@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: chkconfig.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-chkconfig">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>chkconfig</refentrytitle>
+    <refmiscinfo class="domain">4. Berkeley Dağıtımı</refmiscinfo>
+    <refmiscinfo class="date">8 Ekim 1997</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>chkconfig</refname>
+    <refpurpose>sistem servisleri için çalışma seviyesi bilgilerini sorgular ve günceller.</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>chkconfig --list </command> [<emphasis>isim</emphasis>]
+<command>chkconfig --add </command><emphasis>isim</emphasis>
+<command>chkconfig --del </command><emphasis>isim</emphasis>
+<command>chkconfig </command> [<command>--level </command><emphasis>seviyeler</emphasis>] <emphasis>isim</emphasis> &lt;<command>on</command>|<command>off</command>|<command>reset</command>>
+<command>chkconfig </command> [<command>--level </command><emphasis>seviyeler</emphasis>] <emphasis>isim</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>chkconfig</command>, basit bir komut satırı aracı sunarak, sistem yöneticilerinin <filename>/etc/rc[0-6].d</filename> dizinindeki çeşitli sembolik bağların bakımını yapma yükünü azaltmayı amaçlar.
+    </para><para>
+Bu komut, IRIX işletim sistemindeki <command>chkconfig</command> komutundan esinlenerek oluşturulmuştur. <filename>/etc/rc[0-6].d</filename> hiyerarşisinin dışındaki ayar bilgilerinin bakımını yapmaktan ziyade, bu sürüm doğrudan <filename>/etc/rc[0-6].d</filename> dizinindeki sembolik bağları yönetir. <command>init</command>'in tek bir alanda başlattığı servisler ile bağlantılı olarak, ayar bilgileri ile uğraşmaz.
+    </para><para>
+<command>chkconfig</command> beş ayrı işleve sahiptir: yönetim için yeni servisler eklemek, servisleri kaldırmak, kullanımdaki servislerin başlatma bilgilerini listelemek, servislerin başlatma bilgilerini değiştirmek ve tek tek servislerin başlatılma durumlarını kontrol etmek.
+    </para><para>
+<command>chkconfig</command> herhangi bir seçenek belirtilmeden kullanılmış ise, kullanım bilgileri görüntülenir. Eğer sadece bir servis ismi belirtilmişse, servisin geçerli çalışma seviyesinde başlaması için ayarlı olup olmadığını kontrol eder. Şayet ayarlı ise, <command>chkconfig</command> doğru ile döner; aksi durumlarda yanlış döndürür.  <command>--level</command> seçeneği ile geçerli çalışma seviyesi yerine, istenen bir çalışma seviyesi için sorgu yaptırılabilir.
+    </para><para>
+Şayet servis isminde sonra <command>on</command>, <command>off</command> veya <command>reset</command>'den birisi belirtilmişse, <command>chkconfig</command> belirtilen servisin başlangıç bilgilerini değiştirir. <command>on</command> ve <command>off</command>, sırası ile, düzenlenen çalışma seviyesinde servisin başlamasına veya durmasına sebep olurlar. <command>reset</command> ile servis yeniden başlatılır.
+    </para><para>
+Öntanımlı olarak, <command>on</command> ve <command>off</command> sadece 3, 4 ve 5. çalışma seviyelerinde etkili olur. <command>reset</command> ise bütün seviyelerde geçerlidir. <command>--level</command> seçeneği etkilenmesini istediğiniz çalışma seviyesini belirtmek için kullanılabilir.
+    </para><para>
+Unutmayın ki her bir servis için, her çalışma seviyesi ya bir başlatma
+ya da bir durdurma betiğine sahiptir. Çalışma seviyeleri arasında geçiş yaparken, <command>init</command>, halihazırda çalışan bir servisi tekrar çalıştırmaz ve çalışmayan bir servisi tekrar durdurmaz.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist><glossentry>
+    <glossterm><command>--level </command><varname>seviyeler</varname></glossterm>
+    <glossdef><para>
+Bir işlemin yapılması istenen çalışma seviyesini tanımlar. Sözdizimi olarak veya sayı (0-7) olarak belirtilebilir. Örneğin; <command>--level 35</command>, 3. ve 5. çalışma seviyelerini belirtir.
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>--add </command><varname>isim</varname></glossterm>
+    <glossdef><para>
+Bu seçenek <command>chkconfig</command> tarafından yönetilmek üzere yeni bir servis ekler. Yeni bir servis eklendiği zaman, <command>chkconfig</command>, bu servisin her çalışma seviyesi için başlangıç veya öldürme girdilerinden birisine sahip olduğunu kontrol eder. Şayet herhangi bir çalışma seviyesinde bu tür bir girdi eksik ise,  <command>chkconfig</command>, başlatma betiğindeki öntanımlı değerlere göre uygun bir girdi oluşturur. Not: '<literal>INIT INFO</literal>' bölümlerindeki öntanımlı girdiler, başlatma betiğindeki öntanımlı çalışma seviyelerine göre önceliklidir.
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>--del </command><varname>isim</varname></glossterm>
+    <glossdef><para>
+<varname>isim</varname> ile belirtilen servis <command>chkconfig</command> yönetiminden çıkarılır ve <filename>/etc/rc[0-6].d</filename> içindeki bu servise ait sembolik bağ silinir.
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>--list </command><varname>isim</varname></glossterm>
+    <glossdef><para>
+Bu seçenek <command>chkconfig</command>’in bildiği bütün servislerin bütün çalışma seviyelerindeki durumlarını açık ya da kapalı olarak belirterek listeler. Şayet bir <varname>isim</varname> belirtilmişse, sadece belirtilen servis hakkında bilgiler görüntülenir.
+    </para></glossdef>
+    </glossentry></glosslist>
+  </refsect1><refsect1><title>ÇALIŞMA SEVİYESİ DOSYALARI</title>
+    <para>
+<command>chkconfig</command> tarafından yönetilecek bütün servisler, kendi <filename>init.d</filename> betikleri içinde iki ya da daha fazla yorum satırına ihtiyaç duyarlar. İlk satır, servisin başlatılacağı öntanımlı çalışma seviyelerini belirtir. Ayrıca başlatma ve durdurma öncelik seviyelerini de belirtir. Şayet servis, öntanımlı olarak, herhangi bir çalışma seviyesinde başlatılmamalı ise, çalışma seviyesi listesinde bu seviye için bir “-“ işareti kullanılır. İkinci satır servis için bir tanımlama içerir. Ters bölü işareti kullanılarak birden fazla satıra yayılabilir.
+    </para><para>
+Örneğin, <filename>random.init</filename> üç satıra sahiptir:
+    </para><para>
+<literallayout># chkconfig: 2345 20 80
+# description: Saves and restores system entropy pool for \
+#              higher quality random number generation.
+</literallayout>
+    </para><para>
+Buna göre <filename>random</filename> betiği 2, 3, 4 ve 5. çalışma seviyelerinde başlatılmalıdır, başlatma önceliği 20 ve durdurulma önceliği 80’dir. Açıklama satırlarını kendiniz düzenleyebilirsiniz. Satır sonlarına konacak <command>\</command> işareti satırın devam ettiğini belirtir. Satır başındaki fazlalık boşluklar göz ardı edilir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-init"/>, <link linkend="tr-man8-ntsysv"/>, <link linkend="tr-man8-tksysv"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Erik Troan <email>ewt@redhat.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

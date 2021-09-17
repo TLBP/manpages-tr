@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: ptx.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-ptx">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>ptx</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>ptx</refname>
+    <refpurpose>dosya içeriğini karılmış olarak basar</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis>
+<command>ptx</command> [<emphasis>seçenek</emphasis>] ... [<emphasis>girdi</emphasis>] ... (<command>-G</command> olmaksızın)
+<command>ptx</command> <command>-G</command> [<emphasis>seçenek</emphasis>] ... [<emphasis>girdi</emphasis> [<emphasis>çıktı</emphasis>]} ...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<varname>girdi</varname> dosyalarındaki sözcüklerin söz gelişlerini de içererek karılmış halde basar.
+    </para><para>
+Uzun seçeneklerde zorunlu olan argümanlar kısa seçeneklerde de zorunludur.
+    </para><para><glosslist><glossentry>
+        <glossterm><command>-A</command></glossterm>
+        <glossterm><command>--auto-reference</command></glossterm>
+        <glossdef><para>Satırbaşlarına özdevinimli üretilmiş başvurular koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-G</command></glossterm>
+        <glossterm><command>--traditional</command></glossterm>
+        <glossdef><para>System V'deki <command>ptx</command> gibi davranır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F</command></glossterm>
+        <glossterm><command>--flag-truncation=</command><varname>dizge</varname> </glossterm>
+        <glossdef><para>Satırları kesmesi gerektiğinde satırı kestiği yeri <varname>dizge</varname> ile belirtir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-M</command></glossterm>
+        <glossterm><command>--macro-name=</command><varname>dizge</varname> </glossterm>
+        <glossdef><para>TeX formatında çıktı oluştururken `xx' yerine <varname>dizge</varname> makrosunu kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-O</command></glossterm>
+        <glossterm><command>--format=roff</command></glossterm>
+        <glossdef><para>Çıktıyı roff yönergeleri olarak oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>--right-side-refs</command></glossterm>
+        <glossdef><para>
+<command>-A</command> seçeneğinde oluşturulan başvuruları satırbaşına değil, satırsonuna koyar, <command>-w</command> seçeneğinde sayılmazlar. (<command>-A</command> ile beraber kullanımı anlamlı bir seçenek)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossterm><command>--sentence-regexp=</command><varname>düzifd</varname> </glossterm>
+        <glossdef><para>Satır sonları veya cümle sonları için düzenli ifade.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T</command></glossterm>
+        <glossterm><command>--format=tex</command></glossterm>
+        <glossdef><para>Çıktıyı TeX yönergeleri olarak oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W</command></glossterm>
+        <glossterm><command>--word-regexp=</command><varname>düzifd</varname> </glossterm>
+        <glossdef><para>
+Anahtar sözcükleri belirlemek için <varname>düzifd</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossterm><command>--break-file=</command><varname>dosya</varname> </glossterm>
+        <glossdef><para>
+Sözcük sonlarını <varname>dosya</varname>daki karakterlere bakarak belirler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--ignore-case</command></glossterm>
+        <glossdef><para>Büyük/küçük harf ayrımı yapmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g</command></glossterm>
+        <glossterm><command>--gap-size=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>
+Çıktının sütunları arasındaki boşluk genişliği <varname>sayı</varname> olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--ignore-file=</command><varname>dosya</varname> </glossterm>
+        <glossdef><para>
+Girdi üzerinde çalışırken yoksayılacak sözcükleri <varname>dosya</varname>dan okur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o</command></glossterm>
+        <glossterm><command>--only-file=</command><varname>dosya</varname> </glossterm>
+        <glossdef><para>
+Girdi üzerinde çalışırken dikkate alınacak sözcükleri <varname>dosya</varname>dan okur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--references</command></glossterm>
+        <glossdef><para>Her satırın ilk alanını başvuru olarak kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><command>--typeset-mode</command></glossterm>
+        <glossdef><para>- gerçeklenmedi -
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossterm><command>--width=</command><varname>sayı</varname></glossterm>
+        <glossdef><para>Çıktıdaki sütun <varname>sayı</varname>sı (başvuru hariç).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Yardım iletisini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+<varname>dosya</varname> belirtilmediğinde veya - olduğunda standart girdi okunur. `<command>-F /</command>' öntanımlıdır.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>F. Pinard tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>ptx</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>ptx</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para><glosslist><glossentry>
+       <glossdef><para><command>info coreutils ptx</command></para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>

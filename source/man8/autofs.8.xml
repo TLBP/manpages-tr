@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: autofs.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-autofs">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>autofs</refentrytitle>
+    <refmiscinfo class="date">9 Eylül 1997</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname sortas="autofs">/etc/init.d/autofs</refname>
+    <refpurpose>Özdevinimli dosya sistemi bağlama betiği</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>/etc/init.d/autofs</command> start | stop | reload | status
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>autofs</command>, Linux sisteminde çalışan <link linkend="tr-man8-automount"/> artalan sürecinin işleyişini kontrol eder. <command>autofs</command>, genellikle, <literal>start</literal> parametresi ile, sistem açılışı esnasında işletilir ve sistem kapanışı sırasında <literal>stop</literal> parametresi ile durdurulur. <command>autofs</command> betiği, sistem yöneticisi tarafından komut satırından da yönetilebilir. Sistem yöneticisi, betiği başlatabilir, durdurabilir veya yeniden yükleyebilir.
+    </para>
+  </refsect1><refsect1><title>İŞLEYİŞİ</title>
+    <para>
+<command>autofs</command>, sistemdeki bağlantı noktalarını bulabilmek için <filename>/etc/auto.master</filename> ayar dosyasına başvurur (bakınız: <link linkend="tr-man5-auto.master"/>). Buradaki her bir bağlantı noktası için, kendilerine tahsis edilmiş parametreler ile birlikte, bir <link linkend="tr-man8-automount"/> süreci başlatılır. <command>automount</command> tarafından başlatılmış aktif bağlantı noktalarını, <command>/etc/init.d/autofs status</command> komutu ile kontrol edebilirsiniz. Bir <filename>auto.master</filename> ayar dosyası işletildikten sonra, <command>autofs</command> betiği, aynı isimli bir NIS eşlemi arayacaktır. Şayet böyle bir eşlem var ise, bu eşlem <filename>auto.master</filename> eşleminin kullandığı yöntemle işletilecektir.  NIS eşlemi en son işletilecektir.
+    </para><para>
+<command>/etc/init.d/autofs  reload</command>, o anki <filename>auto.master</filename> eşlemini çalışan artalan süreçlerine göre kontrol edecektir.  Girişleri değişen artalan süreçlerini öldürecek ve yeni veya değişmiş girdiler için artalan süreçlerini tekrar başlatacaktır.
+    </para><para>
+Şayet bir eşlem değiştirilmişse, değişiklik derhal uygulanır. Şayet  <filename>auto.master</filename> eşlemi değiştirilmişse, <command>autofs</command> betiği değişiklikleri etkinleştirmek için tekrar çalıştırılmalıdır.
+    </para><para>
+<command>/etc/init.d/autofs  status</command>, geçerli ayarları ve çalışan automount
+artalan süreçlerinin bir listesini görüntüleyecektir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-automount"/>,
+<link linkend="tr-man5-autofs"/>,
+<link linkend="tr-man5-auto.master"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Bu kılavuz, Christoph  Lameter  <email>chris@waterf.org</email> tarafından Debian GNU/Linux sistemi için yazılmıştır. H. Peter Anvin <email>hpa@transmeta.com</email> tarafından düzenlenmiştir.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

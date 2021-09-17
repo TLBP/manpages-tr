@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: boot.7.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man7-boot">
+<remark>.\" Written by Oron Peled &lt;oron (at) actcom.co.il>.
+.\" May be distributed subject to the GPL.
+.\"
+.\" I tried to be as much generic in the description as possible:
+.\" - General boot sequence is applicable to almost any
+.\" OS/Machine (DOS/PC, Linux/PC, Solaris/SPARC, CMS/S390)
+.\" - kernel and init(8) is applicable to almost any Unix/Linux
+.\" - boot scripts are applicable to SYSV-R4 based Unix/Linux
+</remark>
+  <refmeta>
+    <manvolnum>7</manvolnum>
+    <refentrytitle>boot</refentrytitle>
+    <refmiscinfo role="date">6 Temmuz 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>boot</refname>
+    <refpurpose>genel olarak açılış işlemleri</refpurpose>
+  </refnamediv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Açılış işlemleri sistemden sisteme değişiklik gösterirse de genellikle beş adımda incelenebilir: (i) donanımsal açılış, (ii) önyükleme, (iii) çekirdeğin yüklenmesi, (iv) init ve inittab, (v) açılış betikleri. Bunları aşağıda daha ayrıntılı olarak açıklayacağız.
+    </para>
+    <refsect2><title>Donanım açılışı</title>
+    <para>
+Makinayı açıldıktan veya yeniden başlatıldıktan sonra denetim salt okunur bellekte bulunan (genellikle bu bir PROM'dur) bir yazılıma devredilir. PC'lerde bu yazılım genellikle <command>BIOS</command> (bayos okunur) olarak bilinir.
+    </para><para>
+Bu yazılım makina üzerinde bir temel sınama yaptıktan sonra gerekli parametreleri okumak için oynak olmayan (non-volatile) belleğe erişir. Bu bellek PC'lerde pille beslenen bir CMOS bellektir ve <command>CMOS</command> (simos okunur) adıyla bilinir. PC dünyası dışında ise genellikle <command>nvram</command> (non-volatile ram) olarak bilinir.
+    </para><para>
+nvram üzerinde saklanan parametreler sistemden sisteme değişiklik gösterir, fakat en azından donanım açılış yazılımı, açılışın yapılacağı aygıtı ya da algılanması gereken olası açılış aygıtlarını bilmek zorundadır.
+    </para><para>
+Donanım açılış adımı ile açılış aygıtına erişildikten sonra, işletim sistemini yükleyecek olan önyükleyici yazılımı yüklenir. Bu yazılım açılış aygıtının belli bir yerinde bulunur ve denetim bu yazılıma aktarılır.
+    </para><note><para>
+Burada ağdan açılış adımlarını açıklamayacağız. Bu konu ile ilgileniyorsanız arama sözcükleriniz şunlar olabilir: DHCP, TFTP, PXE, Etherboot.
+    </para></note>
+    </refsect2><refsect2><title>Önyükleyici</title>
+    <para>
+PC'lerde önyükleyici açılış aygıtının ilk sektöründe bulunur. Bu sektör Asıl Önyükleme Kaydı (<command>MBR</command> - Master Boot Record) olarak bilinir.
+    </para><para>
+Çoğu sistemde bazı kısıtlamalardan dolayı bu önyükleyici çok sınırlanır. PC dışındaki sistemlerde bile  boyut ve önyükleyicinin karmaşıklığıyla ilgili sınırlamalar vardır. Fakat PC'lerde MBR'ın boyutu (512 bayttır ve disk bölümleme tablosu da buradadır) önyükleyicinin bu alana deyim yerindeyse tıkıştırılmasını gerektirir.
+    </para><para>
+Diğer yandan, çoğu işletim sistemi birincil önyükleyicinin disk bölümünün belli bir yerinde bulunan bir ikincil önyükleyiciyi çalıştırır.
+    </para><para>
+Linux işletim sisteminin önyükleyicisi normalde <link linkend="tr-man8-lilo"/> ya da <link linkend="tr-man8-grub"/>'dır. Her ikisi de ya ikincil yükleyiciyle (DOS çalıştırmak gibi) ya da bir parçası MBR içinde diğer parçası kök disk bölümünde bulunan iki parçalı bir önyükleyici olarak kurulur.
+    </para><para>
+Önyükleyicinin asıl görevi disk üzerinde çekirdeğin yerini belirlemek, onu yükleyip çalıştırmaktır. Çoğu önyükleyici başka çekirdeklerin belirtilmesine (son derlediğiniz çekirdek çalışmazsa öncekinin yüklenmesini sağlayabilirsiniz) ve bu çekirdeklere isteğe bağlı parametrelerin aktarılmasına imkan veren etkileşimli bir arayüze sahiptir.
+    </para>
+    </refsect2><refsect2><title>Çekirdeğin başlatılması</title>
+    <para>
+Çekirdek yüklendiğinde aygıtları (sürücüleri üzerinden) ilklendirir, takas alanını etkinleştirir (günümüz çekirdeklerinde <command>kswapd</command> olarak bilinen bir çekirdek sürecidir) ve kök dosya sistemini (/) bağlar.
+    </para><para>
+Çekirdeğe bu etkinliklerle ilgili olarak bazı parametreler aktarılabilir (örneğin kök dosya sistemi olarak başka bir disk bölümünü belirtebilirsiniz). Bu tür Linux parametreleri ile ilgili daha ayrıntılı bilgi için <link linkend="tr-man7-bootparam"/> kılavuzuna bakınız.
+    </para><para>
+Bundan sonra çekirdek sadece, numarası 1 olan ilk süreci (kullanıcı tarafı) çalıştırır. Bu süreç kendisine verilmiş parametrelerden işine yaramayanları aktararak <filename>/sbin/init</filename> yazılımını çalıştırır.
+    </para>
+    </refsect2><refsect2><title>init ve inittab</title>
+    <para>
+<command>init</command> çalışmaya başladığında ilk olarak <filename>/etc/inittab</filename> dosyasında bulunan yönergeleri okur. Bu dosya farklı çalışma seviyeleri ile bu çalışma seviyelerinde çalıştırılacak komutlara ilişkin bilgiler içerir.
+    </para><para>
+Bu, sistem yöneticisine belli servislerin ilişkilendirilebildiği farklı çalışma seviyeleri ile (örn: <command>S</command> tek kullanıcılı kiptir, ağ servisleri için <command>2</command> gibi) kolayca yönetilebilen bir şema sunar. Sistem yöneticisi çalışma seviyesini <link linkend="tr-man8-init"/> ile değiştirebilir ve o anki çalışma seviyesini <link linkend="tr-man8-runlevel"/> ile sorgulayabilir.
+    </para><para>
+Servislerin başlatılması ve durdurulması bu dosyayı düzenleyerek yapılmaz. Bu dosya içindeki veriler, belirli çalışma seviyelerinde çalıştırılacak ya da durdurulacak servislerin betiklerinin bulunduğu yere denetimi aktarmakta kullanılır.
+    </para>
+    </refsect2><refsect2><title>Açılış betikleri</title>
+    <note><para>
+Aşağıdaki açıklamalar sadece SYSV-R4 temelli sistemlere uygulanır. Bunlar ticari Unix'ler (Solaris, HPUX, Irix, Tru64) ile bazı Linux dağıtımlarıdır (Red Hat, Fedora, Debian, Mandrake,  Suse,  Caldera). Bazı sistemler (Slackware Linux, FreeBSD, OpenBSD) açılış betiklerinin düzenlenmesinde biraz daha farklı şemalar kullanırlar.
+    </para></note><para>
+Yönetilen her servis (posta sunucusu, nfs sunucusu, cron, vs.) için belirli bir dizinde (çoğu Linux sürümünde <filename>/etc/init.d</filename> dizinidir) bulunan tek bir betik vardır. Bu betiklerin herbiri ya sadece 'start' (servisin başlatılmasını sağlar) ya da genel olarak üzerinde "anlaşma sağlanmış" sözcükleri argüman kabul ederler (örneğin, 'restart' servisi durdurur ve tekrar başlatır, 'status' servisin durmu hakkında bilgi döndürür). Betikler argümansız çalıştırıldığında kullanılabilecek argümanların listesini gösterir.
+    </para>
+    </refsect2><refsect2><title>Çalışma seviyelerine özel dizinler</title>
+    <para>
+Servislerin belirli çalışma seviyelerinde çalıştırılması, durdurulması ve çalıştırılma sıralarının belirlenmesi için özel dizinler vardır. Bunlar normalde <command>/etc/rc[0-6S].d</command> dizinleridir. Bu dizinlerin her birinde <filename>/etc/init.d</filename> dizininde bulunan betiklere sembolik bağlar bulunur.
+    </para><para>
+Bir birincil betik (genellikle <filename>/etc/rc</filename>) inittab(5)'dan çağrılır ve bu betik çalışma seviyesi dizinlerindeki sembolik bağlar üzerinden servis betiklerini çalıştırır. Betiklerin sembolik bağ isimlerinden 'S' ile başlayanlar 'start' argümanı ile (servisi başlatmak için), 'K' ile başlayanlar ise 'stop' argümanı ile (servisi durdurmak için) çalıştırılır.
+    </para><para>
+Aynı çalışma seviyesinde betiklerin hangi sırada çalıştırılacaklarını belirlemek için sembolik bağ isimleri sıra numaraları içerir. Bu numaradan sonra da çalıştırılacak servisin ismi gelir. Örneğin, <filename>/etc/rc2.d/S80sendmail</filename> ile sendmail 2. çalışma seviyesinde başlatılır. Ancak bu,  <filename>/etc/rc2.d/S12syslog</filename>'dan sonra ve <filename>/etc/rc2.d/S90xfs</filename>'den önce çalıştırılır.
+    </para><para>
+Çalışma seviyelerini ve açılış sırasını bu bağlar sayesinde kolayca yönetibiliriz. Bir çok Linux dağıtımı bu işlemi daha da kolaylaştıran araçlarla gelir (örn, <link linkend="tr-man8-chkconfig"/>.
+    </para>
+    </refsect2><refsect2><title>Sistemin açılışta yapılandırılması</title>
+    <para>
+Artalanda başlatılan süreçler genellikle isteğe bağlı bazı parametreler ve komut satırı seçenekleri kabul ederler. Sistem yöneticilerinin bu parametreleri betiklere dokunmadan daha kolay düzenleyebilmeleri için süreçlerin kendilerine ait yapılandırma dosyaları vardır. Bunların yerleri dağıtımlara göre değişir. Örneğin Red Hat için bu dosyalar <filename>/etc/sysconfig</filename> dizininde bulunur.
+    </para><para>
+Eski Unix'lerde bunlar komut satırı seçenekleri iken günümüz Linux sistemlerinde (ve HPUX'de) bu dosyalar kabuk değişkenlerini içerir. <filename>/etc/init.d</filename> dizininde bulunan betikler bu değişkenlerin değerlerini kullanır.
+    </para></refsect2>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<filename>/etc/init.d/</filename>, <filename>/etc/rc[S0-6].d/</filename>,  <filename>/etc/sysconfig/</filename>
+
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-inittab"/>, <link linkend="tr-man7-bootparam"/>, <link linkend="tr-man8-init"/>, <link linkend="tr-man8-runlevel"/>, <link linkend="tr-man8-shutdown"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>

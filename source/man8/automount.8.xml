@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: automount.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-automount">
+<remark>.\" Linux man page by B. James Phillippe, 1997 &lt;bryan (at) Terran.ORG>
+.\"
+.\" This page was written to contribute to the Linux kernel autofs
+.\" implementation by H. Peter Anvin (1997).  It is loosly based on
+.\" the documentation for mount(8) and amd(8) Linux manpages.
+.\"
+.\" This is free documentation.
+.\"
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>automount</refentrytitle>
+    <refmiscinfo class="date">19 Haziran 2000</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>automount</refname>
+    <refpurpose>autofs için bağlantı noktalarını düzenler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>automount</command> [<emphasis>seçenekler</emphasis>] <emphasis>bağlantı_noktası eşlem_türü</emphasis>[,<emphasis>biçim</emphasis>] <emphasis>eşlem</emphasis>
+          [<emphasis>eşlem_seçenekleri</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>automount</command>, autofs için, bir bağlantı noktasını düzenler.  <command>automount</command>, bir temel <varname>bağlantı_noktası</varname> ve bir <varname>eşlem</varname> alarak çalışır ve bunları (diğer <varname>seçenekler</varname> ile birlikte) herhangi bir yerden erişildiğinde temel <varname>bağlantı noktası</varname>nda özdevinimli bağlar.  Daha sonra, belirli bir süre bu dosya sisteminde işlem yapılmaz veya herhangi bir faaliyette bulunulmaz ise, sistem özdevinimli olarak dosya sistemlerini ayırır.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <para><glosslist>
+      <glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossterm><command>--pid-file</command></glossterm>
+        <glossdef><para>Artalan sürecinin süreç kimliğini belirtilen dosyaya yazar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><command>--timeout</command></glossterm>
+        <glossdef><para>Dosya sistemleri ayrılana kadar geçecek asgari zaman aşımı
+süresini saniye cinsinden ayarlar. Öntanımlı değer 5 dakikadır. Zaman aşımı süresini sıfıra ayarlayarak, dosya sistemlerinin ayrılmasını engelleyebilirsiniz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm numarasını görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ARGÜMANLAR</title>
+    <para>
+<command>automount</command> en az üç argüman alır. Zorunlu argümanlar <varname>bağlantı_noktası</varname>, <varname>eşlem_türü</varname> ve <varname>eşlem</varname>dir. Zorunlu ve isteğe bağlı argümanlar aşağıda açıklanmıştır:
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><varname>bağlantı_noktası</varname></glossterm>
+        <glossdef><para>autofs tarafından bağlanan dosya istemleri için temel bağlantı noktası. Bu argüman, sistemde varolan bir dizin adı olmak zorundadır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>eşlem_türü</varname></glossterm>
+        <glossdef><para>Bu <command>automount</command> çağrısı için kullanılan eşlem türü. Geçerli eşlem türleri şunlardır:
+        </para><para><glosslist>
+          <glossentry>
+            <glossterm><command>file</command></glossterm>
+            <glossdef><para>Eşlem normal bir metin dosyasıdır.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>program</command></glossterm>
+            <glossdef><para>Eşlem komut satırına bir anahtar aktarılan bir çalıştırılabilir yazılımdır ve hatasız bir çıkış durumunda standart çıktıda bir girdi ile döner.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>yp</command></glossterm>
+            <glossdef><para>Eşlem bir NIS (YP) veritabanıdır.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>nisplus</command></glossterm>
+            <glossdef><para>Eşlem bir NIS+ veritabanıdır.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>hesiod</command></glossterm>
+            <glossdef><para>Eşlem <command>filsys</command> girdilerinin eşlemler için kullanıldığı bir hesiod veritabanıdır.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>ldap</command></glossterm>
+            <glossdef><para>Eşlem isimleri <command>[sunucuadı:]temelDN</command> şeklindedir. Buradaki isteğe bağlı <command>sunucuadı</command> sorgulanacak LDAP sunucusunun ismidir. <command>temelDN</command> ise altında altağaç araması yapılacak alan adıdır. Girdiler  belirtilen altağaç içindeki <command>automount</command> nesneleridir ve burada, <command>cn</command> özniteliği anahtardır (arama anhtarı "/" dır), <command>automounterInformation</command> özniteliği ise özdevinimi dosya sistemi bağlayıcı yazılımın kullandığı bilgileri içerir. Bu modül tarafından kullanılan şema ile ilgili bilgileri <ulink url="http://docs.iplanet.com/docs/manuals/directory/411ext/nis/mapping.htm"/> adresinde bulabilirsiniz.
+            </para></glossdef>
+          </glossentry></glosslist>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>biçim</varname></glossterm>
+        <glossdef><para>Eşlem verisinin biçimi; hali hazırda kabul edilen biçimler sadece Sun automounter eşlem biçiminin bir alt kümesi olan <command>sun</command>
+biçimi ile hesiod filesys girdileri için <command>hesiod</command> biçimidir. <varname>biçim</varname> belirtilmezse, <command>hesiod</command> dışındaki tüm eşlem türleri için <command>sun</command> öntanımlı biçimdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>eşlem</varname></glossterm>
+        <glossdef><para>Kullanılacak eşlem dosyasının yeri. <command>file</command> ve <command>program</command> türü eşlemler için bir tam UNIX dosyayolu ve <command>yp</command>, <command>nisplus</command> veya <command>hesiod</command> türü eşlemler için bir veritabanı ismidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>seçenekler</varname></glossterm>
+        <glossdef><para>Tire (-) ile başlayanlar hariç, kalan komut satırı seçeneklerinin tümü <command>mount</command> komutunun seçenekleri olarak alınır. Tire (-) ile başlayanların ise eşlem seçenekleri olduğu varsayılır.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>NOTLAR</title>
+    <para>
+Şayet <command>automount</command> artalan süreci bir USR1 sinyali alırsa, hali hazırda autofs tarafından bağlanmış bütün kullanılmayan dosya sistemlerini ayırır ve çalışmaya devam eder. Şayet bir USR2 sinyali alırsa, autofs tarafından bağlanmış kullanılmayan bütün  dosya sistemlerini ayırır ve tüm dosya sistemleri ayrılmışsa çıkar.  Meşgul dosya sistemleri ayrılmaz.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-autofs"/>,
+<link linkend="tr-man8-mount"/>.
+    </para>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para>
+Arzu edilen pek çok özellik eksiktir. <command>TODO</command> dosyasına göz atabilirsiniz.
+    </para><para>
+Belgeleme bakımından da arzu edilen olmamıştır.
+    </para><para>
+Lütfen, bulduğunuz diğer yazılım hatalarını, ayrıntılı tanımlamaları ile birlikte, <email>autofs@linux.kernel.org</email> adresine gönderiniz.  Bu e-posta grubuna katılmak için, içinde "subscribe autofs" geçen bir e-postayı, <email>majordomo@linux.kernel.org</email> adresine gönderiniz.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>H. Peter Anvin <email>hpa@transmeta.com</email> tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

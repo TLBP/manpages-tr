@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: su.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-su">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>su</refentrytitle>
+    <refmiscinfo class="header">FSF</refmiscinfo>
+    <refmiscinfo class="domain">GNU sh-utils 2.0.11</refmiscinfo>
+    <refmiscinfo class="date">Eylül 2001</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>su</refname>
+    <refpurpose>başka bir kullanıcı ve grup kimliği ile bir kabuk çalıştırır</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>su</command> [<emphasis>seçenek</emphasis>]... [-] [<emphasis>kullanıcı</emphasis> [<emphasis>argümanlar</emphasis>]...]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Etkin kullanıcı ve grup kimliğini <varname>kullanıcı</varname>'nınkilerle değiştirir.
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-</command></glossterm>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--login</command></glossterm>
+        <glossdef><para>Kabuğu, giriş kabuğu haline dönüştürür.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossterm><command>--commmand</command><varname>=komut</varname></glossterm>
+        <glossdef><para>Kabuğa <command>-c</command> ile tek bir <varname>komut</varname> aktarır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--fast</command></glossterm>
+        <glossdef><para>Kabuğa <command>-f</command> aktarır (csh veya tcsh için).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--preserve-environment</command></glossterm>
+        <glossdef><para>Ortam değişkenlerini sıfırlamaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossdef><para><command>-m</command> ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--shell</command><varname>=kabuk</varname></glossterm>
+        <glossdef><para><filename>/etc/shells</filename> izin verdiği taktirde <varname>kabuk</varname> kabuğunu çalıştırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım metnini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist><para>
+Tek başına <command>-</command> verilirse <command>-l</command> verilmiş gibi işlem yapılır. <varname>kullanıcı</varname> belirtilmezse, kullanıcı root kabul edilir.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, yazılım hatalarını <email>bug-sh-utils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2000 Free Software Foundation, Inc.<sbr/>Bu bir serbest yazılımdır; kopyalama koşulları için kaynak koduna bakınız. Hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<command>su</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>su</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para/><glosslist><glossentry>
+        <glossdef><para><command>info su</command></para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>

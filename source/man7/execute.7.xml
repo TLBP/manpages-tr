@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: execute.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-execute">
+ <refmeta>
+  <refentrytitle>EXECUTE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>EXECUTE</refname>
+  <refpurpose>bir taslağı çalıştırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>EXECUTE</command> <replaceable>taslak_ismi</replaceable> [ (<replaceable>parametre</replaceable> [, ...] ) ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklamalar</title><para>
+<command>EXECUTE</command> evvelce hazırlanmış bir SQL cümlesini (bir taslağı) çalıştırır. Taslaklar sadece bir oturum boyunca geçerli kaldıklarından, taslaklar <command>PREPARE</command> deyimi ile o oturumda evvelce oluşturulmuş olmalıdır.
+  </para><para>
+Taslak oluşturulurken, <command>PREPARE</command> deyiminde bazı parametreler belirtilmişse, bu parametrelerle uyuumlu parametrelerin  <command>EXECUTE</command> komutuna da aktarılması gerekir; aksi takdirde bir hata oluşur. İşlevlerin tersine, parametre sayısı ve türlerinin farklılaşması nedeniyle birden fazla taslağa aynı isim verilemez; taslak isimleri bir veritabanı oturumu içinde eşsiz olmalıdır.
+  </para><para>
+Taslakların oluşturulması ve kullanımı hakkında daha fazla bilgi edinmek için, <link linkend="tr-man7-prepare" xreflabel="PREPARE"/> kılavuz sayfasına bakınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>taslak_ismi</replaceable></term>
+    <listitem><para>Çalıştırılacak taslağın ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>parametre</replaceable></term>
+    <listitem><para><command>PREPARE</command> komutu ile taslak oluşturulurken belirtilen parametrelerden birinin karşılığı olarak parametre veri türü ile uyumlu bir değer ile sonuçlanan bir ifade.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Çıktı</title><para>
+<command>EXECUTE</command> tarafından döndürülen çıktı taslağın çıktısıdır, <command>EXECUTE</command> komutunun değil.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+Örnekleri <link linkend="tr-man7-prepare" xreflabel="PREPARE"/> kılavuz sayfasında bulabilirsiniz.
+   </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardı bir <command>EXECUTE</command> deyimi içerir, fakat sadece gömülü SQL ile kullanmak içindir. Bu sürümdeki <command>EXECUTE</command> deyimi ayrıca biraz farklı bir sözdizimi kullanmaktadır.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-deallocate" xreflabel="DEALLOCATE"/>,
+<link linkend="tr-man7-prepare" xreflabel="PREPARE"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

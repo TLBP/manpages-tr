@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_rule.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_rule">
+ <refmeta>
+  <refentrytitle>CREATE RULE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE RULE</refname>
+  <refpurpose>bir yeniden yazma kuralı tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [ <command>OR REPLACE</command> ] <command>RULE</command> <emphasis>isim</emphasis> <command>AS ON</command> <emphasis>olay</emphasis>
+    <command>TO</command> <emphasis>tablo</emphasis> [ <command>WHERE</command> <emphasis>koşul</emphasis> ]
+    <command>DO</command> [ <command>ALSO</command> | <command>INSTEAD</command> ] { <command>NOTHING</command> | <emphasis>komut</emphasis> | ( <emphasis>komut</emphasis> ; <emphasis>komut</emphasis> ... ) }
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE RULE</command> belirtilen bir tabloya uygulanması için yeni bir kural tanımlar. <command>CREATE OR REPLACE RULE</command> ya yeni bir kural oluşturur ya da o tabloda mevcut aynı isimde bir kural varsa o kuralı değiştirir.
+  </para><para>
+<productname>PostgreSQL</productname> kural sistemi veritabanı tablolarında veri girme, güncelleme veya silme işlemlerini gerçekleştirecek ek bir eylem tanımlamayı mümkün kılar. Başka bir deyişle, bir kural, belirtilen bir tablo üzerinde her komut çalıştırılışında ek komutların çalıştırılmasına sebep olur. Bundan başka, bir <command>INSTEAD</command> kuralı ile bir komutun bir başka komut ile değiştirilebilmesi, hatta hiç çalıştırılmaması da mümkündür. Kurallar, sanal tabloların oluşturulmasında da kullanılabilir. Bir kuralın aslında bir komut dönüştürme mekanizası mı yoksa bir komut makrosu mu olduğunu bilmek önemlidir. Dönüşüm, verilen komutlar çalıştırılmadan önce meydana gelir. Eğer, bir işlemin herbir fiziksel satır için tek tek uygulanmasını istiyorsanız, bunu şüphesiz bir kuralla değil, bir tetikle yaparsınız. Kural sistemi hakkında daha ayrıntılı bilgi edinmek için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/rules.html"/> adresine bakınız.
+  </para><para>
+Şimdilik, <command>ON SELECT</command> kuralları koşulsuz <command>INSTEAD</command> kuralları olmalı ve tek bir <command>ON SELECT</command> komutundan oluşan eylemler içermelidirler. Bu şekilde, bir <command>ON SELECT</command> kuralı aslında bir tabloyu bir sanal tabloya döndürür, ancak tabloda ne varsa değil, kuralın <command>SELECT</command> komutunun döndürdüğü satırlar kullanılır. Sanal tabloları, önce bir gerçek tablo ardından da buna bir  <command>ON SELECT</command> kuralı uygulayıp oluşturmak yerine bir <command>CREATE VIEW</command> komutu yazarak oluşturmak daha iyi bir çözümdür.
+  </para><para>
+Bir sanal tablo üzerinde <command>ON INSERT</command>, <command>ON UPDATE</command> ve <command>ON DELETE</command> kuralları tanımlayıp, diğer tabloların ilgili güncellemelerini bu güncelleme eylemleri ile değiştirerek güncellenebilir bir sanal tablo görüntüsü oluşturabilirsiniz.
+  </para><para>
+Sanal tablo güncellemeleri için koşullu kurallar kullanmak isterseniz bir hileye başvurabilirsiniz: belirteceğiniz her eylemin bir koşulsuz <command>INSTEAD</command> kuralı içermesini sağlamalısınız. Eğer kural, koşullu ise ya da <command>INSTEAD</command> kuralı değilse, sistem güncelleme eylemini uygulamayı hala reddetmeye çalışacaktır. Çünkü, bazı durumlarda, sanal tablonun taklidi üzerinde uygulanacak eylemin sonuna geldiğini varsayacaktır. Eğer, koşullu kurallardaki tüm kullanışlı durumların uygulanmasını istiyorsanız, sistemin asla bir tablo taklidini güncelleme çağrısı yapılmadığını anlamasını sağlamak için koşulsuz bir <command>DO INSTEAD NOTHING</command> kuralı ekleyin. Ardından da <command>INSTEAD</command> içermeyen koşullu kuralları oluşturun; uygulandıkları yerlerde, bunlar öntanımlı <command>INSTEAD NOTHING</command> eylemine eklenir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Oluşturulacak kuralın ismi. Bu aynı tablodaki diğer kuralların isimlerinden farklı olmalıdır. Aynı tabloda ve aynı olay türünde çok sayıda kural varsa, bunlar alfabetik sırada uygulanır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>olay</replaceable></term>
+    <listitem><para><command>SELECT</command>, <command>INSERT</command>, <command>UPDATE</command> ve <command>DELETE</command> cümlelerinden biridir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>tablo</replaceable></term>
+    <listitem><para>Kuralın uygulanacağı tablo ya da sanal tablonun ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>koşul</replaceable></term>
+    <listitem><para>Herhangi bir koşullu SQL ifadesi (<type>boolean</type> döndüren). <command>NEW</command> ve <command>OLD</command> olması ve ortak değer işlevleri içermemesi dışında bu koşullu ifade hiçbir tabloya başvuru yapamaz.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>INSTEAD</command></term>
+    <listitem><para>Komutların "özgün komutların yerine" çalıştırılacağını belirtir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>ALSO</command></term>
+    <listitem><para>Komutların "özgün komutlara ek olarak" çalıştırılacağını belirtir.
+     </para><para>
+<command>ALSO</command> ve <command>INSTEAD</command> birlikte belirtilemez. <command>ALSO</command> öntanımlıdır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>komut</replaceable></term>
+    <listitem><para>Kuralın eylemleri olan komut ya da komutlar. Geçerli komutlar <command>SELECT</command>, <command>INSERT</command>, <command>UPDATE</command>, <command>DELETE</command> veya <command>NOTIFY</command>'dır.
+    </para></listitem></varlistentry></variablelist><para>
+<replaceable>koşul</replaceable> ve <replaceable>komut</replaceable> içinde, özel tablo isimleri <command>NEW</command> ve <command>OLD</command> başvurulacak tablonun değerlerini nitelemek için kullanılabilir. <command>NEW</command>, <command>ON INSERT</command> ve <command>ON UPDATE</command> kurallarında veri girilecek ya da güncellenecek yeni bir satırı belirtirken kullanılabilir. <command>OLD</command> ise, <command>ON UPDATE</command> ve <command>ON DELETE</command> kurallarında güncellenecek ya da silinecek mevcut bir satırı belirtirken kullanılabilir.
+  </para></refsect1><refsect1><title>Ek Bilgi</title><para>
+Üzerinde bir kural tanımlayabilmeniz için tablo üzerinde <command>RULE</command> yetkiniz olmalıdır.
+  </para><para>
+Döngüsel kurallardan kaçınmaya çalışmanız çok önemlidir. Örneğin, aşağıdaki iki kural tanımı PostgreSQL tarafından kabul edildiği halde sorgunun defalarca baştan uygulanması nedeniyle PostgreSQL bir hata raporlayacaktır:
+  </para><para>
+<programlisting indent="4">CREATE RULE "_RETURN" AS
+    ON SELECT TO t1
+    DO INSTEAD
+        SELECT * FROM t2;
+
+CREATE RULE "_RETURN" AS
+    ON SELECT TO t2
+    DO INSTEAD
+        SELECT * FROM t1;
+
+SELECT * FROM t1;
+</programlisting>
+  </para><para>
+Şimdilik, bir kural eylemi bir <command>NOTIFY</command> komutu içeriyorsa, ne olursa olsun, kuralın uygulanacağı bir satır olmasa bile, <command>NOTIFY</command> komutu çalıştırılır. Örnek:
+  </para><para>
+<programlisting indent="2">CREATE RULE notify_me AS ON UPDATE TO mytable DO ALSO NOTIFY mytable;
+
+UPDATE mytable SET name = 'foo' WHERE id = 42;
+</programlisting>
+  </para><para>
+<command>UPDATE</command> sırasında, <command>id = 42</command> koşulu ile eşleşen bir satır olmasa bile, bir <command>NOTIFY</command> olayı gönderilecektir. Bu, gerçekleme ile ilgili bir kısıtlamadır; ileriki sürümlerde düzeltilebilir.
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE RULE</command>, sorgunun tamamını yeniden yazma sistemi olarak bir <productname>PostgreSQL</productname> oluşumudur.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

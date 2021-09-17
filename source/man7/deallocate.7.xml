@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: deallocate.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-deallocate">
+ <refmeta>
+  <refentrytitle id="tr-man7-deallocate-title">DEALLOCATE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DEALLOCATE</refname>
+  <refpurpose>bir taslağı serbest bırakır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DEALLOCATE</command> [ <command>PREPARE</command> ] <emphasis>taslak_ismi</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DEALLOCATE</command> evvelce hazırlanmış bir SQL cümlesini serbest bırakmakta kullanılır. Bu yapılmadığı zaman, taslak oturum sonunda sistem tarafından serbest bırakılır.
+  </para><para>
+Taslaklar hakkında daha fazla bilgi için <link linkend="tr-man7-prepare" xreflabel="PREPARE"/> kılavuz sayfasına bakınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><command>PREPARE</command></term>
+    <listitem><para>Yoksayılır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>taslak_ismi</replaceable></term>
+    <listitem><para>Serbest bırakılacak taslağın ismi.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardı bir <command>DEALLOCATE</command> deyimi içerirse de, bu sadece gömülü SQL'de kullanmak içindir.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-execute" xreflabel="EXECUTE"/>,
+<link linkend="tr-man7-prepare" xreflabel="PREPARE"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

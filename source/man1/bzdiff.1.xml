@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: bzdiff.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-bzdiff">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>bzdiff</refentrytitle>
+  </refmeta>
+
+  <refnamediv><refname>bzdiff</refname>
+    <refpurpose>bzip2 ile sıkıştırılmış dosyaları karşılaştırır</refpurpose>
+  </refnamediv><refnamediv><refname>bzcmp</refname>
+    <refpurpose>bzip2 ile sıkıştırılmış dosyaları karşılaştırır</refpurpose>
+  </refnamediv>
+
+
+  <refsynopsisdiv>
+<synopsis><command>bzcmp</command> [ <emphasis>cmp_seçenekleri</emphasis> ] <emphasis>dosya1</emphasis> [ <emphasis>dosya2</emphasis> ]
+<command>bzdiff</command> [ <emphasis>diff_seçenekleri</emphasis> ] <emphasis>dosya1</emphasis> [ <emphasis>dosya2</emphasis> ]
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>bzcmp</command>  ve  <command>bzdiff</command>, <command>bzip2</command> ile sıkıştırılmış dosyalar üzerinde <command>cmp</command> ve <command>diff</command> komutlarını çalıştırmak
+ için kullanılır. <command>cmp</command> ve <command>diff</command> için geçerli olan bütün seçenekler burada da geçerlidir. Şayet tek bir dosya adı belirtilmişse, <varname>dosya1</varname> ve sıkıştırılmış <varname>dosya1</varname><filename>.bz2</filename> dosyalarını karşılaştırılır. Şayet iki dosya belirtilmişse, gerekli ise açılırlar ve <command>cmp</command> ya da <command>diff</command> komutlarına gönderilirler. <command>cmp</command> veya <command>diff</command>'ten dönen çıkış durumu korunur.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-cmp"/>, <link linkend="tr-man1-diff"/>, <link linkend="tr-man1-bzmore"/>, <link linkend="tr-man1-bzless"/>, <link linkend="tr-man1-bzgrep"/>, <link linkend="tr-man1-bzip2"/>.
+    </para>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para><command>cmp</command> veya <command>diff</command> komutlarından gelen iletiler belirtilen dosyalarla değil geçici dosyalarla ilgilidir.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

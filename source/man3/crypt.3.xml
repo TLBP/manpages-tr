@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: crypt.3.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man3-crypt">
+<remark>.\" Michael Haardt (michael@cantor.informatik.rwth.aachen.de) Sat Sep  3 22:00:30 MET DST 1994
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111,
+.\" USA.
+.\"
+.\" Sun Feb 19 21:32:25 1995, faith@cs.unc.edu edited details away
+.\"
+.\" TO DO: This manual page should go more into detail how DES is perturbed,
+.\" which string will be encrypted, and what determines the repetition factor.
+.\" Is a simple repetition using ECB used, or something more advanced?  I hope
+.\" the presented explanations are at least better than nothing, but by no
+.\" means enough.
+.\"
+.\" added _XOPEN_SOURCE, aeb, 970705
+.\" added GNU MD5 stuff, aeb, 011223
+</remark>
+  <refmeta>
+    <manvolnum>3</manvolnum>
+    <refentrytitle>crypt</refentrytitle>
+    <refmiscinfo class="header">Kütüphane İşlevleri</refmiscinfo>
+    <refmiscinfo class="date">23 Aralık 2001</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>crypt</refname>
+    <refpurpose>parola ve veri şifrelemesi</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>BİLDİRİM</title>
+<synopsis>#define _XOPEN_SOURCE
+#include &lt;unistd.h>
+
+void <command>crypt</command> (const char *<emphasis>parola</emphasis>, const char *<emphasis>tuz</emphasis>);
+</synopsis><para><command>-lcrypt</command> ile ilintileme gerektirir.</para>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>crypt</command>  parola şifreleme işlevidir. Veri Şifreleme Standartı (Data Encryption Standard) algoritmasına dayanır, fakat anahtar tarama için tasarlanmış donanımlara engel olmak için bir takım farklılıklar içerir.
+  </para><para>
+<varname>parola</varname> kullanıcın girdiği paroladır.
+  </para><para>
+<varname>tuz</varname> ise,  elemanları <literal>[a-zA-Z0-9./]</literal> kümesinden seçilen iki karakterli bir dizgedir. Bu dizge algoritmayı 4096 farklı ihtimalden biri ile karıştırmayı amaçlar.
+  </para><para>
+<varname>parola</varname>nın ilk sekiz karakterinden her birinin en düşük anlamlı 7 biti alınarak 56 bitlik parola oluşturulur. Bu 56 bitlik parola tekrar tekrar bir dizgeyi (genellikle hepsi sıfırlardan oluşan bir dizge) şifrelemede kullanılır. Dönüş değeri 13 karakterli bir ASCII dizgesi olan ve ilk iki karakteri tuzu temsil eden şifrelenmiş paroladır. Dönüş değeri, her işlev çağrısında içeriği değişen statik bir veridir.
+  </para><para><warning><title>Uyarı</title><para>
+Anahtar aralığı 2^56 (7.2e16) farklı değer içermektedir. Bu anahtar aralığının tümünü kapsayan taramalar paralel bilgisayarlar ile mümkündür. <link linkend="tr-man1-crack"/> gibi yazılımlar  bu anahtar aralığının bir kısmını tarayıp parolaları elde etmek için insanlar tarafından kullanılmaktadır. Bu sebeple, parola seçerken sık kullanılan kelime ve isimlerden sakınılmalıdır. Parola seçme işlemi esnasında kırılabilir parolaları kontrol eden <link linkend="tr-man1-passwd"/> uygulaması kullanmalıdır.</para></warning>
+  </para><para>
+DES algoritması, <command>crypt</command> arayüzünün parola kimlik denetimi haricinde kullanılmasını kötü bir seçenek haline getirmiştir.Eğer <command>crypt</command> arayüzünü kriptografi projenizde kullanmayı planlıyorsanız, bundan vazgeçin: Şifreleme ve DES kütüphaneleri konusunda iyi bir kitap elde edinin.
+    </para>
+  </refsect1><refsect1><title>DÖNÜŞ DEĞERİ</title>
+    <para>Dönüş değeri şifrelenmiş parolaya bir göstericidir. Hata durumunda, boş gösterici döner.
+    </para>
+  </refsect1><refsect1><title>HATALAR</title>
+    <para><glosslist><glossentry>
+      <glossterm><command>ENOSYS</command></glossterm>
+      <glossdef><para>İşlev kütüphanede bulunmamaktadır (Örneğin, ABD'nin ihracat sınırlamalarından dolayı).
+      </para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>GNU OLUŞUMU</title>
+    <para>
+Bu işlevin glibc2 sürümü şu ek özelliklere sahiptir. Eğer <varname>tuz</varname> karakter dizisi, "<literal>$1$</literal>" karakterleri ile başlar ve bunun ardından en fazla 8 karakter gelirse (ve tercihan "<literal>$</literal>" karakteri ile sonlandırılırsa), bu durumda glib crypt işlevi DES motoru yerine, MD5 algoritması kullanılır ve 34  bayta kadar çıktı verilir. Çıktı "<literal>$1$&lt;<emphasis>dizge</emphasis>>$</literal>" biçimindedir. Burada <varname>dizge</varname>, 8 karaktere kadar <varname>tuz</varname> ve bunu takip eden <literal>[a-zA-Z0-9./]</literal> kümesinden seçilmiş 22 bayttan oluşur.  Burada bu anahtarın bütünü anlamlıdır (sadece ilk 8 baytı değil).
+  </para><para>
+Bu işlevin kullanıldığı yazılımlar derlenirken <command>-lcrypt</command> ile ilintilemelidir.
+    </para>
+  </refsect1><refsect1><title>UYUMLULUK</title>
+    <para><command>crypt()</command> işlevi SVID, X/OPEN, BSD 4.3 ve POSIX 1003.1-2001 uyumludur.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+<!-- link etiketinin bu kullanımı sadece refentry'lere özgüdür.
+     Bu kullanım biçimi xref'e benziyorsa da işlevi farklıdır; hedef
+     bulunamasa bile olası hedefin ismi yazılır; xref bunu yapamaz, ayrıca yapmamalıdır da.
+     refentry'ler içinde link etiketinin diğer kullanımı da geçerlidir.
+-->
+    <para>
+<link linkend="tr-man1-login"/>, <link linkend="tr-man1-crypt"/>, <link linkend="tr-man1-passwd"/>, <link linkend="tr-man3-encrypt"/>, <link linkend="tr-man3-getpass"/>, <link linkend="tr-man5-passwd"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Emin İslam Tatlı <email>eminislam@web.de</email>, Nisan 2004</para>
+  </refsect1>
+</refentry>
+

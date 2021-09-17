@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: man.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-man">
+<remark>.\" Man page for man (and the former manpath)
+.\"
+.\" Copyright (c) 1990, 1991, John W. Eaton.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the README file that comes with the man 1.0
+.\" distribution.
+.\"
+.\" John W. Eaton
+.\" jwe (at) che.utexas.edu
+.\" Department of Chemical Engineering
+.\" The University of Texas at Austin
+.\" Austin, Texas  78712
+.\"
+.\" Many changes - aeb
+.\"
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>man</refentrytitle>
+    <refmiscinfo class="date">2 Eylül 1995</refmiscinfo>
+  </refmeta>
+
+  <refnamediv><refname>man</refname>
+    <refpurpose>kılavuz sayfalarını biçimler ve görüntüler</refpurpose>
+  </refnamediv><refnamediv><refname>manpath</refname>
+    <refpurpose>man sayfalarının aranacağı yolu gösterir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>man</command> [<command>-acdfFhkKtwW</command>] [<command>--path</command>] [<command>-m </command><emphasis>sistem</emphasis>] [<command>-p </command><emphasis>dizge</emphasis>] [<command>-C </command><emphasis>ayar-dosyası</emphasis>]
+    [<command>-M </command><emphasis>dosyayolu</emphasis>] [<command>-P </command><emphasis>sayfalayıcı</emphasis>] [<command>-S </command><emphasis>bölüm-listesi</emphasis>] [<emphasis>bölüm</emphasis>]
+    <emphasis>isim ...</emphasis>
+</synopsis>
+</refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>man</command> kılavuz sayfalarını biçimler ve görüntüler. Şayet <varname>bölüm</varname> belirtilirse, man komutu bu bölümdeki kılavuzla ilgilenecektir. <varname>isim</varname> genellikle, bir komut, işlev ya da dosyanın ismi olarak kılavuz sayfasının adıdır. Bununla birlikte, şayet <varname>isim</varname> bir bölü (/) işareti içeriyorsa, man komutu bunu bir dosya belirimi gibi kabul edecektir. Böylece <command>man ./foo.5</command> ve hatta <command>man /cd/foo/bar.1.gz</command> şeklinde bile komut uygulanabilir.
+    </para><para>
+Kılavuz sayfası dosyalarını <command>man</command>'ın nerede aradığı aşağıda açıklanmıştır.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-C </command><replaceable>ayar-dosyası</replaceable></glossterm>
+        <glossdef><para>Kullanılacak ayar dosyası belirtilir, öntanımlı olarak <command>/etc/man.config</command>'dir (<command>man.conf</command>(5)'a bakınız.)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-M </command><replaceable>dosyayolu</replaceable></glossterm>
+        <glossdef><para>Man sayfalarının aranacağı dizinler belirtilir. Dizinler
+`:'larla ayrılır. Boş liste <command>-M</command> hiç kullanılmamış gibi işlem görür. <xref linkend="tr-man1-man-path"/> bölümüne bakınız.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-P </command><replaceable>sayfalayıcı</replaceable></glossterm>
+        <glossdef><para>Kullanılacak sayfalayıcı uygulamasını belirtmek için kullanılır. Bu seçenek <literal>MANPAGER</literal> ortam değişkenini umursamaz. Komutun kullanılmasından sonra <literal>PAGER</literal> değişkeni tekrar devreye girer. Öntanımlı sayfalayıcı olarak, man komutu  <command>/usr/bin/less -isr</command> kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S </command><replaceable>bölüm-listesi</replaceable></glossterm>
+        <glossdef><para>Aranacak kılavuz bölümlerinin `:' ayraçlı listesi belirtilir. Bu seçenek <literal>MANSECT</literal> ortam değişkenini umursamaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossdef><para>Öntanımlı olarak, <command>man</command> bulduğu ilk kılavuz sayfasını görüntüledikten sonra devreden çıkacaktır. Bu seçenek ile, sadece bulunan ilk kılavuz  sayfasının değil, isimle eşleşen bütün sayfaların gösterilmesi sağlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Bir güncel cat sayfası mevcut olsa bile man sayfasını tekrar biçimler. Bu seçenek sadece, cat sayfasının farklı bir ekran genişliği için derlenmiş olduğu ya da evvelce biçimlenmiş dosyanın bozulması halinde kullanılırsa anlamlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para>Man sayfasını görüntülemez, sadece hata ayıklama bilgileri basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D</command></glossterm>
+        <glossdef><para>Yukarıdaki seçenekten farklı olarak man sayfasını görüntülediği gibi hata ayıklama bilgilerini de basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para><command>whatis</command> ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F</command></glossterm>
+        <glossterm><command>--preformat</command></glossterm>
+        <glossdef><para>Sadece biçimler, göstermez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossdef><para>Tek satırlık bir yardım iletisi basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-k</command></glossterm>
+        <glossdef><para><command>apropos</command> ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-K</command></glossterm>
+        <glossdef><para>Bütün man sayfaları içinde, belirtilen dizgeyi arar. UYARI: Bu işlem, muhtemelen, çok yavaş olacaktır. Bir bölüm belirtmek daha uygundur (sadece bir fikir vermesi açısından: 500 man sayfasının aranması bir dakika sürer)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m </command><replaceable>sistem</replaceable></glossterm>
+        <glossdef><para>İsmi belirtilen sistem üzerinde aranacak, başka bir man sayfaları kümesi tanımlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p </command><replaceable>dizge</replaceable></glossterm>
+        <glossdef><para><command>nroff</command> veya <command>troff</command>'dan önce çalıştırılacak önişlemci dizilimini belirtmek için kullanılır.  Her kurulum bütün önişlemcilere sahip değildir. Bazı önişlemciler ve bunları belirten harfler şunlardır: eqn (e), grap (g), pic (p), tbl (t), vgrind (v),refer (r).  Bu seçenek <literal>MANROFFSEQ</literal> ortam değişkenini yok sayacaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossdef><para>Kılavuz sayfasını standart çıktıya akterırken biçimlemek için <command>/usr/bin/groff -Tps -mandoc</command> kullanır.  <command>/usr/bin/groff -Tps -mandoc</command>'dan çıktısının basılmadan önce bazı filtrelerden geçirilmesi gerekebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossterm><command>--path</command></glossterm>
+        <glossdef><para>Aslında man sayfalarını görüntülemez, sadece biçemlenecek veya görüntülenecek dosyaların bulunduğu yerleri bildirir. Herhangi bir argüman belirtilmemişse, man komutu tarafından man sayfalarını bulmak için aranan dizinlerin listesini standart çıktıdan görüntüler. Şayet manpath, man'e bir bağ ise, bu durumda "tr-manpath" ile "tr-man --path" eşdeğerdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W</command></glossterm>
+        <glossdef><para>-w gibidir, fakat her satıra tek bir dosya ismi basar ve herhangi
+bir ek bilgi vermez. <command>man -aW man | xargs ls -l</command> benzeri kabuk komutlarında oldukça faydalıdır.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1><title>CAT SAYFALARI</title>
+    <para>
+Tekrar ihtiyaç duyulduğunda man sayfalarının biçimlenme zamanını kazanmak için, man komutu biçimlenmiş man sayfalarını kaydetmek isteyecektir. Geleneksel olarak <filename>DİZİN/manX</filename> içindeki sayfaların biçimlenmiş halleri, <filename>DİZİN/catX</filename> içinde tutulur. Fakat, man dizini ile cat dizini arasındaki diğer eşleşmeler <command>/etc/man.config</command> içinde belirtilebilir. Gerekli cat dizini yoksa, hiçbir cat sayfası kaydedilmeyecektir. Satır uzunluğu 80 karakterden farklı biçimlenmiş hiçbir cat sayfası kaydedilmez. <filename>man.conf</filename> dosyası <literal>NOCACHE</literal> içeriyorsa hiçbir cat dosyası kaydedilmez.
+    </para><para>
+bir man kullanıcısına, <command>man</command> suid yapmak mümkündür. Böylece, bir cat dizininin sahibi man kullanıcısı ve izinler 755 (sadece man tarafından yazılabilir) ve cat dosyalarının sahibi man kullanıcısı ve izinleri 644 veya 444 (sadece man kullanıcısı tarafından yazılabilir veya hiç kimse yazamaz) iken, herhangi bir normal kullanıcı cat sayfalarını değiştiremez veya bu dizine başka dosyalar koyamaz. Şayet man, suid olarak tanımlanmamışsa, bütün kullanıcıların cat sayfalarını buraya bırakmasını istersek, cat dizininin izinleri 777 olmalıdır.
+    </para><para>
+<command>-c</command> seçeneği, bir cat sayfası var olsa bile, sayfanın tekrar biçimlenmesini sağlar.
+    </para>
+  </refsect1><refsect1 id="tr-man1-man-path"><title>KILAVUZ SAYFALARININ ARAMA YOLU</title>
+    <para>
+<command>man</command> komutu kılavuz sayfalarını bulmak için, verilen seçeneklere, ortam değişkenlerine, <command>/etc/man.config</command> ayar dosyasına ve bazı yerleşik ve geleneksel yapılara dayanan oldukça karışık bir yöntem kullanır.
+    </para><para>
+İlk olarak, <varname>isim</varname> argümanı bölü (/) karakterini içeriyorsa, man komutu bunu dosyanın kendi belirtimi olarak kabul eder ve arama yapılmaz.
+    </para><para>
+<varname>isim</varname> argümanı bölü (/) karakterini içermediği normal durumlarda, aranan kılavuz sayfası ile alakalı olabilecek bir dosyayı bulmak için çeşitli dizinleri araştırır.
+    </para><para>
+Şayet <command>-M </command><varname>dosyayolu</varname> seçeneğini belirtirseniz, <varname>dosyayolu</varname> `:' ayraçlı dizin listesindeki dizinler man komutunun arayacağı dizinlerdir.
+    </para><para>
+Şayet <command>-M</command> belirtilmemiş ama <command>MANPATH</command> ortam değişkeni belirtilmiş ise, bu değişkenin değerindeki dizin listesi man komutunun arayacağı dizinlerdir.
+    </para><para>
+Şayet <command>-M</command> veya <command>MANPATH</command> ile dizin listesi açıkça belirtilmemiş ise, <command>man</command> komutu <command>/etc/man.config</command> ayar dosyasında tanımlanmış olan kendi dizin listesini esas alır. Ayar dosyasındaki <command>MANPATH</command> deyimleri, aramada kullanılacak ek dizinleri tanımlar.
+    </para><para>
+Bununla birlikte, <command>MANPATH_MAP</command> deyimleri sizin arama yollarınıza eklenir, tabii ki bu sizin komut arama yolunuza bağlıdır (mesela: sizin <command>PATH</command> ortam değişkeninize). Komut arama yolunda olabilecek her bir dizin için, kılavuz sayfaları arama yoluna eklenebilecek bir dizin <command>MANPATH_MAP</command> deyimi içinde tanımlanır. <command>man</command> komutu <command>PATH</command> değişkenine bakar ve uygun dizinleri kılavuz sayfaları arama yoluna ekler. Böylece, <command>MANPATH_MAP</command>'in tam olarak kullanımında, <command>man xyz</command> komutu ile <command>xyz</command> komutunu verdiğinizde çalışacak uygulamanın kılavuz sayfasını elde edersiniz.
+    </para><para>
+Ek olarak, komut arama yolundaki (bundan sonra `komut dizini' olarak anılacaktır) <command>MANPATH_MAP</command> ifadesine sahip olmayan herbir dizin için, <command>man</command> komutu, man dizinini, komut dizini altında veya komut dizininin üst dizininin altdizinlerinde arar.
+    </para><para>
+<command>/etc/man.config</command> içerisine <command>NOAUTOPATH</command> deyimini ekleyerek bu yakınlık aramasını iptal edebilirsiniz.
+    </para><para>
+Yukarıda tarif edilen arama yolu içerisindeki her bir dizinde, <command>man</command> komutu, bölüm olarak isteğe bağlı bir numara ve olası bir sıkıştırma sonekiyle <varname>konu.bölüm</varname> isimli dosyayı  arar.  Şayet böyle bir dosya bulamaz ise, <varname>N</varname> kılavuz bölüm numarası olmak üzere <command>man</command><varname>N</varname> veya <command>cat</command><varname>N</varname> adlı altdizinlere bakar. Şayet dosya <command>cat</command><varname>N</varname> altdizininde bulunursa, <command>man</command> bu dosyası biçimlenmiş kılavuz sayfaları dosyası (cat sayfaları) olarak kabul eder. Aksi durumda, <command>man</command> bu sayfaların biçimlenmediği varsayar. Her ikisi durumda da dosya bilinen bir sıkıştırma biçimine sahip sonek taşıyorsa (örneğin; <command>.gz</command>), <command>man</command> bu dosyanın gzipli olduğunu kabul eder.
+    </para><para>
+Belirli bir konu için, <command>man</command> komutunun bir kılavuz sayfasını nerede bulacağını (veya bulup bulamayacağını) görmek için <command>--path</command> (<command>-w</command>) seçeneğini kullanın.
+    </para>
+  </refsect1><refsect1><title>ORTAM DEĞİŞKENLERİ</title>
+    <para><glosslist>
+      <glossentry><glossterm><command>MANPATH</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANPATH</command> belirtilmiş ise, <command>man</command> komutu burada belirtilen yolu kılavuz sayfalarını aramak için kullanacağı yol olarak kabul eder  ve otomatik arama yolu ile ayar dosyasındaki ayarlar yok sayılır, ama <command>-M</command> seçeneği <command>MANPATH</command> ile belirtilen yolun da yok sayılmasını sağlar. <xref linkend="tr-man1-man-path"/> bölümüne bakınız.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>MANPL</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANPL</command> belirtilmiş ise, görüntülenecek sayfa uzunluğunu belirlemek için bu değişkeninin değeri kullanılır. Aksi halde, bütün man sayfası tek (ve muhtemelen uzun) bir sayfa halinde görüntülenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>MANROFFSEQ</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANROFFSEQ</command> belirtilmiş ise; bu değişkenin değeri, <command>nroff</command> veya <command>troff</command> çalıştırılmadan önce çalıştırılacak önişlemcileri belirlemek için kullanılır. Öntanımlı olarak, sayfalar <command>nroff</command>'tan  önce tbl önişlemcisinden geçirilirler.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>MANSECT</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANSECT</command> belirtilmiş ise; bu değişkenin değeri hangi kılavuz bölümünün araştırılacağını belirlemek için kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>MANWIDTH</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANWIDTH</command>  belirtilmiş ise, bu değişkenin değeri kılavuz sayfasının ne genişlkte görüntüleneceğini belirtmek için kullanılır. Belirtilmemişse sayfa tam ekran genişliğinde görüntülenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>MANPAGER</command></glossterm>
+        <glossdef><para>
+Şayet <command>MANPAGER</command> belirtilmiş ise; bu değişkenin değeri kılavuz sayfasını görüntüleyecek programın adını tayin etmek için kullanılır. Belirtilmemişse, <command>PAGER</command> kullanılır. Eğer hiçbir değer yok ise, <command>/usr/bin/less -isr</command> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>LANG</command></glossterm>
+        <glossdef><para>
+Şayet <command>LANG</command> belirtilmiş ise; bu değişkenin değeri, <command>man</command> komutunun  kılavuz sayfası için ilk bakacağı altdizini belirtir. Böylece,  `<literal>LANG=dk man1 foo</literal>' komutu, <command>man</command>'in, <filename>foo</filename> kılavuz sayfaları için ilk olarak <filename>.../dk/man1/foo.1</filename>, eğer bu dosya bulunamazsa, <filename>.../man1/foo.1</filename> dosyasına bakmasını sağlar. Buradaki `<command>...</command>' arama yolunda tanımlı bir dizindir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>NLSPATH</command></glossterm>
+        <glossterm><command>LC_MESSAGES</command></glossterm>
+        <glossterm><command>LANG</command></glossterm>
+        <glossdef><para>
+<command>NLSPATH</command> ve <command>LC_MESSAGES</command> çevre değişkenleri (veya ikincisinin olmadığı durumlarda <command>LANG</command> değişkeni) mesaj kataloğunu konumlamada rol oynar. (İngilizce sayfalar derlenmiştir ve İngilizce için kataloğa gerek yoktur.) Ayrıca <command>man</command> tarafından çağrılan <link linkend="tr-man1-col"/> gibi uygulamaların <command>LC_CTYPE</command>'ı kullandığını unutmayın.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>PATH</command></glossterm>
+        <glossdef><para>
+<command>PATH</command>, kılavuz sayfaları dosyaları için arama yolunu tayin etmeye yardımcı olur. <xref linkend="tr-man1-man-path"/> bölümüne bakınız
+        </para></glossdef>
+      </glossentry><glossentry><glossterm><command>SYSTEM</command></glossterm>
+        <glossdef><para>
+Öntanımlı olarak gelen bir sonraki sistem ismini almak  için kullanılır (<command>-m</command> seçeneği ile birlikte kullanmak için).
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-apropos"/>, <link linkend="tr-man1-whatis"/>, <link linkend="tr-man1-less"/>, <link linkend="tr-man1-groff"/>, <link linkend="tr-man5-man.config"/>.
+    </para>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>
+<command>-t</command> seçeneği sadece troff benzeri bir uygulama yüklü ise çalışır.
+    </para>
+  </refsect1><refsect1><title>İPUÇLARI</title>
+    <para><varname>.emacs</varname> dosyanıza</para><para>
+<screen indent="0">
+(global-set-key [(f1)] (lambda () (interactive) (manual-entry (current-word))))
+</screen>
+    </para><para>
+satırını eklerseniz, F1'e bastığınız zaman imlecin üzerinde bulunduğu kütüphane çağrısının man sayfası açılır.
+    </para><para>
+Bir man sayfasını düz metin halinde, tersbölüler ve   altçizgiler olmadan, görmek isterseniz
+    </para><para>
+<screen>
+# man foo | col -b > foo.mantxt
+</screen>
+    </para><para>komutunu vermeyi deneyin.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>

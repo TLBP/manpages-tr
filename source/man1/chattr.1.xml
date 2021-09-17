@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: chattr.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-chattr">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>chattr</refentrytitle>
+    <refmiscinfo class="domain">E2fsprogs sürüm-1.32</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>chattr</refname>
+    <refpurpose>Bir Linux genişletilmiş ikinci sürüm dosya sisteminin üzerinde dosya özniteliklerini değiştirir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>chattr</command> [<command>-RV</command>]  [<command>-v </command><emphasis>sürüm</emphasis>]  [<emphasis>kip</emphasis>]  <emphasis>dosyalar</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>chattr</command> bir Linux genişletilmiş ikinci sürüm dosya sisteminin üzerinde dosya özniteliklerini değiştirir.
+    </para><para>
+Sembolik kip sözdizimi: <literal>+-=[ASacDdIijsTtu]</literal>
+    </para><para>
+'<command>+</command>' işleci belirtilen özniteliklerin varolanlara eklenmesini sağlar; '<command>-</command>' işleci belirtilen öznitelikleri dosya özniteliklerinden çıkartır; '<command>=</command>' işleci ise belirtilen özniteliklerin dosya öznitelikleri ile değiştirilmesini sağlar. Bu işlecin kullanılmasından sonra dosyanın var olan öznitelikleri tamamen yok olur. Belirtilen öznitelikler eskilerinin yerini alır.
+    </para><para>
+'<command>uASacDdijsu</command>' harfleri dosyalar için yeni öznitelikleri seçer: <command>A</command> ile erişim zamanı güncellenmez, <command>S</command> ile güncellemeler eşzamanlı olur, <command>D</command> ile dizin güncellemelerini eşzamanlı olur, <command>a</command> ile sadece dosya sonuna ekleme yapılabilir, <command>c</command> ile dosyalar sıkıştırılmış tutulur, <command>d</command> ile dosya dump uygulamasından etkilenmez, <command>i</command> ile dosya değiştirilemez, <command>j</command> ile jurnalleme yapılır, <command>s</command> ile silme güvenliği sağlanır, <command>T</command> ile dizin tepe dizin varsayılır, <command>t</command> ile dosya eklemesi ayrı bir blok ile olmaz, <command>u</command> ile silinememezlik sağlanır.
+    </para>
+  </refsect1>
+  <refsect1><title>SEÇENEKLER</title><para>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossdef><para>
+Dizinlerin özniteliklerini ve içeriklerini ardışık olarak değiştirir. Dizin geçişleri esnasında karşılaşılan sembolik bağlar yoksayılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossdef><para>
+Yapılan işlem hakkında daha ayrıntılı çıktı verir ve sürüm bilgilerini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>-v </command><emphasis>sürüm</emphasis></literal></glossterm>
+        <glossdef><para>
+Dosyanın sürümünü/nesil numarasını ayarlar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>ÖZNİTELİKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>A</command></glossterm>
+        <glossdef><para>
+Dosyanın erişim zamanı güncellenmez. Bu, dizüstü sistemlerde disk G/Ç sırasında bir miktar tasarruf sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>a</command></glossterm>
+        <glossdef><para>
+Sadece dosyanın sonuna ekleme yapılabilir. Sadece root ya da <literal>CAP_LINUX_IMMUTABLE</literal> özelliğine sahip bir süreç bunu ayarlayıp, değiştirebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>c</command></glossterm>
+        <glossdef><para>
+Sıkıştırılmış; dosyanın okuma-yazma sırasındaki açılması/sıkıştırılması çekirdeğin denetimindedir. Bu dosyadan okuma yapılmak istendiğinde sıkıştırılmamış veri döner. Yazılmak istendiğinde ise diske yazılmadan önce sıkıştırma yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>D</command></glossterm>
+        <glossdef><para>
+Bir dizine uygulanır ve dizindeki değişiklikler diske eşzamanlı yazılır; bu dosya alt sisteminin '<literal>dirsync</literal>' seçeneği ile bağlanmasına eşdeğerdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>d</command></glossterm>
+        <glossdef><para>
+<link linkend="tr-man8-dump"/> çalıştırıldığında dosya yedekleme adayı olmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>E</command></glossterm>
+        <glossdef><para>
+Deneysel sıkıştırma yamaları tarafından, sıkıştırılmış dosyanın sıkıştırma hatasına sahip olduğunu göstermek için kullanılır.  <command>chattr</command> kullanarak düzenlenemez veya sıfırlanamaz;  bununla birlikte <link linkend="tr-man1-lsattr"/> ile görüntülenebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>I</command></glossterm>
+        <glossdef><para>
+Htree kodu tarafından isim-değer çifti tabloları kullanarak indislenmesinin geciktiğini belirtmek için kullanılır. <command>chattr</command> kullanarak düzenlenemez veya sıfırlanamaz;  bununla birlikte <link linkend="tr-man1-lsattr"/> ile görüntülenebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>i</command></glossterm>
+        <glossdef><para>
+Değişmez; dosya içeriği silinemez, yazılamaz, dosyaya bağ oluşturulamaz ve ismi değiştirilemez. Sadece root ya da <literal>CAP_LINUX_IMMUTABLE</literal> özelliğine sahip bir süreç bunu ayarlayıp, değiştirebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>j</command></glossterm>
+        <glossdef><para>
+Jurnal; dosya içindeki bütün bilgiler, dosyanın kendisine yazılmadan önce, etx3 günlükleme sistemine yazdırılır. Fakat burada dosya sisteminin "data=ordered" veya "data=writeback" seçeneklerinden biri ile bağlanmış olması gerekir. Dosya sistemi  "data=journalled" seçeneği ile bağlanmışsa, zaten bütün veriler günlüklenmiş durumdadır ve bu niteliğin bir anlamı kalmaz.  Sadece root ya da <literal>CAP_LINUX_IMMUTABLE</literal> özelliğine sahip bir süreç bu niteliği ayarlayıp, silebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>s</command></glossterm>
+        <glossdef><para>
+Silinme güvenliği; bu özellik verilen bir dosya silindiğinde veri alanı sıfırlarla doldurulur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>S</command></glossterm>
+        <glossdef><para>
+Eşzamanlı güncellemeler; bu özelliği içeren bir dosya değiştirildiği zaman tüm değişiklikler diske anında yazılır, dosya alt sisteminin 'sync' seçeneği ile bağlanmasına eşdeğer özellik sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>T</command></glossterm>
+        <glossdef><para>
+Bu özniteliğe sahip olan dizin, dizin yapısının tepesi olarak kabul edilecektir. Buradaki amaç, Linux 2.5.46 ve daha sonrasında kullanılan Orlov blok ayırıcıya uyum sağlamaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>t</command></glossterm>
+        <glossdef><para>
+Bu özniteliğe sahip olan dosyada, diğer dosyalar ile birleştirmeden dolayı bir blok parçalanması meydana gelmez (uç birleştirmeyi destekleyen dosya sistemleri için).  LILO gibi dosya sistemini doğrudan okuyan ve uç birleştirmeli dosyaları anlamayan uygulamalar için bu gereklidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>u</command></glossterm>
+        <glossdef><para>
+Silinememezlik; bu dosya silindiğinde içeriği saklanır. Bu, kullanıcıya, silinmiş dosyanın geri getirilmesini (undelete) isteme olanağı sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>X</command></glossterm>
+        <glossdef><para>
+Deneysel sıkıştırma yamaları tarafından, sıkıştırılmış dosyanın ham içeriğine doğrudan erişilebileceğini göstermek için kullanılır. <command>chattr</command> kullanarak düzenlenemez veya sıfırlanamaz;  bununla birlikte <link linkend="tr-man1-lsattr"/> ile görüntülenebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>Z</command></glossterm>
+        <glossdef><para>
+Deneysel sıkıştırma yamaları tarafından, sıkıştırılmış dosyanın kirlenmiş olduğunu göstermek için kullanılır. <command>chattr</command> kullanarak düzenlenemez veya sıfırlanamaz;  bununla birlikte <link linkend="tr-man1-lsattr"/> ile görüntülenebilir.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+<command>chattr</command> Remy Card <email>Remy.Card@linux.org</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>YAZILIM HATALARI ve SINIRLAMALAR</title>
+    <para>
+Linux 2.2'de, '<literal>c</literal>', '<literal>s</literal>' ve '<literal>u</literal>' öznitelikleri çekirdek dosya sistemi tarafından desteklenmemekteydi. Yakın bir gelecekte, bu öznitelikler, ext2 dosya sistemine eklenecektir.
+    </para><para>
+'<literal>j</literal>' seçeneği, sadece ext3 olarak bağlanmış dosya sistemlerinde
+kullanışlıdır.
+    </para><para>
+'<literal>D</literal>' seçeneği sadece Linux çekirdeğinin 2.5.19 ve daha yüksek sürümlerinde geçerlidir.
+    </para>
+  </refsect1><refsect1><title>TEMİNİ</title>
+    <para>
+<command>chattr</command>, e2fsprogs  paketinin bir parçasıdır ve<sbr/><ulink url="http://e2fsprogs.sourceforge.net"/> adresinden temin edilebilir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-lsattr"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

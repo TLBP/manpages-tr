@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: move.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-move">
+ <refmeta>
+  <refentrytitle>MOVE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>MOVE</refname>
+  <refpurpose>bir gösterici konumlandırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>MOVE</command> [ <emphasis>direction</emphasis> { <command>FROM</command> | <command>IN</command> } ] <emphasis>gösterici_ismi</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+
+ <refsect1><title>Açıklama</title><para>
+<command>MOVE</command> bir göstericiyi herhangi bir veri döndürmeden istenen konuna taşır. Göstericiyi belli bir konuma taşıyıp satır döndürmemesi dışında <command>FETCH</command> ile tamamen aynıdır.
+  </para><para>
+Sözdizimi ve kullanım ile ilgili ayrıntılar için <link linkend="tr-man7-fetch" xreflabel="FETCH"/> kılavuz sayfasına bakınız.
+  </para>
+ </refsect1><refsect1><title>Çıktılar</title><para>
+Bir <command>MOVE</command> komutu işlemi başarıyla tamamlamışsa şöyle bir çıktı üretir:
+  </para><para>
+<screen indent="4">MOVE <replaceable>miktar</replaceable></screen>
+  </para><para>
+<replaceable>miktar</replaceable>,  <command>FETCH</command> komutundaki gibi satır sayısını belirtir (sıfır olabilir).
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+<programlisting indent="4">BEGIN WORK;
+DECLARE liahona CURSOR FOR SELECT * FROM films;
+
+-- İlk 5 satırı atlayalım:
+MOVE FORWARD 5 IN liahona;
+MOVE 5
+
+-- 6. satırı çekelim:
+FETCH 1 FROM liahona;
+code  | title  | did | date_prod  |  kind  |  len
+-------+--------+-----+------------+--------+-------
+P_303 | 48 Hrs | 103 | 1982-10-22 | Action | 01:37
+(1 row)
+
+-- Göstericiyi kapatıp hareketi sonlandıralım:
+CLOSE liahona;
+COMMIT WORK;
+</programlisting></para>
+ </refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>MOVE</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-close" xreflabel="CLOSE"/>,
+<link linkend="tr-man7-declare" xreflabel="DECLARE"/>,
+<link linkend="tr-man7-fetch" xreflabel="FETCH"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

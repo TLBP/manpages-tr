@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: autoreconf.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-autoreconf">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>autoreconf</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">autoreconf 2.59</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2003</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>autoreconf</refname>
+    <refpurpose>Üretilmiş yapılandırma dosyalarını günceller</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+<synopsis><command>autoreconf</command> [<emphasis>seçenek</emphasis>] [CONFIGURE-AC veya <emphasis>dizin</emphasis>] ...
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>autoconf</command>'u  (ve  <command>autoheader</command>, <command>aclocal</command>, <command>automake</command>, <command>autopoint</command> (öncesinde <command>gettextize</command>), ve ilgiliyse <command>libtoolize</command>) tekrar tekrar çalıştırarak <varname>dizin</varname>lerdeki ya da <literal>CONFIGURE-AC</literal> tarafından yürütülen dizin ağaçlarındaki GNU Derleme Sistemi dosyalarını bir seferde yeniden oluşturur.
+  </para><para>
+Öntanımlı olarak, mevcut dosyalardan daha eski olanları yeniden oluşturur. Eğer GNU Derleme Sisteminin yeni bir sürümünü versiyonunu yüklüyorsanız, <command>autoreconf</command>'u  <command>--force</command> seçeneği ile çalıştırarak bütün dosyaları yeniden oluşturursunuz.
+  </para><refsect2><title>İşlem kipleri:</title>
+    <glosslist><glossentry>
+      <glossterm><command>-h</command></glossterm>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Bu yardım metnini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>İşlemi ayrıntılı raporlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--debug</command></glossterm>
+        <glossdef><para>Geçici dosyalar kaldırılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--force</command></glossterm>
+        <glossdef><para>Tüm dosyalar eski sürüm kabul edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--install</command></glossterm>
+        <glossdef><para>Kayıp yardımcı dosyaları kopyalar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--symlink</command></glossterm>
+        <glossdef><para><command>-i</command> ile birlikte, dosyalar yerine sembolik bağları kopyalar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--make</command></glossterm>
+        <glossdef><para>Uygulanabiliyorsa, <command>./configure &amp;&amp; make</command> yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W</command></glossterm>
+        <glossterm><command>--warnings=</command><varname>sınıf</varname> </glossterm>
+        <glossdef><para><varname>sınıf</varname> [sözdizimi] girdisi ile belirtilen sınıfa ait uyarıları gösterir.
+        </para><para><command>Uyarı sınıfları şunlardır:</command>
+        </para><para><glosslist><glossentry>
+      <glossterm><literal>'cross'</literal></glossterm>
+      <glossdef><para>çapraz derleme sorunları
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'obsolete'</literal></glossterm>
+      <glossdef><para>atıl duruma gelmiş yapılar
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'syntax'</literal></glossterm>
+      <glossdef><para>Sözdizimsel olarak belirsiz yapılar
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'all'</literal></glossterm>
+      <glossdef><para>bütün uyarılar
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'no-SINIF'</literal></glossterm>
+      <glossdef><para>SINIFa ilişkin tüm uyarıları kapatır
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'none'</literal></glossterm>
+      <glossdef><para>bütün uyarıları kapatır
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>'error'</literal></glossterm>
+      <glossdef><para>uyarılar hata sayılır
+        </para></glossdef>
+      </glossentry></glosslist></para><para>
+Ortam değişkeni '<literal>WARNINGS</literal>' önemsenir. Diğer yan araçlar başka uyarı türlerini destekliyor olabilir, bu bakımdan <literal>'all'</literal> kullanılması önerilir.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect2><refsect2><title>Kütüphane dizinleri:</title>
+    <glosslist><glossentry>
+      <glossterm><command>-B</command></glossterm>
+      <glossterm><command>--prepend-include=</command><varname>dizin</varname></glossterm>
+      <glossdef><para><varname>dizin</varname> olarak verilen dizini arama yolunun önüne ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-I</command></glossterm>
+      <glossterm><command>--include=</command><varname>dizin</varname></glossterm>
+      <glossdef><para><varname>dizin</varname> olarak verilen dizini arama yolunun sonuna ekler.
+        </para></glossdef>
+      </glossentry></glosslist><para>
+Ortam değişkenleri <literal>AUTOCONF</literal>, <literal>AUTOHEADER</literal>, <literal>AUTOMAKE</literal>, <literal>ACLOCAL</literal>, <literal>AUTOPOINT</literal>, <literal>LIBTOOLIZE</literal> önemsenir.
+  </para></refsect2></refsect1><refsect1><title>YAZAN</title><para>
+David J. MacKenzie ve Akim Demaille tarafından yazılmıştır.
+    </para></refsect1><refsect1><title>GERİBİLDİRİM</title><para>
+Lütfen, böcekleri ve hataları  <email>bug-autoconf@gnu.org</email> adresine bildirin.
+    </para></refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2003 Free Software Foundation, Inc.<sbr/>Bu bir serbest yazılımdır; kopyalama koşulları için kaynak koduna bakınız. Hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-autoconf"/>, <link linkend="tr-man1-automake"/>, <link linkend="tr-man1-autoheader"/>, <link linkend="tr-man1-autoscan"/>, <link linkend="tr-man1-autoupdate"/>, <link linkend="tr-man1-config.guess"/>, <link linkend="tr-man1-config.sub"/>, <link linkend="tr-man1-ifnames"/>, <link linkend="tr-man1-libtool"/>.
+    </para><para>
+<command>autoconf</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>autoreconf</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info autoreconf</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Mehmet Büyüközer <email>mbuyukozer@gmx.co.uk</email>, Mart 2004</para>
+  </refsect1>
+</refentry>

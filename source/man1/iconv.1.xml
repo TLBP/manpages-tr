@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: iconv.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-iconv">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>iconv</refentrytitle>
+    <refmiscinfo class="domain">glibc</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2003</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>iconv</refname>
+    <refpurpose>belirtilen dosyanın karakter kodlamasını değiştirir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>iconv</command> [<command>-lcs?V</command>]  [<command>-f </command><emphasis>isim</emphasis>]  [<command>-t </command><emphasis>isim</emphasis>]  [<command>-o </command><emphasis>çıktı-dosyası</emphasis>]
+      [<command>--from-code</command>=<emphasis>isim</emphasis>]  [<command>--to-code</command>=<emphasis>isim</emphasis>]  [<command>--output</command>=<emphasis>çıktı-dosyası</emphasis>]
+      [<command>--list</command>] [<command>--silent</command>]  [<command>--verbose</command>] [<command>--help</command>] [<command>--usage</command>] [<command>--version</command>]
+      [<emphasis>dosya</emphasis>...]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>iconv</command> komutu; <varname>dosya</varname> ile belirtilen dosyadaki karakterlerin kodlamasını, başka bir karakter kodlamasına dönüştürür. Sonuç, <command>--output</command> seçeneği ile belirtilmediği sürece standart çıktıya gönderilir.
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><literal><command>--from-code</command>=<emphasis>isim </emphasis></literal></glossterm>
+        <glossdef><para>Özgün metin kodlaması belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><literal><command>--to-code</command>=<emphasis>isim </emphasis></literal></glossterm>
+        <glossdef><para>Çıktı için kodlama belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--list</command></glossterm>
+        <glossdef><para>Kodlaması bilinen tüm karakter kodlamalarını listeler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Geçersiz karakterleri çıktıya yazmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o</command></glossterm>
+        <glossterm><literal><command>--output</command>=<emphasis>çıktı-dosyası </emphasis></literal></glossterm>
+        <glossdef><para>Çıktı için dosya belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--silent</command></glossterm>
+        <glossdef><para>Uyarılar engellenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>Gelişim bilgisini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>?</command></glossterm>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--usage</command></glossterm>
+        <glossdef><para>Kısa kullanım iletisi gösterilir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+Uzun seçeneklerdeki argümanlar zorunlu olsun olmasın kısa seçeneklerde de
+geçerlidir.
+    </para>
+  </refsect1><refsect1>
+    <title>YAZAN</title>
+    <para><command>iconv</command>, GNU C Kütüphanesinin bir parçası olarak, Ulrich Drepper tarafından yazılmıştır.</para><para><command>iconv</command> man sayfası Joel Klecker <email>espy@debian.org</email> tarafından, Debian GNU/Linux  Sistemi için yazılmıştır.</para><para>Bu man sayfası (Türkçe olarak) Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email> tarafından yazılmıştır.</para>
+  </refsect1>
+</refentry>

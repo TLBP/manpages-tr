@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_cast.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_cast">
+ <refmeta>
+  <refentrytitle>DROP CAST</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP CAST</refname>
+  <refpurpose>bir tür dönüşümünü kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP CAST</command> (<emphasis>kaynak_tür</emphasis> <command>AS</command> <emphasis>hedef_tür</emphasis>) [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP CAST</command> evvelce tanımlanmış bir tür dönüşümünü siler.
+  </para><para>
+Bir tür dönüşümünü silebilmek için, ya kaynak ya da hedef türün sahibi olmalısınız. Bunların, bir tür dönüşümünü tanımlamak için gereken izinlerle aynı olması gerekir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+   <variablelist><varlistentry>
+     <term><replaceable>kaynak_tür</replaceable></term>
+     <listitem><para>Tür dönüşümünün kaynak veri türünün ismi.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>hedef_tür</replaceable></term>
+     <listitem><para>Tür dönüşümünün hedef veri türünün ismi.
+      </para></listitem></varlistentry><varlistentry>
+     <term><command>CASCADE</command></term>
+     <term><command>RESTRICT</command></term>
+     <listitem><para>Tür dönüşümlerinde bir bağımlılık sözkonusu olmadığından bu sözcükler etkisizdir.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1>
+  <title>Örnekler</title><para>
+<type>text</type> türünden <type>int</type> türüne dönüşümü silmek için:
+  </para><para>
+<programlisting indent="4">DROP CAST (text AS int);</programlisting>
+  </para></refsect1><refsect1>
+  <title>Uyumluluk</title><para>
+<command>DROP CAST</command> komutu SQL standardı ile uyumludur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_cast" xreflabel="CREATE CAST"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

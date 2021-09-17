@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_function.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_function">
+ <refmeta>
+  <refentrytitle>DROP FUNCTION</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP FUNCTION</refname>
+  <refpurpose>bir işlevi kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP FUNCTION</command> <emphasis>isim</emphasis> ( [ <emphasis>veri_türü</emphasis> [, ...] ] ) [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP FUNCTION</command> mevcut bir işlevin tanımını siler. Komutu çalıştırabilmek için işlevin sahibi olmalısınız. Farkı argümanları olan aynı isimde çok sayıda işlev olabileceğinden silinecek işlevin argümanlarını da belirtmelisiniz.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Mevcut bir işlevin ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>veri_türü</replaceable></term>
+    <listitem><para>İşlevin bir argümanının veri türü.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>İşleve bağımlı nesnelerin de (örn, tetikler veya işleçler) silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>İşleve bağımlı nesneler varsa işlevin silinmesini engeller. Bu öntanımlıdır.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1>
+  <title>Örnekler</title><para>
+Karekök işlevini kaldırmak için:
+ </para><para>
+<programlisting indent="4">DROP FUNCTION sqrt(integer);</programlisting>
+  </para></refsect1><refsect1>
+  <title>Uyumluluk</title><para>
+SQL standardında <command>DROP FUNCTION</command> diye bir deyim vardır ama bu komutla uyumlu değildir.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_function" xreflabel="CREATE FUNCTION"/>,<sbr/>
+<link linkend="tr-man7-alter_function" xreflabel="ALTER FUNCTION"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

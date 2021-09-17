@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: chmod.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-chmod">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>chmod</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>chmod</refname>
+    <refpurpose>dosya kip bitlerini değiştirir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>chmod</command> [<emphasis>seçenek</emphasis>]... <emphasis>kip</emphasis>[,<emphasis>kip</emphasis>]... <emphasis>dosya</emphasis>...
+<command>chmod</command> [<emphasis>seçenek</emphasis>]... <emphasis>sekizlik-kip dosya</emphasis>...
+<command>chmod</command> [<emphasis>seçenek</emphasis>]... <command>--reference</command>=<emphasis>örnek-dosya dosya</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>AÇIKLAMA</title>
+    <para>
+Bu kılavuz, <command>chmod</command> komutunun GNU sürümünü anlatmaktadır. <command>chmod</command>, belirtilen her dosyanın kip bitlerini belirtilen kipe göre değiştirir. Kip belirtimi yapılacak değişiklilerin sembolik gösterimlerinden oluşabileceği gibi yeni kip bitlerinin belirtildiği bit kalıbını içeren sekizlik sayılardan da oluşabilir.
+    </para><para>
+Sembolik kip sözdizimi
+    </para><para>
+<literallayout>
+[ugoa...][[+-=][rwxXstugo...]...][,...]
+</literallayout>
+    </para><para>
+     biçimindedir. <literal>rwxXst</literal> harfleri birden fazla belirtilebilirken, <literal>ugo</literal> harflerinden yalnız biri belirtilebilir. Virgüller ile ayrılarak, çeşitli sembolik kipler belirtilebilir.
+    </para><para>
+<command>ugoa</command> harfleri, değiştirilecek dosyaya hangi kullanıcının erişeceğini kontrol eder:  sahibi olan kullanıcı <command>u</command> (yoU), dosyanın grubunda bulunan kullanıcılar <command>g</command> (Group), dosya grubunun dışındaki diğer kullanıcılar <command>o</command> (Others) veya bütün kullanıcılar <command>a</command> (All). Şayet bunlardan birisi belirtilmemişse, <command>a</command> seçeneği belirtilmiş gibi işlem yapılır, fakat <command>umask</command> içinde ayarlanmış bitler etkilenmez.
+    </para><para>
+<command>+</command> işleci, seçilen kiplerin her dosyadaki mevcut kip bitlerine eklenmesini sağlar; <command>-</command> işleci bunları mevcut kiplerden kaldırmaya yarar;<command>=</command> ise dosyada bulunan izinler üzerine atama yapmaya yarar (<command>=</command> işleci kullanıldıktan sonra eski dosya izinleri geçersiz olur ve yeni atanan izinler kullanılır;  dizinlerin kullanıcı ve grup kimliği bitleri bu özellikten etkilenmezler.).
+    </para><para>
+<command>rwxXst</command> harfleri, etkiledikleri kullanıcılar için, yeni bit kiplerini seçerler: oku <command>r</command> (Read),  yaz <command>w</command> (Write), çalıştır (dizinler için erişim) <command>x</command> (eXecute), dosyanın bir dizin olduğu durumlarda veya bazı kullanıcılar için çalıştırma izninin olduğu durumlarda çalıştır <command>X</command>, çalıştırma için kullanıcı veya grup kimliklerini ayarla <command>s</command>, sınırlı silme bayrağı veya yapışkan bit <command>t</command> (sTicky).
+    </para><para>
+Bu harflerin bir veya birkaçı yerine <command>ugo</command> harflerinden yalnızca birini belirtebilirsiniz: izinler dosyanın sahibi olan kullanıcılara aittir <command>u</command> (yoU),  izinler dosyanın sahibi olan gruptaki diğer kullanıcılara aittir <command>g</command> (Group)  ve izinler önceki iki sınıfta belirtilenlerin dışındaki kullanıcılara tahsis edilmiştir <command>o</command> (Others).
+    </para><para>
+Bir sayısal kip, en az bir en çok dört sekizlik (0 ile 7 arasında) rakamdan oluşur ve her rakam 4, 2 ve 1 değerli bitler birbirine eklenerek elde edilir. Atlanmış her bir basamak sıfır kabul edilir. İlk rakam kullanıcı kimliği (4), grup kimliği (2) ve yapışkan bit (1) özniteliklerinden oluşur. İkinci rakam dosyanın sahibi olan kullanıcı için izinleri seçer: okuma (4), yazma (2) ve çalıştırma (1) izinleri. Üçüncüsü aynı değerleri gruptaki kullanıcılara,  sonuncusu da grup dışındaki kullanıcılara uygular.
+    </para><para>
+<command>chmod</command> asla, sembolik bağların izinlerini değiştirmez, onların izinlerini <command>chmod</command> sistem çağrıları da değiştiremez. Sembolik bağların izinleri asla kullanılmadığı için, bu temelde bir sorun yaratmaz. Bununla beraber, komut satırında listelenen her bir sembolik bağ için, <command>chmod</command> sembolik bağın hedefi olan dosyanın izinlerini değiştirir. Bunun tersi olarak, <command>chmod</command>, ardışık dizin geçişleri sırasında saptadığı sembolik bağları görmezden gelir.
+    </para>
+  </refsect1><refsect1><title>SINIRLI SİLME BAYRAĞI veya YAPIŞKAN BİT</title>
+    <para>
+Sınırlı silme bayrağı ve yapışkan bit tek bir bit olup, bit dosyanın türüne bağlı olarak yorumlanır. Dizinler için bu bit sıradan kullanıcıların kendilerine ait olmayan dizinleri dosyaları dizinden silmelerini veya isimlerini değiştirmelerini engeller; bu durumda bit, dizin için sınırlı silme bayrağı adını alır ve genelde <filename>/tmp</filename> gibi herkesin yazabildiği dizinlerde kullanılır. Bazı eski sistemlerdeki normal dosyalarda bu bit programların metin imgesinin takas alanında saklanmasına ve böylece çalıştırılırken daha hızlı yüklenmesini sağlardı; bu durumda bit yapışkan bit adını alırdı. (Linux çekirdeği bu yapışkan bitleri yoksayar.)
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <para>Her bir <varname>dosya</varname>'nın kipini belirtilen <varname>kip</varname> ile değiştirir.
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossterm><command>--changes</command></glossterm>
+        <glossdef><para>Sadece değişiklik olduğu zaman rapor vermesi dışında <command>--verbose</command> gibidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--no-preserve-root</command></glossterm>
+        <glossdef><para>`/' özel olarak ele alınmaz (öntanımlı)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--preserve-root</command></glossterm>
+        <glossdef><para>`/' üzerinde ardışık işlem yapılamaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--silent</command></glossterm>
+        <glossterm><command>--quiet</command></glossterm>
+        <glossdef><para>Pekçok hatayı görmezden gelir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>İşlem yapılan her bir dosya için bir tanı bilgisi çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--reference=</command><varname>örnek-dosya</varname> </glossterm>
+        <glossdef><para><varname>kip</varname> yerine <varname>örnek-dosya</varname>'nın kipini kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>--recursive</command></glossterm>
+        <glossdef><para>Dosya ve dizinleri ardışık olarak değiştirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım metnini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist><para>
+Her bir <varname>kip </varname> <command>ugoa</command> harflerinin sıfır ya da bir kaçından, <command>+-=</command> sembollerinden birinden ve <command>rwxXst</command> harflerinden sıfır veya bir kaçından <command>ugo</command> harflerinin birinden oluşur. (veya kısaca `<literal>[ugoa]*([-+=]([rwxXst]*|[ugo]))+</literal>')
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie ve Jim Meyering tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man2-chmod"/>
+   </para><para>
+<command>chmod</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>chmod</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils chmod</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Kasım 2003</para>
+    <para>Kasım 2006'da güncellenmiştir.</para>
+  </refsect1>
+</refentry>

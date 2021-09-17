@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_tablespace.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_tablespace">
+ <refmeta>
+  <refentrytitle>DROP TABLESPACE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP TABLESPACE</refname>
+  <refpurpose>bir tablo alanını kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP TABLESPACE</command> <emphasis>tablo_alanı_ismi</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP TABLESPACE</command> sistemdeki bir tablo alanını kaldırır.
+  </para><para>
+Bir tablo alanı sadece sahibi ya da ayrıcalıklı kullanıcı tarafından kaldırılabilir. Bir tablo alanı kaldırılmadan önce içerdiği tüm veritabanı nesneleri kaldırılmış olmalıdır. O anki veritabanına ait, tablo alanını kullanmakta olan hiçbir nesne kalmamış olsa bile, tablo alanı içinde hala diğer veritabanlarına ait nesneler kalmış olabilir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>tablo_alanı_ismi</replaceable></term>
+    <listitem><para>Kaldırılacak tablo alanının ismi.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+Sistemden <literal>mystuff</literal> tablo alanını kaldırmak için:
+  </para><para>
+<programlisting indent="4">DROP TABLESPACE mystuff;</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>DROP TABLESPACE</command> bir <productname>PostgreSQL</productname>
+oluşumudur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_tablespace" xreflabel="CREATE TABLESPACE"/>,<sbr/>
+<link linkend="tr-man7-alter_tablespace" xreflabel="ALTER TABLESPACE"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

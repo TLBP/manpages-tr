@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: cksum.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-cksum">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>cksum</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>cksum</refname>
+    <refpurpose>dosya içindeki baytları sayar ve sağlamasını yapar</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis>
+<command>cksum</command> [<emphasis>dosya</emphasis>]...
+<command>cksum</command> [<emphasis>seçenek</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Her bir <varname>dosya</varname> için bayt sayısını ve CRC sağlamasını gösterir.
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1>
+    <title>YAZAN</title>
+    <para>Q. Frank Xia tarafından yazılmıştır.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>TELİF HAKKI</title>
+    <para>
+     Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>İLGİLİ BELGELER</title>
+    <para>
+<command>cksum</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>cksum</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils cksum</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>ÇEVİREN</title>
+    <para>Yalçın KOLUKISA <email>yalcink01@yahoo .com</email>, Kasım 2003</para>
+    <para>Kasım 2006'da güncellenmiştir.</para>
+  </refsect1>
+</refentry>
+

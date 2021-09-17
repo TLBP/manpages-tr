@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: uucp.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-uucp">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>uucp</refentrytitle>
+    <refmiscinfo class="domain">Taylor UUCP 1.06</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>uucp</refname>
+    <refpurpose>Unix’den Unix’e kopyalama</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>uucp</command> [ <emphasis>seçenekler</emphasis> ] <emphasis>kaynak-dosya hedef-dosya</emphasis>
+<command>uucp</command> [ <emphasis>seçenekler</emphasis> ] <emphasis>kaynak-dosya... hedef-dizin</emphasis>
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>uucp</command> komutu dosyaları sistemler arasında kopyalar. Her bir dosya argümanı ya yerel makinedeki ya da
+  </para><para>
+<literallayout>sistem!dosyayolu</literallayout>
+  </para><para>
+şeklinde belirtilen uzak bir makinedeki bir dosyayoludur. Birinci kullanım şeklinde, birinci dosya içeriği ikinci dosyaya yazılır. İkinci şekilde ise her kaynak dosya, hedef dizine kopyalanır.
+    </para><para>
+Aşağıdaki komut kullanılarak  bir dosya <varname>sistem1</varname> üzerinden <varname>sistem2</varname>’ye veya <varname>sistem2</varname>’den aktarılabilir.
+    </para><para>
+<literallayout>sistem1!sistem2!dosyayolu</literallayout>
+    </para><para>
+<literal>/</literal> veya <literal>~</literal> ile başlamayan dosya yolları geçerli dizin içinde kabul edilir (<command>-W</command> veya <command>--noexpand</command> seçenekleri belirtilmediği sürece). Ortaya çıkan yeni yolun uzak sistem içinde bulunması bir zorunluluk değildir. Sadece bir <literal>~</literal> ile başlayan yol ismi genel UUCP dizininde, <literal>~kullanıcı_adı</literal> şeklinde belirtilen bir yol ismi ise <literal>kullanıcı_adı</literal> olarak belirtilen kullanıcının ev dizininde başlar. Bazı kabuklarda <literal>~</literal> işareti yerel ev dizini olarak kabul edilir ve <command>uucp</command>  bunu atlayabilir, bu nedenle <literal>~</literal> işaretini tırnak içinde kullanmak daha iyi bir yöntemdir.
+    </para><para>
+<literal>? * [ ]</literal> karakterleri kabuk metakarakterleri olarak yorumlanabilirler. Bu sistemlerde, bu işaretleri tırnak içine alarak <command>uucp</command>’den önce kabuğun devreye girerek bunları yorumlaması önlenir.
+    </para><para>
+Kopyalama hemen yapılmaz, <command>uucico</command>(8) artalan süreci için kuyruğa alınır. Eğer <command>–r</command> ya da <command>--nouucico</command> seçenekleri kullanılmazsa <link linkend="tr-man8-uucico"/> süreci hemen devreye girer. Her durumda uzaktaki sistem kopyalanacak dosyaları çağırır.
+  </para></refsect1><refsect1><title>SEÇENEKLER</title><para>
+Aşağıdaki seçenekler kullanılabilir.
+    </para><para><glosslist><glossentry>
+      <glossterm><command>-c</command></glossterm>
+      <glossterm><command>--nocopy</command></glossterm>
+      <glossdef><para>Yerel kaynak dosyalarını <filename>spool</filename> dizinine kopyalamaz. Eğer bu dosyalar <command>uucico</command>(8) artalan süreci tarafından işleme sokulmadan kaldırmışsa, kopyalama başarısız olur.  Dosyalar <command>uucico</command>(8) artalan süreci ve komutu kullanan kullanıcı tarafından okunabilir olmalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-C</command></glossterm>
+      <glossterm><command>--copy</command></glossterm>
+      <glossdef><para>Yerel kaynak dosyalarını <filename>spool</filename> dizinine kopyalar. Öntanımlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-d</command></glossterm>
+      <glossterm><command>--directories</command></glossterm>
+      <glossdef><para>Kopyalama sırasında gerekli dizinlerin hepsi oluşturulur. Öntanımlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-f</command></glossterm>
+      <glossterm><command>--nodirectories</command></glossterm>
+      <glossdef><para>Eğer hedef yolda gerekli dizinler eksik ise kopyalama yapılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-R</command></glossterm>
+      <glossterm><command>--recursive</command></glossterm>
+      <glossdef><para>Eğer herhangi bir kaynak dosya adı bir dizin ise, bunların içerikleri de hedefe kopyalanır (hedefin kendisi de dizin olmalıdır).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>derece</varname></glossterm>
+        <glossterm><command>--grade </command><varname>derece</varname></glossterm>
+      <glossdef><para>Aktarılacak dosyanın önceliğini belirler. Yüksek dereceli işlemler ilk önce yapılır. Dereceler 0 ... 9 A ... Z ve a ... z olarak yüksek dereceliden küçüğe doğru sıralanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--mail</command></glossterm>
+      <glossdef><para>Dosya aktarım işleminin tamamlanıp tamamlanmadığını <link linkend="tr-man1-mail"/> uygulamasını kullanarak bildirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n </command><varname>kullanıcı</varname></glossterm>
+        <glossterm><command>--notify </command><varname>kullanıcı</varname></glossterm>
+      <glossdef><para>Uzak sistemde belirtilen <varname>kullanıcı</varname>ya dosya transferinin tamamlanıp tamamlanmadığını <command>mail</command>(1) uygulamasını kullanarak bildirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--nouucico</command></glossterm>
+      <glossdef><para><link linkend="tr-man8-uucico"/> artalan sürecini hemen başlatmaz, transfer işlemini daha sonra yapmak üzere dosyayı kuyruğa koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-j</command></glossterm>
+        <glossterm><command>--jobid</command></glossterm>
+      <glossdef><para>İş kimliğini standart çıktıya basar. Bu iş daha sonra iş kimliği <command>-k</command> seçeneğine belirtilerek <command>uustat</command>(1) ile iptal  edilebilir. Bazı karmaşık işlemlerde ayrı satırlarda birden fazla iş kimliği üretilebilir. Örneğin;
+      </para><para>
+<screen>uucp sist1!~kull1/dosya1 sist2!~kull2/dosya2 ~kull3</screen>
+      </para><para>
+Bu işlem değişik biri <literal>sist1</literal> diğeri <literal>sist2</literal> için olmak üzere iki adet iş üretir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W</command></glossterm>
+        <glossterm><command>--noexpand</command></glossterm>
+      <glossdef><para>Uzaktaki yol isimlerine geçerli dizin ismini eklemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><command>--uuto</command></glossterm>
+      <glossdef><para>Bu seçenek <command>uuto</command> kabuk betiği tarafından kullanılır. Bu <command>uucp</command>’nin en son argümanının <literal>sistem!kullanıcı</literal> olarak kabul edilmesini sağlar. Dosyalar uzaktaki sistemin <filename>~/receive/kullanıcı/yerel</filename>  dizinine gönderilir. Burada <varname>kullanıcı</varname> en son argümandan alınır, <varname>yerel</varname> ise yerel <command>uucp</command> sisteminin adıdır. Ayrıca <command>--notify </command><varname>kullanıcı</varname> seçeneği kullanılmış gibi bu seçenekle ilgili işlemi gerçekleştirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x </command><varname>tür</varname></glossterm>
+        <glossterm><command>--debug </command><varname>tür</varname> </glossterm>
+        <glossdef><para>Belirtilen hata ayıklama türlerini etkinleştirir. Tanınan hata ayıklama türleri şunlardır: <literal>abnormal, chat, handshake, uucp-proto, proto, port,  config,  spooldir,  execute, incoming, outgoing</literal>.  <command>uucp</command> için sadece <literal>abnormal, config, spooldir</literal> ve <literal>execute</literal> türleri anlamlıdır.
+        </para><para>
+Virgül ile ayrılmış birden fazla tür verilebileceği gibi birden fazla <command>--debug</command> seçeneği de kullanılabilir. Ayrıca sayı verilerek de yukarıdaki listede belirtilen türlerin seçimi sağlanabilir. Liste sıralamasına uymak zorundasınız. Örneğin, <command>--debug 2</command> ile   <command>--debug abnormal,chat</command> aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-I </command><varname>dosya</varname></glossterm>
+        <glossterm><command>--config </command><varname>dosya</varname> </glossterm>
+      <glossdef><para>Kullanılacak yapılandırma dosyasını belirtir. Bu seçenek <command>uucp</command>’nin derlenme şekline bağlı olarak geçerli olmayabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+         <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Seçeneklerin bir özetini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+      <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </para></refsect1><refsect1><title>İLGİLİ DOSYALAR</title><para>
+Dosya isimleri derleme sırasında veya yapılandırma dosyası tarafından değiştirilebilir. Bu nedenle aşağıdaki isimler tahminidir.
+  </para><para><literallayout>
+<filename>/etc/uucp/config</filename>     – yapılandırma dosyası
+<filename>/etc/uucp/oldconfig/</filename> - Diğer yapılandırma dosyası (HDB ya da V2 biçimi)
+<filename>/var/spool/uucp</filename>       - UUCP spool dizini.
+<filename>/var/log/uucp/Log</filename>     - UUCP günlük dosyası.
+<filename>/var/spool/uucppublic</filename> - Öntanımlı UUCP genel dizini.
+</literallayout>
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-mail"/>, <link linkend="tr-man1-uux"/>, <link linkend="tr-man1-uustat"/>, <link linkend="tr-man8-uucico"/>.
+  </para></refsect1><refsect1><title>YAZILIM HATALARI</title><para>
+Bazı seçenekler uzak sistem üzerindeki <command>uucico</command>(8) artalan sürecinin yeteneklerine bağlıdır.
+   </para><para>
+<command>-n</command> ve <command>-m</command> seçenekleri iki uzak sistem arasında kopyalamada çalışmamaktadır.
+   </para><para>
+Dosya kipleri, çalıştırma biti haricinde korunmaz. Sonuç dosya <command>uucp</command> kullanıcısı tarafından sahiplenilir.
+  </para></refsect1><refsect1><title>YAZAN</title><para>
+Ian Lance Taylor <email>ian@airs.com</email> tarafından yazılmıştır.
+  </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Erdal Yazıcıoğlu <email>erdal.yazicioglu@gbhl.org.tr</email>, Şubat 2004</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

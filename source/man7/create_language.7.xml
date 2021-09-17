@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_language.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_language">
+ <refmeta>
+  <refentrytitle>CREATE LANGUAGE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE LANGUAGE</refname>
+  <refpurpose>yeni bir yordamsal dil tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [ <command>TRUSTED</command> ] [ <command>PROCEDURAL</command> ] <command>LANGUAGE</command> <emphasis>isim</emphasis>
+    <command>HANDLER</command> <emphasis>eylemci</emphasis> [ <command>VALIDATOR</command> <emphasis>doğrulama_işlevi</emphasis> ]
+</synopsis>
+ </refsynopsisdiv>
+  <refsect1><title>Açıklama</title><para>
+<command>CREATE LANGUAGE</command> kullanarak, bir <productname>PostgreSQL</productname> kulanıcısı bir <productname>PostgreSQL</productname> veritabanı için yeni bir yordamsal dil kaydı yapabilir. Bundan sonra bu yeni dilde işlevler ve tetik yordamları tanımlanabilir. Yeni bir dil kaydı yapabilmek için kullanıcı, <productname>PostgreSQL</productname> ayrıcalıklı kullanıcısı yetkilerine sahip olmalıdır.
+  </para><para>
+<command>CREATE LANGUAGE</command> aslında, bir dilde yazılmış işlevlerin çalıştırılmasından sorumlu bir eylemci ile bu dili ilişkilendirir. Dil eylemcileri hakkında ayrıntılı bilgi edinmek için<sbr/><ulink url="http://www.postgresql.org/uygulamalar/pgsql/xplang.html"/> adresine bakınız.
+  </para><para>
+Yordamsal dil kaydı her veritabanına ayrı ayrı yapılmalıdır. Bir dilin bütün veritabanlarında öntanımlı olması için, bu dil <literal>template1</literal> veritabanında kayıtlı olmalıdır.
+  </para></refsect1><refsect1 id="tr-man7-createlanguage-parameters">
+  <title>Parametreler</title>
+   <variablelist><varlistentry>
+     <term><command>TRUSTED</command></term>
+     <listitem><para>Eylemcinin dil için gövenli olduğunu belirtir. Bu, bir yetkisiz kullanıcı erişim kısıtlamalarını aşacak herhangi bir işlevselliği kullanmayacak demektir. Belirtilmezse, sadece <productname>PostgreSQL</productname> ayrıcalıklı kullanıcısının yetkilerine sahip kullanıcılar bu dili yeni bir işlev tanımlamak için kullanabilecektir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><command>PROCEDURAL</command></term>
+     <listitem><para>Gereksizdir (etkisi yoktur).
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>isim</replaceable></term>
+     <listitem><para>Yeni yordamsal dilin ismi. Dil ismi harf büyüklüğüne duyarlıdır. İsim veritabanındaki dil isimleri arasında eşsiz olmalıdır.
+      </para><para>
+Geriye uyumluluk için isim tek tırnak içine alınabilir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><command>HANDLER </command><replaceable>eylemci</replaceable></term>
+     <listitem><para><replaceable>eylemci</replaceable> yordamsal dilin işlevlerini çalıştırmak için çağrılacak, evvelce kaydedilmiş bir işlevin ismidir. Bir yordamsal dilin eylemci işlevi C gibi bir derlenen dilin 1. sürüm çağrı uzlaşımı ile yazılmış olmalı ve argüman almayan ve dönüş türü <type>language_handler</type> olan bir işlev olarak kaydedilmiş olmalıdır.  <type>language_handler</type> dönüş türü, işlevi bir eylemci işlev olarak tanımlamakta kullanılan bir yer tutucu türdür.
+     </para></listitem></varlistentry><varlistentry>
+     <term><command>VALIDATOR </command><replaceable>doğrulama_işlevi</replaceable></term>
+     <listitem><para><replaceable>doğrulama_işlevi</replaceable> yeni dilde yeni bir işlev oluşturulduğunda yeni işlevi doğrulamak için çağrılacak evvelce kaydedilimiş bir işlevin ismidir. Böyle bir işlev belirtilmezse, yeni bir işlev oluşturulduğunda sınanmayacaktır. Doğrulama işlevi, yeni oluşturulacak işlevin nesne kimliği için <type>oid</type> türünde bir argüman almalıdır. İşlev genellikle <type>void</type> döndürecek şekilde tasarlanır.
+      </para><para>
+Bir doğrulama işlevi genellikle işlev gövdesini sözdizimsel doğruluk bakımından inceler, ama işlevin diğer özelliklerine de (dilin desteklemediği bir argüman türü kullanılmış mı, acaba; gibi) bakar. Bir hatayı sinyallemek için, doğrulama işlevi <function>ereport()</function> işlevini kullanmalıdır. İşlevin dönüş değeri yok sayılır.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Bu komut normalde doğrudan kullanıcılar tarafından çalıştırılmaz. Yordamsal diler için <productname>PostgreSQL</productname> dağıtımında bulunan <link linkend="tr-man1-createlang"/> aracı kullanılmalıdır. Bu araç ayrıca, doğru eylemciyi de kuracaktır. (<command>createlang</command>
+yerine <command>CREATE LANGUAGE</command>'de kullanılabilir.)
+  </para><para>
+PostgreSQL'in 7.3 sürümünden önce, eylemci işlevin  <type>language_handler</type> türünde değil, <type>opaque</type> türde yer tutucu döndürmesi gerekirdi. Eski döküm dosyalarını desteklemek için <command>CREATE LANGUAGE</command> <type>opaque</type> türde değer döndüren bir işlevi kabul edecektir, ama işlevin, dönüş türü <type>language_handler</type> olacak şekilde bildirilmesinin gerektiğini bildiren bir uyarı gösterecektir.
+  </para><para>
+Yeni bir işlev oluşturmak için <link linkend="tr-man7-create_function" xreflabel="CREATE FUNCTION"/> kullanılır.
+  </para><para>
+Bir yordamsal dili veritabanından kaldırmak için <link linkend="tr-man7-drop_language" xreflabel="DROP LANGUAGE"/> ya da daha iyisi <link linkend="tr-man1-droplang"/> aracını kullanın.
+  </para><para>
+Sistem kataloğu <classname>pg_language</classname> (bkz.<sbr/><ulink url="http://www.postgresql.org/uygulamalar/pgsql/catalog-pg-language.html"/>), o an kurulu olan diller hakkındaki bilgileri kaydeder. Ayrıca, <command>createlang</command> kurulu dilleri listelemek için bir seçeneğe sahiptir.
+  </para><para>
+Bir kullanıcının bir yordamsal dili kullanabilmesi için, <command>USAGE</command> yetkisi olması gerekir. Eğer dilin güvenilir olduğu biliniyorsa, <command>createlang</command> herkese bu izni özdevinimli olarak verir.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+Aşağıdaki iki komut sırayla çalıtırılarak yeni bir dilin ve eylemcisinin kaydını yapacaktır.
+  </para><para>
+<programlisting indent="4">CREATE FUNCTION plsample_call_handler() RETURNS language_handler
+    AS '$libdir/plsample'
+    LANGUAGE C;
+CREATE LANGUAGE plsample
+    HANDLER plsample_call_handler;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE LANGUAGE</command> bir <productname>PostgreSQL</productname> oluşumudur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_language" xreflabel="ALTER LANGUAGE"/>,<sbr/>
+<link linkend="tr-man7-create_function" xreflabel="CREATE FUNCTION"/>,<sbr/>
+<link linkend="tr-man7-drop_language" xreflabel="DROP LANGUAGE"/>,<sbr/>
+<link linkend="tr-man7-grant" xreflabel="GRANT"/>,
+<link linkend="tr-man7-revoke" xreflabel="REVOKE"/>,
+<link linkend="tr-man1-createlang"/>, <link linkend="tr-man1-droplang"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

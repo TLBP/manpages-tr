@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: shutdown.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-shutdown">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>shutdown</refentrytitle>
+    <refmiscinfo class="header">Linux Sistem Yöneticisinin Kılavuzu</refmiscinfo>
+    <refmiscinfo class="date">31 Temmuz 2001</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>shutdown</refname>
+    <refpurpose>sistemi kapatır</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>/sbin/shutdown</command> [<command>-t </command><emphasis>saniye</emphasis>] [<command>-arkhncfF</command>] <emphasis>zaman</emphasis> [<emphasis>uyarı-iletisi</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>shutdown</command>, sistemi güvenli bir şekilde kapatır. O an sisteme bağlı bütün kullanıcılar, sistemin kapatılmakta olduğu hakkında uyarılır ve <command>login</command>(1) baskılanır.  Sistemi hemen kapatmak veya belirli bir süre sonra kapatmak tercihe bağlıdır. <literal>SIGTERM</literal> sinyali ile, bütün süreçler sistemin kapatılacağı konusunda uyarılır. Böylece, yazılımlara, yapmakta oldukları işi kaydetmeleri için süre tanınmış olur. Örneğin <command>vi</command>(1) üzerinde çalıştığı belgeyi kaydeder, posta ve haber programlarına düzgün bir şekilde kapanma şansı verilmiş olur, vs... <command>shutdown</command>, <link linkend="tr-man8-init"/> sürecine sinyal göndererek, çalışma seviyesini değiştirmesini söyler. Çalışma seviyesi <command>0</command> sistemi durdurmak, <command>6</command> sistemi yeniden başlatmak ve <command>1</command> tek kullanıcılı kipe geçmek için kullanılır. <command>–h</command> veya <command>–r</command> seçeneklerinden hiçbiri belirtilmemişse bu öntanımlıdır. Sistemi kapatma (halt) ve yeniden bağlatma (reboot) işlemleri esnasında neler olup bittiğini görmek için, <filename>/etc/inittab</filename> dosyası içindeki ilgili girdilere bakınız.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist><glossentry>
+      <glossterm><command>–a</command></glossterm>
+      <glossdef><para><command>/etc/shutdown.allow</command> kullanılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–t </command><varname>saniye</varname></glossterm>
+      <glossdef><para>init(8)’e, çalışma seviyesini değiştirmeden önce, uyarı ve kill sinyali süreçleri arasında <varname>saniye</varname> saniye beklemesini söyler.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–k</command></glossterm>
+      <glossdef><para>Gerçekte kapatma işlemi yapılmaz, sadece sisteme bağlı bulunan kullanıcılara uyarı gönderilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–r</command></glossterm>
+      <glossdef><para>Sistemi kapattıktan sonra yeniden başlatır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–r</command></glossterm>
+      <glossdef><para>Sistemi durdurduktan sonra kapatır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–n</command></glossterm>
+      <glossdef><para>[ÖNERİLMEZ] kapatma işlemi için <link linkend="tr-man8-init"/>’i çağırmaz, bu işlemi kendi başına yapar. Bu seçeneği kullanmak tavsiye edilmez ve bu işlemin sonuçları, her zaman beklenildiği gibi olmaz.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–f</command></glossterm>
+      <glossdef><para>Sistemi yeniden başlattığında fsck yapılmaz.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–F</command></glossterm>
+      <glossdef><para>Sistemi yeniden başlattığında fsck mutlaka yapılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>–c</command></glossterm>
+      <glossdef><para>Çalışmakta olan shutdown sürecini iptal eder. Elbette, bu seçenek ile <varname>zaman</varname> argümanını belirtmek mümkün değildir, fakat bütün kullanıcılara göndermek üzere açıklayıcı bir uyarı girilebilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>zaman</varname></glossterm>
+      <glossdef><para>kapatma zamanı.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>uyarı-iletisi</varname></glossterm>
+      <glossdef><para>Tüm kullanıcılara gönderilecek uyarı iletisi.
+      </para></glossdef>
+    </glossentry></glosslist>
+    <para>
+<varname>zaman</varname> argümanı değişik biçimlerde kullanılabilir. Birincisi, <varname>ss:dd</varname> biçiminde olabilir (ss, saat, dd ise dakikadır). Saat bölümü bir ya da iki basamak olabilir, dakika ise iki basamaklı olmalıdır.  İkinci biçim olarak; <varname>+d</varname> biçimi kullanılabilir. Burada <varname>d</varname> beklenecek dakikayı gösterir. <command>now</command> kelimesi <command>+0</command> ile aynı anlama gelir. Yani sistemi kapatmak için hiç beklenmez.
+    </para><para>
+Şayet <command>shutdown</command> komutu, bir gecikme belirtilerek çağrılırsa, <link linkend="tr-man1-login"/> gibi yazılımların sisteme yeni kullanıcı girişlerini önlemek amacı ile <filename>/etc/nologin</filename> adında bir uyarı dosyası oluşturur. <command>shutdown</command> komutu <link linkend="tr-man8-init"/>’e gerekli sinyali göndermeden önce durdurulur ya da bir hata meydana gelirse <command>shutdown</command> bu dosyayı siler. Çalışma seviyesini değiştirmesi için <command>init</command>'i çağırmadan önce <command>shutdown</command> dosyayı siler.
+    </para><para>
+<command>-f</command> seçeneğinin anlamı ‘sistemi çabucak yeniden başlat’tır. Bu seçenekle sadece, tekrar açılışta sistem tarafından varlığı aranan <filename>/fastboot</filename> adında bir dosya oluşturulur. Şayet bu dosya mevcut ise, açılışta çalışan <command>rc</command> betiği bu dosyanın varlığına bakarak sistemin düzgün kapandığına karar verip <link linkend="tr-man1-fsck"/>'yı çalıştırmaz. Bundan sonra, açılış süreci <filename>/fastboot</filename> dosyasını sistemden siler.
+    </para><para>
+<command>-F</command> seçeneğinin anlamı ‘fsck için zorla’dır. Bu seçenekle sadece, tekrar açılışta sistem tarafından varlığı aranan <filename>/forcefsck</filename> adında bir dosya oluşturulur. Şayet bu dosya mevcut ise, açılışta çalışan <command>rc</command> betiği bu dosyanın varlığına bakarak sistem düzgün kapanmış bile olsa, <command>fsck</command>(1)'yı özel bir 'force' argümanı ile çalışmaya zorlar. Daha sonra, açılış süreci <filename>/forcefsck</filename> dosyasını sistemden siler.
+    </para><para>
+<command>-n</command> seçeneği, <command>shutdown</command>’a <command>init</command>'i çağırmamasını, bunun yerine çalışan bütün süreçlerin <command>shutdown</command> tarafından öldürülmesini söyler. Bundan sonra, <command>shutdown</command>, bütün kotaları, hesapları ve takaslamayı kapatıp dosya sistemlerini ayırır.
+    </para>
+  </refsect1><refsect1><title>ERİŞİM DENETİMİ</title>
+    <para>
+<command>shutdown</command>, <command>CTRL-ALT-DEL</command> tuşlarına aynı anda basılmak sureti ile <link linkend="tr-man8-init"/> üzerinden de çağrılabilir. Bunun için <filename>/etc/inittab</filename> dosyası içinde bu tanımlamanın yapılmış olması gerekir. Şayet bu tanımlama yapılmış ise, konsol klavyesine fiziksel erişime sahip bütün kullanıcılar sistemi kapatabilir. Bunu önlemek için, <command>shutdown</command>, sanal konsollardan birine yetkili bir kullanıcının bağlanmış olup olmadığını kontrol edebilir. Şayet <command>shutdown</command> komut <command>–a</command> seçeneği ile çağrılmış ise (bunu <filename>/etc/inittab</filename> içindeki <command>shutdown</command> çağrısına ekleyin), <command>shutdown </command> <filename>/etc/shutdown.allow</filename> dosyasının var olup olmadığını kontrol edecektir. Daha sonra burada liste içindeki yetkili isimler ile sanal konsoldan bağlanmış kullanıcıların listesini (<filename>/var/run/utmp</filename>'den)  karşılaştırır. Şayet, burada belirtilen yetkili kişilerden birisi veya <command>root</command> kullanıcı sisteme bağlanmış ise, bu kapatma işlemini gerçekleştirilir. Aksi taktirde şöyle bir hata mesajı ekrana basılır:
+    </para><para>
+<command>shutdown: no authorized users logged in</command> (sistemde  yetkili kullanıcı yok)
+    </para><para>
+<filename>/etc/shutdown.allow</filename> dosyasının biçimi, her satırda tek bir kullanıcı ismi şeklindedir. Bu dosyada yorum satırları (# ile başlayan) veya boş satırlar bulunabilir. Bu dosya 32 kullanıcı ismi ile sınırlıdır.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout indent="0">
+/fastboot
+/etc/inittab
+/etc/init.d/halt
+/etc/init.d/reboot
+/etc/shutdown.allow
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>NOTLAR</title>
+    <para>
+Kullanıcıların çoğu <varname>zaman</varname> argümanını vermeyi unutur ve <command>shutdown</command> tarafından üretilen hata iletisi karşısında şaşırırlar. <varname>zaman</varname> argümanı zorunludur. Hemen hemen bütün durumların yüzde doksanında bu argümanın değeri <command>now</command> sözcüğü olacaktır.
+    </para><para>
+Inıt sadece CTRL-ALT-DEL'i yakalayabilir ve <command>shutdown</command>'ı konsol kipinde başlatır. Sistemde X pencere sistemi çalışıyorsa, X sunucusu tüm tuş vuruşlarını işleyebilir. Bazı X11 ortamlarında CTRL-ALT-DEL'in yakalanması mümkündür ancak tam olarak nasıl bir eylemle sonuçlanacağı ortama bağlıdır.
+    </para><para>
+<command>shutdown</command> setuid olarak çalışmak üzere tasarlanmamıştır. <filename>/etc/shutdown.allow</filename> dosyası <command>shutdown</command>'ı kimin kullandığını bulmak için kullanılmaz, SADECE o an konsollarda kimlerin olduğuna bakar.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-init"/>, <link linkend="tr-man8-fsck"/>, <link linkend="tr-man8-halt"/>, <link linkend="tr-man8-halt"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Miquel van Smoorenburg, <email>miquels@cistron.nl</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

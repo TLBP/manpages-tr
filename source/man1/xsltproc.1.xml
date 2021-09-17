@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: xsltproc.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-xsltproc">
+<remark>
+.\" Copyright (C) 2001-2002 Daniel Veillard.  All Rights Reserved.
+.\"
+.\" Permission is hereby granted, free of charge, to any person obtaining a copy
+.\" of this software and associated documentation files (the "Software"), to deal
+.\" in the Software without restriction, including without limitation the rights
+.\" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+.\" copies of the Software, and to permit persons to whom the Software is fur-
+.\" nished to do so, subject to the following conditions:
+.\"
+.\" The above copyright notice and this permission notice shall be included in
+.\" all copies or substantial portions of the Software.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+.\" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIT-
+.\" NESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+.\" DANIEL VEILLARD BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+.\" IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CON-
+.\" NECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+.\"
+.\" Except as contained in this notice, the name of Daniel Veillard shall not
+.\" be used in advertising or otherwise to promote the sale, use or other deal-
+.\" ings in this Software without prior written authorization from him.
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>xsltproc</refentrytitle>
+    <refmiscinfo class="header">xsltproc kılavuzu</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>xsltproc</refname>
+    <refpurpose>komut satırı xslt işlemcisi</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>xsltproc</command> [<command>-V</command> | <command>-v</command> | <command>-o </command><emphasis>dosya</emphasis> | <command>--timing</command> | <command>--repeat</command>
+         | <command>--debug</command> | <command>--novalid</command> | <command>--noout</command> | <command>--maxdepth </command><emphasis>değer</emphasis>
+         | <command>--html</command> | <command>--docbook</command> | <command>--param </command><emphasis>isim değer</emphasis>
+         | <command>--stringparam</command> isim değer | <command>--nonet</command> | <command>--catalogs</command>
+         | <command>--xinclude</command> | <command>--profile</command> | <command>--dumpextensions</command> | <command>--nowrite</command>
+         | <command>--nomkdir</command> | <command>--writesubtree</command>] [<emphasis>xsl_betiği</emphasis>] [<emphasis>dosya1</emphasis>]
+         [<emphasis>dosya2</emphasis>] [....]
+</synopsis>
+    </refsynopsisdiv>
+  <refsect1><title>GİRİŞ</title><para>
+<command>xsltproc</command>, XML belgelerine XSLT şablonlarını uygulamak için kullanılan bir komut satırı aracıdır. GNOME projesinin XSLT C kütüphanesi olan libxslt’nin bir parçasıdır. GNOME projesinin bir parçası olarak geliştirilmesine rağmen, GNOME masaüstü ortamından bağımsız olarak da kullanılabilir.
+    </para><para>
+<command>xsltproc</command>, komut satırından xslt şablonlarını içeren betiğin adı ve bu şablonların uygulanacağı dosya veya dosyaların adı belirtilerek kullanılır.
+    </para><para>
+Şayet bir XML belge içinde xslt betiği ile ilgili bir işlem komutu varsa, komut satırında xslt betiğinin isminin bildirmesi gerekmez. <command>xsltproc</command>, bu betiği bulur ve onu kullanır.
+    </para><para>
+Öntanımlı olarak, çıktı standart çıktıya yazılır. <command>–o</command> seçeneğini kullanarak çıktı için bir dosya belirtebilirsiniz.
+    </para>
+    </refsect1><refsect1><title>KOMUT SATIRI SEÇENEKLERİ</title>
+    <para><glosslist><glossentry>
+      <glossterm><command>-V</command></glossterm>
+      <glossterm><command>--version</command></glossterm>
+        <glossdef><para>libxml ve libxslt’nin sürüm numaralarını verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>XML belgenin ve xslt dosyasının işlenmesi sırasında <command>xsltproc</command> tarafından gerçekleştirilen bütün adımlar hakkında ayrıntılı bilgi verilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o</command></glossterm>
+        <glossterm><command>--output </command><varname>dosya_adı</varname></glossterm>
+        <glossdef><para>Çıktı <varname>dosya_adı</varname> ile belirtilen dosyaya yazılır. "Tomarlama" (chunking) diye bilinen çoğul çıktılar için,  <command>-o </command><varname> dizin/</varname> şeklinde kullanım, bütün dosyaların <varname>dizin</varname> ile belirtilen dizinin altına gönderilmesini sağlar. Dizin sistemde mevcut olan bir dizin olmalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--timing</command></glossterm>
+        <glossdef><para>XML belgenin ve XSLT şablon dosyasının çözümlenmesi ve belgeye şablonların uygulanması ile sonuçların kaydedilmesi sırasında geçen süreyi görüntüler. Sonuç milisaniye cinsindendir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--repeat</command></glossterm>
+        <glossdef><para>Dönüşümü 20 kere gerçekleştirir. Zaman testi için kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--debug</command></glossterm>
+        <glossdef><para>Hata ayıklama amacıyla, dönüştürülmüş belgenin XML ağacını çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--novalid</command></glossterm>
+        <glossdef><para>Belgenin DTD'sinin yüklenmesi adımını atlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--noout</command></glossterm>
+        <glossdef><para>Sonuçlar çıktılanmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--maxdepth </command><varname>değer</varname></glossterm>
+        <glossdef><para>Libxslt'nin bir sonsuz döngüye girmesini engellemek üzere şablon yığıtının derinliğini sınırlamakta kullanılır. Öntanımlı değeri 500'dür.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--html</command></glossterm>
+        <glossdef><para>Girdi olarak verilen belge bir HTML dosyasıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--docbook</command></glossterm>
+        <glossdef><para>Girdi olarak verilen belge bir DocBook SGML dosyasıdır. DocBook XML belgelerle çalışmak için <command>--docbook</command> seçeneğini kullanmayın. Bu seçenek sadece Docbook’un SGML sürümüne sınırlı bir destek vermek için tasarlanmıştır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--param </command><varname>isim değer</varname></glossterm>
+        <glossdef><para>XSLT şablonunun <varname>isim</varname> parametresine <varname>değer</varname> değerini aktarmakta kullanılır En fazla 32 çift isim/değer çifti aktarabilirsiniz. Şayet verilen değer bir düğüm tanımlayıcısı değil de bir dizge ise, <command>--stringparam</command> seçeneğini kullanmak daha uygundur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--stringparam </command><varname>isim değer</varname></glossterm>
+        <glossdef><para>Değerin bir düğüm tanımlayıcısı değil de bir dizge olduğu durumlarda, XSLT şablonunun <varname>isim</varname> parametresine <varname>değer</varname> değerini aktarmakta kullanılır. Dizge mutlaka UTF-8 kodlanmış olmalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nonet</command></glossterm>
+        <glossdef><para>DTD'ler ve öğeler sadece yerel dosya sisteminden alınır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--catalogs</command></glossterm>
+        <glossdef><para>Harici girdilerin aranacağı yerler için <literal>SGML_CATALOG_FILES</literal> içinde tanımlanmış SGML kataloglarını kullanır. Öntanımlı olarak, <command>xsltproc</command>  <literal>XML_CATALOG_FILES</literal> içinde belirtilmiş kataloglara bakar. Şayet bu da belirtilmemiş ise <filename>/etc/xml/catalog</filename> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--xinclude</command></glossterm>
+        <glossdef><para>Belgeyi Xinclude belirtimini kullanarak işler. Xinclude belirtimi hakkkında ayrıntılı bilgi için bakınız: <ulink url="http://www.w3.org/TR/xinclude/"/>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--profile</command></glossterm>
+        <glossterm><command>--norman</command></glossterm>
+        <glossdef><para>XSLT şablonlarının her bir bölümü için harcanan zaman hakkında kısa bir bilgi verir. XSLT şablonlarının başarımını eniyilemek için uğraşırken faydalı olabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--dumpextensions</command></glossterm>
+        <glossdef><para>Kayıtlı bütün eklentilerin listesini standart çıktıya yazar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nowrite</command></glossterm>
+        <glossdef><para>Çıktı herhangi bir dosya veya kaynağa yazılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nomkdir</command></glossterm>
+        <glossdef><para>Çıktı dizinleri oluşturulmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--writesubtree </command><varname>dosyayolu</varname></glossterm>
+        <glossdef><para>Yazma işlemi sadece <varname>dosyayolu</varname> ile belirtilen dizinin alt dizinlerinde yapılır.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>DÖNEN DEĞERLER</title>
+    <para>
+<command>xsltproc</command>’un geri döndürdüğü değerler, <command>xsltproc</command>’u bir betik aracılığı ile çalıştırmayı denediğiniz durumlarda işinize yarayabilir.
+    </para><para/><para>
+<literallayout>
+<command>0</command>: normal
+
+<command>1</command>: argüman belirtilmemiş
+
+<command>2</command>: çok fazla parametre verilmiş
+
+<command>3</command>: bilinmeyen seçenek
+
+<command>4</command>: xslt şablon dosyası çözümlenemedi
+
+<command>5</command>: xslt şablon dosyasında hata
+
+<command>6</command>: belgelerden birinde hata var
+
+<command>7</command>: desteklenmeyen <command>xsl:output</command> yöntemi
+
+<command>8</command>: dizge parametresi hem çift tırnak hem de tek tırnak içeriyor
+
+<command>9</command>: dahili işlem hatası
+
+<command>10</command>: işlemin bitirilmesini gerektiren bir ileti tarafından süreç durduruldu
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>AYRINTILI BİLGİ İÇİN</title>
+    <para>
+libxml sanalyöresi: <ulink url="http://www.xmlsoft.org/"/><sbr/>
+W3C XSLT belirtimi: <ulink url="http://www.w3.org/TR/xslt/"/>
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+John Fleck <email>jfleck@inkstain.net</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>

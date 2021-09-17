@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: wvdial.conf.5.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man5-wvdial.conf">
+  <refmeta>
+    <manvolnum>5</manvolnum>
+    <refentrytitle>wvdial.conf</refentrytitle>
+    <refmiscinfo class="header">WvDial</refmiscinfo>
+    <refmiscinfo class="domain">Debian Projesi</refmiscinfo>
+    <refmiscinfo class="date">Aralık 1999</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>wvdial.conf</refname>
+    <refpurpose>wvdial ayar  dosyası</refpurpose>
+  </refnamediv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>wvdial</command> başladığında, ilk olarak <filename>/etc/wvdial.conf</filename> ayar dosyasını yükler. Bu dosya temel ayarların tutulduğu yerdir. İçinde modem hızı ve portu, başlangıç dizisi, İSS telefon numaraları, kullanıcı ismi ve parolası gibi bilgiler yer alır.
+    </para><para>
+<filename>/etc/wvdial.conf</filename> ayar dosyası Windows’un  ".ini" dosya biçimindedir: bölüm isimleri köşeli parantez ile ayrılmış, değişken değeri atamaları "=" işareti ile yapılmıştır. Aşağıda örnek bir yapılandırma dosyası verilmektedir:
+    </para><para>
+<literallayout>[Dialer Defaults]
+Modem = /dev/ttyS2
+Baud = 57600
+Init = ATZ
+Init2 = AT S11=50
+Phone = 555-4242
+Username = kalemsor
+Password = parolam
+
+[Dialer phone2]
+Phone = 555-4243
+
+[Dialer shh]
+Init3 = ATM0
+
+[Dialer pulse]
+Dial Command = ATDP
+</literallayout>
+    </para><para>
+Yukarıda belirtilmiş olan bu basit ayar dosyası, burada belirtilen iki basit komut satırı uygulamasını çalıştırmak için gereken bütün seçenekleri içermektedir.
+    </para><para>
+<screen>$ <command>wvdial phone2</command>
+$ <command>wvdial pulse</command>
+</screen>
+    </para><para>
+Aşağıda wvdial tarafından tanınan bütün seçeneklerin bir listesini bulabilirsiniz:
+    </para><para><glosslist><glossentry>
+        <glossterm><literal>Modem</literal></glossterm>
+        <glossdef><para><command>wvdial</command> uygulamasının modem olarak kullanacağı aygıtın yeri. Öntanımlı değer: <literal>/dev/modem</literal>.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Baud</literal></glossterm>
+        <glossdef><para><command>wvdial</command> uygulamasının, modem ile haberleşmek için kullanacağı hızı belirtir. Öntanımlı değer 57600’dür.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Init1 ... Init9</literal></glossterm>
+        <glossdef><para><command>wvdial</command> modeminizi ayarlamak amacı ile 9 adede kadar başlangıç dizgesi kullanabilir. Telefon numarası aranmadan önce,  bu dizgeler numara sıralarına göre modeme gönderilir. Bu, özellikle çoklu bölüm tanımlamada işe yarar. Yukarıda örnekte <literal>Init3</literal> dizgesinin modem sesini kapamak için kullanıldığını görebilirsiniz. Öntanımlı değer <literal>Init1</literal> için <literal>ATZ</literal>’dir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Phone</literal></glossterm>
+        <glossterm><literal>Phone1 ... Phone4</literal></glossterm>
+        <glossdef><para><command>wvdial</command> uygulamasının çevirmesini istediğiniz telefon numaraları biri asıl dördü ek olmak üzere 5 numaraya kadar desteklenmektedir. Numaralar sıra ile aranır.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Dial Prefix</literal></glossterm>
+        <glossdef><para><command>wvdial</command> uygulaması, bu öneki arama komutunun ardından, aranacak numarasının önüne ekler. Örneğin kuzey Amerika’da arama esnasında beklemeyi önlemek için bu değeri "*70," olarak atayabilirsiniz.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Dial Command</literal></glossterm>
+        <glossdef><para><command>wvdial</command> uygulaması, bu dizgeyi modeme arama yapmasını söylemek için kullanır.  Öntanımlı değer "ATDT"dir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Login</literal></glossterm>
+        <glossdef><para>İSS'nin size verdiği "kullanıcı ismi"ni burada belirtmelisiniz.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Login Prompt</literal></glossterm>
+        <glossdef><para>Şayet İSS’niz, <command>wvdial</command>’in ayarlayamadığı garip bir bağlantı süreci kullanıyorsa, bu seçeneği bağlantı istemi tanımlamak için kullanabilirsiniz. Bu istem İSS’den alındıktan sonra, <command>wvdial</command> Login dizgesini gönderecektir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Password</literal></glossterm>
+        <glossdef><para>Bağlantı parolanızı belirteceğiniz alan.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Ask Password</literal></glossterm>
+        <glossdef><para>Bu seçeneği ayarlarsanız, her İSS bağlantısı yaptığınızda kullanıcı parolanız sizden istenecektir. Bu seçeneği kullandığınızda, parolanızı dosya içine kaydetmeniz gerekmez. (bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Password Prompt</literal></glossterm>
+        <glossdef><para>Şayet İSS’niz, <command>wvdial</command>’in ayarlayamadığı garip bir bağlantı süreci kullanıyorsa, bu seçeneği parola istemi tanımlamak için kullanabilirsiniz. Bu istem alındığında <command>wvdial</command> parolayı karşıya gönderir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>PPPD Path</literal></glossterm>
+        <glossdef><para>Şayet sisteminizdeki <command>pppd</command>, <filename>/usr/sbin</filename> içinde değil ise bu seçeneği kullanmanız gerekecektir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Auto DNS</literal></glossterm>
+        <glossdef><para>DNS’yi otomatik olarak almanızı sağlar. Öntanımlı olarak bu değer "açık/on" olarak tanımlı gelir. (Bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Check DNS</literal></glossterm>
+        <glossdef><para>Bağlantı sağlandıktan sonra DNS kontrolü yapmak için kullanılır. Öntanımlı olarak bu değer "açık/on" olarak tanımlı gelir. (Bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>DNS Test1</literal></glossterm>
+        <glossdef><para>DNS sınaması için ilk DNS araması. (Bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>DNS Test2</literal></glossterm>
+        <glossdef><para>DNS sınaması için ikincisi DNS araması. (Bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Check Def Route</literal></glossterm>
+        <glossdef><para>Bağlantı ayarlandıktan sonra öntanımlı yolu sınar. Öntanımlı olarak bu değer "açık/on" olarak tanımlı gelir. (Bu seçenek SuSE tarafından eklenmiştir.)
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Force Address</literal></glossterm>
+        <glossdef><para>Bu seçenek sadece, sabit IP adresiniz olması durumunda uygulanır ve buna genelde ihtiyaç yoktur.  Ancak, bazı İSS’ler PPP iletişimi sırasında IP adresini göndermezler. Bu seçenekle, <command>pppd</command>’yi belirttiğiniz IP adresini kullanmaya zorlayabilirsiniz.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Remote Name</literal></glossterm>
+        <glossdef><para>Şayet İSS’niz PAP veya CHAP kimlik sınama sistemlerini kullanıyorsa, bu seçenekle İSS’nizin kimlik sınama sistemi ismini belirtmek durumunda kalabilirisiniz. Yine de, öntanımlı değer olan "*"’ı kullanmak genellikle güvenlidir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Carrier Check</literal></glossterm>
+        <glossdef><para>Bu seçenek, bağlantı esnasında modemin sınanmasını sağlar. Böylece hatta olup olmadığınızı anlayabilirisiniz. Şayet taşıyıcı hattınızın sürekli olarak kapalı olmasında ısrar eden garip bir modeminiz varsa, bu seçeneğe "no"  atayıp taşıyıcı sınamasını kapatabilirsiniz.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Stupid Mode</literal></glossterm>
+        <glossdef><para><command>wvdial</command> aptal kipine ayarlanmışsa, uçbirim, sunucudan gelen hiçbir istemi yorumlamaya kalkmaz. Modem bağlantısı sonrası <command>pppd</command>’yi hemen başlatır.  Görünüşe göre, size bağlantı istemi veren ama sadece siz PPP’yi çalıştırdıktan sonra bağlantıya izin veren İSS’ler var (ttnet genelde bu kipi kullanır). Bu kipin öntanımlı değeri, doğal olarak, kapalıdır.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>New PPPD</literal></glossterm>
+        <glossdef><para>Şayet <command>pppd</command>’nin 2.3.0 veya üzeri bir sürümünü kullanıyorsanız, <command>wvdial</command> uygulamasının <filename>/etc/ppp/peers/wvdial</filename> dosyasını oluşturabilmesi için bu seçeneğe ihtiyacınız var demektir. Öntanımlı olarak bu seçenek etkindir. Şayet eski bir <command>pppd</command> sürümü kullanıyorsanız ya bu seçeneği kapatın veya sürümünüzü yükseltin.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Default Reply</literal></glossterm>
+        <glossdef><para><command>wvdial</command> bir istem tespit ettiği ama tepki olarak ne yapacağını bilemediği durumlarda, öntanımlı olarak "ppp" göndermeye yarar. Bazen bu yetersiz kalabilir. Bu seçeneği <command>wvdial</command>’in öntanımlı istem yanıtını yok sayması için kullanabilirsiniz.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Auto Reconnect</literal></glossterm>
+        <glossdef><para>Şayet etkinse, hattan düştüğünüz durumlara <command>wvdial</command> otomatik olarak yeniden bağlantı sağlayacaktır. Öntanımlı olarak bu değer etkindir.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Idle Seconds</literal></glossterm>
+        <glossdef><para>Hat bağlı iken herhangi bir faaliyet olmadan geçmesine müsaade ettiğiniz süreyi belirtir. Bu seçeneğe atanan saniye cinsinden değerin aşılması durumunda bağlantı kopartılır. Şayet 0 (sıfır) değerini atamışsanız bu seçenek geçersiz olur.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Abort on Busy</literal></glossterm>
+        <glossdef><para>Şayet bu seçenek aktif ise, hattın meşgul olması durumunda <command>wvdial</command> aramayı tekrarlamaz. Öntanımlı değer "off" tur ve bu nedenle hattan meşgul sinyali gelince <command>wvdial</command> aramayı tekrarlar.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Abort on No Dialtone</literal></glossterm>
+        <glossdef><para>Şayet bu seçenek etkinse, hatta çevir sesi olmaması durumunda <command>wvdial</command> aramayı tekrarlamaz. Öntanımlı değer "on"dur.
+        </para></glossdef></glossentry><glossentry>
+        <glossterm><literal>Dial Attempts</literal></glossterm>
+        <glossdef><para>Şayet bir değer belirtilmişse, bu arama denemesi sayısına ulaşılınca wvdial çıkar. Şayet bu değer 0 (sıfır) olarak atanmışsa, <command>wvdial</command> memnuniyetle sonsuz kere arama tekrarı yapacaktır.
+        </para></glossdef></glossentry></glosslist>
+     </para><para>
+<link linkend="tr-man1-wvdialconf"/> uygulaması modeminizin algılanması ve Modem, Baud, Init1/Init2 seçeneklerinin otomatik olarak doldurulması için kullanılabilir.
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-wvdial"/>, <link linkend="tr-man1-wvdialconf"/>, <link linkend="tr-man8-pppd"/>.
+  </para></refsect1><refsect1><title>YAZANLAR</title><para>
+Worldvisions Weaver Projesinin bir parçası olarak, Dave Coombs ve Avery Pennarun tarafından, Net Integration  Technologies  Inc. için yazılmıştır. SuSE ve Red Hat’teki çocukların büyük katkıları olmuştur. Teşekkürler çocuklar!
+  </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Ocak 2005</para>
+  </refsect1>
+</refentry>
+

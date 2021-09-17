@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: close.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-close">
+ <refmeta>
+  <refentrytitle>CLOSE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CLOSE</refname>
+  <refpurpose>bir göstericiyi kapatır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CLOSE</command> <emphasis>isim</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+
+ <refsect1><title>Açıklama</title><para>
+<command>CLOSE</command> bir açık gösterici ile ilgili olarak ayrılmış tüm özkaynakları serbest bırakır. Gösterici kapatıldıktan sonra, üzerinde işleme artık izin verilmez. Artık ihtiyaç kalmadığında bir gösterici kapatılmalıdır.
+  </para><para>
+Hareket dışında geçerli olmayan göstericiler, hareketin <command>COMMIT</command> veya <command>ROLLBACK</command> ile sonlandırılmasıyla dolaylı olarak kapatılırlar. Hareket tamamlandıktan sonra da geçerli kalan göstericiler ise, oluşturulduğu hareket <command>ROLLBACK</command> ile geri alındığında dolaylı olarak kapatılırlar. Eğer hareket başarıyla tamamlanmışsa böyle bir gösterici ya doğrudan bir <command>CLOSE</command> ile ya da istemci bağlantıyı kestiğinde dolaylı olarak kapatılır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Kapatılacak göstericinin ismi.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+<productname>PostgreSQL</productname> bir <command>OPEN</command> gösterici deyimi kullanmaz; bir gösterici bildirildiği andan itibaren açık kabul edilir. Bir göstericiyi bildirmek için <link linkend="tr-man7-declare" xreflabel="DECLARE"/> kullanılır.
+  </para></refsect1><refsect1><title>Örnek</title><para>
+<literal>liahona</literal> göstericisini kapatmak için:
+  </para><para>
+<programlisting indent="4">CLOSE liahona;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+   <command>CLOSE</command> SQL standardıyla tamamen uyumludur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-declare" xreflabel="DECLARE"/>,
+<link linkend="tr-man7-fetch" xreflabel="FETCH"/>,
+<link linkend="tr-man7-move" xreflabel="MOVE"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

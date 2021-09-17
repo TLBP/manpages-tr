@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: lsusb.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-lsusb">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>lsusb</refentrytitle>
+    <refmiscinfo class="header">Linux USB Araçları</refmiscinfo>
+    <refmiscinfo class="footerleft">usbutils-0.2</refmiscinfo>
+    <refmiscinfo class="footermid">14 Eylül 1999</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>lsusb</refname>
+    <refpurpose>sistemdeki bütün USB aygıtlarını listeler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>lsusb</command> [<emphasis>seçenekler</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>lsusb</command> komutu, sistemdeki bütün USB taşıtları ve onlara bağlı aygıtlar hakkında bilgi elde etmeye yarayan bir araçtır.
+    </para><para>
+Bu komutu bütün özellikleri ile birlikte kullanabilmek için 2.3.15 sürümü veya üstü bir çekirdeğe ihtiyacınız var (<filename>/proc/bus/usb</filename> arayüzünü desteklemeli).
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>Bütün aygıtlar hakkında oldukça ayrıntılı bilgi verilmesini sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-vv</command></glossterm>
+        <glossdef><para>Abartılı ayrıntı seçeneği. <command>lsusb</command>, USB aygıtlar hakkında verebileceği bütün bilgileri ayrıntılı görüntüler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><literal>[[<emphasis>taşıt</emphasis>]:][<emphasis>aygıtnum</emphasis>]</literal>
+        </glossterm><glossdef><para>Sadece belirtilen <replaceable>taşıt</replaceable> ve <replaceable>aygıtnum</replaceable>'a sahip aygıt görüntülenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d </command><literal>[<emphasis>satıcı</emphasis>]:[<emphasis>ürün</emphasis>]</literal>
+        </glossterm><glossdef><para>Sadece belirtilen satıcı ve ürün kimliğine sahip aygıtları görüntüler. Her iki kimlik numarası onaltılık olabileceği gibi “*” şeklinde de belirtilebilir (“*”: herhangi bir değer).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p </command><replaceable>dizin</replaceable>
+        </glossterm><glossdef><para>USB  taşıtı verileri için <filename>/proc/bus/usb</filename> yerine belirtilen <replaceable>dizin</replaceable> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D </command><replaceable>aygıt</replaceable>
+        </glossterm><glossdef><para><filename>/proc/bus/usb</filename> dizinini taramaz, bunun yerine belirtilen <replaceable>aygıt</replaceable> dosyası varsa, bu aygıta ait bilgileri görüntüler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossdef><para>Fiziksel USB aygıt hiyeraşisini ağaç biçiminde görüntüler.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <glosslist>
+      <glossentry><glossterm>
+        <command>/usr/share/hwdata/usb.ids</command>
+      </glossterm><glossdef><para>Bilinen bütün USB kimliklerinin listesi (satıcılar, ürünler, sınıflar, altsınıflar ve protokoller).
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>/proc/bus/usb</command>
+      </glossterm><glossdef><para>2.3.15 sonrası Linux çekirdeği ile sağlanmış olan USB aygıtları arayüzü. Her taşıt için bir altdizin altında her kart için bir yapılandırma alanı dosyası ve bütün USB aygıtlarının listesini içeren bir aygıt dosyası içerir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-setpci"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Thomas Sailer <email>sailer@ife.ee.ethz.ch</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

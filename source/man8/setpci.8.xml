@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: setpci.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-setpci">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>setpci</refentrytitle>
+    <refmiscinfo class="header">Linux PCI Araçları</refmiscinfo>
+    <refmiscinfo class="domain">pciutils-2.1.10</refmiscinfo>
+    <refmiscinfo class="date">30 Mart 2002</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>setpci</refname>
+    <refpurpose>PCI aygıtlarını yapılandırır</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+<synopsis><command>setpci</command> [<emphasis>seçenekler</emphasis>] <emphasis>aygıtlar işlemler</emphasis> ...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>setpci</command>, PCI aygıtlarının durumlarını öğrenmek ve ayarlarını yapmak için kullanılan bir araçtır.
+    </para><para>
+Bu komutu bütün özellikleri ile birlikte kullanabilmek için 2.1.82 sürümü veya üstü bir çekirdeğe ihtiyacınız var (<filename>/proc/bus/pci</filename> arayüzünü desteklemeli). Eski çekirdeklerdeki PCI araçları, donanımlara doğrudan erişime sahip ve sadece root kullanıcıya mahsus araçlardı. Bu tür eski araçlar donanım farklılıkları ve marka çeşitliliğinden dolayı oldukça fazla problem  yaşatmaktaydılar.
+    </para><para>
+Bütün sayılar onaltılık tabanda olarak girilir.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para><command>setpci</command> aracının sonuçlarının daha ayrıntılı olmasını ve mümkün olan tüm bilgileri göstermesini sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para>Şayet yapılacak bir işlem yoksa (mesela bir pci kart belirtilememişse) <command>setpci</command> aracının bir çıktı vermemesini sağlar. Bu seçenek genellikle dağıtımların yapılandırma betikleri tarafından, sorgudaki pci kartın makinede olup olmadığının ya da düzgün çalışıp çalışmadığının tespiti için kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D</command></glossterm>
+        <glossdef><para>'Gösteri kipi' -- Yaptığınız ayarları gerçekte uygulanmaz ama sanki uygulanmış gibi sonuçları çıktılar. Komutu <command>setpci -vD</command> şeklinde kukkanarak oldukça karmaşık olan komut diziminin sonucunu gerçekte komutu uygulamadan görebilirsiniz ve bu da yapacağınız bir hatalı sözdiziminin engellenmesine yardımcı olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para><command>setpci</command> aracının sürüm bilgilerini gösterir. Bu seçenek tek başına kullanılmalıdır.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>AYGIT SEÇİMİ</title>
+    <para>
+Her komut diziminden önce uygulayacağınız komutun etki edeceği PCI aygıtını seçmelisiniz.
+    </para><glosslist><glossentry>
+        <glossterm><command>-s </command><literal>[[<emphasis>taşıt</emphasis>]:][<emphasis>yuva</emphasis>][.[<emphasis>işlev</emphasis>]]</literal></glossterm>
+        <glossdef><para>Belirtilmiş <varname>taşıt</varname>, <varname>yuva</varname> ve <varname>işlev</varname>'e uygun aygıtları seçer.
+Aygıt adreslerinin her bir bileşeni ihmal edilebilir ya da "herhangi bir değer" anlamına gelen "*" şeklinde yazılabilir. Bütün sayılar onaltılık tabanda verilir. Mesela, "0:" 0 numaralı taşıt üzerindeki bütün aygıtlar anlamına gelir,
+“0" herhangi bir taşıt üzerindeki  0 numaralı aygıtının bütün işlevlerini
+kapsar, "0.3" bütün taşıtlar üzerindeki 0 numaralı aygıtın üçüncü işlevini gösterir, ".4" her aygıtın sadece dördüncü işlevini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d </command><literal>[<emphasis>üretici</emphasis>]:[<emphasis>aygıt</emphasis>]</literal></glossterm>
+        <glossdef><para>Belirtilmiş <varname>üretici</varname> ve <varname>aygıt</varname>  kimliğine sahip aygıtları seçer. İki değer de verilecekse onaltılık tabanda veya "herhangi bir değer" anlamında "*" şeklinde verilebilir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İŞLEMLER</title>
+    <para>
+Bir yapılandırma yazmacının değerini sorgulamak için, sadece ismini belirtmek yeterlidir. Bunu ismini yazarak yapabileceğiniz gibi yazmaç adresi ile hatta isteğe bağlı olarak adresin sonuna yazmacın genişliğini belirtmek üzere bayt, word (2 bayt), longword (4 bayt) sözcüklerini ifade eden  <command>.B, .W, .L</command> soneklerini ekleyerek yapabilirsiniz.
+    </para><para>
+Bir yazmaca değer atamak için, <varname>yazmaç</varname> sorguda kullandığınız isim ya da adres olmak üzere <varname>yazmaç=değer</varname> yazmalısınız. Burada <varname>değer</varname> yazmaca yazılacak değerlerin virgüllü listesi olabilir.
+    </para>
+  </refsect1><refsect1><title>YAZMAÇ İSİMLERİ</title>
+    <para>
+<command>setpci</command> aşağıdaki yapılandırma yazmaçlarının isimlerini tanır. Bunların kesin anlamları için PCI bus belirtimine veya bir kaç yorum bulabileceğiniz <command>/usr/include/linux/pci.h</command> dosyasına bakın.
+    </para><para>
+<literallayout indent="4">
+VENDOR_ID
+DEVICE_ID
+COMMAND
+STATUS
+REVISION
+CLASS_PROG
+CLASS_DEVICE
+CACHE_LINE_SIZE
+LATENCY_TIMER
+HEADER_TYPE
+BIST
+BASE_ADDRESS_0
+BASE_ADDRESS_1
+BASE_ADDRESS_2
+BASE_ADDRESS_3
+BASE_ADDRESS_4
+BASE_ADDRESS_5
+CARDBUS_CIS
+SUBSYSTEM_VENDOR_ID
+SUBSYSTEM_ID
+ROM_ADDRESS
+INTERRUPT_LINE
+INTERRUPT_PIN
+MIN_GNT
+MAX_LAT
+PRIMARY_BUS
+SECONDARY_BUS
+SUBORDINATE_BUS
+SEC_LATENCY_TIMER
+IO_BASE
+IO_LIMIT
+SEC_STATUS
+MEMORY_BASE
+MEMORY_LIMIT
+PREF_MEMORY_BASE
+PREF_MEMORY_LIMIT
+PREF_BASE_UPPER32
+PREF_LIMIT_UPPER32
+IO_BASE_UPPER16
+IO_LIMIT_UPPER16
+BRIDGE_ROM_ADDRESS
+BRIDGE_CONTROL
+CB_CARDBUS_BASE
+CB_CAPABILITIES
+CB_SEC_STATUS
+CB_BUS_NUMBER
+CB_CARDBUS_NUMBER
+CB_SUBORDINATE_BUS
+CB_CARDBUS_LATENCY
+CB_MEMORY_BASE_0
+CB_MEMORY_LIMIT_0
+CB_MEMORY_BASE_1
+CB_MEMORY_LIMIT_1
+CB_IO_BASE_0
+CB_IO_BASE_0_HI
+CB_IO_LIMIT_0
+CB_IO_LIMIT_0_HI
+CB_IO_BASE_1
+CB_IO_BASE_1_HI
+CB_IO_LIMIT_1
+CB_IO_LIMIT_1_HI
+CB_SUBSYSTEM_VENDOR_ID
+CB_SUBSYSTEM_ID
+CB_LEGACY_MODE_BASE
+</literallayout></para>
+  </refsect1><refsect1><title>PCILIB SEÇENEKLERİ</title>
+    <para>
+PCI  araçları, PCI kartları ile haberleşmek için PCILIB (PCI yapılandırma
+alanları için, platform bağımsız işlevler sağlayan taşınabilir bir kütüphane) kullanırlar. Aşağıdaki seçenekler kütüphanenin parametrelerini kontrol eder, özellikle kullanılan erişim yöntemini. Öntanımlı olarak,  PCILIB  eldeki ilk erişim yöntemini kullanır ve hata ayıklama iletisi görüntülemez. Her bir seçeneğe desteklenen donanım/yazılım ayarlarını içeren bir liste eşlik eder.
+    </para><glosslist>
+      <glossentry><glossterm>
+        <command>-P </command><replaceable>dizin</replaceable>
+      </glossterm><glossdef><para><replaceable>dizin</replaceable> dizinine erişim için <filename>/proc/bus/pci</filename> yerine Linux  2.1 tarzı yapılandırma erişimi kullanılır (sadece Linux 2.1 veya daha yeni sürümlerde).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H1</command></glossterm>
+        <glossdef><para>Intel yapılandırma mekanizması 1 üzerinden doğrudan donanım erişimi kullanılır (sadece i386 ve uyumluları için).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H2</command></glossterm>
+        <glossdef><para>Intel yapılandırma mekanizması 2 üzerinden doğrudan donanım erişimi kullanılır.
+        </para><para>
+Uyarı: Bu yöntemde sadece herhangi bir taşıt üzerindeki ilk onaltı aygıtı adresleyebilirsiniz. Pek çok durum için güvenilmez bir yöntemdir (sadece i386 ve uyumluları için).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossdef><para>PCI erişim sistem çağrılarını kullanır. (sadece Alpha ve UltraSparc üzerindeki Linux'lar içindir).
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-F </command><replaceable>dosya</replaceable>
+      </glossterm><glossdef><para>Bütün bilgileri <command>setpci –x</command> çıktısını içeren dosyadan elde eder. Kullanıcılardan gelen yazılım hataları raporları için oldukça faydalı bir yöntemdir. Bütün donanım yapılandırmasını, kullanıcıya daha fazla ayrıntı için soru sormaya gerek kalmadan, görülmesini sağlar (bütün sistemlerde).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-G</command></glossterm>
+        <glossdef><para>Kütüphanenin hata ayıklama seviyesini artırır (bütün sistemlerde).
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>ÖRNEKLER</title>
+    <para>
+<command>setpci -d *:* latency_timer=40</command> latency_timer 64’e ayarlanır (onaltılık tabanda 40).
+    </para><para>
+<command>setpci  -s  0  aygıt_no üretici_no</command> bütün taşıtların 0. yuvasında bulunan aygıtların kimliklerini listeler.
+    </para><para>
+<command>setpci -s 12:3.4 3c.l=1,2,3’</command> 4 bayt genişlikteki (longword) 1 değerini 3c yazmacına, 2 değerini 3d yazmacına ve 3 değerini 12 numaralı taşıtın 3 numaralı yuvasının 4 numaralı işlevinin 3e yazmacına yazar.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <glosslist>
+      <glossentry><glossterm>
+        <command>/usr/share/hwdata/pci.ids</command>
+      </glossterm><glossdef><para>Bilinen bütün PCI kimliklerinin listesi (satıcılar, aygıtlar, sınıflar ve altsınıflar).
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>/proc/bus/pci</command>
+      </glossterm><glossdef><para>2.1.82 sonrası Linux çekirdeği ile sağlanmış olan PCI taşıtı yapılandırma alanı ile iletişimi sağlamak için bir arayüz. Her taşıt için bir altdizin altında her kart için bir yapılandırma alanı dosyası ve bütün PCI aygıtların listesini içeren bir aygıt dosyası içerir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-lspci"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Linux PCI Araçlarının bakımı Martin Mares <email>mj@ucw.cz</email> tarafından
+yürütülmektedir.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Ekin Yurdakurban <email>ekin@capanlar.com</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+

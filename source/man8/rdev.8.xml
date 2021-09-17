@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: rdev.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-rdev">
+<remark>.\" Copyright 1992, 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+.\" Changes from sct@dcs.ed.ac.uk added Sat Oct  9 09:54:00 1993.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>rdev</refentrytitle>
+    <refmiscinfo class="header">Linux Yazılımcısının Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">Linux 0.99</refmiscinfo>
+    <refmiscinfo class="date">20 Kasım 1993</refmiscinfo>
+  </refmeta>
+
+  <refnamediv><refname>rdev</refname>
+    <refpurpose>kök aygıt biteşlemini, RAM disk boyutunu veya video kipini ayarlar/sorgular</refpurpose>
+   </refnamediv><refnamediv><refname>ramsize</refname>
+    <refpurpose>RAM disk boyutunu ayarlar</refpurpose>
+   </refnamediv><refnamediv><refname>vidmode</refname>
+    <refpurpose>video kipini ayarlar</refpurpose>
+   </refnamediv><refnamediv><refname>rootflags</refname>
+    <refpurpose>kök aygıt seçeneklerini ayarlar</refpurpose>
+   </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>rdev</command>      [ <command>-rhV</command> ] [ <command>-o </command><emphasis>konum</emphasis> ] [ <emphasis>biteşlem</emphasis> [ <emphasis>değer</emphasis> [<emphasis>konum</emphasis> ]]]
+<command>rdev</command>      [ <command>-o </command><emphasis>konum</emphasis> ] [ <emphasis>biteşlem</emphasis> [ <emphasis>kök_aygıt</emphasis> [<emphasis>konum</emphasis> ]]]
+<command>ramsize</command>   [ <command>-o </command><emphasis>konum</emphasis> ] [ <emphasis>biteşlem</emphasis> [ <emphasis>boyut</emphasis> [<emphasis>konum</emphasis> ]]]
+<command>vidmode</command>   [ <command>-o </command><emphasis>konum</emphasis> ] [ <emphasis>biteşlem</emphasis> [ <emphasis>kip</emphasis> [<emphasis>konum</emphasis> ]]]
+<command>rootflags</command> [ <command>-o </command><emphasis>konum</emphasis> ] [ <emphasis>biteşlem</emphasis> [ <emphasis>seçenekler</emphasis> [<emphasis>konum</emphasis> ]]]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Herhangi bir argüman verilmemişse, <command>rdev</command>, geçerli kök dosya sistemi için bir <filename>/etc/mtab</filename> satırı görüntüler. <command>ramsize</command>, <command>vidmode</command> ve <command>rootflags</command> komutları argümansız kullanıldığında kullanım bilgileri görüntülenir.
+    </para><para>
+Bir i386 üzerindeki Linux çekirdeğinin önyükleme biteşlemi, kök aygıtını, video kipini ve RAM disk boyutunu tanımlayan pek çok bayt çifti içerir. Bu bayt çiftleri, çekirdek biteşlemi içinde öntanımlı olarak, 504. (onluk tabanda) bayttan başlar:
+    </para><para>
+<literallayout indent="4">
+498 kök seçenekleri
+(500 ve 502 yedek)
+504 RAM Disk boyutu
+506 VGA kipi
+508 kök aygıt
+(510 önyükleme imzası)
+</literallayout>
+    </para><para>
+<command>rdev</command> işte bu değerleri değiştirir.
+    </para><para>
+<replaceable>biteşlem</replaceable> parametresinin değeri, Linux çekirdeğinin önyükleme biteşlemidir ve şunlar veya benzerleri olabilir:
+    </para><para>
+<literallayout indent="4">
+/vmlinux
+/vmunix
+/boot/bzImage-2.4.0
+/dev/fd0
+/dev/fd1
+</literallayout>
+    </para><para>
+<command>rdev</command> komutunu kullanırken, <replaceable>kök_aygıt</replaceable> parametresinin değeri şunlar veya benzerleri olabilir:
+    </para><para>
+<literallayout indent="4">
+/dev/hda1
+/dev/hdf13
+/dev/sda2
+/dev/sdc4
+/dev/ida/c0d0p1
+</literallayout>
+    </para><para>
+Kök aygıtı tanımlamak için virgülle ayrılmış ana ve alt aygıt numaraları da <literal>ana,alt</literal> biçiminde kullanılabilir.
+    </para><para>
+<command>ramsize</command> komutu için, <replaceable>boyut</replaceable> parametresinde RAM disk boyu kB cinsinden belirtilmelidir.
+    </para><para>
+<command>rootflags</command> komutu için, <replaceable>seçenekler</replaceable> parametresi kök bağlanırken kullanılan ek bilgileri içermelidir. <replaceable>seçenekler</replaceable> parametresinin şu an için tek etkisi, sıfırdan farklı bir değer ise; çekirdeği, kök dosya sistemini salt okunur kipte bağlanmaya zorlamaktır.
+    </para><para>
+<command>vidmode</command> komutu için, <replaceable>kip</replaceable> parametresi video kipini tanımlar:
+    </para><para>
+<literallayout indent="4">
+-3 = Prompt
+-2 = yayılmış VGA
+-1 = Normal VGA
+ 0 = istemde sanki 0 basılmış gibi
+ 1 = istemde sanki 1 basılmış gibi
+ 2 = istemde sanki 2 basılmış gibi
+ n = istemde sanki n basılmış gibi
+</literallayout>
+    </para><para>
+Şayet bir değer belirtilmemişse, geçerli ayarları bulabilmek için biteşleme bakılır.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossdef><para><command>rdev</command>’in <command>ramsize</command> gibi davranmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossdef><para><command>rdev</command>’in <command>rootflags</command> gibi davranmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para><command>rdev</command>’in <command>vidmode</command> gibi davranmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossdef><para>Kullanım bilgilerini gösterir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>
+<command>rdev</command> aracı, geçerli kök aygıt için isim bulmaktan başka bir şey için kullanıldığında, çekirdek biteşlemini, sihirli bir konumunda sihirli sayılar ile yamayan antik bir kotarımdır. i386 dışındaki platformlarda çalışmaz. Kullanımı gerçekten göz korkutucudur. Bunun yerine <command>syslinux</command>, <command>grub</command> veya <command>lilo</command> gibi bir önyükleyici kullanın.
+    </para>
+  </refsect1><refsect1><title>GEÇMİŞ</title>
+    <para>
+502. bayt konumu takas aygıtının (Linux 0.12) aygıt numarası olarak kullanıldı ve  <command>rdev -s</command> veya <command>swapdev</command> bunu ayarlardı. Bununla birlikte, Linux 0.95’ten beri, bu sabit kullanılmıyor ve takas aygıtı, <command>swapon</command>() sistem çağrısı kullanılarak tanımlanıyor.
+    </para>
+  </refsect1><refsect1><title>YAZANLAR</title>
+    <para>
+ilk defa Werner Almesberger <email>almesber@nessie.cs.id.ethz.ch</email> tarafından yazılmıştır.<sbr/>
+Peter MacDonald <email>pmacdona@sanjuan.UVic.CA</email> tarafından değiştirildi.
+<command>rootflags</command> desteği Stephen Tweedie <email>sct@dcs.ed.ac.uk</email> tarafından eklendi.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Şubat 2004</para>
+  </refsect1>
+</refentry>
+

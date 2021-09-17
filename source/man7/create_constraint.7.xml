@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_constraint.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_constraint">
+ <refmeta>
+  <refentrytitle>CREATE CONSTRAINT TRIGGER</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE CONSTRAINT TRIGGER</refname>
+  <refpurpose>yeni bir kısıt tetiği tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE CONSTRAINT TRIGGER</command> <emphasis>isim</emphasis>
+    <command>AFTER</command> <emphasis>olaylar</emphasis> <command>ON</command>
+    <emphasis>tablo_ismi</emphasis> <emphasis>kısıt</emphasis> <emphasis>öznitelikler</emphasis>
+    <command>FOR EACH ROW EXECUTE PROCEDURE</command> <emphasis>işlev_ismi</emphasis> ( <emphasis>argümanlar</emphasis> )
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE CONSTRAINT TRIGGER</command>, <command>CREATE TABLE</command>/<command>ALTER TABLE</command> içinde ve  <application>pg_dump</application> tarafından gösterimsel bütünlük için özel tetikler oluşturmakta kullanılır. Genel kullanım için tasarlanmamıştır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Kısıt tetiğinin ismi.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>olaylar</replaceable></term>
+      <listitem><para>Bu tetiği harekete geçirebilen olay kategorileri.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>tablo_ismi</replaceable></term>
+      <listitem><para>Tetikleyen olanların oluştuğu tablonun ismi (şema nitelemeli olabilir).
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>kısıt</replaceable></term>
+      <listitem><para>Asıl kısıt belirtimi.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>öznitelikler</replaceable></term>
+      <listitem><para>Kısıt öznitelikleri.
+      </para></listitem></varlistentry><varlistentry>
+      <term><literal><emphasis>işlev_ismi</emphasis>(<emphasis>argümanlar</emphasis>)</literal></term>
+      <listitem><para>Tetik işleminin parçası olarak çağrılacak işlev.
+      </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

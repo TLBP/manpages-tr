@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: diff.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-diff">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>diff</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">GNU Araçları</refmiscinfo>
+    <refmiscinfo class="date">22 Eylül 1993</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>diff</refname>
+    <refpurpose>iki dosya arasındaki farklılıkları bulur</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>diff</command> [ <emphasis>seçenekler</emphasis> ] <emphasis>1.dosya</emphasis> <emphasis>2.dosya</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>diff</command>, en basit tabiri ile, iki farklı dosyanın içeriğini karşılaştırır.  Dosya ismi olarak - verilmişse, <command>diff</command> standart girdiyi okur. Özel bir durum olarak, <command>diff - -</command> şeklinde komut kullanımı, standart girdi ile bir kopyasını karşılaştırır.
+    </para><para>
+Şayet <varname>1.dosya</varname> bir dizin ve <varname>2.dosya</varname> değilse, <command>diff</command> komutu, <varname>1.dosya</varname> ile verilen dizin içindeki <varname>2.dosya</varname> ile aynı isimli dosyayı karşılaştırır; bu durum tersi için de geçerlidir. Dizin olmayan dosya mutlaka - olmalıdır.
+    </para><para>
+Şayet her iki girdi de dizin ise, <command>diff</command>, alfabetik sıra ile, eşleşen bütün dosyaları karşılaştırır. Bu karşılaştırma alt dizinlerde yapılmaz. Şayet alt dizinlerdeki dosyalarında karşılaştırılmasını <command>-r</command> veya <command>-recursive</command> seçeneğini belirtmeniz gerekir. <command>diff</command>, asla bir dizinin asıl içeriğini bir dosyaymış gibi karşılaştırmaz. Standart girdi isimsiz olduğundan, tamamen tanımlanmış bir dosyaya standart girdi muamelesi yapılmaz ve  "aynı isimli dosya" fikri buraya uygulanamaz.
+    </para><para>
+<command>diff</command> seçenekleri <command>-</command>  ile başlar. Bu nedenle <varname>1.dosya</varname> ve <varname>2.dosya</varname> isimleri <command>-</command> ile başlayamaz. Bunun yanında, <command>--</command> şeklinde kullanım ile bu sorunu aşabilirsiniz. <command>--</command> işaretinden sonra gelen argümanlar <command>-</command> ile başlasa bile dosya ismi olarak değerlendirilir.
+    </para><refsect2><title>Seçenekler</title>
+    <para>
+Aşağıda, GNU <command>diff</command>'in kabul ettiği bütün komutların bir özetini bulacaksınız. Pek çok seçenek iki eşdeğer isme sahiptir. Birincisi <command>-</command> ile başlayan tek bir harften oluşur, diğeri ise <command>--</command> ile başlayan uzun bir isimden meydana gelmektedir. Çok sayıda tek harfli seçenek (bir argüman almadıkça), <command>-ac</command> gibi yanyana yazılabilir: <command>-ac</command>, <command>-a</command> ve <command>-c</command> anlamına gelir. Uzun isimli seçenekler de başlangıçtan itibaren kendilerinden başka bir seçenekle karışmayacak şekilde kısaltılarak kullanılabilirler. Köşeli parantezler içindeki argümanlar, gerekli değilse verilmeyebileceği anlamına gelir.
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><varname>-satır_sayısı</varname></glossterm>
+        <glossdef><para>Dosya içeriğin tamsayı cinsinden satır sayısı (-5 gibi belirtilir). Bu seçenek kendi başına bir çıktı biçimi tanımlamaz. <command>-c</command> veya <command>-u</command> ile birlikte kullanılmadığı sürece bir etkisi yoktur. Bu seçenek eskidir. <command>patch</command> komutunun düzgün çalışması için içerikte en az iki satır olması gerekir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--text</command></glossterm>
+        <glossdef><para>Metin dosyası olmasalar bile, bütün dosyaları metin dosyaları olarak kabul eder ve onları satır satır karşılaştırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossterm><command>--ignore-space-change</command></glossterm>
+        <glossdef><para>Karşılaştırmada ara boşluklarındaki farklar dikkate alınmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-B</command></glossterm>
+        <glossdef><para>Karşılaştımada boş satırlardaki farklar dikkate alınmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Bağlamsal çıktı biçimi kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-C </command><varname>satır_sayısı</varname></glossterm>
+        <glossterm><command>--context</command><literal>[=</literal><replaceable>satır_sayısı</replaceable><literal>]</literal> </glossterm>
+        <glossdef><para>Bağlamın <varname>satır_sayısı</varname> satırı gösterilerek bağlamsal çıktı biçimi kullanılır.  <varname>satır_sayısı</varname> belirtilmezse üç satır gösterilir. <command>patch</command> komutunun düzgün çalışması için içerikte en az iki satır olması gerekir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--changed-group-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>Her iki dosyadaki if-then-else biçimindeki farklı satırları içeren  satır gruplarını çıktılarken <varname>biçim</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--minimal</command></glossterm>
+        <glossdef><para>En küçük değişikliği bile bulmak için algoritma değiştirilir. Bu seçenek <command>diff</command>'in yavaş çalışmasına (bazan oldukça yavaş) sebep olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D </command><varname>isim</varname></glossterm>
+        <glossdef><para><varname>isim</varname> önişlemci makrosunun koşullarına uygun olarak katıştırılmış if-then-else biçimli çıktı üretir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-e</command></glossterm>
+        <glossterm><command>-ed</command></glossterm>
+        <glossdef><para>Çıktıyı bir <command>ed</command> betiği olarak üretir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--forward-ed</command></glossterm>
+        <glossdef><para>Çıktı bir <command>ed</command> betiği gibi karışık olur ancak farklar dosyadaki sırasına uygun çıktılanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F </command><varname>düzifd</varname></glossterm>
+        <glossterm><command>--show-function-line=</command><replaceable>düzifd </replaceable></glossterm>
+        <glossdef><para>Bağlamsal veya tekilleştirilmiş biçimde, her bir değişiklik parçası için, önceki satırdan <varname>düzifd</varname> ile eşleşen kısmı gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossdef><para>Bu seçenek herhangi bir etkiye sahip değildir, Unix uyumluluğu için vardır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H</command></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--speed-large-files</command></glossterm>
+        <glossdef><para>Pek çok küçük değişikliğe sahip büyük dosyaların karşılaştırılmasında işlemini hızlandırmak için buluşsal yöntemler (heuristics) kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--horizon-lines=</command><replaceable>satır_sayısı </replaceable></glossterm>
+        <glossdef><para>Farklılıklardan önceki ortak satırların son <varname>satır_sayısı</varname> satırını ve farklılıklardan sonraki ortak satırların ilk <varname>satır_sayısı</varname> satırını iptal etmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--ignore-case</command></glossterm>
+        <glossdef><para>Büyük ve küçük harf kullanımından kaynaklanan farklar gözönüne alınmaz, aynı kabul edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--ifdef=</command><replaceable>isim </replaceable></glossterm>
+        <glossdef><para><varname>isim</varname> önişlemci makrosunun koşullarına uygun olarak katıştırılmış if-then-else biçimli çıktı üretir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-I </command><varname>düzifd</varname></glossterm>
+        <glossterm><command>--ignore-matching-lines=</command><replaceable>düzifd </replaceable></glossterm>
+        <glossdef><para><varname>düzifd</varname> ile eşleşen satırlar diğer dosyada olsa da olmasada yok sayılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--ignore-blank-lines</command></glossterm>
+        <glossdef><para>Satırları karşılaştırırken boş satırları yoksayar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--paginate</command></glossterm>
+        <glossdef><para>Çıktıyı sayfalamak için <command>pr</command> komutundan geçirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-L </command><varname>etiket</varname></glossterm>
+        <glossterm><command>--label=</command><replaceable>etiket </replaceable></glossterm>
+        <glossdef><para>Bağlamsal ya da tekilleştirilmiş biçimli başlıklarda dosya ismi yerine <varname>etiket</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--left-column</command></glossterm>
+        <glossdef><para>Yanyana çıktılama biçiminde iki ortak satırdan sadece soldakini basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--line-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>if-then-else biçimli tüm girdi satırlarını çıktılarken biçim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>-rcs</command></glossterm>
+        <glossdef><para>RCS biçimli çıktı verir; her komutun etkilenen satır sayısını belirtmesi dışında <command>-f</command> ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-N</command></glossterm>
+        <glossterm><command>--new-file</command></glossterm>
+        <glossdef><para>Dizinleri karşılaştırırken, bir dosyanın sadece tek bir dizin içinde bulunduğu durumlarda; bu dosyayı diğer dizin içinde de, içi boş olarak, varmış gibi kabul eder.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--new-group-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>İkinci dosyadaki if-then-else biçimli girdi satırı gruplarını çıktılarken biçim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--new-line-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>İkinci dosyadaki if-then-else biçimli bir girdi satırını çıktılarken biçim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--old-group-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>Birinci dosyadaki if-then-else biçimli girdi satırı gruplarını çıktılarken biçim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--old-line-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>Birinci dosyadaki if-then-else biçimli bir girdi satırını çıktılarken biçim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossterm><command>--show-c-function</command></glossterm>
+        <glossdef><para>Her bir değişikliğin hangi C işlevi içinde olduğunu gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-P</command></glossterm>
+        <glossterm><command>--unidirectional-new-file</command></glossterm>
+        <glossdef><para>Dizinleri karşılaştırırken, bir dosyanın sadece ikinci dizin içinde bulunduğu durumlarda; bu dosyayı diğer dizin içinde de, içi boş olarak, varmış gibi kabul eder.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossterm><command>--brief</command></glossterm>
+        <glossdef><para>Dosyalar farklıysa sadece raporlar, farkları bulmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--recursive</command></glossterm>
+        <glossdef><para>Dizinleri karşılaştırırken, bulunan bütün alt dizinlerin içindekileri de karşılaştır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--report-identical-files</command></glossterm>
+        <glossdef><para>Dosyalar aynıysa raporlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S </command><varname>dosya</varname></glossterm>
+        <glossterm><command>--starting-file=</command><replaceable>dosya </replaceable></glossterm>
+        <glossdef><para>Dizinleri karşılaştırırken, <varname>dosya</varname> ile belirtilen dosyadan başlar. Böylece yarıda kalmış bir kıyaslamayı devam ettirebilirsiniz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--from-file=</command><replaceable>dosya </replaceable></glossterm>
+        <glossdef><para>Tüm terimleri <varname>dosya</varname> ile karşılaştırır. <varname>dosya</varname> bir dizin olabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--to-file=</command><replaceable>dosya </replaceable></glossterm>
+        <glossdef><para><varname>dosya</varname>yı tüm terimlerle karşılaştırır. <varname>dosya</varname> bir dizin olabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--sdiff-merge-assist</command></glossterm>
+        <glossdef><para><command>sdiff</command>'e yardım için ek bilgiler basar. <command>sdiff</command>, bu bilgileri <command>diff</command>'i çalıştırırken kullanır. Bu seçenek, kullanıcıların doğrudan kullanması için tasarlanmamıştır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--suppress-common-lines</command></glossterm>
+        <glossdef><para>Yan yana çıktı biçiminde ortak satırlar çıktılanmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--expand-tabs</command></glossterm>
+        <glossdef><para>Girdi dosyalarındaki sekmelerin eşitliğini sağlamak için; çıktılarken sekmeleri boşluklara çevirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T</command></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--initial-tab</command></glossterm>
+        <glossdef><para>Normal ya da bağlamsal biçimdeki bir satırın metninden önceki boşlukları sekmelerle değiştirir. Böylece, satırların sekmelerle hizalanarak düzgün görünmesi sağlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossdef><para>Tekilleştirilmiş dosya biçimi kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--unchanged-group-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>Her iki dosyadan da alınmış if-then-else biçimindeki bir ortak satır grubunu <varname>biçim</varname> biçiminde çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--unchanged-line-format=</command><replaceable>biçim </replaceable></glossterm>
+        <glossdef><para>Her iki dosyadan da alınmış if-then-else biçimindeki bir ortak satırı <varname>biçim</varname> biçiminde çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-U </command><varname>satır_sayısı</varname></glossterm>
+        <glossterm><command>--unified</command><literal>[=<replaceable>satır_sayısı</replaceable>] </literal></glossterm>
+        <glossdef><para>Bağlamın <varname>satır_sayısı</varname> satırı gösterilerek tekilleştirilmiş çıktı biçimi kullanılır.  <varname>satır_sayısı</varname> belirtilmezse üç satır gösterilir. <command>patch</command> komutunun düzgün çalışması için içerikte en az iki satır olması gerekir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para><command>diff</command>'in sürüm numarasını basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--ignore-all-space</command></glossterm>
+        <glossdef><para>Satırları karşılaştırırken boşlukları atlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W </command><varname>krk_sayısı</varname></glossterm>
+        <glossterm><command>--width=</command><replaceable>krk_sayısı</replaceable></glossterm>
+        <glossdef><para>Yanyana çıktı biçiminde <varname>krk_sayısı</varname> ile belirtilen genişlikte sütunlar kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x </command><varname>şablon</varname></glossterm>
+        <glossterm><command>--exclude=</command><replaceable>şablon </replaceable></glossterm>
+        <glossdef><para>Dizinleri kıyaslarken, <varname>şablon</varname> ile eşleşen sahip alt dizinleri ve dosyaları yoksayar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-X </command><varname>dosya</varname></glossterm>
+        <glossterm><command>--exclude-from=</command><replaceable>dosya </replaceable></glossterm>
+        <glossdef><para>Dizinleri kıyaslarken, <varname>dosya</varname> içindeki şablonlar ile eşleşen sahip alt dizinleri ve dosyaları yoksayar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-y</command></glossterm>
+        <glossterm><command>--side-by-side</command></glossterm>
+        <glossdef><para>Yan yana çıktı biçimi kullanılır.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect2></refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-cmp"/>, <link linkend="tr-man1-comm"/>, <link linkend="tr-man1-diff3"/>, <link linkend="tr-man1-ed"/>, <link linkend="tr-man1-patch"/>), <link linkend="tr-man1-pr"/>, <link linkend="tr-man1-sdiff"/>.
+    </para>
+  </refsect1><refsect1><title>ÇIKIŞ DURUMU</title>
+    <para>
+Çıkış durumu olarak <command>0</command>'ın anlamı, hiçbir farklılık bulunamadığıdır. Bazı farklılıkların olduğu durumlarda <command>1</command> ile çıkar. Şayet <command>2</command> ile çıkarsa, bir sorun var demektir.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>

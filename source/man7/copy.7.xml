@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: copy.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-copy">
+ <refmeta>
+  <refentrytitle>COPY</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>COPY</refname>
+  <refpurpose>bir tablo ile bir dosya arasında veri kopyalar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>COPY</command> <emphasis>tablo_ismi</emphasis> [ ( <emphasis>sütun</emphasis> [, ...] ) ]
+    <command>FROM</command> { '<emphasis>dosya_ismi</emphasis>' | <command>STDIN</command> }
+    [ [ <command>WITH</command> ]
+          [ <command>BINARY</command> ]
+          [ <command>OIDS</command> ]
+          [ <command>DELIMITER</command> [ <command>AS</command> ] '<emphasis>ayraç</emphasis>' ]
+          [ <command>NULL</command> [ <command>AS</command> ] '<emphasis>boş_dizge</emphasis>' ]
+          [ <command>CSV</command> [ <command>QUOTE</command> [ <command>AS</command> ] '<emphasis>tırnak</emphasis>' ]
+                [ <command>ESCAPE</command> [ <command>AS</command> ] '<emphasis>öncelem</emphasis>' ]
+                [ <command>FORCE NOT NULL</command> <emphasis>sütun</emphasis> [, ...] ]
+
+<command>COPY</command> <emphasis>tablo_ismi</emphasis> [ ( <emphasis>sütun</emphasis> [, ...] ) ]
+    <command>TO</command> { '<emphasis>dosya_ismi</emphasis>' | <command>STDOUT</command> }
+    [ [<command> WITH</command> ]
+          [ <command>BINARY</command> ]
+          [ <command>OIDS</command> ]
+          [ <command>DELIMITER</command> [ <command>AS</command> ] '<emphasis>ayraç</emphasis>' ]
+          [ <command>NULL</command> [ <command>AS</command> ] '<emphasis>boş_dizge</emphasis>' ]
+          [ <command>CSV</command> [ <command>QUOTE</command> [ <command>AS</command> ] '<emphasis>tırnak</emphasis>' ]
+                [ <command>ESCAPE</command> [ <command>AS</command> ] '<emphasis>öncelem</emphasis>' ]
+                [ <command>FORCE QUOTE</command> <emphasis>sütun</emphasis> [, ...] ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>COPY</command> <productname>PostgreSQL</productname> tabloları ile standart dosya sistemi dosyaları arasında veri taşımak için kullanılır. <command>COPY TO</command> bir tablonun içeriğini bir dosyaya, <command>COPY FROM</command> ise bir dosyadaki veriyi bir tabloya kopyalar (mevcut bir tabloya veri eklemek şeklinde).
+  </para><para>
+Eğer bir sütun listesi verilmişse, sadece belirtilen sütunların verileri kopyalamaya konu olur. Eğer sütun listesindeki sütunlar, tablodaki sütunların hepsini içermiyorsa, <command>COPY FROM</command> veri sağlanmamış sütunlara öntanımlı değerlerini yazar.
+  </para><para>
+Bir dosya ismi ile kullanılan <command>COPY</command>, PostgreSQL sunucusunun okumak ve yazmak için doğrudan bir dosyaya erişmesini sağlar. Dosya sunucu tarafından erişilebilir olmalı ve dosya ismi sunucuya göre belirtilmelidir. <command>STDIN</command> veya <command>STDOUT</command> belirtildiğinde, veri istemci ile sunucu arasındaki bağlantı üzerinden iletilir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>tablo_ismi</replaceable></term>
+    <listitem><para>Mevcut bir tablonun ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>sütun</replaceable></term>
+     <listitem><para>Kopyalanacak sütunların isteğe bağlı listesi. Bir sütun listesi belirtilmemişse, sütunların hepsi kullanılır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>dosya_ismi</replaceable></term>
+    <listitem><para>Girdi veya çıktı dosyasının mutlak dosya yoluyla ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>STDIN</command></term>
+    <listitem><para>Girdinin istemci uygulamadan geldiğini belirtir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>STDOUT</command></term>
+    <listitem><para>Çıktının istemci uygulamaya gittiğini belirtir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>BINARY</command></term>
+    <listitem><para>Saklanacak ya da okunacak verinin metin biçiminde değil, ikilik biçimde olacağını belirtir. İkilik kipte <option>DELIMITER</option>, <option>NULL</option> veya <option>CSV</option> seçeneklerini belirtemezsiniz.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>OIDS</command></term>
+    <listitem><para>Her satır için nesne kimliklerinin kopyalanacağını belirtir. (Eğer nesne kimlikleri olmayan bir tablo için <command>OIDS</command> belirtilmişse, bir hata oluşur.)
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>ayraç</replaceable></term>
+    <listitem><para>Dosyanın her satırındaki sütunları ayıran tek karakter. Metin kipinde sekme, <command>CSV</command> kipinde virgül öntanımlıdır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>boş_dizge</replaceable></term>
+    <listitem><para>Bir boş değer belirten dizge. Metin kipinde <literal>\N</literal>, <command>CSV</command> kipinde tırnak içine alınmamış boş dizge öntanımlıdır. NULL ile boş dizge arasında ayrım yapılmamasını istediğiniz yerlerde metin kipinde bile boş dizge kullanmayı tercih etmelisiniz.
+     </para><para><note><para>
+<command>COPY FROM</command> kullanırken, bu dizge ile eşleşen her veri öğesi bir NULL değer olarak saklanacaktır, dolayısıyla aynı dizgeyi <command>COPY TO</command> için de kullanmaya dikkat etmelisiniz.
+    </para></note></para></listitem></varlistentry><varlistentry>
+    <term><command>CSV</command></term>
+    <listitem><para>Virgül Ayraçlı Değer kipini seçer (<command>CSV</command> - Comma Separated Value).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>tırnak</replaceable></term>
+    <listitem><para><command>CSV</command> kipinde kullanılan tırnak karakterini belirtmek içindir. Çift tırnak (") öntanımlıdır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>öncelem</replaceable></term>
+    <listitem><para><command>CSV</command> kipindeki <command>QUOTE</command> veri karakteri (genelde çift tırnaktır) veri içinde kullanıldığında bu karakteri önceleyen karakter.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>FORCE QUOTE</command></term>
+    <listitem><para><command>CSV COPY TO</command> kipinde, belirtilen sütunlardaki <literal>NULL</literal> olmayan değerler için tırnak kullanımını zorunlu hale getirir. <literal>NULL</literal> değerler asla tırnak içine alınmaz.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>FORCE NOT NULL</command></term>
+    <listitem><para><command>CSV COPY FROM</command> kipinde, belirtilen her sütunun tırnaklı değer içerdiği, dolayısıyla bir <literal>NULL</literal> değer içermediği kabulü ile işlem yapılır. <command>CSV</command> kipindeki öntanımlı boş dizge (<literal>''</literal>) için, bu seçenek eksik değerlerin sıfır uzunluklu dizge olarak ele alınmasına sebep olur.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+<command>COPY</command> sadece normal tablolarla kullanılabilir, sanal tablolarla kullanılamaz.
+   </para><para>
+<command>BINARY</command> seçeneği, tüm verinin metin değil ikilik biçimde saklanmasına/okunmasına sebep olur. Kısmen daha hızlı olsa da, ikilik biçimli dosyalar makine mimarileri ve farklı <productname>PostgreSQL</productname> sürümleri arasında daha az taşınabilirdir.
+   </para><para>
+<command>COPY TO</command> tarafından okunan tablolarda <command>SELECT</command>, <command>COPY FROM</command> ile veri girilen tablolarda ise <command>INSERT</command> yetkiniz olmalıdır.
+   </para><para>
+Bir <command>COPY</command> cümlesindeki isimli dosyalar istemci tarafından değil, sunucu tarafından okunur/yazılır. Bu nedenle, ya sunucu tarafında olmalı ya da sunucu makinedeki veritabanına erişiminiz olmalıdır. Bunlar <productname>PostgreSQL</productname> kullanıcısı (sunucuyu çalıştıran kullanıcı) tarafından okuma/yazma anlamında erişebilir olmalıdır, istemcinin değil. Bir dosyaya <command>COPY</command> isminin verilebilmesi, sunucunun erişebildiği her dosyaya okuma ve yazma yetkisi olduğundan, sadece veritabanı ayrıcalıklı kullanıcı için mümkündür.
+   </para><para>
+<command>COPY</command> sözcüğünü <application>psql</application>'in <command>\copy</command> komutuyla karıştırmayın. <command>\copy</command> komutu <application>psql</application> istemcisinin erişebildiği bir dosyanın verisini almak/saklamak için <command>COPY FROM STDIN</command> veya <command>COPY TO STDOUT</command> çağrısı yapar. Bu nedenle, <command>\copy</command> kullanıldığında dosyaya erişilebilirlik ve erişim izinleri bakımından sunucu değil istemci etkindir.
+   </para><para>
+<command>COPY</command> ile kullanılacak dosyanın daima mutlak dosya yolu ile belirtilmesi önerilir. Bu, <command>COPY TO</command> durumunda zorunludur, ama <command>COPY FROM</command> için bir dosyayı göreli dosya yolu ile belirtebilirsiniz; göreli dosya yolu, istemcinin çalışma dizinine göre değil, sunucu sürecinin çalışma dizinine (veri dizininin altında bir yer) göre yorumlanacaktır.
+   </para><para>
+<command>COPY FROM</command> hedef tablodaki tetikleri ve sınama kısıtlarını da çağıracaktır. Ancak, kurallar çağrılmayacaktır.
+   </para><para>
+<command>COPY</command> girdi ve çıktısı <literal>DateStyle</literal>  değerinden etkilenecektir. Öntanımlı olmayan <literal>DateStyle</literal> değerleri kullanabilen diğer <productname>PostgreSQL</productname> kurulumlarına taşınabilirlik bakımından, <command>COPY TO</command> kullanmadan önce <literal>DateStyle</literal> değeri olarak <command>ISO</command> belirtmelisiniz.
+   </para><para>
+<command>COPY</command>, işlemi ilk hatada durdurur. Bunun <command>COPY TO</command> için sorunlara yol açmaması gerekir, ama hedef tablo hatadan önceki satırları almış olacaktır. Bu satırlar görünür ve erişilebilir olmayacak ama yine de diskte yer kaplıyor olacaktır. Eğer hata çok büyük bir kopyalama işleminde gerçekleşmişse, bu, diskin önemli bir bölümünün yararsız kullanımına yol açacaktır. Yararsız kısımlardan kurtulmak için <command>VACUUM</command> kullanmayı deneyebilirsiniz.
+   </para></refsect1><refsect1><title>Dosya Biçimleri</title>
+  <refsect2><title>Metin Biçimi</title><para>
+<command>COPY</command> cümlesi <command>BINARY</command> veya <command>CSV</command> seçenekleri olmaksızın kullanılırken, verinin okunması veya yazılmasında, bir metin dosyasının her satırına bir tablonun bir satırı karşılık getirilir. Bir satırdaki sütunlar ayraç karakteri ile ayrılırlar. Sütunların değerleri ya çıktı işlevleri tarafından üretilmiş ya da girdi işlevleri tarafından özniteliklerinin veri türünde oldukları kabul edilen dizgelerdir. Belirtilen boş dizgeler sütunlara NULL değerler olarak yerleştirilir. Eğer girdi dosyasının bir satırı umulandan daha az ya da daha fazla sütun içeriyorsa, <command>COPY FROM</command> bir hata oluşturacaktır. Eğer <command>OIDS</command> belirtilmişse, nesne kimliği, veri sütunlarından önce, ilk sütun olarak okunur ya da yazılır.
+   </para><para>
+Verinin sonu sadece bir tersbölü ve nokta (<literal>\.</literal>) içeren  tek bir satırla ifade edilebilir. Veri dosyadan okunurken veri sonunun imlenmesi, dosya sonu zaten iyi algılanabildiğinden gerekli değildir; sadece 3.0 öncesi istemci protokolünü kullanan istemci uygulamaları ile veri kopyalanırken gerekli olur.
+   </para><para>
+Sütun verisi içinde ayraç ve tırnak karakterleri kullanılırken, bunların ayraç ve tırnak karakterleri olarak algılanmaması için tersbölü karakteri (<literal>\</literal>) bunları öncelemekte kullanılabilir. Bir sütun değerinin içinde yer aldığında bir tersbölü ile öncelenmesi gereken karakterler şunlardır: tersbölü karakterinin kendisi, satırsonu, satırbaşı karakterleri ile ayraç ve tırnak olarak kullanılan karakterler.
+   </para><para>
+Belirtilmiş bir boş dizge <command>COPY TO</command> tarafından tersbölü eklenmeden gönderilir; bunun aksine, <command>COPY FROM</command> girdi olan boş dizgeyi tersbölüleri silmeden önce eşleştirir. Bu nedenle, <literal>\N</literal> gibi bir boş dizge aslında bir veri değeri olan <literal>\N</literal> ile karışmaz (<literal>\\N</literal> olarak ifade edildiğinden).
+   </para><para>
+<command>COPY FROM</command> tarafından tanınan tersbölü öncelemeli dizgeler:
+   </para><para>
+<literallayout indent="4">
+ Dizge          Anlamı
+--------       ---------------------------------------
+  \b           Terbölü (ASCII 8)
+  \f           Sayfa ileri (ASCII 12)
+  \n           Satırsonu (ASCII 10)
+  \r           Satırbaşı (ASCII 13)
+  \t           Sekme (ASCII 9)
+  \v           Düşey sekme (ASCII 11)
+  \rakamlar    tersbölüden sonra gelen sekizlik tabandaki üç rakam
+               bir karakterin sayısal değerini belirtir
+</literallayout>
+   </para><para>
+Şu an, <command>COPY TO</command> tersbölü karakterini izleyen sekizlik rakamlar çıktılamayacak, ama yukarıda listelenmiş diğer dizgeleri kullanacaktır.
+   </para><para>
+Yukarıdaki listede belirtilmemiş ama terbölü öncelemeli olarak belirtilmiş başka karakterler de olabilir, bu karakterler kendileri olarak değerlendirilecektir. Yine de tersbölülerin gereksiz yere kullanılmasından kaçınılmalıdır, çünkü istemeden veri sonunu imleyen <literal>\.</literal> ile boş dizgeyi imleyen <literal>\N</literal> dizgeleri üretilebilir. Bu dizgeler, bir tersbölü işlemi yapılmadan önce algılanmaya çalışılacaktır.
+   </para><para>
+<command>COPY</command> için veri üreten uygulamaların veri içindeki satırsonu ve satırbaşı karakterlerini mutlaka <literal>\n</literal> ve <literal>\r</literal> dizgelerine dönüştürerek döndürmeleri önerilir. Şimdilik bu karakterler bu dizgelerle gösterilebiliyor olsa da ileride bu gösterimler kabul edilmeyebilir. Ayrıca bu karakterler, bilhassa dosyanın farklı makineler arasında aktarılması sırasında (örneğin, Unix ile Windows) bozulmalara yol açabilir.
+   </para><para>
+<command>COPY TO</command> her satırı Unix tarzı satırsonu ("<literal>\n</literal>") ile sonlandıracaktır. Microsoft Windows üzerinde çalışan sunucular ise bunun yerine satırbaşı/satırsonu ("<literal>\r\n</literal>") çıktılayacaktır, fakat sadece bir sunucu dosyasına kopyalama için; platformlar arasında tutarlılığı sağlamak için <command>COPY TO STDOUT</command> sunucu platformundan bağımsız olarak daima "<literal>\n</literal>" gönderecektir. <command>COPY FROM</command> satırsonları ister satırbaşı, ister satırsonu, ister satırbaşı/satırsonu ile bitsin, satırları düzgün olarak elde edebilir. Veri içinde tersbölü ile öncelenmemiş satırsonu ve satırbaşı karakterlerinden dolayı hata oluşması riskini en aza indirmek için <command>COPY FROM</command> satırsonlarının beklendiği gibi bitmediğinden şikayet edecektir.
+   </para></refsect2><refsect2><title>CSV Biçimi</title><para>
+Bu biçim, hesap çizelgesi uygulamaları gibi başka uygulamalarla veri alışverişi yapmak için kullanılır. Bu kipte, PostgreSQL'in standart metin kipi tarafından kullanılan önceleme mekanizması yerine, bilinen CSV önceleme mekanizması kullanılır.
+   </para><para>
+Her kayıttaki değerler <command>DELIMITER</command> karakteri ile ayrılır. Eğer değer ayraç karakteri, <command>QUOTE</command> karakteri, <literal>NULL</literal> dizge, bir satırsonu ya da satırbaşı karakteri içeriyorsa, değerin tamamı <command>QUOTE</command> karakterleri ile sarmalanır ve değerin içindeki <command>QUOTE</command> veya <command>ESCAPE</command> karakteri önceleme karakteri ile öncelenir. Ayrıca, belli sütunlarda <literal>NULL</literal> olmayan değerleri çıktılarken mutlaka tırnak kullanılacağını belirtmek için <command>FORCE QUOTE</command> kullanabilirsiniz.
+   </para><para>
+<command>CSV</command> biçiminde, bir <literal>NULL</literal> değeri bir boş dizgeden ayırmanın standart bir yolu yoktur. PostgreSQL'in <command>COPY</command> oluşumu bunu tırnaklarla elde eder. Bir <literal>NULL</literal>, <literal>NULL</literal> dizge olarak çıktılanır ve tırnak içine alınmazken, <literal>NULL</literal> dizge ile eşleşen bir veri değeri tırnak içine alınır. Bu nedenle, öntanımlı ayarları kullanarak, bir <literal>NULL</literal> dizge tırnak içine alınmamış bir boş dizge olarak yazılırken, bir boş dizge tırnakların içine alınarak (<literal>""</literal>) yazılır. Değerlerin okunması da benzer şekilde yapıllır. Belli sütunlar için <literal>NULL</literal> dizge karşılaştırmasını önlemek için <command>FORCE NOT NULL</command> kullanabilirsiniz.
+   </para><para><note><para>
+CSV kipi gömülü satırsonu ve satırbaşı karakterleri içeren tırnak içine alınmış değerlerli CSV dosyalarını tanır ve bunları üretir. Bu bakımdan bu dosyaların metin kipindeki gibi her satırı bir tablo satırına karşılık gelmeyebilir. Eğer CSV dosyası, kendisinde kullanılan satır sonlandırma uzlaşımıyla uyuşmayan, gömülü satır sonlandırma karakterleri içeren alanlar içeriyorsa, PostgreSQL'in <command>COPY</command> oluşumu bu dosyayı girdi olarak reddedecektir. Bu nedenle, gömülü satır sonlandırma karakterleri içeren verinin CSV kipinde değil, metin ya da ikilik kipte alınması daha güvenli olur.
+    </para><para>
+Çoğu uygulama standarddan çok bir uzlaşımın sonucu gibi görünen dosya biçimli, tuhaf CSV dosyalar üretir. Bu bakımdan, bu mekanizmanın bazı dosyaları kabul etmediğini ya da <command>COPY</command> oluşumunun ürettiği dosyaların başka uygulamalar tarafından işlenemediğini keşfedebilirsiniz.
+    </para></note></para></refsect2><refsect2><title>İkilik Biçim</title><para>
+<command>COPY BINARY</command> için kullanılan dosya biçimi <productname>PostgreSQL</productname> 7.4'de değişmiştir. Yeni dosya biçimi, bir dosya başlığı, sıfır ya da daha fazla sayıda satır verisi içeren demet ve bir dosya kuyruğu içerir. Başlık ve veri şimdi ağ bayt sıralamasındadır.
+   </para><refsect3><title>Dosya başlığı</title><para>
+Dosya başlığı, değişken uzunluktaki başlık ek veri alanı ile biten, 15 baytlık sabit uzunlukta  bir alandan oluşur. Sabit uzunluklu alanlar şunlardır:
+    </para><para><variablelist userlevel="4"><varlistentry>
+      <term>İmza</term>
+      <listitem><para>
+11 bayt uzunluktaki <literal>PGCOPY\n\377\r\n\0</literal> dizgesi; bu dizgenin sonundaki boş karakter (<literal>\0</literal>) imzanın bir parçası olarak gereklidir. (Bu imza, temiz 8 bitlik olmayan bir aktarımla anlaşılırlığı bozulan dosyaların kolayca tanımlanabilmesi için tasarlanmıştır. Bu imza, böyle bir aktarımda, satırsonu dönüşüm süzgeçleri, boş karakterlerin kaldırılması, eşlik değişiklikleri ya da yüksek bitlerin kaldırılmasıyla değiştirilecektir.)
+       </para></listitem></varlistentry><varlistentry>
+      <term>Seçenekler alanı</term>
+      <listitem><para>Dosya biçiminin önemli niteliklerini açıklayan 32 bitlik tamsayı bit maskesi. Bitler 0'dan (<acronym>LSB</acronym>) 31'e (<acronym>MSB</acronym>) kadar numaralanmıştır. Bu alan da, dosya biçiminin diğer tamsayı alanları gibi ağ bayt sıralamasında (en kıymetli bayt ilk bayttır) saklanmıştır. 16-31 arasındaki bitler dosya biçimi bakımından yaşamsal önemdeki nitelikler için yedek olarak ayrılmıştır; bir okuyucu bu bitlerden beklenmeyen birinin etkin olduğunu saptarsa, dosyayı reddetmelidir. 0-15 arasındaki bitler ise dosya biçiminin geriye doğru uyumluluğu ile ilgili alanlar için ayrılmıştır; bir okuyucu bu bitlerden beklenmeyen birinin etkin olduğunu saptarsa, bunu yoksaymalıdır. Şimdilik sadece bir bit tanımlıdır, kalan bitler sıfır olmalıdır:
+      </para><para><variablelist userlevel="4"><varlistentry>
+          <term>Bit 16</term>
+          <listitem><para>Bu bit 1 ise, veri, nesne kimliklerini içeriyor, 0 ise içermiyor demektir.
+          </para></listitem></varlistentry></variablelist>
+       </para></listitem></varlistentry><varlistentry>
+      <term>Başlık ek veri alanı uzunluğu</term>
+      <listitem><para>Kendisi hariç, başlığın kalanının bayt cinsinden uzunluğunu veren 32 bitlik bir tamsayı. Şimdilik bu alanın değeri sıfırdır ve hemen ardından ilk demet gelmektedir. İleride başlığın ek veriler içermesi gerekirse bu değişebilir. Bir okuyucu böyle bir ek veriye rastlarsa ve onunla ne yapacağını bilmiyorsa, basitçe atlaması önerilir.
+       </para></listitem></varlistentry></variablelist>
+    </para><para>
+Başlığın ek veri alanının kendinden menkul parçalardan oluşacağı düşünülmüştür. Bayrakları içeren alan ise okuyucuya ek veri alanında nelerin bulunduğunu açıklamak için tasarlanmamıştır. Başlığın ek veri alanının neleri içereceği daha sonraki dağıtımlara bırakılmıştır.
+    </para><para>
+Bu tasarım, hem geriye uyumlu başlık eklemelerine (başlık ek veri parçaları veya düşük baytlardaki ek seçenek bitleri) hem de geriye uyumlu olmayan değişikliklere (yüksek baytlardaki seçenek bitleri bu değişiklikleri belirtmek için kullanılabileceği gibi gerekirse destek verisi ek veri alanına eklenebilir) izin verir.
+    </para>
+   </refsect3><refsect3><title>Demetler</title><para>
+Her demet, içindeki alan sayısını belirten 16 bitlik bir tamsayı ile başlar. (Şimdilik, bir tablo aynı sayıda alan içereceğinden tüm demetlerin aynı sayıda alan içereceği belli ise de bu her zaman doğru olmayabilir.) Bundan sonra alanlar gelir. Her alan, alan uzunluğunu belirten 32 bitlik bir tamsayı ile başlar (bu tamsayı, alan uzunluğuna dahil değildir ve sıfır da olabilir). Özel bir durum olarak -1 değeri bir NULL alan değeri belirtir ve bu alan sıfır uzunluktadır.
+    </para><para>
+Alanlar arasında adımlama anlamında herhangi bir ek alan bulunmaz.
+    </para><para>
+Şimdilik, bir <command>COPY BINARY</command> dosyasındaki tüm veri değerlerinin ikilik biçimde olacağı kabul edilmektedir. Gelecekte, sütun biçim kodlarının belirtileceği bir başlık alanının eklenebileceği umulmaktadır.
+    </para><para>
+Demet verisinin ikilik biçimini daha iyi anlayabilmek için PostgreSQL'in kaynak dosyalarına bakınız. Her sütunun veri türü <function>*send</function> ve <function>*recv</function> işlevlerinde görülebilir. Bu işlevler genellike kaynak paketinin <filename>src/backend/utils/adt/</filename> dizininde bulunur.
+    </para><para>
+Nesne kimlikleri dosyada bulunuyorsa, OID alanı alan sayısını belirten tamsayıdan hemen sonra gelir ve alan sayısına dahil edilmemesi dışında normal bir alandır. Yani, normal alanlar gibi uzunluğunu belirten bir tamsayı ile başlar. Böylece 4 baytlık ve 8 baytlık nesne kimliklerinin belirtilebilmesi mümkün olur, hatta istenirse, nesne kimliklerinin boş olarak gösterilmesini de mümkün kılar.
+    </para></refsect3><refsect3><title>Dosya Kuyruğu</title><para>
+Dosya kuyruğu -1 içeren 16 bitlik bir tamsayıdan oluşur. Bu, bir demetin alan sayısı değerinden kolayca ayrılır.
+    </para><para>
+Eğer alan sayısını belirten tamsayı ne -1 ne de umulan sütun sayısını içeriyorsa, okuyucunun bir hata raporlaması gerekir. Bu, verinin düzgün olarak alınıp alınmadığıyla ilgili ek bir sınama da sağlar.
+    </para></refsect3></refsect2>
+ </refsect1><refsect1><title>Örnekler</title><para>
+Alan ayracı olarak <literal>|</literal> kullanarak istemciye bir tablonun kopyalanması:
+  </para><para>
+<programlisting indent="4">COPY country TO STDOUT WITH DELIMITER '|';
+</programlisting>
+  </para><para>
+Verinin bir dosyadan <literal>country</literal> tablosuna kopyalanması:
+  </para><para>
+<programlisting indent="4">COPY country FROM '/usr1/proj/bray/sql/country_data';
+</programlisting>
+  </para><para>
+<command>STDIN</command>'den bir tabloya kopyalanmaya uygun veri örneği:
+  </para><para>
+<programlisting indent="4">AF      AFGHANISTAN
+AL      ALBANIA
+DZ      ALGERIA
+ZM      ZAMBIA
+ZW      ZIMBABWE
+</programlisting>
+  </para><para>
+Burada her satırın içindeki boşluklar aslında birer sekme karakteridir.
+  </para><para>
+Aşağıda aynı veri ikilik biçimde çıktılanmıştır. Buradaki veri bir Unix aracı olan <command>od -c</command> ile süzüldükten sonra gösterilmiştir. Tablo üç alana sahiptir; ilk alan <type>char(2)</type> türünde, ikinci alan <type>text</type> türünde, üçüncü alan ise <type>integer</type> türündedir. Tüm satırların üçüncü sütunları birer NULL değer içermektedir.
+  </para><para>
+<programlisting indent="0">0000000   P   G   C   O   P   Y  \n 377  \r  \n  \0  \0  \0  \0  \0  \0
+0000020  \0  \0  \0  \0 003  \0  \0  \0 002   A   F  \0  \0  \0 013   A
+0000040   F   G   H   A   N   I   S   T   A   N 377 377 377 377  \0 003
+0000060  \0  \0  \0 002   A   L  \0  \0  \0 007   A   L   B   A   N   I
+0000100   A 377 377 377 377  \0 003  \0  \0  \0 002   D   Z  \0  \0  \0
+0000120 007   A   L   G   E   R   I   A 377 377 377 377  \0 003  \0  \0
+0000140  \0 002   Z   M  \0  \0  \0 006   Z   A   M   B   I   A 377 377
+0000160 377 377  \0 003  \0  \0  \0 002   Z   W  \0  \0  \0  \b   Z   I
+0000200   M   B   A   B   W   E 377 377 377 377 377 377
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>COPY</command> diye bir deyim yoktur.
+  </para><para>
+Aşağıdaki sözdizimi PostgreSQL'in 7.3 sürümünden önce kullanılmaktaydı ve hala desteklenmektedir:
+  </para><para>
+<synopsis><command>COPY</command> [ <command>BINARY</command> ] <emphasis>tablo_ismi</emphasis> [ <command>WITH OIDS</command> ]
+    <command>FROM</command> { '<emphasis>dosya_ismi</emphasis>' | <command>STDIN</command> }
+    [ [<command>USING</command>] <command>DELIMITERS</command> '<emphasis>ayraç</emphasis>' ]
+    [ <command>WITH NULL AS</command> '<emphasis>boş_dizge</emphasis>' ]
+
+<command>COPY</command> [ <command>BINARY</command> ] <emphasis>tablo_ismi</emphasis> [ <command>WITH OIDS</command> ]
+    <command>TO</command> { '<emphasis>dosya_ismi</emphasis>' | <command>STDOUT</command> }
+    [ [<command>USING</command>] <command>DELIMITERS</command> '<emphasis>ayraç</emphasis>' ]
+    [ <command>WITH NULL AS</command> '<emphasis>boş_dizge</emphasis>' ]
+</synopsis>
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

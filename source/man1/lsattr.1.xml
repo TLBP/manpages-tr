@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: lsattr.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-lsattr">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>lsattr</refentrytitle>
+    <refmiscinfo class="domain">E2fsprogs sürüm-1.32</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>lsattr</refname>
+    <refpurpose>Bir Linux genişletilmiş ikinci sürüm dosya sisteminin üzerinde dosya özniteliklerini listeler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>lsattr</command> [<command>-RVadv</command>] <emphasis>dosyalar</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>lsattr</command> bir Linux genişletilmiş ikinci sürüm dosya sisteminin üzerinde dosya özniteliklerini listeler.  Özniteliklerin tanımı ve ne anlama geldiğini görmek için <link linkend="tr-man1-chattr"/>'e bakınız.
+    </para>
+  </refsect1>
+  <refsect1><title>SEÇENEKLER</title><para>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossdef><para>
+Dizinlerin özniteliklerini ve içeriklerini ardışık olarak listeler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossdef><para>
+Uygulamanın sürüm bilgilerini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossdef><para>
+'<command>.</command>'  ile başlayanlar da dahil olmak üzere dizin içindeki bütün dosyaları öznitelikleri ile listeler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para>
+Sadece içinde bulunulan dizinin özniteliklerini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>
+Dosyaların sürüm/nesil numaralarını listeler.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+<command>lsattr</command> Remy Card <email>Remy.Card@linux.org</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>Hiç yok ki <literal>:-)</literal>.</para>
+  </refsect1><refsect1><title>TEMİNİ</title>
+    <para>
+<command>lsattr</command>, e2fsprogs  paketinin bir parçasıdır ve<sbr/><ulink url="http://e2fsprogs.sourceforge.net"/> adresinden temin edilebilir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-chattr"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

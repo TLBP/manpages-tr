@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_aggregate.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_aggregate">
+ <refmeta>
+  <refentrytitle>CREATE AGGREGATE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE AGGREGATE</refname>
+  <refpurpose>yeni bir ortak değer işlevi tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE AGGREGATE</command> <emphasis>isim</emphasis> (
+    <command>BASETYPE = </command><emphasis>girdi_veri_türü</emphasis>,
+    <command>SFUNC = </command><emphasis>durum_işlevi</emphasis>,
+    <command>STYPE = </command><emphasis>durum_veri_türü</emphasis>
+    [ , <command>FINALFUNC = </command><emphasis>son_işlev</emphasis> ]
+    [ , <command>INITCOND = </command><emphasis>ilk_değer</emphasis> ]
+)
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE AGGREGATE</command> yeni bir ortak değer işlevi tanımlar. Temel ve çok kullanılan ortak değer işlevleri dağıtıma dahil edilmiş ve bunlar<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/functions-aggregate.html"/> adresinde açıklanmıştır. Eğer yeni türlerin tanımlanması ya da dağıtımla gelmeyen bir ortak değer işlevine ihtiyaç olursa istenen özellikleri sağlamak için <command>CREATE AGGREGATE</command> kullanılabilir.
+  </para><para>
+Bir şema ismi verilmişse (<command>CREATE AGGREGATE myschema.myagg ...</command> gibi), ortak değer işlevi belirtilen şema içinde oluşturulur.
+  </para><para>
+Bir ortak değer işlevi, ismi ve girdi veri türü ile tanımlanır. Eğer iki ortak değer işlevi farklı veri türleri ile çalışıyorlarsa, aynı şema içinde aynı isimle tanımlanabilir. Ayrıca, bir ortak değer işlevi gerek ismi gerekse girdi veri türü bakımından aynı şema içindeki sıradan işlevlerden de farklı olmalıdır.
+  </para><para>
+Bir ortak değer işlevi bir ya da iki sıradan işlevden oluşur: <replaceable>durum_işlevi</replaceable> ile belirtilen bir durum geçiş işlevi ve <replaceable>son_işlev</replaceable> ile isteğe bağlı olarak belirtilebilen bir son hesap işlevi. Bunlar şöyle kullanılır:
+  </para><para>
+<literallayout><emphasis>durum_işlevi</emphasis>( <emphasis>dahili_durum</emphasis>, <emphasis>sonraki-veri-öğesi</emphasis> )
+      ---> sonraki-dahili-durum
+<emphasis>son_işlev</emphasis>( <emphasis>dahili_durum</emphasis> )
+      ---> ortak-değer
+</literallayout>
+  </para><para>
+<productname>PostgreSQL</productname> ortak değerin o anki dahili durumunu saklamak üzere <replaceable>durum_veri_türü</replaceable> ile belirtilen veri türünde bir geçici değişken oluşturur. Her girdi öğesinde, yeni bir dahili durum değerini hesaplamak üzere durum geçiş işlevi çağrılır. Tüm veri işlendikten sonra, döndürülecek ortak değeri hesaplamak için son işlev çağrılır. Eğer bir son işlev yoksa, son durum değeri olduğu gibi döndürülür.
+  </para><para>
+Bir ortak değer işlevine dahili durum değeri için bir ilk değer olarak, bir <replaceable>ilk_değer</replaceable> sağlanabilir. Bu veritabanında <type>text</type> türünde bir sütun olarak belirtilir ve saklanır, fakat bu, durum değerinin veri türündeki bir sabitin geçerli bir harici gösterimi olmalıdır. Eğer verilmezse, durum değeri NULL olarak ayrılır.
+  </para><para>
+Eğer durum geçiş işlevi argümanlarına bağımlı olarak bildirilmişse, NULL girdilerle çağrılamaz. Böyle bir geçiş işleviyle cümle çalıştırıldığında davranışı şöyle açıklayabiliriz. NULL girdi değerleri yoksayılır (işlev çağrılmamıştır ve önceki durum değeri beklemektedir). Eğer ilk durum değeri NULL ise, ilk NULL olmayan girdi değeri durum değeri yapılır ve geçiş işlevi ikinci NULL olmayan girdi değeriyle çağrılır. Bu, <function>max</function> gibi ortak değer işlevlerini gerçeklerken kullanışlıdır. Bu davranış sadece <replaceable>durum_veri_türü</replaceable> ile <replaceable>girdi_veri_türü</replaceable> aynı ise kullanılabilir. Bu veri türleri farklı olduğunda, ya NULL olmayan bir <replaceable>ilk_değer</replaceable> ya da argümanlarına bağımlı olmayan bir geçiş işlevi sağlamalısınız.
+  </para><para>
+Eğer durum geçiş işlevi argümanlarına bağımlı değilse, koşulsuz olarak her girdi değeriyle çağrılabilecek, NULL girdi değerleriyle ve kendinin NULL geçiş değerleriyle çalışacaktır. Bu, işlev yazarının, ortak değerin boş değerlerle elde edilebilmesi bakımından tam denetime sahip olmasıyla mümkün olur.
+  </para><para>
+Eğer son işlev argümanlarına bağımlı olarak bildirilmişse, son durum değeri NULL olduğunda çağrılmayacak; bunun yerine kendiliğinden bir NULL sonuç döndürülecektir. (Şüphesiz bu, argümanlarına bağımlı olarak işlem yapabilen işlevler için normal bir davranıştır.) Her durumda, bir son işlev bir NULL değer döndürecek bir seçeneğe sahip olabilir. Örneğin, <function>avg</function> işlevinin son işlevi sıfır girdi satırı varsa, NULL döndürür.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Oluşturulacak ortak değer işlevinin ismi (şema nitelemeli olabilir).
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>girdi_veri_türü</replaceable></term>
+    <listitem><para>Bu ortak değer işlevinin üzerinde işlem yapacağı girdinin veri türü. Girdi değerlerinin türüyle ilgilenmeyen bir ortak değer işlevi için (<function>count(*)</function> gibi), <literal>"ANY"</literal> olarak belirtilebilir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>durum_işlevi</replaceable></term>
+    <listitem><para>Her girdi değeri için çağrılacak durum geçiş işlevinin ismi.  Bu normalde iki argümanlı bir işlevdir; ilk argümanı <replaceable>durum_veri_türü</replaceable> türünde, ikincisi ise <replaceable>girdi_veri_türü</replaceable> türündedir. Eğer bir ortak değer işlevi girdi veri türü ile ilgilenmiyorsa işlev <replaceable>durum_veri_türü</replaceable> türünde tek bir argüman alabilir. Her durumda işlev <replaceable>durum_veri_türü</replaceable> türünde bir değer döndürmelidir. Bu işlev o anki durum değerini ve o anki girdi veri öğesini alıp, sonraki durum değeri ile döner.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>durum_veri_türü</replaceable></term>
+    <listitem><para>Durum geçiş işlevinin durum değerinin veri türü.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>son_işlev</replaceable></term>
+    <listitem><para>Tüm girdi değerleri işleme sokulup, ortak değer hesaplanacağı zaman çağrılan son işlevin ismi. İşlev <replaceable>durum_veri_türü</replaceable> türünde tek bir argüman almalıdır. Ortak değer işlevinin dönüş türü bu işlevin dönüş türü olarak tanımlanır. Eğer  <replaceable>son_işlev</replaceable> belirtilmemişse, son durum değeri işlevin dönüş değeri olarak kullanılır ve dönüş türü <replaceable>durum_veri_türü</replaceable> olur.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>ilk_değer</replaceable></term>
+    <listitem><para>Durum değeri için ilk değer. <replaceable>durum_veri_türü</replaceable> türünde kabul edilebilecek bir dizge sabit olmalıdır. Belirtilmezse, durum değeri NULL olarak ayrılır.
+     </para></listitem></varlistentry></variablelist><para>
+<command>CREATE AGGREGATE</command> deyiminin parametrelerini tam da yukarıdaki sırasıyla yazmak şart değildir, istenen sırada yazılabilir.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+<ulink url="http://www.postgresql.org/docs/8.0/static/xaggr.html"/> adresine bakınız.
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE AGGREGATE</command> bir <productname>PostgreSQL</productname> oluşumudur. SQL standardı kullanıcı tanımlı ortak değer işlevlerini desteklememektedir.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_aggregate" xreflabel="ALTER AGGREGATE"/>,<sbr/>
+<link linkend="tr-man7-drop_aggregate" xreflabel="DROP AGGREGATE"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

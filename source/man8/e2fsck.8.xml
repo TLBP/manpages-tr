@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: e2fsck.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-e2fsck">
+<remark>.\" Copyright 1993, 1994, 1995 by Theodore Ts'o.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>e2fsck</refentrytitle>
+    <refmiscinfo class="domain">E2fsprogs sürüm 1.32</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv><refname>e2fsck</refname>
+    <refpurpose>Linux ext2 dosya sistemini denetler</refpurpose>
+   </refnamediv><refnamediv><refname>fsck</refname>
+    <refpurpose>Linux ext2 dosya sistemini denetler</refpurpose>
+   </refnamediv><refnamediv><refname>fsck.ext2</refname>
+    <refpurpose>Linux ext2 dosya sistemini denetler</refpurpose>
+   </refnamediv><refnamediv><refname>fsck.ext3</refname>
+    <refpurpose>Linux ext3 dosya sistemini denetler</refpurpose>
+   </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>e2fsck</command> [ <command>-pacnyrdfvstDFSV</command> ] [ <command>-b </command><emphasis>süperblok</emphasis> ] [ <command>-B </command><emphasis>blokboyu</emphasis> ]
+       [ <command>-l</command>|<command>-L </command><emphasis>bozuk_blok_dosyası</emphasis> ] [ <command>-C </command><emphasis>dt</emphasis> ] [ <command>-j </command><emphasis>harici_günlük</emphasis> ]
+       [ <command>-E </command><emphasis>ek_seçenekler</emphasis> ] <emphasis>aygıt</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<dicterm><english>journal</english><turkish>günlük</turkish></dicterm>
+<dicterm><english>superblock</english><turkish>süperblok</turkish></dicterm>
+<dicterm><english>inode</english><turkish>dosya indisi</turkish></dicterm>
+<dicterm><english>inode</english><turkish>dosya düğümü</turkish></dicterm>
+<command>e2fsck</command>, bir Linux dosya sisteminin ikinci geliştirmesini (ext2fs) denetlemek için kullanılır. <command>e2fsck</command>, ayrıca günlük destekli ext2 dosya sistemini (ext3 dosya sistemi) de destekler. Normal <command>e2fsck</command> işlemine başlamadan önce günlük dosyasını dosya sistemine uygular.  Jurnal uygulandıktan sonra, dosya sistemi “temiz/clean” olarak işaretlenir. Ext3 sistemleri için, süperblokta ayrıntılı bir tarama isteği yok ise, <command>e2fsck</command> günlüğü çalıştırır ve çıkar.
+    </para><para>
+<replaceable>aygıt</replaceable>, dosya sisteminin bulunduğu fiziksel aygıtın adıdır (örneğin: <filename>/dev/hdc1</filename>).
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossdef><para><command>-p</command> seçeneği ile aynıdır. Geriye uyumluluk içine vardır; mümkünse <command>–p</command> seçeneğini kullanmanız önerilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b </command><replaceable>süperblok</replaceable></glossterm>
+        <glossdef><para>Birincil süperbloğu kullanmak yerine, <replaceable>süperblok</replaceable> ile belirtilen başka bir süperbloğu kullanır. Bu seçenek, birincil süperblok bozulduğu durumlarda kullanılır. Yedek süperbloğun yeri, dosya sisteminin blok boyutu ile alakalıdır. 1k’lık blok boyutları olan dosya sistemleri için, yedek süperblok 8193. blokta bulunur; 2k’lık blok boyutlu bir dosya sisteminde yedek süperblok 16384. bloktadır; 4k’lık blok boyutlu dosya sistemleri için ise 32768. blokta bulunur.
+        </para><para>
+<link linkend="tr-man8-mke2fs"/> komutunu <command>–n</command> seçeneği ile birlikte kullanarak, yedek süperblokların nerelerde bulunduğunu öğrenebilirsiniz. Dosya sisteminin blok boyutlarını tanımlamaya yarayan <link linkend="tr-man8-mke2fs"/>’nin <command>–b</command> seçeneği, süperblokların yerleşim sırasına tam riayet edilerek tanımlanmalıdır.
+        </para><para>
+Şayet bir süperblok tanımlanmış ve dosya sistemi salt okunur açılmamışsa, e2fsck, birincil süperbloğu dosya sisteminin bütünlüğü adına güncelleyecektir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-B </command><replaceable>blokboyu</replaceable></glossterm>
+        <glossdef><para>Normalde, <command>e2fsck</command> uygun blok boyutunu bulabilmek için değişik blok boyutlarına uyan bir süperblok arar. Bazı durumlarda bu arama iyi sonuç vermez. Bu seçeneği kullanarak, <command>e2fsck</command>’nın sadece belirtilen boyutta arama yapması sağlanır. Şayet süperblok bulunamazsa, <command>e2fsck</command> bir ölümcül  hata vererek sonlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Bu seçenekle, <command>e2fsck</command>’nın <link linkend="tr-man8-badblocks"/> uygulamasını çalıştırması sağlanır. <link linkend="tr-man8-badblocks"/> uygulaması dosya sistemindeki bozuk blokları arar ve onları “bozuk/bad” olarak işaretleyip bozuk blok düğümüne ekler.  Şayet bu seçenek iki kez kullanılırsa,  bozuk blok araması verileri bozmayan bir oku/yaz sınaması kullanılarak yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-C </command><replaceable>dt</replaceable></glossterm>
+        <glossdef><para>Bu seçenek ile, <command>e2fsck</command> sürecinin tamamı, dosya tanımlayıcısı belirtilen bir dosyaya yazılır ve böylece işlemlerin bitmesini müteakip, bütün süreci tekrar gözden geçirebilirsiniz. Bu seçenek, <command>e2fsck</command>’yi kullanan yazılımlar tarafından sıklıkla kullanılır. Şayet dosya olarak 0 tanımlı ise, <command>e2fsck</command> bir süreç ilerleme çubuğu görüntüleyecek ve işin ne kadarlık kısmının bittiğini bu çubuktan izlemek mümkün olacaktır. Bunun için, <command>e2fsck</command>’nin bir video konsol veya bir uçbirimde çalışıyor olması gerekmektedir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para>Hata ayıklama iletilerini görüntüler (<command>e2fsck</command> içinde hata ayıklaması yapmıyorsanız, kullanışlı değildir).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D</command></glossterm>
+        <glossdef><para>Dosya sistemindeki dizinlerde eniyileme yapar. Bu seçenek, <command>e2fsck</command>’nin bütün dizinleri olabilecek en iyi duruma getirmesini sağlar: ya dizini yeniden indisler (dosya sistemi destekliyor ise) ya da yeniden sıralar ve daha küçük bir dizinler halinde ya da geleneksel dosya sistemleri için düz dizin yapısında sıkıştırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-E </command><replaceable>ek_seçenekler</replaceable></glossterm>
+        <glossdef><para><command>e2fsck</command>’nin desteklediği ek seçenekleri belirtmek için kullanılır. Bu seçenekler virgül ile ayrılımış ve “=” işaretini kullanan isim değer çiftlerinden oluşur. Aşağıdaki seçenekler desteklenmektedir:
+        </para><para/><para><glosslist><glossentry>
+        <glossterm><command> ea_ver=</command><replaceable>ek_özellik_sürümü</replaceable></glossterm>
+        <glossdef><para>Bu seçenekle, dosya sistemindeki ek özellik bloklarının sürüm numarasının belirtildiği varsayılır. Sürüm numarası 1 veya 2 olabilir. Öntanımlı değer 2'dir.
+        </para></glossdef></glossentry></glosslist>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para>Dosya sistemi temiz olsa bile, denetim yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F</command></glossterm>
+        <glossdef><para>
+<dicterm><english>buffer</english><turkish>tampon</turkish></dicterm>
+<dicterm><english>cache</english><turkish>önbellek</turkish></dicterm>
+Denetime başlamadan önce, dosya sistemi aygıtının tampon önelleğini boşaltır. Aslında sadece, <command>e2fsck</command>’nin zamanlama denemeleri için kullanışlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-j </command><replaceable>harici_günlük</replaceable></glossterm>
+        <glossdef><para>Bu dosya sistemi için kayıtların tutulacağı harici günlük dosyasının yeri belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l </command><replaceable>bozuk_blok_dosyası</replaceable></glossterm>
+        <glossdef><para><replaceable>bozuk_blok_dosyası</replaceable> ile belirtilen dosyada bulunan bozuk blok numaraları listesini, bozuk blokların listesine ekler. Bu dosyanın biçimi, <link linkend="tr-man8-badblocks"/> ile oluşturulan ile aynıdır. Bu blok numaraları, sadece içinde bulundukları dosya sistemleri için geçerlidir. Çünkü <link linkend="tr-man8-badblocks"/>’a, kesin ve doğru bir sonuç alabilmek için, dosya sisteminin blok boyunu vermek gerekmektedir. Sonuç olarak, <command>e2fsck</command> ile <command>–c</command> seçeneğini kullanmak çok daha basit ve akıllıca olacaktır. Çünkü böylece <link linkend="tr-man8-badblocks"/> yazılımına doğru parametrelerin geçildiğinden emin olabiliriz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-L </command><replaceable>bozuk_blok_dosyası</replaceable></glossterm>
+        <glossdef><para>Bozuk blok listesi olarak <replaceable>bozuk_blok_dosyası</replaceable> ile belirtilen dosyayı kullanır. Bu seçenek aslında, <command>–l</command> seçeneği ile aynıdır fakat burada bozuk blok listesine yeni bloklar eklenmeden önce eskileri silinir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossdef><para>Dosya sistemini salt okunur açar ve bütün sorulara “no/hayır” cevabının verildiğini kabul eder. Böylece <command>e2fsck</command>’yi etkileşimsiz kipte çalıştırmış olursunuz. (EK BİLGİ: <command>-n</command> seçeneğine ek olarak <command>–c</command>, <command>-l</command> veya <command>–L</command> seçeneği de belirtilirse; dosya sistemi oku-yaz kipinde açılacak ve bozuk blok listesinin güncellenmesi de mümkün olacaktır.)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossdef><para>Onay beklemeden dosya sistemini düzeltir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossdef><para>Aslında bu seçenek hiçbir şey yapmaz, sadece geçmişe uyumluluk adına bulunmaktadır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossdef><para>Dosya sistemini normalleştirmek, standart bayt sıralamasına çevirmek için bayt-takaslaması yapar (i386 veya en kıymetsiz bayt sonda). Şayet dosya sistemi zaten standart bayt sıralamasına sahipse, bu seçenek hiçbir işlem gerçekleştirmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossdef><para>Dosya sisteminin o anki durumu ne olursa olsun, bayt takaslaması yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossdef><para><command>e2fsck</command> için zaman istatiklerini görüntüler. Şayet bu seçenek iki kere kullanılırsa, ek zaman değerleri her geçiş için ayrıca görüntülenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>Ayrıntı kipi.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-y</command></glossterm>
+        <glossdef><para>Bütün sorulara “yes/evet” cevabı verilmiş gibi davranarak <command>e2fsck</command>’nin etkileşimsiz kipte çalışmasını sağlar.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>ÇIKIŞ KODLARI</title>
+    <para>
+<command>e2fsck</command>’nin çıkış kodu aşağıdakilerin toplamıdır:
+    </para><para>
+<literallayout indent="4">
+  0 - Hata yok
+  1 - Dosya sistemi hataları düzeltildi
+  2 - Dosya sistemi hataları düzeltildi, sistem yeniden
+      başlatılmalı
+  4 - Dosya sistemi hataları düzeltilmeden bırakıldı
+  8 - İşlemsel hata
+ 16 - Kullanım veya sözdizimi hatası
+ 32 - E2fsck kullanıcı tarafından iptal edildi
+128 - Paylaşımlı kütüphane hatası
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>SİNYALLER</title>
+    <para>
+<command>e2fsck</command>'ya gönderildiğinde hangi sinyallerin ne etkilere sebep olduğu aşağıda açıklanmıştır:
+    </para><glosslist><glossentry>
+        <glossterm><command>SIGUSR1</command></glossterm>
+        <glossdef><para>Bir süreç ilerleme çubuğu görüntülenir (<command>-C</command> seçeneğine bakınız).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>SIGUSR2</command></glossterm>
+        <glossdef><para>Süreç ilerleme çubuğunun görüntülenmesine son verilir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>HATALARIN BİLDİRİLMESİ</title>
+    <para>
+Her yazılımda hatalar olabilir. Şayet <command>e2fsck</command>’nin çökmesine sebep olan bir dosya sistemi veya <command>e2fsck</command>’nin tamir edemediği bir dosya sistemi bulursanız, lütfen yazara bunu bildirin.
+    </para><para>
+Hata raporunuza, mümkün olduğunca fazla bilgi ekleyin. En iyisi, <command>e2fsck</command>’nin hata iletisinin tamamını e-postanıza iliştirin. Şayet kopyaların saklanabildiği yazılabilir bir dosya sisteminiz varsa, <command>script</command>(1) komutu <command>e2fsck</command>’nin çıktılarının bir dosyaya yazılabilmesi için en kullanışlı yoldur.
+    </para><para>
+Ayrıca <link linkend="tr-man8-dumpe2fs"/>’nin çıktılarını göndermek de faydalı olabilir. Şayet özel bir düğüm veya düğümler <command>e2fsck</command>’ye sorun çıkarıyorsa, <link linkend="tr-man8-debugfs"/>'i kullanmak ve ilgili düğümler hakkındaki raporu da göndermek iyi bir fikir olacaktır. Şayet bu düğüm bir dizin ise, <command>debugfs dump</command> komutu bu dizin düğümünün içeriğini almanıza yardımcı olur. Daha sonra <command>uuencode</command>(1) komutunu bu çıktı üzerinde çalıştırdıktan sonra bana gönderin.
+    </para><para>
+<command>e2fsck -V</command> çıktısını da eklemeyi unutmayın.
+    </para>
+  </refsect1><refsect1><title>YAZANLAR</title>
+    <para>
+<command>e2fsck</command>’nın bu sürümü Theodore Ts’o <email>tytso@mit.edu</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-debugfs"/>, <link linkend="tr-man8-dumpe2fs"/>, <link linkend="tr-man8-mke2fs"/>, <link linkend="tr-man8-tune2fs"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Şubat 2004</para>
+  </refsect1>
+</refentry>
+

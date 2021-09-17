@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: pr.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-pr">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>pr</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>pr</refname>
+    <refpurpose>metin dosyalarını yazıcıda basılacak biçime  dönüştürür</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>pr</command> [ <emphasis>seçenekler</emphasis> ] [ <emphasis>dosya</emphasis> ] ...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>pr</command>, yazıcıda çıktılanmak üzere dosyayı sütunlara ve sayfalara ayırır.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar, kısa seçenekler için de zorunludur.
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><literal>+</literal><varname>ilk_sayfa</varname><literal>[:</literal><varname>son_sayfa</varname><literal>]</literal></glossterm>
+        <glossterm><command>--pages</command><varname>=ilk_sayfa</varname><literal>[:</literal><varname>son_sayfa</varname><literal>]</literal></glossterm>
+        <glossdef><para>Basım işlemi <varname>ilk_sayfa</varname>'dan başlar, <varname>son_sayfa</varname>'da biter.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>-sütun_sayısı</varname></glossterm>
+        </glossentry><glossentry><glossterm>
+        <literal><command>--columns</command>=<emphasis>sütun_sayısı</emphasis></literal> </glossterm>
+        <glossdef><para><varname>sütun_sayısı</varname> ile belirtilen sayıda sütun çıktılar ve <command>-a</command> seçeneği belirtilmemişse, sütunları aşağıya doğru basar. Her sayfadaki sütun içi satır sayısını eşitler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--across</command></glossterm>
+        <glossdef><para>Sütunları aşağıya doğru değil, bir uçtan diğerine doğru basar, <varname>-sütun_sayısı</varname> ile birlikte kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossterm><command>--show-control-chars</command></glossterm>
+        <glossdef><para>Şapkalı (^G) ve sekizlik tersbölülü gösterim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--double-space</command></glossterm>
+        <glossdef><para>Çıktıda çift boşluk bırakır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D</command></glossterm></glossentry><glossentry>
+        <glossterm> <literal><command>--date-format</command>=<emphasis>biçim</emphasis></literal></glossterm>
+        <glossdef><para>Başlıkta tarih biçimi olarak <varname>biçim</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>-e</command>[<emphasis>karakter</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        </glossentry><glossentry>
+        <glossterm><literal><command>--expand-tabs</command>[=<emphasis>karakter</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        <glossdef><para><varname>karakter</varname>'leri (sekmeler) <varname>genişlik</varname> (8) karakterlik boşluklara genişletir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>-F</command></glossterm>
+        <glossterm><command>--form-feed</command></glossterm>
+        <glossdef><para>Sayfaları ayırmak için satırsonu karakteri yerine sayfa ilerletme karakteri kullanılır (<command>-F</command> seçeneği kullanıldığında 3 satırlık sayfa başı, kullanılmadığında ise 5 satırlık sayfa başı ve sonu ayrılır).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h </command><varname>başlık</varname></glossterm>
+        <glossterm><literal><command>--header</command>=<emphasis>başlık</emphasis> </literal></glossterm>
+        <glossdef><para>Sayfa başlığında ortalanmış olarak dosya ismi yerine <varname>başlık</varname> kullanılır. <command>-h ""</command> ile boş bir satır basılır, <command>-h""</command> olarak kullanmayın.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command><literal>[<emphasis>karakter</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--output-tabs</command><literal>[=<emphasis>karakter</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        <glossdef><para><varname>genişlik</varname> (8) karakterlik boşlukları <varname>karakter</varname>'le (sekme) değiştirir
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-J</command></glossterm>
+        <glossterm><command>--join-lines</command></glossterm>
+        <glossdef><para>Uzun satırların <command>-W</command> seçeneği ile kırpılmasını engelleyerek aşağıda devem etmesini sağlar. Sütun hizalaması yapılmaz, ayraçlar <command>--sep-string</command><literal>[=<emphasis>dizge</emphasis>]</literal> ile belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l </command><varname>sayfa_uzunluğu</varname></glossterm>
+        </glossentry><glossentry>
+        <glossterm><command>--length</command><varname>=sayfa_uzunluğu</varname></glossterm>
+        <glossdef><para>Sayfa uzunluğunu <varname>sayfa_uzunluğu</varname> satıra (66) ayarlar (öntanımlı satır sayısı, metinler için  56'dır, <command>-F</command> kullanılmışsa 63'dür).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--merge</command></glossterm>
+        <glossdef><para>Bütün dosyaları her sütunda bir olmak üzere <command>-J</command> seçeneği belirtilmemişse satırları kırparak paralel çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm> <command>-n</command><literal>[<emphasis>ayraç</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        </glossentry><glossentry><glossterm> <command>--number-lines</command><literal>[=<emphasis>ayraç</emphasis>[<emphasis>genişlik</emphasis>]]</literal></glossterm>
+        <glossdef><para>Satırları <varname>genişlik</varname> haneli sayılarla (verilmezse 5) numaralandırır. Numaradan sonra <varname>ayraç</varname> karakteri (verilmezse sekme) kullanılır. Öntanımlı olarak, numaralama girdi dosyasının 1. satırından başlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-N </command><varname>sayı</varname></glossterm>
+        </glossentry><glossentry>        <glossterm><literal><command>--first-line-number</command>=<emphasis>sayı</emphasis> </literal></glossterm>
+        <glossdef><para>İlk sayfanın 1. satırı <varname>sayı</varname> ile numaralanarak sayılır (bkz. <literal>+<emphasis>ilk_sayfa</emphasis></literal>).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o </command><varname>girinti</varname></glossterm>
+        </glossentry><glossentry>        <glossterm><literal><command>--indent</command>=<emphasis>girinti</emphasis> </literal></glossterm>
+        <glossdef><para>Her satırı <varname>girinti</varname> boşluk içerden basar. <command>-w</command> ya da <command>-W</command> etkilenmez. <varname>girinti</varname>, <varname>sayfa_genişliği</varname>'ne eklenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--no-file-warnings</command></glossterm>
+        <glossdef><para>Dosya açılmadığı durumlarda uyarı vermez.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+<command>-s</command><literal>[<emphasis>karakter</emphasis>]</literal></glossterm>
+        </glossentry><glossentry><glossterm>
+<literal><command>--separator</command>[=<emphasis>karakter</emphasis>]</literal> </glossterm>
+        <glossdef><para>Sütunlar tek bir karakter ile ayrılır, <command>-w</command> belirtilmedikçe öntanımlı <varname>karakter</varname> sekme karakteridir, <command>-w</command> belirtilirse karakter kullanılmaz. <command>-w</command> belirtilmedikçe 3 sütunlu seçeneklerin (<varname>-sütun_sayısı</varname>|<command>-a</command> <varname>-sütun_sayısı</varname>|<command>-m</command>) tümünde <command>-s</command><literal>[<emphasis>karakter</emphasis>]</literal> satırların kırpılmamasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command><varname>dizge</varname></glossterm>
+        </glossentry><glossentry><glossterm>
+<literal><command>--sep-string</command>[=<emphasis>dizge</emphasis>]</literal> </glossterm>
+        <glossdef><para>Sütunlar <varname>dizge</varname> ile ayrılır. <command>-S</command> olmadan: <command>-J</command> ile öntanımlı ayraç sekme karakteridir, <command>-J</command> kullanılmazsa boşluk kullanılır (<command>-S" "</command>) ile aynı). Sütun seçenekleri üzerinde bir etkisi yoktur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><command>--omit-header</command></glossterm>
+        <glossdef><para>Sayfa başındaki ve sonundaki alanlar kaldırılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T</command></glossterm>
+        <glossterm><command>--omit-pagination</command></glossterm>
+        <glossdef><para>Sayfa başındaki ve sonundaki alanlar kaldırılır, sayfa ilerletme karakteri ile sayfalama uygulanmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--show-nonprinting</command></glossterm>
+        <glossdef><para>Sekizlik tersbölülü gösterim kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w </command><varname>sayfa_genişliği</varname></glossterm>
+        </glossentry><glossentry><glossterm>
+<literal><command>--width</command>=<emphasis>sayfa_genişliği</emphasis></literal> </glossterm>
+        <glossdef><para>Sadece çok sütunlu çıktılama için sayfa genişliği <varname>sayfa_genişliği</varname> (72) karaktere ayarlanır. <command>-S</command>[<varname>karakter</varname>] ile kapatılır (72).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-W </command><varname>sayfa_genişliği</varname></glossterm>
+        </glossentry><glossentry><glossterm>
+<literal><command>--page-width</command>=<emphasis>sayfa_genişliği</emphasis></literal> </glossterm>
+        <glossdef><para>Sayfa genişliği daima <varname>sayfa_genişliği</varname> (72) karaktere ayarlanır. <command>-J</command> seçeneği verilmezse satırlar kırpılır. <command>-S</command> veya <command>-s</command> ile etkileşime grmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+<literal>nn &lt;=10</literal> veya <command>-F</command> ile <literal>nn &lt;=3</literal> olduğu zaman <command>-T</command> ile <command>-l nn</command> uygulanır. <varname>dosya</varname> verilmezse ya da <command>-</command> verilirse standart girdi okunur.
+    </para>
+  </refsect1><refsect1><title>YAZANLAR</title>
+    <para>
+Pete TerMaat ve Roland Huebner tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİ BİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildiriniz.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<command>pr</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>pr</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info pr</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Aralık 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: losetup.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-losetup">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>losetup</refentrytitle>
+    <refmiscinfo class="header">Bakım Komutları</refmiscinfo>
+    <refmiscinfo class="domain">Linux</refmiscinfo>
+    <refmiscinfo class="date">24 Kasım 1993</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>losetup</refname>
+    <refpurpose>dönüş aygıtlarını ayarlar ve denetler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>losetup</command> [ <command>-e </command><emphasis>şifreleme</emphasis> ] [ <command>-o </command><emphasis>konum</emphasis> ] <emphasis>aygıt</emphasis> <emphasis>dosya</emphasis>
+<command>losetup</command> [ <command>-d</command> ]  <emphasis>aygıt</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>losetup</command>, dönüş aygıtlarını sistemden ayırmak ve dönüş aygıtlarının durumunu sorgulamak için, dönüş aygıtlarını normal dosyalar veya blok aygıtları ile ilişkilendirmek için kullanılır.  Eğer sadece <replaceable>aygıt</replaceable> argümanı verilmişse, bu dönüş aygıtının durumu görüntülenir.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para>Belirtilen dönüş aygıtı ile ilişkili dosya veya aygıtı sistemden ayırır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-e </command><replaceable>şifreleme</replaceable>
+        </glossterm><glossdef><para>Veri şifrelemesini etkinleştirir. <replaceable>şifreleme</replaceable> için aşağıdaki kelimeler kullanılabilir:
+        </para><para><glosslist>
+        <glossentry><glossterm><command>NONE</command></glossterm>
+        <glossdef><para>Şifreleme yapılmaz (öntanımlı).
+        </para></glossdef>
+        </glossentry><glossentry>
+        <glossterm><command>XOR</command></glossterm>
+        <glossdef><para>Basit bir XOR şifrelemesi kullanılır.
+        </para></glossdef>
+        </glossentry><glossentry>
+        <glossterm><command>DES</command></glossterm>
+        <glossdef><para>DES şifrelemesi kullanılır. Bu şifreleme yöntemi sadece DES paketinin çekirdeğe eklenmesi durumunda kullanılabilir. DES şifreleme yöntemi sözlük saldırılarına karşı ilave bir başlangıç değeri kullanır.
+        </para></glossdef>
+        </glossentry></glosslist></para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-o </command><replaceable>konum</replaceable>
+        </glossterm><glossdef><para>Veri başlangıcı belirtilen aygıt veya dosya içinde <replaceable>konum</replaceable> bayta taşınır.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>ÇIKIŞ DURUMU</title>
+    <para>
+<command>losetup</command> başarılı olması durumunda 0 döndürür, hata durumunda sıfırdan farklı bir değer döner. <command>losetup</command>, dönüş aygıtının durumunu görüntülediği durumlarda, şayet aygıt yapılandırılmamışsa 1, <command>losetup</command>’ı aygıt durumunu saptamaktan alıkoyan bir hata olması durumunda 2 döner.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<filename>/dev/loop0</filename>, <filename>/dev/loop1</filename>,...   dönüş aygıtları (7 asıl numaralı aygıt)
+    </para>
+  </refsect1><refsect1><title>ÖRNEK</title>
+    <para>
+Şayet yüklenebilir modül kullanıyorsanız, öncelikle aşağıdaki komutu kullanarak modülü yüklemelisiniz:
+    </para><para>
+<screen># insmod loop.o</screen>
+    </para><para>
+Aşağıdaki komutlar, dönüş aygıtının kullanımına bir örnek teşkil edebilir.
+    </para><para>
+<screen>
+    dd if=/dev/zero of=/file bs=1k count=100
+    losetup -e des /dev/loop0 /file
+    Password:
+    Init (up to 16 hex digits):
+    mkfs -t ext2 /dev/loop0 100
+    mount -t ext2 /dev/loop0 /mnt
+    ...
+    umount /dev/loop0
+    losetup -d /dev/loop0
+</screen>
+    </para><para>
+Şayet yüklenebilir bir modül kullanıyorsanız, bu komutla modülü kaldırabilirsiniz:
+    </para><para>
+<screen># rmmod loop.o</screen>
+    </para>
+  </refsect1><refsect1><title>KISITLAMALAR</title>
+    <para>
+DES  şifrelemesi oldukça yavaştır. Diğer yandan XOR ise oldukça zayıftır.
+    </para>
+ </refsect1><refsect1><title>YAZANLAR</title>
+    <para>
+Özgün sürüm:Theodore Ts’o <email>tytso@athena.mit.edu</email><sbr/>
+Özgün DES: Eric Young <email>eay@psych.psy.uq.oz.au</email>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

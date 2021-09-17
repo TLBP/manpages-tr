@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: pinky.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-pinky">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>pinky</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>pinky</refname>
+    <refpurpose>basit bir `finger' uygulaması;  kullanıcı bilgilerini gösterir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>pinky </command>[<emphasis>seçenek</emphasis>] ... [<emphasis>kullanıcı</emphasis>] ...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1>
+  <title>AÇIKLAMA</title><para>
+Basit bir`finger' uygulaması;  kullanıcı bilgilerini gösterir. <filename>utmp</filename> dosyası olarak <filename>/var/run/utmp</filename> kullanılacaktır.
+    </para><para>
+    <glosslist><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossdef><para>belirtilen <varname>kullanıcı</varname>lar için uzun biçemde çıktı üretir
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossdef><para>uzun biçemde kullanıcının ev dizinini ve kabuğunu göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossdef><para>uzun biçemde kullanıcının proje dosyasını göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossdef><para>uzun biçemde kullanıcının plan dosyasını göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossdef><para>kısa biçemde çıktı üretir; öntanımlıdır
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para>kısa biçemde sütun başlığı satırını göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossdef><para>kısa biçemde kullanıcının tam adını göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossdef><para>kısa biçemde kullanıcının tam adı ve uzak makinayı göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossdef><para>kısa biçemde kullanıcının tam adı, uzak makina ve boşta geçen zamanı göstermez
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Bu yardım metnini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+   </refsect1><refsect1><title>YAZAN</title><para>
+Joseph Arceneaux, David MacKenzie ve Kaveh Ghazi tarafından yazılmıştır.
+    </para></refsect1><refsect1>
+    <title>GERİBİLDİRİM</title><para>
+Bir yazılım hatası bulursanız, lütfen <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para></refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>pinky</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>pinky</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils pinky</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>
+

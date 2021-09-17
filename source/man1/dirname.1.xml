@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: dirname.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-dirname">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>dirname</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>dirname</refname>
+    <refpurpose>dosya isminin sonundan dizin olmayan kısmı ayırır</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>dirname</command> <emphasis>isim</emphasis>
+<command>dirname</command> <emphasis>seçenek</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<varname>isim</varname>, sonundaki <replaceable>/dosyaismi</replaceable> parçası silinerek çıktılanır. Eğer <varname>isim</varname> hiç / içermiyorsa içinde bulunulan dizin anlamında . (nokta) çıktılanır.
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1><title>ÖRNEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>dirname /usr/bin/sort</command></glossterm>
+        <glossdef><para>"<filename>/usr/bin</filename>" çıktılanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>dirname stdio.h</command></glossterm>
+        <glossdef><para>"." çıktılanır.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+   </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie ve Jim Meyering tarafından yazılmıştır.</para>
+   </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+   </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+  <link linkend="tr-man1-basename"/>, <link linkend="tr-man1-readlink"/>
+  </para><para>
+<command>dirname</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>dirname</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils dirname</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>

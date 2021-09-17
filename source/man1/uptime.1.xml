@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: uptime.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-uptime">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>uptime</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">procps 3.2.7</refmiscinfo>
+    <refmiscinfo class="date">26 Ocak 1993</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>uptime</refname>
+    <refpurpose>sistemin ne kadar zamandır çalıştığını söyler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>uptime</command>
+<command>uptime</command> [<command>-V</command>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title><para>
+uptime tek bir satır halinde şu bilgiyi verir: o anki saat, sistemin ne kadar süredir çalışmakta olduğu, sistemde oturum açmış kaç kullanıcı bulunduğu ve 1, 5 ve 15 dakika önceki sistem yükleri.
+</para><para>
+Bu, <link linkend="tr-man1-w"/> tarafından gösterilen başlık satırındaki bilgi ile aynıdır.
+</para><para>
+Sistem yük ortalamaları çalışmakta olan veya durdurulmaması gereken süreçlerle ilgilidir. Çalışmakta olan bir süreç ya işlemciyi kullanıyordur ya da işlemciyi kullanmayı bekliyordur. Durdurulmaması gereken bir süreç ise örneğin bir disk gibi bir aygıtı G/Ç erişimi için beklemekte olan bir süreçtir. Ortalamalar üç zaman aralığında alınır. Yük ortalamaları bir sistemdeki işlemci sayısına göre normalleştirilmez, yani, birim yük ortalaması tek işlemcili bir sistemin birim zamandaki yükü olup, 4 işlemcili bir sistemde bu zamanın %75'i boşta geçer.
+</para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+<literallayout indent="0">
+/var/run/utmp  o an oturum açmış olanlarla ilgili bilgiler
+/proc          süreçlerin bilgileri
+</literallayout>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Larry Greenfield <email>greenfie@gauss.rutgers.edu</email> ve Michael
+       K. Johnson <email>johnsonm@sunsite.unc.edu</email> tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>albert@users.sf.net</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-ps"/>,
+<link linkend="tr-man1-top"/>
+<link linkend="tr-man5-utmp"/>,
+<link linkend="tr-man1-w"/>.
+   </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>
+
+

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: comment.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-comment">
+ <refmeta>
+  <refentrytitle>COMMENT</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>COMMENT</refname>
+  <refpurpose>bir nesnenin açıklamasını tanımlar veya değiştirir</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>COMMENT ON</command>
+{
+  <command>TABLE</command> <emphasis>nesne_ismi</emphasis> |
+  <command>COLUMN</command> <emphasis>tablo_ismi</emphasis>.<emphasis>sütun_ismi</emphasis> |
+  <command>AGGREGATE</command> <emphasis>işlev_ismi</emphasis> (<emphasis>işlev_türü</emphasis>) |
+  <command>CAST</command> (<emphasis>kaynak_türü</emphasis> <command>AS</command> <emphasis>hedef_türü</emphasis>) |
+  <command>CONSTRAINT</command> <emphasis>kısıt_ismi</emphasis> <command>ON</command> <emphasis>tablo_ismi</emphasis> |
+  <command>CONVERSION</command> <emphasis>nesne_ismi</emphasis> |
+  <command>DATABASE</command> <emphasis>nesne_ismi</emphasis> |
+  <command>DOMAIN</command> <emphasis>nesne_ismi</emphasis> |
+  <command>FUNCTION</command> <emphasis>işlev_ismi</emphasis> (<emphasis>arg1_türü</emphasis>, <emphasis>arg2_türü</emphasis>, ...) |
+  <command>INDEX</command> <emphasis>nesne_ismi</emphasis> |
+  <command>LARGE OBJECT</command> <emphasis>büyük_nesne_oid</emphasis> |
+  <command>OPERATOR</command> <emphasis>işleç</emphasis> (<emphasis>sol_terim_türü</emphasis>, <emphasis>sağ_terim_türü</emphasis>) |
+  <command>OPERATOR CLASS</command> <emphasis>nesne_ismi</emphasis> <command>USING</command> <emphasis>indeks_yöntemi</emphasis> |
+  [ <command>PROCEDURAL</command> ] <command>LANGUAGE</command> <emphasis>nesne_ismi</emphasis> |
+  <command>RULE</command> <emphasis>kural_ismi</emphasis> ON <emphasis>tablo_ismi</emphasis> |
+  <command>SCHEMA</command> <emphasis>nesne_ismi</emphasis> |
+  <command>SEQUENCE</command> <emphasis>nesne_ismi</emphasis> |
+  <command>TRIGGER</command> <emphasis>tetik_ismi</emphasis> <command>ON</command> <emphasis>tablo_ismi</emphasis> |
+  <command>TYPE</command> <emphasis>nesne_ismi</emphasis> |
+  <command>VIEW</command> <emphasis>nesne_ismi</emphasis>
+} <command>IS</command> <emphasis>'metin'</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>COMMENT</command> bir veritabanı nesnesi hakkındaki bir açıklamayı kaydeder.
+  </para><para>
+Bir açıklamayı değiştirmek için aynı nesneye yeni bir <command>COMMENT</command> uygulayın. Her nesnede sadece bir açıklama dizgesi bulunabilir. Bir açıklamayı silmek için 'metin' dizgesi olarak <literal>NULL</literal> yazın. Bir nesne silindiğinde açıklaması da özdevinimli olarak silinir.
+  </para><para>
+Açıklamalar <command>\dd</command>, <command>\d+</command> ve <command>\l+</command> <application>psql</application> komutları ile kolayca alınabilir. Diğer kullanıcı arayüzleri açıklamaları almak için <application>psql</application>'in yerleşik olarak kullandığı <function>obj_description</function> ve <function>col_description</function> işlevlerini kullanabilirler (bkz.<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/functions-info.html#FUNCTIONS-INFO-COMMENT-TABLE"/>).
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>nesne_ismi</replaceable></term>
+    <term><replaceable>tablo_ismi.sütun_ismi</replaceable></term>
+    <term><replaceable>kısıt_ismi</replaceable></term>
+    <term><replaceable>işlev_ismi</replaceable></term>
+    <term><replaceable>işleç</replaceable></term>
+    <term><replaceable>kural_ismi</replaceable></term>
+    <term><replaceable>tetik_ismi</replaceable></term>
+    <listitem><para>Açıklanacak nesnenin ismi. Tablolar, ortak değer işlevleri, etki alanları, işlevler, indeksler, işleçler, işleç sınıfları, kayıt listeleri, türler ve sanal tablolar şema nitelemeli olabilir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>işlev_türü</replaceable></term>
+    <listitem><para>Ortak değer işlevinin veri türü. İşlev herhangi bir veri türünü kabul ediyorsa, <command>*</command> belirtilebilir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>büyük_nesne_oid</replaceable></term>
+    <listitem><para>Büyük nesnenin nesne kimliği.
+    </para></listitem></varlistentry><varlistentry>
+     <term><command>PROCEDURAL</command></term>
+     <listitem><para>Bu sözcük parazittir.
+    </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>kaynak_türü</replaceable></term>
+     <listitem><para>Tür dönüşümü yapılacak kaynak veri türünün ismi.
+    </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>hedef_türü</replaceable></term>
+     <listitem><para>Tür dönüşümünün hedef veri türü ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>'metin'</replaceable></term>
+    <listitem><para>Yeni açıklama ise bir dizge sabiti olarak yazılır. Açıklama silinmek isteniyorsa <literal>NULL</literal> yazılır.
+    </para></listitem></varlistentry></variablelist>
+  </refsect1><refsect1><title>Ek Bilgi</title><para>
+Bir veritabanı açıklaması sadece bu veritabanında oluşturulabilir ve sadece bu veritabanından görüntülenebilir, başka veritabanından görüntülenemez.
+  </para><para>
+Açıklamalar için bir güvenlik mekanizması yoktur: bir veritabanına bağlanan her kullanıcı bu veritabanındaki nesnelerin tüm açıklamalarını görebilir (sahibi olmadığı nesnelerin açıklamalarını sadece ayrıcalıklı kullanıcı değiştirebilir). Bu nedenle, güvenlik açığı oluşturabilecek bilgileri açıklamalara yazmayın.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+<literal>mytable</literal> tablosuna bir açıklama eklemek için:
+  </para><para>
+<programlisting indent="4">COMMENT ON TABLE mytable IS 'Bu tablo benimdir.';
+</programlisting>
+  </para><para>
+Onu kaldırmak için:
+  </para><para>
+<programlisting indent="4">COMMENT ON TABLE mytable IS NULL;
+</programlisting>
+  </para><para>
+Bazı örnekler:
+  </para><para>
+<programlisting indent="0">COMMENT ON AGGREGATE my_aggregate (double precision)
+    IS 'Örnek sapmayı hesaplar';
+COMMENT ON CAST (text AS int4) IS 'metinleri int4 türüne dönüştürür';
+COMMENT ON COLUMN my_table.my_column IS 'Personelin kimlik numarası';
+COMMENT ON CONVERSION my_conv IS 'Unicode'a dönüşüm';
+COMMENT ON DATABASE my_database IS 'Geliştirdiğim veritabanı';
+COMMENT ON DOMAIN my_domain IS 'Eposta adres alanı';
+COMMENT ON FUNCTION my_function (timestamp) IS 'Romen sayılarıyla döner';
+COMMENT ON INDEX my_index IS 'Kimlik numarasının eşsiz olmasını sağlar';
+COMMENT ON LANGUAGE plpython
+    IS 'saklanmış yordamlar için Python desteği';
+COMMENT ON LARGE OBJECT 346344 IS 'Planlama belgesi';
+COMMENT ON OPERATOR ^ (text, text) IS 'iki metni kesiştirir';
+COMMENT ON OPERATOR ^ (NONE, text)
+    IS 'Metin üzerinde bir önek işlecidir';
+COMMENT ON OPERATOR CLASS int4ops USING btree
+    IS '4 baytlık tamsayı işleçleri';
+COMMENT ON RULE my_rule ON my_table IS 'Personel kayıt günlükleri';
+COMMENT ON SCHEMA my_schema IS 'Bölümlerin verileri';
+COMMENT ON SEQUENCE my_sequence IS 'Birincil anahtar üretimi için.;
+COMMENT ON TABLE my_schema.my_table IS 'Personel Bilgileri';
+COMMENT ON TRIGGER my_trigger ON my_table IS 'RI için kullanılır';
+COMMENT ON TYPE complex IS 'Karmaşık sayı veri türü';
+COMMENT ON VIEW my_view IS 'Bölüm maliyetleri';
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>COMMENT</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

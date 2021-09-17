@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: split.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-split">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>split</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>split</refname>
+    <refpurpose>bir dosyayı parçalara ayırır</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis>
+<command>split</command> <emphasis>seçenek</emphasis> [<emphasis>girdi</emphasis> [<emphasis>önek</emphasis>]]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<varname>girdi</varname>yi eşit büyüklükte (öntanımlı: 1000 satır) parçalara bölüp <varname>önek</varname>aa, <varname>önek</varname>ab, ... isimli
+dosyalara koyar. <varname>önek</varname> belirtilmediğinde  parça isimleri `x' ile başlar. <varname>girdi</varname> belirtilmediğinde veya - olduğunda standart girdiyi kullanır.
+</para><para>
+Uzun seçenekler için zorunlu olan argümanlar kısa seçenekler için de zorunludur.
+</para><glosslist><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--suffix-length=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para><varname>sayı</varname> uzunlukta sonek kullanır (öntanımlı: 2)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossterm><command>--bytes=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>Her çıktı dosyasına <varname>sayı</varname> bayt koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-C</command></glossterm>
+        <glossterm><command>--line-bytes=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>Her çıktı dosyasına en fazla <varname>sayı</varname> baytlık satırlar koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--numeric-suffixes</command></glossterm>
+        <glossdef><para>Alfabetik sonekler yerine sayısay sonekler kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--lines=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>Her çıktı dosyasına en fazla <varname>sayı</varname> satır koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>Her çıktı dosyasından önce standart hataya bir tanı iletisi basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Yardım iletisini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist><para>
+<varname>sayı</varname>, bir katsayı soneki içerebilir: 512 için <literal>b</literal>, 1K için <literal>k</literal>, 1 Meg için <literal>m</literal>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Torbjorn Granlund ve Richard M. Stallman tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>split</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>split</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para><glosslist><glossentry>
+       <glossdef><para><command>info coreutils split</command></para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>

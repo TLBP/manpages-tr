@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: expr.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-expr">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>expr</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>expr</refname>
+    <refpurpose>ifadeleri değerlendirir</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>expr</command> <emphasis>ifade</emphasis>
+<command>expr</command> <emphasis>seçenek</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+    <glosslist><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Yardım iletisini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+    <varname>ifade</varname>nin değerini standart çıktıya basar. Aşağıda <varname>ifade</varname>ler öncelikleri artan sırada gruplanmıştır:
+   </para><para><orderedlist><listitem><para>
+      <glosslist><glossentry>
+        <glossterm><varname>arg1 </varname><literal>| </literal><varname>arg2</varname></glossterm>
+        <glossdef><para>eğer <varname>arg1</varname> boş veya 0 ise <varname>arg2</varname>, değil ise <varname>arg1</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>&amp; </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>eğer iki argüman da 0 veya boş ise <varname>arg2</varname>, değil ise <varname>arg1</varname>
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><varname>arg1 </varname><literal>&lt; </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> küçüktür <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>&lt;= </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> küçük ya da eşittir <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>= </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> eşittir <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>!= </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> farklıdır <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>>= </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> büyük ya da eşittir <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>> </literal><varname>arg2</varname></glossterm>
+      <glossdef><para><varname>arg1</varname> büyüktür <varname>arg2</varname>
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><varname>arg1 </varname><literal>+ </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>aritmetik toplama işlemi
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>- </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>aritmetik çıkarma işlemi
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><varname>arg1 </varname><literal>* </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>aritmetik çarpma işlemi
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>/ </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>aritmetik bölme işleminde bölümü verir
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><varname>arg1 </varname><literal>% </literal><varname>arg2</varname></glossterm>
+      <glossdef><para>aritmetik bölme işleminde kalanı verir
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><varname>dizge </varname><literal>: </literal><varname>düzenli_ifade</varname></glossterm>
+      <glossdef><para>ilk karakterinden itibaren <varname>dizge</varname> içindeki <varname>düzenli_ifade</varname> ile eşleşen kısım
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><command>match </command><varname>dizge düzenli_ifade</varname></glossterm>
+      <glossdef><para><varname>dizge </varname><literal>: </literal><varname>düzenli_ifade</varname> ile aynı.
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><command>substr </command><varname>dizge konum uzunluk</varname></glossterm>
+      <glossdef><para><varname>dizge</varname>nin <varname>konum</varname>dan (1'den başlayarak sayılır) başlayan <varname>uzunluk</varname>taki alt dizgesi.
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><command>index </command><varname>dizge karakterler</varname></glossterm>
+      <glossdef><para><varname>dizge</varname> içinde <varname>karakterler</varname>e ilk rastlandığı konum, yoksa 0.
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><command>length </command><varname>dizge</varname></glossterm>
+      <glossdef><para><varname>dizge</varname>nin uzunluğu.
+       </para></glossdef>
+     </glossentry><glossentry>
+      <glossterm><command>+ </command><varname>andaç</varname></glossterm>
+      <glossdef><para><varname>andaç</varname> `<literal>match</literal>' gibi bir anahtar sözcük ya da `/' gibi bir işleç bile olsa bir dizge olarak yorumlanır.
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem><listitem><para>
+    <glosslist><glossentry>
+      <glossterm><literal>( </literal><varname>ifade </varname><literal>) </literal></glossterm>
+      <glossdef><para><varname>ifade</varname>nin değeri
+       </para></glossdef>
+     </glossentry></glosslist>
+   </para></listitem></orderedlist></para><para>
+Kabukta yorumlanması için öncelenmesi ya da yorumlanmaması için tırnak içine  alınması gereken işleçlerden sakının. Karşılaştırmalar her ikisi de sayısal ise sayısal, değilse sözlük sırasına göredir. Örgüsel eşleşmeler <literal>\(</literal> ve <literal>\)</literal> arasındaki eşleşen dizge ile ya da null ile sonuçlanır; eğer <literal>\(</literal> ve <literal>\)</literal> kullanılmamışsa eşleşen karakter sayısıyla ya da 0 ile sonuçlanır.
+</para><para><glosslist><glossentry>
+   <glossterm><command>expr</command> çıkış durumu,</glossterm>
+   <glossdef><para>
+<varname>ifade</varname> ne null ne de 0 ise 0,<sbr/>
+<varname>ifade</varname> null veya 0 ise 1,<sbr/>
+<varname>ifade</varname> sözdizimsel olarak geçersizse 2,<sbr/>
+bir hata oluşmuşsa 3'tür.
+    </para></glossdef>
+</glossentry></glosslist>
+  </para>
+  </refsect1><refsect1><title>YAZAN</title>
+   <para>Mike Parker tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>expr</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>expr</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para><glosslist><glossentry>
+       <glossdef><para><command>info coreutils expr</command></para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>

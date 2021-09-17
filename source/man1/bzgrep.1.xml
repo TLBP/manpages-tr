@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: bzgrep.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-bzgrep">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>bzgrep</refentrytitle>
+  </refmeta>
+
+  <refnamediv><refname>bzgrep</refname>
+    <refpurpose>bir düzenli ifade için belirtilen bzip2 sıkıştırılmış dosyalarında grep ile arama yapar</refpurpose>
+  </refnamediv><refnamediv><refname>bzegrep</refname>
+    <refpurpose>bir düzenli ifade için belirtilen bzip2 sıkıştırılmış dosyalarında egrep ile arama yapar</refpurpose>
+  </refnamediv><refnamediv><refname>bzfgrep</refname>
+    <refpurpose>bir düzenli ifade için belirtilen bzip2 sıkıştırılmış dosyalarında fgrep ile arama yapar</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>bzgrep</command>  [ <emphasis>grep_seçenekleri</emphasis> ]   [ <emphasis>-e</emphasis> ] <emphasis>ifade dosya</emphasis> ...
+<command>bzegrep</command> [ <emphasis>egrep_seçenekleri</emphasis> ]  [ <emphasis>-e</emphasis> ] <emphasis>ifade dosya</emphasis> ...
+<command>bzfgrep</command> [ <emphasis>fgrep_seçenekleri</emphasis> ]  [ <emphasis>-e</emphasis> ] <emphasis>ifade dosya</emphasis> ...
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>bzgrep</command>, <command>bzip2</command> ile sıkıştırılmış dosyalar üzerinde <command>grep</command> çalıştırmak için kullanılır. <command>grep</command> için geçerli olan bütün seçenekler burada da geçerlidir. Şayet <varname>dosya</varname> ismi belirtilmemişse, standart girdi, gerekli ise açıldıktan sonra <command>grep</command>'e gönderilir. Eğer <varname>dosya</varname> ismi verilmişse, bu dosyalar gerekli ise açılır ve <command>grep</command>'e gönderilir.
+    </para><para>
+Şayet <command>bzgrep</command>, <command>bzegrep</command> veya <command>bzfgrep</command> şeklinde çağrılır ise, <command>grep</command> yerine <command>egrep</command> veya <command>fgrep</command> kullanılır. Eğer <literal>GREP</literal> ortam değişkeni ayarlanmışsa, <command>bzgrep</command> bu değişkeni <command>grep</command> çağrısı olarak kullanır. Örneğin:
+    </para><para>
+<command>sh</command> için:  <literal>GREP=<command>fgrep  bzgrep </command><emphasis>ifade dosyalar</emphasis></literal><sbr/>
+<command>csh</command> için: <literal>(<command>setenv</command> GREP <command>fgrep</command>; <command>bzgrep </command><emphasis>ifade dosyalar</emphasis>)</literal>
+  </para></refsect1><refsect1><title>YAZAN</title><para>
+Charles Levert <email>charles@comm.polymtl.ca</email> tarafından yazılmıştır.Debian GNU/Linux için <command>bzip2</command>'ye Philippe Troin <email>phil@fifi.org</email> tarafından uyarlanmıştır.
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-bzdiff"/>, <link linkend="tr-man1-bzmore"/>, <link linkend="tr-man1-bzmore"/>, <link linkend="tr-man1-bzip2"/>, <link linkend="tr-man1-grep"/>, <link linkend="tr-man1-grep"/>, <link linkend="tr-man1-grep"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

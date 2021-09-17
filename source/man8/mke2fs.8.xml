@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: mke2fs.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-mke2fs">
+<remark>.\" Copyright 1993, 1994, 1995 by Theodore Ts'o.  All Rights Reserved.
+.\" This file may be copied under the terms of the GNU Public License.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>mke2fs</refentrytitle>
+    <refmiscinfo class="domain">E2fsprogs sürüm 1.32</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2002</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>mke2fs</refname>
+    <refpurpose>bir ext2/3 dosya sistemi oluşturur</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mke2fs </command>[ <command>-c</command> | <command>-l </command><emphasis>dosyaismi</emphasis> ] [ <command>-b </command><emphasis>blok-boyu</emphasis> ] [ <command>-f </command><emphasis>adım-boyu</emphasis> ]
+       [ <command>-i </command><emphasis>düğüm-boyu</emphasis> ] [ <command>-j</command> ] [ <command>-J </command><emphasis>günlük-seçenekleri</emphasis> ]
+       [ <command>-N </command><emphasis>düğüm-sayısı</emphasis> ] [ <command>-n</command> ] [ <command>-m </command><emphasis>yedek-blok-yüzdesi</emphasis> ]
+       [ <command>-o </command><emphasis>işletim-sistemi</emphasis> ] [ <command>-O </command><emphasis>özellik</emphasis>[,...] ] [ <command>-q</command> ]
+       [ <command>-r </command><emphasis>ds-sürümü</emphasis> ] [ <command>-R </command><emphasis>raid-seçenekleri</emphasis> ] [ <command>-v</command> ] [ <command>-F</command> ]
+       [ <command>-L </command><emphasis>etiket</emphasis> ] [ <command>-M </command><emphasis>son-bağlanan-dizin</emphasis> ] [ <command>-S</command> ]
+       [ <command>-T </command><emphasis>ds-türü</emphasis> ] [ <command>-V</command> ] <emphasis>aygıt</emphasis> [ <emphasis>blok-sayısı</emphasis> ]
+
+<command>mke2fs -O </command> <emphasis>günlük-aygıtı</emphasis> [ <command>-b </command><emphasis>blok-boyu</emphasis> ] [ <command>-L </command><emphasis>etiket</emphasis> ] [ <command>-n</command> ] [ <command>-q</command> ]
+       [ <command>-v</command> ] <emphasis>harici-günlük</emphasis> [ <emphasis>blok-sayısı</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>mke2fs</command>, genellikle bir disk bölümü üzerinde ext2/ext3 dosya sistemi oluşturmak için kullanılır.  <varname>aygıt</varname>, aygıta karşılık gelen özel dosyadır (örneğin: <filename>/dev/hdXX</filename>). <varname>blok-sayısı</varname>, aygıttaki blok sayısıdır. Şayet belirtilmemişse, <command>mke2fs</command> dosya sistemi boyutunu kendisi tespit eder. Şayet <command>mkfs.ext3</command> şeklinde kullanılmışsa, sanki <command>–j</command> seçeneği kullanılmış gibi günlük dosyası oluşturur.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist><glossentry>
+      <glossterm><command>-b </command><varname>blok-boyu</varname></glossterm>
+      <glossdef><para>Blok boyutlarını bayt cinsinden tanımlar. Geçerli  değerler blok başına 1024, 2048, 4096 bayttır. Şayet bu seçenek belirtilmemişse, <command>mke2fs</command> blok boyutu dosya sisteminin kullanımına uygun olarak dosya sistemi boyutuna göre kararlaştırılır (<command>-T</command> seçeneğine bakınız).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Dosya sistemi oluşturulmadan önce aygıt bozuk bloklar aranır. Eğer bu seçenek iki kere belirtilmişse, hızlı bir salt okunur sınama yerine daha yavaş ve yıkıcı bir oku/yaz sınaması yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f </command><varname>adım-boyu</varname></glossterm>
+        <glossdef><para>Bayt cinsinden adımlama boyu. Bu sürümde <varname>adım-boyu</varname> blok boyuna eşittir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F</command></glossterm>
+        <glossdef><para>Aygıt blok özellikli olmasa bile, hatta sisteme bağlı olsa bile dosya sistemini oluşturulur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i </command><varname>düğüm-boyu</varname></glossterm>
+        <glossdef><para>Boş bir dizinin disk üzerinde kaplayabileceği en küçük alan, bayt cinsinden verilir. <command>mke2fs</command>, diskteki boşluğunun her <varname>düğüm-boyu</varname> baytlık alanı için bir dosya düğümü oluşturur. <varname>düğüm-boyu</varname> büyüdükçe, daha az düğüm oluşturulur. Bu değer, dosya sisteminin blok boyutundan daha küçük olmamalıdır, yoksa çok fazla düğüm oluşturulmak durumunda kalınabilir. Unutmayın ki bir dosya sistemi oluşturulduktan sonra içindeki düğüm sayısını artırmak mümkün değildir. Bu nedenle bu parametre için değer atarken oldukça dikkatli olmanız ve kararınızı ona göre vermeniz gerekmektedir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-j</command></glossterm>
+        <glossdef><para>ext3 günlüklü dosya sistemini oluşturur. Şayet <command>–J</command> seçeneği kullanılmamışsa, günlük dosyası öntanımlı özelliklerle oluşturulur. Günlük destekli bir dosya sistemi oluşturabilmek için ext3 destekli bir çekirdek kullanmak zorundasınız.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-J </command><varname>günlük-seçenekleri</varname></glossterm>
+        <glossdef><para>Belirtilen <varname>günlük-seçenekleri</varname> kullanılarak ext3 günlük dosyası oluşturulur. Günlük seçenekleri virgül ile ayrılarak ve herbirinin değeri “=” işareti kullanılarak belirtilirler. Desteklenen günlük seçenekleri:
+        </para><para><glosslist><glossentry>
+      <glossterm><command>size=</command><varname>günlük-boyu</varname> </glossterm>
+      <glossdef><para>Dosya sisteminin içinde boyu MB cinsinden belirtilen günlük dosyasını oluşturur. Bu dosyanın boyutu 1024 dosya sistemi bloğundan daha küçük olamaz (örnek: şayet 1k’lık bloklar kullanmışsanız en azından 1 MB’lik; 4k’lık bloklar kullanmışsanız en azından 4MB’lik günlük dosyası oluşturmalısınız). Ayrıca bu dosya 102400 dosya sistemi bloğundan büyük olamaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>device=</command><varname>dış-günlük-aygıtı </varname></glossterm>
+      <glossdef><para>Başka bir aygıt üzerindeki jurnal dosyasının kullanılması sağlanır. Bu aygıt üzerindeki günlük dosyası daha önce aşağıdaki gibi oluşturulmuş olmalıdır:
+        </para><para>
+<screen><command>mke2fs</command> -O günlük-aygıtı dış-günlük-dosyası</screen>
+        </para><para><varname>dış-günlük-dosyası</varname>, oluşturulacak yeni dosya sistemi ile aynı blok boyunda olmalıdır.
+        </para><para><varname>dış-günlük-aygıtı</varname> olarak doğrudan bir aygıt ismi belirtmek yerine, <command>LABEL=</command><varname>etiket</varname> veya <command>UUID=</command><varname>uuid</varname> de tanımlanabilir. Bu yöntemle, günlük dosyasının başlangıçındaki ext2 süperbloğunda saklanan <varname>etiket</varname> veya <varname>uuid</varname>’ye göre konumlanan dış aygıt atanmış olur. Bir günlük aygıtının <varname>etiket</varname> veya <varname>uuid</varname>’sini görebilmek için <link linkend="tr-man8-dumpe2fs"/>’i kullanabilirsiniz. Ayrıca, <link linkend="tr-man8-tune2fs"/>'in <command>-L</command> seçeneğine de bakınız.
+        </para></glossdef>
+      </glossentry></glosslist></para><para>Bir dosya sistemi için <command>boyut</command> ve <command>aygıt</command> seçeneklerinin ikisi birden belirtilmez. Sadece  birisi belirtilebilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-l </command><varname>dosyaismi</varname></glossterm>
+      <glossdef><para>İsmi <varname>dosyaismi</varname> ile belirtilen bozuk blokarın listesini içeren dosyayı okur. Bu listede bulunan bozuk blokların boyu, <command>mke2fs</command> ile kullandığınız blok boyu ile aynı olmak zorundadır. Bir dosya sistemini biçimlemeden önce bozuk blok sınaması için <command>mke2fs</command>’nin <command>–c</command> seçeneğini kullanmak daha kolay ve daha az baş ağrıtıcı olabilir. Böylece <command>mke2fs</command>, <command>badblocks</command> uygulamasına daima doğru parametreleri geçebilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-L </command><varname>etiket</varname></glossterm>
+      <glossdef><para>Dosya sistemine bir etiket atar.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-m </command><varname>yedek-blok-yüzdesi</varname></glossterm>
+      <glossdef><para>Süper kullanıcı için ayrılacak blokların yüzdesini ayarlar. Öntanımlı değer %5’dir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-n</command></glossterm>
+      <glossdef><para>Dosya sistemi oluşturulmaz, sadece işlemleri gösterir, Yapsaydık ne olurdu sorusuna cevap bulmak için en uygun yoldur. Bu seçenek, belirli bir dosya sistemi için, yedek süper blokların yerini tespit etmek için kullanılır, bunun için dosya sisteminin ilk oluşturulması esnasında kullanılan <command>mke2fs</command> parametreleri kullanılır (tabii ki <command>-n</command> seçeneği eklenerek).
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-N </command><varname>düğüm-sayısı</varname></glossterm>
+      <glossdef><para>Düğüm boyuna göre hesaplanmış düğüm sayısı yerine bu seçenekle toplam dosya düğümü sayısı belirtilebilir. Bu seçenek, kullanıcının istediği değeri doğrudan atamasını sağlar.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-o </command><varname>işletim-sistemi</varname></glossterm>
+      <glossdef><para>Dosya sisteminin "creator os" alanının öntanımlı değeri yerine yazılacak değer.Normalde bu değer öntanımlı olarak <command>mke2fs</command> uygulamasının üzerinde çalıştığı işletim sistemine ayarlıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-O </command><varname>özellik</varname><literal>[,...]</literal></glossterm>
+      <glossdef><para>Dosya sistemini verilen özellikler (dosya sistemi seçenekleri) ile oluşturur. Öntanımlı olarak açık olan özelikler ‘^’ sembolü önek olarak kullanmak sureti ile kapatılabilir. Gerçekte, <command>mke2fs</command> Linux 2.2 veya daha yeni bir sistem üzerinde çalışıyorsa, dosya sistemi özeliklerinde <command>sparse_super</command> ve <command>filetype</command> özellikleri öntanımlı olarak etkin duruma getirilir (<varname>işletim-sistemi</varname> olarak Hurd belirtilmemişse). Linux 2.2 öncesi çekirdekli bir yere bağlanmış dosya sistemleri veya diğer çekirdekler <command>–O none</command> seçeneği ile oluşturulmalıdır.  Böylece, <command>mke2fs</command>’nin üzerinde çalıştığı sistem bu özelliği desteklese bile, bu özellik devre dışı bırakılmış olur.
+      </para><para>Desteklenen dosya sistemi özellikleri şunlardır:
+      </para><para><glosslist><glossentry>
+      <glossterm><command>sparse_super</command></glossterm>
+      <glossdef><para>Büyük dosya sistemlerinde yer tasarrufu sağlayabilmek için daha az yedek süperblok oluşturulmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>filetype</command></glossterm>
+      <glossdef><para>Dizin girdilerinde dosya türü bilgilerinin saklanmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>has_journal</command></glossterm>
+      <glossdef><para><command>-j</command> seçeneğinin yaptığı gibi bir ext3 günlük dosyası oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>journal_dev</command></glossterm>
+      <glossdef><para>Bir ext2 dosya sistemi yerine, verilen aygıt üzerinde bir dış ext3 günlük dosyası oluşturur. Bu dosyanın blok boyu günlükleyeceği dosya sisteminin blok boyu ile aynı olmalıdır.
+        </para></glossdef>
+      </glossentry></glosslist>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossdef><para>Sessiz çalışma. <command>mke2fs</command>’nin bir betik içinden çalıştırıldığı durumlar için oldukça uygundur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r </command><varname>ds-sürümü</varname></glossterm>
+        <glossdef><para>Yeni dosya sistemi için dosya sistemi sürümünü düzenler. Sadece 1.2 çekirdekleri 0 sürümü dosya sistemlerini desteklemektedir. Öntanımlı olarak 1 sürümü dosya sistemleri oluşturulur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R </command><varname>raid-seçenekleri</varname></glossterm>
+        <glossdef><para>Dosya sistemi için RAID seçeneklerini düzenler. Bu seçenekler virgül ile ayrılarak ve herbirinin değeri “=” işareti kullanılarak belirtilirler. Desteklenen seçenekler şunlardır:
+        </para><para><glosslist><glossentry>
+      <glossterm><command>stride=</command><varname>ayırma-boyu</varname> </glossterm>
+      <glossdef><para>Her bir elemanı <varname>ayırma-boyu</varname> blokluk bir RAID dizisi olarak dosya sistemini yapılandırır.
+        </para></glossdef>
+      </glossentry></glosslist>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossdef><para>Kurtarma amacıyla sadece süperblok ve grup tanımlayıcılar yeniden yazılır. Bütün süperbloklar ve yedek süperblokların zarar gördüğü durumlar için faydalıdır ve last-ditch kurtarma yöntemi tercih edilir. Bu seçenek ile <command>mke2fs</command> süperblokları ve grup tanımlayıcılarını tekrar ilklendirir, düğüm tablosuna, blok ve düğüm biteşlemine dokunmaz. Bu seçeneğin kullanılmasında sonra <command>e2fsck</command> derhal çalıştırılmalıdır. Herhangi bir verinin kurtarılma garantisi olmadığını unutmayınız. Bu seçeneği kullanırken doğru blok boyu kullanmak kritik derecede önemlidir. Aksi taktirde kurtarma işleminin hiç şansı olmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T </command><varname>ds-türü</varname></glossterm>
+        <glossdef><para>Dosya sisteminin ne amaçla kullanılacağını belirtir, böylece <command>mke2fs</command>’nin en uygun dosya sistemi parametrelerini seçmesi sağlanır. Desteklenen dosya sistemi türleri şunlardır:
+        </para><para><glosslist><glossentry>
+      <glossterm><command>news</command></glossterm>
+      <glossdef><para>Her 4kB'lık blok için bir düğüm.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>largefile</command></glossterm>
+      <glossdef><para>Her 1MB'lık blok için bir düğüm.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>largefile4</command></glossterm>
+      <glossdef><para>Her 4MB'lık blok için bir düğüm.
+        </para></glossdef>
+      </glossentry></glosslist>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>Ayrıntılı bir çıktı verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossdef><para><command>mke2fs</command>’nin sürüm numarasını görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+<command>mke2fs</command>’nin bu sürümü Theodore Ts’o <email>tytso@mit.edu</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>BÖRTÜ BÖCEK</title>
+    <para><command>mke2fs</command>, <command>-f</command> seçeneğini kabul eder ama ext2 dosya sistemi henüz adımlamayı desteklemediği için bu seçeneği yok sayar. Başka sorunlar da olabilir. Lütfen bunları yazara bildiriniz.</para>
+  </refsect1><refsect1><title>TEMİNİ</title><para>
+<command>mke2fs</command>, e2fsprogs  paketinin bir parçasıdır ve şu adresten temin edilebilir: <ulink url="http://e2fsprogs.sourceforge.net/"/>.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-badblocks"/>,  <link linkend="tr-man8-dumpe2fs"/>, <link linkend="tr-man8-e2fsck"/>, <link linkend="tr-man8-tune2fs"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+

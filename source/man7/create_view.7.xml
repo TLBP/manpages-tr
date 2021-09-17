@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_view.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_view">
+ <refmeta>
+  <refentrytitle>CREATE VIEW</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE VIEW</refname>
+  <refpurpose>yeni bir sanal tablo tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [ <command>OR REPLACE</command> ] <command>VIEW</command> <emphasis>isim</emphasis> [ ( <emphasis>sütun_ismi</emphasis> [, ...] ) ] <command>AS</command> <emphasis>sorgu</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE VIEW</command> bir sorgudan yeni bir sanal tablo tanımlar. Sanal tablo fiziken mevcut değildir. Her seferinde sorgu yeniden çalıştırılıp sanal tablo oluşturulur.
+  </para><para>
+<command>CREATE OR REPLACE VIEW</command> de hemen hemen aynıdır, farklı olarak, aynı isimde bir sanal tablo zaten varsa, yeniden oluşturulur. Böyle bir sanal tabloyu yeni bir sorgudan yeniden, sadece aynı sütun isimleri ve veri türleriyle oluşturabilirsiniz.
+  </para><para>
+<command>CREATE VIEW myschema.myview ...</command> gibi bir şema nitelemeli isim kullanırsanız, sanal tablo belirtilen şemada oluşturulur. Aksi takdirde, o anki şemada oluşturulur. Sanal tablonun ismi aynı şemada bulunan tablo, kayıt listesi, indeks ve sanal tablo isimlerinden farklı olmalıdır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Oluşturulacak sanal tablonun ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>sütun_ismi</replaceable></term>
+    <listitem><para>Sanal tablonun isteğe bağlı sütun isimleri. Belirtilmezse, sütun isimleri sorgudan saptanır.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>sorgu</replaceable></term>
+    <listitem><para>Sanal tablonun satır ve sütunlarının elde edileceği sorgu (bu bir <command>SELECT</command> cümlesidir).
+     </para><para>
+Sorgular hakkında bilgi edinmek için <link linkend="tr-man7-select" xreflabel="SELECT"/> kılavuz sayfasına bakınız.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Şimdilik, sanal tablolar salt okunurdur: sistem, veri girme, veri silme ve güncelleme işlemlerine izin vermez. Güncellenebilir bir sanal tabloyu, diğer tablolardaki veri girme, veri silme veya güncelleme işlemlerini yeniden yazan kurallar oluşturarak elde edebilirsiniz. Daha fazla bilgi için <link linkend="tr-man7-create_rule" xreflabel="CREATE RULE"/> kılavuz sayfasına bakınız.
+   </para><para>
+Sanal tabloyu kaldırmak için <command>DROP VIEW</command> kullanın.
+   </para><para>
+Sanal tablonun sütunlarının isim ve veri türlerinin sizin istediğiniz şekilde atanmasını sağlamalısınız. Örneğin,
+  </para><para>
+<programlisting>    CREATE VIEW vista AS SELECT 'Hello World';
+</programlisting>
+  </para><para>
+şeklinde bir cümle iki bakımdan kötüdür: sütun isimleri için <literal>?column?</literal>, sütun veri türleri için ise <type>unknown</type> öntanımlıdır. Bu cümleyi şöyle yazarsanız, sanal tablodan ne isteyeceğinizi de bilirsiniz:
+  </para><para>
+<programlisting indent="4">CREATE VIEW vista AS SELECT text 'Hello World' AS hello;
+</programlisting>
+   </para><para>
+Sanal tablonun oluşturulduğu tablolara erişim, sanal tablonun sahibine göre belirlenir. Ancak, sanal tabloda çağrılan işlevler, doğrudan sorgudan çağılmış gibi ele alınır. Bu yüzden, sanal tablo kullanıcısının sanal tablo tarafından çağrılan tüm işlevleri çağıracak izinlerinin olması gerekir.
+   </para></refsect1><refsect1><title>Örnekler</title><para>
+Tamamı komedi filmlerinden oluşan bir sanal tablonun oluşturulması:
+  </para><para>
+<programlisting indent="4">CREATE VIEW komediler AS
+    SELECT *
+    FROM filmler
+    WHERE cinsi = 'Komedi';
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardı <command>CREATE VIEW</command> deyimi için bazı ek yetenekler belirtir:
+  </para><para>
+<synopsis><command>CREATE VIEW</command> <emphasis>isim</emphasis> [ ( <emphasis>sütun</emphasis> [, ...] ) ]
+    <command>AS</command> sorgu
+    [ <command>WITH</command> [ <command>CASCADE</command> | <command>LOCAL</command> ] <command>CHECK OPTION</command> ]
+</synopsis>
+  </para><para>
+Burada isteğe bağlı deyimler şunlardır:
+  </para><para>
+   <variablelist><varlistentry>
+      <term><command>CHECK OPTION</command></term>
+      <listitem><para>Güncellenebilir sanal tablolar yapar. Sanal tablo üzerindeki tüm <command>INSERT</command> ve <command>UPDATE</command> komutlarının sanal tablo tanımlama koşullarına uygunluğu sınanacaktır (yani, yeni verinin sanal tablo üzerinden görünür olması gerekir). Sınama başarısız olursa, güncelleme reddedilecektir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>LOCAL</command></term>
+      <listitem><para>Sanal tablonun kendi bütünlüğü sınanır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>CASCADE</command></term>
+      <listitem><para>Sanal tablonun diğer sanal tablolarla bütünlük içinde olup olmadığı sınanır. Ne <command>CASCADE</command> ne de <command>LOCAL</command> belirtilmişse, <command>CASCADE</command> öntanımlıdır.
+      </para></listitem></varlistentry></variablelist>
+  </para><para>
+<command>CREATE OR REPLACE VIEW</command> ise bir <productname>PostgreSQL</productname> oluşumudur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-drop_view" xreflabel="DROP VIEW"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

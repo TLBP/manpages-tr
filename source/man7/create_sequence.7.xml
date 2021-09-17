@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_sequence.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_sequence">
+ <refmeta>
+  <refentrytitle>CREATE SEQUENCE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE SEQUENCE</refname>
+  <refpurpose>yeni bir kayıt listesi üreteci tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [ <command>TEMPORARY</command> | <command>TEMP</command> ] <command>SEQUENCE</command> <emphasis>isim</emphasis> [ <command>INCREMENT</command> [ <command>BY</command> ] <emphasis>artış</emphasis> ]
+    [ <command>MINVALUE</command> <emphasis>asgarideğer</emphasis> | <command>NO MINVALUE</command> ]
+    [ <command>MAXVALUE</command> <emphasis>azami_değer</emphasis> | <command>NO MAXVALUE</command> ]
+    [ <command>START</command> [ <command>WITH</command> ] <emphasis>başlangıç</emphasis> ]
+    [ <command>CACHE</command> <emphasis>kayıt_sayısı</emphasis> ] [ [ <command>NO</command> ] <command>CYCLE</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE SEQUENCE</command> yeni bir kayıt listesi üreteci oluşturur. Bunu <replaceable>isim</replaceable> isimli yeni bir özel tek satırlık tabloyu oluşturarak ve ilklendirirerek yapar. Komutu kullanan üretecin sahibi olur.
+  </para><para>
+Bir şema ismi verilmişse, kayıt listesi belirtilen şemada oluşturulur. Aksi takdirde, o anki şemada oluşturulur. Geçici kayıt listeleri özel bir şema içinde mevcuttur, dolayısıyla bir geçici kayıt listesi oluştururken bir şema ismi belirtilmemelidir. Satır listesinin ismi aynı şemadaki başka bir kayıt listesi, tablo, indeks ya da sanal tablo ile çakışmayacak şekilde seçilmelidir.
+  </para><para>
+Bir kayıt listesi oluşturulduktan sonra, üzerinde <command>nextval</command>, <command>currval</command> ve <command>setval</command> işlevleri ile işlem yapabilirsiniz. Bu işlevlerin açıklamalarını <ulink url="http://belgeler.org/uygulamalar/pgsql/pgsql-functions-sequence.html"/> adresinde bulabilirsiniz.
+  </para><para>
+Bir kayıt listesini doğrudan göncelleyemezsiniz, bir kayıt listesinin o anki durumunu ve parametrelerini incelemek için şöyle bir sorgu kullanabilirsiniz:
+  </para><para>
+<programlisting indent="4">SELECT * FROM <replaceable>isim</replaceable>;
+</programlisting>
+  </para><para>
+Kısmen, kayıt listesinin <literal>last_value</literal> alanı herhangi bir oturum tarafından ayrılmış son değeri gösterir. (Şüphesiz, başka oturumlar o an <command>nextval</command> çağrıları yapıyorsa, aldığınız değer atıl olmuş olabilir.)
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><command>TEMPORARY</command> veya <command>TEMP</command></term>
+    <listitem><para>Belirtilmişse, kayıt listesi nesnesi sadece bu oturum için oluşturulur ve oturum sonunda silinir. Aynı isimdeki kalıcı kayıt listelerinin varlığı durumunda, bunlara şema nitelemeli isimlerle erişilmedikçe, geçici şemanın varlığı durumunda görünür olmazlar.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Oluşturulacak kayıt listesinin ismi (şema nitelemeli olabilir).
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>artış</replaceable></term>
+    <listitem><para>İsteğe bağlı <literal>INCREMENT BY </literal><replaceable>artış</replaceable> deyimi,  yeni değeri oluşturmak üzere o anki sıra değerine eklenecek değeri belirtmek için kullanılır. Bir pozitif değer bir artan değerli liste, negatif bir değer ise azalan değerli bir liste oluşturacaktır. Öntanımlı değer 1'dir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>asgarideğer</replaceable></term>
+    <term><command>NO MINVALUE</command></term>
+    <listitem><para>İsteğe bağlı <command>MINVALUE </command><replaceable>asgarideğer</replaceable> deyimi üretilen bir kayıt listesinin asgari sıra değerini belirlemekte kullanılır. Belirtilmezse ya da <command>NO MINVALUE</command>  belirtilirse, öntanımlı sıra değeri kullanılır. Öntanımlı değer artan değerli bir liste için 1, azalan değerli bir liste için 2<superscript>63</superscript>-1'dir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>azami_değer</replaceable></term>
+    <term><command>NO MAXVALUE</command></term>
+    <listitem><para>İsteğe bağlı <command>MAXVALUE </command><replaceable>azami_değer</replaceable> deyimi üretilen bir kayıt listesinin azami sıra değerini belirlemekte kullanılır. Belirtilmezse ya da <command>NO MAXVALUE</command>  belirtilirse, öntanımlı sıra değeri kullanılır. Öntanımlı değer artan değerli bir liste için 2<superscript>63</superscript>-1, azalan değerli bir liste için -1'dir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>başlangıç</replaceable></term>
+    <listitem><para>İsteğe bağlı <command>START WITH </command><replaceable>başlangıç</replaceable>  deyimi kayıt listesinin başlangıcını belirtmek için kullanılır. Öntanımlı başlangıç değeri, artan değerli bir liste için <replaceable>asgarideğer</replaceable>, azalan değerli bir liste için <replaceable>azami_değer</replaceable>'dir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>satır_sayısı</replaceable></term>
+    <listitem><para>İsteğe bağlı <command>CACHE </command><replaceable>satır_sayısı</replaceable> deyimi daha hızlı erişim için sıralı listeyi saklamak üzere bellekte yer ayrılmasını ve ilklendirilmesini sağlar. En az değer 1'dir ve bu ayrıca öntanımlıdır.
+     </para></listitem></varlistentry><varlistentry>
+    <term><command>CYCLE</command></term>
+    <term><command>NO CYCLE</command></term>
+    <listitem><para><command>CYCLE</command> seçeneği, artan bir değerli bir listede <replaceable>azami_değer</replaceable>, azalan değerli bir listede <replaceable>asgarideğer</replaceable> aşıldığında tekrar başlangıca dönülmesini sağlar.
+     </para><para>
+<command>NO CYCLE</command> belirtilmişse, bir <command>nextval</command> çağrısı bir listenin sonunda yapıldığında bir hata döndürecektir. Ne <command>CYCLE</command> ne de <command>NO CYCLE</command> belirtilmişse, <command>NO CYCLE</command> öntanımlıdır.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Bir kayıt listesini silmek için <command>DROP SEQUENCE</command> kullanın.
+  </para><para>
+Satır listeleri <type>bigint</type> aritmetiğine tabidirler, dolayısıyla listedeki satır sayısı sekiz baytlık tamsayı genişliğini (-9223372036854775808 .. 9223372036854775807) aşamaz. Bazı eski platformlarda sekiz baytlık tamsayılara derleyici desteği olmadığından mecburen <type>integer</type> aritmetiği (-2147483648 .. +2147483647 aralığı) kullanılır.
+  </para><para>
+Çok sayıda oturum tarafından ortaklaşa kullanılacak bir kayıt listesi için  <replaceable>kayıt_sayısı</replaceable> 1'den büyük seçilirse, umulmadık sonuçlar ortaya çıkabilir. Herhangi bir oturum bu sıralama değişkenine eriştiği her bir defa için bir dizi değere yer ayırıp, orada saklar ve sıralama nesnesine ait  <literal>last_value</literal> değerini bir artırır. Bundan sonraki <replaceable>kayıt_sayısı</replaceable>-1 defalık erişimde mevcut kayıt listesine dokunmadan değerler için önceden ayrılmış yerler kullanılır. Ayrılmış ama kullanılmamış yerler var ise bunlar boşa gider ve oturum bittiğinde kayıt listesinde boşluklar kalmış olur.
+  </para><para>
+Bunun yanında farklı oturumlar için farklı sıralama değerleri belirlenmesi garanti edilmiş olmasına rağmen bütün oturumlar dikkate alındığında bunlar bir sıra takip etmeyebilir. Örneğin, <replaceable>kayıt_sayısı</replaceable> için 10 belirtilmiş olsun, A oturumu 1 den 10 a kadar sıra değeri ayırmış ve <function>nextval</function>=1 döndürmüş olsun. Daha sonra B oturumu da 11 den 20 ye kadar sıra değeri ayırmış olsun ve A oturumunun değer döndürmesini beklemeden <function>nextval</function>=11 döndürmüş olsun. Burada, <replaceable>kayıt_sayısı</replaceable>=1 değeri için döndürülen <function>nextval</function> değerleri bir sıra takip ederken 1'den büyük <replaceable>kayıt_sayısı</replaceable> değerleri için bu garanti edilemez, sadece üretilen değerlerin birbirinden farklı değerler olacakları garanti edilebilir. Ayrıca <literal>last_value</literal> değeri de henüz <function>nextval</function> tarafından döndürülmüş olmasa da herhangi bir oturum tarafından ayrılmış son değeri içerir.
+  </para><para>
+Diğer bir önemli husus, ayrılarak belleğe alınmış değerler kullanılana kadar üzerinde <function>setval</function> uygulanan bir oturumun diğer oturumlar tarafından uyarılmayacağıdır.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+101'den başlayacak ve artan sıralı olacak <literal>serial</literal> isimli kayıt listesininin oluşturulması:
+   </para><para>
+<programlisting indent="4">CREATE SEQUENCE serial START 101;
+</programlisting>
+  </para><para>
+Bir kayıt listesinden sonraki kaydın seçilmesi:
+  </para><para>
+<programlisting indent="4">SELECT nextval('serial');
+
+nextval
+---------
+    114
+</programlisting>
+  </para><para>
+Bu kayıt listesinin bir <command>INSERT</command> cümlesinde kullanılması:
+  </para><para>
+<programlisting indent="4">INSERT INTO distributors VALUES (nextval('serial'), 'nothing');
+</programlisting>
+  </para><para>
+Kayıt listesi değerinin bir <command>COPY FROM</command> sonrasında güncellenmesi:
+  </para><para>
+<programlisting indent="4">BEGIN;
+COPY distributors FROM 'input_file';
+SELECT setval('serial', max(id)) FROM distributors;
+END;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE SEQUENCE</command>, <acronym>SQL:2003</acronym>'de belirtilmiştir. <productname>PostgreSQL</productname> aşağıdaki durumlar dışında standartla uyumludur:
+   <itemizedlist><listitem><para>
+Standardın <literal>AS &lt;veri türü&gt;</literal> ifadesi desteklenmemektedir.
+   </para></listitem><listitem><para>
+Sonraki değerin sağlanması, standardın <command>NEXT VALUE FOR</command> ifadesi yerine <function>nextval()</function> işlevi kullanılarak yapılır.
+   </para></listitem></itemizedlist>
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Mart 2005
+</para></refsect1>
+</refentry>
+
+

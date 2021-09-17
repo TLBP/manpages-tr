@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: base64.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-base64">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>base64</refentrytitle>
+    <refmiscinfo class="header">FSF</refmiscinfo>
+    <refmiscinfo class="domain">GNU coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>base64</refname>
+    <refpurpose>veriyi base64 kodlar veya kodunu çözer ve standart çıktıya basar</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>base64 </command><emphasis>seçenekler dosya</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+   <command>base64</command>, <varname>dosya</varname> veya standart girdiyi base64 kodlar veya kodunu çözer ve standart çıktıya basar.
+    </para><para>
+     <glosslist><glossentry>
+       <glossterm><command>-w</command></glossterm>
+       <glossterm><command>--wrap=</command><varname>sütun</varname></glossterm>
+       <glossdef><para>Kodlanan satırları <varname>sütun</varname> karakterle sınırlar (öntanımlı 76).  Satır genişliğini sınırlamayı iptal etmek için 0 kullanınız.
+</para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>-d</command></glossterm>
+       <glossterm><command>--decode</command></glossterm>
+       <glossdef><para>Verinin kodunu çözer.</para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>-i</command></glossterm>
+       <glossterm><command>--ignore-garbage</command></glossterm>
+       <glossdef><para>Kodu çözerken alfabetik olmayan karakterleri yoksayar.</para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Bu yardım metnini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist></para><para>
+<varname>dosya</varname> belirtilmezse veya dosya olarak - verilirse standart girdi okunur.
+    </para><para>
+Veri RFC 3584'te açıklandığı gibi base64 alfabesine göre kodlanır. Kod çözme öntanımlı olarak uyumlu girdi gerektirir. Kodlanmış akımı içindeki alfabetik olmayan karakterlerden (örneğin satırsonu karakterleri) kurtarmak için <command>--ignore-garbage</command> seçeneğini kullanınız.
+</para></refsect1><refsect1><title>YAZAN</title><para>
+    Simon Josefsson tarafından yazılmıştır.
+    </para></refsect1><refsect1>
+    <title>GERİBİLDİRİM</title><para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>base64</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>base64</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils base64</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>
+

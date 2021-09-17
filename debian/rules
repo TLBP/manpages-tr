@@ -1,0 +1,104 @@
+#! /usr/bin/make -f
+# Stolen from the manpages Debian package and heavily hacked to accomodate
+# manpages-tr's needs by Daniel Kobras <kobras@debian.org>.
+
+#export DH_VERBOSE=1
+
+MIRRORURL:=http://ftp.de.debian.org/debian
+CONTENTS_ARCHLIST:=amd64 i386
+CONTENTS=$(foreach arch,$(CONTENTS_ARCHLIST),/tmp/manpages-tr.build/Contents-$(arch).gz)
+
+HTTP_GET=$(shell which curl)
+ifeq (,$(HTTP_GET))
+HTTP_GET=$(shell which wget)
+endif
+ifeq (,$(HTTP_GET))
+HTTP_GET=$(shell which GET)
+endif
+
+#
+# Convenience rules. Never used in an automated build. Call by hand before
+# building a new release.
+#
+
+/tmp/manpages-tr.build/Contents-%:
+ifeq (,$(HTTP_GET))
+	@echo "Cannot retrieve Contents files without curl, wget, or GET"; \
+	     exit 1
+else
+	@echo "Retrieving up-to-date $(CONTENTS)"
+	test -d /tmp/manpages-tr.build || mkdir /tmp/manpages-tr.build
+	cd /tmp/manpages-tr.build; \
+		$(HTTP_GET) "$(MIRRORURL)/dists/unstable/`basename $@`"
+endif
+
+debian/manpages-tr.prune: debian/manpages-tr.prune.in $(CONTENTS)
+	cp debian/manpages-tr.prune.in debian/manpages-tr.prune
+	zgrep -vhE '[^,]doc/manpages-tr?$$' \
+	           /tmp/manpages-tr.build/Contents-*.gz | \
+		grep -E '/man/tr(\.[^/]+)?/' | while read file rest; do \
+			echo "$${file%.gz}"; \
+		done | sort -u >> debian/manpages-tr.prune
+
+update-prune: debian/manpages-tr.prune
+
+#
+# Standard rules to follow
+#
+
+build: 
+# Builds the binary package.
+# empty
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp install-stamp
+	-rm -rf *~ *.orig "#*" debian/manpages-tr debian/*~ debian/files* source/xml2man
+	-rm -rf tr/*
+	dh_clean
+
+binary-arch: build
+
+binary-indep: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs 
+	$(MAKE) deb-build
+#	$(MAKE) prefix=`pwd`/debian/manpages-tr/usr/share install
+#	Better use dh_installman, which has the nice feature of turning
+#	all the .so-links to proper symlinks.
+#	dh_installman `find tr/man? -maxdepth 1 -type f`
+	$(MAKE) deb-install DESTDIR=$(CURDIR)/debian/manpages-tr
+#	Uh-uh. Our man pages do not contain a language code, so dh_installman
+# 	treats them as English. Move to proper dir now!
+#	mv debian/manpages-tr/usr/share/man debian/manpages-tr/usr/share/tr
+	dh_installdirs -A /usr/share/man
+#	mv debian/manpages-tr/usr/share/tr debian/manpages-tr/usr/share/man/
+	grep -v '^#' debian/manpages-tr.prune | while read exists crap; do \
+		exists=`echo "$$exists" | \
+		        sed -e 's,usr/share/man/tr\.[^/]\+,usr/share/man/tr,'`;\
+		test -f `pwd`/debian/manpages-tr/"$$exists" || \
+		test -L `pwd`/debian/manpages-tr/"$$exists" && \
+		rm -f `pwd`/debian/manpages-tr/"$$exists" || \
+		true; \
+	done
+	dh_movefiles --sourcedir=debian/manpages-tr
+	while read dir; do \
+		test -d debian/manpages-tr/$$dir && \
+		rmdir debian/manpages-tr/$$dir || \
+		true; \
+	done < debian/manpages-tr.files
+	dh_installdocs 
+	dh_installchangelogs 
+	dh_compress
+	dh_fixperms
+	dh_link
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+
+.PHONY: binary binary-arch binary-indep clean update-prune

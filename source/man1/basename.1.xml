@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: basename.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-basename">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>basename</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>basename</refname>
+    <refpurpose>dosya isimlerinden dizin ve soneki ayırır</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>basename </command><emphasis>isim </emphasis>[<emphasis>sonek</emphasis>]
+<command>basename </command><emphasis>seçenekler</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1>
+  <title>AÇIKLAMA</title><para>
+Dizin bileşenlerini silerek <varname>isim</varname>'i basar. Şayet belirtilmişse, dosya <varname>sonek</varname>ini de kaldırır.
+    </para><para>
+    <glosslist><glossentry>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Bu yardım metnini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+   </refsect1><refsect1><title>ÖRNEKLER</title>
+    <para>
+     <glosslist><glossentry>
+       <glossterm><command>basename /usr/bin/sort</command></glossterm>
+       <glossdef><para>"sort" çıktılanır.</para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>basename include/stdio.h .h</command></glossterm>
+       <glossdef><para>"stdio" çıktılanır.</para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>YAZAN</title><para>
+Bilinmiyor.
+    </para></refsect1><refsect1>
+    <title>GERİBİLDİRİM</title><para>
+Bir yazılım hatası bulursanız, lütfen <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para></refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man1-dirname"/>, <link linkend="tr-man1-readlink"/>
+   </para><para>
+<command>basename</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>basename</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils basename</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+   <para>Yalçın Kolukısa <email>yalcink01 (at) yahoo .com</email>, Mart 2004</para>
+    <para>Kasım 2006'da güncellenmiştir.</para>
+  </refsect1>
+</refentry>
+

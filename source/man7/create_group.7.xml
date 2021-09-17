@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_group.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_group">
+ <refmeta>
+  <refentrytitle>CREATE GROUP</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE GROUP</refname>
+  <refpurpose>yeni bir kullanıcı grubu tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE GROUP</command> <emphasis>isim</emphasis> [ [ <command>WITH</command> ] <emphasis>seçenek</emphasis> [ ... ] ]
+
+burada <emphasis>seçenek</emphasis>:
+
+     <command>SYSID</command> <emphasis>gid</emphasis>
+   | <command>USER</command>  <emphasis>kull_ismi</emphasis> [, ...]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE GROUP</command> yeni bir kullanıcı grubu tanımlar. Bu komutu çalıştırabilmek için veritabanının ayrıcalıklı kullanıcısı olmalısınız.
+  </para><para>
+hem kullanıcılar hem de gruplar veritabanı kümesi seviyesinde tanımlanabilir, böylece küme içindeki tüm veritabanlarında geçerli olurlar.
+  </para><para>
+Bir grup üyeliğini değiştirmek için <link linkend="tr-man7-alter_group" xreflabel="ALTER GROUP"/>, bir grubu kaldırmak için <link linkend="tr-man7-drop_group" xreflabel="DROP GROUP"/> kullanın.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Grubun ismi.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>gid</replaceable></term>
+      <listitem><para>Yeni grup için bir <productname>PostgreSQL</productname> grup kimliği belrtmek için kullanılır. Bu normalde gereksizdir ama bazı nesnelerin izinlerine göre bir grubu yeniden oluşturmak isterseniz yararlı olabilir.
+       </para><para>
+Eğer belirtilmezse atanmış enyüksek grup kimliğine (en küçük grup kimliği 100 kabulüyle) bir eklenerek öntanımlı olarak kullanılacaktır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>kull_ismi</replaceable></term>
+      <listitem><para>Bu gruba dahil edilecek kullanıcıların isimleri. Kullanıcılar mevcut olmalıdır.
+      </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+Boş bir grup oluşturmak için:
+  </para><para>
+<programlisting>    CREATE GROUP staff;</programlisting>
+  </para><para>
+Üyeleri olan bir grup oluşturmak için:
+  </para><para>
+<programlisting>    CREATE GROUP marketing WITH USER jonathan, david;</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>CREATE GROUP</command> diye bir deyim yoktur. Roller grup fikriyle benzerdir.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_group" xreflabel="ALTER GROUP"/>,
+<link linkend="tr-man7-drop_group" xreflabel="DROP GROUP"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

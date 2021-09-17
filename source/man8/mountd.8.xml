@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: mountd.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-mountd">
+<remark>.\" Copyright (C) 1999 Olaf Kirch &lt;okir (at) monad.swb.de>
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>rpc.mountd</refentrytitle>
+    <refmiscinfo class="date">25 Ağustos 2000</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>rpc.mountd</refname>
+    <refpurpose>NFS bağlama süreci</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>/usr/sbin/rpc.mountd </command>[<emphasis>seçenekler</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<userinput>rpc.mountd</userinput>, NFS dosya sistemi bağlama protokolünü yürütür. Bir NFS alıcısına bir MOUNT isteği geldiğinde, isteği ağ kullanımına tahsis edilmiş dosya sistemlerinin listesinden kontrol eder. Şayet istemci dosya sistemine bağlanmak için gerekli yetkiye sahipse, <userinput>rpc.mountd</userinput> istenen dizin için bir dosya tanımlayıcı oluşturur ve bunu istemciye döndürür.
+    </para><para>
+<userinput>rpc.mountd</userinput> sunucusu, NFS istemcileri tarafından yapılan dosya sistemi bağlama isteklerini gerçekleştirmek için ihtiyaç duyulan bir servistir.
+    </para>
+  <refsect2><title>NFS Dosya Sistemlerinin İhracı</title>
+    <para>
+Dosya sistemlerini NFS istemcileri için kullanılabilir hale getirmeye <wordasword>dosya sisteminin ihracı</wordasword> (exporting) denir.
+    </para><para>
+Dosya sistemleri ve istemci konakları, <userinput>/etc/exports</userinput> dosyası içinde listelenmeli ve her sistem açılışında <userinput>exportfs –a</userinput>  ile kullanıma açılmalıdır. <userinput>exportfs</userinput>(8) komutu, ihraç bilgilerini hem çekirdeğin NFS sunucu modülü hem de <userinput>rpc.mountd</userinput> süreci için kullanılabilir hale getirir.
+    </para><para>
+Ayrıca, dizinleri <userinput>exportfs</userinput>’nin <literal><emphasis>konak</emphasis>:/<emphasis>dizin</emphasis></literal> sözdizimini kullanarak da tek tek ihraç edebilirsiniz.
+    </para></refsect2>
+    <refsect2><title><filename>rmtab</filename> Dosyası</title>
+    <para>
+NFS servisinin kullanıcı seviyesi bölümü. Bir NFS sunucu tarafından alınan her bir bağlama isteği için <userinput>rpc.mountd</userinput>, <filename>/var/lib/nfs/rmtab</filename> dosyasına bir girdi ekler.  Bir ayırma isteği geldiğinde ise bu girdi silinir.
+    </para><para>
+Bununla birlikte, bu dosya çoğunlukla süs olarak durur. Birincisi, istemci <userinput>rpc.mountd</userinput>’nin <literal>UMOUNT</literal> yordamını çağırdıktan sonra bile dosya tanımlayıcısı kullanabilir olmaya devam edecektir. İkinci olarak, şayet bir istemci makina <userinput>rpc.mountd</userinput>’ye haber vermeksizin kapatılıp açılırsa, <filename>rmtab</filename> dosyasındaki eski girdi olduğu gibi kalacaktır.
+    </para></refsect2>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><userinput>-d </userinput><varname>şey</varname></glossterm>
+        <glossterm><userinput>--debug </userinput><varname>şey</varname></glossterm>
+        <glossdef><para><varname>şey</varname> için hata ayıklamayı açar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-F</userinput></glossterm>
+        <glossterm><userinput>--foreground</userinput></glossterm>
+        <glossdef><para>Önalanda çalışır (artalan süreci haline gelmez).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-f </userinput><varname>dosya</varname></glossterm>
+        <glossterm><userinput>--exports-file=</userinput><varname>dosya</varname> </glossterm>
+        <glossdef><para>Her bir bağlantı için uygulanacak parametreleri ve bu sunucunun hizmet vereceği istemcilerin listelendiği <filename>exports</filename> dosyasını tanımlar (ayrıntılı bilgi için bkz. <link linkend="tr-man5-exports"/>).  Öntanımlı olarak, ihraç bilgileri <filename>/etc/export</filename> dosyasından alınır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-h</userinput></glossterm>
+        <glossterm><userinput>--help</userinput></glossterm>
+        <glossdef><para>Kullanım iletisi gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-o </userinput><varname>num</varname></glossterm>
+        <glossterm><userinput>--descriptors </userinput><varname>num</varname> </glossterm>
+        <glossdef><para>Açık dosya tanımlayıcılarının sayısını sınırlar. Öntanımlı değer 256’dır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-N </userinput><varname>sürüm</varname></glossterm>
+        <glossterm><userinput>--no-nfs-version </userinput><varname>sürüm</varname></glossterm>
+        <glossdef><para>Bu seçenek kullanılarak, tercih edilmeyen NFS sürümü belirtilebilir. <userinput>rpc.mountd</userinput>'nin geçerli sürümü, NFS sürüm 2 ve sürüm 3’ü desteklemektedir. Şayet çekirdek modülü NFSv3 desteği olmadan derlenmiş ise, <userinput>rpm.mountd -–no-nfs-version 3</userinput> komutu kullanılmalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-n</userinput></glossterm>
+        <glossterm><userinput>--no-tcp</userinput></glossterm>
+        <glossdef><para>Bağlama işlemi için TCP kullanılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-P</userinput></glossterm>
+        <glossdef><para>Yoksayılır (unfsd ile uyumluluk??).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-p </userinput><varname>num</varname></glossterm>
+        <glossterm><userinput>--port </userinput><varname>num</varname></glossterm>
+        <glossdef><para><userinput>rpc.mountd</userinput>’yi <userinput>portmapper</userinput> tarafından atana rasgele bir port yerine, <varname>num</varname> ile belirtilen port üzerinden bağlanmaya zorlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-V </userinput><varname>sürüm</varname></glossterm>
+        <glossterm><userinput>--nfs-version </userinput><varname>sürüm</varname></glossterm>
+        <glossdef><para>Bu seçenek kullanılarak, tercih edilen NFS sürümü belirtilebilir. <userinput>rpc.mountd</userinput>'nin geçerli sürümü, NFS sürüm 2 ve sürüm 3’ü desteklemektedir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><userinput>-v</userinput></glossterm>
+        <glossterm><userinput>--version</userinput></glossterm>
+        <glossdef><para>Bağlama işlemi için TCP kullanılmaz.
+        </para></glossdef><userinput>rpc.mountd</userinput> sürüm bilgilerini gösterir ve çıkar.
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1><title>TCP_WRAPPERS DESTEĞİ</title>
+    <para>
+<userinput>rpc.mountd</userinput>’nin bu sürümü <userinput>tcp_wrapper</userinput> kütüphanesi tarafından
+korunmaktadır. Kullanılmasını mümkün kılmak istiyorsanız, <userinput>rpc.mountd</userinput>’ye istemci erişimi vermek zorundasınız. Örneğin, <filename>.bar.com</filename> alan adındaki istemcilerden erişimlere izin vermek için <filename>/etc/hosts.allow</filename> dosyasına şu satırı eklemelisiniz:
+    </para><para>
+<screen>mountd: .bar.com</screen>
+    </para><para>
+Süreç ismi olarak <userinput>mountd</userinput> kullanmalısınız (komutun ismi farklı olsa bile).
+    </para><para>
+Daha ayrıntılı bilgi için <link linkend="tr-man8-tcpd"/> ve <link linkend="tr-man5-hosts_access"/> kılavuz sayfalarına bakınız.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-exports"/>, <link linkend="tr-man8-exportfs"/>), <link linkend="tr-man8-nfsd"/>, <link linkend="tr-man8-rpc.rquotad"/>.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para><userinput>/etc/exports</userinput>, <userinput>/var/lib/nfs/xtab</userinput>.</para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Olaf Kirch, Bill Hawes, H. J. Lu, G. Allan Morris III ve diğerleri.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

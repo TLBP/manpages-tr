@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_conversion.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_conversion">
+ <refmeta>
+  <refentrytitle>CREATE CONVERSION</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE CONVERSION</refname>
+  <refpurpose>yeni bir karakter kümesi dönüşümü tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [<command>DEFAULT</command>] <command>CONVERSION</command> <emphasis>isim</emphasis>
+    <command>FOR</command> <emphasis>kaynak_kodlama</emphasis> <command>TO</command> <emphasis>hedef_kodlama</emphasis> <command>FROM</command> <emphasis>işlev_ismi</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE CONVERSION</command> yeni bir karakter kümesi dönüşümü tanımlar. Dönüşüm isimleri belli bir karakter kümesi dönüşümünü belirtmek için <function>convert</function> işlevinde kullanılabilir. Ayrıca, <command>DEFAULT</command> imli dönüşümler sunucu ile istemci arasında özdevinimli karakter kümesi dönüşümü için kullanılabilir. Bu amaçla,  A'dan B'ye ve B'den A'ya olmak üzere iki dönüşüm tanımlanmalıdır.
+ </para><para>
+Bir dönüşüm oluşturabilmek için işlev üzerinde  <command>EXECUTE</command> yetkiniz ve hedef şema üzerinde de <command>CREATE</command> yetkiniz olmalıdır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+   <variablelist><varlistentry>
+     <term><command>DEFAULT</command></term>
+     <listitem><para>Bu kaynak kodlamadan ve hedef kodlamaya dönüşümün öntanımlı olduğunu belirtir. Bu kodlama çifti için bir şema içinde sadece bir öntanımlı kodlama olmalıdır.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>isim</replaceable></term>
+     <listitem><para>Dönüşümün ismi. Şema nitelemeli olabilir, değilse dönüşüm o anki şemada tanımlanmış olur. Dönüşüm ismi bu şema içinde eşsiz olmalıdır.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>kaynak_kodlama</replaceable></term>
+     <listitem><para>Kaynak karakter kümesinin ismi.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>hedef_kodlama</replaceable></term>
+     <listitem><para>Hedef karakter kümesinin ismi.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>işlev_ismi</replaceable></term>
+     <listitem><para>Dönüşümü gerçekleştirecek işlevin ismi. İşlev ismi şema nitelemeli olabilir, değilse işlev arama yolunda aranacaktır.
+      </para><para>
+İşlev prototipi şöyle olmalıdır:
+      </para><para>
+<programlisting indent="0">conv_proc(
+  integer, -- kaynak karakter kümesi kimliği
+  integer, -- hedef karakter kümesi kimliği
+  cstring, -- kaynak dizge (boş karakter sonlandırmalı C dizgesi)
+  cstring, -- hedef dizge (boş karakter sonlandırmalı C dizgesi)
+  integer  -- kaynak dizge uzunluğu
+) RETURNS void;
+</programlisting>
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Kullanıcı tanımlı dönüşümleri kaldırmak için <command>DROP CONVERSION</command> kullanılır.
+  </para><para>
+Bir dönüşüm oluşturmak için gereken izinler ilerideki dağıtımlarda değişebilir.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+<function>myfunc</function> işlevini kullanarak <command>UNICODE</command>'dan <command>LATIN1</command>'e dönüşüm oluşturmak için:
+  </para><para>
+<programlisting indent="4">CREATE CONVERSION myconv FOR 'UNICODE' TO 'LATIN1' FROM myfunc;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE CONVERSION</command> bir <productname>PostgreSQL</productname> oluşumudur. SQL standardında <command>CREATE CONVERSION</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_conversion" xreflabel="ALTER CONVERSION"/>,<sbr/>
+<link linkend="tr-man7-create_function" xreflabel="CREATE FUNCTION"/>,<sbr/>
+<link linkend="tr-man7-drop_conversion" xreflabel="DROP CONVERSION"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

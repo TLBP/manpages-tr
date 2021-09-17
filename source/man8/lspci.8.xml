@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: lspci.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-lspci">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>lspci</refentrytitle>
+    <refmiscinfo class="header">Linux PCI Araçları</refmiscinfo>
+    <refmiscinfo class="domain">pciutils-2.1.10</refmiscinfo>
+    <refmiscinfo class="date">30 Mart 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>lspci</refname>
+    <refpurpose>bütün PCI aygıtlarını listeler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>lspci</command> [<emphasis>seçenekler</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>lspci</command> komutu, sistemdeki bütün PCI taşıtları ve onlara bağlı aygıtlar hakkında bilgi elde etmeye yarayan bir araçtır.
+    </para><para>
+Bu komutu bütün özellikleri ile birlikte kullanabilmek için 2.1.82 sürümü veya üstü bir çekirdeğe ihtiyacınız var (<filename>/proc/bus/pci</filename> arayüzünü desteklemeli). Eski çekirdeklerdeki PCI araçları, donanımlara doğrudan erişime sahip ve sadece root kullanıcıya mahsus araçlardı. Bu tür eski araçlar donanım farklılıkları ve marka çeşitliliğinden dolayı oldukça fazla problem  yaşatmaktaydılar.
+    </para><para>
+Şayet PCI aygıt sürücüleri veya bizzat <command>lspci</command> hakkında bir yazılım hatası rapor etmek isterseniz, lütfen <command>lspci –vvx</command> çıktısını raporunuza ekleyiniz.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>Bütün aygıtlar hakkında oldukça ayrıntılı bilgi verilmesini sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-vv</command></glossterm>
+        <glossdef><para>Abartılı ayrıntı seçeneği. <command>lspci</command>, PCI aygıtlar hakkında verebileceği bütün bilgileri ayrıntılı görüntüler. Bu verinin gerçek anlamı bu kılavuz içinde açıklanmamıştır. Daha fazla bilgi için <filename>/usr/include/linux/pci.h</filename> veya PCI belirtimlerine bakınız.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossdef><para>PCI kimlikleri veri tabanına bakmadan, PCI aygıt satıcısı ve aygıt kodlarını numara biçiminde gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x</command></glossterm>
+        <glossdef><para>PCI ayar alanının ilk 64 baytlık kısmını (standart başlık) onaltılık biçimde gösterir. Sürücü hataları ve <command>lspci</command> uygulamasının kendi hatalarını ayıklamak için oldukça yararlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-xxx</command></glossterm>
+        <glossdef><para>PCI yapılandırma alanının tamamını onaltılık düzende görüntüler. Yapılandırma alanının tanımlanmamış kısımları okumaya kalkışıldığında aygıt çöktüğü için, bu seçenek sadece root kullanıcıya tahsis edilmiştir. Bu durum PCI standardıyla çelişmemekle birlikte, en azından; oldukça aptal bir durum olarak kabul etmek gerekir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossdef><para>Taşıt merkezli görünüm kipi. Çekirdek tarafından algılanan IRQ numaraları ve adresleri yerine PCI taşıtlarında bulunan kartlar tarafından algılanan IRQ numara ve adreslerini görüntüler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossdef><para>Bütün taşıtlar, köprüler, aygıtlar ve bunlar arasındaki bağlantıları gösteren ağaç yapılı bir şema görüntüler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><literal>[[<emphasis>taşıt</emphasis>]:][<emphasis>yuva</emphasis>][.[<emphasis>işlev</emphasis>]]</literal>
+        </glossterm><glossdef><para>Sadece belirtilen <replaceable>taşıt</replaceable>, <replaceable>yuva</replaceable> ve <replaceable>işlev</replaceable>'e sahip aygıt görüntülenir. Aygıt adresinin her bir bölümü atlanabilir veya “*” şeklinde, “herhangi bir değer” anlamına gelecek şekilde, düzenlenebilir. Bütün numaralar onaltılık düzendedir. Örneğin;
+        </para><para>
+<literallayout indent="0">
+<command>0:</command>  0 numaralı taşıtta bulunan bütün aygıtlar,
+<command>0</command>   herhangi bir taşıtta bulunan 0 aygıtının bütün işlevleri,
+<command>0.3</command> herhangi bir taşıtta bulunan 0 aygıtının üçüncü işlevi,
+<command>.4</command>  her bir aygıtın sadece dördüncü işlevi
+</literallayout>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d </command><literal>[<emphasis>satıcı</emphasis>]:[<emphasis>aygıt</emphasis>]</literal>
+        </glossterm><glossdef><para>Sadece belirtilen satıcı ve aygıt_numarasına sahip aygıtları görüntüler. Her iki kimlik numarası onaltılık olabileceği gibi “*” şeklinde de belirtilebilir(“*”: herhangi bir değer).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i </command><replaceable>dosya</replaceable>
+        </glossterm><glossdef><para>PCI kimlikleri veritabanı olarak, <filename>/usr/share/hwdata/pci.ids</filename> yerine  <replaceable>dosya</replaceable> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p </command><replaceable>dizin</replaceable>
+        </glossterm><glossdef><para>PCI taşıtı verileri için <filename>/proc/bus/pci</filename> yerine belirtilen <replaceable>dizin</replaceable> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossdef><para>PCI aygıt verilerini makinenin okuyabileceği biçimde (hem normal hem de ayrıntılı kipte) basar, böylece betiklerin çözümleme yapması kolaylaşır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-M</command></glossterm>
+        <glossdef><para>Hatalı ayarlanmış köprüler, vs.nin arkasındaki aygıtlar dahil, bütün aygıtların bulunmasını sağlayan geniş arama kipini çağırır. Bu seçenek sadece hata ayıklama amacı ile kullanılmaktadır ve makinenizin çökmesine sebep olabilir (sadece bozuk aygıtlar olması durumunda). AKLINIZDA BULUNSUN. Sadece root kullanıcıya tahsis edilmiş bir seçenektir. Doğrudan donanım ile konuşmayan PCI erişim yöntemleri üzerinde <command>-M</command> seçeneğini kullanmanın bir anlamı yoktur. Zaten sonuçlar, normal listeleme kipindeki sonuçlar ile aynı olacaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para><command>lspci</command> sürüm bilgilerini görüntüler. Bu seçenek tek başına kullanılmalıdır.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>PCILIB SEÇENEKLERİ</title>
+    <para>
+PCI  araçları, PCI kartları ile haberleşmek için PCILIB (PCI yapılandırma
+alanları için, platform bağımsız işlevler sağlayan taşınabilir bir kütüphane) kullanırlar. Aşağıdaki seçenekler kütüphanenin parametrelerini kontrol eder, özellikle kullanılan erişim yöntemini. Öntanımlı olarak,  PCILIB  eldeki ilk erişim yöntemini kullanır ve hata ayıklama iletisi görüntülemez. Her bir seçeneğe desteklenen donanım/yazılım ayarlarını içeren bir liste eşlik eder.
+    </para><glosslist>
+      <glossentry><glossterm>
+        <command>-P </command><replaceable>dizin</replaceable>
+      </glossterm><glossdef><para><replaceable>dizin</replaceable> dizinine erişim için <filename>/proc/bus/pci</filename> yerine Linux  2.1 tarzı yapılandırma erişimi kullanılır (sadece Linux 2.1 veya daha yeni sürümlerde).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H1</command></glossterm>
+        <glossdef><para>Intel yapılandırma mekanizması 1 üzerinden doğrudan donanım erişimi kullanılır (sadece i386 ve uyumluları için).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H2</command></glossterm>
+        <glossdef><para>Intel yapılandırma mekanizması 2 üzerinden doğrudan donanım erişimi kullanılır.
+        </para><para>
+Uyarı: Bu yöntemde sadece herhangi bir taşıt üzerindeki ilk onaltı aygıtı adresleyebilirsiniz. Pek çok durum için güvenilmez bir yöntemdir (sadece i386 ve uyumluları için).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossdef><para>PCI erişim sistem çağrılarını kullanır. (sadece Alpha ve UltraSparc üzerindeki Linux'lar içindir).
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-F </command><replaceable>dosya</replaceable>
+      </glossterm><glossdef><para>Bütün bilgileri <command>lspci –x </command> çıktısını içeren dosyadan elde eder. Kullanıcılardan gelen yazılım hataları raporları için oldukça faydalı bir yöntemdir. Bütün donanım yapılandırmasını, kullanıcıya daha fazla ayrıntı için soru sormaya gerek kalmadan, görülmesini sağlar (bütün sistemlerde).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-G</command></glossterm>
+        <glossdef><para>Kütüphanenin hata ayıklama seviyesini artırır (bütün sistemlerde).
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <glosslist>
+      <glossentry><glossterm>
+        <command>/usr/share/hwdata/pci.ids</command>
+      </glossterm><glossdef><para>Bilinen bütün PCI kimliklerinin listesi (satıcılar, aygıtlar, sınıflar ve altsınıflar).
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>/proc/bus/pci</command>
+      </glossterm><glossdef><para>2.1.82 sonrası Linux çekirdeği ile sağlanmış olan PCI taşıtı yapılandırma alanı ile iletişimi sağlamak için bir arayüz. Her taşıt için bir altdizin altında her kart için bir yapılandırma alanı dosyası ve bütün PCI aygıtların listesini içeren bir aygıt dosyası içerir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-setpci"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Linux PCI Araçlarının bakımı Martin Mares <email>mj@ucw.cz</email> tarafından
+yürütülmektedir.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

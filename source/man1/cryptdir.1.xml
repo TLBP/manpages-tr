@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: cryptdir.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-cryptdir">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>cryptdir</refentrytitle>
+    <refmiscinfo class="date">1 Ocak 1993</refmiscinfo>
+  </refmeta>
+  <refnamediv><refname>cryptdir</refname>
+    <refpurpose>bir dizindeki bütün dosyaları şifreler</refpurpose>
+  </refnamediv><refnamediv><refname>decryptdir</refname>
+    <refpurpose>bir dizindeki bütün dosyaları deşifre eder</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>cryptdir</command>   [ <emphasis>dizin</emphasis> ]
+<command>decryptdir</command> [ <emphasis>dizin</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>GİRİŞ</title><para>
+<command>cryptdir</command> geçerli dizindeki bütün dosyaları (ya da argüman olarak verilen bir dizindeki bütün dosyaları) şifreler. Eğer komut <command>decryptdir</command> olarak kullanılırsa bu sefer bütün dosyalar deşifre edilir (aynı yazılım, farklı isim).
+  </para></refsect1><refsect1><title>AÇIKLAMA</title>
+    <para>
+Şifreleme esnasında, güvenlik sebebi ile parola iki kere girilir. İstemediğiniz
+bir parola ile dosyaları şifrelemek talihsizlik olurdu.
+    </para><para>
+Deşifre ederken, bunun aksine, parola sadece bir kez girilir. Şayet yanlış parola girilirse, bir zarar gelmez.
+    </para><para>
+Şifreli dosyalar <filename>.crypt</filename> uzantısına sahip olurlar. Bu, dosyaların ikinci kez şifrelenmelerini engeller. Deşifre esnasında bu uzantı silinir. Böylece şifreli bir dizine başka dosyaları çekinmeden ekleyebilir ve bu dizinde <command>cryptdir</command> komutunu önceden şifreli dosyaları dert etmeden çalıştırabilirsiniz.
+  </para></refsect1><refsect1><title>HATALAR</title><para>
+Bu kılavuz sayfası komutun programından daha uzun.
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+"Exploring  Expect:  A  Tcl-Based  Toolkit  for Automating Interactive Programs", Don Libes, O'Reilly  and  Associates, January 1995.
+  </para></refsect1><refsect1><title>YAZAN</title>
+    <para>Don Libes (National Institute of Standards and Technology) tarafından yazılmıştır.
+  </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Emin İslam Tatlı <email>eminislam@web.de</email>, Nisan 2004</para>
+  </refsect1>
+</refentry>
+

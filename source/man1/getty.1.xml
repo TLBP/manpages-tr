@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: getty.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-getty">
+<remark>.\" +----------
+.\" |
+.\" |   GETTY/UUGETTY man page.
+.\" |
+.\" |   Copyright 1989,1990 by Paul Sutcliffe Jr.
+.\" |
+.\" |   Permission is hereby granted to copy, reproduce, redistribute,
+.\" |   or otherwise use this software as long as: there is no monetary
+.\" |   profit gained specifically from the use or reproduction or this
+.\" |   software, it is not sold, rented, traded or otherwise marketed,
+.\" |   and this copyright notice is included prominently in any copy
+.\" |   made.
+.\" |
+.\" |   The author make no claims as to the fitness or correctness of
+.\" |   this software for any use whatsoever, and it is provided as is.
+.\" |   Any use of this software is at the user's own risk.
+.\" |
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>getty</refentrytitle>
+    <refmiscinfo class="domain">Sürüm 2.0.7h</refmiscinfo>
+    <refmiscinfo class="date">2 Kasım 1995</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>getty</refname>
+    <refpurpose>uçbirim kipini, hızını ve hat disiplinini ayarlar</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>/etc/getty</command> [<command>-d </command><emphasis>öntanımlı_dosya</emphasis>] [<command>-a</command>] [<command>-h</command>] [<command>-H </command><emphasis>kapama_süresi</emphasis>]
+           [<command>-t </command><emphasis>zamanaşımı</emphasis>] [<command>-w </command><emphasis>dizge</emphasis>] <emphasis>hat</emphasis> [<emphasis>hız </emphasis>[<emphasis>tür </emphasis>[<emphasis>disiplin</emphasis>]]]
+<command>/etc/getty</command> <command>-c </command><emphasis>gettydefs_dosyası</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>getty</command>, sistem tarafından kullanıcının bağlanmasını sağlamak için kullanılan üç uygulamadan ikincisidir (<command>init</command>(1),  <command>getty</command>(1) ve <command>login</command>(1)). <command>getty</command>, <command>init</command>(1) tarafından çağrılır:
+    </para><para><orderedlist userlevel="3"><listitem><para>
+<literal>tty</literal> hatlarını açar ve kiplerini ayarlar.
+   </para></listitem><listitem><para>
+Bağlantı ekranını görüntüler ve kullanıcı ismi girilmesini ister.
+    </para></listitem><listitem><para>
+Kullanıcı için bir bağlantı sürecini başlatır.
+    </para></listitem></orderedlist></para><para>
+<command>getty</command>'nin takip ettiği yol şöyle açıklanabilir: İlk önce kendi komut satırını çözümler, şayet herhangi bir hata yok ise, doğru çalışma zamanı değerlerini bulabilmek için öntanımlı dosyaları (şayet <literal>FSSTND</literal> seçeneği ile derlenmişse <filename>/etc/conf.getty</filename>) incelemeye başlar. Normalde bu dosya <command>/etc/conf.getty</command>'dir. Komut satırından verilen değerler bu öntanımlı dosyadaki (<command>-d </command><varname>öntanımlı_dosya</varname> seçeneği ile başka bir dosya belirtilebilir) değerlere göre önceliklidir. Daha sonra okuma ve yazma için bir hat açar ve stdio tamponlamasını kapatır. Şayet bir ilklendirme tanımlı ise, onu başlatır.<sbr/>(Ayrıntılar için <xref linkend="tr-man1-getty-line"/> bölümüne bakınız).
+    </para><para>
+İlklendirmeden sonra, hat kapatılır ve tekrar açılır. Bu sefer hat engellenebilen kipte açılır ve böylece aygıt serbest hareket edemez hale gelir. Taşıyıcı sinyalin tespit edilmesi hattın açılmasını sağlar.
+    </para><para>
+Sonra, <command>getty</command> bir önbilgi (genellikle <command>/etc/issue</command> içindeki metin) ve kullanıcı ismi istemini basar. Son olarak, kullanıcının girdiği ismi okur ve <command>login</command>(1)'i kullanıcı ismini argüman olarak kullanarak çağırır.  Bu ismi okuma işlemi esnasında, <command>getty</command> kullanılan uçbirimin hızını sisteme uyarlamaya çalışır ve kullanıcının bağlantı yordamında kullanılacak uçbirim parametrelerini (ayrıntılar için <command>termio</command>(7)'e bakınız) ayarlar.
+    </para><para>
+<command>getty</command> tarafından kullanılan <literal>tty</literal> aygıtı <varname>hat</varname> argümanından saptanır. Getty bağlanacağı aygıtın ismi olarak <command>/dev/</command><varname>hat</varname> dizgesini kullanır.  Getty <command>-h</command> seçeneği ile çalıştırılmamış (veya öntanımlı dosyada <command>HANGUP=NO</command> belirtilmemiş) ise hızı sıfırlayarak hattı kapanmaya zorlayacaktır. Hattın askıda kalma süresini <command>-H</command> seçeneğine saniye cinsinden sayı belirterek (veya öntanımlı dosyada <command>HANGUPSECS=kapamasüresi</command> belirterek)  ayarlayabilirsiniz. <command>-r</command> seçeneği ile <varname>gecikme</varname> vererek (veya öntanımlı dosyada <command>WAITCHAR=YES</command> ve <command>DELAY=gecikme</command> belirterek) <command>getty</command>'nin hattan tek bir karakter girilmesini beklemesi sağlanabilir ve bu karakter girildikten sonra işleme devam etmeden önce belirtilen saniye kadar daha bekler. Gecikme istenmiyorsa, <command>-r0</command> kullanın. <command>-w</command> seçeneği ile dizge (veya öntanımlı dosyada <command>WAITFOR=dizge</command>) belirterek <command>getty</command>'nin bu dizgeyi hattan beklemesi sağlanabilir. <command>-t</command> seçeneğine zamanaşımı (veya öntanımlı dosyada <command>TIMEOUT=zamanaşımı</command>) belirtilerek, kullanıcı ismi için istem gösterildikten sonra belirtilmiş zaman içinde bir kullanıcı ismi girilmez veya bu süre içinde doğru kullanıcı ismi girilmez ise <command>getty</command>'nin çıkması sağlanabilir.
+    </para><para>
+Hız argümanı <command>/etc/gettydefs</command> (ayrıntılar için <command>gettydefs</command>(4)kılavuzuna bakınız) dosyası içindeki girdiye bir etikettir. Bu girdi <command>getty</command>'nin tty ayarlarında başlangıç hızını, kullanıcının ismini girerken bağlantı hızı ile hızın yanlış olması durumunda kullanıcının müdahale etmesini sağlayacak başka bir girdiye gösterici olacak hızı tanımlar. Bu işlem &lt;break> karakteri (aslında bir karakter dizisidir) göndererek yapılır. Belirli şartlar altında, bir CR (Satırbaşı karakteri) de aynı işi yapacaktır. Bu genellikle <command>getty</command>'nin modem veya uçbirim hızından daha yükseğe ayarlandığı durumlara oluşur. <command>getty</command>, <filename>gettydefs</filename> dosyasını sıra ile tarar ve verilen girdiye uygun bir eşleşme arar. Şayet hız belirtilmemişse veya bir girdi bulunamazsa, <command>/etc/gettydefs</command> içindeki ilk girdi öntanımlı değer olarak kabul edilir ve o değer kullanılır. <filename>gettydefs</filename> dosyasına ulaşılamadığı durumlarda, derleme zamanında tanımlanmış girdi kullanılır.
+    </para><para>
+<varname>tür</varname> argümanı, hatta bağlı uçbirimi tanımlayan bir dizgedir. <varname>tür</varname>, <command>termcap</command>(7) içinde listelenen geçerli uçbirim isimlerinden biri olmalıdır. <command>getty</command>, bu değeri ekranı nasıl temizleyeceğine karar vermek için kullanır. Ayrıca <literal>TERM</literal> ortam değişkenini bu değer ile ayarlar.
+    </para><para>
+<varname>disiplin</varname> argümanı hat üzerinde kullanılacak hat disiplinini tarif eden bir dizgedir. Öntanımlı değer <command>LDISCO</command>'dur.
+    </para><para>
+Daha  önce bahsedildiği gibi, <command>getty</command> bağlantı ekranını görüntüledikten sonra kullanıcı adını okur. Şayet boş karakter alınırsa, kullanıcının &lt;break> tuşuna veya hızın hatalı olduğunu bildirmek için CR tuşuna bastığı kabul edilir. Bunun sonucu olarak <command>getty</command> sıradaki hıza geçer (<filename>/etc/gettydefs</filename> içinde tanımlı olan hızlar).
+    </para><para>
+Kullanıcı ismi satırsonu karakteri veya satırbaşı karakteri ile sonlandırılır.. Bir satırbaşı karakteri, sistemde yeni satıra geçilmesi sonucunu doğurur (ayrıntılı bilgi için <command>ioctl</command>(2)).
+    </para><para>
+Kullanıcı adı, sadece büyük harflerdenen oluşup oluşmadığını görmek için taranır. Şayet öyle ise, sistem bütün büyük harfleri küçük harfe çevirir.
+    </para><para>
+<filename>gettydefs</filename> dosyasını sınama seçeneği de vardır. <command>getty</command>,  <command>-c</command><varname>gettydefs</varname> seçeneği ile çağrılırsa, adı geçen <varname>gettydefs</varname> dosyası taranır ve görülen değerler standart çıktıya aktarılır. Şayet herhangi bir yazım hatası var ise (<varname>gettydefs</varname> dosyasındaki sözdizimi hataları) bunlar kullanıcıya bildirilir.
+    </para>
+  </refsect1><refsect1><title>ÖNTANIMLILAR DOSYASI</title>
+    <para>
+Başlangıçta, <command>getty </command><filename>/etc/conf.getty.</filename><varname>hat</varname> dosyasına bakar (veya bu dosyanın bulunamadığı durumlarda <filename>/etc/conf.getty</filename> dosyasına). Şayet bu dosya var ise satırları aşağıdaki biçimde okur:
+    </para>
+<literallayout>
+İSİM=<varname>değer</varname>
+</literallayout><para>
+Bu sayede, <command>getty</command> çalışma zamanı esnasında yeniden derlemeye gerek olmadan belirli özellikleri ayarlama şansına sahip olur. Tanınan <literal>İSİM</literal> dizgesi ve onların karşılıkları şunlardır:
+    </para><glosslist><glossentry>
+      <glossterm><literal>SYSTEM=</literal><replaceable>isim</replaceable></glossterm>
+      <glossdef><para>Düğümismi değerini (<command>@S</command> ile gösterilen -- <xref linkend="tr-man1-getty-prompt"/> bölümüne bakınız) <varname>isim</varname>'e ayarlar. Öntanımlı <varname>düğümismi</varname> değeri <command>uname</command>(3) çağrısı tarafından döndürülür.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>VERSION=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para><command>@V</command> parametresi (ayrıntılar için <xref linkend="tr-man1-getty-prompt"/> bölümüne bakınız) ile gösterilen değeri <varname>dizge</varname>'ye ayarlar. Şayet dizge '<literal>/</literal>' karakteri ile başlıyorsa, dosyanın tam yolu belirtilmiş olarak kabul edilir ve <command>@V</command> bu dosyanın içeriğine göre ayarlanır. Öntanımlı değer <filename>/proc/version</filename>'dur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>LOGIN=</literal><replaceable>isim</replaceable> </glossterm>
+      <glossdef><para>Bağlantı için kullanılacak uygulamanın adını ayarlar. Öntanımlı olarak <command>/bin/login</command> kullanılır. Şayet bu seçenek belirtilmişse, bu isim <command>/bin/login</command> yerine kullanılacak uygulamanın tam yolunu da vermelidir. Şayet bu string '/' karakteri ile başlıyorsa, bu bir dosyanın tam yolu olarak kabul edilir ve /etc/issue yerine adı belirtilen bu dosya kullanılır. Unutmayın ki,  <command>/bin/login</command> argüman olarak sadece kullanıcı adını  alır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>ISSUE=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para>Başlangıç esnasında <command>getty</command> bir önbilgi, genellikle <command>/etc/issue</command> içindeki metni basar. Şayet bu <varname>dizge</varname> belirtilmişse <command>getty</command> bu dizgeyi gösterir. Şayet bu <varname>dizge</varname> '/' karakteri ile başlıyorsa, bir dosyanın tam yolu olarak kabul edilir ve <command>/etc/issue</command> yerine adı belirtilen bu dosya kullanılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>CLEAR=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para><varname>değer</varname> olarak <command>NO</command> belirtilmişse, başlangıç esnasında <command>getty</command> bir önbilgi ve kullanıcı ismi istemini basmadan önce ekranı temizlemez. Öntanımlı olarak ekran temizlenir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>HANGUP=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para><varname>değer</varname> olarak <command>NO</command> belirtilmişse, başlangıç esnasında <command>getty</command> hattı kapatmayacaktır. Komut satırından <command>-h</command> seçeneğini belirtmek ile aynı şeydir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>WAITCHAR=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para><varname>değer</varname> olarak <command>YES</command> belirtilmişse, <command>getty</command> devam etmeden önce tek bir karakter girilmesi için bekleyecektir. Bu, özellikle modemin sürekli meşgul olmasına sebep olan CD'ye sahip modemlerin sonsuz bir şekilde <command>getty</command>'nin modem ile haberleşmesini sağlar.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>DELAY=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para><literal>WAITCHAR</literal> ile birlikte kullanılır. <command>getty</command>'nin girilen karakteri kabul ettikten sonra işleme devam etmeden önce saniye cinsinden verilen süre kadar beklemesi sağlanır. Komut satırından <command>-r</command><varname>gecikme</varname> şeklinde tanılama yapılırsa hem <literal>WAITCHAR</literal> hem de <literal>DELAY</literal> bu tanımlama ile aynı etkiye sahip olur. Şayet <literal>WAITCHAR</literal>, bir <literal>DELAY</literal> tanımlaması yapılmadan verilmiş ise sonuç, komut satırında <command>-r0</command> verilmesi ile aynı olur. Öntanımlı olarak bekleme yapılmaz.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>TIMEOUT=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para><command>-t </command><varname>zamanaşımı</varname> komut satırı argümanı ile aynı etkiye sahiptir. Bağlantı ekranının görüntülenmesinden sonra belirtilen süre içinde bir kullanıcı adı girilmez ise <command>getty</command>'nin çıkması sağlanır. Öntanımlı olarak sonsuz bekleyişe ayarlıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>CONNECT=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para>Şayet belirtilmişse, <varname>dizge</varname> bağlantının sağlanması esnasında <command>getty</command>'i yönlendirecek  bir umulan/gönderilen dizilimi (tıpkı INIT için olduğu gibi) olmalıdır. <varname>dizge</varname> yerine <literal>DEFAULT</literal> yazılabilir ve bu yerleşik dizge olan
+      </para>
+<literallayout>
+CONNECT\s\A\r\n
+</literallayout><para>yerine geçer. <literal>\A</literal> öncelemesi hızı gösterecek rakamların yerini işaret eder. Ayrıntılar için <xref linkend="tr-man1-getty-baud"/> kısmına bakınız. Öntanımlı olarak bir bağlantı uzlaşması gerçekleştirilmez.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>WAITFOR=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para>Bu parametre <literal>WAITCHAR</literal>'e benzer ama beklenen şey bir karakter değil karakter dizisidir. Bu karakter dizisi girilene kadar <command>getty</command> bekler. Bu parametre <literal>CONNECT</literal> ile birlikte kullanıldığı zaman en iyi sonucu verir. Örnek:
+      </para>
+<screen>
+WAITFOR=RING
+CONNECT="" ATA\r CONNECT\s\A
+</screen><para>
+<command>getty</command>, <command>RING</command> dizgesini bekler, ardından hiçbir şey gelmesi beklemez, bir satırbaşı karakteri ile biten <command>ATA</command> gönderir ve <command>CONNECT 2400</command> gibi bir dizge bekler ve bu durumda kendini 2400 baud'a ayarlar. Öntanımlı olarak herhangi bir dizge girilmesini beklemez.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>ALTLOCK=</literal><replaceable>hat</replaceable> </glossterm>
+      <glossdef><para>Uugetty bu parametreyi bağlı olduğu aygıta ilave olarak, diğer bir aygıtı kilitlemek için kullanır. Aynı fiziksel port için iki farklı aygıt ismine sahip sistemler içindir. Örneğin; <filename>/dev/tty1A</filename>'nın ve <filename>/dev/tty1a</filename>'nın aynı modemi belirttiği ve başka bir modem olmadığı durumda kullanılır. Ayrıntılar için <xref linkend="tr-man1-getty-uu"/> bölümüne bakınız. Öntanımlı olarak başka bir aygıtın kilitlemesi yapılmaz.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>ALTLINE=</literal><replaceable>hat</replaceable> </glossterm>
+      <glossdef><para>Modem ilklendirmesinde kullanılacak başka bir aygıtı tanımlamak için kullanılan parametredir. Şayet <literal>WAITFOR</literal> seçeneği tanımlanmışsa, bu hatta da uygulanır. İki hat arasında kilitleme alıştırmaları yapan sistemler için gereklidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>RINGBACK=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para>Şayet değer <command>YES</command> ise geri arama etkinleştirilir. Gelen aramalar ile uzlaşabilmek için <literal>WAITFOR</literal> ve <literal>CONNECT</literal> ile birlikte kullanılmalıdır. Öntanımlı eylem, hattın bir ila üç defa çaldırılıp kapatılması ve ilk aramadan sonra 60  saniye çağrı beklenmesidir.  <literal>MINRBTIME</literal> ve <literal>MAXRBTIME</literal> ikinci arama için asgari ve azami süreleri tanımlar. <literal>INTERRING</literal> aynı aramada iki ardışık çalma arasındaki azami süreyi belirtir. <literal>MINRINGS</literal> ve <literal>MAXRINGS</literal> ilk arama için asgari ve azami çalma sayısını belirtir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>SCHED=</literal><replaceable>>aralık1 aralık2 aralık3 ...</replaceable> </glossterm>
+      <glossdef><para><command>getty</command> bu değerleri açılacak oturumların zamanlaması için kullanır. Her bir aralık <literal>HG:SA:DAK-HG:SA:DAK</literal> şeklindedir. <command>HG</command> haftanın günü demektir. 0 = Pazar, 1 = Pazartesi, ... 6 = Cumartesi. <command>SA</command> saat ve <command>DAK</command> dakika anlamına gelir. Şayet o an ki zaman bu aralıklardan birine denk gelirse, <literal>INIT</literal> dizisi gönderilir ve <command>getty</command> süre bitimine kadar çalışmasını sürdürür. Aksi taktirde, <literal>OFF</literal> dizisi gönderilir ve <command>getty</command> zamanı gelene kadar uyur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>OFF=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para>Bu satır <literal>INIT</literal> satırına benzer, tek farkı zamanlama nedeniyle hattın kapatılması için gönderilmesidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>FIDO=</literal><replaceable>dizge</replaceable> </glossterm>
+      <glossdef><para>Bu satır FidoNet postacısına  tam yolu tanımlar. Öntanımlı olarak tanımsız gelir. Bir FidoNet postacısına ayarlandığı zaman, <literal>EMSI</literal>'yi de açmalısınız (<literal>yes</literal> yapmalısınız). Dışarıdan bir FidoNet araması alındığı zaman,  sanki iki <literal>TSYNC</literal> veya iki <literal>YOOHOO</literal> ardışık alınmış gibi, FidoNet postacısına komut satırı seçenekleri olarak <literal>tsync</literal> veya <literal>yoohoo</literal> kelimeleri aktarılır. Şayet <literal>EMSI</literal> yes olarak ayarlanmışsa, bütün <literal>EMSI</literal> dizgesi (yıldız ile başlar satırbaşı karakteri ile biter) komut satırı seçeneği olarak (satırbaşı karakteri hariç) aktarılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>EMSI=</literal><replaceable>değer</replaceable> </glossterm>
+      <glossdef><para>Şayet "yes" olarak ayarlanırsa, FidoNet <literal>EMSI</literal> dizilimleri için girdiyi tarar.
+      </para></glossdef>
+    </glossentry></glosslist><para>
+Öntanımlı dosyanın adı, komut satırından <command>-d </command><varname>öntanımlı_dosya</varname> şeklinde tanımlama yapılarak değiştirilebilir.  Eğer öntanımlı_dosya ismi "/" işareti ile başlıyorsa, dosyanın tam yeri belirtiliyormuş gibi kabul edilir. Aksi taktirde, sadece bir dosya ismiymiş gibi ele alınır ve <command>getty</command>'nin tam dosya ismi olarak  <filename>/etc/conf.</filename><varname>öntanımlı_dosya</varname>'yı kullanması sağlanır. Şayet <literal>FSSTND</literal> uyumluluğu ile derlenmiş ise <filename>/etc/conf.</filename><varname>öntanımlı_dosya</varname>  kullanılır.
+    </para>
+  </refsect1><refsect1 id="tr-man1-getty-prompt"><title>İSTEM İKAMELERİ</title>
+    <para>
+<command>getty</command> önbilgi (genellikle /etc/issue içindeki) ve kullanıcı istemini görüntülediği zaman, çeşitli terbölü öncelemeli karakterlerin kullanılacağını kabul eder. Bu karakterlerden biri bulunduğu zaman, <command>getty</command> tarafından üretilen çıktıda bunların yerine değeri atanır.  Tanınan tersbölü öncelemeli karakterler şunlardır:
+    </para><glosslist><glossentry>
+      <glossterm><literal>\\</literal></glossterm>
+      <glossdef><para>Tersbölü (\)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\b</literal></glossterm>
+      <glossdef><para>Gerisilme (<literal>^H</literal>)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\c</literal></glossterm>
+      <glossdef><para>Bir dizgenin sonunda satırsonu karakterinden önce kullanıldığında o satırsonu karakterinin yoksayılmasını sağlar.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\f</literal></glossterm>
+      <glossdef><para>Sayfa ileri (<literal>^L</literal>)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\n</literal></glossterm>
+      <glossdef><para>Satırsonu (<literal>^J</literal>)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\r</literal></glossterm>
+      <glossdef><para>Satırbaşı (<literal>^M</literal>)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\s</literal></glossterm>
+      <glossdef><para>Tek boşluk (' ')</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\t</literal></glossterm>
+      <glossdef><para>Yatay sekme (<literal>^I</literal>)</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\nnn</literal></glossterm>
+      <glossdef><para>Onluk tabandaki değeri <literal>nnn</literal> olan ASCII karakter. Eğer <literal>nnn</literal> 0 ile başlıyorsa sekizlik tabanda, 0x ile başlıyorsa onaltılık tabanda verilmiş kabul edilir.</para></glossdef>
+    </glossentry></glosslist>
+    <para>
+Bunlara ek olarak, satır sonundaki tek bir tersbölü yeni satırın yok sayılmasına sebebiyet verir ve ilk satırın aşağıdaki satırda devam ettiği kabul edilir.
+    </para><para>
+Ayrıca, <command>@</command> ile öncelenmiş belirli karakterleri parametre olarak kullanabilirsiniz. Bu parametreler ve bu parametrelere atanan değerler şunlardır:
+    </para><glosslist><glossentry>
+      <glossterm><command>@B</command></glossterm>
+      <glossdef><para>
+baud cinsinden geçerli hız (@B göründüğü zaman değerlendirilir)
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@D</command></glossterm>
+      <glossdef><para>O an ki tarih, AA/GG/YY biçiminde gösterilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@L</command></glossterm>
+      <glossdef><para><command>getty</command>'nin bağlandığı hat.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@S</command></glossterm>
+      <glossdef><para>Sistemin düğüm ismi.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@T</command></glossterm>
+      <glossdef><para>O an ki saat, SS:DD:SN (24 saat üzerinden) biçiminde gösterilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@U</command></glossterm>
+      <glossdef><para>
+O an bağlı bulunan kullanıcıların sayısı. Bu sayı; <filename>/etc/utmp</filename> dosyasında <literal>ut_name</literal> alanı boş olmayan girdilerin toplamı ile olarak elde edilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>@V</command></glossterm>
+      <glossdef><para>
+Öntanımlılar dosyasında verilen <literal>VERSION</literal> değeri.
+      </para></glossdef>
+    </glossentry></glosslist><para>
+Tek bir '<literal>@</literal>' karakteri görüntülemek için '<literal>\@</literal>' ya da '<literal>@@</literal>' kullanın.
+    </para>
+  </refsect1><refsect1 id="tr-man1-getty-line">
+  <title>HATTIN İLKLENDİRİLMESİ</title>
+    <para>
+<command>getty</command>'nin en büyük özelliklerinden birisi (en azından yazar açısından) kullanacağı hattı, kullanmadan önce ilklendirme yeteneğidir. Bu çoğunlukla uçbirimlerde değil de modemli hatlarda olmaktaysa da, uçbirimlerin ilkendirilmesi bu kapsamın dışında değildir.
+    </para><para>
+Hattın ilklendirilmesi; hattın açılmasından hemen sonra, <literal>WAITCHAR</literal> ve/veya <literal>WAITFOR</literal> seçeneklerine bağlı olarak, yapılır. İlklendirme, öntanımlılar  dosyasına
+    </para>
+<literallayout>
+INIT=<varname>dizge</varname>
+</literallayout><para>
+girdisi yerleştirilerek gerçekleştirilir. <varname>dizge</varname>, aşağıdaki şekilde bir ya da daha fazla alandan oluşur:
+    </para>
+<literallayout>
+<replaceable>umulan </replaceable>[ <replaceable>gönderilen </replaceable>[ <replaceable>umulan </replaceable>[ <replaceable>gönderilen </replaceable>] ] ...]
+</literallayout><para>
+Bu UUCP <filename>L.sys</filename> dosyasında kullanılan <replaceable>umulan</replaceable>/<replaceable>gönderilen</replaceable> dizilimine benzer. Tek farkı, '<replaceable>gönderilen</replaceable>' dizilimine özdevinimli olarak satırbaşı karakteri eklenmemesidir..  Şayet bir satırbaşı karakteri eklenmesini istiyorsanız, bunu '<literal>\r</literal>' ile açıkça göstermelisiniz.
+    </para><para>
+<command>getty</command>, <replaceable>umulan</replaceable> alanında, UUCP'deki gibi alt alanları destekler:
+    </para>
+<literallayout>
+<replaceable>umulan</replaceable>[-<replaceable>gönderilen</replaceable>-<replaceable>umulan</replaceable>]...
+</literallayout><para>
+<xref linkend="tr-man1-getty-prompt"/> bölümünde belirtilen bütün tersbölülü önceleme karakterleri umulan ve gönderilen alanları için de geçerlidir. Bunlara ek olarak, aşağıdaki önceleme karakterleri de geçerlidir:
+    </para><glosslist><glossentry>
+      <glossterm><literal>\p</literal></glossterm>
+      <glossdef><para>1 saniyelik gecikme ekler.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\d</literal></glossterm>
+      <glossdef><para>2 saniyelik gecikme ekler.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\K</literal></glossterm>
+      <glossdef><para>0.25 saniyelik Break gönderir.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>\Tnnn</literal></glossterm>
+      <glossdef><para>Öntanımlı (30 saniyelik) zamanaşımı değerini <literal>nnn</literal> saniye olarak değiştirir. <literal>nnn</literal> değeri, onluk, sekizlik veya onaltılık olarak belirtilebilir; <xref linkend="tr-man1-getty-prompt"/> bölümündeki <literal>\nnn</literal> kullanımına bakınız.</para></glossdef>
+    </glossentry></glosslist><para>
+Bu ilave önceleme karakterleri için, gerçekte karakter gönderilmediğini unutmayın.
+    </para>
+  </refsect1><refsect1 id="tr-man1-getty-baud"><title>BAĞLANTI ve HIZ</title>
+    <para>
+<command>getty</command> düzgün kurulmuş bir bağlantı sağlamak için bir uzlaşmaya girişir. Bu özelliğinin en iyi kullanımı modem tarafından gönderilen CONNECT iletisine bakmak ve hat hızını bu iletide belirtilen hıza ayarlamaktır (örneğin 2400).
+    </para><para>
+Bağlantı uzlaşması için gereken betik, aşağıdaki ek dışında INIT betiği ile tamamen aynıdır (<xref linkend="tr-man1-getty-line"/> bölümüne bakınız):
+    </para><glosslist><glossentry>
+      <glossterm><literal>\A</literal></glossterm>
+      <glossdef><para>baud cinsinden hızın görüneceği yerleri işaretler. Bu işaret, betik içinde işaret edilen yerdeki 0-9 arasındaki rakamların tamamı ile eşleşir ve mümkünse hızı bu değere göre ayarlar.</para></glossdef>
+    </glossentry></glosslist><para>
+Hızın özdevinimli ayarlanması 0 değeri ile etkinleştirilir.
+    </para>
+<literallayout>
+CONNECT=CONNECT\s\A
+</literallayout><para>
+Yukarıdaki satır CONNECT 1200 dizgesi ile eşleşirse, <command>getty</command>'nin bağlantı hızını 1200 baud'a ayarlamasına sebep olur. Bu işlem şu adımları takip eder:
+    </para><orderedlist userlevel="3"><listitem><para>
+1200 değeriyle eşleşme olması için <command>getty</command>, <filename>gettydefs</filename> dosyası içinde 1200 etiketli bir girdi arayacaktır. Şayet eşleşen bir girdi bulursa, bu değer kullanılır. Eğer bulamazsa, ikinci adıma geçilir.
+    </para></listitem><listitem><para>
+O an kullanılan geçerli <filename>gettydefs</filename> değerleri eşleşen hıza uyum için düzenlenir (örneğin 1200'e). Bununla birlikte, eşleşen hız geçersiz ise, sonraki adıma geçilir.
+    </para></listitem><listitem><para>
+<command>getty</command> bir hata iletisini günlüğe kaydedip, normal işlemine döner. Böylece <filename>gettydefs</filename> dosyasındaki disiplin girdileri denenerek yapılan normal işlevlerine dönmesi sağlanır.
+    </para></listitem></orderedlist>
+  </refsect1><refsect1 id="tr-man1-getty-uu"><title>UUGETTY</title>
+    <para>
+<command>uugetty</command>, <command>getty</command>'ye benzer ama UUCP ailesi (uucp(1), cu(1) ve diğerleri) tarafından  kullanılan kilit dosyalarını oluşturmak ve kullanmak için tasarlanmıştır. Bu sayede iki veya daha fazla sürecin aynı tty hattını kullanması önlenir.
+    </para><para>
+<command>uugetty</command> başladığı zaman, kullanmaya niyetlendiği hatta bir kilit dosyası görürse, bu hattaki kilit dosyasının sahibi olan bir süreç olup olmadığını tespit etmek için, kilit dosyasının süreç numarasını kullanır.  Şayet bu kilit dosyası bir sürece ait değilse, <command>uugetty</command> bu dosyası siler ve işleme devam eder. Şayet bu dosyanın kontrolünü elinde tutan, geçerli bir süreç varsa, <command>uugetty</command>, o süreç bu kilit dosyasını serbest bırakana kadar uyur ve daha sonra <command>init</command>(1)'in yeni bir <command>uugetty</command> başlatmasını sağlayıp kendini sonlandırır.  Çakışan süreç ortadan kalkınca, <command>uugetty</command> kendi kilit dosyasını oluşturarak bağlantı ekranını çalıştırır. Bu sayede diğer süreçlerin aynı hattı kullanması önlenmiş olur.
+    </para><para>
+<command>uugetty</command> normalde sadece üzerinde çalıştığı hattın adını kilitler. Aynı porta işaret eden iki ayrı aygıt isminin bulunduğu sistemlerde (bir tanesi modemi kontrol eden, diğeri etmeyen iki aygıt bulunması durumu gibi) aşağıdaki  gibi bir hat öntanımlı dosyaya yerleştirilir:
+    </para>
+<literallayout>
+ALTLOCK=<varname>hat</varname>
+</literallayout><para>
+Örneğin; eğer <command>uugetty</command>'nin <filename>/dev/tty1a</filename> üzerinde ise ve ilaveten <filename>/dev/tty1A</filename>'nın kilitlenmesini istiyorsanız, öntanımlı dosyaya şu satırı girin: <command>ALTLOCK=tty1A</command>.
+    </para><para>
+Taşıyıcı tespiti için beklerken, <command>uugetty</command> her 30 saniyede bir kilit dosyalarını kontrol eder. Eğer kilit dosyaları bulursa, <command>uugetty</command> çıkar ve  init yeni bir <command>getty</command> başlatır. Böylece, modem başka bir süreç tarafından kullanılmadan önce tekrar ilklendirilmiş olur.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <glosslist><glossentry>
+      <glossterm><literal>/etc/conf.getty[.<varname>hat</varname>]</literal> </glossterm>
+      <glossdef><para>Çalışma zamanı yapılandırmalarını içerir. <command>uugetty</command>, <filename>/etc/conf.uugetty[.<varname>hat</varname>]</filename> dosyasını kullanır.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>/etc/gettydefs</literal></glossterm>
+      <glossdef><para><command>getty tarafından</command> kullanılacak hız ve tty ayarlarını içerir.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>/etc/issue</literal></glossterm>
+      <glossdef><para>Önbilgilerin bulunduğu dosya.</para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>/bin/login</literal></glossterm>
+      <glossdef><para>Kullanıcı ismi girildikten sonra çağrılan öntanımlı uygulama.</para></glossdef>
+    </glossentry></glosslist>
+   </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-init"/>, <link linkend="tr-man1-login"/>, <link linkend="tr-man1-uucp"/>, <link linkend="tr-man2-ioctl"/>, <link linkend="tr-man3-uname"/>, <link linkend="tr-man5-gettydefs"/>, <link linkend="tr-man5-utmp"/>, <link linkend="tr-man7-termio"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title><para>
+Şu an ki şeytani Getty_ps:<sbr/>
+Kris Gleason  <email>gleasokr@boulder.colorado.edu</email>
+    </para><para>
+Orjinal getty_ps:<sbr/>
+Paul Sutcliffe, Jr.  <email>paul@devon.lns.pa.us</email><sbr/>
+UUCP: ...!rutgers!devon!paul
+    </para><para>
+Autobauding rutinleri Mark Keating &lt;...!utzoo!censor!markk> tarafından önerilen kodlardan alınmıştır.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Mart 2004</para>
+  </refsect1>
+</refentry>

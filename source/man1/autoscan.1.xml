@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: autoscan.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-autoscan">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>autoscan</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">autoscan 2.59</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2003</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>autoscan</refname>
+    <refpurpose>Öncü bir configure.in üretir</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+<synopsis><command>autoscan</command> [<emphasis>seçenek</emphasis>] [<emphasis>kaynakdizini</emphasis>]
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+Belirtilmişse <varname>kaynakdizini</varname> olarak verilen dizinin altındaki dizinleri kapsayacak şekilde, verilmediyse komutun çalıştırıldığı dizinin altındaki kaynak kodlarını inceler. Kaynak dosyalarında genel taşınabilirlik sorunları bakımından arama yapar, '<filename>configure.ac</filename>'nin eksiksizliğini denetler ve bu paketin '<filename>configure.ac</filename>' dosyasının öncüsü olan '<filename>configure.scan</filename>' dosyasını oluşturur.
+  </para><refsect2><title>Seçenekler:</title><para>
+    <glosslist><glossentry>
+      <glossterm><command>-h</command></glossterm>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para>Bu yardım metnini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>İşlemi ayrıntılı raporlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--debug</command></glossterm>
+        <glossdef><para>Geçici dosyalar kaldırılmaz.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+  </refsect2><refsect2><title>Kütüphane dizinleri:</title><para>
+    <glosslist><glossentry>
+      <glossterm><command>-B</command></glossterm>
+      <glossterm><command>--prepend-include=</command><varname>dizin</varname></glossterm>
+      <glossdef><para><varname>dizin</varname> olarak verilen dizini arama yolunun önüne ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-I</command></glossterm>
+      <glossterm><command>--include=</command><varname>dizin</varname></glossterm>
+      <glossdef><para><varname>dizin</varname> olarak verilen dizini arama yolunun sonuna ekler.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </para></refsect2></refsect1><refsect1><title>YAZAN</title><para>
+David J. MacKenzie ve Akim Demaille tarafından yazılmıştır.
+    </para></refsect1><refsect1><title>GERİBİLDİRİM</title><para>
+Lütfen, böcekleri ve hataları  <email>bug-autoconf@gnu.org</email> adresine bildirin.
+    </para></refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2003 Free Software Foundation, Inc.<sbr/>Bu bir serbest yazılımdır; kopyalama koşulları için kaynak koduna bakınız. Hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-autoconf"/>, <link linkend="tr-man1-automake"/>, <link linkend="tr-man1-autoheader"/>, <link linkend="tr-man1-autoreconf"/>, <link linkend="tr-man1-autoupdate"/>, <link linkend="tr-man1-config.guess"/>, <link linkend="tr-man1-config.sub"/>, <link linkend="tr-man1-ifnames"/>, <link linkend="tr-man1-libtool"/>.
+    </para><para>
+<command>autoconf</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>autoscan</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info autoscan</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Mehmet Büyüközer <email>mbuyukozer@gmx.co.uk</email>, Mart 2004</para>
+  </refsect1>
+</refentry>

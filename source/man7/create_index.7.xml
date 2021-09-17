@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_index.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_index">
+ <refmeta>
+  <refentrytitle>CREATE INDEX</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE INDEX</refname>
+  <refpurpose>yeni bir indeks tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [ <command>UNIQUE</command> ] <command>INDEX</command> <emphasis>isim</emphasis> <command>ON</command> <emphasis>tablo</emphasis> [ <command>USING</command> <emphasis>yöntem</emphasis> ]
+    ( { <emphasis>sütun</emphasis> | ( <emphasis>ifade</emphasis> ) } [ <emphasis>işleç_sınıfı</emphasis> ] [, ...] )
+    [ <command>TABLESPACE</command> <emphasis>tablo_alanı</emphasis> ]
+    [ <command>WHERE</command> <emphasis>dayanak</emphasis> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE INDEX</command> belirtilen bir tablo üzerinden bir indeks oluşturur. İndekslerin birincil kullanım amacı veritabanı başarımını arttırmaktır (ancak, uygunsuz kullanımı başarımın düşmesiyle sonuçlanır).
+  </para><para>
+İndeks için anahtar alanları sütun isimleri olarak ya da parantez içinde yazılmış ifadeler olarak belirtilir. İndeksleme yöntemi çoksütunlu indeksleri destekliyorsa, çok sayıda alan belirtilebilir.
+  </para><para>
+Bir indeks alanı tablonun satırındaki bir veya daha fazla sütun değerinden hesaplanan bir ifade olabilir. Bu özellik, bazı temel veri dönüşümlerini temel alan veriye daha hızlı erişim sağlamak için kullanılabilir. Örneğin, <literal>upper(col)</literal>'a göre hesaplanan bir indeks, <command>WHERE upper(col) = 'JIM'</command> gibi bir deyimin belirtilebilmesini mümkün kılar.
+  </para><para>
+<productname>PostgreSQL</productname> B-tree, R-tree, hash ve GiST indeksleme yöntemlerini içerir. B-tree indeksleme yöntemi bir Lehman-Yao yüksek bilinirlikli B-tree gerçeklenimidir. R-tree indeksleme yöntemi, Gutman'in dördül ayırma algoritması kullanılarark gerçeklenir. Hash indeksleme yöntemi ise Litwin'in bir gerçeklenimidir. Kullanıcılar da kendi indeksleme yöntemini tanımlayabilir ama bu oldukça karmaşıktır.
+  </para><para>
+<command>WHERE</command> deyiminin varlığında, bir kısmî indeks oluşturulur. Bir kısmî indeks, bir tablonun kalanına göre indeksleme bakımından daha kullanışlı olan bir bölümündeki girdileri içeren bir indekstir. Örneğin, hem toptan hem de perakende siparişleri içeren bir tablomuz olsun, perakende siparişlerin tabloda daha az bulunmasına karşın en sık kullanılanların bunlar olduğunu varsayalım. Sadece bu kayıtlarla ilgili bir indeks oluşturarak başarımı önemli ölçüde arttırabilirsiniz. Başka bir olası kısmî indeks uygulaması, tablonun bir alt kümesindekilerin eşsizliğini sağlamak için <command>WHERE</command> ile <command>UNIQUE</command>'in birlikte kullanımıdır.
+  </para><para>
+<command>WHERE</command> ile kullanılan ifade sadece indekslenen tablonun sütunlarına başvurabilir ama sadece indekslenen değil, bütün sütunlar kullanılabilir. Şimdilik, <command>WHERE</command> deyimi içinde altsorgular ve ortak değer işlevleri de kullanılamamaktadır. Aynı kısıtlamalar ifadelerdeki indeks alanları için de geçerlidir.
+  </para><para>
+Bir indeks tanımında kullanılan bütün işlevler ve işleçler <command>IMMUTABLE</command> imli olmalıdır, yani sonuçlar bunların argümanlarına bağımlı olmalı ve argümanları asla yorumlanabilir olmamalıdır (başka bir tablonun içeriği ya da şimdiki zaman kullanılamaz). Bu sınırlama indeksin davranışının iyi tanımlanmış olmasını sağlar. Bir kullanıcı tanımlı işlevi bir indeks ifadesinde ya da <command>WHERE</command> deyiminde kullanmak istiyorssanız, işlevi tanımlarken <command>IMMUTABLE</command> imli olmasını sağlamayı unutmayın.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><command>UNIQUE</command></term>
+      <listitem><para>İndeks oluşturulurken ve her veri eklenişinde, tabloda birbirinin aynı değerler bulunmaması için sistemin sınama yapmasını sağlar. Girdilerin yinelenmesine sebep olacak bir veri girme veya güncelleme işleminin yapılmaya çalışılması bir hata üretecektir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Oluşturulacak indeksin ismi; burada şema nitelemeli isimler kullanılamaz. İndeks daima tabloyu içeren şemada oluşturulur.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>tablo</replaceable></term>
+      <listitem><para>İndekslencek tablonun ismi (şema nitelemeli olabilir).
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>yöntem</replaceable></term>
+      <listitem><para>İndeks için kullanılacak yöntemin ismi. Değer olarak, <literal>btree</literal>, <literal>hash</literal>, <literal>rtree</literal> ve <literal>gist</literal> verilebilir. <literal>btree</literal> öntanımlı yöntemdir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>sütun</replaceable></term>
+      <listitem><para>Tablo sütunun ismi.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>ifade</replaceable></term>
+      <listitem><para>Tablonun bir ya da daha fazla sütünu ile ilintili bir ifade. İfade yukarıdaki sözdiziminde gösterildiği gibi parantez içinde yazılmalıdır. Ancak, ifade bir işlev çağrısı biçimindeyse parantez içine alınmayabilir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>işleç_sınıfı</replaceable></term>
+      <listitem><para>Bir işleç sınıfının ismi. Ayrıntılar için aşağıya bakınız.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>tablo_alanı</replaceable></term>
+      <listitem><para>İndeksin oluşturulacağı tablo alanı. Belirtilmezse, <literal>default_tablespace</literal> yapılandırma değişkeninin değeri; bu değişkene bir değer atanmamışsa veritabanının öntanımlı tablo alanı kullanılır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>dayanak</replaceable></term>
+      <listitem><para>Bir kısmî indeks için kısıt ifadesi.
+      </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+İndekslerin hangi durumlarda yararlı olduğu, hangi durumlarda kullanılmayacağı, ne zaman kullanıldığı gibi bilgileri<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/indexes.html"/> adresinde bulabilirsiniz.
+  </para><para>
+Şimdilik, çok sütunlu indekslerde sadece B-tree ve GiST indeksleme yöntemleri desteklenmektedir. Öntanımlı olarak en fazla 32 alan belirtilebilir. (Bu sınır PostgreSQL kurulum için yapılandırılırken değiştirilebilir.) B-tree şimdilik sadece eşsiz indeksleri desteklemektedir.
+  </para><para>
+Bir işleç sınıfı bir indeksin her sütunu için belirtilebilir. İşleç sınıfı indeks tarafından sütunlar için kullanılacak işleçleri belirler. Örneğin, dört baytlık tamsayılar üzerindeki bir B-tree indeksi <literal>int4_ops</literal> sınıfını kullanırdı; bu işleç sınıfı dört baytlık tamsayıların karşılaştırma işlevlerini içerir. Uygulamada, sütun türüne göre öntanımlı olan işleç sınıfı genellikle yeterli olur. İşleç sınıflarına sahip olmanın ana esprisi, birden fazla anlamlı sıralaması olabilen bazı veri türlerinin olmasıdır. Örneğin, bir karmaşık sayı veri türü için sıralamayı hem gerçel kısmı hem de mutlak değeri için yapmak isteyebiliriz. Bunu veri türü için iki işleç sınıfı tanımlayarak ve indeksi oluştururken bu sınıflardan birini belirterek yapabilirdik. İşleç sınıfları hakkında daha fazla bilgi edinmek için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/indexes-opclass.html"/> ve<sbr/><ulink url="http://www.postgresql.org/uygulamalar/pgsql/xindex.html"/> adreslerine bakınız.
+  </para><para>
+Bir indeksi kaldırmak için <link linkend="tr-man7-drop_index" xreflabel="DROP INDEX"/> kullanılır.
+  </para><para>
+İndeksler öntanımlı olarak <command>IS NULL</command> deyimleri için kullanılmazlar. Böyle durumlarda indeksleri kullanmanın en iyi yolu, <command>IS NULL</command> dayatmasını kullanan bir kısmî indeks oluşturmaktır.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+<literal>films</literal> tablosunun <literal>title</literal> sütunu üzerinde bir B-tree indeksi oluşturmak için:
+  </para><para>
+<programlisting indent="4">CREATE UNIQUE INDEX title_idx ON films (title);
+</programlisting>
+  </para><para>
+<literal>films</literal> tablosunun <literal>code</literal> sütunu üzerinde bir indeks oluşturup, bu indeksin <literal>indexspace</literal> tablo alanında kalması için:
+  </para><para>
+<programlisting indent="4">CREATE INDEX code_idx ON films(code) TABLESPACE indexspace;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE INDEX</command> bir  <productname>PostgreSQL</productname> oluşumudur.  SQL standardında indeksler için bir bahis yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_index" xreflabel="ALTER INDEX"/>,
+<link linkend="tr-man7-drop_index" xreflabel="DROP INDEX"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

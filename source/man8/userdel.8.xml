@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: userdel.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-userdel">
+<remark>.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>userdel</refentrytitle>
+  </refmeta>
+
+  <refnamediv>
+    <refname>userdel</refname>
+    <refpurpose>Bir kullanıcı hesabını ve onunla ilgili dosyaları siler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>userdel</command> [ <command>-r</command> ] <emphasis>kullanıcı</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>userdel</command>, userdel komutu, <varname>kullanıcı</varname> ile belirtilen hesabı silerek, sistem hesap dosyalarını değiştirir. Silinmeye çalışan <varname>kullanıcı</varname> hesabı, sistemde var olan bir hesap olmalıdır. Var olmayan bir hesabı silemezsiniz.
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossdef><para>Kullanıcının ev dizinindeki dosyalar, ev dizininin kendisi ve
+kullanıcının posta havuzu silinir. Diğer dosya sistemlerinde bulunan dosyalar silinmez. Bu nedenle bu dosyaları bulmak ve onları silmek sistem yöneticisinin görevidir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout indent="0">
+<filename>/etc/passwd</filename> - kullanıcı hesap bilgileri
+<filename>/etc/shadow</filename> - güvenli kullanıcı hesap bilgileri
+<filename>/etc/group</filename>  - grup bilgileri
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para>
+Kullanıcı sisteme bağlı ise, <command>userdel</command> komutu ile bu hesabı
+kaldıramazsınız.  Silmeye çalıştığınız hesaba ait çalışan bütün süreçleri öldürmek zorundasınız. Bir NIS istemcisindeki NIS özniteliklerini kaldıramayabilirsiniz. Bu işlem, NIS sunucu üzerinde gerçekleştirilmelidir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-chfn"/>, <link linkend="tr-man1-chsh"/>, <link linkend="tr-man1-passwd"/>, <link linkend="tr-man8-groupadd"/>, <link linkend="tr-man8-groupdel"/>, <link linkend="tr-man8-groupmod"/>, <link linkend="tr-man8-useradd"/>, <link linkend="tr-man8-usermod"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Julianne Frances Haugh <email>jockgrrl@ix.netcom.com</email> tarafından  yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

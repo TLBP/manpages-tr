@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: date.1,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-date">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>date</refentrytitle>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>date</refname>
+    <refpurpose>sistem tarih ve saatini görüntüler veya ayarlar</refpurpose>
+  </refnamediv>
+<refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>date</command> [<emphasis>seçenek</emphasis>]... [<emphasis>+biçim</emphasis>]
+<command>date</command> [<command>-u</command>|<command>--utc</command>|<command>--universal</command>] [<emphasis>MMDDhhmm</emphasis>[[<emphasis>CC</emphasis>]<emphasis>YY</emphasis>][<emphasis>.ss</emphasis>]]
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>date</command> geçerli zamanı belirtilen <varname>biçim</varname>'de görüntüler veya sistem zamanını ayarlar.
+  </para><para><glosslist><glossentry>
+      <glossterm><command>-d</command></glossterm>
+      <glossterm><command>--date=</command><varname>dizge</varname></glossterm>
+      <glossdef><para><varname>dizge</varname> ile belirtilen zamanı gösterir, "şu anı" değil.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--file=</command><varname>tarihdosyası</varname></glossterm>
+        <glossdef><para><varname>tarihdosyası</varname>nın her satırına <command>--date</command> uygulamak gibidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>reference=</command><varname>dosya</varname></glossterm>
+        <glossdef><para><varname>dosya</varname>nın son düzenlenme zamanını gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>--rfc-2822</command></glossterm>
+        <glossdef><para>Tarih dizgesi RFC 2822 uyumlu çıktılanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>--rfc-3339=</command><varname>hassasiyet</varname></glossterm>
+       <glossdef><para>Tarih dizgesi RFC 3339'a uyumlu çıktılanır. <varname>hassasiyet</varname> belirtimi `<literal>date</literal>' (tarih), `<literal>seconds</literal>' (saniye) veya `<literal>ns</literal>' (nanosaniye) ile belirtilebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--set=</command><varname>dizge</varname></glossterm>
+        <glossdef><para>Saati belirtilen <varname>dizge</varname>'ye göre ayarlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossterm><command>--utc</command></glossterm>
+        <glossterm><command>--universal</command></glossterm>
+        <glossdef><para>Zaman, Koordinatlı Evrensel Zamana (UTC) uygun olarak gösterilir/ayarlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini basar ve çıkar.
+        </para></glossdef></glossentry>
+      </glosslist>
+    </para><para>
+<varname>biçim</varname>, çıktı biçimini kontrol etmek içindir.  İkinci kullanımdaki tek geçerli biçim Koordinatlı Evrensel Zamandır (UTC). <varname>biçim</varname>lerin yorumlanışları şu şekildedir:
+</para><para><glosslist><glossentry>
+      <glossterm><command>%%</command></glossterm>
+      <glossdef><para>Sadece <command>%</command> işaretini basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%a</command></glossterm>
+      <glossdef><para>Yerele özgü kısaltılmış gün ismi (Paz, Pzt).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%A</command></glossterm>
+      <glossdef><para>Yerele özgü tam gün ismi; isim uzunlukları değişkendir (Pazar, Pazartesi).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%b</command></glossterm>
+      <glossdef><para>Yerele özgü kısaltılmış ay ismi (Ara, Oca).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%B</command></glossterm>
+      <glossdef><para>Yerele özgü tam gün ismi; isim uzunlukları değişkendir (Aralık, Ocak).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%c</command></glossterm>
+      <glossdef><para>Yerele özgü tarih ve saat (Pzt 23 May 2005 17:46:01 UTC).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%C</command></glossterm>
+      <glossdef><para>Yüzyıl (Yıl yüze bölünür, tamsayı kısım gösterilir) [00-99].
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%d</command></glossterm>
+      <glossdef><para>Ayın günü (01..31).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%D</command></glossterm>
+      <glossdef><para>tarih (aa/gg/yy)
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%e</command></glossterm>
+      <glossdef><para>Boşlukla yastıklanmış ayın günü ( 1..31)
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%F</command></glossterm>
+      <glossdef><para><command>%Y</command>-<command>%m</command>-<command>%d</command> ile aynı.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%g</command></glossterm>
+      <glossdef><para><command>%V</command> hafta sayısıyla eşleşen 2 basamaklı yıl.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%G</command></glossterm>
+      <glossdef><para><command>%V</command> hafta sayısıyla eşleşen 4 basamaklı yıl
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%h</command></glossterm>
+      <glossdef><para><command>%b</command> ile aynı.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%H</command></glossterm>
+      <glossdef><para>Saat (00..23).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%I</command></glossterm>
+      <glossdef><para>Saat (01..12).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%j</command></glossterm>
+      <glossdef><para>yılın günü (001..366)
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%k</command></glossterm>
+      <glossdef><para>saat ( 0..23)
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%l</command></glossterm>
+      <glossdef><para>Saat ( 1..12).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%m</command></glossterm>
+      <glossdef><para>Ay (01..12).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%M</command></glossterm>
+      <glossdef><para>Dakika (00..59).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%n</command></glossterm>
+      <glossdef><para>Satırsonu karakteri.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%N</command></glossterm>
+      <glossdef><para>nanosaniye (000000000..999999999)
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%p</command></glossterm>
+      <glossdef><para>Büyük harfli yerel ÖÖ/öS belirteci (çoğu yerelde boştur).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%P</command></glossterm>
+      <glossdef><para>Küçük harfli yerel öö/ös belirteci (çoğu yerelde boştur).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%r</command></glossterm>
+      <glossdef><para>12 saatlik zaman (ss:dd:SS [ÖÖ]S]).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%R</command></glossterm>
+      <glossdef><para>24 saatlik zaman (ss:dd).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%s</command></glossterm>
+      <glossdef><para>`00:00:00 1970-01-01 UTC'den beri geçen saniye sayısı (bir GNU eklentisidir).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%S</command></glossterm>
+      <glossdef><para>Saniye (00..60); 60, artık saniyeyi belirtebilmek için gereklidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%t</command></glossterm>
+      <glossdef><para>Yatay sekme.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%T</command></glossterm>
+      <glossdef><para>24 saatlik zaman (ss:dd:SS).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%u</command></glossterm>
+      <glossdef><para>Haftanın günü (1..7);  1, Pazartesi'ye karşılıktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%U</command></glossterm>
+      <glossdef><para>Yılın haftası, Pazar günü haftanın ilk günü kabul edilir (00..53).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%V</command></glossterm>
+      <glossdef><para>Yılın haftası, Pazartesi günü haftanın ilk günü kabul edilir (01..53).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%w</command></glossterm>
+      <glossdef><para>Haftanın günü (0..6);  0, Pazar gününe karşılıktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%W</command></glossterm>
+      <glossdef><para>Yılın haftası, Pazartesi günü haftanın ilk günü kabul edilir (00..53).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%x</command></glossterm>
+      <glossdef><para>Yerelin tarih betimlemesi (gg/aa/yy).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%X</command></glossterm>
+      <glossdef><para>Yerelin zaman betimlemesi (<command>%H</command>:<command>%M</command>:<command>%S</command>).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%y</command></glossterm>
+      <glossdef><para>Yılın son iki basamağı (00..99).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%Y</command></glossterm>
+      <glossdef><para>Yıl (1970...).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>%z</command></glossterm>
+      <glossdef><para>+ssdd sayısal zaman dilimi (-0400 gibi).
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>%:z</command></glossterm>
+       <glossdef><para>+ss:dd sayısal zaman dilimi (-04:00 gibi).
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>%::z</command></glossterm>
+       <glossdef><para>+ss:dd:SS sayısal zaman dilimi (-04:00:00 gibi).
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>%:::z</command></glossterm>
+       <glossdef><para>gerekli hassasiyet için : ile sayısal zaman dilimi (-04, +05:30 gibi).
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>%Z</command></glossterm>
+       <glossdef><para>alfabetik zaman dilimi kısaltması(EET gibi).
+        </para></glossdef>
+      </glossentry></glosslist></para><para>
+Öntanımlı olarak, <command>date</command> sayısal alanları sıfırlarla ayırır. GNU <command>date</command> ise <command>%</command> ve bir sayısal yönerge arasında kullanıldığında aşağıdaki niteleyicileri tanır:
+  </para><para><glosslist><glossentry>
+      <glossterm><literal>`-'</literal></glossterm>
+      <glossdef><para>(tire) alanları ayırmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>`_'</literal></glossterm>
+      <glossdef><para>(altçizgi) alanları boşluk kullanarak ayırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><literal>`0'</literal></glossterm>
+       <glossdef><para>alanları sıfır kullanarak ayırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><literal>`^'</literal></glossterm>
+       <glossdef><para>mümkünse büyük harf kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><literal>`#'</literal></glossterm>
+       <glossdef><para>mümkünse büyük harf için küçük harf veya tersi kullanılır.
+        </para></glossdef>
+      </glossentry></glosslist></para><para>
+Bu niteleyicilerden sonra isteğe bağlı olarak alan genişliği bir ondalık sayı olarak belirtilir, bunu isteğe bağlı bir değiştirici izleyebilir: E ile mümkünse yerelin diğer gösterimi, O lie eğer elverişli isi yerelin diğer sayısal simgeleri ifade edilir.
+  </para></refsect1><refsect1><title>YAZAN</title><para>
+David MacKenzie tarafından yazılmıştır.
+  </para></refsect1><refsect1><title>GERİBİLDİRİM</title><para>
+Yazılım hatalarını <email>bug-coreutils@gnu.org</email> adresine bildirin.
+  </para></refsect1><refsect1><title>TELİF HAKKI</title><para>
+   Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>date</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>date</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils date</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın KOLUKISA <email>yalcink01@yahoo .com</email>, Mayıs 2005</para>
+    <para>Kasım 2006'da güncellenmiştir.</para></refsect1>
+</refentry>

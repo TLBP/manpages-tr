@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: fdformat.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-fdformat">
+<remark>.\" Copyright 1992, 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>fdformat</refentrytitle>
+    <refmiscinfo class="header">Linux Yazılımcısının Lılavuzu</refmiscinfo>
+    <refmiscinfo class="date">1 Şubat 1993</refmiscinfo>
+    <refmiscinfo class="domain">Linux 0.99</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>fdformat</refname>
+    <refpurpose>bir diskete düşük seviyeli biçimleme uygular</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>fdformat </command>[ <command>-n</command> ] <emphasis>aygıt</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>fdformat</command>, bir diskete düşük seviyeli biçemleme uygular. Aygıt, genellikle aşağıdakilerden birisidir (disketler için, asıl aygıt numarası 2 [major=2] dir ve alt aygıt numaraları [minor] bilgilendirme amacı ile gösterilmektedir):
+    </para><para>
+<literallayout>/dev/fd0d360  (minor = 4)
+/dev/fd0h1200 (minor = 8)
+/dev/fd0D360  (minor = 12)
+/dev/fd0H360  (minor = 12)
+/dev/fd0D720  (minor = 16)
+/dev/fd0H720  (minor = 16)
+/dev/fd0h360  (minor = 20)
+/dev/fd0h720  (minor = 24)
+/dev/fd0H1440 (minor = 28)
+
+/dev/fd1d360  (minor = 5)
+/dev/fd1h1200 (minor = 9)
+/dev/fd1D360  (minor = 13)
+/dev/fd1H360  (minor = 13)
+/dev/fd1D720  (minor = 17)
+/dev/fd1H720  (minor = 17)
+/dev/fd1h360  (minor = 21)
+/dev/fd1h720  (minor = 25)
+/dev/fd1H1440 (minor = 29)
+</literallayout>
+    </para><para>
+Genel disket aygıtları, <filename>/dev/fd0</filename> ve <filename>/dev/fd1</filename> dir. Standart dışı bir biçim kullanıldığı veya biçim daha önceden özdevinimli olarak saptanamadığı zaman, <command>fdformat</command> hata verecektir. Bu durumda, disk parametrelerini yüklemek için <link linkend="tr-man8-setfdprm"/> kullanın.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist><glossentry>
+      <glossterm><command>-n</command></glossterm>
+      <glossdef><para>Doğrulama yapılmaz. Bu seçenek ile, biçimleme bittikten sonra yapılan doğrulama işlemi iptal edilmiş olur.
+      </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man4-fd"/>, <link linkend="tr-man8-emkfs"/>, <link linkend="tr-man8-mkfs"/>, <link linkend="tr-man8-setfdprm"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Werner Almesberger <email>almesber@nessie.cs.id.ethz.ch</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

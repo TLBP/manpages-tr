@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: mknod.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-mknod">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>mknod</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>mknod</refname>
+    <refpurpose>blok veya karakter özel dosyalarını oluşturur</refpurpose>
+  </refnamediv><refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mknod</command> [<emphasis>seçenek</emphasis>] <emphasis>isim</emphasis> <emphasis>tür</emphasis> [<emphasis>ana alt</emphasis>]
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<varname>isim</varname> özel dosyasını belirtilen <varname>tür</varname>de oluşturur.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar, kısa seçenekler için de zorunludur.
+    </para><para><glosslist><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--mode=</command><varname>kip</varname></glossterm>
+        <glossdef><para>İzin kiplerini ayarlar (tıpkı <command>chmod</command> gibi) ama <literal>a=rw</literal> gibi ya da izin maskesi olarak değil.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım metnini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+<varname>ana</varname> ve <varname>alt</varname> aygıt numaraları <varname>tür</varname> b,c,u iken belirtilmelidir, <literal>p</literal> türü ile kullanılmaz. <varname>ana</varname> ve <varname>alt</varname> aygıt numaraları <literal>0x</literal> veya <literal>0X</literal> ile başlıyorsa onaltılık tabanda, <literal>0</literal> ile başlıyorsa sekizlik tabanda, aksi takdirde onluk tabanda belirtildiği varsayılır. <varname>tür</varname> şunlardan biri olabilir:
+    </para><para><glosslist><glossentry>
+        <glossterm><command>b</command></glossterm>
+        <glossdef><para>bir blok (tamponlu) özel dosyası oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>c</command></glossterm>
+        <glossterm><command>u</command></glossterm>
+        <glossdef><para>bir karakter (tamponsuz) özel dosyası oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>p</command></glossterm>
+        <glossdef><para>bir FIFO oluşturur.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man2-mknod"/>
+   </para><para>
+<command>mknod</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>mknod</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils mknod</command></para></glossdef>
+      </glossentry></glosslist>
+    </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Ağustos 2004</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>

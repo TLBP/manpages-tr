@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: chage.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-chage"><title>chage</title>
+<remark>
+.\" Copyright 1990 - 1994 Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>chage</refentrytitle>
+  </refmeta>
+  <refnamediv>
+    <refname>chage</refname>
+    <refpurpose>kullanıcı parolasının son kullanma tarihini değiştirir</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+<synopsis><command>chage</command> [<command>-m </command><emphasis>asgari-gün-sayısı</emphasis>]  [<command>-M </command><emphasis>azami-gün-sayısı</emphasis>]  [<command>-d </command><emphasis>son-gün</emphasis>]
+      [<command>-I </command><emphasis>pasif</emphasis>]  [<command>-E </command><emphasis>son-tarih</emphasis>]  [<command>-W </command><emphasis>uyarı-gün-sayısı</emphasis>]  <emphasis>kullanıcı</emphasis>
+
+<command>chage -l </command><emphasis>kullanıcı</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>AÇIKLAMA</title>
+    <para>
+<command>chage</command>, parolanın son değiştirilme tarihinden, değiştirilmesi gerekecek olan güne kadar geçen sürenin gün cinsinde miktarını değiştirir. Bu bilgi, sistem tarafından, kullanıcının ne zaman parolasını değiştirmesi gerektiğini bulmakta kullanılır. Bu komut root kullanıcıya tahsis edilmiştir. Sadece <command>-l</command> seçeneği, normal kullanıcılar tarafından, parola ve hesaplarının son kullanma tarihini görmek amacı ile kullanılabilir.
+    </para><para>
+<command>-m</command> seçeneği ile belirtilen <varname>asgari-gün-sayısı</varname>'nın değeri, parola değişiklikleri arasında geçecek  asgari gün sayısıdır. Buraya sıfır değeri verilirse, kullanıcı istediği bir zaman parolasını değiştirebilir.
+    </para><para>
+<command>-M</command> seçeneği ile belirtilen <varname>azami-gün-sayısı</varname>'nın değeri, parolanın geçerliliğinin biteceği güne kadar geçecek zamanın gün cinsinden miktarıdır.  <varname>azami-gün-sayısı</varname> artı <varname>son-gün</varname>, içinde bulunulan günden az ise, kullanıcı hesabını kullanmadan önce parolasını değiştirmek zorunda kalacaktır. Bu olay, <command>-W</command> seçeneğini kullanılarak da ayarlanabilir. Bu seçenek sayesinde kullanıcıya bu olay hakkında uyarı mesajı verebilirsiniz.
+    </para><para>
+<command>-d</command> seçeneği ile, <varname>son-gün</varname>'ün değeri 1 Ocak 1970'den parolanın son değişeceği güne kadar olan gün sayısıdır. YYYY-AA-GG biçiminde bir tarih olarak da belirtilebilir (veya  yaşadığınız bölgede kabul edilen tarih biçimi ile).
+    </para><para>
+<command>-E</command> seçeneği, kullanıcı hesabının hangi tarihten sonra erişilemez olduğunu ayarlamak için kullanılır. <varname>son-tarih</varname>'in değeri; 1 Ocak 1970'den hesabın kilitleneceği güne kadar olan sürenin gün cinsinden miktarıdır. YYYY-AA-GG biçiminde bir tarih olarak da belirtilebilir (veya  yaşadığınız bölgede kabul edilen tarih biçimi ile).  Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
+    </para><para>
+<command>-I</command> seçeneği, bir parolanın pasif hale geçmesi ile  hesabın kilitlenmesi arasında geçecek olan gün miktarını ayarlamak için kullanılır.  <varname>pasif</varname> seçeneği, pasif geçecek gün sayısıdır. 0 (sıfır) değeri bu özelliği etkisizleştirir.  Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
+    </para><para>
+<command>-W</command> seçeneği, bir parola değişikliğinin gerekeceği günden kaç gün önce uyarı verileceğini ayarlamak için kullanılır. <varname>uyarı-gün-sayısı</varname> seçeneği, kullanıcının parolasının geçersiz kalmasından önce kullanıcının uyarılacağı gün sayısıdır.
+    </para><para>
+Şayet hiçbir seçenek belirtilmezse, <command>chage</command> etkileşimli kipe geçer. O an için geçerli olan bütün değerleri ekrana yazar. Bu alanlardaki değerleri değiştirmek için yeni değerler girilir. Şayet geçerli değerleri kullanmak istiyorsanız bu satırları boş bırakın. Geçerli değerler <command>[ ]</command> işaretleri arasında gösterilir.
+    </para>
+  </refsect1><refsect1><title>SINIRLAMALAR</title>
+    <para>
+<command>chage</command> uygulamasının <filename>/etc/shadow</filename> dosyasına ihtiyacı vardır.  Şayet parolalar <filename>/etc/passwd</filename> dosyası içinde saklanıyorsa, <command>chage</command> uygulamasının işlevselliği ortadan kalkar.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<filename>/etc/passwd</filename> - kullanıcı hesabı bilgileri<sbr/>
+<filename>/etc/shadow</filename> - gölge parolalı kullanıcı hesabı bilgileri
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-passwd"/>, <link linkend="tr-man5-shadow"/>.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Julianne Frances Haugh <email>jockgrrl@ix.netcom.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>

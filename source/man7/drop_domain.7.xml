@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_domain.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_domain">
+ <refmeta>
+  <refentrytitle>DROP DOMAIN</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP DOMAIN</refname>
+  <refpurpose>bir veri alanını kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP DOMAIN</command> <emphasis>isim</emphasis> [, ...]  [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP DOMAIN</command> bir veri alanını kaldıracaktır.  Bir veri alanını silebilmek için sahibi olmalısınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Silinecek veri alanının ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>Veri alanına bağımlı nesnelerin de (örn, tablo sütunları) silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>Veri alanına bağımlı nesneler varsa alanın silinmesini engeller. Bu öntanımlıdır.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+<type>box</type> isimli veri alanını kaldırmak için:
+ </para><para>
+<programlisting indent="4">DROP DOMAIN box;</programlisting>
+  </para></refsect1><refsect1>
+  <title>Uyumluluk</title><para>
+Bu komut SQL standardıyla uyumludur.
+  </para></refsect1><refsect1>
+  <title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_domain" xreflabel="CREATE DOMAIN"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

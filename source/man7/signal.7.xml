@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: signal.7.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man7-signal">
+<remark>.\" Copyright (c) 1993 by Thomas Koenig (ig25 (at) rz.uni-karlsruhe.de)
+.\" Copyright (c) 2002 by Michael Kerrisk (mtk16 (at) ext.canterbury.ac.nz)
+.\"
+.\" Permission is granted to make and distribute verbatim copies of this
+.\" manual provided the copyright notice and this permission notice are
+.\" preserved on all copies.
+.\"
+.\" Permission is granted to copy and distribute modified versions of this
+.\" manual under the conditions for verbatim copying, provided that the
+.\" entire resulting derived work is distributed under the terms of a
+.\" permission notice identical to this one
+.\"
+.\" Since the Linux kernel and libraries are constantly changing, this
+.\" manual page may be incorrect or out-of-date.  The author(s) assume no
+.\" responsibility for errors or omissions, or for damages resulting from
+.\" the use of the information contained herein.  The author(s) may not
+.\" have taken the same level of care in the production of this manual,
+.\" which is licensed free of charge, as they might when working
+.\" professionally.
+.\"
+.\" Formatted or processed versions of this manual, if unaccompanied by
+.\" the source, must acknowledge the copyright and authors of this work.
+.\" License.
+.\" Modified Sat Jul 24 17:34:08 1993 by Rik Faith (faith(at)cs.unc.edu)
+.\" Modified Sun Jan  7 01:41:27 1996 by Andries Brouwer (aeb(at)cwi.nl)
+.\" Modified Sun Apr 14 12:02:29 1996 by Andries Brouwer (aeb(at)cwi.nl)
+.\" Modified Sat Nov 13 16:28:23 1999 by Andries Brouwer (aeb(at)cwi.nl)
+.\" Modified 10 Apr 2002, by Michael Kerrisk (mtk16(at)ext.canterbury.ac.nz)
+.\" Modified  7 Jun 2002, by Michael Kerrisk (mtk16(at)ext.canterbury.ac.nz)
+.\"     Added information on real-time signals
+.\" Modified 13 Jun 2002, by Michael Kerrisk (mtk16(at)ext.canterbury.ac.nz)
+.\"     Noted that SIGSTKFLT is in fact unused
+.\"
+</remark>
+  <refmeta>
+    <manvolnum>7</manvolnum>
+    <refentrytitle>signal</refentrytitle>
+    <refmiscinfo class="header">Linux Yazılımcılarının Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">Linux 2.4.18</refmiscinfo>
+    <refmiscinfo class="date">13 Haziran 2002</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>signal</refname>
+    <refpurpose>kullanılabilir sinyallerin listesi</refpurpose>
+  </refnamediv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+    </para><para>
+Linux hem POSIX güvenilir sinyallerini (bundan sonra "standart sinyaller" denecektir) hem de POSIX gerçek zamanlı sinyallerini destekler.
+    </para>
+    <refsect2><title>Standart Sinyaller</title>
+      <para>
+Linux aşağıda listelenen standart sinyalleri desteklemektedir. Sinyal numaralarının bazıları "Değer" sütununda görüldüğü gibi mimariye bağımlıdır. (Üç değer verilen yerlerde ilk değer genelde alpha ve sparc içindir, ortadaki değer i386, ppc ve sh için, sonuncusu ise mips içindir. - işareti sinyalin o mimaride bulunmadığını gösterir.)
+      </para><para>
+Tablonun "Eylem" sütunundaki girdiler sinyallerin öntanımlı eylemlerini gösterir:
+      </para><para>
+        <glosslist><glossentry>
+          <glossterm>Son</glossterm>
+          <glossdef><para>Öntanımlı eylem sürecin sonlandırılmasıdır.
+          </para></glossdef>
+        </glossentry><glossentry>
+          <glossterm>Yok</glossterm>
+          <glossdef><para>Öntanımlı eylem sinyalin yoksayılmasıdır.
+          </para></glossdef>
+        </glossentry><glossentry>
+          <glossterm>Core</glossterm>
+          <glossdef><para>Öntanımlı eylem sürecin sonlandırılması ve <filename>core</filename> dosyası çıktılanmasıdır.
+          </para></glossdef>
+        </glossentry><glossentry>
+          <glossterm>Dur</glossterm>
+          <glossdef><para>Öntanımlı eylem sürecin durdurulmasıdır.
+          </para></glossdef>
+        </glossentry></glosslist>
+      </para><para>
+Sinyaller ilk defa orginal POSIX.1 standardında açıklanmıştır.
+      </para><para>
+<literallayout>
+Sinyal    Değer    Eylem  Açıklama
+-------------------------------------------------------------------------
+<command>SIGHUP</command>       1     Son    Denetleyen uçbirimde hangup saptandı
+                           veya denetleyen sürecin ölümü
+<command>SIGINT</command>       2     Son    Klavyeden sistem kesmesi
+<command>SIGQUIT</command>      3     Core   Klavyeden çıkış
+<command>SIGILL</command>       4     Core   Kuraldışı komut
+<command>SIGABRT</command>      6     Core   abort(3)'den çık sinyali
+<command>SIGFPE</command>       8     Core   Kayan nokta hatası
+<command>SIGKILL</command>      9     Son    Öldür sinyali
+<command>SIGSEGV</command>     11     Core   Bellek başvurusu geçersiz
+<command>SIGPIPE</command>     13     Son    Kırık boruhattı: okuyucusu olmayan boruya yazma
+<command>SIGALRM</command>     14     Son    alarm(2)'den zamanlayıcı sinyali
+<command>SIGTERM</command>     15     Son    Sonlandırma sinyali
+<command>SIGUSR1</command>  30,10,16  Son    Kullanıcı tanımlı sinyal 1
+<command>SIGUSR2</command>  31,12,17  Son    Kullanıcı tanımlı sinyal 2
+<command>SIGCHLD</command>  20,17,18  Yok    Alt süreç durdu ya da sonlandırıldı
+<command>SIGCONT</command>  19,18,25         Durmuşsa devam etsin
+<command>SIGSTOP</command>  17,19,23  Dur    Süreci durdur
+<command>SIGTSTP</command>  18,20,24  Dur    tty'de yazmayı durdur
+<command>SIGTTIN</command>  21,21,26  Dur    artalan süreci için tty girdisi
+<command>SIGTTOU</command>  22,22,27  Dur    artalan süreci için tty çıktısı
+</literallayout>
+      </para><para>
+<command>SIGKILL</command> ve <command>SIGSTOP</command> sinyalleri yakalanamaz, engellenemez ve yoksayılamaz.
+      </para><para>
+Aşağıdaki sinyaller POSIX.1 standardında yoktur, SUSv2 ve SUSv3 / POSIX 1003.1-2001 standartlarında açıklanmıştır.
+      </para><para>
+<literallayout>
+Sinyal      Değer    Eylem  Açıklama
+-------------------------------------------------------------------------
+<command>SIGBUS</command>     10,7,10   Core   Taşıt hatası (hatalı bellek erişimi)
+<command>SIGPOLL</command>              Son    Kutuplanabilir olay (Sys V). SIGIO ile aynı.
+<command>SIGPROF</command>    27,27,29  Son    Profilleme zamanlayıcısında zamanaşımı
+<command>SIGSYS</command>     12,-,12   Core   İşlev argümanı hatalı (SVID)
+<command>SIGTRAP</command>       5      Core   İz sürme/noktasal durdurma kapanı
+<command>SIGURG</command>     16,23,21  Yok    Soket üzerinde acil durum (4.2 BSD)
+<command>SIGVTALRM</command>  26,26,28  Son    Sanal uyarı saati (4.2 BSD)
+<command>SIGXCPU</command>    24,24,30  Core   İşlemci zaman sınırı aşıldı (4.2 BSD)
+<command>SIGXFSZ</command>    25,25,31  Core   Dosya boyut sınırı aşıldı (4.2 BSD)
+</literallayout>
+      </para><para>
+Linux 2.2 dahil ve daha öncesinde <command>SIGSYS</command>,  <command>SIGXCPU</command>,  <command>SIGXFSZ</command> ve (SPARC ve MIPS dışındaki mimarilerde) <command>SIGBUS</command> sinyali için öntanımlı davranış (<filename>core</filename> çıktılanmaksızın) süreci sonlandırmaktı. (<command>SIGXCPU</command> ve <command>SIGXFSZ</command> sinyali için bazı Unix'lerde öntanımlı davranış bir <filename>core</filename> çıktılamaksızın süreci sonlandırmak şeklindedir.) Linux 2.4 bu sinyaller için POSIX
+1003.1-2001 gereksinimlerine uygun olarak süreci sonlandırırken bir <filename>core</filename> çıktılamaktadır.
+      </para><para>
+Diğer sinyaller aşağıdadır:
+      </para><para>
+<literallayout>
+Sinyal      Değer    Eylem  Açıklama
+-------------------------------------------------------------------------
+<command>SIGIOT</command>        6      Core   IOT kapanı. SIGABRT ile eşanlamlı
+<command>SIGEMT</command>      7,-,7    Son
+<command>SIGSTKFLT</command>   -,16,-   Son    ek işlemcide yığıt hatası (kullanılmadı)
+<command>SIGIO</command>      23,29,22  Son    G/Ç şimdi nümkün (4.2 BSD)
+<command>SIGCLD</command>      -,-,18   Yok    SIGCHLD ile eşanlamlı
+<command>SIGPWR</command>     29,30,19  Son    Güç kaybı (System V)
+<command>SIGINFO</command>     29,-,-          SIGPWR ile eşanlamlı
+<command>SIGLOST</command>     -,-,-    Son    Dosya kilidi kaybı
+<command>SIGWINCH</command>   28,28,20  Yok    Pencere boyutlandırma sinyali (4.3 BSD, Sun)
+<command>SIGUNUSED</command>   -,31,-   Son    Kullanılmamış sinyal (SIGSYS olacak)
+</literallayout>
+      </para><para>
+29 numaralı sinyal bir alpha için <command>SIGINFO</command> / <command>SIGPWR</command> iken sparc için <command>SIGLOST</command>'dur.
+      </para><para>
+<command>SIGEMT</command> sinyali POSIX 1003.1-2001 standardında belirtilmemesine rağmen çoğu Unix'de rastlandığı yerde öntanımlı eylem olarak genellikle süreci sonlandırır ve bir core çıktılar.
+      </para><para>
+<command>SIGPWR</command> (POSIX 1003.1-2001 standardında belirtilmemiştir) sinyali de bu Unix'lerde rastlandığı yerde öntanımlı eylem olarak genellikle yoksayılır.
+      </para><para>
+<command>SIGIO</command> (POSIX 1003.1-2001 standardında belirtilmemiştir) sinyali de başka birçok Unix'de öntanımlı olarak yoksayılır.
+      </para>
+    </refsect2><refsect2><title>Gerçek Zamanlı Sinyaller</title>
+      <para>
+Linux, POSIX.4'de tanımlı (ve şimdi POSIX 1003.1-2001'de de bulunan) gerçek zamanlı oluşumlar olarak gerçek zamanlı sinyalleri destekler.  Linux, 32'den (<command>SIGRTMIN</command>) 63'e (<command>SIGRTMAX</command>) kadar numaralı 32 tane gerçek zamanlı sinyal destekler. (Gerçek zamanlı sinyallerin aralıkları Unix'ler arasında değişiklik gösterdiğinden, uygulamalar gerçek zamanlı sinyalleri daima <command>SIGRTMIN</command>+n sözdizimi ile kullanmalıdır.)
+      </para><para>
+Standart sinyallerin tersine gerçek zamanlı sinyallerin önceden tanımlı anlamları yoktur: gerçek zamanlı sinyallerin tümü uygulama tanımlı amaçlar için kullanılır. (Yine de gerçek zamanlı sinyallerin ilk üçünü LinuxThreads oluşumları kullanır.)
+      </para><para>
+Gerçek zamanlı sinyaller aşağıdaki özelliklere sahiptir:
+      </para><para>
+        <orderedlist userlevel="4">
+          <listitem><para>
+Gerçek zamanlı sinyallerin çoklu gerçeklemeleri kuyruklanabilir. Tersine olarak, bir standart sinyal bloklanmış olduğu halde çoklu gerçeklemeleri kulanılmışsa sadece bir gerçeklemesi kuyruklanabilir.
+          </para></listitem><listitem><para>
+Bir sinyal <command>sigqueue</command>(2) kullanılarak gönderilmişse, sinyalle birlikte bir değer (bir tamsayı ya da gösterici) gönderilebilir. Sinyali alan süreç <command>sigaction</command>(2)'la <command>SA_SIGACTION</command> bayrağını kullanarak bu sinyal için bir tutucu oluşturursa, bu süreç veriyi, tutucuya ikinci argüman olarak aktarılan <varname>siginfo_t</varname> yapısının  <varname>si_value</varname> alanı üzerinden sağlayabilir. Diğer taraftan, bu yapının <varname>si_pid</varname> ve <varname>si_uid</varname> alanları sinyali gönderen sürecin gerçek kullanıcı kimliği ile süreç kimliğini (PID) elde etmekte kullanılabilir.
+          </para></listitem><listitem><para>
+Gerçek zamanlı sinyaller garanti edilmiş bir sırada teslim edilir. Aynı türdeki çoklu gerçek zamanlı sinyaller gönderildikleri sırayla teslim edilir. Bir sürece farklı gerçek zamanlı sinyaller gönderilmişse, en düşük numaralı sinyalden başlayarak teslim edilirler (yani düşük numaralı sinyallerin önceliği daha yüksektir.).
+          </para></listitem>
+        </orderedlist>
+      </para><para>
+Eğer bir süreç için hem standart hem de gerçek zamanlı sinyaller askıdaysa, POSIX hangisinin önce teslim edileceğini belirlememiştir. Linux, benzer bir çok gerçeklemede olduğu gibi böyle bir durumda standart sinyallere öncelik verir.
+      </para><para>
+POSIX'e uygun olarak, bir oluşum, bir sürece kuyruklanacak gerçek zamanlı sinyallerin sayısının en azından <literal>_POSIX_SIGQUEUE_MAX</literal> (32) olmasına izin vermelidir. Bunula birlikte, süreç başına bir sınır koymaktansa, Linux tüm süreçler için kuyruklanacak gerçek zamanlı sinyallerin sayısı için sistem çapında bir sınır koyar. Bu sınır <filename>/proc/sys/kernel/rtsig-max</filename> dosyasında görülebilir ve izinlere bağlı olarak değiştirilebilir. <filename>/proc/sys/kernel/rtsig-max</filename> ile ilgili bir dosya ile de kaç tane gerçek zamanlı sinyalin kuyruklanmış olduğu görülebilir.
+      </para>
+    </refsect2>
+  </refsect1><refsect1><title>UYUMLULUK</title>
+    <para>POSIX.1</para>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>
+<command>SIGIO</command> ve <command>SIGLOST</command> aynı değere sahiptir. Sonuncusu çekirdek kaynak kodunda iptal edilmiştir, ancak hala bazı yazılımların derleme süreçleri 29 numaralı sinyalin <command>SIGLOST</command> olduğunu düşünüyor.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-kill"/>, <link linkend="tr-man2-kill"/>, <link linkend="tr-man2-setitimer"/>, <link linkend="tr-man2-sigaction"/>, <link linkend="tr-man2-signal"/>, <link linkend="tr-man2-sigprocmask"/>, <link linkend="tr-man2-mask"/>, <link linkend="tr-man2-sigqueue"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>
+

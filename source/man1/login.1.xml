@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: login.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-login">
+<remark>
+.\" Copyright 1993 Rickard E. Faith (faith@cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>login</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">util-linux 1.6</refmiscinfo>
+    <refmiscinfo class="date">4 Kasım 1996</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>login</refname>
+    <refpurpose>Kullanıcının sisteme girişini sağlar.</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>login</command> [ <emphasis>isim</emphasis> ]
+<command>login -p</command>
+<command>login -h</command> <emphasis>konakismi</emphasis>
+<command>login -f</command> <emphasis>isim</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>login</command>, bir sisteme bağlanmak için kullanılır. Ayrıca, istenilen bir anda, bir kullanıcı adından başka birine geçiş yapmak içinde kullanılabilir (günümüzdeki pek çok kabuk, yerleşik olarak bu özelliği desteklemektedir).
+    </para><para>
+Herhangi bir argüman belirtilmemişse, <command>login</command> kullanıcı adını soracaktır.
+    </para><para>
+Şayet kullanıcı root değilse, ve eğer <filename>/etc/nologin</filename> dosyası varsa, bu dosyanın içeriği ekrana basılacak ve <command>login</command> sonlandırılacaktır. Bu genellikle, sistem kapanırken, yapılacak bağlantıları önlemek için kullanılır.
+    </para><para>
+Şayet kullanıcı için <filename>/etc/usertty</filename> içinde özel erişim kısıtlamaları tanımlanmışsa, kullanıcı bu şartları karşılamak zorundadır. Aksi taktirde bağlantı girişimi reddedilecek ve bir <command>syslog</command> iletisi üretilecektir. Daha fazla bilgi için "<xref linkend="tr-man1-login-access"/>" bölümüne bakınız.
+    </para><para>
+Şayet kullanıcı root ise, <filename>/etc/securetty</filename> içinde listelenen uçbirimlerden birisini kullanarak bağlanmak zorundadır. Giriş hataları <command>syslog</command> tarafından kaydedilir.
+    </para><para>
+Bütün bu şartlar kontrol edildikten sonra, parola istenecek ve kontrol edilecektir (şayet bu kullanıcı için parola gerekli ise). <command>login</command> sonlandırılmadan önce, 10 giriş denemesine izin vardır, fakat ilk üç denemeden sonra isteğe karşılık verme süresi uzayacaktır. Bağlantı hataları <command>syslog</command> üzerinden rapor edilecektir. Bu, ayrıca başarılı root bağlantılarını raporlamak içinde kullanılır.
+    </para><para>
+Şayet <filename>.hushlogin</filename> dosyası varsa, bir "hızlı" bağlantı gerçekleştirilir (bu özellik; e-posta kontrolünü, en son bağlantı zamanının ve günün iletisinin ekrana basılmasını engeller). Diğer yandan, şayet <filename>/var/log/lastlog</filename> dosyası varsa, son bağlantı zamanı ekrana basılacaktır (ve o anki bağlantı kaydedilecektir).
+    </para><para>
+Uçbirimin UID ve GID ayarlarını yapmak gibi, rastgele yönetim işleri yapılır. Şayet daha önceden belirtilmişse, <literal>TERM</literal> ortam değişkeni korunur (<command>-p</command> seçeneği kullanılmışsa diğer çevre değişkenleri de korunur).  Daha sonra <literal>HOME, PATH, SHELL, TERM, MAIL</literal> ve <literal>LOGNAME</literal> ortam değişkenleri ayarlanır. <literal>PATH</literal> değişkeni normal kullanıcılar için öntanımlı olarak <filename>/usr/local/bin:/bin:/usr/bin:.</filename> ve root kullanıcı için <filename>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin</filename>'dir. Son olarak, şayet bu bir "hızlı" bağlantı değilse; günün iletisi görüntülenir, kullanıcıya ait <filename>/var/spool/mail</filename> içindeki dosya kontrol edilir ve şayet dosya uzunluğu sıfırdan farklı ise bir ileti görüntülenir (şayet bu dosyanın uzunluğu sıfırdan farklı ise, kullanıcıya bir ileti gelmiş demektir).
+    </para><para>
+Daha sonra kullanıcı kabuğu başlatılır. Şayet <command>/etc/passwd</command> içinde  kullanıcı için bir kabuk tanımlı değilse, <command>/bin/sh</command> kullanılır. Şayet <filename>/etc/passwd</filename> içinde bir dizin tanımlı değilse, ev dizini olarak <command>/</command> (kök) dizini kullanılır (yukarıda bahsedilen <filename>.hushlogin</filename> dosyası için ev dizinine bakılır).
+    </para>
+  </refsect1>
+  <refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossdef><para>
+<link linkend="tr-man8-getty"/> tarafından kullanılır, ortam değişkenlerinin korunmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para>
+İkinci bağlantı doğrulamasını atlamak için kullanılır. Özellikle root kullanıcı için çalışmaz ve Linux altında da çalıştığı görülmemiştir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossdef><para>
+Diğer sunucular tarafından (<link linkend="tr-man8-telnetd"/> gibi) uzak konak adını, <command>login</command>'e bildirmek için kullanılır, böylece uzak adı <filename>utmp</filename> ve <filename>wtmp</filename> içine yerleştirilebilir. Bu seçenek sadece root kullanıcı içindir.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1 id="tr-man1-login-access"><title>ÖZEL ERİŞİM KISITLAMALARI</title>
+    <para>
+<filename>/etc/securetty</filename> dosyası, root kullanıcının bağlantı yapabileceği, uçbirim isimlerinin listesini içerir. Her bir satırda, <filename>/dev/</filename> öneki olmaksızın bir <filename>tty</filename> aygıtının adı belirtilmelidir. Şayet bu dosya yoksa, root kullanıcı herhangi bir uçbirim üzerinden bağlanabilir.
+    </para><para>
+Günümüzde çoğu Linux sistemi PAM (Pluggable Authentication Modules - Eklenebilir Kimlik Kanıtlama Modülleri) kullanmaktadır. PAM kullanılmayan sistemlerde <filename>/etc/usertty</filename> dosyası, belirlenen kullanıcılar için, ek erişim kısıtlamaları içerir. Şayet bu dosya yoksa, ek erişim kısıtlamaları yüklenemez. Bu dosya çeşitli bölümler içerir. Üç bölüm türü münkündür: <literal>CLASSES, GROUPS</literal> ve <literal>USERS</literal>. <literal>CLASSES</literal> bölümü uçbirim sınıflarının ve sunucu adlarının şablonlarını içerir. <literal>GROUPS</literal>  bölümü her bir grup için, <literal>USERS</literal> bölümü  ise her bir kullanıcı için izin verilen uçbirimleri ve sunucuları tanımlar.
+    </para><para>
+Bu dosya içindeki her bir satır en fazla 255 karaktere sahip olabilir. Açıklamalar <command>#</command> ile başlar ve satır sonuna kadar devam eder.
+    </para>
+    <refsect2><title><literal>CLASSES</literal> Bölümü</title>
+      <para>
+Bir <literal>CLASSES</literal> bölümü bir satırın başında tamamen büyük harflerden oluşmuş <literal>CLASSES</literal> dizgesi ile başlar. Yeni bir bölümün başlangıcına veya dosyanın sonuna kadar  her bir satır sekmeler ya da boşluklar tarafından ayrılmış sözcük dizilimleri içerir. Her bir satır uçbirim sınıfları ve sunucu şablonları içerir.
+      </para><para>
+Satır başındaki sözcük, satırın kalanında tanımlanmış uçbirimler ve sunucu şablonları için ortak sınıf ismidir. Bu sınıf ismi <literal>GROUPS</literal> veya <literal>USERS</literal> bölümlerinde kullanılabilir. Yinelenmiş sınıflar oluşturma hatasından korunmak için sınıf isimleri tanımlamaların içinde kullanılmamalıdır.
+      </para><para>
+Örnek bir <literal>CLASSES</literal> bölümü:
+      </para><para>
+<screen>CLASSES
+sinif1       tty1 tty2
+sinif2       tty3 @.foo.com
+</screen>
+      </para><para>
+Burada <varname>sinif1</varname> ve <varname>sinif2</varname> sınıfları sağ taraflarındakilerle tanımlanmıştır.
+      </para>
+    </refsect2><refsect2><title><literal>GROUPS</literal> Bölümü</title>
+      <para>
+Bir <literal>GROUPS</literal> bölümü; her bir UNIX grubu için izin verilen uçbirim ve
+sunucuları tanımlar.  Şayet bir kullanıcı <filename>/etc/passwd</filename> ve <filename>/etc/group</filename> dosyalarındaki tanımlara göre göre bir UNIX grubunun üyesi ise ve bu grup <filename>/etc/usertty</filename> içindeki <literal>GROUPS</literal> bölümünde belirtilmiş ise, kullanıcıya erişim izni verilmiş demektir.
+      </para><para>
+Bir <literal>GROUPS</literal> bölümü bir satırda tamamen büyük harflerden oluşmuş <literal>GROUPS</literal> yazısı ile başlar ve altındaki tüm satırlar, boşluklar veya sekmeler ile ayrılmış, kelime dizileridir. Bir satırdaki ilk kelime grup adı ve diğer kelimeler; grup elemanlarına bağlantı için izin verilen tty'lerin ve konakların adlarıdır. Bu tanımlamalar önceki bölümde( CLASSES bölümünde) açıklanan sınıfları içerebilirler.
+      </para><para>Örnek bir <literal>GROUPS</literal> bölümü:
+      </para><para>
+<screen>GROUPS
+sys       tty1 @.bar.edu
+stud      sinif1 tty4
+</screen>
+      </para><para>
+Bu örneğe göre, <literal>sys</literal> grubunun üyelerinin <literal>bar.edu</literal> alanından ve <literal>tty1</literal> üzerinden oturum açabilir. <literal>stud</literal> grubunun üyeleri ise <literal>sinif1</literal> sınıfında belirtilen tty'lerden veya <literal>tty4</literal>'den oturum açabilir.
+      </para>
+    </refsect2><refsect2><title><literal>USERS</literal> Bölümü</title>
+      <para>
+Bir <literal>USERS</literal> bölümü bir satırda tamamen büyük harflerden oluşmuş <literal>USERS</literal> yazısı ile başlar ve altındaki tüm satırlar, boşluklar veya sekmeler ile ayrılmış kelime dizilerinden oluşur. Bir satırdaki ilk kelime kullanıcı adı olup diğer kelimeler bağlantı için izin verilen tty'lerin ve konakların adlarıdır. Bu tanımlamalar <literal>CLASSES</literal> bölümünde açıklanan sınıfları içerebilirler. Dosyanın başında bölüm adı belirtilmeden yerleştirilmiş satırlar varsa bu satırların öntanımlı olarak <literal>USERS</literal> bölümünün satırları olduğu varsayılır. Örnek bir <literal>USERS</literal> bölümü:
+      </para><para>
+<screen>USERS
+zacho     tty1 @130.225.16.0/255.255.255.0
+blue      tty3 sinif2
+</screen>
+      </para><para>
+Bu örneğe göre, zacho sadece tty1'den ve IP adresi 130.225.16.0  -  130.225.16.255 aralığında olan konaklardan oturum açabilirken, blue'ya tty3'den ve sinif2 sınıfında belirtilen yerlerden oturum açabilir.
+      </para><para>
+<literal>USERS</literal> bölümünde kullanıcı adı olarak * belirtilmiş bir satır bulunabilir ve bu satırdaki tanımlar diğer satırlardaki tanımlarla uyuşmayan kullanıcılara uygulanır.
+      </para><para>
+Eğer bir kullanıcı için hem  <literal>USERS</literal> hem de <literal>GROUPS</literal> bölümünde eşleşme sağlanıyorsa, bu kullanıcı her iki bölümde izin verilen yerlerin herhangi birinden bağlanabilir.
+      </para>
+    </refsect2><refsect2><title>Kökenler</title>
+      <para>
+<literal>USERS</literal>, <literal>GROUPS</literal> ve <literal>CLASSES</literal> bölümlerinde tanımlanan tty ve konak kalıplarına köken (origin) adı verilir. Bir köken dizgesi şu biçimlerde olabilir:
+      </para><para><itemizedlist><listitem><para>
+<filename>/dev/</filename> öneki olmaksızın bir <filename>tty</filename> aygıtının ismi; örneğin, <filename>tty1</filename> veya <filename>ttyS0</filename>.
+      </para></listitem><listitem><para>
+<literal>@localhost</literal> dizgesi; bu, kullanıcının yerel konaktan  aynı konağa <command>telnet</command>/<command>rlogin</command> yapmasına izin verildiği anlamına gelir. Bu sayede, kullanıcı <command>xterm -e /bin/login</command> gibi bir komutu çalıştırabilir.
+      </para></listitem><listitem><para>
+<literal>@.bir.dom</literal> gibi bir alan adı soneki; bu, kullanıcının belirtilen soneke sahip alanlardaki konaklardan <command>telnet</command>/<command>rlogin</command> yapmasına izin verildiği anlamına gelir.
+      </para></listitem><listitem><para>
+@x.x.x.x/y.y.y.y biçiminde yazılmış bir IPv4 adres aralığı; burada x.x.x.x ağ adresini, y.y.y.y ise ağ maskesini belirtir. Örneğin, @130.225.16.0/255.255.254.0 dizgesi, kullanıcının 130.225.16.0  - 130.225.17.255 aralığında bir IP adresinden <command>telnet</command>/<command>rlogin</command> yapmasına izin verildiği anlamına gelir.
+      </para></listitem></itemizedlist>
+      </para><para>
+Yukarıdaki belirtimlerin başına, aşağıdaki sözdizimlerine uygun olarak bir zaman belirtimi getirilebilir:
+      </para><para>
+<synopsis>zaman_belirtimi ::= '[' <emphasis>gün_veya_saat</emphasis> [':' <emphasis>gün_veya_saat</emphasis>]* ']'
+<emphasis>gün</emphasis>             ::= 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
+<emphasis>saat</emphasis>            ::= '0' | '1' | ... | '23'
+<emphasis>saat_belirtimi</emphasis>  ::= <emphasis>saat</emphasis> | <emphasis>saat</emphasis> '-' <emphasis>saat</emphasis>
+<emphasis>gün_veya_saat</emphasis>   ::= <emphasis>gün</emphasis> | <emphasis>saat_belirtimi</emphasis>
+</synopsis>
+      </para><para>
+Örneğin, <literal>[mon:tue:wed:thu:fri:8-17]tty3</literal> kökeni, Pazartesi gününden Cuma gününe kadar 8:00 ile 17:59 saatleri arasında tty3 üzerinde oturum açılabileceğini belirtir. Bu açıklamadan da anlaşılacağı üzere a-b biçiminde belirtilen bir zaman aralığı a:00 ile b:59 arasındaki tüm anları içerir. 10 gibi tek bir saat belirtimi ise, 10:00 ile 10:59 arasındaki tüm anları içerecektir.
+      </para><para>
+Bir tty veya konak belirtiminin başında bir zaman belirtiminin olmayışı buralardan zaman sınırlaması olmaksızın her an oturum açılabileceği anlamına gelir. Eğer bir zaman belirtimi kullanmak isterseniz, hem bağlantıya izin verilen günleri hem da saati ya da saat aralığını belirtmelisiniz. Zaman belirtimleri boşluk karakterlerini içeremezler.
+      </para><para>
+Öntanımlı kural belirtilmemiş bir <filename>/etc/usertty</filename> içindeki satırlardan biriyle eşleşmeyen her kullanıcıya herhangi bir anda herhangi bir yerden oturum açma izni verilmiş demektir (standart davranış).
+      </para>
+    </refsect2>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title><para>
+<literallayout>
+  /var/run/utmp
+  /var/log/wtmp
+  /var/log/lastlog
+  /usr/spool/mail/*
+  /etc/motd
+  /etc/passwd
+  /etc/nologin
+  /etc/usertty
+  .hushlogin
+</literallayout>
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man1-mail"/>, <link linkend="tr-man1-passwd"/>, <link linkend="tr-man5-passwd"/>, <link linkend="tr-man7-environ"/>, <link linkend="tr-man8-init"/>, <link linkend="tr-man8-getty"/>, <link linkend="tr-man8-shutdown"/>.
+  </para></refsect1><refsect1><title>YETERSİZLİKLER</title><para>
+Belgelenmemiş olan BSD'nin <option>-r</option> seçeneği desteklenmemektedir. Bu bazı <link linkend="tr-man8-rlogind"/> uygulamaları için gerekli olabilir.
+  </para><para>
+Eskiden mümkün olan ardışık oturum açmalar artık çalışmamaktadır; çoğu amaçlar için <link linkend="tr-man8-su"/> bunu zaten ikame ediyor. Bunun yerine, güvenlik gerekçeleriyle, tty üzerinde olası dinleme süreçlerini kaldırmak için <command>login</command> bir <function>vhangup()</function> sistem çağrısı yapar. Bu parola dinlemeyi engellemek içindir. Biri kabuk üzerinde <command>login</command> komutunu kullanırsa, o kabuk artık tty'nin gerçek sahibi olmayacağından <function>vhangup()</function> tarafından öldürülür. Üst seviye kabuk veya xterm'de <command>exec login</command> kullanılarak bunun olması engellenebilir.
+  </para></refsect1><refsect1><title>YAZAN</title><para>
+HP-UX için Michael Glad (<email>glad@daimi.dk</email>) tarafından geliştirilen BSD login 5.40 (5/9/89) Linux 0.12'ye  Peter Orbaek (<email>poe@daimi.aau.dk</email>) tarafından uyarlandı.
+  </para></refsect1><refsect1><title>ÇEVİREN</title><para>
+Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Eylül 2005</para>
+  </refsect1>
+</refentry>
+
+
+

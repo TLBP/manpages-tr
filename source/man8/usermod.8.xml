@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: usermod.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-usermod">
+<remark>.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>usermod</refentrytitle>
+  </refmeta>
+
+  <refnamediv>
+    <refname>usermod</refname>
+    <refpurpose>bir kullanıcı hesabını düzenler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>usermod</command> [<command>-c </command><emphasis>açıklama</emphasis>] [<command>-d </command><emphasis>evdizini </emphasis>[<command>-m</command>]]
+        [<command>-e </command><emphasis>bitiş_tarihi</emphasis>] [<command>-f </command><emphasis>askı_süresi</emphasis>]
+        [<command>-g </command><emphasis>birincil_grup</emphasis>] [<command>-G </command><emphasis>grup</emphasis>[,...]]
+        [<command>-l </command><emphasis>kullanıcı-adı</emphasis>]  [<command>-p </command><emphasis>parola</emphasis>]
+        [<command>-s </command><emphasis>kabuk</emphasis>] [<command>-u </command><emphasis>kull_kiml</emphasis> [<command>-o</command>]] [<command>-L</command>|<command>-U</command>] <emphasis>kullanıcı</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>usermod</command> komutu, sistem hesap dosyalarını düzenlemeye, üzerlerinde değişiklik yapmaya yarar. Bu komuta uygulanabilecek seçenekler şunlardır:
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-c </command><varname>açıklama</varname></glossterm>
+        <glossdef><para>Kullanıcı parola dosyasındaki açıklama alanına girilecek yeni değeri belirtir. Normalde <link linkend="tr-man1-chfn"/> komutu ile düzenlenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d </command><varname>evdizini</varname></glossterm>
+        <glossdef><para>Kullanıcının sisteme girişte kullanacağı ev dizinini belirtir. Şayet <command>–m</command> seçeneği belirtilmiş ise, kullanıcının hali hazırda kullanmakta olduğu ev dizininin içeriği yeni oluşturulan ev dizinine aktarılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-e </command><varname>bitiş_tarihi</varname></glossterm>
+        <glossdef><para>Kullanıcı hesabının son kullanma tarihini belirtir. Tarih <literal>YYYY-AA-GG</literal> (Y: yıl, A: ay, G: gün) şeklinde belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f </command><varname>askı_süresi</varname></glossterm>
+        <glossdef><para>Kullanıcı parolasının son kullanma tarihinden itibaren, bu hesabın
+tamamen kapatılacağı tarihe kadar geçecek olan sürenin gün cinsinden değeri belirtilir. Bu değer 0 olarak belirtilirse, parolanın son kullanma tarihinde hesap kapatılır. -1 değeri verilirse, bu özellik iptal edilmiş olur. -1 değeri öntanımlı değerdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>birincil_grup</varname></glossterm>
+        <glossdef><para>Kullanıcının üyesi olacağı birincil grubun adı veya numarası belirtilir. Belirtilen grup, sistemde önceden tanımlanmış olmalıdır. Öntanımlı değer 1 dir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>grup</varname><literal>[,...]</literal></glossterm>
+        <glossdef><para>Kullanıcının üyesi olacağı ilave gruplar belirtilir. Her grup, diğerinden virgül ile ayrılır, arada boşluk bırakılmaz. Burada tanımlanan gruplar, <command>-g</command> ile tanımlanan grubun kısıtlamalarına tabidirler. Şayet kullanıcı listelenen gruplar haricinde bir grubun da üyesi ise, kullanıcı bu gruptan çıkarılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l </command><varname>kullanıcı-adı</varname></glossterm>
+        <glossdef><para>Sisteme girişte kullanıcının kullanacağı yeni isim. Sadece isim değişir, başka hiçbir şey değişmez. Kullanıcının ev dizininin ismi, yeni kullanıcı ismi ile bağlantı yapılmasını sağlamak için <varname>kullanıcı-adı</varname> ile tanımlanan yeni isme dönüşür.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p </command><varname>parola</varname></glossterm>
+        <glossdef><para><link linkend="tr-man3-crypt"/> tarafından döndürülen şifrelenmiş paroladır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><varname>kabuk</varname></glossterm>
+        <glossdef><para>Kullanıcının sisteme girişte kullanacağı kabuğun adıdır. Bu alan boş bırakılırsa, sistemin öntanımlı kabuğunun seçilmesi sağlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u </command><varname>kull_kiml</varname></glossterm>
+        <glossdef><para>Kullanıcı kimliğinin sayısal değeridir. Bu değer, <command>-o</command> seçeneği kullanılmadığı sürece, eşsiz olmalıdır. Değer mutlaka pozitif bir sayı olmalıdır. 0 ile 99 arsındaki değerler sistem hesapları için ayrılmıştır. Bu değer değiştirildiği zaman; kullanıcının sahip olduğu bütün dosyaların ve kullanıcı ev dizinini kök dizin olarak kabul ederek, kullanıcı ev dizininin altındaki hiyeraşik yapı içindeki bütün dosyaların kullanıcı numarası otomatik olarak değişir. Kullanıcı ev dizininin dışındaki dosyaların kullanıcı iyelik numarası kullanıcı tarafından değiştirilmelidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-L</command></glossterm>
+        <glossdef><para>Kullanıcı parolasını kilitler. Parolayı devre dışı bırakmak için, şifreli parolanın önüne '!'  işareti koyar. Bu seçeneği <command>–p</command> veya <command>–U</command> seçenekleri ile birlikte kullanamazsınız.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-U</command></glossterm>
+        <glossdef><para>Devre dışı bırakılmış bir kullanıcı parolasını tekrar açar. Yaptığı iş şifreli parolanın önündeki '!' işaretini kaldırmaktır. Bu seçeneği <command>–p</command> veya <command>–L</command> seçenekleri ile birlikte kullanamazsınız.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para>
+<command>usermod</command> komutu ile, sisteme bağlı bir kullanıcının adını
+değiştiremezsiniz. Kullanıcının tanımlayıcı numarasını değiştirmeye kalktığınız zaman, kullanıcının herhangi bir süreç çalıştırmadığından emin olun. Herhangi bir <command>crontab</command> dosyasının sahibini kendiniz değiştirmelisiniz.  Çalışan herhangi bir işin sahibini de kendiniz değiştirmelisiniz. NIS sunuculardaki NIS ile alakalı bütün değişiklikleri kendiniz yapmalısınız
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout indent="0">
+<command>/etc/passwd</command>  - kullanıcı hesabı bilgileri
+<command>/etc/shadow</command>  - güvenli kullanıcı hesabı bilgileri
+<command>/etc/group</command>   - grup bilgileri
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-chfn"/>, <link linkend="tr-man1-chsh"/>, <link linkend="tr-man1-passwd"/>, <link linkend="tr-man3-crypt"/>, <link linkend="tr-man8-groupadd"/>, <link linkend="tr-man8-groupdel"/>, <link linkend="tr-man8-groupmod"/>, <link linkend="tr-man8-useradd"/>, <link linkend="tr-man8-userdel"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Julianne Frances Haugh <email>jockgrrl@ix.netcom.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

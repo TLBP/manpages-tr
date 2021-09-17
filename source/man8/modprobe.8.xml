@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: modprobe.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-modprobe">
+<remark>.\" Copyright (c) 1994, 1995 Jacques Gelinas (jacques (at) solucorp.qc.ca)
+.\" Copyright (c) 1995, 1999 Bjorn Ekwall (bj0rn (at) blox.se)
+.\" This program is distributed according to the Gnu General Public License.
+.\" See the file COPYING in the base distribution directory
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>modprobe</refentrytitle>
+    <refmiscinfo class="header">Linux Modül Desteği</refmiscinfo>
+    <refmiscinfo class="domain">Linux</refmiscinfo>
+    <refmiscinfo class="date">4 Şubat 2002</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>modprobe</refname>
+    <refpurpose>yüklenebilir modüller için yüksek seviyeli işlemci</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>modprobe</command> [<command>-adnqv</command>] [<command>-C </command><emphasis>dosya</emphasis>] <emphasis>modül</emphasis> [<emphasis>sembol</emphasis>=<emphasis>değer</emphasis> ...]
+<command>modprobe</command> [<command>-adnqv</command>] [<command>-C </command><emphasis>dosya</emphasis>] [<command>-t </command><emphasis>tür</emphasis>] <emphasis>şablon</emphasis>
+<command>modprobe -l </command>[<command>-C </command><emphasis>dosya</emphasis>] [<command>-t </command><emphasis>tür</emphasis>] <emphasis>şablon</emphasis>
+<command>modprobe -c </command>[<command>-C </command><emphasis>dosya</emphasis>]
+<command>modprobe -r </command>[<command>-dnv</command>] [<command>-C </command><emphasis>dosya</emphasis>] [<emphasis>modül</emphasis> ...]
+<command>modprobe -Vh </command>
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--all</command></glossterm>
+        <glossdef><para>İlk başarılı yüklemeden sonra durmak yerine, bütün eşleşen modülleri yükler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossterm><command>--showconfig</command></glossterm>
+        <glossdef><para>Kullanımdaki yapılandırmayı gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-C</command></glossterm>
+        <glossterm><command>--config </command><varname>dosya</varname> </glossterm>
+        <glossdef><para>Yapılandırmayı belirtmek için (isteğe bağlı olarak kullanılan) <filename>/etc/modules.conf</filename> yerine <varname>dosya</varname> kullanır. <filename>/etc/modules.conf</filename> (ya da eski adıyla <filename>/etc/conf.modules</filename>) yerine farklı bir yapılandırma seçmek için <command>MODULECONF</command> ortam değişkeni de kullanılabilir.
+        </para></glossdef>
+      </glossentry></glosslist>
+    <para>
+<command>UNAME_MACHINE</command> ortam değişkeni tanımlı olduğunda modutils, uname() sistem çağrısının makina alanı yerine bu değişkene atanmış değeri kullanacaktır. Bu esas olarak, 64 bitlik modüllerin 32 bitlik kullanıcı alanında derlendiği ya da tamamen tersi durumlarda kullanım alanı bulur. Mevcut modutils modüllerin tam çapraz derleme kipini desteklemez, destek, makina mimarisinin 32 ve 64 bitlik sürümlerini seçmekle sınırlıdır.
+    </para><glosslist><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--debug</command></glossterm>
+        <glossdef><para>Modül yığıtının dahili gösterimi hakkında bilgi verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Seçeneklerin listesini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-k</command></glossterm>
+        <glossterm><command>--autoclean</command></glossterm>
+        <glossdef><para>Yüklü modüllere `autoclean' uygular. Modül olarak sağlanmış ama mevcut olmayan bir özelliği gidermek için çekirdek tarafından <command>modprobe</command> çağrılarak kullanılır. Bu seçenek <command>-q</command> seçeneğini de uygular. Bu seçenekler özdevinimli olarak <command>insmod</command>'a gönderilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--list</command></glossterm>
+        <glossdef><para>Eşleşen modülleri listeler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>--show</command></glossterm>
+        <glossdef><para>İşlemi gerçekleştirmeden, sadece işlemin sonuçlarını gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossterm><command>--quiet</command></glossterm>
+        <glossdef><para><command>insmod</command>'un bir modülü yüklemede başarısız olması durumunda bilgi verilmez. İşlemlere sessiz bir şekilde, diğer olası <command>modprobe</command> sınamaları ile devam edilecektir. Bu seçenek özdevinimli olarak <command>insmod</command>'a yollanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--remove</command></glossterm>
+        <glossdef><para>Komut satırında belirtilmiş modüllerin varlığına bağlı olarak, modülleri (yığıtlarını) kaldırır ya da özdevinimli temizleme başlatır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--syslog</command></glossterm>
+        <glossdef><para>Raporlamayı standart hata yerine syslog üzerinden yapar. Bu seçenek özdevinimli olarak <command>insmod</command>'a yollanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t </command><varname>modültürü</varname></glossterm>
+        <glossterm><command>--type </command><varname>modültürü</varname></glossterm>
+        <glossdef><para>Modüllerin sadece bu türde olduğu varsayılır. modprobe sadece tam olarak "/modültürü/" dizinini içeren dosya yollarında bulunan modülleri işleme sokacaktır. <varname>modültürü</varname> birden fazla dizin ismi içerebilir, örneğin "<command>-t </command><filename>drivers/net</filename>" şeklinde bir kullanım ile  <filename>xxx/drivers/net/</filename> ve alt dizinlerindeki modüller işleme sokulacaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>Çalıştırılan tüm komutları gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para><command>modprobe</command>'un sürüm bilgilerini gösterir.
+        </para></glossdef>
+      </glossentry></glosslist>
+    <warning><title>Önemli</title><para>Modül isimleri ne dosya yolu ('/' içermemeli) ne de '.o' soneki içermelidir. Örneğin <filename>slip</filename>, <command>modprobe</command> için geçerli bir modül ismidir, ama <filename>/lib/modules/2.2.19/net/slip</filename> ve <filename>slip.o</filename> geçersizdir. Bu kural hem komut satırında hem de yapılandırma dosyasında geçerlidir.</para></warning>
+  </refsect1><refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>modprobe</command> ve <command>depmod</command> araçları Linux modüler çekirdeğinin kullanımını, sistem yöneticileri, dağıtımcılar ve bütün kullanıcılar için kolaylaştırmak amacıyla tasarlanmıştır.
+    </para><para>
+<command>modprobe</command> öntanımlı dizin ağaçlarında bulunan modüllerden gerekli olanları özdevinimli olarak yüklemek için <command>depmod</command> tarafından oluşturulan "Makefile" benzeri bir bağımlılık dosyası kullanır.
+    </para><para>
+<command>modprobe</command> tek bir modülü, bir modül grubunu, bağımlı modül yığınlarını ya da bir etiket ile işaretlenmiş bütün modülleri yüklemek için kullanılabilir.
+    </para><para>
+<command>modprobe</command> özdevinimli olarak, <filename>modules.dep</filename> bağımlılık dosyasında belirtilen, modül yığınındaki bütün taban modülleri yükleyecektir. Eğer bu modüllerden birisinin yüklemesi başarısız olursa, modülün parçası olduğu yığının bütün modülleri özdevimli olarak yüklenmemiş duruma getirilecektir.
+    </para><para>
+<command>modprobe</command> modülleri yüklemek için iki yol kullanır. Bir tanesi (algılama kipi) <varname>şablon</varname> ile tanımlanmış liste dışı bir modülü yükler. <command>modprobe</command> yüklemeyi bir modülün yüklenmesi bittiğinde durduracaktır. Örnek olarak bu yol özdevinimli olarak bir listeden bir Ethernet sürücüsünü yüklemek için kullanılabilir. Diğer yol ise bir listedeki bütün modülleri yüklemektir. Aşağıdaki <xref linkend="tr-man8-modprobe-examples"/> bölümüne bakınız.
+    </para><para>
+<command>-r</command> seçeneği kullanıldığında <command>modprobe</command> özdevinimli olarak bir modül yığınını boşaltacaktır (<command>rmmod -r</command> gibi). Altını çizmek gerekir ki, <command>modprobe -r</command> komutu, özdevinimli olarak yüklenmiş ama kullanılmayan modülleri boşaltır, bunun yanında <filename>/etc/modules.conf</filename>'da belirtilmiş boşaltma öncesi ve sonrası komutlarını da uygular.
+    </para><para>
+<command>-l</command> ve <command>-t</command> seçeneği ile beraber kullanıldığında belirtilen türdeki bütün modüller listelenecektir.
+    </para><para>
+<command>-c</command> seçeneği o anda kullanılan yapılanmayı gösterir (öntanımlı + yapılandırma dosyası).
+    </para>
+  </refsect1><refsect1><title>YAPILANDIRMA</title>
+    <para>
+<command>modprobe</command>'un (ve <command>depmod</command>'un) işleyişi istenirse <filename>/etc/modules.conf</filename> dosyasından değiştirilebilir. Bu dosyanın nasıl değiştirilebileceği ve öntanımlı yapılanma hakkında daha ayrıntılı bilgi için <command>modules.conf</command>(5)'a bakınız.
+    </para><para>
+Dikkat edilmesi gereken bir nokta, eğer bir modül <command>kerneld</command> tarafından özdevinimli olarak temizlenmişse, boşaltma öncesi ve sonrası komutlar çalıştırılmaz. Eğer kurma öncesi ve sonrası özelliklerini kullanmak istiyorsanız, <command>kerneld</command>'nin özdevinimli temizlemesini kapatmanız ve onun yerine 2 dakikada bir özdevinimli temizleme yapmak için, aşağıdaki satıra benzer bir komutu <command>crontab</command>'ınıza (kmod sistemleri içinde bu geçerlidir) eklemeniz gereklidir:
+    </para><para>
+<literal>*/2 * * * * test -f /proc/modules &amp;&amp; /sbin/modprobe -r</literal>
+    </para>
+  </refsect1><refsect1><title>STRATEJİ</title>
+    <para>
+Ana fikir olarak, <command>modprobe</command> ilk önce geçerli çekirdek sürümü için derlenmiş modüllerin bulunduğu dizine (örn, <filename>/lib/modules</filename>) bakacaktır. Eğer modül bu dizinde bulunamazsa, <command>modprobe</command> çekirdeğin sürümüne göre isimlendirilmiş dizine (örn, <filename>/lib/modules/2.4.21</filename>) bakacaktır. Eğer modül hala bulunamazsa, <command>modprobe</command> bu sefer bir öntanımlı dağıtımın dizinine bakacaktır ve bu işlem bu şekilde devam edecektir.
+    </para><para>
+Yeni bir linux kurduğunuzda, olağan koşullarda modüller yüklediğiniz çekirdeğin sürümüne göre isimlendirilmiş bir dizine taşınır. Bu aşamadan sonra bu dizinden öntanımlı dizine bir sembolik bağ oluşturmanız gerekir.
+    </para><para>
+Çekirdeği her derlediğinizde, <command>make modules_install</command> komutu yeni bir dizin oluşturacaktır, ancak öntanımlı bağı değiştirmeyecektir.
+    </para><para>
+Çekirdek dağıtımınızla ilgisi olmayan bir modül elinize geçtiğinde, bu modülü <filename>/lib/modules</filename>'ün altındaki sürümden bağımsız dizinlerden birisine yerleştirmeniz gereklidir.
+    </para><para>
+Bu anlatılan öntanımlı stratejidir. İstenirse <filename>/etc/modules.conf</filename> dosyasından değiştirilebilir.
+    </para>
+  </refsect1><refsect1 id="tr-man8-modprobe-examples"><title>ÖRNEKLER</title>
+    <glosslist><glossentry>
+        <glossterm><command>modprobe -t net</command></glossterm>
+        <glossdef><para>"net" isimli dizindeki modüllerden birisini yükler. Modüllerden birisi başarılı bir şekilde yüklenene kadar listedeki bütün modüller denenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>modprobe -a -t boot</command></glossterm>
+        <glossdef><para>"boot" isimli dizindeki modüllerden hepsini yükler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>modprobe slip</command></glossterm>
+        <glossdef><para><filename>slip</filename> modülü, <filename>slhc</filename> modülünün de işlevsel olmasını gerektirdği için; eğer <filename>slhc.o</filename> modülü henüz yüklenmemişse, bu komut <filename>slhc.o</filename>'yu yüklemeye çalışacaktır. Bu gereklilik, <command>depmod</command> tarafından özdevinimli olarak oluşturulmuş <filename>modules.dep</filename> dosyasında belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>modprobe -r slip</command></glossterm>
+        <glossdef><para><filename>slip</filename> modülünü sistemden kaldıracaktır. Eğer <filename>slhc</filename> modülü başka bir modül tarafından (ör. <filename>ppp</filename>) kullanılmıyorsa, bu komut <filename>slhc</filename> modülünü de sistemden kaldırır.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+<literallayout indent="0">
+/etc/modules.conf, (artık kullanılmıyor olsa bile: /etc/conf.modules)
+/lib/modules/*/modules.dep,
+/lib/modules/*
+</literallayout>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-depmod"/>,
+<link linkend="tr-man8-kerneld"/>,
+<link linkend="tr-man8-ksyms"/>,
+<link linkend="tr-man8-lsmod"/>,
+<link linkend="tr-man8-rmmod"/>.
+    </para>
+  </refsect1><refsect1><title>GÜVENLİ KİP</title>
+    <para>
+Eğer etkin kullanıcı kimliği gerçek kullanıcı kimliği ile aynı değilse <command>modprobe</command> girdilerine şüpheyle yaklaşacaktır. Son parametre "-" (tire) ile başlasa bile her zaman bir modül adı olduğu varsayılacaktır. Sadece bir modül adı kullanılabilecektir ve "<literal>değişken=değer</literal>" şeklindeki seçenekler yasaklanacaktır. Güvenli kipte modül isimlerinin her zaman bir dizge olduğu varsayılır, hiç bir ara değer çözümlemesi gerçekleştirilmez. Bu duruma bir istisna yapılandırma dosyalarıdır. Yapılandırma dosyalarından okunan verilere ara değer çözümlemesi uygulanmaya devam edilir.
+    </para><para>
+<command>modprobe</command> çekirdek tarafından çağrıldığında etkin kullanıcı kimliği gerçek kullanıcı kimliği ile aynı olabilir (bu durum çekirdek >= 2.4.0-test11'ler için doğrudur). Mükemmel bir senaryoda <command>modprobe</command>, çekirdekten sadece geçerli parametreler alacağına güvenebilirdi. Ancak üst düzey çekirdek kodu, kullanıcıdan gelen kontrol edilmemiş parametreleri doğrudan <command>modprobe</command>'a gönderdiği için, en az bir kere yerel kök bozulması oluşmuştur. Bu yüzden <command>modprobe</command> çekirdeğe artık güvenmemektedir.
+    </para><para>
+Ortam aşağıdaki değerlerden birini içerdiğinde, <command>modprobe</command> özdevinimli olarak güvenli kipe geçecektir.
+    </para><para>
+<literallayout indent="4">
+HOME=/
+TERM=linux
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+</literallayout>
+    </para><para>
+Bu değerler etkin kullanıcı kimliği gerçek kullanıcı kimliği ile aynı olsa bile, <command>modprobe</command>'u çağıran 2.2 ile 2.4.0-test11 arasındaki çekirdek sürümlerinde algılanır (önceki sürümlerde bu durum oluşmaktadır).
+    </para>
+  </refsect1><refsect1><title>GÜNLÜKLEME KOMUTLARI</title>
+    <para>
+Eğer <filename>/var/log/ksymoops</filename> dizini varsa ve <command>modprobe</command> bir modülü silebilecek ya da yükleyebilecek bir seçenekle çalıştırılmışsa, <command>modprobe</command> komutunu ve dönüş durumunu <filename>/var/log/ksymoops/</filename>‘<varname>date+%Y%m%d.log</varname>' konumuna kaydedecektir. Bu özdevinimli günlüklemeyi kapatacak bir komut yoktur, eğer günlük kaydı istemiyorsanız, <filename>/var/log/ksymoops</filename> dizinini oluşturmayın. Eğer bu dizin varsa, sahibi root olmalıdır, 644 yada 600 kipinde olmalıdır ve aşağı yukarı her gün <command>insmod_ksymoops_clean</command> komutu çalıştırılmalıdır.
+    </para>
+  </refsect1><refsect1><title>GEREKLİ ARAÇLAR</title>
+    <para>
+<link linkend="tr-man8-depmod"/>, <link linkend="tr-man8-insmod"/>.
+    </para>
+  </refsect1><refsect1><title>NOTLAR</title>
+    <para>
+<command>modprobe</command>'a yollanan <varname>şablon</varname>lar, düzgün olarak değerlendirildiğinden emin olmak için öncelenmelidir.
+    </para>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para>
+<command>modprobe</command>, <literal>[ <command>-V</command> | <command>--version</command>  ]</literal>  seçenekleri ile kullanıldığında başka bir seçenek verilmiş bile olsa sadece sürüm bilgisini basar ve anında çıkar.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Jacques Gelinas <email>jack@solucorp.qc.ca</email> ve Bjorn Ekwall <email>bj0rn@blox.se</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Can Kavaklıoğlu <email>linuxcucan@yahoo.com</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+

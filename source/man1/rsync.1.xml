@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: rsync.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-rsync">
+<refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>rsync</refentrytitle>
+    <refmiscinfo class="date">28 Şubat 2005</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>rsync</refname>
+    <refpurpose>rcp yerine daha hızlı ve esnek bir araç</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>rsync</command> [<emphasis>seçenek</emphasis>]... <emphasis>kaynak</emphasis> [<emphasis>kaynak</emphasis>]... [<emphasis>kullanıcı</emphasis>@]<emphasis>konak</emphasis>:<emphasis>hedef</emphasis>
+
+<command>rsync</command> [<emphasis>seçenek</emphasis>]... [<emphasis>kullanıcı</emphasis>@]<emphasis>konak</emphasis>:<emphasis>kaynak hedef</emphasis>
+
+<command>rsync</command> [<emphasis>seçenek</emphasis>]... <emphasis>kaynak</emphasis> [<emphasis>kaynak</emphasis>]... <emphasis>hedef</emphasis>
+
+<command>rsync</command> [<emphasis>seçenek</emphasis>]... [<emphasis>kullanıcı</emphasis>@]<emphasis>konak</emphasis>::<emphasis>kaynak</emphasis> [<emphasis>hedef</emphasis>]
+
+<command>rsync</command> [<emphasis>seçenek</emphasis>]... <emphasis>kaynak</emphasis> [<emphasis>kaynak</emphasis>]... [<emphasis>kullanıcı</emphasis>@]<emphasis>konak</emphasis>::<emphasis>hedef</emphasis>
+
+<command>rsync</command> [<emphasis>seçenek</emphasis>]... rsync://[<emphasis>kullanıcı</emphasis>@]<emphasis>konak</emphasis>[:<emphasis>port</emphasis>]/<emphasis>kaynak</emphasis> [<emphasis>hedef</emphasis>]
+</synopsis></refsynopsisdiv>
+<refsect1><title>AÇIKLAMA</title><para>
+<command>rsync</command> çoğunlukla <command>rcp</command> gibi davranan bir uygulamadır, ancak daha fazla seçenek içerir ve  özellikle hedefteki dosyanın mevcut olması halinde dosya aktarımını çok daha hızlı gerçekleştiren <command>rsync</command> uzak güncelleme protokolünü kullanır.
+  </para><para>
+<command>rsync</command> uzak güncelleme protokolü <command>rsync</command>'in ağ bağlantısı üzerinden sadece iki dosya grubu arasındaki farkları aktarmasını mümkün kılar. Bunu bu pakete eşlik eden teknik raporda açıklanan verimli bir toplama sağlaması arama algoritmasını kullanarak yapar.
+  </para><para>
+<command>rsync</command>'e özgü bazı ek özellikler:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+bağların, aygıtların, sahip, grup ve izinlerin kopyalanmasını destekler
+</para></listitem><listitem><para>
+GNU <command>tar</command>'a benzer exclude ve exclude-from seçenekleri
+</para></listitem><listitem><para>
+CVS'nin yok sayacağı dosyaların yoksayılmasını sağlayan CVS dışlama (exclude) kipi
+</para></listitem><listitem><para>
+<command>rsh</command>, <command>ssh</command> gibi uzak şeffaf kabukları kullanabilir
+</para></listitem><listitem><para>
+root kullanıcısının yetkilerine ihtiyaç duymaz
+</para></listitem><listitem><para>
+görünmeyen maliyetleri asgari düzeyde tutmak için dosya aktarımlarında borulama yapar
+</para></listitem><listitem><para>
+hem anonim hem de kimlik doğrulamalı <command>rsync</command> sunucu desteği (yansılama için ideal)
+</para></listitem></itemizedlist>
+</para></refsect1><refsect1><title>GENEL</title><para>
+<command>rsync</command> sekiz farklı yöntemle kullanılabilir:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+yerel dosyaları kopyalamak için. Bu çağrıda ne kaynak ne de hedef dosya yolu bir : ayracı içermez.
+  </para></listitem><listitem><para>
+yerel makineden uzaktaki bir makineye bir uzak kabuk uygulaması (<command>ssh</command> veya <command>rsh</command> gibi) kullanarak dosyaları kopyalamak için. Bu çağrıda sadece hedef dosya yolu tek bir : ayracı içerir.
+  </para></listitem><listitem><para>
+uzaktaki bir makineden yerel makineye bir uzak kabuk uygulaması (<command>ssh</command> veya <command>rsh</command> gibi) kullanarak dosyaları kopyalamak için. Bu çağrıda sadece kaynak dosya yolu bir : ayracı içerir.
+  </para></listitem><listitem><para>
+uzaktaki bir <command>rsync</command> sunucusundan yerel makineye kopyalama yapmak için. Bu çağrıda sadece kaynak dosya yolu bir :: ayracı veya bir <filename>rsync://</filename> URL'si içerir.
+  </para></listitem><listitem><para>
+yerel makineden uzaktaki bir <command>rsync</command> sunucusuna kopyalama yapmak için. Bu çağrıda sadece hedef dosya yolu bir :: ayracı veya bir <filename>rsync://</filename> URL'si içerir.
+  </para></listitem><listitem><para>
+uzaktaki makinede bulunan <command>rsync</command> sunucusunu ve bir uzak kabuk uygulamasını kullanarak, uzaktaki makineden yerel makineye kopyalama yapmak için. Bu çağrıda kaynak dosya yolunun bir :: ayracı içermesi yanında <command>--rsh=</command><varname>komut</varname> (ya da <command>-e </command><varname>komut</varname>) seçeneği de kullanılır.
+  </para></listitem><listitem><para>
+uzaktaki makinede bulunan <command>rsync</command> sunucusunu ve bir uzak kabuk uygulamasını kullanarak, uzaktaki makineye yerel makineden kopyalama yapmak için. Bu çağrıda hedef dosya yolunun bir :: ayracı içermesi yanında <command>--rsh=</command><varname>komut</varname> (ya da <command>-e </command><varname>komut</varname>) seçeneği de kullanılır.
+  </para></listitem><listitem><para>
+uzaktaki makinede bulunan dosyaların listesini almak için. Bu işlem uzaktaki makineden kopyalama işlemindeki gibi ancak yerel hedefi belirtmeden yapılır.
+  </para></listitem></itemizedlist></para><para>
+Tüm durumlarda (burada listelenenler dışında kalanlar dahil) kaynak ve hedef belirtimlerinden biri daima yerel olmalıdır (yani <command>rsync</command> ile iki uzak makine arasında işlem yapamazsınız).
+</para></refsect1><refsect1><title>AYARLAR</title><para>
+Kurulum işlemleri için <filename>README</filename> dosyasına bakınız.
+  </para><para>
+Kurduktan sonra, bir uzak kabuk üzerinden eriştiğiniz (veya <command>rsync</command> artalan kipi protokolü kullanarak eriştiğiniz) her makinede <command>rsync</command> kullanabilirsiniz. Uzak dosya aktarımları için, günümüzde <command>rsync</command> iletişimde <command>ssh</command> kullanmasına rağmen öntanımlı olarak kullanacağı uzak kabuk <command>rsh</command> veya <command>remsh</command> gibi bir kabuk olarak da ayarlanabilir.
+  </para><para>
+Bundan başka <command>-e</command> komut satırı seçeneğinin argümanı olarak veya <literal>RSYNC_RSH</literal> ortam değişkenine atayarak da istediğiniz bir uzak kabuk uygulamasını belirtebilirsiniz.
+  </para><para>
+Yüksek derecede güvenlik istendiğinde ortak kanaat <command>ssh</command> kullanmaktır.
+  </para><para>
+Yalnız, <command>rsync</command>'in hem yerel hem de uzak makine üzerinde kurulu olması gerektiğini unutmayın.
+</para></refsect1><refsect1><title>KULLANIMI</title><para>
+<command>rsync</command>'i <command>rcp</command>'yi nasıl kullanıyorsanız öyle kullanabilirsiniz. Biri uzak makine olmak üzere bir kaynak ve bir hedef belirtmelisiniz.
+  </para><para>
+Şüphesiz sözdizimini açıklamanın en kolay yolu bir örnek vermektir:
+  </para><para>
+<screen>rsync -t *.c foo:src/
+</screen>
+  </para><para>
+Bu komut çalışma dizinindeki <filename>*.c</filename> kalıbı ile eşleşen tüm dosyaları <filename>foo</filename> makinesinin <filename>src</filename> dizinine kopyalayacaktır. Bu dosyalardan uzak makinede mevcut olanları için <command>rsync</command> uzak güncelleme protokolü kullanılarak sadece farklar gönderilir. Bu konuda daha ayrıntılı bilgi için teknik rapora bakınız.
+  </para><para>
+<screen>rsync -avz foo:src/bar /data/tmp
+</screen>
+  </para><para>
+Bu komut, <filename>foo</filename> makinesindeki <filename>src/bar</filename> dizinindeki tüm dosyaları varsa altdizinlerdekileri de içererek yerel makinenin <filename>/data/tmp</filename> dizinine kopyalar. Dosyaların, sembolik bağların, aygıtların, özniteliklerinin, izinlerinin, sahiplerinin, v.s.sinin korunmasını sağlayan "arşiv" kipinde aktarım yapılır. Buna ek olarak, aktarım işleminin verileri içeren kısımlarının boyutunu küçültmek için sıkıştırma uygulanır.
+  </para><para>
+<screen>rsync -avz foo:src/bar/ /data/tmp
+</screen>
+  </para><para>
+Kaynak yolunun sonuna eklenen <filename>/</filename> işareti hedefte ek bir dizin oluşturmaktan kaçınılması davranışını değiştirir. Sona eklenen bu <filename>/</filename> işaretinin "dizini ismiyle kopyala" davranışının zıddı olarak "bu dizinin içeriğini kopyala" anlamına geldiğini düşünebilirsiniz, fakat her iki durumda da dizinin öznitelikleri hedefteki dizine kopyalanacaktır. Başka bir deyişle, aşağıdaki komutların her biri ile dosyalar aynı şekilde, <filename>/dest/foo</filename> dizininin öznitelikleri ayarlanarak kopyalanır:
+  </para><para>
+<screen>rsync -av /src/foo /dest
+rsync -av /src/foo/ /dest/foo
+</screen>
+  </para><para>
+Ayrıca, <command>rsync</command>'i sadece yerel kipte de kullanabilirsiniz. Bu durumda hedef ve kaynak dosya yollarının ikisi de isimlerinde ':' içermeyecektir. Kopyalama işlemi güçlendirilmiş bir kopyalama komutu verilmiş gibi yürüyecektir.
+  </para><para>
+<screen>rsync somehost.mydomain.com::
+</screen>
+  </para><para>
+Bu komut, <filename>somehost.mydomain.com</filename> makinesindeki kullanılabilecek tüm anonim <command>rsync</command> modüllerini listeleyecektir. (Daha fazla bilgi için aşağıdaki bölümlere bakınız.)
+</para></refsect1><refsect1><title>İLERİ DÜZEY KULLANIM</title><para>
+Bir uzak makineden çok sayıda dosya için istek yaparken aralarında boşluk bırakılmış kaynak dosya yollarını tırnak içine alarak belirtebilirsiniz. Bazı örnekler:
+  </para><para>
+<screen indent="1">rsync makine::'modülismi/dizin1/dosya1 modülismi/dizin2/dosya2' /hedef
+</screen>
+  </para><para>
+Bu komut, bir <command>rsync</command> sunucusundan <filename>/hedef</filename> dizinine <filename>dosya1</filename> ve <filename>dosya2</filename> dosyalarını kopyalayacaktır. Her argüman aynı "<filename>modülismi/</filename>" önekini içermeli ve arada sadece bir boşluk karakteri bulunmalıdır. Diğer tüm boşlukların dosya isimlerine ekleneceği varsayılır.
+  </para><para>
+<screen>rsync -av makine:'dizin1/dosya1 dizin2/dosya2' /hedef
+</screen>
+  </para><para>
+Bu komut <filename>dosya1</filename> ve <filename>dosya2</filename> dosyalarını <filename>/hedef</filename> dizinine kopyalayacaktır. Sözcük ayırma işlemi uzak kabuk tarafından yapılır, yani eğer sözcük ayırma gerçekleşmemişse, bunun sebebi uzak kabuğun bu işlem için yapılandırılmamış olmasıdır (nedendir bilinmez, çok yaygındır). İsmi boşluk içeren bir dosyayı kopyalamak isterseniz, ya bunu uzak kabuğun anlayabileceği bir yöntemle yapmalı ya da boşlukların yerine dosya ismi kalıpları kullanmalısınız. İki örnek:
+  </para><para>
+<screen>rsync -av makine:'isminde\ boşluk\ olan\ dosya' /hedef
+rsync -av makine:isminde?boşluk?olan?dosya /hedef
+</screen>
+  </para><para>
+İkinci örnekte, eşleşmeyen kalıpları kabuğunuzun anlayacağı varsayılmıştır. Bu takdirde bunları tersbölü öncelemeli hale getirecektir.
+</para></refsect1><refsect1><title>BİR RSYNC SUNUCUSUNA BAĞLANMAK</title><para>
+Dosya aktarımı için <command>rsync</command>'i bir uzak kabuk olmaksızın da kullanmak mümkündür. Bu durumda, TCP 873. port üzerinde çalışan bir uzak <command>rsync</command> sunucusuna bağlanacaksınız.
+  </para><para>
+RSYNC_PROXY ortam değişkenine bir makine:port çifti belirterek bir vekil sunucu üzerinden de bağlantı sağlayabilirsiniz. Burada, vekil sunucunuzun yapılandırmasının 873. port üzerinden bağlantıya izin verdiğinden emin olmalısınız.
+  </para><para>
+rsync'i bu yöntemle kullanmanın bir uzak kabuk üzerinden kullanmaya farkları şunlardır:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+ya makine ismini dosya yolundan ayırmak için tek bir : yerine :: kullanırsınız ya da bir <filename>rsync://</filename> URL biçimini kullanırsınız.
+  </para></listitem><listitem><para>
+uzak sunucu bağlandığınızda günün iletisini basabilir.
+  </para></listitem><listitem><para>
+uzak sunucu için bir dosya yolu belirtmezseniz, sunucu üzerinde erişilebilir olan dosya yollarının listesini alırsınız.
+  </para></listitem><listitem><para>
+bir yerel hedef belirtmezseniz, uzak sunucu istediğiniz dosyaların bir listesini yollar.
+  </para></listitem></itemizedlist></para><para>
+Uzak sunucu üzerindeki bazı dosya depoları kimlik doğrulaması gerektirebilir. Böyle bir durumda bağlanmak istediğinizde sizden parola istenecektir. Parola istemi almamak için parolanızı <literal>RSYNC_PASSWORD</literal> ortam değişkenine kaydedebileceğiniz gibi, <command>--password-file</command> seçeneğini de kullanabilirsiniz. Bu kullanım <command>rsync</command>'i bir betik ile kullandığınız durumlarda yararlıdır.
+  </para><para><warning><para>
+Bazı sistemlerde ortam değişkenlerini tüm kullanıcılar görebilmektedir. Bu tür sistemlerde <command>--password-file</command> seçeneğinin tercih edilmesi önerilir. </para></warning>
+</para></refsect1><refsect1 id="tr-man1-rsync-ssh">
+<title>BİR RSYNC SUNUCUSUNA BİR UZAK KABUKTAN BAĞLANMAK</title><para>
+Bağlantı için <command>ssh</command> veya <command>rsh</command> kullanarak ve dosya aktarımını <command>rsync</command> sunucusunun yeteneklerinden yararlanarak yapmanın mümkün olması bazan kullanışlı olabilmektedir. Özellikle, bir uzak makineye <command>ssh</command> üzerinden bağlanmak istediğinizde (şifreleme için ya da güvenlik duvarından geçebilmek için) ama bunun yanında <command>rsync</command> sunucusunun yeteneklerinden de yararlanmak istediğiniz durumlarda bu yararlıdır (<xref linkend="tr-man1-rsync-server-ssh"/> bölümüne bakınız).
+  </para><para>
+Kullanıcı açısından, <command>rsync</command>'in bu yöntemle kullanılması, komut satırından uzak kabuk uygulamasının <command>--rsh=</command><varname>komut</varname> ile belirtilmesi dışında bir <command>rsync</command> sunucusuna bağlanmaktan farksızdır. (Burada, <literal>RSYNC_RSH</literal> ortam değişkenine bir atama yaparak uzak kabuk uygulaması belirtmek, beklenen işlevselliği sağlamayacaktır.)
+  </para><para>
+Uzak kabuk kullanıcısını, <command>rsync</command> sunucu kullanıcısından ayırmak için uzak kabuk komutunda '<command>-l </command><varname>kullanıcı</varname>' seçeneğini kullanabilirsiniz:
+  </para><para>
+<screen>rsync -av --rsh="ssh -l ssh-kullanıcısı" \
+    rsync-kullanıcısı@makine::modül[/yol] yerel-yol
+</screen>
+  </para><para>
+"ssh-kullanıcısı" ssh seviyesinde kullanılmalıdır; "rsync-kullanıcısı" ise uzak makinenin <filename>rsyncd.conf</filename> dosyasından sınanacaktır.
+</para></refsect1><refsect1><title>BİR RSYNC SUNUCUSU ÇALIŞTIRMAK</title><para>
+Bir <command>rsync</command> sunucusu bir yapılandırma dosyası kullanılarak yapılandırılır. Daha ayrıntılı bilgi için <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasına bakınız. <command>rsync</command>'i bir uzak kabuk uygulaması üzerinden ve root olarak çalıştırmadıkça, öntanımlı olarak <filename>/etc/rsyncd.conf</filename> dosyası kullanılır. Aksi takdirde, uzak makinedeki çalışma dizininde (genellikle <filename>$HOME</filename>) bulunan <filename>rsyncd.conf</filename> öntanımlıdır.
+</para></refsect1><refsect1 id="tr-man1-rsync-server-ssh"><title>BİR UZAK KABUKTAN BİR RSYNC SUNUCUSU ÇALIŞTIRMAK</title><para>
+<command>rsync</command> sunucusu yapılandırma dosyası ile ilgili tüm bilgiyi <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasında bulabilirsiniz.
+  </para><para>
+Uzak kullanıcı root (<command>chroot</command>, <literal>setuid/setgid</literal>, v.s.) olmadıkça bazı yapılandırma seçenekleri kullanılamaz olacaktır. Eğer <command>rsync</command> sunucusunu bir uzak kabuk uygulaması üzerinden kullanıyorsanız, <filename>services</filename> dosyasında <command>rsync</command> sunucu portunun bulunması ya da <command>inetd</command>'nin yapılandırılması gerekli değildir.
+  </para><para>
+Bir tek kullanımlık ssh anahtarı dışında bir <command>rsync</command> sunucusu çalıştırmak için <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasındaki bu bölüme bakınız.
+</para></refsect1><refsect1><title>ÖRNEKLER</title><para>
+Burada <command>rsync</command> kullanımıyla ilgili bazı örnekler bulacaksınız.
+  </para><para>
+Büyük MS  Word dosyaları ve eposta dizinlerinden oluşan eşimin ev dizinini yedeklemek için şöyle bir <command>cron</command> işi çalıştırıyorum:
+  </para><para>
+<screen>rsync -Cavz . arvidsjaur:backup
+</screen>
+  </para><para>
+Her gece bir PPP bağlantısı üzerinden bu dizini ayrıca, kendi makinemin <filename>arvidsjaur</filename> dizinine kopyalıyorum.
+  </para><para>
+Samba kaynak ağacını eşzamanlı tutmak için şu Makefile hedeflerini kullanıyorum:
+  </para><para>
+<literallayout>get:
+        rsync -avuzb --exclude ’*~’ samba:samba/ .
+put:
+        rsync -Cavuzb . samba:samba/
+sync: get put
+</literallayout>
+  </para><para>
+Bu sayede bağlantının öbür ucundaki bir CVS diziniyle benimkini güncellememi sağlıyor. Uzak makinede bir takım CVS işlemleri yaptıktan sonra uzak CVS protokolü ile bunları kendi makinemde güncellemek gecikmelerden dolayı pek verimli olmuyor.
+  </para><para>
+"eski" ve "yeni" ftp sitelerim arasında bir dizini şu komutla yansılıyorum:
+  </para><para>
+<screen indent="2">rsync -az -e ssh --delete ~ftp/pub/samba nimbus:"~ftp/pub/tridge"
+</screen>
+  </para><para>
+Bu komut her saat başı <command>cron</command>'dan çalıştırılıyor.
+</para></refsect1><refsect1><title>ÖZETLE SEÇENEKLER</title><para>
+Burada <command>rsync</command>'de kullanılabilen seçeneklerin bir özetine yer verilmiştir (<command>rsync --help</command> komutu bu listeyi çıktılar). Bu seçenekler bir sonraki bölümde ayrıntılı olarak açıklanmıştır.
+  </para><para>
+<literallayout indent="1">-v, --verbose             çıktı daha ayrıntılı olur
+-q, --quiet               hatalar dışında bilgi verilmez
+-c, --checksum            sadece toplam sağlamaya bakılır, zaman ve
+                          boyut değişikliklerine bakılmaz
+-a, --archive             arşiv kipi; -rlptgoD (-H'sız) ile aynı
+-r, --recursive           dizinlerin alt dizinlerine inilir
+-R, --relative            göreli dosya yolları kullanılır
+    --no-relative         --relative kapatılır
+    --no-implied-dirs     -R uygulanmış dizinler gönderilmez
+-b, --backup              yedekleme yapılır (--suffix ve
+                          --backup-dir seçeneklerine bakın)
+    --backup-dir=DİZİN    sadece belirtilen dizinin içeriği
+                          yedeklenir
+    --suffix=SONEK        yedekleme soneki
+                          (--backup-dir yoksa ~ öntanımlıdır)
+-u, --update              hedeftekiler daha yeniyse bu dosyalar
+                          atlanır
+    --inplace             hedef dosyaları yerinde günceller
+-d, --dirs                altdizinlere inmeden dizinleri aktarır
+-l, --links               sembolik bağları sembolik bağ olarak
+                          kopyalar
+-L, --copy-links          sembolik bağ değil bağın son hedefi
+                          kopyalanır
+    --copy-unsafe-links   sadece güvensiz sembolik bağlar
+                          dönüştürülür
+    --safe-links          ağacın dışını hedefleyen sembolik
+                          bağlar yoksayılır
+-H, --hard-links          sabit bağlar korunur
+-K, --keep-dirlinks       sembolik bağlı dizinler alıcıda dizin
+                          yapılır
+-p, --perms               izinler korunur
+-o, --owner               sahip korunur (sadece root)
+-g, --group               grup korunur
+-D, --devices             aygıtlar korunur (sadece root)
+-t, --times               zamanlar korunur
+-O, --omit-dir-times      zamanlar korunurken dizinler bunun
+                          dışında tutulur
+-S, --sparse              seyrek dosyaları en verimli şekilde
+                          elde eder
+-n, --dry-run             işlemi yapıyormuş gibi gösterir ama yapmaz
+-W, --whole-file          dosyaları tamamen kopyalar
+                          (rsync algoritması ile farkları değil)
+    --no-whole-file       daima arttırımlı <command>rsync</command> algoritması
+                          kullanılır
+-x, --one-file-system     dosya sistemi sınırlarının dışına çıkılmaz
+-B, --block-size=BOYUT    sabit bir blok boyunda sağlama toplamına
+                          zorlar
+-e, --rsh=KOMUT           kullanılacak uzak kabuk uygulaması
+                          belirtilir
+    --rsync-path=UYGULAMA uzak makinede rsnc'in çalıştıracağı
+                          uygulama
+    --existing            sadece hedefte mevcut olan dosyalar
+                          güncellenir
+    --ignore-existing     hedefte mevcut olan dosyalar yoksayılır
+    --remove-sent-files   alınan dosyalar/sembolik bağlar
+                          göndericide silinir
+    --del                 --delete-during ile aynı
+    --delete              göndericide olmayan dosyalar alıcıda
+                          silinir
+    --delete-before       alıcıda aktarım öncesi silme yapılır
+                          (öntanımlı)
+    --delete-during       alıcıda aktarım sırasında silme yapılır
+    --delete-after        alıcıda aktarım sonrası silme yapılır
+    --delete-excluded     alıcıda ayrıca dışlanmış dosyalar da
+                          silinir
+    --ignore-errors       G/Ç hataları olsa da siler
+    --force               dizinler boş olmasa bile silinir
+    --max-delete=SAYI     SAYIdan fazla dosya silinmez
+    --max-size=BOYUT      BOYUTtan daha büyük dosyalar aktarılmaz
+    --partial             kısmen aktarılmış dosyalar tutulur
+    --partial-dir=DİZİN   kısmen aktarılmış dosyalar DİZİNde tutulur
+    --delay-updates       güncellenecek tüm dosyalar sona bırakılır
+    --numeric-ids         kullanıcı/grup kimliklerini isimlerle
+                          eşleştirmez
+    --timeout=SÜRE        G/Ç zamanaşımını SÜRE saniyeye ayarlar
+-I, --ignore-times        zaman ve boyut bakımından eşleşen dosyalar
+                          atlanmaz
+    --size-only           boyutları aynı olan dosyalar atlanır
+    --modify-window=SAYI  doğruluğu arttırmak için değişiklik
+                          zamanları karşılaştırılır
+-T, --temp-dir=DİZİN      geçici dosyaları DİZİNde oluşturur
+-y, --fuzzy               hedefte dosya yoksa benzerini bulur
+    --compare-dest=DİZİN  alınan dosyaları ayrıca DİZİNdekilerle
+                          karşılaştırır
+    --link-dest=DİZİN     değişmediyse DİZİNdeki dosyalara sabit bağ
+-z, --compress            aktarım sırasında dosya verisi sıkıştırılır
+-C, --cvs-exclude         dosyalar CVS'nin yaptığı gibi yoksayılır
+-f, --filter=KURAL        bir dosya süzme kuralı ekler
+-F                        --filter='dir-merge /.rsync-filter' ve
+                          yinelemeli: --filter='- .rsync-filter'
+                          ile aynı
+    --exclude=KALIP       KALIP ile eşleşen dosyalar dışlanır
+    --exclude-from=DOSYA  dışlama kalıpları DOSYAdan okunur
+    --include=KALIP       KALIP ile eşleşen dosyalar dışlanmaz
+    --include-from=DOSYA  dışlanmayan kalıplar DOSYAdan okunur
+    --files-from=DOSYA    aktarılacak dosyaların isimlerinin listesi
+                          DOSYAdan okunur
+-0, --from0               *from seçeneklerindeki dosya listeleri boş
+                          karakter sonlandırmalı kabul edilir
+    --version             sürüm numarasını basar
+    --port=PORT           başka bir port belirtmek için
+    --blocking-io         uzak kabukta engellemeli G/Ç kullanılır
+    --no-blocking-io      engellemeli G/Ç öntanımlı olduğunda bunu
+                          iptal eder
+    --stats               dosya aktarımı sırasında durum bilgileri
+                          verir
+    --progress            aktarım sırasında gelişimi gösterir
+-P                        --partial --progress ile aynı
+-i, --itemize-changes     tüm güncellemeler için bir değişiklik
+                          özeti çıktılar
+    --log-format=BİÇİM    aktarımları belirtilen biçimde günlükler
+    --password-file=DOSYA parola DOSYAdan okunur
+    --list-only           dosyaları kopyalamaz, sadece listeler
+    --bwlimit=KBPS        saniyede kBayt cinsinden G/Ç band genişliği
+    --write-batch=DOSYA   bir betikli güncellemeyi DOSYAya yazar
+    --read-batch=DOSYA    bir betikli güncellemeyi DOSYAdan okur
+    --checksum-seed=SAYI  blok/dosya sağlama toplamı tohumunu ayarlar
+-4, --ipv4                IPv4 tercih edilir
+-6, --ipv6                IPv6 tercih edilir
+-h, --help                bu yardım iletisini gösterir
+  </literallayout></para><para>
+<command>rsync</command> ayrıca bir artalan süreci olarak da çalıştırılabilir. Bu durumda şu seçenekleri kabul eder:
+  </para><para>
+<literallayout indent="1">
+    --daemon              bir rsync artalan süreci olarak çalışır
+    --address=ADRES       belirtilen adres kullanılır
+    --bwlimit=KBPS        saniyede kBayt cinsinden G/Ç band genişliği
+    --config=DOSYA        rsyncd.conf yerine kullanılacak DOSYA
+    --no-detach           üst süreçten ayrık çalışmaz
+    --port=PORT           belirtilen PORTu dinler
+-v, --verbose             ayrıntı düzeyini arttırır
+-4, --ipv4                IPv4 tercih edilir
+-6, --ipv6                IPv6 tercih edilir
+-h, --help                bu yardım iletisini gösterir
+</literallayout></para></refsect1><refsect1 id="tr-man1-rsync-client">
+<title>AÇIKLAMALARIYLA SEÇENEKLER</title><para>
+<command>rsync</command> GNU uzun seçenekler paketini kullanır. Çoğu komut satırı seçeneği hem kısa hem de uzun seçenek içerir. Bazı seçenekler ise sadece uzun seçeneklerden oluşur. `=' işareti içeren seçeneklerdeki parametreler isteğe bağlıdır; `=' yerine boşluk kullanılabilir.
+  </para><para><glosslist><glossentry>
+      <glossterm><command>-h</command></glossterm>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para><command>rsync</command> tarafından kabul edilen seçenekleri açıklayan kısa bir yardım iletisi basar.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--version</command></glossterm>
+      <glossdef><para><command>rsync</command> sürüm numarasını basar ve çıkar.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-v</command></glossterm>
+      <glossterm><command>--verbose</command></glossterm>
+      <glossdef><para>Bu seçenek aktarım sırasında verilen bilgi miktarını arttırır. <command>rsync</command> öntanımlı olarak sessiz çalışır. Tek <command>-v</command> belirtildiğinde, hangi dosyaların aktarıldığını gösterip sonunda bir özet basar. İki <command>-v</command> belirtildiğinde atlanan dosyaları gösterir ve sonunda daha fazla bilgi verir. İkiden fazla <command>-v</command> kullanımı sadece <command>rsync</command> hata ayıklaması yapıyorsanız anlamlıdır.
+      </para><para>
+Aktarılan dosya isimlerinin çıktılanmasında <command>--log-format</command> seçeneğinin öntanımlı olarak "<literal>%n%L</literal>" ile kullanıldığı varsayılarak sadece dosyaların isimleri ve varsa sembolik bağlar hedefleri ile belirtilir. Tek <command>-v</command> seviyesinden bir ayrıntıda bir dosyanın öznitelikleri değişmişse bu gösterilmez. Değiştirilen özniteliklerin öğelere göre listelenmesi isterseniz (<command>--itemize-changes</command> seçeneğiyle ya da <command>--log-format</command> seçeneğine "<literal>%i</literal>" ekleyerek), istemcideki çıktıda değiştirilen tüm öğelerin ayrıntı düzeyi arttırılır. Daha fazla bilgi için <command>--log-format</command> seçeneğinin açıklamasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-q</command></glossterm>
+      <glossterm><command>--quiet</command></glossterm>
+      <glossdef><para>Bu seçenek aktarım sırasında verilen bilgi miktarını azaltır. Özellikle uzak sunucudaki bilgi iletileri baskılanır. Bu seçenek <command>rsync</command>'i <command>cron</command>'dan çalıştırırken yararlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-I</command></glossterm>
+      <glossterm><command>--ignore-times</command></glossterm>
+      <glossdef><para>Normalde <command>rsync</command> hedefte de aynı boyutta ve aynı değişiklik zamanına sahip dosyalar varsa bunları atlayacaktır. Bu seçenek bu "hızlı sınama" davranışını kapatır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--size-only</command></glossterm>
+      <glossdef><para>Normalde <command>rsync</command> hedefte de aynı boyutta ve aynı değişiklik zamanına sahip dosyalar varsa bunları atlayacaktır. Bu seçenekle, dosyaların zamanlarına bakılmaksızın hedefte de aynı boyutta iseler aktarılmazlar. Zaman değerlerinin doğru tutulmadığı başka bir yansılama sistemini kullandıktan sonra <command>rsync</command>'i kullanmaya başlayacaksanız bu seçenek yararlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--modify-window=</command><varname>sayı</varname></glossterm>
+      <glossdef><para>
+İki zaman değerini karşılaştırırken, fark <varname>sayı</varname>'ya eşitse <command>rsync</command> bu değerleri eşit kabul eder. Bu fark normalde 0 dır (tam eşitlik), ancak bu farkı bazı durumlarda daha büyük bir değere ayarlamak daha yararlıdır. Örneğin, MS Windows FAT dosya sistemi (zaman değerleri 2 saniyelik çözünürlüğe sahiptir) taraflardan biri olduğunda  <command>--modify-window=1</command> yararlıdır (1 saniyelik farklara izin vermek).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-c</command></glossterm>
+      <glossterm><command>--checksum</command></glossterm>
+      <glossdef><para>Bu seçenek göndericiyi aktarımdan önce tüm dosyaları 128 bitlik MD4 sağlama toplamını kullanarak sınamaya zorlar. Sağlama toplamı doğrudan alıcıda sınanır ve mevcut olanlar arasında aynı sağlama toplamlı, aynı boyutlu ve aynı isimli olanlar aktarılmaz. Bu seçenek aktarım işlemini oldukça yavaşlatabilir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-a</command></glossterm>
+      <glossterm><command>--archive</command></glossterm>
+      <glossdef><para>Bu seçenek <command>-rlptgoD</command> seçeneklerine eşdeğerdir. Alt dizinlere inerek işlem yapılmasını ve hemen hemen herşeyin korunmasını istemenin en kestirme yoludur; bir şey dışında: <command>--files-from</command> belirtilmişse <command>-r</command> uygulanmayacaktır.
+      </para><para>
+Çok sayıda bağlı dosyanın varlığı pahalıya mal olacağından <command>-a</command> seçeneği sabit bağları korumaz. Bunu istiyorsanız <command>-H</command> seçeneğini ayrıca belirtmelisiniz.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-r</command></glossterm>
+      <glossterm><command>--recursive</command></glossterm>
+      <glossdef><para>Bu seçenek alt dizinlerinde ardışık olarak kopyalanmasını sağlar. Ayrıca  <command>--dirs</command> (<command>-d</command>) seçeneğine de bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-R</command></glossterm>
+      <glossterm><command>--relative</command></glossterm>
+      <glossdef><para>
+Göreli dosya yolları kullanılır. Yani, komut satırının gönderici kısmında belirtilen dosya yolunun son parçası değil, dosya yolunun tamamı kopyalanır. Bu seçenek aynı anda çok sayıda dizini göndermek için yararlıdır. Örneğin şöyle bir komut,
+     </para><para>
+<screen>rsync /foo/bar/foo.c remote:/tmp/
+</screen>
+     </para><para>
+uzak makinede <filename>/tmp/foo.c</filename> dosyasını oluşturur. Bunun yerine şu komutu kullansaydınız,
+     </para><para>
+<screen>rsync -R /foo/bar/foo.c remote:/tmp/
+</screen>
+     </para><para>
+uzak makinede <filename>/tmp/foo/bar/foo.c</filename> dosyası oluşturulacaktı (dosya yolunun tamamı kopyalanır). Karşıya yollanacak yol uzunluğunu sınırlamak için şöyle yapabilirsiniz:
+     </para><para>
+<screen>cd /foo
+rsync -R bar/foo.c remote:/tmp/
+</screen>
+     </para><para>
+Bu komut uzak makinede <filename>/tmp/bar/foo.c</filename> dosyasını oluşturur.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--no-relative</command></glossterm>
+      <glossdef><para><command>--relative</command> seçeneğini iptal eder. Bu özellikle <command>--files-from</command> seçeneğinin gerektiği durumlarda <command>--relative</command> seçeneği uygulanmaksızın dosyaları işleme sokmakta yararlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--no-implied-dirs</command></glossterm>
+      <glossdef><para><command>--relative</command> seçeneği ile birlikte kullanıldığında her dosya yolundaki dolaylı dizinler, aktarımın parçası olarak yinelenmez. Bu dosya aktarımını daha elverişli yaptığı gibi ayrıca dosya yolunun dolaylı parçalarında iki tarafta eşleşmeyen sembolik bağların varlığını mümkün kılar. Örneğin, "<filename>/path/foo/file</filename>" dosyasını <command>-R</command> ile aktarırsanız, hedefte "<filename>/path</filename>" ve "<filename>/path/foo</filename>" ile kaynağın dizin ve sembolik bağları tamamen eşleştirilecektir. <command>--no-implied-dirs</command> seçeneğinin kullanımı bu dolaylı dizinlerin her ikisinin de atlanmasına yol açar. Yani, eğer "<filename>/path</filename>" bir makine üzerinde gerçek bir dizin, ancak diğer makinede bir sembolik bağ ise, <command>rsync</command> bunu değiştirmeye çalışmayacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-b</command></glossterm>
+      <glossterm><command>--backup</command></glossterm>
+      <glossdef><para>Bu seçenekle, evvelce mevcut hedef dosyaların her aktarımında ya da silinmesinde bu dosyaların isimleri değiştirilir. Yedek dosyaların nereye gideceğini ve nasıl bir sonek alacaklarını <command>--backup-dir</command>  ve <command>--suffix</command> seçenekleri ile belirtebilirsiniz. Eğer <command>--backup-dir</command> seçeneğini belirtmezseniz, <command>--omit-dir-times</command> seçeneği etkin kılınacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--backup-dir=</command><varname>dizin</varname></glossterm>
+      <glossdef><para><command>--backup</command> seçeneği ile birlikte kullanıldığında bu seçenekle yedek dosyaların hangi dizinde saklanacağı belirtilebilir. Bu, arttırımlı yedekleme yaparken çok yararlıdır. Buna ek olarak <command>--suffix</command> seçeneğini kullanarak bir yedek soneki de belirtebilirsiniz (aksi takdirde dosyalar belirtilen dizine kendi isimleri ile yedeklenir).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--suffix=</command><varname>sonek</varname></glossterm>
+      <glossdef><para>Bu seçenek <command>--backup</command> (<command>-b</command>) ile kullanıldığında, belirtilen <varname>sonek</varname> öntanımlı yedekleme sonekinin yerine kullanılır. <command>--backup-dir</command> belirtilmemişse, öntanımlı sonek <command>~</command> işaretidir, aksi takdirde boş bir dizgedir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-u</command></glossterm>
+      <glossterm><command>--update</command></glossterm>
+      <glossdef><para>Bu seçenek, hedefte mevcut olan bir dosyanın değişiklik zamanının kaynak dosyanınkinden daha yeni olduğu durumda atlanmasını sağlar. (Eğer hedef dosyanın değişiklik zamanı kaynağınkiyle aynıysa, ama boyutları farklıysa güncelleme yapılacaktır.)
+    </para><para>
+--update seçeneğinin şu anki gerçekleniminde gönderici ve alıcı arasında dosya biçimlerinde bir fark varsa, bu, güncelleme için tarihlerden daha önemli olarak ele alınır. Başka bir deyişle, hedef bir dosyaya sahipken, kaynak bir dizin veya bir sembolik bağa sahipse, aktarım dosyalarını zaman değerlerine bakılmaksızın yapılır. Bu davranış ileride değişebilir (bu konuda bir fikriniz varsa, eposta listesinde bunu açıklamaktan çekinmeyin).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--inplace</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'in dosyanın yeni bir kopyasının oluşturulmamasına ve yerine taşınmamasına sebep olur. Bunun yerine <command>rsync</command> mevcut dosyanın üzerine yazacaktır,yani <command>rsync</command> algoritması ağ yükünü tamamen azaltmayı başaramaz (henüz veriyi uyumlu sıralamayı denemediğinden). Buna bir istisna, <command>rsync</command> yedek dosyaları aktarımda temel dosya olarak kullanma yeterliğinde olduğundan, seçeneğin <command>--backup</command> ile birlikte kullanılmasıdır.
+    </para><para>
+Bu seçenek blok temelli değişiklikler olan ya da sonuna ekleme yapılan çok büyük dosyalarla, disk ve ağ bakımından sınırlı sistemlerde yararlıdır.
+    </para><para>
+Bu seçenek <command>--partial</command> (kesilmeye uğramış bir aktarımda dosya silinmez) seçeneğini uygular, fakat <command>--partial-dir</command>  ve <command>--delay-updates</command> seçenekleriyle çelişir.  <command>rsync</command> 2.6.4 öncesinde  <command>--inplace</command> ayrıca <command>--compare-dest</command> ve <command>--link-dest</command> seçenekleriyle de çelişiyordu.
+    </para><para><warning><para>
+Dosya verisi aktarım sırasında kararsız bir durumda olacaktır (ve büyük ihtimalle aktarım kesintiye uğradıktan sonra da), dolayısıyla, kullanılmakta olan dosyaları bu seçeneği kullanarak güncellememelisiniz. Ayrıca, alıcı kullanıcının yazma izni olmayan dosyaların <command>rsync</command> tarafından yerinde güncellenemeyeceğini de unutmayın.
+    </para></warning>
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-d</command></glossterm>
+      <glossterm><command>--dirs</command></glossterm>
+      <glossdef><para>Gönderen tarafın saptanan her dizini içereceğini söyler. <command>--recursive</command> seçeneğinin tersine, bir dizinin içeriği, dizin komut satırında "<command>.</command>" ya da bir bölü çüzgisi ile biten bir isim ("<filename>foo/</filename>" gibi) ile belrtilmedikçe kopyalanmaz. Bu seçenek ya da <command>--recursive</command> seçeneği olmaksızın, <command>rsync</command> saptadığı tüm dizinleri atlayacaktır (ve herbiri için bir ileti çıktılayacaktır).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-l</command></glossterm>
+      <glossterm><command>--links</command></glossterm>
+      <glossdef><para>Saptanan her sembolik bağ hedefte oluşturulur.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-L</command></glossterm>
+      <glossterm><command>--copy-links</command></glossterm>
+      <glossdef><para>
+Sembolik bağ saptandığında sembolik bağ değil, hedefindeki dosya kopyalanır. <command>rsync</command>'in eski sürümlerinde, bu seçenek ayrıca alıcı tarafa, dizin sembolik bağı gibi sembolik bağları izlemesini söylemek gibi bir yan etkiye sahipti. Günümüzde ise, <command>rsync</command>, böyle bir durumda, bu ek davranışı sağlamak için sizin <command>--keep-dirlinks</command> (<command>-K</command>) seçeneğini belirtmenizi gerektirir. Buna tek istisna, <command>-K</command> seçeneğini anlayacak çok eski bir <command>rsync</command> ile dosyaların gönderilmesidir -- bu durumda <command>-L</command> seçeneği daha eski bir <command>rsync</command> ile hala <command>-K</command> seçeneğinin yan etkisine sahip olacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--copy-unsafe-links</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, kopyalanan ağacın dışındaki bir hedefi gösteren sembolik bağları kopyalamasını söyler. Mutlak sembolik bağlar ayrıca sıradan dosyalar olarak ele alınır, böylece bunlar <command>--relative</command> kullanıldığında kaynak dosya yolunun kendindeki sembolik bağlar olurlar.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>safe-links</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, kopyalanan ağacın dışındaki bir hedefi gösteren sembolik bağları yoksaymasını söyler. Bu seçeneğin <command>--relative</command> seçeneğiyle birlikte kullanılması beklenmedik sonuçlara yol açabilir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-H</command></glossterm>
+      <glossterm><command>--hard-links</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, sabit bağları aynı kaynak sistemdeki gibi yeniden oluşturmasını söyler. Bu seçenek olmaksızın sabit bağlar sıradan dosyalar olarak ele alınırlar.
+    </para><para>
+<command>rsync</command>'in, eğer bağın her iki parçası da dosya listesi ile gönderilmişse, sabit bağları saptayabileceğini unutmayın.
+    </para><para>
+Bu seçenek işlemi yavaşlatabilir, gerçekten bu işlevselliğe ihtiyacınız varsa kullanın.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-K</command></glossterm>
+      <glossterm><command>--keep-dirlinks</command></glossterm>
+      <glossdef><para>Alıcı tarafta, bir sembolik bağ bir dizini gösteriyorsa, bunun gönderici tarafta bir dizinle eşleştiği varsayılacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-W</command></glossterm>
+      <glossterm><command>--whole-file</command></glossterm>
+      <glossdef><para>Bu seçenekle arttırımlı <command>rsync</command> algortiması kullanılmaz ve bunun yerine dosya olduğu gibi gönderilir. Eğer kaynak ile hedef arasındaki band genişliği diskin band genişliğinden (özellikle disk, ağ dosya sisteminin bir parçası ise) daha yüksekse bu seçenek daha hızlı olabilir. Kaynak ve hedef,  yerel dosya yolları olarak belirtilmişse bu seçenek öntanımlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--no-whole-file</command></glossterm>
+      <glossdef><para><command>--whole-file</command> öntanımlı olduğunda bu seçenek onu kapatır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-p</command></glossterm>
+      <glossterm><command>--perms</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, izinleri hedefte aynı kaynak sistemdeki gibi belirlemesini söyler.
+    </para><para>
+Bu seçenek olmaksızın, her yeni dosya izinlerini kaynak dosyanın izinlerine ve alıcı taraftaki <command>umask</command>'a göre belirlenir, diğer tüm dosyalar (güncellenenler dahil)  kendi mevcut izinleriyle kalır (bu, <command>cp</command> gibi diğer dosya kopyalama araçlarında da böyledir).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-o</command></glossterm>
+      <glossterm><command>--owner</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedef dosyanın sahibini aynı kaynak dosyadaki gibi belirlemesini söyler. Çoğu sistemde sadece ayrıcalıklı kullanıcı dosya aidiyetini belirleyebilir. Öntanımlı olarak, koruma isim tarafında yapılır, fakat bazı durumlarda son çare olarak kullanıcı kimliği kullanılır. Bu konu <command>--numeric-ids</command> seçeneğinin açıklamasında daha ayrıntılı incelenmiştir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-g</command></glossterm>
+      <glossterm><command>--group</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedef dosyanın grubunu aynı kaynak dosyadaki gibi belirlemesini söyler. Alıcı tarafta <command>rsync</command>'i ayrıcalıklı kullanıcı çalıştırmıyorsa, sadece alıcının üyesi olduğu gruplar için bu yapılabilir. Öntanımlı olarak işlem grup ismine göre yapılır, ancak bazı durumlarda son çare olarak grup kimliği de kullanıabilir. Bu konu <command>--numeric-ids</command> seçeneğinin açıklamasında daha ayrıntılı incelenmiştir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-D</command></glossterm>
+      <glossterm><command>--devices</command></glossterm>
+      <glossdef><para>Aktarılan karakter ve blok aygıtları hedefte yeniden oluşturulur. Bu seçeneği sadece ayrıcalıklı kullanıcı kullanabilir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-t</command></glossterm>
+      <glossterm><command>--times</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, dosyaları değişiklik zamanlarına göre aktarmasını ve bunları uzak sistemde güncellemesini söyler. Bu seçenek kullanılmazsa, eniyileme yüzünden değiştirilmemiş dosyaların dışlanması verimli olamaz; başka bir deyişle, <command>-t</command> veya <command>-a</command> seçeneğinin yokluğu sonraki aktarımda <command>-I</command> kullanılmış gibi tüm dosyaların güncellenmesine yol açar (<command>rsync</command> algoritması güncellemeyi oldukça verimli yapacağından, eğer dosyalar gereçekten değişmemişse, <command>-t</command> kullanmanız çok daha iyi olacaktır).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-O</command></glossterm>
+      <glossterm><command>--omit-dir-times</command></glossterm>
+      <glossdef><para>Eğer <command>rsnc</command> değişiklik zamanlarını güncelliyorsa (<command>--times</command> ile), bu seçenek belirtildiğinde dizinleri bunun dışında tutar. Eğer alıcı tarafta NFS dizinleri paylaştırıyorsa, <command>-O</command> seçeneğini kullanmak daha iyidir. Bu seçenek <command>--backup</command> seçeneği <command>--backup-dir</command> olmaksızın kullanılmış gibi sonuç verir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-n</command></glossterm>
+      <glossterm><command>--dry-run</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, herhangi bir dosya aktarımı yapmamasını, sadece yapıyormuş gibi işlemleri raporlamasını söyler.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-S</command></glossterm>
+      <glossterm><command>--sparse</command></glossterm>
+      <glossdef><para>Bu seçenekle  <command>rsync</command>, seyrek dosyaların hedefte daha az yer kaplayacak şekilde elde edilmesini sağlamaya çalışır.
+     </para><para><note><para>
+Bu seçeneği hedefteki dosya sistemi Solaris "tmpfs" ise kullanmayın. Boş bölgelerin düzgünce atlanmasını sağlayamaz ve dosya sonunda bozulmalar oluşur.</para></note>
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-x</command></glossterm>
+      <glossterm><command>--one-file-system</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, aktarım sırasında dosya sistemi sınırlarının dışına çıkmamasını söyler. Bu seçenek, tek bir dosya sisteminin içeriğini aktarmak için yararlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--existing</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedefte yeni dosya oluşturulmasını gerektirecek aktarımları yapmamasını sadece güncelleme yapmasını söyler.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--ignore-existing</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedefte mevcut olan dosyaları güncellememesini söyler.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--remove-sent-files</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedefte yeni oluşturulan dosyalarla içeriği güncellenenleri, gönderen taraftan silmesini söyler. Dizinler ve aygıtlar ile sadece öznitelikleri değiştirilmiş dosyalar silinmez.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delete</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, hedefte olup kaynakta olmayan dosyaları hedeften silmesini söyler, fakat sadece dosyalar dizinleri ile belirtilmişse bu yapılır. Yani, <command>rsync</command>'den tüm dizini ("<filename>dir</filename>" veya "<filename>dir/</filename>" gibi) göndermesini istemeli, dizin içeriğini belirten dosya kalıpları ("<filename>dir/*</filename>" gibi) belirtmemelisiniz. Dosya kalıpları belirtildiğinde kalıp kabuk tarafından yorumlanır ve kabuk <command>rsync</command>'den dosyaları kapsayan dizini değil, tek tek dosyaları aktarmasını ister. Aktarımdan dışlanan dosyalardan biriyse, <command>--delete-excluded</command> kullanılmamışsa ya da kurallar sadece gönderen tarafla eşleşenleri imliyorsa hedefte silinecek olanlar da dışlanır (<xref linkend="tr-man1-rsync-filters"/> bölümündeki içerme/dışlama belirteçlerine bakınız).
+    </para><para>
+Alt dizinlere inilmiyorsa bu seçenek etkisizdir.
+    </para><para>
+Bu seçenek doğru şekilde kullanılmazsa tehlikeli olabilir. Önce <command>--dry-run</command> (<command>-n</command>) seçeneğiyle silinecek dosyaları görüp, önemli dosyaların silinmeyeceğinden emin olduktan sonra asıl işlemi başlatmak çok daha iyidir.
+    </para><para>
+Gönderen tarafta bir G/Ç hatası saptandığında hedefteki dosya silme işlemi iptal edilir. Bu, gönderen tarafın alıcı taraftaki dosyaları tümden silmesi gibi geçici dosya sistemi hatalarına karşı (NFS hataları gibi) bir önlemdir. Bu davranışı <command>--ignore-errors</command> seçeneğiyle iptal edebilirsiniz.
+    </para><para>
+<command>--delete</command> seçeneği silme zamanını belirten <command>--delete-*</command> seçenekleriyle, <command>--delete-excluded</command> dahil, herhangi bir sorun olmaksızın birleştirilebilir. Ancak, silme zamanını belirten <command>--delete-*</command> seçeneklerinden biri belirtilmemişse, <command>rsync</command> öntanımlı olarak <command>--delete-before</command> algoritmasını seçer. İleri sürümlerde bu seçim <command>--delete-during</command> algoritmasıyla değiştirilebilir. Ayrıca, <command>--delete-after</command> seçeneğine de bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delete-before</command></glossterm>
+      <glossdef><para>Alıcı taraftaki dosya silme işlemlerinin aktarımın başlangıcında yapılmasını sağlar. Bu seçenek <command>--delete</command> veya <command>--delete-excluded</command> seçeneği ile birlikte silme zamanını belirten <command>--delete-*</command> seçeneklerinden biri belirtilmemişse öntanımlıdır. Dosya silinmesi ile ilgili daha ayrıntılı bilgi için <command>--delete</command> seçeneğinin açıklamasına bakınız.
+    </para><para>
+Aktarımın başında silme yapılması, eğer dosya sistemi doluluk bakımından sınırda ise ve ancak fazlalıkların kaldırılmasıyla dosya aktarımı mümkün olabilecekse yararlıdır. Ancak, bu seçenek aktarımın başlamasını geciktirdiğinden aktarımın zamanaşımına uğramasına (<command>--timeout</command> belirtilmişse) sebep olabilir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delete-during</command></glossterm>
+      <glossterm><command>--del</command></glossterm>
+      <glossdef><para>Alıcı taraftaki dosya silme işlemlerinin aktarımı sırasında yapılmasını sağlar. Bu yöntem silme işleminin aktarımdan önce ve sonra yapıldığı algoritmalardan daha hızlıdır. Fakat ilk olarak <command>rsync</command>'in 2.6.4 sürümüyle kullanılabilir olmuştur. Dosya silinmesi ile ilgili daha ayrıntılı bilgi için <command>--delete</command> seçeneğinin açıklamasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delete-after</command></glossterm>
+      <glossdef><para>Alıcı taraftaki dosya silme işlemlerinin aktarım tamamlandıktan sonra yapılmasını sağlar.  Eğer aktarımın bir parçası olarak dizin bazında yeni dosya birleşimleri yapıyorsanız ve bunların ihracının aktarımın silme fazında etkin olmasını istiyorsanız bu seçenek yararlı olacaktır. Dosya silinmesi ile ilgili daha ayrıntılı bilgi için <command>--delete</command> seçeneğinin açıklamasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delete-excluded</command></glossterm>
+      <glossdef><para>Alıcı tarafta olup, gönderici tarafta olmayan dosyaların alıcı tarafta silinmesine ek olarak, alıcı tarafta dışlanan dosyalarında silinmesini sağlar (<command>--exclude</command> seçeneğine bakınız). Alıcı tarafta tek tek dosyaların dışlanmasının bu yöntemle silinmesi ve silinmesi istenmeyen dosyaların bu seçenekten korunması ile ilgili bilgiler için <xref linkend="tr-man1-rsync-filters"/> bölümüne bakınız. Dosya silinmesi ile ilgili daha ayrıntılı bilgi için ise <command>--delete</command> seçeneğinin açıklamasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--ignore-errors</command></glossterm>
+      <glossdef><para>G/Ç hataları olsa bile <command>--delete</command> işleminin sürdürülmesini sağlar.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--force</command></glossterm>
+      <glossdef><para>Gönderici tarafta olmayan ancak alıcı tarafta olan dizinlerin içleri dolu bile olsa silnmesini sağlar. Bu sadece <command>--delete</command> seçeneği olmaksızın böyledir, çünkü silme işlemleri artık içiçe dizinler içeren bir tepe dizinin silinmesi şeklinde yapılmaktadır. Etkin olması için <command>--recursive</command> seçeneği (<command>-a</command> tarafından uygulanır) gerekir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--max-delete=</command><varname>sayı</varname></glossterm>
+      <glossdef><para><varname>sayı</varname>'dan fazla dosya ya da dizin silinmez. Yansılama yapılırken çok büyük ağaçların yıkıma yol açmaması için yararlıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--max-size=</command><varname>boyut</varname></glossterm>
+      <glossdef><para><varname>boyut</varname> bayttan dha büyük dosyalar aktarılmaz. <varname>boyut</varname> belirtilirken, sonek olarak K, M, G gibi bayt çarpanları belirtilebileceği gibi kesirli değerler de belirtilebilir (<command>--max-size=1.5m</command> gibi).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-B</command></glossterm>
+      <glossterm><command>--block-size=</command><varname>blokboyu</varname></glossterm>
+      <glossdef><para><command>rsync</command> algoritmasında sabit bir blok boyunun kullanımına zorlar. Normalde, bu değer güncellenen her dosya için ayrı ayrı seçilir. Daha ayrıntılı bilgi için teknik rapora bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-e</command></glossterm>
+      <glossterm><command>--rsh=</command><varname>komut</varname></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'in yerel ve uzak kopyaların arasında iletişim için bir uzak kabuk uygulaması belirleyebilmeyi sağlar. Genelde, <command>rsync</command> öntanımlı olarak <command>ssh</command> kullanacak şekilde yapılandırılır, fakat bir yerel ağda <command>rsh</command> kullanmayı da tercih edebilirsiniz.
+    </para><para>
+Bu seçenek <literal>[kullanıcı@]makine::modül/yol</literal> ile kullanılırsa, uzak makinedeki <command>rsync</command> sunucusunu çalıştırmak için belirtilen uzak kabuk <varname>komut</varname>'u kullanılacak ve aktarım için uzak makinede çalışan <command>rsync</command> suncusunun soket bağlantısı değil, uzak kabuk bağlantısı kullanılacaktır. Ayrıca, yukarıdaki <xref linkend="tr-man1-rsync-ssh"/> bölümüne de bakınız.
+    </para><para>
+<varname>komut</varname> içinde <command>rsync</command> sadece tek bir argümana izin verir. Örnek:
+    </para><para>
+<literallayout>-e "ssh -p 2234"
+</literallayout>
+    </para><para><note><para>
+<command>ssh</command> kullanıcıları makineye özel bağlantı seçeneklerini kendi <filename>.ssh/config</filename> dosyası ile kişiselleştirebilirler.
+    </para></note></para><para>
+Uzak kabuk uygulamasını seçmek için <literal>RSYNC_RSH</literal> ortam değişkenini, <command>-e</command> seçeneğinde belirtilebilen bir değeri atayarak kullanabilirsiniz.
+    </para><para>
+Ayrıca, bu seçenekten etkilenen <command>--blocking-io</command> seçeneğinin açıklamasına da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--rsync-path=</command><varname>uygulama</varname></glossterm>
+      <glossdef><para>Uzak makinede başlangıçta hangi uygulamanın çalıştırılacağını belirtmek için kullanılır. Çoğunlukla, <command>rsync</command>'in uzak kabuğun öntanımlı yolları dışında bulunduğu durumda kullanılır (<command>--rsync-path=/usr/local/bin/rsync</command> gibi). <varname>uygulama</varname> kabuk tarafından çalıştırılacağından herhengi bir uygulama, betik ya da bir dizi komut olabilir. Bir dizi komut belirtiyorsanız <command>rsync</command>'in iletişimde kullanacağı standart girdi ve standart çıktının devredışı kalmamasına dikkat etmelisiniz.
+    </para><para>
+Aşağıdaki örnekte uzak makinede <command>--relative</command> seçeneği ile kullanmak için farklı bir öntanımlı yol belirtilmektedir:
+    </para><para>
+<screen indent="4">rsync -avR --rsync-path="cd /a/b &amp;&amp; rsync" makine:c/d /e/
+</screen>
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-C</command></glossterm>
+      <glossterm><command>--cvs-exclude</command></glossterm>
+      <glossdef><para>Sistemler arasında aktarımı istenmeyen geniş bir dosya kümesinin dışlanması için bir kısayol olarak kullanışlıdır. CVS'nin yoksayılacak dosyaları saptamakta kullandığı algoritma kullanılır.
+    </para><para>
+Dışlanan dosyaların listesi şöyle ilklendirilmiş olsun:
+    </para><para>
+<literallayout indent="4">
+ RCS   SCCS   CVS   CVS.adm   RCSLOG  cvslog.*  tags  TAGS
+ .make.state .nse_depinfo *~ #* .#* ,* _$* *$ *.old  *.bak
+ *.BAK  *.orig *.rej .del-* *.a *.olb *.o *.obj *.so *.exe
+ *.Z *.elc *.ln core .svn/
+</literallayout>
+    </para><para>
+<filename>$HOME/.cvsignore</filename> içindeki dosyalarla <literal>CVSIGNORE</literal> ortam değişkeninde (tüm isimler bir boşlukla ayrılarak belirtilir) listelenen her dosya bu listeye eklenecektir.
+    </para><para>
+Son olarak, <filename>.cvsignore</filename> dosyası ile aynı dizindeki dosyalardan <filename>.cvsignore</filename> dosyasında listelenmiş kalıplarla eşleşen dosyalar yok sayılır. <command>rsync</command>’in süzme ve dışlama uyguladığı dosyaların aksine bu kalıplar boşluklarla ayrılır. Daha fazla bilgi için <link linkend="tr-man1-cvs"/> kılavuz sayfasına bakınız.
+    </para><para>
+Bu seçeneği kendi <command>--filter</command> kurallarınızla birlikte belirtirseniz, <command>-C</command> seçeneğinin komut satırının neresinde olduğuna bakılmaksızın, CVS dışlananlarının sizin kurallarınızın sonuna ekleneceğini unutmayın. Bu, onlara sizin belirttiğiniz kurallara göre daha düşük öncelik verir.  CVS dışlananlarının süzme kurallarınız arasındaki yerini kendiniz belirlemek isterseniz, komut satırı seçeneği olarak <command>-C</command> belirtmek yerine <command>--filter=:C</command> ve <command>--filter=-C</command> seçeneklerini belirtmelisiniz (bu şekilde komut satırında belirtebileceğiniz gibi bir süzme dosyasına "<literal>:C</literal>"  ve  "<literal>-C</literal>" kurallarını yerleştirerek de belirtebilirsiniz). İlk kural her dizinde <filename>.cvsignore</filename> dosyalarına bakılmasını, ikinci kural ise yukarıda bahsedilen CVS dışlananlarını bir seferliğine dahil edilmesini sağlar.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-f</command></glossterm>
+      <glossterm><command>--filter=</command><varname>kural</varname></glossterm>
+      <glossdef><para>Bu seçenek aktarılacak dosyalar listesinden belli dosyaların seçilerek dışlanması için kurallar eklemenizi mümkün kılar. Bu seçenek alt dizinlerin ardışık aktarıldığı aktarımlarda kullanıldığında çok yararlıdır.
+    </para><para>
+Dışlanacak dosyaların listesini oluşturmak içim komut satırında çok sayıda <command>--filter</command> seçeneği belirtebilirsiniz.
+    </para><para>
+Bu seçenek hakkında daha ayrıntılı bilgi için <xref linkend="tr-man1-rsync-filters"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-F</command></glossterm>
+      <glossdef><para>Bu seçenek iki defa belirtildiğinde komuta iki <command>--filter</command> kuralı eklemeye eşdeğerdir. İlk seçenek şu kuralı ekler:
+  </para><para>
+<literallayout>--filter=’: /.rsync-filter’
+</literallayout>
+  </para><para>
+Bu kural, <command>rsync</command>'in dizin hiyerarşisi dahilinde serpiştirilmiş <filename>.rsync-filter</filename> dosyalarına bakmasını ve aktarımda bu dosyalardaki süzme kurallarını kullanmasını sağlar. <command>-F</command> seçeneği ikinci kez kullanılmışsa şu kuralı uygular:
+    </para><para>
+<literallayout>--filter=’- .rsync-filter’
+</literallayout>
+    </para><para>
+Bu kural <filename>.rsync-filter</filename> dosyalarının aktarılmamasını sağlar.
+    </para><para>
+Bu seçenek hakkında daha ayrıntılı bilgi için <xref linkend="tr-man1-rsync-filters"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--exclude=</command><varname>kalıp</varname></glossterm>
+      <glossdef><para>Bu seçenek bir dışlama kuralı tanımlanmasını sağlayan <command>--filter</command> seçeneğinin basitleştirilmiş bir biçimidir. Seçenek, normal süzme kurallarının kural çözümleme sözdizimine izin vermez.
+    </para><para>
+Bu seçenek hakkında daha ayrıntılı bilgi için <xref linkend="tr-man1-rsync-filters"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--exclude-from=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Bu seçenek, dışlama kurallarının belirtilen dosyadan alınmasını sağlaması dışında <command>--exclude</command> seçeneğinin benzeridir. <varname>dosya</varname> içindeki boş satırlar ile ’<command>;</command>’  veya  ’<command>#</command>’ ile başlayan satırlar yoksayılır. <varname>dosya</varname> olarak <command>-</command> belirtilmişse girdiler standart girdiden okunur.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--include=</command><varname>kalıp</varname></glossterm>
+      <glossdef><para>Bu seçenek bir içerme kuralı tanımlanmasını sağlayan <command>--filter</command> seçeneğinin basitleştirilmiş bir biçimidir. Seçenek, normal süzme kurallarının kural çözümleme sözdizimine izin vermez.
+    </para><para>
+Bu seçenek hakkında daha ayrıntılı bilgi için <xref linkend="tr-man1-rsync-filters"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--include-from=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Bu seçenek, içerme kurallarının belirtilen dosyadan alınmasını sağlar. <varname>dosya</varname> olarak <command>-</command> belirtilmişse girdiler standart girdiden okunur.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--files-from=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Bu seçeneği kullanarak aktarılacak dosyaların tam listesini belirtebilirsiniz. Liste <varname>dosya</varname>'dan ya da "-" belirtilmişse standart girdiden okunur. Ayrıca, bu seçenekle birlikte öntanımlı uygulanan seçeneklere bağlı olarak <command>rsync</command>'in öntanımlı davranışını kolayca değiştirebilirsiniz:
+    </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+<command>--relative</command>  (<command>-R</command>) seçeneği uygulanarak <varname>dosya</varname> içindeki her öğede belirtilen yol bilgisi korunmuştur (bu davranışı kapatmak için <command>--no-relative</command> seçeneğini kullanın).
+  </para></listitem><listitem><para>
+<command>--dirs</command> (<command>-d</command>) seçeneği uygulanarak listede belirtilen dizinlerin atlanmayıp, hedefte oluşturulması sağlanmıştır.
+  </para></listitem><listitem><para>
+<command>--archive</command> (<command>-a</command>) seçeneği uygulanmasına rağmen bu seçeneğin uygulamalarından biri olan <command>--recursive</command>  (<command>-r</command>) seçeneği uygulanmadığından, bu davranışın uygulanmasını istiyorsanız <command>--recursive</command> (<command>-r</command>) seçeneğini ayrıca belirtmelisiniz.
+    </para></listitem></itemizedlist></para><para>
+<varname>dosya</varname>'dan okunan dosya isimlerinin hepsi kaynak dizine göre değerlendirilir -- öğelerin başındaki "<command>/</command>"lar ile daha üst dizinlere çıkılmasını sağlayan "<command>../</command>"lar kaldırılır. Örnek:
+    </para><para>
+<screen>rsync -a --files-from=/tmp/foo /usr uzak:/yedek
+</screen>
+    </para><para>
+<filename>/tmp/foo</filename> içinde "<filename>bin</filename>" (hatta "<filename>/bin</filename>") diye bir girdi varsa, <filename>/usr/bin</filename> dizini hedefte <filename>/yedek/bin</filename> dizini olarak oluşturulur (ancak, <varname>dosya</varname> içinde dosyalar açıkça listelenmemişse ya da komut satırında <command>-r</command> seçeneği yoksa <filename>/usr/bin</filename> dizinindeki dosyalar aktarılmaz). Ayrıca, <command>--relative</command> seçeneğinin etkisini (öntanımlı olarak etkindir) sadece dosyadan okunan yol bilgisini yinelemek için saklar ancak, kaynak için belirtilmiş yolun yinelenmesine zorlamaz (örnekte <filename>/usr</filename>).
+    </para><para>
+Ek olarak, eğer <varname>dosya</varname>'yı "<filename>uzak:</filename>" öneki ile belirtirseniz, bu dosya yerel makineden değil, uzak makineden okunur (<filename>uzak:</filename> ile belirtilen makine, aktarımın yapıldığı makine olmalıdır). Bir kısaltma olarak, "aktarımın yapıldığı uzak makine" anlamında sadece ":" önekini de kullanabilirsiniz. Örnek:
+    </para><para>
+<screen indent="2">rsync -a --files-from=:/yol/dosya-listesi uzak:/ /tmp/kopya
+</screen>
+    </para><para>
+Bu komut "<filename>uzak</filename>" makinesindeki <filename>/yol/dosya-listesi</filename> dosyasında listelenmiş dosyaları kopyalayacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-0</command></glossterm>
+      <glossterm><command>--from0</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, bir dosyadan okunan dosya isimlerinin sonlandırılmasının satırsonu karakteri (LF) veya satırbaşı karakteri (CR) ya da her bu ikisinin birlikte kullanılmasıyla (CR+LF) değil sadece boş karakterle (’<literal>\0</literal>’) yapıldığını belirtir.  Bu seçenek  <command>--exclude-from</command>, <command>--include-from</command>, <command>--files-from</command> ve bir <command>--filter</command> kuralı ile belirtilen dosyaları etkiler. Dosya isimlerinin boşluk ile ayrıldığı <filename>.cvsignore</filename> dosyalarını kullanan <command>--cvs-exclude</command> seçeneğini etkilemez.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-T</command></glossterm>
+      <glossterm><command>--temp-dir=</command><varname>dizin</varname></glossterm>
+      <glossdef><para>Bu seçenekle, dosyalar aktarılırken alıcı tarafta geçici olarak oluşturulan dosyaların nereye konulacağını belirtmek için kullanılır. Öntanımlı davranış, geçici dosyaların alıcı dizinde oluşturulmasıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-y</command></glossterm>
+      <glossterm><command>--fuzzy</command></glossterm>
+      <glossdef><para>Bu seçenekle, hedefte bulunmayan bir dosya için benzer bir dosya aranacağını belirtilir. Şimdiki algoritma, hedef dosya için aynı dizinde, aynı boyda ve aynı değişiklik zamanlı ya da aynı isimli bir dosya arar. Böyle bir dosya varsa, bu dosya bulanık bir hedef dosya olarak aktarımın hızlandırılması amacıyla kullanılır.
+  </para><para><note><para>
+<command>--delete</command> seçeneği bu amaçla kullanılabilecek bir dosyanın işlem öncesinde silinmesine yol açabileceğinden, bunun yerine ya <command>--delete-after</command> seçeneğini kullanın ya da dosyanın silme işlemine konu olmayacak şekilde olmasına dikkat edin.
+      </para></note></para></glossdef></glossentry><glossentry>
+      <glossterm><command>--compare-dest=</command><varname>dizin</varname></glossterm>
+      <glossdef><para>Bu seçenekle, alıcı makinede hedef dizinde olmayan dosyalar için karşılaştırmanın <varname>dizin</varname> dizinine göre yapılacağı belirtilir. Eğer <varname>dizin</varname> içinde göndericinin dosyasının aynısı varsa bu dosya aktarılmaz. Bu, sadece bir önceki yedeklemeden beri değişmiş dosyaların yedeklenmesi için kullanışlıdır.
+  </para><para>
+2.6.4 sürümünden başlayarak, çok sayıda <command>--compare-dest</command> dizini belirtilebilmektedir. Eğer hedefte bir eşleşme bulunamazsa, dosya bu dizinlerde aranır.
+  </para><para>
+Eğer <varname>dizin</varname> göreli bir dizin olarak belirtilmişse bu dizinin hedef dizinde olduğu kabul edilir. Ayrıca <command>--link-dest</command> seçeneğine de bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--link-dest=</command><varname>dizin</varname></glossterm>
+      <glossdef><para>Bu seçenek, <varname>dizin</varname> içindeki değişmemiş dosyaların hedef dizine sabit bağlı yapılması dışında <command>--compare-dest</command> seçeneği gibi davranır. Sabit bağlı yapılacak dosyalar öznitelikleri (izinler, sahipler, v.s) bakımından kaynaktakilerle tamamen aynı olmalıdır. Örnek:
+  </para><para>
+<screen>rsync -av --link-dest=$PWD/öncü-dizin \
+   makine:kaynak-dzn/ yeni-dzn/
+</screen>
+  </para><para>
+2.6.4 sürümünden başlayarak, çok sayıda <command>--link-dest</command> dizini belirtilebilmektedir. Eğer hedefte bir eşleşme bulunamazsa, dosya bu dizinlerde aranır.
+  </para><para>
+Eğer <varname>dizin</varname> göreli bir dizin olarak belirtilmişse bu dizinin hedef dizinde olduğu kabul edilir. Ayrıca <command>--compare-dest</command> seçeneğine de bakınız.
+  </para><para><note><para>
+2.6.1 sürümünden önceki sürümlerde, <command>-o</command> seçeneği (<command>-a</command> seçeneği de bu seçeneği uygular) belirtilmişse, <command>--link-dest</command> seçeneği root olmayan bir kullanıcı için istendiği gibi çalışmayacaktır (yazılım hatası). Bu hatadan korunmak için böyle bir <command>rsync</command> ile <command>-o</command> seçeneğini kullanmamalısınız.
+      </para></note></para></glossdef></glossentry><glossentry>
+      <glossterm><command>-z</command></glossterm>
+      <glossterm><command>--compress</command></glossterm>
+      <glossdef><para>Bu seçenekle hedef makineye gönderilen dosyaların verilerini <command>rsync</command>, aktarım miktarını azaltmak için sıkıştıracaktır. Özellikle, yavaş bağlantılar için çok yararlıdır.
+  </para><para><note><para>
+Hedef makinede sıkıştırma için aynı araçlar kullanılıyorsa, sıkıştırılmış veri sıkıştırma ile ilgili dolaylı bilgileri içermeyeceğinden aktarımda daha iyi sıkıştırma yapılabilmektedir.
+      </para></note></para></glossdef></glossentry><glossentry>
+      <glossterm><command>--numeric-ids</command></glossterm>
+      <glossdef><para>Bu seçenekle <command>rsync</command>, her iki uçta kullanıcı ve grup isimlerini değil, kullanıcı ve grup kimliklerini eşleştirmeye çalışacaktır.
+  </para><para>
+Öntanımlı olarak <command>rsync</command>, dosyaların sahibini belirlemekte kullanıcı ve grup isimlerini kullanır. Özel kullanıcı ve grup kimliği olan 0 kimliği, bu seçenek belirtilmemiş olsa bile, kullanıcı ve grup isimleriyle asla eşleştirilmez.
+  </para><para>
+Eğer kullanıcı ve grup isimleri her iki uçta eşleşmiyorsa, bunların yerine kaynak sistemdeki kullanıcı ve grup kimlikleri kullanılır. <command>chroot</command> ayarlarının <command>rsync</command>'in kullanıcı ve grup isimlerini arama yeteneklerini nasıl etkilediğini ve bunları nasıl değiştirebileceğinizi öğrenmek için <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasındaki <command>use  chroot</command> modül seçeneğinin açıklamasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--timeout=</command><varname>süre</varname></glossterm>
+      <glossdef><para>Bu seçenekle G/Ç zamanaşımını saniye cinsinden belirtebilirsiniz. Belirtilen süre içinde bir aktarım gerçekleşmezse, <command>rsync</command> işlemi sonlandıracaktır. Öntanımlı değer, bir zamanaşımı olmadığını belirten 0 değeridir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--port=</command><varname>port</varname></glossterm>
+      <glossdef><para>Öntanımlı 873. port yerine kullanılacak portu belirtmek için kullanılır. URL sözdizimi port belirtmek için zaten bir yöntem içerdiğinden, bu sadece bir <command>rsync</command> sunucusuna "::" kullanarak bağlanıyorsanız gerekir. Bu seçeneğin <xref linkend="tr-man1-rsync-daemon"/> bölümündeki açıklamasına da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>blocking-io</command></glossterm>
+      <glossdef><para>Uzak kabuk aktarımı başlatılırken engellenebilen G/Ç kullanılmasını belirtir. Uzak kabuk <command>rsh</command> veya <command>remsh</command> ise, <command>rsync</command> öntanımlı olarak engellenebilen G/Ç, aksi takdirde engellenemeyen G/Ç kullanır (<command>ssh</command> ile engellenemeyen G/Ç tercih edilir).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>no-blocking-io</command></glossterm>
+      <glossdef><para>Öntanımlı olarak engellenebilen G/Ç kullanılıyorsa, bunu kapatır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-i</command></glossterm>
+      <glossterm><command>--itemize-changes</command></glossterm>
+      <glossdef><para>Her dosyanın öznitelik değişikliklerini de içererek yapılmış değişikliklerin dosyalara göre tasnif edilmiş bir listesini ister. Bu, <command>--log-format=’%i %n%L’</command> belirtmekle aynıdır.
+  </para><para>
+"<command>%i</command>"  belirtimi 9 karakter uzunlukta şifresel bir çıktıya sahiptir. Genel biçimi <varname>UXcstpoga</varname> dizgesine benzer. Burada <command>U</command> karakteri yapılan güncellemenin çeşidini, <command>X</command> karakteri dosya türünü diğer karakterler ise güncellenmişlerse öznitelikleri belirten bir karakterle değiştirilir.
+  </para><para>
+<command>U</command> karakterinin yerini alan güncelleme türleri şunlardır:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+<command>&lt;</command>  karakteri yerel makineye aktarılan (alınan) bir dosyayı belirtir.
+  </para></listitem><listitem><para>
+<command>></command> karakteri yerel makineye aktarılan (gönderilen) bir dosyayı belirtir.
+  </para></listitem><listitem><para>
+<command>c</command> karakteri yerel makinede değiştirilen/oluşturulan bir dosyayı belirtir (bir dizin ya da sembolik bağın oluşturulması gibi).
+  </para></listitem><listitem><para>
+<command>h</command> karakteri başka bir öğeye sabit bağ olan bir öğeyi belirtir (<command>--hard-links</command> gerektirir).
+  </para></listitem><listitem><para>
+ <command>.</command> (nokta) karakteri sadece öznitelikleri değişmiş bir dosya belirtir.
+  </para></listitem><listitem><para>
+<command>=</command> karakteri öğenin iki uçta da aynı olduğunu belirtir (bu sadece ve sadece yüksek bir ayrıntı seviyesinde çıktılanır).
+  </para></listitem></itemizedlist></para><para>
+<command>X</command> karakterinin yerini alan dosya türleri şunlardır: bir dosya için <command>f</command>, bir dizin için <command>d</command>, bir sembolik bağ için <command>L</command> ve bir aygıt için <command>D</command>.
+  </para><para>
+<varname>UXcstpoga</varname> dizgesinin diğer harfleri, gerçek karakterler olup, öğenin ilgili öznitelikleri güncellenmişse çıktılanırlar, aksi takdirde "." ile değiştirilirler. Bunun üç istisnası vardır:
+  </para><para><orderedlist userlevel="3"><listitem><para>
+yeni oluşturulmuş bir öğe için her harf bir "<command>+</command>" ile değiştirilir.
+  </para></listitem><listitem><para>
+İki uçtada aynı olan öğelerde her harf bir boşlukla değiştirilir.
+  </para></listitem><listitem><para>
+Bilinmeyen her öznitelik bir "<command>?</command>" ile değiştirilir (bu, daha eski bir <command>rsync</command> ile konuşurken ortaya çıkar).
+  </para></listitem></orderedlist></para><para>
+Harflerin belirttiği öznitelikler şunlardır:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+<command>c</command> dosyanın sağlama toplamlarının farklı olduğunu ve dosyanın aktarımla güncelleneceğini belirtir (<command>--checksum</command> gerektirir).
+  </para></listitem><listitem><para>
+<command>s</command> dosyanın boyutlarının farklı olduğunu ve dosyanın aktarımla güncelleneceğini belirtir
+  </para></listitem><listitem><para>
+<command>t</command> değişklik zamanlarının farklı olduğunu ve sunucudaki değer ile güncelleneceğini belirtir (<command>--times</command> gerektirir). Bazan bu karakterin yerine  <command>T</command> kullanılır ve zamanın aktarım zamanına ayarlanacağını belirtir. <command>T</command> harfi, bir bir dosya ya da dizin <command>--times</command> seçeneği belirtilmeksizin aktarılırken ya da bir sembolik bağ aktarılırken çıktılanır.
+  </para></listitem><listitem><para>
+<command>p</command>  izinlerin farklı olduğunu ve sunucudaki değer ile güncelleneceğini belirtir (<command>--perms</command> gerektirir).
+  </para></listitem><listitem><para>
+<command>o</command> sahiplerin farklı olduğunu ve sunucudaki değer ile güncelleneceğini belirtir (<command>--owner</command>  ve root yetkileri gerektirir).
+  </para></listitem><listitem><para>
+<command>g</command> grupların farklı olduğunu ve sunucudaki değer ile güncelleneceğini belirtir (<command>--group</command> ve grup yetkileri gerektirir).
+  </para></listitem><listitem><para>
+<command>a</command> harfi gelecekte ACL'ler gibi genişletilmiş dosya özniteliklerini desteklemek üzere yedek olarak ayrılmıştır.
+  </para></listitem></itemizedlist></para><para>
+Olası diğer bir çıktı daha vardır: dosyalar silinirken silinecek her öğe için "<command>%i</command>"  belirtimi "<literal>deleting</literal>" dizgesini çıktılar (yeterince son sürüm bir <command>rsync</command> ile konuşulduğu ve bunun silme işlemlerini bir ayrıntı olarak çıktılamayıp günlük kaydı tuttuğu varsayımıyla).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--log-format=</command><varname>biçim</varname></glossterm>
+      <glossdef><para>İşlenen her dosya için kullanıcıya <command>rsync</command> istemcisinin nasıl bir çıktı göstereceğini belirlemenizi sağlar. <varname>biçim</varname> her biri <command>%</command> karakteri ile öncelenmiş tek karakterli belirtimlerden oluşan bir dizgedir. Olası belirtimlerin listesi için <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasındaki <command>log format</command> seçeneğinin açıklamasına bakınız. (<command>--log-format</command> seçeneği bir sunucunun günlük kaydında ne çıktılayacağını belirlemez.)
+  </para><para>
+<varname>biçim</varname> dizgesinde <command>--itemized-changes</command> belirtimi (<literal>%i</literal>) kullanılmamışsa, belli bir yolla (bir dosyanın aktarılması, bir sembolik bağ veya aygıtın yeniden oluşturulması, bir dizine dokunulması) güncellenen her dosya için çıktı üretilecektir, aksi takdirde, çıktılama herhangi bir yolla güncellenen her öğeye genişletilir (alıcı tarafın sürümü en azından 2.6.4 ise). "<literal>%i</literal>" belirtiminin çıktısı ile ilgili ayrıntılar için <command>--itemized-changes</command> seçeneğinin açıklamasına bakınız.
+  </para><para>
+<command>--verbose</command> seçeneği "<literal>%n%L</literal>" biçiminin uygulanmasını sağlar. <command>--log-format</command> seçeneğini isterseniz, <command>-v</command> (<command>--verbose</command>) seçeneğini belirtmeksizin kullanabileceğiniz gibi bu seçeneği de kullanarak her dosya için bu biçimdeki bir çıktının üretimesini de sağlayabilirsiniz.
+  </para><para>
+Günlüklemenin aktarımın sonunda yapılmasını sağlayan aktarım istatistiği belirtimlerinden biri belirtilmedikçe <command>rsync</command>, günlük biçimi dizgesini bir dosyanın aktarımından önce çıktılayacaktır. Bu geç günlükleme etkin olduğunda ve ayrıca <command>--progress</command> belirtilmişse <command>rsync</command> ayrıca aktarılan dosyanın ismini işlem bilgisinden önce (şüphesiz, <command>--log-format</command> çıktısından sonra) çıktılayacaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--stats</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'e, <command>rsync</command> algoritmasının verileriniz için ne kadar verimli olduğunu görmenizi sağlayacak dosya aktarım istatitiklerini ayrıntılı olarak basmasını söyler.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--partial</command></glossterm>
+      <glossdef><para>Aktarım kesintiye uğramışsa, öntanımlı olarak <command>rsync</command>, aktarımı yarım kalmış dosyayı silecektir. Bazı durumlarda kısmen aktarılmış dosyaları silinmemesi istenebilir. Aktarımın bir sonraki bağlantıda tamamlanmasını hızlandırmak üzere kısmen aktarılmış dosyaların silinmemesi için bu seçeneği kullanabilirsiniz.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--partial-dir=</command><varname>dizin</varname></glossterm>
+      <glossdef><para>Aktarımı yarım kalmış dosyaların silinmesini önlemenin daha iyi bir yolu bu tür dosyalar için ayrı bir <varname>dizin</varname> belirtmektir. Sonraki aktarımda, <command>rsync</command> bu dosyanın aktarımını tamamlamak için belirtilen <varname>dizin</varname> içindeki dosyayı kullanacak ve dosyanın aktarımı tamamlandıktan sonra bu dosyayı silecektir. Yalnız, eğer <command>--whole-file</command> belirtilmişse (ya da dolaylı uygulanıyorsa), <command>rsync</command> arttırımlı algoritmayı kullanmaksızın dosyaları göndereceğinden, <varname>dizin</varname> içinde tamamlanmayı bekleyen bir dosya bulunursa basitçe silinecektir.
+  </para><para>
+Eğer <varname>dizin</varname> mevcut değilse, <command>rsync</command> <varname>dizin</varname>'i oluşturacaktır (sadece son dizin, yolun tamamı değil). Bu davranışın sonucu olarak, hedef dosyanın bir dizin oluşturmayı gerektirdiği durumlarda göreli yol belirtmek (<command>--partial-dir=.rsync-partial</command> gibi) daha iyidir, bu takdirde eksik dosya işlem sonunda silindiğinde bu dizin de silinir.
+  </para><para>
+Eğer <varname>dizin</varname> ile mutlak bir yol belirtilmemişse, mevcut dışlamalarınızın sonunda <command>rsync</command> ayrıca <command>--exclude</command> değeri olarak bir dizin ekleyecektir. Böylece <varname>dizin</varname> içindeki dosyaların aktarımı ve ayrıca alıcı tarafta bu dosyaların zamanından önce silinmesi engellenecektir. Bir örnek: yukarıdaki <command>--partial-dir</command> seçeneği diğer süzme kurallarının sonuna bir "<command>--exclude=.rsync-partial/</command>" kuralı ekleyecektir. Eğer kendiniz bir takım süzme kuralları kullanıyorsanız, bu kuralın daha yüksek öncelik alması için kendi kurallarınız içinde uygun bir yerde belirtebilirsiniz (kurallarınızın sonunda bir <command>--exclude=’*’</command> kuralı varsa, özdevimli eklenen bir kural hiçbir zaman erişilebilir olmayacaktır).
+  </para><para><important><para><command>--partial-dir</command> ile belirtilen dizine diğer kullanıcılar yazamamalıdır, aksi takdirde bu bir güvenlik açığı oluşturur. Yani "<filename>/tmp</filename>" gibi bir dizin belirtmekten KAÇININ.</para></important>
+  </para><para>
+Ayrıca <varname>dizin</varname> değerini <literal>RSYNC_PARTIAL_DIR</literal> ortam değişkeninde belirtebilirsiniz. Bu değişkene bir değerin atanmış olması <command>--partial</command> seçeneğinin etkin olmasını sağlamaz ama komut satırında <command>--partial</command> seçeneğini belirtmekle <command>--partial-dir</command> seçeneğine dizin belirtilmiş gibi işlem yapılması sağlanır. Örneğin, <command>--partial-dir=.rsync-tmp</command> ile <command>--progress</command> seçeneğini birlikte kullanmak yerine, kabukta <literal>RSYNC_PARTIAL_DIR=.rsync-tmp</literal> şeklinde bir atama yaptığınızı ve <filename>.rsync-tmp</filename> dizinini eksik kalan aktarımı tamamlamak için komut satırında sadece <command>-P</command> seçeneğini belirterek kullandığınızı varsayalım. <command>--partial</command> seçeneğinin bu ortam değişkenine bakmadığı durumlar, (1) <command>--inplace</command> seçeneğinin belirtilmiş olması (<command>--inplace</command> seçeneği <command>--partial-dir</command> ile çeliştiğinden), (2) <command>--delay-updates</command> seçeneğinin belirtilmiş olmasıdır (aşağıya bakınız).
+  </para><para>
+Sunucu yapılandırmasının <command>refuse  options</command> ayarı, amacı gereği <command>--partial-dir</command> seçeneğinin <command>--partial</command> seçeneğini uygulamamasına sebep olur. Bu, yani, <command>--partial</command> seçeneğinin reddedilmesi, <command>--partial-dir</command> tarafından sağlanan daha güvenilir üsluba hala izin veriyor olmakla, aktarımı yarım kalmış hedef dosyaların tekrar yazılmasına izin vermemekte kullanılabilir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--delay-updates</command></glossterm>
+      <glossdef><para>Bu seçenek, güncellenen her dosyayı aktarımın sonunda isimleri değiştirilmek suretiyle yerine taşınmak üzere bir dizin içinde geçici bir dosyaya koyar. Bu dosyaların güncellenmesini daha atomik yapmayı amaçlar. Öntanımlı olarak bu dosyalar her dosyanın hedef dizini içindeki "<filename>.~tmp~</filename>" isimli bir dizine konur, fakat bu davranışı <command>--partial-dir</command> seçeneğini belirterek değiştirebilirsiniz. Bu seçenek <command>--inplace</command> seçeneği ile çelişir.
+      </para><para><note><para>
+Bu seçeneğe özel olarak, <command>--partial-dir</command> yerine <literal>RSYNC_PARTIAL_DIR</literal> ile <command>--partial</command> belirtmek <literal>RSYNC_PARTIAL_DIR</literal> değerinin kullanılmasını sağlamaz. Ayrıca, sunucu yapılandırmasının <command>refuse  options</command> ayarı, amacı gereği <command>--partial-dir</command> seçeneğine özel uygulamalar da yapılmaz.
+  </para></note></para><para>
+Bu seçenek alıcı tarafta biraz daha fazla bellek kullanımına (aktarılan dosya başına bir bit) ve güncellenen tüm dosyaları tutacak kadar boş disk alanına gereksinim duyar. Ayrıca, yol mutlak olduğunda güncellenen dosyaların hepsi tek bir dizine konulacağından, aktarımda dosyaların herhangi birinin aynı isimde olma olasılığının olmaması durumu dışında, <command>--partial-dir</command> ile mutlak dosya yolu belirtmemelisiniz.
+  </para><para>
+Ayrıca, çok daha atomik bir güncelleme algortiması içeren, <command>rsync</command> paketinin "<filename>support</filename>" alt dizinindeki "<filename>atomic-rsync</filename>" perl betiğine de bakın (<command>--link-dest</command> seçeneğini ve dosyalar için paralel bir hiyerarşi kullanır).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--progress</command></glossterm>
+      <glossdef><para>Aktarımın gelişimini gösteren çıktı üretilmesini sağlar. Bu, bezgin kullanıcıya bazı şeyleri kollayabilme imkanı verir. Açıkça belirtilmemişse, <command>--verbose</command> seçeneğini de uygulanır.
+  </para><para>
+Bir dosya aktarılırken, üretilen çıktı şöyle görünür:
+  </para><para>
+<literallayout>782448  63%  110.64kB/s    0:00:04
+</literallayout>
+  </para><para>
+Bu çıktı kullanıcıya o anki dosya boyunu, aktarılmış verinin yüzdesini (hattaki veri ile aktarılmış verinin toplamı olarak), aktarım hızını ve aktarımın tamamlanması için gerekli kalan süreyi gösterir.
+  </para><para>
+Bir dosya aktarıldıktan sonra, üretilen çıktı şöyle görünür:
+  </para><para>
+<literallayout>1238099 100%  146.38kB/s    0:00:08  (5, 57.1% of 396)
+</literallayout>
+  </para><para>
+Bu çıktı kullanıcıya aktarımı biten dosyanın son boyutunu, aktarımın %100 tamamlandığını, dosyanın son aktarım hızını, dosyanın aktarımı için kullanılan süreyi ve ek olarak toplam aktarımın boyut ve adet olarak ne kadarının tamamlandığını parantez içinde gösterir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-P</command></glossterm>
+      <glossdef><para><command>--partial --progress</command> seçenkleri için kısayoldur. Amacı, kesintiye uğraması muhtemel uzun bir aktarım için bu iki seçeneğin birlikte belirtilmesini kolaylaştırmaktır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--password-file=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Uzak <command>rsync</command> sunucusuna erişim için parola içeren bir dosya belirtebilmeyi sağlar. Bu seçenek, aktarım için bir uzak kabuk kullanıldığında değil, sadece yerleşik aktarım kullanarak bir <command>rsync</command> sunucusuna erişirken yararlıdır. Dosya herkesçe okunabilir olmamalı ve  içinde parolayı içerek tek bir satır bulunmalıdır.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--list-only</command></glossterm>
+      <glossdef><para>Bu seçenek dosyaların aktarılmasına değil, kaynak dosyaların listelenmesine sebep olur. Bu seçenek, eğer bir hedef belirtilmezse çalışır, dolayısıyla doğrudan kullanmaya ihtiyaç duymazsınız. Ancak, alt dizinlere inilmeyen bir liste üretmek için tecrübeli bir kullanıcının <command>-r --exclude=’/*/*’</command> seçeneklerini kullanmaktan kaçınabilmesi için bir kolaylık sağlar.
+      </para></glossdef></glossentry><glossentry id="tr-man1-rsync-bwlimit">
+      <glossterm><command>--bwlimit=</command><varname>kbps</varname></glossterm>
+      <glossdef><para>
+Azami aktarım hızının kB/s cinsinden belirtilebilmesini sağlar. <command>rsync</command>'i çok büyük dosyaları (MB'larca) aktarmak için kullanırken oldukça verimlidir. <command>rsync</command> aktarımlarının doğası gereği, veri bloklar halinde gönderilir, eğer <command>rsync</command> aktarımın oldukça hızlı olduğunu saptarsa, sonraki bloku göndermeden önce bekler. Sonuçta, aktarım hızının ortalaması belirtilen hıza eşit olur. Sıfır değeri bir sınırlama olmadığı anlamına gelir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--write-batch=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Aynı hedefe yapılacak eşdeğer bir çağrı için <command>--read-batch</command> seçeneği ile kullanılmak üzere bir dosya oluşturur. Ayrıntılar için <xref linkend="tr-man1-rsync-batch"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--read-batch=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Evvelce <command>--write-batch</command> ile oluşturulan <varname>dosya</varname> içindekileri uygular. Eğer <varname>dosya</varname> olarak "-" belirtilirse betik verisi standart girdiden okunur. Ayrıntılar için <xref linkend="tr-man1-rsync-batch"/> bölümüne bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-4</command></glossterm>
+      <glossterm><command>--ipv4</command></glossterm>
+      <glossterm><command>--6</command></glossterm>
+      <glossterm><command>--ipv6</command></glossterm>
+      <glossdef><para>rsync'e soketleri oluştururken IPv4/IPv6 tercih etmesini söyler. Bu sadece <command>rsync</command>'in doğrudan kendi denetimi altındaki soketleri etkiler. Ayrıca, bu seçeneklerin <xref linkend="tr-man1-rsync-daemon"/> bölümündeki açıklamasına da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--checksum-seed=</command><varname>tamsayı</varname></glossterm>
+      <glossdef><para>MD4 sağlama toplamı tohumunun <varname>tamsayı</varname> olarak belirtilebilmesini sağlar. Bu 4 baytlık tohum her blok ve dosyanın MD4 sağlama hesaplamasında kullanılır. Öntanımlı olarak bu tohum o anki zaman değeri olarak sunucu tarafından üretilir. Bu seçenek, yinelenebilir blok ve dosya sağlamaları isteyen uygulamalar için ya da kullanıcının daha bir rasgele tohum kullanmak istediği yerlerde kullanışlıdır. <varname>tamsayı</varname> olarak sıfır değeri verilirse öntanımlı tohum kullanılacaktır.
+  </para></glossdef></glossentry></glosslist>
+</para></refsect1><refsect1 id="tr-man1-rsync-daemon"><title>SUNUCU SEÇENEKLERİ</title><para>
+Bir <command>rsync</command> sunucu başlatılırken kullanılan seçenekler:
+  </para><para><glosslist><glossentry>
+      <glossterm><command>--daemon</command></glossterm>
+      <glossdef><para>Bu seçenek <command>rsync</command>'in artalanda çalışacağını belirtir. Başlattığınız sunucuya bir <command>rsync</command> istemcisi <filename>makine::modül</filename> veya <filename>rsync://makine/modül/</filename> sözdizimini kullanarak erişebilir.
+  </para><para>
+Eğer standart girdi bir soket ise, <command>rsync</command>, <command>inetd</command> üzerinden çalıştığını varsayacaktır, aksi takdirde, uçbirimini bırakıp bir artalan süreci haline gelecektir. <command>rsync</command> istemcileri tarafından yapılan her bağlantı isteğinde süreç, yapılandırma dosyasını (<filename>rsyncd.conf</filename>) okuduktan sonra isteğe yanıt verecektir. Daha fazla bilgi için <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasına bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--address=</command><varname>adres</varname></glossterm>
+      <glossdef><para>Öntanımlı olarak <command>rsync</command>, <command>--daemon</command> seçeneği ile başlatıldığında ya da bir <command>rsync</command> sunucuya bağlanırken bir şablon adres kullanır. Bu seçenekle kullanılacak adres olarak belli bir IP adresi (veya konakismi) belirtebilirsiniz. Bu <command>--config</command> seçeneği ile birlikte kullanılarak sanal adresleme yapabilmeyi mümkün kılar. Ayrıca, <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasındaki <command>address</command> seçeneğinin açıklamasına da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--bwlimit=</command><varname>kbps</varname></glossterm>
+      <glossdef><para>
+Sunucu sürecinin gönderdiği veri için kilobayt/s cinsinden azami aktarım hızını belirtmek için kullanılır. İstemci bu durumda bile bir <command>--bwlimit</command> değeri belirtebilir, ancak bu istemci taraftaki band genişliğini daraltmak için yapılabilir. Eğer sunucunun belirttiği hız bu yolla  aşılmak istenirse değer aşağıya, sunucunu hızına yuvarlanır. Bazı ek ayrıntılar için bu seçeneğin <link linkend="tr-man1-rsync-bwlimit">istemci seçeneklerindeki açıklamasına</link> da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--config=</command><varname>dosya</varname></glossterm>
+      <glossdef><para>Öntanımlı yapılandırma dosyasında farklı bir yapılandırma dosyası belirtmek için kullanılır. Sunucu süreci root dışında bir uzak kullanıcı tarafından, bir uzak kabuk uygulaması üzerinden çalıştırılıyorsa öntanımlı yapılandırma dosyası çalışma dizinindeki (genellikle <filename>$HOME</filename>) <filename>rsyncd.conf</filename> dosyası, aksi takdirde <filename>/etc/rsyncd.conf</filename>'dur.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--no-detach</command></glossterm>
+      <glossdef><para>Bir sunucu olarak çalışmada <command>rsync</command>'in uçbirimini bırakıp bir artalan süreci haline gelmesini engeller. Bu seçenek, <command>rsync</command>, Cygwin üzerinde bir hizmet olarak çalıştırılırken gereklidir. Ayrıca, daemontools ya da AIX'in Sistem Özkaynak Denetçisi gibi bir uygulama tarafından yönetildiğinde yararlıdır. Seçeneğin ayrıca, <command>rsync</command> bir hata ayıklayıcı altında çalıştırılırken de kullanılması tavsiye edilir. Bu seçenek, <command>rsync</command>, <command>inetd</command> veya <command>sshd</command> üzerinden çalışıyorsa etkisizdir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>--port=</command><varname>port</varname></glossterm>
+      <glossdef><para>Sunucu tarafından öntanımlı olarak kullanılan 873. port yerine başka bir port belirtmek için kullanılır. Ayrıca <link linkend="tr-man5-rsyncd.conf"/> kılavuz sayfasındaki <command>port</command> seçeneğinin açıklamasına da bakınız.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-v</command></glossterm>
+      <glossterm><command>--verbose</command></glossterm>
+      <glossdef><para>Sunucu sürecinin başlatılması sırasında günlük bilgilerinin miktarını arttırmak için kullanılır. Sunucunun, istemci bağlandıktan sonraki ayrıntı seviyesi istemci tarafından kullanılan seçeneklerle ve modülün yapılandırma bölümündeki <command>max verbosity</command> değeriyle denetlenir.
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-4</command></glossterm>
+      <glossterm><command>--ipv4</command></glossterm>
+      <glossterm><command>--6</command></glossterm>
+      <glossterm><command>--ipv6</command></glossterm>
+      <glossdef><para><command>rsync</command> sunucusunun bağlantıları dinleyeceği soketleri oluştururken IPv4/IPv6 tercih etmesini sağlarlar. Çekirdekteki bir yazılım hatası nedeniyle Linux'un eski sürümlerinde bu seçeneklerden biri gerekli olabilir (port kullanılacağı zaman bir "adres zaten kullanımda" hatası alıyorsanız, <command>rsync</command> sunucusunu başlatırken <command>--ipv6</command> veya <command>--ipv4</command> belirtmeyi deneyin).
+      </para></glossdef></glossentry><glossentry>
+      <glossterm><command>-h</command></glossterm>
+      <glossterm><command>--help</command></glossterm>
+      <glossdef><para><command>--daemon</command> seçeneğinden sonra belirtilirse, <command>rsync</command> sunucusu başlatılırken kullanılabilecek seçenekleri kısaca açıklayan bir yardım sayfası basar.
+  </para></glossdef></glossentry></glosslist>
+</para></refsect1><refsect1 id="tr-man1-rsync-filters"><title>SÜZME KURALLARI</title><para>
+Süzme kuralları hangi dosyaların aktarılacağını (içerileceğini - include), hangi dosyaların atlanacağını (dışlanacağını - exclude) seçmek için esnek bir yöntem sağlar. Kurallar ya doğrudan include/exclude seçenekleri ile ya da daha hassas içerme/dışlama kalıpları ile (bir dosyadan okuyarak) belirtilebilir.
+  </para><para>
+<command>rsync</command>, aktarılacak dosya/dizinlerin listesindeki her isim için ayrı ayrı içerme/dışlama kurallarını tarar ve ilk eşleşen kalıbı uygular: bir dışlama kalıbıyla eşleşen dosya atlanır; bir içerme kalıbı ile  eşleşen dosya atlanmaz; eşleşen bir kalıp yoksa dosya atlanmaz.
+  </para><para>
+<command>rsync</command>, komut satırında belirtilen include/exclude seçeneklerinden sıralı bir süzme kuralları listesi oluşturur. Süzme kurallarının sözdizimi şöyledir:
+  </para><para>
+<literallayout>       <emphasis>kural</emphasis> [<emphasis>kalıp_veya_dosyaismi</emphasis>]
+       <emphasis>kural</emphasis>,<emphasis>belirteç</emphasis> [<emphasis>kalıp_veya_dosyaismi</emphasis>]
+</literallayout>
+  </para><para>
+<varname>kural</varname> ismi olarak, aşağıda açıklanan kısa ya da uzun kural isimlerinden birini kullanabilirsiniz. Eğer kısa isimli bir kural kullanırsanız, isteğe bağlı olan <varname>belirteç</varname>'ten <varname>kural</varname>ı bir ',' ile ayırın. <varname>kalıp</varname> veya <varname>dosyaismi</varname>'ni (varsa) bir boşluk veya altçizgiden sonra yazmalısınız. Kullanılabilecek kural önekleri:
+  </para><para>
+<literallayout indent="2">
+uzun     kısa  açıklama
+--------------------------
+exclude    -   dışlama kalıbı belirtir
+include    +   içerme kalıbı belirtir.
+merge      .   ek kuralları okumak için katıştırılacak dosya,
+dir-merge  :   bir dizin içi katıştırma dosyası belirtir.
+hide       H   aktarımdan gizlenecek dosyalar için kalıp.
+show       S   aktarımdan gizlenmeyecek dosyalar için kalıp.
+protect    P   silinmekten koruncak dosyalar için kalıp.
+risk       R   silinmekten korunmayacacak dosyalar için kalıp.
+clear      !   o anki include/exclude listesini temizler (argümansız)
+</literallayout>
+  </para><para>
+Kurallar bir dosyadan okunduğunda, "#" ile başlayan açıklama satırları ile boş satırlar yoksayılır.
+  </para><para>
+<command>--include</command> ve <command>--exclude</command> komut satırı seçenekleri yukarıdaki kural sözdizimini değil, sadece kalıplarla ek olarak listeyi temizleyen ünlem (<command>!</command>) imini (ve kalıplar bir dosyadan okunuyorsa boş ve açıklama satırlarını) kabul ederler. Bir include seçeneği için, bir kalıp "<command>- </command>" (tire ve boşluk) veya "<command>+ </command>" (artı ve boşluk) ile başlamıyorsa, kural bir "<command>+ </command>" olarak değerlendirilir. Bir <command>--exclude</command> seçeneği için bir kalıp bir "<command>- </command>" ile başlamalıdır.
+  </para><para>
+Bir <command>--filter</command> seçeneği ise kuralın başlangıcında daima bir uzun ya da kısa kural ismi içermelidir.
+  </para><para>
+Ayrıca, <command>--filter</command>, <command>--include</command> ve <command>--exclude</command> seçenekleri tek bir kalıp/kural alabilir. Çok sayıda kalıp/kural eklemek için komut satırında bu seçenekleri tekrarlayabilir veya <command>--filter</command>, <command>--include-from</command> ve <command>--exclude-from</command> seçeneklerinin dosya katıştırma sözdizimini kullanabilirsiniz.
+</para><refsect2 id="tr-man1-rsync-incexc"><title>İçerme/Dışlama Kalıpları</title><para>
+Yukarıda <xref linkend="tr-man1-rsync-filters"/> bölümünde bahsedildiği gibi dosyaları "<command>+</command>", "<command>-</command>" gibi kalıpları kullanarak aktarabilir ya da atlayabilirsiniz. İçerme ve dışlama kurallarının herbirinde aktarılacak dosyaların isimleriyle eşleşen kalıplar belirtilir. Bu kalıplar çeşitli biçimler alabilir:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+Eğer kalıp bir <command>/</command> ile başlıyorsa, dosya hiyerarşisi içinde belli bir noktaya demirlenir, aksi takdirde yol isminin sonuna eşlenir. Bu düzenli ifadelerde kalıbı <command>^</command> ile başlatmaya benzer. Örneğin, "<command>/foo</command>" kalıbı ya "aktarımın kökü"ndeki (genel bir kural için) ya da katıştırılan dosyanın dizinindeki (<command>dir-merge</command> kuralı için) "<filename>foo</filename>" isimli bir dosya ile eşleşirdi. Nitelenmemiş bir "<command>foo</command>" ise, ağacın herhangi bir yerindeki "<filename>foo</filename>" isimli bir dosya veya dizin ismi ile eşleşirdi, çünkü algoritma kökten uca doğru alt dizinlere inilerek uygulanır; yani, her yol elemanı sonunda dosya ismi olacak bir sırada ele alınır. "<command>sub/foo</command>" ise hiyerarşinin herhangi bir noktasındaki "<filename>sub</filename>" isimli bir dizin içindeki bir "<filename>foo</filename>" ile eşleşirdi. Aktarımın kökü ile eşleşen bir kalıbın nasıl belirtileceğinin ayrıntılı açıklaması için <xref linkend="tr-man1-rsync-anchoring"/> bölümüne bakınız..
+  </para></listitem><listitem><para>
+Eğer kalıp bir <command>/</command> ile bitiyorsa, sadece bir dizinle eşleşecektir, bir dosya, bağ ya da aygıtla değil.
+  </para></listitem><listitem><para>
+Eğer kalıp <command>*?[</command> dosyaismi kalıp karakterlerinden birini içeriyorsa, ifade kabuğun dosyaismi eşleştirme kuralları kullanılarak eşleştirilir. Aksi takdirde basit bir dizge eşleme kullanılır.
+  </para></listitem><listitem><para>
+Tek yıldızlı bir kalıp ("<command>*</command>") bölü çizgilerinde duracakken, çift yıldızlı kalıp ("<command>**</command>") çok sayıda bölü çizgisi ile eşleşecektir.
+  </para></listitem><listitem><para>
+Eğer bir kalıp bir <command>/</command> (sonda değil) ya da bir "<command>*</command>" içeriyorsa baştan sona tüm dizinleri dahil tam dosya yolu ile eşleştirilir. Eğer kalıp bir <command>/</command> ya da "<command>**</command>" içermiyorsa, sadece dosyaisminin son bileşeni ile eşleştirilir (algoritmanın altdizinlere inilerek uygulandığını hatırlayın, yani "tam dosyaismi" başlangıç dizininden başlayarak son dizine kadar yolun herhangi bir parçası ile eşleşebilir).
+  </para></listitem></itemizedlist></para><para>
+Şuna dikkat edin, <command>--recursive</command> (<command>-r</command>) seçeneğini (<command>-a</command> ile uygulanan) kullandığınızda, her yolun her alt bileşeni yukarıdan aşağıya ziyaret edilir, yani içerme/dışlama kalıpları altdizinlere inilerek her alt bileşenin tam ismine uygulanır (örn, "<filename>/foo/bar/baz</filename>" içerilirken "<filename>/foo</filename>" ve "<filename>/foo/bar</filename>" dışlanamaz). <command>rsync</command> göndereceği dosyaları ararken, dışlama kalıpları aslında dizin basamaklama aşamasını kısadevre eder. Eğer bir kalıp belli bir üst dizini dışlıyorsa, bir daha derin içerme kalıbını sonuçsuz bırakabilir, çünkü <command>rsync</command>, hiyerarşinin dışlanan bir bölümünden daha derine inmez. Bu özellikle "<command>*</command>" ile biten bir kural kullanırken önem kazanır. Örneğin, bu çalışmayacaktır:
+  </para><para>
+<literallayout>+ /bir/yol/bu-dosya-bulunmaz
++ /bu-dosya-bulunur
+- *
+</literallayout>
+  </para><para>
+Bu kural listesi, "bir" üst dizini '<command>*</command>' kuralından dolayı dışlayacağından başarısız olur, yani <command>rsync</command>, "<filename>bir</filename>" ve "<filename>bir/yol</filename>" dizinleri içindeki hiçbir dosyayı ziyaret etmez. Hiyerarşideki tüm dizinleri ziyaret ettirmenin bir yolu tek bir kuralın listeye dahil edilmesidir: "<command>+ */</command>" ("<command>- *</command>" kuralından önce herhangi bir yere yerleştirebilirsiniz). Diğer bir çözüm ise ziyaret edilmesi gereken üst dizinlerin hepsi için belirli bir içerme kuralı eklemektir. Örneğin, bu kural kümesi doğru çalışır:
+  </para><para>
+<literallayout>+ /bir/
++ /bir/yol/
++ /bir/yol/bu-dosya-bulunur
++ /bu-dosya-da-bulunur
+- *
+</literallayout>
+  </para><para>
+Dışlama/içerme eşleştirme örnekleri:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+"<command>- *.o</command>" kalıbı <filename>*.o</filename> ile eşleşen tüm dosya isimlerini dışlar.
+  </para></listitem><listitem><para>
+"<command>- /foo</command>" kalıbı aktarımın kök dizinindeki "<filename>foo</filename>" isimli bir dosyayı dışlar.
+  </para></listitem><listitem><para>
+"<command>- foo/</command>" kalıbı "<filename>foo</filename>" isimli hehangi bir dizini dışlar.
+   </para></listitem><listitem><para>
+"<command>- /foo/*/bar</command>" kalıbı aktarımın kök dizinindeki "<filename>foo</filename>" dizininden iki seviye aşağıdaki "<filename>bar</filename>" isimli dosyayı dışlar.
+  </para></listitem><listitem><para>
+"<command>- /foo/**/bar</command>" kalıbı aktarımın kök dizinindeki "<filename>foo</filename>" dizininden iki veya daha alt seviyedeki "<filename>bar</filename>" isimli dosyayı dışlar.
+  </para></listitem><listitem><para>
+"<command>+ */</command>", "<command>+ *.c</command>" ve "<command>- *</command>" kalıplarının birleşimi tüm dizinler ve C kaynak dosyaları dışında herşeyi dışlar.
+  </para></listitem><listitem><para>
+"<command>+ foo/</command>",  "<command>+ foo/bar.c</command>" ve "<command>- *</command>" kalıplarının birleşimi sadece "<filename>foo</filename>" dizinini ve "<filename>foo/bar.c</filename>" dosyasını içerecektir ("<filename>foo</filename>" dizini açıkça içerilmelidir yoksa "<command>*</command>" tarafından dışlanırdı).
+  </para></listitem></itemizedlist>
+</para></refsect2><refsect2><title>Katıştırma Dosyası Süzme Kuralları</title><para>
+Yukarıda <xref linkend="tr-man1-rsync-filters"/> bölümünde bahsedildiği gibi dosyaları bir <command>merge</command> (<command>.</command>) ya da bir  <command>dir-merge</command> (<command>:</command>) süzme kuralı belirterek süzme kurallarınıza tüm dosyaları katıştırablirsiniz.
+  </para><para>
+İki çeşit katıştırma dosyası vardır: tek dosyalık ('.') ve diziniçi dosyalar (':'). Tek dosyalık bir katıştırma dosyası bir defa okunur ve "." kuralındaki süzme listesi ile birlikte işleme sokulur. Diziniçi katıştırma dosyası türünde ise, <command>rsync</command> adım adım bütün altdizinleri tarayarak ismi belirtilen dosyayı buldukça dosya içeriğini o anki kural listesine ekler. Bu diziniçi kural dosyaları aktarım alt dizinlerinde aranması gerektinden gönderen tarafta oluşturulmalıdır. Ayrıca, bu kural dosyalarının silinmeyecek dosyaları etkilemesi isteniyorsa, alıcı tarafa aktarılmaları gerekecektir (aşağıda, <xref linkend="tr-man1-rsync-perdir"/> bölümüne bakınız).
+  </para><para>Bazı örnekler:</para><para>
+<screen>
+ merge /etc/rsync/default.rules
+ . /etc/rsync/default.rules
+ dir-merge .per-dir-filter
+ dir-merge,n- .non-inherited-per-dir-excludes
+ :n- .non-inherited-per-dir-excludes
+</screen>
+  </para><para>
+Bir <command>merge</command> veya <command>dir-merge</command> kuralı şu belirteçleri kabul eder:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+Bir <command>-</command> belirteci, dosyaiçi açıklamalar hariç başka bir kural çözümleme olmaksızın, sadece dışlama kalıplarından oluşan bir dosya belirtir.
+  </para></listitem><listitem><para>
+Bir <command>+</command> belirteci, dosyaiçi açıklamalar hariç başka bir kural çözümleme olmaksızın, sadece içerme kalıplarından oluşan bir dosya belirtir.
+  </para></listitem><listitem><para>
+Bir <command>C</command> belirteci, bir dosyanın CVS uyumluluğu anlamında okunması gerektiğini belirtir. Bu ’<command>n</command>’, ’<command>w</command>’, ve  ’<command>-</command>’ belirteçlerini etkin kılar, fakat ayrıca, belirtilecek liste temizleme imine de (<command>!</command>) izin verir. Bir dosyaismi belirtilmemişse dosya isminin "<filename>.cvsignore</filename>" olduğu varsayılır.
+  </para></listitem><listitem><para>
+Bir <command>e</command> belirteci, katıştırma dosyasını aktarımdan dışlayacaktır; örneğin, "<command>dir-merge,e  .rules</command>" kuralı "<command>dir-merge .rules</command>" ve "<command>- .rules</command>" kuralları gibidir.
+  </para></listitem><listitem><para>
+Bir <command>n</command> belirteci, kuralların altdizinlerde miras alınmayacağını belirtir.
+  </para></listitem><listitem><para>
+Bir <command>w</command> belirteci, kurallar için satırlara göre değil boşluklara göre sözcük ayırma uygulanacağını belirtir. Bu ayrıca açıklamalara da izin vermeyecektir.
+   </para><para><note><para>
+Bir kuralın öneki olan boşluklar özel olarak ele alınır, yani "<command>- foo + bar</command>" dizgesi iki kurala ayrılacaktır (ek olarak önek çözümlemesinin iptal edilmediği varsayımıyla).
+  </para></note>
+  </para></listitem><listitem><para>
+Ayrıca, "<command>+</command>" veya "<command>-</command>" kuralı için aşağıdaki belirteçlerden herhangi birini belirtebilirsiniz. Örneğin, "<command>dir-merge,s .filt</command>" ve "<command>:sC</command>" kurallarının herbiri sadece sunucu tarafında uygulanacak diziniçi katıştırma kurallarını oluştururken, "<command>merge,-/ .excl</command>" kuralıyla <filename>.excl</filename> dosyasının içeriği mutlakyol dışlamaları olarak ele alınır.
+  </para></listitem></itemizedlist></para><para>
+Bir "<command>+</command>" veya "<command>-</command>" kuralından sonra kullanılabilecek belirteçler:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+Bir "<command>/</command>" belirteci kuralın dosya sisteminin köküne göre bir mutlak yol olarak ele alınacağını belirtir. Örneğin, "<command>-/ /etc/passwd</command>" kuralı aktarım sırasında "<filename>/etc</filename>" dizininden gönderilen dosyalardan <filename>passwd</filename> dosyasının dışlanacağını belirtir.
+  </para></listitem><listitem><para>
+Bir "<command>!</command>" belirteci kuralın, kalıbın eşleşmediğinde etkili olacağını belirtir. Örneğin, "<command>-! */</command>" kuralı dizin olmayan herşeyi dışlayacaktır.
+  </para></listitem><listitem><para>
+Bir "<command>C</command>" belirteci, tüm genel CVS dışlama kurallarının yerinde "<command>-C</command>" dışlamaları olarak yerleştirileceğini belirtmek için kullanılır. Bir argüman almaz.
+  </para></listitem><listitem><para>
+Bir "<command>s</command>" belirteci, kuralın sadece gönderen tarafta uygulanacağını belirtir. Bir kural gönderen tarafta etkin olduğunda, dosyaların aktarılmasını engeller. <command>--delete-excluded</command> belirtilmedikçe, bir kuralın her iki tarafı da etkilemesi öntanımlıdır, aksi takdirde kuralın sadece gönderen tarafı etkilemesi öntanımlıdır. Sunucu tarafında etkili içerme/dışlama kuralları belirtmenin diğer yolları için <command>hide</command> (<command>H</command>) ve  <command>show</command>
+ (<command>S</command>) kurallarına da bakınız.
+  </para></listitem><listitem><para>
+Bir "<command>C</command>" belirteci, kuralın alıcı tarafa uygulanacağını belirtir. Bir kural alıcı tarafta etkili olduğunda, dosyaların silinmesini engeller. Daha fazla bilgi için üstteki "<command>s</command>" belirtecine bakınız. Ayrıca, alıcı tarafta etkili içerme/dışlama kuralları belirtmenin diğer yolları için <command>protect</command> (<command>P</command>) ve <command>risk</command> (<command>R</command>) kurallarına da bakınız.
+  </para></listitem></itemizedlist></para><para>
+<command>dir-merge</command> kuralları <command>n</command> belirteci kullanılmadıkça katıştırma dosyasının bulunduğu her alt dizinde miras alınır. Her alt dizinin kuralları, miras alınan kurallara göre daha yüksek öncelik almak üzere üst dizindeki <command>dir-merge</command> kurallarının başına eklenir. Birleşik kural kümesi katıştırma dosyasının bulunduğu noktalara göre gruplanır, böylece genel kurallar listesinde evvelce belirtilmiş bir kuralın <command>dir-merge</command> kuralları ile değiştirilmesi mümkün olur. Bir diziniçi katıştırma dosyasında bir liste temizleme kuralına rastlandığında, sadece o katıştırma dosyasının bulunduğu noktaya kadar miras alınan kurallar temizlenir.
+  </para><para>
+Bir tek dosyalık kuralın bir <command>dir-merge</command> dosyasından miras alınmasını engellemenin diğer bir yolu, dosyanın başına bir <command>/</command> getirmektir. Bir diziniçi katıştırma dosyasındaki bu tür  kurallar katıştırma dosyasının bulunduğu dizine göre ele alınır, böylece bir "<command>/foo</command>" kalıbı <command>dir-merge</command> süzme kuralı dosyasının bulunduğu dizindeki "<filename>foo</filename>" dosyasıyla eşleşir.
+  </para><para>
+<command>--filter=". dosya"</command> üzerinden belirteceğiniz örnek süzme dosyası:
+  </para><para>
+<screen>merge /home/user/.global-filter
+- *.gz
+dir-merge .rules
++ *.[ch]
+- *.o
+</screen>
+  </para><para>
+Bu, bu listenin başına <filename>/home/user/.global-filter</filename> dosyasının içeriğini ve ayrıca, bunu da alt dizinde "<filename>.rules</filename>" dosyasının sonuna ekleyecektir. Her dizinin başında önce tüm kurallar okunup üst dizinden alınan genel kurallar buna eklenir.
+  </para><para>
+Eğer bir diziniçi katıştırma dosyası, ilk aktarım dizininin üst dizini olan bir dosya yolu ile belirtilmişse, <command>rsync</command> belirtilen dosya için, aktarım dizininin başlangıcından itibaren tüm üst dizinleri tarayacaktır. Örneğin, böyle bir süzgeç (<command>-F</command> seçeneğine bakınız),
+  </para><para>
+<literallayout>--filter=’: /.rsync-filter’
+</literallayout>
+  </para><para>
+<command>rsync</command>'e <filename>.rsync-filter</filename> dosyasını kökten aşağı doğru,  aktarımın bir parçası olarak gönderilen dizinlerde dosyaı normal taramaya başlamadan önce aktarımın üst dizininden itibaren tüm dizinlerde aramasını söyler (Bilgi: bir <command>rsync</command> sunucusu için kök dizin daima modülün dizinidir).
+  </para><para>
+Diziniçi katıştırma dosyaları için bu tür öntarama örnekleri:
+  </para><para>
+<literallayout indent="2">rsync -avF /src/path/ /dest/dir
+rsync -av --filter=’: ../../.rsync-filter’ /src/path/ /dest/dir
+rsync -av --filter=’: .rsync-filter’ /src/path/ /dest/dir
+</literallayout>
+  </para><para>
+İlk iki komut "<filename>.rsync-filter</filename>" dosyasını "<filename>/src/path</filename>" içinde aramaya başlamadan önce "<filename>/</filename>"  ve "<filename>/src</filename>" dizinlerinde arar. Son komut ise, üst dizin taramasından kaçınır ve "<filename>.rsync-filter</filename>" dosyasını sadece aktarımın parçası olan dizinlerde arar.
+  </para><para>
+Bir "<filename>.cvsignore</filename>" dosyasının içeriğini kalıplarınıza dahil etmek isterseniz, "<command>:C</command>" kuralını kullanmalısınız. Bu kural, <filename>.cvsignore</filename> dosyalarını diziniçi katıştırma dosyaları haline getirir, fakat dosya CVS uyumluluğu bağlamında ayrıştırılır. <command>--cvs-exclude</command> (<command>-C</command>) seçeneğinin bulunduğu yerde etkili olmasını istiyorsanız kurallarınızın arasına bu noktada "<command>:C</command>" kuralını yerleştirebilirsiniz. Bu olmaksızın, <command>rsync</command>  <filename>.cvsignore</filename> dosyası için <command>dir-merge</command> kuralını diğer kurallarınızın sonuna ekleyecektir (komut satırı seçeneklerinizden daha düşük bir öncelik vererek). Örnek:
+  </para><para>
+<screen>cat &lt;&lt;EOT | rsync -avC --filter=’. -’ a/ b
++ foo.o
+:C
+- *.old
+EOT
+rsync -avC --include=foo.o -f :C --exclude=’*.old’ a/ b
+</screen>
+  </para><para>
+Yukarıdaki <command>rsync</command> komutlarının ikisi de aynı işi yapar. Her ikisi de diziniçi <filename>.cvsignore</filename> kurallarını listenin sonuna değil, ortasına katıştıracaktır. Bu, onların dizine özel kurallarının sizin kurallarınızın tümünden daha düşük önemde olması yerine <command>:C</command>'ye kadar olan kuralların yerine geçmesini mümkün kılar. Diğer CVS dışlama kurallarını etkilemek için (örn, öntanımlı dışlananlar listesi, <filename>$HOME/.cvsignore</filename> dosyasının içeriği ve <literal>$CVSIGNORE</literal> değişkeninin değeri), <command>-C</command> komut satırı seçeneğini belirtmemeli, onun yerine kurallarınıza bir "<command>-C</command>" kuralı yerleştirmelisiniz; örn, "<command>--filter=-C</command>".
+</para></refsect2><refsect2><title>Liste Temizleyen Süzme Kuralı</title><para>
+Yukarıda <xref linkend="tr-man1-rsync-filters"/> bölümünde bahsedildiği gibi mevcut içerme/dışlama listesini "<command>!</command>" süzme kuralını kullanarak temizleyebilirsiniz.  "Mevcut" liste ya genel kural listesi (kural, süzme seçenekleri çözümlenirken saptanmışsa) ya da diziniçi katıştırma dosyası kurallarından (bunlar kendi alt listelerinde miras alınırlar, dolayısıyla üst dizinin kurallarını bu kuralla temizleyebilirsiniz) oluşur.
+</para></refsect2><refsect2 id="tr-man1-rsync-anchoring"><title>İçerme/Dışlama Kalıplarının Kök Dizinle İlişklendirilmesi</title><para>
+Evvelce de bahsedildiği gibi, genel içerme/dışlama kalıpları aktarımın kök dizini ile ilişkilendirilebilir (katıştırma dosyasının dizini ile ilişklendirilen diziniçi kalıplarının tersine). Aktarımı, göndericiden alıcıya bir isim altağacının gönderilmesi olarak düşünürseniz, aktarımın kök dizini hedef dizinde yinelenecek olan ağaç başlangıcıdır. Bu kök, bir <filename>/</filename> ile başlayan kalıplarla ilişkilendirilir.
+  </para><para>
+Eşleşme aktarımın köküne göre yapıldığından, kaynak yolun sonundaki bölü çizgisini değiştirmek ya da <command>--relative</command> seçeneğinin kullanımında değişiklik yapmak eşleştirmenizde kullanılması gereken yolu etkiler. Aşağıdaki örneklerde bu davranış modellenmiştir.
+  </para><para>
+Biri "<filename>/home/ben/foo/bar</filename>", diğeri "<filename>/home/sen/bar/baz</filename>" olan iki dosyamız olsun. Aşağıda bu iki dosyanın çeşitli komut kullanımlarında nasıl farklı aktarıldıkları gösterilmiştir.
+  </para><para>
+<literallayout indent="4">
+Örnek komut: rsync -a /home/ben /home/sen /hedef
++/- kalıbı: /ben/foo/bar
++/- kalıbı: /sen/bar/baz
+Hedef dosya: /hedef/ben/foo/bar
+Hedef dosya: /hedef/sen/bar/baz
+
+Örnek komut: rsync -a /home/ben/ /home/sen/ /hedef
++/- kalıbı: /foo/bar               (dikkat: "ben" yok)
++/- kalıbı: /bar/baz               (dikkat: "sen" yok)
+Hedef dosya: /hedef/foo/bar
+Hedef dosya: /hedef/bar/baz
+
+Örnek komut: rsync -a --relative /home/ben/ /home/sen /hedef
++/- kalıbı: /home/ben/foo/bar       (dikkat: tam dosyayolu)
++/- kalıbı: /home/sen/bar/baz       (keza bu da)
+Hedef dosya: /hedef/home/ben/foo/bar
+Hedef dosya: /hedef/home/sen/bar/baz
+
+Örnek komut: cd /home; rsync -a --relative ben/foo sen/ /hedef
++/- kalıbı: /ben/foo/bar      (belirtilen yolla başlar)
++/- kalıbı: /sen/bar/baz      (keza bu da)
+Hedef dosya: /hedef/ben/foo/bar
+Hedef dosya: /hedef/sen/bar/baz
+</literallayout>
+  </para><para>
+Hangi ismi süzdüğünüzü görmenin en kolay yolu, <command>--verbose</command> kullanarak çıktıya bakmak ve ismin önüne bir <filename>/</filename> koymaktır (herhangi bir dosya kopyalamaya hazır değilseniz, <command>--dry-run</command> seçeneğini kullanın).
+</para></refsect2><refsect2 id="tr-man1-rsync-perdir"><title>Diziniçi Katıştırma Kuralları ve Silme</title><para>
+Bir silme seçeneği olmaksızın, diziniçi katıştırma dosyası kuralları sadece gönderen tarafta konuyla ilgilidir, dolayısıyla aktarımı etkilemeksizin rahatça katıştırma dosyalarını dışlayabilirsiniz. Bunu kolayca yapmanın yolu, örnekte görüldüğü gibi bu dışlamaya '<command>e</command>' belirtecini eklemektir:
+  </para><para>
+<screen indent="1">rsync -av --filter=’: .haric’ --exclude=.haric mkn:kaynak/dizin /hedef
+rsync -av --filter=’:e .haric’ mkn:kaynak/dizin /hedef
+</screen>
+  </para><para>
+Buna rağmen, alıcı tarafta bir silme yapmak VE bazı dosyaların da silinerek dışlanmasını isterseniz, alıcı tarafın dışlanacak dosyaları bilmesini sağlamanız gerekecektir. En kolayı, aktarıma diziniçi katıştırma dosyalarını dahil etmek ve <command>--delete-after</command> kullanmaktır. Bu yolla, birşeyleri silmeden önce alıcı tarafta gönderen taraftaki dışlama kuralları alınmış olacaktır:
+  </para><para>
+<screen>rsync -avF --delete-after mkn:kaynak/dizin /hedef
+</screen>
+  </para><para>
+Yine de, katıştırma dosyaları aktarımın bir parçası değilse, ya bazı genel dışlama kuralları belirtmeli (komut satırında belirtilebilir) ya da alıcı tarafta diziniçi katıştırma dosyalarının bulunmasını kendiniz sağlamalısınız. İlkine bir örnek (uzak <filename>.kural</filename> dosyalarının kendilerini dışladıkları varsayılıyor):
+  </para><para>
+<screen>rsync -av --filter=’: .kural’ --filter=’. /benim/ek.kuralım’
+   --delete mkn:kaynak/dizin /hedef
+</screen>
+  </para><para>
+Bu örnekte <filename>ek.kuralım</filename> dosyası aktarımın her iki tarafını da etkileyebilir, fakat (gönderen tarafta) kurallar diziniçi katıştırma kuralından sonra belirtildiğinden <filename>.kural</filename> dosyasından katıştırılan kurallardan daha düşük öncelikli olurlar
+  </para><para>
+Son örnekte, uzak taraf <filename>.rsync-filter</filename> dosyalarını aktarımdan dışlamaktadır, ancak biz alıcı tarafta neyin silineceğini denetim altına almak için kendi <filename>.rsync-filter</filename> dosyalarımızı kullanmak istiyoruz. Bunu yapmak için diziniçi katıştırma dosyalarını özellikle dışlamalı (böylece silinmezler) ve neyin silinip silinmeyeceğini denetim altına almak için kuralları yerel dosyalara  koymalıyız. Bu komutlardan biri gibi:
+  </para><para>
+<screen>rsync -av --filter=’:e /.rsync-filter’ --delete \
+    mkn:kaynak/dizin /hedef
+rsync -avFF --delete mkn:kaynak/dizin /hedef
+</screen>
+</para></refsect2></refsect1>
+<refsect1 id="tr-man1-rsync-batch"><title>BETİK KİPİ</title><para>
+Betik kipi bir çok sistem için aynı olan güncellemeleri uygularken kullanılabilir. Bir dizin ağacının çok sayıda makine üzerinde kopyalarının bulunduğunu varsayalım. Şimdi, kaynak ağacında bazı değişiklikler olduğunu ve bunların diğer makinelere de aktarılması gerektiğini varsayalım. Bu işlemi betik kipini kullarak yapmak için, <command>rsync</command>, kaynak ağacındaki değişiklikleri hedef ağaçlardan birinde uygulayan  <command>--write-batch</command> seçeneği ile çalıştırılır. <command>--write-batch</command> seçeneği, yapılan işlemlerin aynı dizin ağacını içeren hedeflerde uygulanmak üzere bir "betik dosyası" içinde saklanmasını sağlar.
+  </para><para>
+Kaydedilen değişiklikleri diğer hedef ağaçlara uygulamak için <command>rsync</command>, bu dosyanın ismi seçeneğe argüman olarak belirtilerek <command>--read-batch</command> seçeneği ile çalıştırılır. <command>rsync</command>, betik dosyasında saklanmış bilgileri kullanarak hedef ağacı günceller.
+  </para><para>
+Rahat olsun diye, <command>--write-batch</command> seçeneği kullanılırken ek bir dosya daha oluşturulur. Bu dosyanın ismi, betik dosyasının isminin sonuna "<filename>.sh</filename>" eklenerek oluşturulur. Bu <filename>.sh</filename> dosyası betik dosyasını kullanarak hedefi güncelleyecek komut satırını içerir.  Bir Bourne(-benzeri) kabuk kullanılarak çalıştırılabilir. İsteğe bağlı olarak özgün yol yerine hedef ağacın dosya yolu aktarılabilir. Bu, hedef ağacın kaynak ağacının yolundan farklı olduğu durumlarda yararlıdır.
+  </para><para>
+Dosya durumu, sağlama toplamı sınanması ve veri bloklarının üretimi işlemleri betik dosyasına bir kere kaydedildi mi, hedef ağaçlarda defalarca kullanılabilir. Aynı verileri her konağa ayrı ayrı göndermek yerine çok sayıda konağı aynı anda güncelleyecek çok görevli aktarım protolleri de kullanılabilir.
+  </para><para>
+Örnekler:
+  </para><para>
+<screen>$ rsync --write-batch=foo -a mkn:/kaynak/dzn/ /hedef1/dzn/
+$ scp foo* uzak:
+$ ssh uzak ./foo.sh /hedef2/dzn/
+
+$ rsync --write-batch=foo -a /kaynak/dzn/ /hedef1/dzn/
+$ ssh remote rsync --read-batch=- -a /hedef2/dzn/ &lt;foo
+</screen></para><para>
+Bu örneklerde, <command>rsync</command> <filename>/kaynak/dzn/</filename>'den <filename>/hedef1/dzn/</filename>'i güncellemekte kullanılmış ve bu işlemi yinelemek için işlemler "<filename>foo</filename>" ve "<filename>foo.sh</filename>" dosyalarına kaydedilmiştir. "<filename>uzak</filename>" konağı betiğe kayıtlı veri <filename>/hedef2/dzn/</filename> dizinine gönderilerek güncellenir. Bu iki örnek arasındaki farklar betik dosyalarının hangi esneklikte kullanılabileceğini göstermek içindir:
+  </para><para><itemizedlist mark="disc" userlevel="3"><listitem><para>
+İlk örnek ilk kopyanın yerel olmayacağını gösterir -- her iki yönde de aktarım için ister uzak kabuk sözdizimini, ister <command>rsync</command> sunucu sözdizimini kullanabilirsiniz.
+  </para></listitem><listitem><para>
+İlk örnek uzak makine üzerinde <command>--read-batch</command> seçenekli komutu çalıştırırken doğru <command>rsync</command> seçeneklerini oluşturulan "<filename>foo.sh</filename>" dosyasından alır.
+  </para></listitem><listitem><para>
+İkinci örnek betik verisini standart girdiden okur, böylece betik dosyasının önce uzak makineye kopyalanması gerekmez. Bu örnekte değiştirilmiş bir <command>--read-batch</command> seçeneği kullanılmasını gerektirdiğinden  "<filename>foo.sh</filename>" betiği kullanılmamıştır, fakat betiği kullanmak için dosyayı kendiniz düzenleyebilirsiniz. (Ancak, başka bir seçeneğin (<command>--exclude-from=-</command> gibi) standart girdiyi kullanmadığından emin olmalısınız.)
+  </para></listitem></itemizedlist>
+</para><refsect2><title>Yetersizlikler</title><para>
+Betik okuma seçeneği, hedef ağacın, betiğin oluşturulduğu hedefteki ağaçla aynı olacağı kabulüne dayanır. Hedef ağaçta bir fark saptandığında işlem ya bir hata verilmeksizin iptal edilir (dosya güncel görünüyorsa) ya da dosya güncellemesi yapılmaya çalışılır ve bundan sonra eğer dosyanın doğrulanması başarısız olursa işlem bir hata üretilerek iptal edilir. Bu, eğer işlem kesintiye uğratılırsa bir betik okuma işleminin yeniden başlatılmasının güvenli olması gerektiği anlamına gelir. Eğer betikli güncellemenin dosyanın boyutuna ve tarihine bakılmaksızın daima yapılabilmesini isterseniz, <command>-I</command> seçeneğini kullanın (betik okunurken). Eğer bir hata oluşursa, hedef ağaç bir ihtimal, kısmen güncellenmiş durumda olacaktır. Bu durumda, <command>rsync</command> betikli güncelleme ile değil, normal işlemle kullanılarak hedef ağaç düzeltilebilir.
+  </para><para>
+Tüm hedeflerde kullanılan <command>rsync</command> sürümü, betik dosyasını üretmekte kullanılandan en azından biraz daha yeni olmalıdır.  Eğer, betik dosyasının protokol sürümü onu okuyan <command>rsync</command>'in sürümünden daha yeni ise <command>rsync</command> bir hata vererek sonlanacaktır.
+  </para><para>
+<command>--dry-run</command> (<command>-n</command>) seçeneği betik kipinde çalışmaz ve bir çalışma anı hatası ile sonlanır.
+  </para><para>
+Bir betik dosyası okunurken, siz belirtmemiş olsanız bile, betik dosyası üretilirken kullanılan ve betik dosyasındaki veriler için gerekli olan bazı seçenekler zorunlu olarak kullanılacaktır.  Diğer seçenekler değiştirilebilir, hatta değiştirilmelidir de. Örneğin,  <command>--write-batch</command> seçeneği <command>--read-batch</command> seçeneği olarak değişmeli, <command>--files-from</command> kullanılmamalıdır, bunun yanında <command>--filter</command>/<command>--include</command>/<command>--exclude</command> seçenekleri ise  <command>--delete</command> seçeneklerinden biri belirtilmedikçe gerekli olmaz.
+  </para><para>
+<varname>betik</varname><filename>.sh</filename> dosyasını oluşturan kod, kabuk betiğinin sonuna tek bir listeye dönüştürerek <command>--filter</command>/<command>--include</command>/<command>--exclude</command> seçeneklerini bir belge niteliğinde ekler. Tecrübeli bir kullanıcı bu bilgiyi <command>--delete</command> tarafından silinmesi istenenlerde bir değişiklik varsa, dışlama listesini değiştirmekte kullanabilir. Normal bir kullanıcı ise, bu ayrıntıları yoksayabilir ve betikli veriyi uygun <command>--read-batch</command> komutuyla çalıştıran kabuk betiğini kullanabilir.
+  </para><para>
+<command>rsync</command>'deki özgün betik kipi "<filename>rsync+</filename>" üzerine inşa edilmiş olsa da en son sürümde yeni bir gerçeklenim kullanılmaktadır.
+</para></refsect2></refsect1><refsect1><title>SEMBOLİK BAĞLAR</title><para>
+<command>rsync</command> kaynak dizini içinde bir sembolik bağ saptadığında üç temel davranış sözkonusudur:
+  </para><para><itemizedlist userlevel="3"><listitem>
+Öntanımlı olarak, sembolik bağlar oldukları gibi aktarılmazlar. Bir sembolik bağ varsa, "skipping non-regular file" (normal dosya olmadığından atlanıyor) iletisini alırsınız ve dosya atlanır.
+  </listitem><listitem>
+Eğer <command>--links</command> seçeneği belirtilmişse, sembolik bağlar alıcı tarafta aynı hedefle yeniden oluşturulurlar. BİLGİ: <command>--archive</command> seçeneği dolaylı olarak <command>--links</command> seçeneğini uygular.
+  </listitem><listitem>
+Eğer <command>--copy-links</command> seçeneği belirtilmişse, alıcı tarafa sembolik bağın ismiyle hedefindeki dosya aktarılır.
+  </listitem></itemizedlist></para><para>
+<command>rsync</command> ayrıca, "güvenilir" ve güvensiz" sembolik bağları ayrımsayabilir. Bunun kullanıldığı yere bir örnek olarak, bir sanalyöre yansılaması yapılırken, yörenin genel bölümündeki <filename>/etc/passwd</filename> sembolik bağının aktarımda içerilmediğinden emin olunmak istenmesi gösterilebilir. <command>--copy-unsafe-links</command> seçeneğinin kullanımı sembolik bağların hedefindeki dosyaların kopyalanmasına sebep olacaktır. <command>--safe-links</command> seçeneğinin kullanımı ise güvensiz bağların atlanmasına sebep olacaktır.
+  </para><para>
+Mutlak yol içeren (<filename>/</filename> ile başlayan) sembolik bağlarla, bulunulan dizinden daha yukarıdaki dizinleri gösteren "<filename>..</filename>" bileşenlerini içeren sembolik bağlar güvensiz olarak kabul edilir.
+</para></refsect1><refsect1><title>TANI KOYMA</title><para>
+<command>rsync</command> ara sıra biraz şifreli gibi görünen hata iletileri üretir. Bunlardan biri en kafa karıştıcı olan "protocol  version mismatch -- is your shell clean?" (protokol sürümü yanlış -- kabuğunuz temiz mi?) iletisidir.
+  </para><para>
+Bu ileti genellikle, <command>rsync</command>'in aktarım için kullandığı akım üzerinde istenmeyen veriler üreten uzak kabul oluşumları ya da başlatma betiklerinizden kaynaklanır. Bu soruna tanı koymanın yolu, uzak kabuğu şöyle çalıştırmaktır:
+  </para><para>
+<screen>ssh uzakmakine /bin/true > out.dat
+</screen>
+  </para><para>
+Bundan sonra oluşturulan <filename>out.dat</filename> dosyasına bakın. Herşey yolunda gitmişse dosya sıfır uzunlukta olacaktır. Eğer yukarıdaki hatayı alıyorsanız, dosya bazı veriler içerecektir. Dosyanın içeriğine bakarak bunları nelerin üretebileceğini bulmaya çalışın. Çok yapılan bir hata, etkileşimsiz oturum açmak için komutlar içeren yanlış yapılandırılmış kabuk betikleridir (<filename>.cshrc</filename>  veya <filename>.profile</filename> gibi).
+  </para><para>
+Süzme kalıplarında hata ayıklamak istiyorsanız, <command>-vv</command> seçeneğini belirtmeyi deneyin. <command>rsync</command>, bu ayrıntı seviyesinde dosyaların tek tek neden içerildiğini veya dışlandığını gösterecektir.
+</para></refsect1><refsect1><title>ÇIKIŞ DEĞERLERİ</title><para>
+  <glosslist><glossentry>
+  <glossterm><command>0</command></glossterm>
+  <glossdef><para>Başarılı
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>1</command></glossterm>
+  <glossdef><para>Sözdizimi ya da kullanım hatası
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>2</command></glossterm>
+  <glossdef><para>Protokol uyumsuzluğu
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>3</command></glossterm>
+  <glossdef><para>girdi/çıktı dosyalarını, dizinlerini seçerken oluşan hatalar
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>4</command></glossterm>
+  <glossdef><para>İstenen eylem desteklenmiyor; 64 bitlik dosyaları desteklemeyen bir platformda bu tür dosyalarla çalışılmak isteniyor; istemci tarafından desteklendiği halde sunucu tarafından desteklenmeyen bir seçenek kullanılmış.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>5</command></glossterm>
+  <glossdef><para>Sunucu/istmeci protokolü başlatılırken hata.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>10</command></glossterm>
+  <glossdef><para>Soket G/Ç hatası
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>11</command></glossterm>
+  <glossdef><para>Dosya G/Ç hatası
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>12</command></glossterm>
+  <glossdef><para><command>rsync</command> protokolü veri akımında hata
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>13</command></glossterm>
+  <glossdef><para>Uygulama tanılarında hata
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>14</command></glossterm>
+  <glossdef><para>Süreçlerarası iletişim (IPC) kodunda hata
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>20</command></glossterm>
+  <glossdef><para>Bir SIGUSR1 veya SIGINT alındı
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>21</command></glossterm>
+  <glossdef><para>waitpid() bazı hatalar döndürdü
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>22</command></glossterm>
+  <glossdef><para>nüve bellek tamponları ayrılırken hata
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>23</command></glossterm>
+  <glossdef><para>Hatadan dolayı kısmî aktarım
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>24</command></glossterm>
+  <glossdef><para>Gözden kaçan kaynak dosyalarından dolayı kısmî aktarım
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><command>30</command></glossterm>
+  <glossdef><para>Veri aktarımında zamanaşımı
+  </para></glossdef></glossentry></glosslist>
+</para></refsect1><refsect1><title>ORTAM DEĞİŞKENLERİ</title><para>
+  <glosslist><glossentry>
+  <glossterm><literal>CVSIGNORE</literal></glossterm>
+  <glossdef><para>
+<filename> .cvsignore</filename> dosyalarındaki gibi yoksayılacak kalıpları belirtmek için kullanılır. Daha fazla bilgi için <command>--cvs-exclude</command> seçeneğinin açıklamasına bakınız.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><literal>RSYNC_RSH</literal></glossterm>
+  <glossdef><para>
+<command>rsync</command> tarafından kullanılan öntanımlı kabuğun yerine kullanılacak kabuğu belirtmek için kullanılır. Komut isminden sonra komut satırı seçeneği olarak sadece <command>-e</command> seçeneği kullanılabilir.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><literal>RSYNC_PROXY</literal></glossterm>
+  <glossdef><para>
+<command>rsync</command> sunucusuna bağlanırken <command>rsync</command> istemcisi tarafından kullanılacak vekil sunucuyu belirtmek için kullanılır. Değeri bir <literal>konakadı:port</literal> çifti olarak belirtmelisiniz.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><literal>RSYNC_PASSWORD</literal></glossterm>
+  <glossdef><para>
+Kimlik kanıtlaması gerektiren bir <command>rsync</command> sunucusuna bağlanırken komut satırında parola belirtmek zorunda kalmamak için parola bu değişkene atanabilir. Aktarım <command>ssh</command> gibi bir kabuk üzerinden gerçekleştiriliyorsa bu değişkene bakılmayacaktır.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><literal>USER</literal> veya <literal>LOGNAME</literal></glossterm>
+  <glossdef><para><literal>USER</literal> veya <literal>LOGNAME</literal> değişkenleri bir <command>rsync</command> sunucusuna gönderilecek kullanıcı ismini saptamak için kullanılır. Böyle bir tanım yapılmamışsa, öntanımlı kullanıcı ismi olarak "<literal>nobody</literal>" kullanılır.
+  </para></glossdef></glossentry><glossentry>
+  <glossterm><literal>HOME</literal></glossterm>
+  <glossdef><para>Kullanıcının öntanımlı <filename>.cvsignore</filename> dosyasını bulmakta kullanılır.
+  </para></glossdef></glossentry></glosslist>
+</para></refsect1><refsect1><title>İLGİLİ DOSYALAR</title><para>
+<filename>/etc/rsyncd.conf</filename> veya <filename>rsyncd.conf</filename>
+</para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man5-rsyncd.conf"/>
+</para></refsect1><refsect1><title>HATALAR</title><para>
+Zamanlar unix time_t türünden değerler olarak aktarılır.
+</para><para>
+Dosyalar FAT dosya sistemine aktarılırken, <command>rsync</command> dosyalarda değişiklik yapmayabilir. <command>--modify-window</command> seçeneğinin açıklamasına bakınız.
+</para><para>
+Dosya izinleri, aygıtlar, vs. temel sayısal değerleriyle aktarılır.
+</para><para>
+Ayrıca, <command>--delete</command> seçeneğinin açıklamasına da bakınız.
+</para><para>
+Lütfen hataları raporlayınız! Hataları raporlamak için <ulink url="http://rsync.samba.org/"/> adresine bakınız.
+</para></refsect1><refsect1><title>RSYNC HAKKINDA</title><para>
+<command>rsync</command> GNU kamu lisansı altında dağıtılmaktadır. Ayrıntılar için <filename>COPYING</filename> dosyasına bakınız.
+</para><para>
+Sanalyöremize <ulink url="http://rsync.samba.org/"/> adresinden erişebilirsiniz.  Bu kılavuz sayfasında yanıtlarını bulamadığınız sorular için sanalyöremizde bir FAQ-O-Matic bulunmaktadır.
+</para><para>
+<command>rsync</command>'in ana ftp'si: <ulink url="ftp://rsync.samba.org/pub/rsync"/>.
+</para><para>
+Bu uygulamayı istiyorsanız, sizden bunu duymak bizi mennun edecektir.
+</para><para>
+Bu uygulamada, Jean-loup Gailly ve Mark Adler tarafından yazılmış zlib sıkıştırma kütüphanesi kullanılmaktadır.
+</para></refsect1><refsect1><title>TEŞEKKÜR</title><para>
+<command>rsync</command>'in yamanması, sınanması ve önerileri için Richard Brent, Brendan Mackay, Bill Waite,  Stephen  Rothwell ve  David  Bell'e teşekkür ederiz. Burada bahsetmeyi unuttuğum kişiler kalmışsa, affola.
+</para><para>
+Ayrıca, David Dykstra, Jos Backus, Sebastian  Krahmer, Martin Pool, Wayne Davison ve J.W. Schultz'a özellikle teşekkür ederiz.
+</para></refsect1><refsect1><title>YAZANLAR</title><para>
+<command>rsync</command> ilk olarak Andrew Tridgell ve Paul Mackerras tarafından yazıldı. Daha sonra bir çok kişi tarafından geliştirildi.
+</para><para>
+Destek ve geliştirme için <ulink url="http://lists.samba.org"/> adresindeki eposta listelerine bakınız.
+</para></refsect1><refsect1><title>ÇEVİREN</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Mart 2005
+</para></refsect1>
+</refentry>

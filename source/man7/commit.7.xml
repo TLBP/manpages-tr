@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: commit.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-commit">
+ <refmeta>
+  <refentrytitle>COMMIT</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>COMMIT</refname>
+  <refpurpose>o anki hareketi teslim eder</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>COMMIT</command> [ <command>WORK</command> | <command>TRANSACTION</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>COMMIT</command> o anki hareketi teslim eder. Hareket içinde yapılan tüm değişiklikler diğerlerine görünür olur ve bir çökme oluşursa, kalıcılık garanti edilir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><command>WORK</command></term>
+    <term><command>TRANSACTION</command></term>
+    <listitem><para>İsteğe bağlı anahtar sözcükler. Bir etkileri yoktur.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Bir hareketi geri sarmak (iptal etmek) için  <link linkend="tr-man7-rollback" xreflabel="ROLLBACK"/> kullanılır.
+  </para><para>
+Bir hareketin dışında <command>COMMIT</command> kullanımı bir bozukluğa sebep olmaz, sadece bir uyarı iletisine sebep olur.
+  </para></refsect1><refsect1><title>Örnek</title><para>
+Mevcut hareketi teslim edip tüm değişiklikleri kalıcı yapmak için:
+  </para><para>
+<programlisting indent="4">COMMIT;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardı sadece <command>COMMIT</command> ve <command>COMMIT WORK</command> diye 2 biçim tanımlar. Bunun dışında bu komut tamamen uyumludur.
+  </para></refsect1><refsect1><title>İlgili belgeler</title><para>
+<link linkend="tr-man7-begin" xreflabel="BEGIN"/>,
+<link linkend="tr-man7-rollback" xreflabel="ROLLBACK"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

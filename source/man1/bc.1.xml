@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: bc.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-bc">
+<remark>
+.\" This file is part of GNU bc.
+.\" Copyright (C) 1991-1994, 1997, 2000 Free Software Foundation, Inc.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License , or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; see the file COPYING.  If not, write to:
+.\"   The Free Software Foundation, Inc.
+.\"   59 Temple Place, Suite 330
+.\"   Boston, MA 02111 USA
+.\"
+.\" You may contact the author by:
+.\" e-mail: philnelson@acm.org
+.\" us-mail: Philip A. Nelson
+.\" Computer Science Department, 9062
+.\" Western Washington University
+.\" Bellingham, WA 98226-9062
+.\"
+.\"
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>bc</refentrytitle>
+    <refmiscinfo class="header">Komut Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">bc v1.06</refmiscinfo>
+    <refmiscinfo class="date">12 Eylül 2000</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>bc</refname>
+    <refpurpose>Keyfî duyarlılıkta hesaplama dili</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>bc</command> [ <command>-hlwsqv</command> ] [ <emphasis>uzun-seçenekler</emphasis> ] [ <emphasis>dosya</emphasis> ... ]
+</synopsis>
+</refsynopsisdiv>
+
+  <refsect1><title>SÜRÜM</title><para>
+Bu kullanım kılavuzu, GNU <command>bc</command> sürüm 1.06'ya göre hazırlanmıştır.
+  </para>
+  </refsect1><refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>bc</command>, girilen deyimleri işleterek keyfi uzunlukta ve duyarlılıktaki sayılar üzerinde matematiksel işlemler yapmaya imkan sağlayan etkileşimli bir ortam ve bir yazılım geliştirme dilidir. Sözdizimi açısından C yazılım geliştirme dilini andıran benzerlikler sözkonusudur. Komut satırından belirtmek suretiyle kullanabileceğimiz standart bir math  kütüphanesine de sahiptir. Eğer gerekli ise; math kütüphanesi, belirtilen dosyalardan daha önce ele alınır. <command>bc</command> işleme tabi tutarken dosyaları komut satırında belirtilen sıraya göre ele alır. Belirtilen dosyaların tümü ele alınıp işlendikten sonra, standart girdiden girişler okunmaya başlar. Kodlar nasıl okunuyorlarsa bu halleriyle işletilirler. (Eğer belirtilen dosyalardan herhangi birinde <command>bc</command>'yi sonlandıracak bir komut yer alırsa, <command>bc</command> sonlanır, bir daha standart girdiden okuyamaz.)
+   </para><para>
+<command>bc</command>'nin bu sürümü, geleneksel <command>bc</command> uygulamalarına ve POSIX taslak standardına göre ilave oluşumlar içermektedir. Komut satırından belirtilecek bir seçenekle bu genişletmeler kullanıma dahil edilebilir veya edilmeyebilir. Bu kılavuzda GNU <command>bc</command> anlatılacak ve ek oluşumlar yeri gelince belirtilecektir.
+    </para>
+  <refsect2><title>SEÇENEKLER</title>
+    <para><glosslist>
+      <glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bir kullanım iletisi basar ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--interactive</command></glossterm>
+         <glossdef><para>Etkileşimli kipe geçilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--mathlib</command></glossterm>
+        <glossdef><para>Standart math kütüphanesini kullanıma sokar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossterm><command>--warn</command></glossterm>
+        <glossdef><para>POSIX <command>bc</command>'ye ek oluşumlar için uyarılar verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--standard</command></glossterm>
+        <glossdef><para>Standart POSIX <command>bc</command> diline uygun olarak işlem yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossterm><command>--quiet</command></glossterm>
+        <glossdef><para>Normalde gelen, GNU <command>bc</command> hoşgeldiniz iletisini görüntülemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm ve telif hakkı bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect2><refsect2><title>SAYILAR</title>
+    <para>
+<command>bc</command>'deki en temel eleman sayılardır. Sayılar keyfi duyarlılıkta ifade edilirler. Yani <command>bc</command>'de bir sayı, tamsayı kısım ve ondalık kısım olarak ifade edilir. Tüm sayılar normalde iç hesaplamalarda onluk tabanda ele alınırlar ve tüm işlemler onluk taban üzerinden gerçekleştirilirler. (Bu sürüm, bölme ve çarpma işlemlerinde sayıların ondalık kısımlarını belli uzunluktan sonra kesmektedir.) <command>bc</command>'de sayıların iki özelliği vardır: uzunluk ve bölüntü. Uzunluk, sayıdaki tüm anlamlı rakamların, bölüntü ise ondalık noktadan sonraki rakamların adedidir.
+    </para><para>
+Örneğin:
+    </para><para>
+<literallayout>0.0000010 sayısının uzunluğu 7 ve bölüntüsü 6'dır.
+01935.000 sayısının uzunluğu 7 ve bölüntüsü 3'tür.
+</literallayout>
+    </para><para>
+Uzunluk açısından; en sağdaki sıfır anlamlı, en soldaki sıfır anlamsızdır.
+    </para>
+  </refsect2><refsect2><title>DEĞİŞKENLER</title>
+    <para>
+Sayılar iki farklı türde değişken olarak saklanabilirler: basit değişkenler ve diziler. Her iki değişken türü için de değişkenlere birer ad verilir. Değişkenler bir harfle başlarlar ve sonrasında harfler, rakamlar ve altçizgi karakteri içerebilirler. Tüm harfler küçük harf olmak zorundadır. (Değişkenlere uzun isim verebilme bir genişletmedir. Çünkü, POSIX <command>bc</command>'de değişken isimleri tek bir küçük harftir.) Dizi değişkenleri ise isimden sonra [] (köşeli parantezler) alırlar.
+    </para><para>
+<command>bc</command>'de dört tane özel değişken vardır. Bunlar; <command>scale</command>, <command>ibase</command>, <command>obase</command> ve <command>last</command>'dır. <command>scale</command>, işlemlerde sayılarda ondalık noktadan sonra kaç tane rakamın kullanılacağını belirtir. Öntanımlı <command>scale</command> değeri <command>0</command>'dır. <command>ibase</command> (input base) ve <command>obase</command> (output base) değişkenleri, sayılarda girdi ve çıktı için tabanları belirtir. Örneğin, ibase=10 ve obase=2 olursa sayılar onluk tabanda girilir ve sonuçlar ekrana ikilik tabanda yazdırılırlar. Öntanımlı <command>ibase</command> ve <command>obase</command> değerleri 10'dur. <command>last</command> değişkeni (bu bir genişletmedir) ise, en son ekrana yazdırılan sayıyı içeren bir değişkendir. Bu değişkenlere yeni değerler atanabilir. Bunlar ileride daha ayrıntılı olarak ele alınacaktır.
+    </para>
+  </refsect2><refsect2><title>AÇIKLAMALAR</title>
+    <para>
+<command>bc</command>'de açıklama satırları <command>/*</command> karakterleri ile başlar ve <command>*/</command> karakterleri ile biter. Açıklamalar herhangi bir yerde başlayabilir ve girdide tek bir boşluk gibi ele alınır. (Yani, bu da açıklamaların girdi elemanları arasında bir ayraç olarak yorumlandığını gösterir. Dolayısıyla, bir değişken ismi içerisinde açıklama yer alamaz anlamındadır.) Açıklamalar satırsonu karakteri içerebilirler.
+    </para><para>
+Ayrıca <command>bc</command>'de betiklerin kullanılmasını sağlamak için tek satırlık açıklamalar desteklenmektedir ve bu bir genişletmedir. Tek satırlık açıklama <command>#</command> karakterinden sonra başlar ve satır sonuna kadar devam eder. Satırsonu karakteri açıklamaya dahil değildir ve normal karakter olarak ele alınır.
+    </para></refsect2><refsect2><title>İFADELER</title>
+    <para>
+Sayılar, ifadelerle ve deyimlerle birlikte kullanılırlar. Bu dil, etkileşimli bir çalışma ortamı olarak tasarlandığı için deyimler ve ifadeler de etkileşimli olarak işletilebilirler. <command>bc</command>'de bir 'main' işlevi kavramı yoktur. Bunun yerine kod, olduğu haliyle hemen yorumlanarak işletilir. (İşlevler, önce tanımlanırlar ve sonradan kullanılabilirler -ileride ele alınacaklar-).
+    </para><para>
+En basit ifade bir 'sabit'tir. <command>bc</command>, <command>ibase</command> değişkeniyle belirtilen o anki girdi tabanını kullanarak sayıyı dahili onluk tabana çevirir. (Ancak, işlevler için bir istisna vardır.) <command>ibase</command> değişkeninin geçerli değerleri 2'den 16'ya kadardır. Bu aralığın dışında değerler atanırsa kendiliğinden 2 veya 16 olarak yeniden ayarlanır. Sayılar girilirken, 0-9 arası rakamlar ve A-F arası harfler ile kullanılabilir. (Not: A-F büyük harf olmalıdır. Çünkü, küçük harfler değişkenler için kullanılıyorlar.) Tek rakamlı sayılar, <command>ibase</command> ne olursa olsun, her zaman rakamın ifade ettiği değere sahip olurlar (örn, A=10)). <command>bc</command> çok rakamlı sayılarda, <command>ibase</command> değerine eşit veya daha büyük rakamları derhal <command>ibase-1</command> tabanında ele alarak sayının değerini hesaplar. Bu <command>FFF</command> sayısını daima, girdi tabanındaki en büyük 3 haneli sayı yapar.
+    </para><para>
+İfadeler, diğer yüksek-düzeyli dillerdekilere oldukça benzerler. <command>bc</command>'de sayılar için farklı türler olmadığı için karışık türler için kurallar yoktur. Bunun yerine, sadece ifadelerin bölüntüleri üzerine kurallar vardır. Her ifadenin bir bölüntüsü vardır. Bu, orijinal sayıların bölüntülerinden, gerçekleştirilen işlemden ve çoğu durumda da <command>scale</command> değişkeninin değerinden elde edilir. <command>scale</command> değişkeninin alabileceği değerler, 0 (sıfır) ile C'deki tamsayı türü ile ifade edilebilen tamsayı aralığındadır.
+    </para><para>
+Aşağıdaki geçerli ifadelerin açıklamalarında "ifade" komple bir ifadeyi ve "değişken" ise sıradan bir değişkeni veya bir dizi değişkenini göstermektedir. Bir basit değişken
+    </para><para>
+<literallayout><emphasis>isim</emphasis>
+</literallayout>
+    </para><para>
+şeklinde ve bir dizi değişkeni ise aşağıdaki gibi belirtilir:
+      </para><para>
+<literallayout><emphasis>isim</emphasis>[<emphasis>ifade</emphasis>]
+</literallayout>
+    </para><para>
+Özel olarak söz edilmediyse sonucun bölüntüsü, ilgili ifadelerin azami bölüntüsü olur.
+    </para><para><glosslist><glossentry>
+      <glossterm><literal>-</literal><varname>ifade</varname></glossterm>
+      <glossdef><para>Sonuç, <varname>ifade</varname>'nin negatifi olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>++</literal><varname>değişken</varname></glossterm>
+      <glossdef><para><varname>değişken</varname>'in değerine önce 'bir' eklenir ve yeni değer ifadenin sonucu olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>--</literal><varname>değişken </varname></glossterm>
+      <glossdef><para><varname>değişken</varname>'in değeri önce 'bir' eksiltilir ve yeni değer ifadenin sonucu olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>değişken</varname><literal>++</literal></glossterm>
+      <glossdef><para>İfadenin sonucu değişkenin değerine göre hesaplanır, sonra <varname>değişken</varname>'in değeri 'bir' artırılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>değişken</varname><literal>--</literal></glossterm>
+      <glossdef><para>İfadenin sonucu değişkenin değerine göre hesaplanır, sonra <varname>değişken</varname>'in değeri 'bir' eksiltilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>+ </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>Sonuç, iki <varname>ifade</varname>'nin toplamıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>- </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>Sonuç, iki <varname>ifade</varname>'nin farkıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>* </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>Sonuç, iki <varname>ifade</varname>'nin çarpımıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>/ </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>Sonuç, iki <varname>ifade</varname>'nin bölümüdür. Sonucun bölüntüsü <command>scale</command> değişkeninin değeridir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>% </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>
+Sonuç, "kalan"ı verir ve şu şekilde hesaplanır. <literal>a%b</literal>'yi hesaplarken, ilk önce a/b <command>scale</command> haneli olarak hesaplanır. <command>scale</command><literal>+scale(b)</literal> ve <literal>scale(a)</literal>'dan hangisi daha büyükse bu bölüntüye göre <literal>a-(a/b)*b</literal> ifadesi  sonucu hesaplamak için kullanılır. Eğer <command>scale</command> 0'a eşitlenirse ve her iki ifade de tamsayı ise, bu ifade tamsayı kalan işlevidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>^ </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>
+İfadenin sonucu, birincinin ikinciye göre üssüdür. İkinci ifade bir tamsayı olmalıdır. (Eğer ikinci ifade tamsayı değilse, önce ekrana bir uyarı gelir ve ifade tamsayı olacak şekilde kesilir, yani ikinci ifadenin tam kısmı alınır). Sonucun bölüntüsü ise, eğer üs negatif ise <command>scale</command>'dir. Üs pozitif ise <literal>scale(a^b) = min(scale(a)*b, max(scale, scale(a)))</literal>'dır. Unutulmamalıdır ki <varname>ifade</varname><literal>^0</literal> ifadesinin sonucu her zaman "1" olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>( </literal><varname>ifade </varname><literal>)</literal></glossterm>
+      <glossdef><para>
+Parantezler, ifadenin değeri bulunurken standart önceliği değiştirir ve parantez içine alınan ifade daha önce hesaplanır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>değişken </varname><literal>= </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>
+İfadenin sonucu değişkene atanır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>değişken </varname><literal>&lt;</literal><varname>işleç</varname><literal>&gt;= </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>
+Bu, "<varname>değişken </varname><literal>= </literal><varname>değişken </varname><literal>&lt;</literal><varname>işleç</varname><literal>&gt; </literal><varname>ifade</varname>" ile eşdeğerdir ancak bir farkla; <varname>değişken</varname>'in değeri sadece bir kere elde edilir. Eğer <varname>değişken</varname> bir dizi ise, işlemin bir kere yapılacağı gözden uzak tutulmamalıdır.
+      </para></glossdef></glossentry></glosslist></para><para>
+İlişkisel ifadeler (karşılaştırma ifadeleri), sonuçları her zaman 0 veya 1 olan özel ifadelerdir. 0, yanlış (false) ve 1, doğru (true) olarak yorumlanır. Bunlar herhangi bir ifade içerisinde yer alabilirler. (POSIX <command>bc</command>'de ise ilişkisel ifadeler sadece <command>if</command>, <command>while</command> ve <command>for</command> deyimlerinde kullanılabilir ve sadece bir tane ilişkisel sınama olabilir.) İlişkisel işleçler şunlardır:
+    </para><para><glosslist><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>&lt; </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'den küçükse 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>&lt;= </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'den küçük ya da eşitse 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>> </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'den büyükse 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>>= </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'den büyük ya da eşitse 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>== </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'ye eşitse 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade1 </varname><literal>== </literal><varname>ifade2</varname></glossterm>
+      <glossdef><para>
+Sonuç, eğer <varname>ifade1</varname>, <varname>ifade2</varname>'den farklıysa 1 olur. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry></glosslist></para><para>
+<command>bc</command>'de  mantıksal (boolean) işlemler de geçerlidir. (POSIX <command>bc</command>'de mantıksal işlemler yoktur.) Mantıksal işlemlerin sonucu, ilişkisel işlemlerde olduğu gibi, 0 (false) yada 1 (true) olmaktadır. Mantıksal işleçler şunlardır:
+    </para><para><glosslist><glossentry>
+      <glossterm><literal>!</literal><varname>ifade</varname></glossterm>
+      <glossdef><para><varname>ifade</varname> 0 ise sonuç 1'dir. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>&amp;&amp; </literal><varname>ifade</varname></glossterm>
+      <glossdef><para>
+        <varname>ifade</varname>'lerin ikiside sıfırdan farklıysa sonuç 1'dir. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>ifade </varname><literal>|| </literal><varname>ifade</varname></glossterm>
+      <glossdef><para><varname>ifade</varname>'lerden biri sıfırdan farklıysa sonuç 1'dir. Aksi halde 0 olur.
+      </para></glossdef>
+    </glossentry></glosslist></para><para>
+İşleçlerin işlem öncelik sırası şöyledir (küçükten büyüğe):
+      </para><para>
+<literallayout><command>||</command> işleci, önce sol taraf
+<command>&amp;&amp;</command> işleci, önce sol taraf
+<command>!</command> işleci, tarafsız
+İlişkisel işleçler, önce sol taraf
+Atama işleci, önce sağ taraf
+<command>+</command> and <command>-</command> işleci, önce sol taraf
+<command>*</command>, <command>/</command> ve <command>%</command> işleci, önce sol taraf
+<command>^</command> işleci, önce sağ taraf
+tek terimli <command>-</command> işleci
+<command>++</command> ve <command>--</command> işleci
+</literallayout>
+      </para><para>
+Bu önceliğin seçilmesinin nedeni, POSIX uyumlu <command>bc</command> yazılımlarının doğru çalışması içindir. Ancak, ilişkisel ve mantıksal işleçler, atama ifadelerinde kullanıldığında elverişsiz ve çok farklı bir durum ortaya çıkmaktadır. Aşağıdaki ifadeyi ele alalım:
+    </para><para>
+<literallayout>a = 3 &lt; 5
+</literallayout>
+    </para><para>
+C programcıları bu ifadeyi ele alırken, önce <literal>3&lt;5</literal>  (sonuç 1'dir) ifadesini gerçekleştirir, ardından sonucu "a" değişkenine atarlar. <command>bc</command>'de ise önce "a"ya 3 atanır ve ardından 5 ile karşılaştırma yapılır. Buna dikkat etmek gerekir. En iyisi, ilişkisel ve mantıksal işleçler ile atama işleci aynı ifadede kullanıldığında karmaşayı önlemek için parantezleri kullanmaktır.
+    </para><para>
+<command>bc</command>'de desteklenen biraz daha özel ifadeler vardır. Bunlar, standart işlevler ve kullanıcı tanımlı işlevlerde, "<varname>isim</varname><literal>(</literal><varname>parametreler</varname><literal>)</literal>" şeklinde görülmektedirler. Ayrıntılı bilgi için <xref linkend="tr-man1-bc-func"/> bölümündeki kullanıcı tanımlı işlevlere bakınız. Yerleşik işlevler şunlardır:
+    </para><para><glosslist><glossentry>
+      <glossterm><command>length </command><literal>( </literal><varname>ifade </varname><literal>)</literal></glossterm>
+      <glossdef><para><command>length </command>işlevinin değeri, <varname>ifade</varname>'deki anlamlı rakamların adedidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>read </command><literal>( )</literal></glossterm>
+      <glossdef><para><command>read </command>işlevi (bu bir genişletmedir), nerede kullanıldığına bakılmaksızın, standart girdiden bir sayı okumak için kullanılır. Ancak, standart girdiden veri ve yazılım birlikte okunurken problemlere neden olabileceğinden dikkatli olmak gerekir. Bu işlevin en iyi kullanım şekli, asla kullanıcıdan kod girmeyi gerektiren yerlerde değil, evvelce geliştirilen bir yazılım için kullanıcıdan bir girdi bekleyen yerlerde kullanmaktır. <command>read </command>işlevinin değeri, standart girdiden okunan sayının <command>ibase</command> tabanındaki değeridir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>scale </command><literal>( </literal><varname>ifade </varname><literal>)</literal></glossterm>
+      <glossdef><para><command>scale </command>işlevinin değeri, <varname>ifade</varname>'denin sonucu olan sayıdaki ondalık hanelerin sayısıdır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>sqrt </command><literal>( </literal><varname>ifade </varname><literal>)</literal></glossterm>
+      <glossdef><para><command>sqrt </command>işlevinin değeri, <varname>ifade</varname>'nin kareköküdür. <varname>ifade</varname>'nin sonucu negatif bir sayı ise bir çalışma anı hatası üretilir.
+      </para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect2><refsect2><title>DEYİMLER</title>
+    <para>
+Deyimler, birçok cebirsel dilde olduğu gibi, ifadelerin sırayla değerlendirilmelerini sağlarlar. <command>bc</command>'de deyimler "mümkün olduğunca" işletilirler. İşletim, bir ya da daha fazla tam deyimden sonra bir satırsonu karakteri girildiğinde gerçekleşir. Bu bakımdan <command>bc</command>'de satırsonu karakterleri çok önemlidir. Aslında, deyimleri ayırmak için bir satırsonu karakteri ve bir noktalı virgül gerekir. Yanlış yerde kullanılmış bir satırsonu karakteri bir sözdizimi hatasına sebep olur. Satır sonu karakteri deyimler için bir ayraç olduğundan, bir satır sonu karakterini gizlemek için ters bölü karakteri kullanılabilir. Tersbölü karakterinden sonra gelen bir satırsonu karakterinden oluşan karakter çiftini <command>bc</command> boşluk karakteri olarak değerlendirir.
+Bir deyim listesi, noktalı virgül ve satırsonu karakteri ile sonlandırımış deyimlerden oluşur. Aşağıdaki listede <command>bc</command>'deki deyimler ve bunların ne yaptıkları anlatılmaktadır (Köşeli parantezler  ([ ]) arasına alınanlar, deyimin isteğe bağlı kısımlarıdır.):
+    </para><para><glosslist><glossentry>
+      <glossterm><varname>ifade</varname></glossterm>
+      <glossdef><para>
+Bu deyim iki şeyden birini yapar. Eğer ifade "&lt;değişken> &lt;atama> ..." şeklinde başlıyorsa, bunun bir atama deyimi olduğunu kabul eder. Eğer ifade bir atama deyimi değil ise, <varname>ifade</varname>'nin değeri bulunur ve çıktıya yazdırılır. Sayının ardından satırsonu karakteri yazdırılır. Örneğin, <literal>a=1</literal> ifadesi bariz bir atama deyimidir; ve <literal>(a=1)</literal> içinde bir atama deyimi olan bir ifadedir. Çıktılanan tüm sayılar <command>obase</command> değişkeni ile belirtilen tabanda yazdırılırlar. <command>obase</command> değişkeninin alabileceği değerler 2 ile <literal>BC_BASE_MAX</literal> arasındadır. (Ayrıntılı bilgi için <xref linkend="tr-man1-bc-limits"/> bölümüne bakınız.)
+    </para><para>
+2 ile 16 arasındaki tabanlar için çıktı bildiğimiz yöntemle yazdırılır. 16'dan daha büyük tabanlar için ise, <command>bc</command> her bir haneyi yazdırmak için 10'luk tabanda birden çok karakter kullanır ve haneler arasında boşluk bırakır. Her hane, <command>obase-1</command> değerini 10'luk düzende yazmak için gereken sayı kadar rakamdan oluşur. Örneğin, <literal>obase=20</literal> için 65 sayısı ekrana "<literal>03 05</literal>" şeklinde yazdırılır. Eğer <literal>obase=101</literal> olsaydı, 25 sayısı ekrana "<literal>025</literal>" şeklinde yazdırılacaktı. Sayılar keyfi duyarlılıkta ele alındıkları için, bazı sayılar ekrana yazdırılırken tek bir satıra sığmayabilirler. Bu uzun sayılar yazdırılırken ekrana satırların sonuna "\" (tersbölü) karakteri gelir. Her bir satırda en fazla 70 karakter yazdırılabilir. <command>bc</command>'nin etkileşimli doğasından dolayı yazılan en son değer, özel <command>last</command> değişkeninde saklanır ki aynı sayıyı bir daha elde etmek için bir önceki <varname>ifade</varname>'yi tekrar yazmaya gerek kalmaz. <command>last</command> değişkenine atama yapılması da geçerlidir ve atanan değer son yazılan değerin üzerine yazılır. Yeni atanan değer, yeni bir değer yazılana kadar ya da <command>last</command> değişkenine yeni bir atama yapılana kadar geçerli kalır. (Bazı kurulumlar <command>last</command> için bir kısaltma olarak bir sayının parçası olmayan tek bir nokta (.) kullanımını mümkün kılabilir.)
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><varname>dizge</varname></glossterm>
+      <glossdef><para>
+<varname>dizge</varname> çıktıya yazdırılır. Çift tırnak "..." arasına alınan her şey (satırsonu karakteri de dahil) dizge olarak kabul edilir ve ekrana aynen yazdırılırlar. <varname>dizge</varname> yazdırıldıktan sonra satırsonu karakteri yazdırılmaz (yani aşağı satıra geçilmez, bu nedenle satırsonu karakteri <varname>dizge</varname>'nin içine yerleştirilmelidir).
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>print </command><varname>liste</varname></glossterm>
+      <glossdef><para>
+<command>print</command> deyimi (bu bir genişletmedir) çıktıya birşeyler yazdırmak için kullanılan diğer bir yöntemdir. <varname>liste</varname> parametresi zorunludur, aralarına virgül (,) konularak dizgelerden ve ifadelerden oluşur. <varname>liste</varname>'deki her bir dizge veya ifade, yazıldıkları sıraya göre ekrana yazdırılır. Eğer belirtilmediyse satır sonunda satırsonu karakteri yazdırılmaz. İfadelerin değerleri bulunduktan sonra sonuçları ekrana yazdırılır. Bu esnada ekrana en son yazdırılan sayının değeri <command>last</command> değişkenine atanır. <command>print</command> deyimi içindeki dizgeler çıktıya yazdırılır ve özel anlamı olan karakterleri de içerebilirler. Özel karakterler tersbölü karakteri ile başlar. <command>bc</command> tarafından tanınan özel karakterler; "<literal>a</literal>" (uyarı; bip sesi), "<literal>b</literal>" (gerisilme),  "<literal>f</literal>" (sayfa ileri), "<literal>n</literal>" (satırsonu), "<literal>q</literal>" (çift tırnak), "<literal>t</literal>" (sekme) ve "<literal>\</literal>" (tersbölü) karakterleridir. Bunların dışındaki karakterler gözardı edilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>{ </literal><varname>deyim_listesi</varname><literal> }</literal></glossterm>
+      <glossdef><para>
+Bu, bir birleşik deyimdir. Bu yapı, birden çok deyimi gruplandırarak birlikte çalıştırmak için kullanılır. Deyimler arasında yukarıda anlatılan ayraçlar yer alırlar.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>if </command><literal>( </literal><varname>ifade</varname><literal> ) </literal><varname>deyim1</varname><literal> [ </literal><command>else </command><varname>deyim2 </varname><literal>]</literal></glossterm>
+      <glossdef><para>
+<command>if </command>deyimi <varname>ifade</varname>'nin değerini bulur ve i<varname>ifade</varname>'nin sonucuna göre <varname>deyim1</varname>'i veya <varname>deyim2</varname>'yi çalıştırır. <varname>ifade</varname>'nin sonucu sıfırdan farklı ise <varname>deyim1</varname> işletilir. Eğer <varname>deyim2</varname> belirtilmişse ve <varname>ifade</varname>'nin sonucu da sıfır ise, <varname>deyim2</varname> işletilir (<command>else</command> sözcüğü bir genişletmedir).
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>while </command><literal>( </literal><varname>ifade</varname><literal> ) </literal><varname>deyim</varname></glossterm>
+      <glossdef><para>
+<command>while </command>deyimi, <varname>ifade</varname>'nin değeri sıfırdan farklı olduğu müddetçe <varname>deyim</varname>'i tekrar tekrar işletir. Döngüde her yinelemede önce <varname>ifade</varname>'nin değeri bulunur, sonuç sıfırdan farklı ise <varname>deyim</varname> işletilir. <varname>ifade</varname>'nin sıfır olması durumunda veya çıkmak için <command>break </command>deyimi kullanıldığında döngü sonlanır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>for </command><literal>( [</literal><varname>ifade1</varname><literal>] ; [</literal><varname>ifade2</varname><literal>] ; [</literal><varname>ifade3</varname><literal>] ) </literal><varname>deyim</varname></glossterm>
+      <glossdef><para>
+<command>for </command>deyimi, <varname>deyim</varname>'in tekrar tekrar çalıştırılmasını sağlar. İlk başta (yani döngü başlamadan önce) <varname>ifade1</varname> işletilir. Döngüde her yinelemede <varname>deyim</varname> işletilmeden önce <varname>ifade2</varname>'nin değeri bulunur. Eğer sonuç sıfırdan farklı ise <varname>deyim</varname> yerine getirilir, eğer sonuç sıfır ise döngü sonlandırılır. Döngüde deyim yerine getirildikten sonra <varname>ifade3</varname> işletilir ve ardından <varname>ifade2</varname>'nin değeri tekrar bulunur. Ta ki <varname>ifade2</varname>'nin değeri sıfır oluncaya kadar... Döngüyü daha erken sonlandırmak için <command>break </command>deyimi kullanılabilir. Eğer <varname>ifade1</varname> veya <varname>ifade3</varname> kullanılmamışsa, bu noktada değerlendirilecek hiçbir şey olmadığından bir şey yapılmaz. Eğer <varname>ifade2</varname> kullanılmamışsa, <varname>ifade2</varname>'nin değeri 1 olarak kabul edilir. (POSIX <command>bc</command>'de her üç ifadeyi de belirtmek mecburidir. Bunların seçimlik kullanılması, bir genişletmedir.) <command>for </command>deyimine karşılık gelen deyimler şunlardır:
+      </para><para>
+<literallayout><emphasis>ifade1</emphasis>;
+<command>while </command>(<emphasis>ifade2</emphasis>) {
+  <emphasis>deyim</emphasis>;
+  <emphasis>ifade3</emphasis>;
+}
+</literallayout>
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>break</command></glossterm>
+      <glossdef><para>
+İçinde yer aldığı son <command>while</command> veya <command>for</command> döngüsünü sonlandırır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>continue</command></glossterm>
+      <glossdef><para>
+<command>continue</command> deyimi, (bir genişletmedir) içinde yer aldığı son <command>for</command> döngüsünü kendinden sonra gelen deyimler işletilmeden sonraki yinelemeden başlatır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>halt</command></glossterm>
+      <glossdef><para>
+<command>halt</command> deyimi, (bir genişletmedir) <command>bc</command>'yi sonladırır. <command>quit</command>'ten farkı, <command>halt</command> deyimi kesinkes değil, şart sağlandığında çalışır. Örneğin, "<literal>if (0==1) halt</literal>" deyimi <command>bc</command>'yi sonladırmaz; çünkü şart sağlanmadığı için <command>halt</command> deyimi işletilmez.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>return</command></glossterm>
+      <glossdef><para>
+Bir işlevden 0 (sıfır) döndürerek çıkar. (Ayrıntılı bilgi için <xref linkend="tr-man1-bc-func"/> bölümüne bakınız.)
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>return </command><literal>( </literal><varname>ifade </varname><literal>)</literal></glossterm>
+      <glossdef><para>
+Bir işlevden <varname>ifade</varname>'nin değerini döndürerek çıkar. (Ayrıntılı bilgi için <xref linkend="tr-man1-bc-func"/> bölümüne bakınız.) Bir genişletme olarak parantezler gerekli değildir.
+      </para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect2><refsect2><title>YARDIMCI DEYİMLER</title>
+    <para>
+Yardımcı deyimler, bildiğimiz klasik anlamda işletilebilir deyimler değildirler. Bunlar "derleme" zamanında ele alınırlar.
+    </para><para><glosslist><glossentry>
+      <glossterm><command>limits</command></glossterm>
+      <glossdef><para><command>bc</command>'nin yerel sürümü tarafından zorlanan yerel sınırları basar. Bu bir genişletmedir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>quit</command></glossterm>
+      <glossdef><para>Her nerede ve her ne şekilde kullanılırsa kullanılsın, <command>bc</command>'yi kesinkes sonlandırır. Örneğin, "<literal>if (0==1) quit</literal>" deyimi, şart sağlanmasa da <command>bc</command>'yi sonlandıracaktır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>warranty</command></glossterm>
+      <glossdef><para>Uzun bir garanti iletisi basar. Bu bir genişletmedir.
+      </para></glossdef>
+    </glossentry>
+    </glosslist></para>
+  </refsect2><refsect2 id="tr-man1-bc-func"><title>İŞLEVLER</title>
+    <para>
+İşlevler, daha sonra çalıştırılmak üzere hesaplamaların tanımlandığı bir yöntem sunar. <command>bc</command>'deki işlevler daima bir değer hesaplayıp bunu çağrıcıya döndürürler. İşlev tanımları "özdevimli"dir; yani, girdide saptanana kadar bir işlev tanımsızdır. Bu tanımlama, aynı isimde yeni bir işlev tanımlanıncaya kadar geçerlidir. Yeni işlev tanımı eskisinin yerine geçer. Bir işlev aşağıdaki gibi tanımlanır.
+    </para><para>
+<literallayout><command>define </command><varname>isim</varname> ( <varname>parametreler</varname> ) { satırsonu
+      <varname>auto_listesi   deyim_listesi</varname> }
+</literallayout>
+      </para><para>
+Bir işlev çağrısı ise "<varname>isim</varname><literal>(</literal><varname>parametreler</varname><literal>)</literal>" biçiminde bir ifadedir.
+    </para><para>
+Parametreler sayılar ya da dizilerdir (dizi parametreler bir genişletmedir). İşlev tanımında sıfır ya da daha fazla sayıda parametre verilebilir ve bunlar aralarına virgül konularak ayrılmış isimlerden oluşan bir liste olarak tanımlanır. Sayılar sadece değerleriyle çağrılan parametrelerdir. Diziler ise sadece değişkenleriyle çağrılırlar. Diziler, parametre tanımında "<varname>isim</varname><literal>[]</literal>" şeklinde belirtilir. İşlev çağrısında asıl parametreler, sayı türünde ifadelerdir. Aynı yazım şekli, dizi parametrelerin tanımı olarak dizilerin aktarılmasında da kullanılır. Bir isimli dizi bir işleve değişkeni ile aktarılır. İşlev tanımları özdevimli olduklarından, parametre sayısı ve türleri işlev çağrıldığında kontrol edilir. Parametrelerin sayısı ve türlerindeki herhangi bir uyumsuzluk bir çalışma anı hatasına sebep olur. Ayrıca, tanımsız bir işlevin çağrılması da bir çalışma anı hatasına sebep olacaktır.
+    </para><para>
+<varname>auto_listesi</varname>, "yerel" kullanım için isteğe bağlı bir değişken listesidir. <varname>auto_listesi</varname>'nin (eğer varsa) sözdizimi "<command>auto </command><varname>isim</varname><literal>,  ...  ;</literal>" şeklindedir (Sondaki noktalı virgül isteğe bağlıdır). Her <varname>isim</varname> bir <command>auto</command> değişkenin ismidir. Diziler, parametrelerde kullanılan sözdizimi ile belirtilebilir. Bu değişkenlerin sıfır ile ilklendirilerek, değerleri, işlevin başlangıcında yığıta basılır ve işlevin icrası boyunca kullanılır. İşlevden çıkışta bu değerler yığıttan çekilir, böylece değişkenler işlevin başlangıcındaki ilk değerlerine dönmüş olur. Parametreler gerçekte, işlev çağrısı sırasında ilklendirilen <command>auto</command> değişkenlerdir. <command>auto</command> değişkenler, geleneksel yerel değişkenlerden farklıdır. A işlevi, B işlevini çağırdığında, A işlevinin <command>auto</command> değişkenlerine, B işlevinde onlar <command>auto</command> değişkenler olarak çağrılmadıkça, B işlevi aynı isimlerle erişebilir. <command>auto</command> değişkenler ve parametreler yığıta basıldıklarından dolayı <command>bc</command> kendini çağrılan işlevleri destekler.
+    </para><para>
+İşlevin gövdesi bir <command>bc</command> deyimleri listesidir. Tekrar belitelim ki, deyimler noktalı virgül ve satırsonu karakterleri ile birbirlerinden ayrılır. <command>return</command> deyimi işlevin sonlandırılmasına sebep olur ve bir değer döndürür. <command>return</command> deyiminin iki sürümü vardır. ilk şeklinde "<command>return</command>" ifadesi işlevi çağıran ifadeye sıfır değerini döndürür. İkinci şeklinde, "<command>return </command><literal>( </literal><varname>ifade </varname><literal>)</literal>", <varname>ifade</varname>'nin değeri hesaplanıp çağıran ifadeye sonucu döndürülür. Her işlevin sonunda kendiliğinden bir <command>return(0)</command> vardır. Böylece bir işlevin sonunda açıkça bir <command>return </command>deyimi kullanmaya gerek kalmaksızın işlev sıfır değeri döndürerek sonlanır.
+    </para><para>
+İşlevler ayrıca, <command>ibase</command> değişkeninin kullanımını da değiştirir. İşlev gövdesindeki tüm sabitler, işlev çağrısı sırasında <command>ibase</command> değişkeninin değeri kullanılarak dönüştürülür. Sayıların dönüşümü için daima  <command>ibase</command>'in o anki değerini kullanan yerleşik <command>read</command> işlevi dışında, işlev icrası sırasında <command>ibase</command> değişiklikleri gözardı edilecektir.
+    </para><para>
+Bir geliştirme olarak, tanım biçimi pek az esnektir. Standart, işlev gövdesini oluşturan ilk kuyruklu ayracın <command>define</command> ile aynı satırda olmasını ve kalan her şeyin alt satırlarda olmasını gerektirir. <command>bc</command>'nin bu sürümünde ilk kaşlı ayraçın öncesinde ya da sonrasında satırsonu karakteri kullanabilmeyi mümkün kılar. Örneğin aşağıdaki tanımlar geçerli tanımlardır:
+    </para><para>
+<screen>define d (n) { return (2*n); }
+define d (n)
+  { return (2*n); }
+</screen>
+      </para>
+  </refsect2><refsect2><title>MATH KÜTÜPHANESİ</title>
+    <para>
+<command>bc</command>, <command>-l</command> seçeneği ile çalıştırıldığında  math kütüphanesini yükler ve öntanımlı bölüntü 20 yapılır. math işlvleri, çağrıldıkları sırada geçerli olan bölüntüye göre sonuç döndürürler. math kütüphanesi aşağıdaki işlevleri tanımlar:
+    </para><para><glosslist><glossentry>
+      <glossterm><command>s </command><literal>(</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para>Radyan cinsinden verilen <varname>x</varname>'in sinüsü.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>c </command><literal>(</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para>Radyan cinsinden verilen <varname>x</varname>'in kosinüsü.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>a </command><literal>(</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para><varname>x</varname>'in arktanjantı; radyan cinsinden döner.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>l </command><literal>(</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para><varname>x</varname>'in tabii logaritması.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>e </command><literal>(</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para><literal>e</literal> üssü <varname>x</varname>.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>j </command><literal>(</literal><varname>n</varname><literal>,</literal><varname>x</varname><literal>)</literal></glossterm>
+      <glossdef><para><varname>x</varname> tamsayısına göre <varname>n</varname>. dereceden Bessel işlevi.
+      </para></glossdef>
+    </glossentry>
+    </glosslist></para>
+  </refsect2><refsect2><title>ÖRNEKLER</title>
+    <para>
+<filename>/bin/sh</filename>'da aşağıdaki atama, kabul değişkeni <command>pi</command>'ye pi değerini atar.
+    </para><para>
+<screen>pi=$(echo "scale=10; 4*a(1)" | bc -l)
+</screen>
+      </para><para>
+Aşağıdaki örnekte, math kütüphanesinde kullanılan üstel işlevin tanımı vardır. Bu işlev POSIX <command>bc</command>'de yazılmıştır.
+    </para><para>
+<screen>scale = 20
+
+/* e^x = (e^(x/2))^2 formülü kullanılıyor
+  x yeterinde küçükse, bu seriyi kullanabiliriz:
+    e^x = 1 + x + x^2/2! + x^3/3! + ...
+*/
+
+define e(x) {
+  auto  a, d, e, f, i, m, v, z
+
+  /* x'in işaretine bakalım. */
+  if (x&lt;0) {
+    m = 1
+    x = -x
+  }
+
+  /* x için önkoşul. */
+  z = scale;
+  scale = 4 + z + .44*x;
+  while (x > 1) {
+    f += 1;
+    x /= 2;
+  }
+
+  /* Değişkenleri ilklendirelim. */
+  v = 1+x
+  a = x
+  d = 1
+
+  for (i=2; 1; i++) {
+    e = (a *= x) / (d *= i)
+    if (e == 0) {
+      if (f>0) while (f--)  v = v*v;
+      scale = z
+      if (m) return (1/v);
+      return (v/1);
+    }
+    v += e
+  }
+}
+</screen></para><para>
+Aşağıdaki örnekte, çek defteri (checkbook) bakiyelerini hesaplayan basit bir yazılım verilmektedir. Yazılımı bir kez yazarak bir dosyaya kaydedebilirsiniz ve sonraları her seferinde yeniden yazmaksızın istediğiniz zaman kullanabilirsiniz.
+    </para><para>
+<screen>scale=2
+print "\nÇek defteri yazılımı!\n"
+print "  Hatırlatma: Depozitolar negatif miktarlardır.\n"
+print "  Çıkış için 0 yazın.\n\n"
+
+print "Başlangıçtaki bakiye? "; bal = read()
+bal /= 1
+print "\n"
+while (1) {
+  "şu anki bakiye = "; bal
+  "çekilecek miktar? "; trans = read()
+  if (trans == 0) break;
+  bal -= trans
+  bal /= 1
+}
+quit
+</screen></para><para>
+Aşağıdaki örnekte ise, kendi kendini çağıran bir faktöriyel hesaplama işlevi tanımlanmaktadır.
+    </para><para>
+<screen>define f (x) {
+  if (x &lt;= 1) return (1);
+  return (f(x-1) * x);
+}
+</screen></para>
+  </refsect2><refsect2><title>READLINE ve LIBEDIT SEÇENEKLERİ</title>
+    <para>
+GNU <command>bc</command> (bir yapılandırma seçeneği ile), GNU <command>readline</command> kütüphanesini ya da BSD <command>libedit</command> kütüphanesini kullanacak şekilde derlenebilir. Bu ise kullanıcıya, <command>bc</command>'ye göndermeden önce birden çok satır üzerinde düzenleme yapma imkanı sunar. Ayrıca, daha önceden girilen satırlar için bir geçmiş de tutar. Bu seçenek seçilirse, <command>bc</command> bir özel değişkene daha sahip olur. Bu özel <command>history</command> değişkeni, bellekte tutulacak satır sayısını tutar. -1  değeri sınırsız (bellek yettiği müddetçe) sayıda eski komut tutulacağını belirtir ve varsayılan değeri 100'dür. Eğer pozitif bir tamsayı belirtilirse, liste bu belirtilen sayı ile sınırlandırılmış olur. 0 değeri ise liste tutulmayacağını belirtir.
+    </para><para>
+Daha ayrıntılı bilgi için, GNU <command>readline</command>, <command>history</command> kütüphanesi ile BSD <command>libedit</command> kütüphanesi hakkındaki belgeleri okuyunuz. <command>bc</command>,  <command>readline</command> ve <command>libedit</command> kütüphaneleri aynı anda etkin olacak şekilde derlenemez.
+    </para>
+  </refsect2><refsect2><title>FARKLILIKLAR</title>
+    <para>
+<command>bc</command>'nin bu sürümü, POSIX P1003.2/D11 taslağından uyarlanmıştır ve taslağa göre ve geleneksel <command>bc</command> uygulamalarına göre bir takım farklılıklar sözkonusudur. dc(1)kullanılan geleneksel yolla gerçekleştirilmemiştir. Bu sürüm, yazılımın kodlarını ayrıştırarak bayt koda çevirdikten sonra tek bir süreç  olarak çalıştırır. Komut satırından verilen ve belgelendirilmemiş <command>-c</command> seçeneği ile, yazılım çalıştırılmaz, onun yerinee bayt kodları ekrana listelenir. Bu, aslında etkileşimli olarak ayrıştırıcının hatalarını görmek/gidermek ve math kütüphanesini hazırlamak için kullanılır.
+    </para><para>
+POSIX <command>bc</command>'deki farklılıkların yanında bir de yeni özellikler eklenmiştir, bunlara da genişletmeler demekteyiz. Aşağıda, bahsedilen farklılıkların ve genişletmelerin bir listesi yer almaktadır:
+    </para><para><glosslist><glossentry>
+      <glossterm><literal>LANG</literal></glossterm>
+      <glossdef><para>Bu sürüm <literal>LANG</literal> ve <literal>LC_</literal> ile  başlayan ortam değişkenlerinin işlenmesinde POSIX standardına uyumlu değildir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>isimler</glossterm>
+      <glossdef><para>Geleneksel ve POSIX <command>bc</command> değişkenler, diziler ve işlevler için sadece tek harften oluşan isimleri mümkün kılar. GNU <command>bc</command>'de bu isimler için çok karakterli isimler kullanılabilir. Bir isim bir harf ile başlar ve harfler, rakamlar ile altçizgi karakterini içerebilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>dizgeler</glossterm>
+      <glossdef><para>Dizgelerde boş karakter kullanılmasına izin verilmez, POSIX'e göre dizgelerde tüm karakterler kullanılabilmelidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>last</command></glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de bir <command>last</command> değişkeni yoktur. <command>bc</command>'nin bazı gerçeklemelerinde bunun yerine nokta (.) kullanılır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>karşılaştırmalar</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de karşılaştırmalar sadece <command>if</command>, <command>while</command> deyimlerinde ve <command>for</command> deyiminin ikinci ifadesinde kullanılabilir. Ayrıca bu deyimlerde sadece bir ilişkisel işleme izin verilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>if</command> deyimi ve <command>else</command> sözcüğü</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de <command>else</command> sözcüğü yoktur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>for</command> deyimi</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de tüm ifadelerin deyim içinde kullanılması gereklidir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>&amp;&amp;, ||, !</literal></glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de mantıksal işleçler yoktur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>read</command> işlevi</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de <command>read</command> işlevi yoktur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>print</command> deyimi</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de <command>print</command> deyimi yoktur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>continue</command> deyimi</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de <command>continue</command> deyimi yoktur.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>return</command> deyimi</glossterm>
+      <glossdef><para>POSIX <command>bc</command>, <command>return</command> ifadesinin parantez içine alınmasını gerektirir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>dizi parametreler</glossterm>
+      <glossdef><para>POSIX <command>bc</command>'de (şimdilik) dizi parametreler tamamen desteklenmemektedir.  POSIX sözdiziminde, işlev tanımlarında dizilere izin veriliyor, ancak bir dizinin bir işleve parametre olarak aktarılması desteklenmiyor. (Bu, aslında gözden kaçan bir dikkatsizliğin sonucudur.) Geleneksel <command>bc</command> gerçeklemeleri, dizileri sadece elemanlarının değerleri ile çağırabilmektedirler.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>işlev biçimi</glossterm>
+      <glossdef><para>POSIX <command>bc</command> ilk kaşlı ayracın <command>define</command> anahtar sözcüğünün bulunduğu satırda, <command>auto</command> anahtar sözcüğünün de alt satırında olmasını gerektirir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><literal>=+, =-, =*, =/, =%, =^</literal></glossterm>
+      <glossdef><para>POSIX <command>bc</command> bu "eski tarz" atama işleçlerinin tanımlanmasını gerektirmez. Bu sürüm bu "eski tarz" atamalara izin verebilir. <command>limits</command> deyimini kullanarak kurulu sürümün bu atamaları desekleyip desteklemediğini öğrenebilirsiniz. Eğer destekliyorsa, "<literal>a =- 1</literal>" atamasında <literal>a</literal> değişkenine -1 atanmayacak, <literal>a</literal> değişkeninin değeri bir eksiltilecektir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>sayılardaki boşluklar</glossterm>
+      <glossdef><para><command>bc</command>'nin diğer gerçeklemeleri sayıların içinde boşluklara izin verir. "<literal>x=1  3</literal>" ataması, "<literal>x=13</literal>" olarak değerlendirilecektir. Aynı ifade bu sürümde bir sözdizimi hatasına sebep olacaktır.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>çalıştırma ve hatalar</glossterm>
+      <glossdef><para>Bu <command>bc</command>, yazılım içerinde sözdizimi ve diğer hataların bulunması durumunda kodun işletilmesi konusunda diğer gerçeklemelere göre oldukça farklılıklar içermektedir. Eğer bir işlev tanımlarken bir sözdizimi hatası yapılmışsa, hata düzeltme mekanizması deyimin başlangıcını bulmaya çalışır, ilk hatalı satırı bulur ve satır numarasını ekrana yazar; sonra yine de işlevin geri kalan kısımlarını ayrıştırmaya devam eder. İşlev içinde birkez bile hata yapılmışsa, o işlev 'çağrılamaz' addedilir ve tanımsız olur.
+      </para><para>
+Etkileşimli ortamda çalışırken bir sözdizimi hatası yapılırsa, bir uyarı gelir ve çalıştırılacak olan o anki blok geçersiz sayılır. İşletim bloğu, yazılışı tamamlanmış basit veya birleşik bir deyimden sonra satırsonu karakteri bulunan yapıdır. Örneğin,
+    </para><para>
+<screen>a = 1
+b = 2
+</screen>
+    </para><para>
+iki ayrı işletim bloğudur. Ancak,
+    </para><para>
+<screen>{ a = 1
+  b = 2 }
+</screen></para><para>
+tek işletim bloğudur. Oluşan herhangi bir çalışma anı hatası (error), o anki işletim bloğunu sonlandırır. Ancak, oluşan herhangi bir çalışma anı uyarısı (warning) işletim bloğunu sonlandırmaz.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm>kesmeler</glossterm>
+      <glossdef><para>
+Bir etkileşimli oturumda, <literal>SIGINT</literal> sinyali (genelde klavyeden Ctrl-C'ye basıldığında üretilir)  o anda işletilmekte olan bloğun yarıda kesilmesine neden olur. Hangi işlevin yarıda kesildiğini belirten bir çalışma anı hatası ekrana yazdırılır. Ardından, tüm çalışma anı yapılarının "temizlenme"sinin ardından, <command>bc</command>'nin yeni girdiler almak için hazır olduğunu yazan bir mesaj belirir. Önceden tanımlanmış olan tüm işlevler ve <command>auto</command>-olmayan değişkenler bu noktadan önceki değerleriyle aynen kalırlar. Tüm <command>auto</command> değişkenler ve işlev parametreleri bu "temizleme" işlemi esnasında silinirler. Etkileşimli olmayan bir oturumda ise <literal>SIGINT</literal> sinyali,<command>bc</command>'nin çalışmasını sonlandırarak kontrolü sisteme devredecektir.
+      </para></glossdef>
+    </glossentry>
+    </glosslist></para>
+  </refsect2><refsect2 id="tr-man1-bc-limits"><title>SINIRLAR</title>
+    <para>
+Aşağıda <command>bc</command>'nin işlem yapabileceği sınırlar verilmiştir. Bunlardan bazıları aslında her bir kurulum için farklı farklı olabilir. Bunların geçerli değerlerini öğrenmek için <command>limits</command> deyimini kullanın.
+    </para><para><glosslist><glossentry>
+      <glossterm><literal>BC_BASE_MAX</literal></glossterm>
+      <glossdef><para>Azami çıktı tabanı, 999 dur. Azami girdi tabanı ise 16 dır.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>BC_DIM_MAX</literal></glossterm>
+      <glossdef><para>Dizilerde indisleme sınırı, keyfi olarak 65535 olarak belirlenmiştir. Kurulumunuzda farklı olabilir.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>BC_SCALE_MAX</literal></glossterm>
+      <glossdef><para>Sayılarda ondalık noktadan sonraki hane sayısı <literal>INT_MAX</literal> ile sınırlanmıştır. Ayrıca ondalık noktadan önceki hane sayısı da <literal>INT_MAX</literal> ile sınırlanmıştır.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>BC_STRING_MAX</literal></glossterm>
+      <glossdef><para>Dizgelerin içerebileceği karakter sayısı <literal>INT_MAX</literal> ile sınırlanmıştır.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm>üs</glossterm>
+      <glossdef><para>Üstel değerlerde üssün sınırı <literal>LONG_MAX</literal>'tır.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm>değişken isimleri</glossterm>
+      <glossdef><para>Basit değişken, dizi ve işlev isimlerinin her biri için eşsiz isim sayısı 32767 ile sınırlanmıştır.
+      </para></glossdef>
+      </glossentry></glosslist></para></refsect2>
+  </refsect1><refsect1><title>ORTAM DEĞİŞKENLERİ</title>
+    <para>
+<command>bc</command> tarafından tanınan ortam değişkenleri şunlardır:
+    </para><para><glosslist><glossentry>
+      <glossterm><literal>POSIXLY_CORRECT</literal></glossterm>
+      <glossdef><para><command>-s</command> seçeneği ile aynıdır.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>BC_ENV_ARGS</literal></glossterm>
+      <glossdef><para>Bu, <command>bc</command>'nin argümanları almak için kullandığı diğer bir mekanizmadır. Biçimi komut satırı argümanlarında olduğu gibidir. Bu argümanlar, belirtilen dosyalardan önce işlem görürler. Bu, kullanıcıya "standart" seçenekleri ayarlama imkanını sunar. Ortam değişkenlerinde belirtilen dosyalar tipik olarak içlerinde kullanıcının tanımladığı işlevler olan dosyalardır. Bu ayarlama ile artık, <command>bc</command> her çalıştırıldığında belirtilen dosyalar işleme sokulurlar.
+      </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><literal>BC_LINE_LENGTH</literal></glossterm>
+      <glossdef><para>Bu, sayılar ekrana yazdırılırken bir satırda kaç karakter olacağını belirten bir tamsayıdır. Uzun (yani, tek satıra sığmayan) sayılar için \ (tersbölü) ve satırsonu karakterleri bu miktara dahildir.
+      </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>HATA AYIKLAMA</title>
+    <para>
+Eğer komut satırında belirtilen dosyalardan biri açılamazsa <command>bc</command> bunu raporlar ve hemen sonlanır. Ayrıca, derleme ve çalışma-anı hatalarında bunlar ekrana hata numaraları ile birlikte yazdırılırlar ve bu esnada açıklayıcı bilgiler verilir.
+    </para>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>
+Hata bulma/düzeltme henüz çok iyi değil.
+    </para><para>
+Hataları rapor etmek için konu alanına "bc" yazarak <email>bug-bc@gnu.org</email> adresine e-posta atınız.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Philip A. Nelson <email>philnelson@acm.org</email></para>
+  </refsect1><refsect1><title>TEŞEKKÜRLER</title>
+    <para>
+Yazar kodun sınanmasındaki geniş yardımlarından dolayı Steve  Sommars'a <email>Steve.Sommars@att.com</email> teşekkürlerinin kabulünü rica ediyor. Bir çok öneride bulundu ve onun katılımıyla bu çok daha iyi bir ürün oldu.
+    </para>
+  </refsect1><refsect1><title>ÇEVİRENLER</title>
+    <para>Adem Güneş  <email>adem@alaeddin.cc.selcuk.edu.tr</email>, Eylül 1999, v1.04<sbr/>Nilgün Belma Bugüner  <email>nilgun@belgeler·gen·tr</email>, Ocak 2004, v1.06</para>
+  </refsect1>
+</refentry>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: alter_type.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-alter_type">
+ <refmeta>
+  <refentrytitle>ALTER TYPE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>ALTER TYPE</refname>
+  <refpurpose>bir tür tanımını değiştirir</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>ALTER TYPE</command> <emphasis>isim</emphasis> <command>OWNER TO</command> <emphasis>yeni_aidiyet</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>ALTER TYPE</command> mevcut bir türün tanımını değiştirir. Şimdilik yapabildiği tek şey bir türün sahibini değiştirmektir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+   <para><variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Değiştirilecek mevcut bir türün ismi (şema nitelemeli olabilir).
+       </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>yeni_aidiyet</replaceable></term>
+      <listitem><para>Türün yeni sahibinin kullanıcı ismi. Bir türün sahibini değiştirebilmek için ayrıcalıklı kullanıcı olmalısınız.
+       </para></listitem></varlistentry></variablelist>
+   </para></refsect1><refsect1><title>Örnekler</title><para>
+Kullanıcı tanımlı <literal>email</literal> türünün sahibini <literal>joe</literal> yapmak için:
+   </para><para>
+<programlisting indent="4">ALTER TYPE email OWNER TO joe;</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>ALTER TYPE</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: alter_group.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-alter_group">
+ <refmeta>
+  <refentrytitle>ALTER GROUP</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>ALTER GROUP</refname>
+  <refpurpose>bir kullanıcı grubunun özniteliklerini değiştirir</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>ALTER GROUP</command> <emphasis>grupismi</emphasis> <command>ADD USER</command> <emphasis>kullanıcı_ismi</emphasis> [, ... ]
+<command>ALTER GROUP</command> <emphasis>grupismi</emphasis> <command>DROP USER</command> <emphasis>kullanıcı_ismi</emphasis> [, ... ]
+
+<command>ALTER GROUP</command> <emphasis>grupismi</emphasis> <command>RENAME TO</command> <emphasis>yeni_isim</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>ALTER GROUP</command> bir kullanıcı grubunun özniteliklerini değiştirir.
+  </para><para>
+İlk iki biçim kullanıcıları gruba eklemek ve gruptan çıkarmak için kullanılır. Bu biçimleri sadece veritabanının ayrıcalıklı kullanıcısı kullanabilir.
+  </para><para>
+Üçüncü biçim grubun ismini değiştirir. Bunu sadece veritabanının ayrıcalıklı kullanıcısı yapabilir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <glosslist><glossentry>
+    <glossterm><replaceable>grupismi</replaceable></glossterm>
+    <glossdef><para>Değişiklik yapılacak grubun ismi.
+     </para></glossdef></glossentry><glossentry>
+    <glossterm><replaceable>kullanıcı_ismi</replaceable></glossterm>
+    <glossdef><para>Gruba eklenecek ya da gruptan çıkarılacak kullanıcının ismi. Belirtilecek kullanıcı ismi mevcutlardan biri olmalıdır; <command>ALTER GROUP</command> yeni bir kullanıcı oluşturmaz ve kullanıcıyı silmez.
+     </para></glossdef></glossentry><glossentry>
+    <glossterm><replaceable>yeni_isim</replaceable></glossterm>
+    <glossdef><para>Grubun yeni ismi.
+     </para></glossdef></glossentry></glosslist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+Bir gruba kullanıcıları eklemek için:
+  </para><para>
+<programlisting indent="4">ALTER GROUP staff ADD USER karl, john;
+</programlisting>
+  </para><para>
+Bir gruptan bir kullanıcıyı çıkarmak için:
+  </para><para>
+<programlisting indent="4">ALTER GROUP workers DROP USER beth;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>ALTER GROUP</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_group" xreflabel="CREATE GROUP"/>,
+<link linkend="tr-man7-drop_group" xreflabel="DROP GROUP"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Mart 2005
+</para></refsect1>
+</refentry>
+
+

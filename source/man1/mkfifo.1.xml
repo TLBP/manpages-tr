@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: mkfifo.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-mkfifo">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>mkfifo</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>mkfifo</refname>
+    <refpurpose>FIFO'lar (isimli borular) oluşturur</refpurpose>
+  </refnamediv><refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mkfifo</command> [<emphasis>seçenek</emphasis>] <emphasis>isim</emphasis> ...
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<varname>isim</varname> ile belirtilen isimli borular (FIFO'lar) oluşturur.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar, kısa seçenekler için de zorunludur.
+    </para><para><glosslist><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--mode=</command><varname>kip</varname></glossterm>
+        <glossdef><para>İzin kiplerini ayarlar (tıpkı <command>chmod</command> gibi) ama <literal>a=rw</literal> gibi ya da izin maskesi olarak değil.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım metnini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title><para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man3-mkfifo"/>
+   </para><para>
+<command>mkfifo</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>mkfifo</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils mkfifo</command></para></glossdef>
+      </glossentry></glosslist>
+    </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Ağustos 2004</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>

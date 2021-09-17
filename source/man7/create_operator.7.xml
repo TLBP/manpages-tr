@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_operator.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_operator">
+ <refmeta>
+  <refentrytitle>CREATE OPERATOR</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE OPERATOR</refname>
+  <refpurpose>yeni bir işleç tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE OPERATOR</command> <emphasis>isim</emphasis> (
+    <command>PROCEDURE</command> = <emphasis>işlev_ismi</emphasis>
+    [, <command>LEFTARG</command> = <emphasis>soltaraf_türü</emphasis> ] [, <command>RIGHTARG</command> = <emphasis>sağtaraf_türü</emphasis> ]
+    [, <command>COMMUTATOR</command> = <emphasis>eşittir_işleci</emphasis> ] [, <command>NEGATOR</command> = <emphasis>değil_işleci</emphasis> ]
+    [, <command>RESTRICT</command> = <emphasis>sınırlama_işlevi</emphasis> ] [, <command>JOIN</command> = <emphasis>katılım_işlevi</emphasis> ]
+    [, <command>HASHES</command> ] [, <command>MERGES</command> ]
+    [, <command>SORT1</command> = <emphasis>sol_sıralama_işleci</emphasis> ] [, <command>SORT2</command> = <emphasis>sağ_sıralama_işleci</emphasis> ]
+    [, <command>LTCMP</command> = <emphasis>küçüktür_işleci</emphasis> ] [, <command>GTCMP</command> = <emphasis>büyüktür_işleci</emphasis> ]
+)
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE OPERATOR</command> <replaceable>isim</replaceable> adında yeni bir işleç tanımlar. İşlecin sahibi komutu çalıştıran kullanıcı olacaktır. Eğer bir şema ismi belirtilmişse, işleç belirtilen şemada oluşturulur. Aksi takdirde o an geçerli olan şemada oluşturulur.
+  </para><para>
+İşlecin ismi en fazla <symbol>NAMEDATALEN</symbol>-1 (öntanımlı 63) karakter içerebilir ve sadece şu karakterlere izin verilir:
+  </para><para>
+<literallayout>    + - * / &lt; &gt; = ~ ! @ # % ^ &amp; | ` ?
+</literallayout>
+  </para><para>
+İsim seçimi ile ilgili bir kaç sınırlama daha vardır:
+  </para><para><itemizedlist><listitem><para>
+<literal>--</literal> ve <literal>/*</literal> dizgeleri açıklama başlangıcını gösterdiğinden, işleç isminde bulunamazlar.
+     </para></listitem><listitem><para>
+Aşağıdaki karakterlerden en az birini içermedikçe, bir çok karakterli işleç ismi <literal>+</literal> veya <literal>-</literal> ile bitemez.
+  </para><para>
+<literallayout>    ~ ! @ # % ^ &amp; | ` ?
+</literallayout>
+  </para><para>
+Örneğin, <literal>@-</literal> bir işleç ismi olabilirken, <literal>*-</literal> bir işleç ismi olamaz. Bu sınırlama sayesinde, işleç ve terimler arasında boşluk bırakılmasa bile PostgreSQL, SQL uyumlu komutları çözümleyebilir.
+     </para></listitem></itemizedlist></para><para>
+<literal>!=</literal> işleci girdide, <literal>&lt;&gt;</literal> işleci olarak ele alınır, dolayısıyla bu iki isim daima eşdeğerdir.
+  </para><para>
+En azından <command>LEFTARG</command> ve <command>RIGHTARG</command>'dan biri tanımlanmalıdır.  İki terimliler için her ikisi de tanımlanmalıdır. Artçıl tekterimlilerde sadece <command>LEFTARG</command>, öncül tekterimlilerde sadece <command>RIGHTARG</command> tanımlanmalıdır.
+  </para><para>
+<replaceable>işlev_ismi</replaceable> işlevi <command>CREATE FUNCTION</command> kullanılarak evvelce türleri belirtilerek doğru sayıda argümanla (bir ya da iki) tanımlanmış olmalıdır.
+  </para><para>
+Diğer deyimler isteğe bağlı işleç eniyileme deyimleridir.<sbr/><ulink url="http://www.postgresql.org/uygulamalar/pgsql/xoper-optimization.html"/> adresinde bunların anlamları ayrıntılı olarak anlatılmıştır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Tanımlanacak işlecin ismi. İzin verilen karakterler yukarıda açıklanmıştı. İsim, <command>CREATE OPERATOR myschema.+ (...)</command> örneğinde olduğu gibi şema nitelemeli olabilir. Değilse, işleç o anki şemada oluluşturulur. Aynı şema içinde, farklı veri türleri ile işlem yapan iki işlecin ismi aynı olabilir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>işlev_ismi</replaceable></term>
+      <listitem><para>Bu işleci gerçeklemede kullanılan işlev.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>soltaraf_türü</replaceable></term>
+      <listitem><para>İşlecin sol tarafındaki terimin veri türü. Bu seçenek öncül tekterimlilerde atlanır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>sağtaraf_türü</replaceable></term>
+      <listitem><para>İşlecin sağ tarafındaki terimin veri türü. Bu seçenek artçıl tekterimlilerde atlanır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>öndeç_işleç</replaceable></term>
+      <listitem><para>Bu işlecin öndeci.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>değil_işleci</replaceable></term>
+      <listitem><para>Bu işlecin olumsuzlayıcısı.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>sınırlama_işlevi</replaceable></term>
+      <listitem><para>Bu işleç için sınırlama seçici işlev.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>katılım_işlevi</replaceable></term>
+      <listitem><para>Bu işleç için katılım seçici işlev.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>HASHES</command></term>
+      <listitem><para>Bu işlecin bir çırpılamalı katılımı desteklediğini belirtir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>MERGES</command></term>
+      <listitem><para>Bu işlecin katıştırmalı katılımı desteklediğini belirtir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>sol_sıralama_işleci</replaceable></term>
+      <listitem><para>Bu işleç katılımı destekliyorsa, küçüktür işleci bu işlecin sol taraf veri türünü sıralar.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>sağ_sıralama_işleci</replaceable></term>
+      <listitem><para>Bu işleç katılımı destekliyorsa, küçüktür işleci bu işlecin sağ taraf veri türünü sıralar.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>küçüktür_işleci</replaceable></term>
+      <listitem><para>Bu işleç katılımı destekliyorsa, küçüktür işleci bu işlecin girdi veri türlerini karşılaştırır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>büyüktür_işleci</replaceable></term>
+      <listitem><para>Bu işleç katılımı destekliyorsa, büyüktür işleci bu işlecin girdi veri türlerini karşılaştırır.
+      </para></listitem></varlistentry></variablelist><para>
+İsteğe bağlı başka bir argüman ya da <replaceable>eşittir_işleci</replaceable>'inde bir şema nitelemeli isim belirtmek için <command>OPERATOR()</command> sözdizimini kullanın. Örnek:
+   </para><para>
+<programlisting>    COMMUTATOR = OPERATOR(myschema.===) ,
+</programlisting>
+  </para></refsect1><refsect1><title>Ek Bilgi</title><para>
+Daha fazla bilgi için:<sbr/><ulink url="http://www.postgresql.org/uygulamalar/pgsql/xoper.html"/>
+  </para><para>
+Bir veritabanındaki kullanıcı tanımlı işleçleri silmek için <link linkend="tr-man7-drop_operator" xreflabel="DROP OPERATOR"/> kullanılır. Bir veritabanındaki işleçlerde değişiklik yapmak için <link linkend="tr-man7-alter_operator" xreflabel="ALTER OPERATOR"/> kullanılır.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+Aşağıdaki örnekte, <type>box</type> veri türü için alan eşitliği ile ilgili yeni bir işleç tanımlanmaktadır.
+  </para><para>
+<programlisting indent="4">CREATE OPERATOR === (
+    LEFTARG = box,
+    RIGHTARG = box,
+    PROCEDURE = area_equal_procedure,
+    COMMUTATOR = ===,
+    NEGATOR = !==,
+    RESTRICT = area_restriction_procedure,
+    JOIN = area_join_procedure,
+    HASHES,
+    SORT1 = &lt;&lt;&lt;,
+    SORT2 = &lt;&lt;&lt;
+    -- Sıralama işleçleri verildiğinden, MERGES uygulanır.
+    -- LTCMP için &lt; ve GTCMP için &gt; varsayılmıştır.
+);
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE OPERATOR</command> bir  <productname>PostgreSQL</productname> oluşumudur.  SQL standardında kullanıcı tanımlı işleçler için bir bahis yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_operator" xreflabel="ALTER OPERATOR"/>,<sbr/>
+<link linkend="tr-man7-create_operator_class" xreflabel="CREATE OPERATOR CLASS"/>,<sbr/>
+<link linkend="tr-man7-drop_operator" xreflabel="DROP OPERATOR"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_function.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_function">
+ <refmeta>
+  <refentrytitle>CREATE FUNCTION</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE FUNCTION</refname>
+  <refpurpose>yeni bir işlev tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE</command> [<command>OR REPLACE</command>] <command>FUNCTION</command> <emphasis>isim</emphasis> ( [ [ <emphasis>arg_ismi</emphasis> ] <emphasis>arg_türü</emphasis> [, ...] ] )
+    <command>RETURNS</command> <emphasis>dönüş_türü</emphasis>
+  { <command>LANGUAGE</command> <emphasis>dil_ismi</emphasis>
+    | <command>IMMUTABLE</command> | <command>STABLE</command> | <command>VOLATILE</command>
+    | <command>CALLED ON NULL INPUT</command> | <command>RETURNS NULL ON NULL INPUT</command> | <command>STRICT</command>
+    | [ <command>EXTERNAL</command> ] <command>SECURITY INVOKER</command> | [ <command>EXTERNAL</command> ] <command>SECURITY DEFINER</command>
+    | <command>AS</command> '<emphasis>tanım</emphasis>'
+    | <command>AS</command> '<emphasis>nesne_dosyası</emphasis>', '<emphasis>ilintileme_sembolü</emphasis>'
+  } ...
+    [ <command>WITH</command> ( <emphasis>öznitelik</emphasis> [, ...] ) ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE FUNCTION</command> yeni bir işlev tanımlar. <command>CREATE OR REPLACE FUNCTION</command> ise ya yeni bir işlev oluşturur ya da bir mevcut işlev tanımını değiştirir.
+  </para><para>
+Eğer bir şema ismi belirtilmişse, işlev belirtilen şemada oluşturulur. Aksi takdirde, geçerli olan şemada oluşturulur. Yeni işlevin ismi, aynı şema içindeki aynı argüman türlerine sahip bir işlev ismi ile aynı olmamalıdır. Farklı argüman türlerine sahip aynı isimdeki işlevlere izin verilir.
+  </para><para>
+Mevcut bir işlevin tanımını güncellemek için <command>CREATE OR REPLACE FUNCTION</command> kullanılır. Ancak, bir işlevin ismini ya da argüman türlerini bu yöntemle değiştirmek mümkün değildir (eğer denerseniz, aslında ayrı ve yeni bir işlev oluşturmuş olursunuz). Ayrıca, <command>CREATE OR REPLACE FUNCTION</command> ile mevcut bir işlevin dönüş türünü değiştirmeye çalışmayın, bunu yapmak için işlevi önce silmeli, sonra yeniden oluşturmalısınız.
+  </para><para>
+Eğer bir işlevi silip yeniden oluşturursanız, yeni işlev eskisiyle aynı olmaz; mevcut kuralları, sanal tabloları, tetikleri, vs. de silmiş olursunuz.  Bunları koruyarak işlev tanımını değiştirmek için <command>CREATE OR REPLACE FUNCTION</command> kullanın.
+  </para><para>
+İşlevi tanımlayan kullanıcı aynı zamanda sahibi olur.
+  </para></refsect1><refsect1><title>Parametreler</title>
+   <variablelist><varlistentry>
+     <term><replaceable>isim</replaceable></term>
+     <listitem><para>Tanımlanacak işlevin ismi (şema nitelemeli olabilir).
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>arg_ismi</replaceable></term>
+     <listitem><para>Bir argümanın ismi. Bazı diller (şimdilik sadece PL/pgSQL) argüman ismini işlev gövdesinde kullanmanızı ister. Diğer diller için argüman ismi sadece ek bir bilgidir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>arg_türü</replaceable></term>
+     <listitem><para>İşlevin (varsa) argümanlarının veri türleri (şema nitelemeli olabilir). Argüman türleri temel, birleşik veya veri alanı türü olabileceği gibi bir tablo sütununun veri türüne başvurulu olabilir.
+      </para><para>
+Gerçeklenim diline bağımlılık sebebiyle, <type>cstring</type> gibi tanımlı türler de belirtilebilir. Argüman türü olarak tanımlı türler kısmen olabileceği gibi SQL veri türlerinin tamamen dışında türler olabilirler.
+      </para><para>
+Bir sütun türüne başvuruyu <replaceable>tablo_ismi</replaceable>.<replaceable>sütun_ismi</replaceable><literal>%TYPE</literal> yazarak belirtebilirsiniz. Bu özelliğin kullanımı bazan bir işlevin bir tablo tanımındaki değişikliklerden bağımsız olmasını sağlayabilir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>dönüş_türü</replaceable></term>
+     <listitem><para>İşlevin dönüş değerinin veri türü (şema nitelemeli olabilir). Dönüş türü temel, birleşik veya veri alanı türü olabileceği gibi bir tablo sütununun veri türüne başvurulu olabilir.
+      </para><para>
+<command>SETOF</command> değiştiricisi işlevin tek bir öğe ile değil, bir öğe kümesi ile döneceğini belirtir.
+      </para><para>
+Bir sütun türüne başvuruyu <replaceable>tablo_ismi</replaceable>.<replaceable>sütun_ismi</replaceable><literal>%TYPE</literal> yazarak belirtebilirsiniz.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>dil_ismi</replaceable></term>
+     <listitem><para>İşlevin gerçeklendiği dilin ismi. <literal>SQL</literal>, <literal>C</literal>, <literal>internal</literal> veya kullanıcı tarafından belirtilecek yordamsal dillerden biri olabilir. Geriye uyumluluk için isim tek tırnak içine alınabilir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><command>IMMUTABLE</command></term>
+     <term><command>STABLE</command></term>
+     <term><command>VOLATILE</command></term>
+     <listitem><para>Çalışma anı eniyilemesi için işlevin çoklu değerlendirmelerinin tek bir değerlendirme ile değiştirilmesinin güvenli olup olmayacağını belirlerler. En fazla bir seçim belirtilebilir. Bunlardan hiçbiri belirtilmemişse <command>VOLATILE</command> öntanımlıdır.
+      </para><para>
+<command>IMMUTABLE</command> işlevin aynı argüman değerleriyle daima aynı sonucu döndüreceğini belirtir; yani, argümanlarının veritabanındaki değerlerden faydalanmayacağını ya da argüman olarak açıkça belirtilmemiş bilgileri kullanmayacağını belirtir. Eğer bu seçenek belirtilmişse, işlevin tamamen sabit argümanlı her çağrısı anında işlev değeriyle değiştirilebilir.
+      </para><para>
+<command>STABLE</command> tek bir tablo taraması içinde işlevin aynı argüman değerleri için tutarlı olarak aynı sonucu döndüreceğini, ama sonucun SQL cümleleriyle değişebileceğini belirtir. Bu, sonuçları veritabanı aramalarına, parametrelerine, v.s. bağımlı işlevler için un uygun seçimdir. Ayrıca, değerleri bir hareket içinde değişmediğinden <function>current_timestamp</function> ailesindeki işlevler de <command>STABLE</command> olarak nitelenmiştir.
+      </para><para>
+<command>VOLATILE</command> işlevin değerinin tek bir tablo taraması içinde bile değişebileceğini, dolayısıyla hiçbir eniyileme yapılamayacağını belirtir. Görece birkaç veritabanı işlevi bu anlamda oynaktır; bazı örnekler: <literal>random()</literal>, <literal>currval()</literal>, <literal>timeofday()</literal>. Yan etkiye sahip her işlevin, işlev sonucu tahmin edilebilir olsa bile, eniyilenmesini önlemek için <command>VOLATILE</command> olarak sınıflanması gerektiğini unutmayın; <literal>setval()</literal> buna bir örnektir.
+      </para><para>
+Ek ayrıntılar için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/xfunc-volatility.html"/> adresine bakınız.
+     </para></listitem></varlistentry><varlistentry>
+     <term><command>CALLED ON NULL INPUT</command></term>
+     <term><command>RETURNS NULL ON NULL INPUT</command></term>
+     <term><command>STRICT</command></term>
+     <listitem><para><command>CALLED ON NULL INPUT</command> (öntanımlıdır)  işlevin bazı argümanları NULL olduğunda normal olarak çağrılacağını belirtir. Bundan sonra işlev yazarının yapacağı NULL değerleri sınamak ve gereğini yapmaktır.
+      </para><para>
+<command>RETURNS NULL ON NULL INPUT</command> veya <command>STRICT</command> ise işlevin, argümanlarından herhangi birinin NULL olması durumunda daima NULL değer döndüreceğini belirtir. Eğer bu seçenek belirtilmişse, NULL argümanların varlığında işlev çalıştırılmayacak, onun yerine hemen bir NULL değer döndürülecektir.
+     </para></listitem></varlistentry><varlistentry>
+     <term>
+<literallayout>[ <command>EXTERNAL</command> ] <command>SECURITY INVOKER</command>
+[ <command>EXTERNAL</command> ] <command>SECURITY DEFINER</command>
+</literallayout></term>
+    <listitem><para>
+<command>SECURITY INVOKER</command> işlevin kendisini çağıran kullanıcının izinleriyle çalıştırılacağını belirtir. <command>SECURITY DEFINER</command> ise işlevin kendisini oluşturan kullanıcının izinleriyle çalıştırılacağını belirtir.
+     </para><para>
+<command>EXTERNAL</command> sözcüğü SQL uyumluluğu için varsa da isteğe bağlı olmasından dolayı, SQL'in tersine bu özellik harici işlevlere uygulanmaz.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>tanım</replaceable></term>
+     <listitem><para>İşlevi tanımlayan bir dizge sabiti; anlamlandırılması dile bağımlıdır. Bir dahili işlev ismi olabileceği gibi bir nesne dosyasının yolu, bir SQL komutu veya bir yordamsal dilde yazılmış bir metin olabilir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>nesne_dosyası</replaceable>, <replaceable>ilintileme_sembolü</replaceable></term>
+     <listitem><para><command>AS</command> sözcüğünün bu biçimi özdevimli yüklenebilen C dili işlevleri için, işlevin C dili kaynak kodundaki ismi, bir SQL işlevinin ismiyle aynı değilse, kullanılır. <replaceable>nesne_dosyası</replaceable> dizgesi ile özdevimli yüklenebilen nesneyi içeren dosyanın ismi belirtilir. <replaceable>ilintileme_sembolü</replaceable> ise işlevin C dili kaynak kodundaki ismi olarak işlevin ilintileme sembolüdür. Eğer ilintileme sembolü belirtilmezse, tanımlandığı SQL işlevinin ismiyle aynı olduğu kabul edilir.
+     </para></listitem></varlistentry><varlistentry>
+     <term><replaceable>öznitelik</replaceable></term>
+     <listitem><para>İşlev hakkında bilgi içeren isteğe bağlı parçaları belirtmenin tarihi bir yolu. Burada belirtilebilecek öznitelikler şunlardır:
+     </para><para><variablelist><varlistentry>
+        <term><literal>isStrict</literal></term>
+        <listitem><para><command>STRICT</command> veya <command>RETURNS NULL ON NULL INPUT</command>'a eşdeğerdir.
+         </para></listitem></varlistentry><varlistentry>
+        <term><literal>isCachable</literal></term>
+        <listitem><para><command>IMMUTABLE</command>'ın atıl olmuş eşdeğeridir; hala geriye uyumluluk adına kabul edilmektedir.
+         </para></listitem></varlistentry></variablelist>
+       </para><para>
+Öznitelik isimleri harf büyüklüğüne duyarlıdır.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+İşlevlerin yazılması hakkında bilgi edinmek için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/xfunc.html"/> adresine bakınız.
+   </para><para>
+Girdi argümanları ve dönüş değeri için tamamen <acronym>SQL</acronym> türü sözdizimine izin verilmektedir. Ancak, temel işlev gerçekleniminin sorumlusu olduğu tür belirtiminin bazı ayrıntıları (sayısal türlerdeki hassasiyet alanı gibi) <command>CREATE FUNCTION</command> tarafından sessizce sineye çekilir (yani, ne tanınır ne de uygulanır).
+   </para><para>
+<productname>PostgreSQL</productname>, argümanları farklı olmak şartıyla işlevler için aynı isimlerin kullanımına izin verir. Ancak, C dilinde tüm işlev isimlerinin farklı olması gerekir, bu nedenle bu tür C işlevlerine farklı C isimleri vermelisiniz. (örneğin, C isimlerinin parçası olarak argüman türleri kullanılabilir).
+   </para><para>
+<command>CREATE FUNCTION</command> aynı nesne dosyası için defalarca çağrıldığında dosya sadece bir kere yüklenir. Dosyayı tekrar tekrar yüklemeniz gerekiyorsa (geliştirme amaçlı) <link linkend="tr-man7-load" xreflabel="LOAD"/> komutunu kullanın.
+   </para><para>
+Kullanıcı tanımlı işlevleri kaldırmak için <link linkend="tr-man7-drop_function" xreflabel="DROP FUNCTION"/> kullanılır.
+   </para><para>
+İşlev tanımlarını yazarken tek tırnak içine almak yerine dolar işaretleri arasında yazmak çoğunlukla daha çok tercih edilen bir yöntemdir<sbr/>(<ulink url="http://www.postgresql.org/docs/8.0/static/sql-syntax.html#SQL-SYNTAX-DOLLAR-QUOTING"/> adresine bakınız). Dolar işaretleri arasında yazma yöntemi kullanılmadığı zaman, işlev tanımı içindeki tek tırnaklar veya tersbölülerin öncelenmesi gerekir.
+   </para><para>
+Bir işlevin tanımlanabilmesi için kullanıcının dil üzerinde <command>USAGE</command> iznine sahip olması gerekir.
+   </para></refsect1><refsect1><title>Örnekler</title><para>
+Burada, başlangıç olarak yardımcı olacak önemsiz bir örneğe yer verilmiştir. Daha fazla bilgi edinmek ve başka örnekler için <sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/xfunc.html"/> adresine bakınız.
+  </para><para>
+<programlisting indent="4">CREATE FUNCTION add(integer, integer) RETURNS integer
+    AS 'select $1 + $2;'
+    LANGUAGE SQL
+    IMMUTABLE
+    RETURNS NULL ON NULL INPUT;
+</programlisting>
+  </para><para>
+<application>PL/pgSQL</application> dilinde bir argüman ismi kullanarak bir tamsayı arttırımı:
+  </para><para>
+<programlisting indent="2">CREATE OR REPLACE FUNCTION increment(i integer) RETURNS integer AS $$
+    BEGIN
+        RETURN i + 1;
+    END;
+$$ LANGUAGE plpgsql;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL:1999 ve sonrasında bir <command>CREATE FUNCTION</command> tanımlıdır. <productname>PostgreSQL</productname> sürümü de benzer olmakla birlikte tamamen uyumlu değildir. Ne öznitelikler taşınabilirdir ne de farklı diller kullanılabilmektedir.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_function" xreflabel="ALTER FUNCTION"/>,
+<link linkend="tr-man7-drop_function" xreflabel="DROP FUNCTION"/>,
+<link linkend="tr-man7-grant" xreflabel="GRANT"/>,
+<link linkend="tr-man7-load" xreflabel="LOAD"/>,
+<link linkend="tr-man7-revoke" xreflabel="REVOKE"/>,
+<link linkend="tr-man1-createlang"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

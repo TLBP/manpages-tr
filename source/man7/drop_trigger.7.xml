@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_trigger.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_trigger">
+ <refmeta>
+  <refentrytitle>DROP TRIGGER</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP TRIGGER</refname>
+  <refpurpose>bir tetik tanımını kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP TRIGGER</command> <emphasis>isim</emphasis> <command>ON</command> <emphasis>tablo</emphasis> [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklamalar</title><para>
+<command>DROP TRIGGER</command> mevcut bir tetik tanımını kaldırır. Komutu çalıştırabilmek için, tetiğin tanımlandığı tablonun sahibi olmalısınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Kaldırılacak tetik tanımının ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>tablo</replaceable></term>
+    <listitem><para>Tetiğin tanımlandığı tablonun ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>Tetiğe bağımlı nesnelerin de silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>Tetiğe bağımlı nesneler varsa tetiğin kaldırılmasını engeller. Bu öntanımlıdır.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1>
+  <title>Örnekler</title><para>
+<literal>films</literal> tablosundan <literal>if_dist_exists</literal> tetiğini kaldırmak için:
+  </para><para>
+<programlisting indent="4">DROP TRIGGER if_dist_exists ON films;</programlisting>
+  </para></refsect1><refsect1>
+  <title>Uyumluluk</title><para>
+<command>DROP TRIGGER</command> deyimi SQL standardı ile uyumlu değildir. SQL standardında, tetik isimleri tablolara ait değildir, dolayısıyla komut tablo ismini içermez (<command>DROP TRIGGER </command><replaceable>isim</replaceable> şeklinde kullanılır).
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_trigger" xreflabel="CREATE TRIGGER"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: id.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-id">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>id</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>id</refname>
+    <refpurpose>kullanıcı kimliğini basar</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis>
+<command>id</command> [<emphasis>seçenek</emphasis>] ... [<emphasis>kullanıcı</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<varname>kullanıcı</varname> ya da çalıştıran kullanıcı hakkındaki bilgileri gösterir.
+    </para><para><glosslist><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossdef><para>Eski sürümlere uyumluluk için var. Yoksayılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g</command></glossterm>
+        <glossterm><command>--group</command></glossterm>
+        <glossdef><para>Sadece etkin grup kimliğini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-G</command></glossterm>
+        <glossterm><command>--groups</command></glossterm>
+        <glossdef><para>Tüm grup kimliklerini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>--name</command></glossterm>
+        <glossdef><para><command>-ugG</command> için bir sayı yerine bir isim gösterir
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--real</command></glossterm>
+        <glossdef><para><command>-ugG</command> için etkin kimlik yerine gerçek kimliği gösterir
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossterm><command>--user</command></glossterm>
+        <glossdef><para>Sadece etkin kullanıcı kimliğini gösterir
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Yardım iletisini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para><varname>seçenek</varname> belirtilmese bazı yararlı kullanıcı bilgileri gösterir.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Arnold Robbins ve David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>id</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>id</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para><glosslist><glossentry>
+       <glossdef><para><command>info coreutils id</command></para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: encrypt.3.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man3-encrypt">
+<remark>.\" Copyright 2000 Nicol?s Lichtmaier &lt;nick@debian.org>
+.\" Created 2000-07-22 00:52-0300
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" Modified 2002-07-23 19:21:35 CEST 2002 Walter Harms
+.\" &lt;walter.harms@informatik.uni-oldenburg.de>
+.\"
+.\" Modified 2003-04-04, aeb
+</remark>
+  <refmeta>
+    <manvolnum>3</manvolnum>
+    <refentrytitle>encrypt</refentrytitle>
+    <refmiscinfo class="header">Kriptografik İşlevler</refmiscinfo>
+    <refmiscinfo class="domain">glibc3</refmiscinfo>
+    <refmiscinfo class="date">4 Nisan 2003</refmiscinfo>
+  </refmeta>
+  <refnamediv><refname>encrypt</refname>
+    <refpurpose>64 bitlik iletileri şifreler</refpurpose>
+  </refnamediv><refnamediv><refname>setkey</refname>
+    <refpurpose>encrypt() tarafından kullanılan anahtarı belirler</refpurpose>
+  </refnamediv><refnamediv><refname>encrypt_r</refname>
+    <refpurpose>64 bitlik iletileri şifreler (evresel)</refpurpose>
+  </refnamediv><refnamediv><refname>setkey_r</refname>
+    <refpurpose>encrypt_r() tarafından kullanılan anahtarı belirler (evresel)</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>BİLDİRİM</title>
+<synopsis>#define _XOPEN_SOURCE
+#include &lt;unistd.h>
+
+void <command>encrypt</command> (char <emphasis>blok</emphasis>[64], int <emphasis>im</emphasis>);
+
+#define _XOPEN_SOURCE
+#include &lt;stdlib.h>
+
+void <command>setkey</command> (const char *<emphasis>anahtar</emphasis>);
+
+#define _GNU_SOURCE
+#include &lt;crypt.h>
+
+void <command>setkey_r</command> (const char *<emphasis>anahtar</emphasis>, struct crypt_data *<emphasis>veri</emphasis>)
+void <command>encrypt_r</command> (char *<emphasis>blok</emphasis>, int <emphasis>im</emphasis>, struct crypt_data *<emphasis>veri</emphasis>);
+</synopsis><para>Bunların herbiri <command>-lcrypt</command> ile ilintileme gerektirir.</para>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Bu işlevler 64 bitlik iletileri şifreler ve deşifrelerler. <command>setkey()</command> işlevi <command>encrypt()</command> işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan <varname>anahtar</varname> parametresi bir bayt dizisidir ve her bayt 1 ya da 0 sayısal değerine sahiptir.  <varname>anahtar</varname><literal>[n]</literal> dizisinin indis değeri <literal>n=8*i-1</literal> olan elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
+    </para><para>
+<command>setkey()</command> işlevi kendine aktarılan tamponu <varname>im</varname> olarak 0 verilmişse şifreleyerek, 0 verilmişse deşifreleyerek değiştirir. <varname>anahtar</varname> parametresi gibi <varname>blok</varname> parametresi de şifrelenmiş değerin bit gösteriminin vektörüdür. Sonuç aynı vektör içinde döner.
+    </para><para>
+Bu iki işlev evresel değildir, yani anahtar verisi durağan bellek bölgesinde saklanır. <command>setkey_r()</command> ve <command>encrypt_r()</command> işlevleri evreseldir. ve anahtar verisini saklamak için <command>crypt_data</command> veri yapısını kullanırlar:
+    </para><para>
+<literallayout>struct crypt_data {
+      char keysched[16 * 8];
+      char sb0[32768];
+      char sb1[32768];
+      char sb2[32768];
+      char sb3[32768];
+      char crypt_3_buf[14];
+      char current_salt[2];
+      long int current_saltbits;
+      int  direction, initialized;
+};
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>DÖNÜŞ DEĞERİ</title>
+    <para>Bu işlevler herhangi bir değer döndürmezler.
+    </para>
+  </refsect1><refsect1><title>HATALAR</title>
+    <para>Yukarıdaki işlevler çağrılmadan önce <command>errno</command> değişkeni sıfırlanır. Başarı durumunda değeri değişmez.
+    </para><para><glosslist><glossentry>
+      <glossterm><command>ENOSYS</command></glossterm>
+      <glossdef><para>İşlev kütüphanede bulunmamaktadır (Örneğin, ABD'nin ihracat sınırlamalarından dolayı).
+      </para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ÖRNEK</title>
+    <para>Bu örneği glibc2.2 ile derlemek için <filename>libcrypt</filename> ile ilintilemeniz gerekir. Anlamlı bir çalıştırma için <varname>anahtar[]</varname> ve <varname>ileti[]</varname> dizilerini anlamlı bir bit kalıbı ile doldurmalısınız. <filename>crypt.h</filename> başlık dosyasının <command>setkey()</command> ve <command>encrypt()</command> işlevlerinin prototiplerini koşulsuz olarak verdiğini unutmayın.
+    </para><para>
+<screen>#include &lt;crypt.h>
+
+main() {
+  char anahtar[64];    /* anahtarın bit kalıbı */
+  char ileti[64];      /* iletinin bit kalıbı */
+  setkey(anahtar);
+  encrypt(ileti, 0);   /* şifreler */
+  encrypt(ileti, 1);   /* deşifreler */
+}
+</screen>
+    </para>
+  </refsect1><refsect1><title>NOTLAR</title>
+    <para>glibc2.2'de bu işlevler DES algoritmasını kullanır.
+    </para>
+  </refsect1><refsect1><title>UYUMLULUK</title>
+    <para><command>encrypt()</command> ve <command>setkey()</command> işlevleri SVID, SUSv2 ve POSIX 1003.1-2001 uyumludur.  <command>encrypt_r()</command> ve <command>setkey_r()</command> işlevleri  ise GNU oluşumudur.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man3-cbc_crypt"/>, <link linkend="tr-man3-crypt"/>, <link  linkend="tr-man3-ecb_crypt"/>, <link linkend="tr-man3-fcrypt"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Emin İslam Tatlı <email>eminislam@web.de</email>, Nisan 2004</para>
+  </refsect1>
+</refentry>
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: ntsysv.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-ntsysv">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>ntsysv</refentrytitle>
+    <refmiscinfo class="date">13 Ekim 1997</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>ntsysv</refname>
+    <refpurpose>çalışma seviyelerini yapılandırmak için basit bir arayüz</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>ntsysv</command> [ <command>--back</command> ] [ <command>--level </command><emphasis>seviyeler</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>ntsysv</command>, <command>chkconfig</command> ile de yapılandırılabilen, çalışma seviyesi servislerin yapılandırılması için basit bir arayüzdür. Öntanımlı olarak, üzerinde çalışılan çalışma seviyesini düzenler. Şayet diğer çalışma seviyeleri de ayarlanmak isteniyorsa, komut satırında <command>–-levels</command> argümanından aralarında boşluk bırakılmadan, bu çalışma seviyelerinin numaraları listelenmelidir. Örneğin: <command>--levels 016</command>; 0, 1 ve 6. çalışma seviyelerini düzenler.
+    </para><para>
+Şayet bir servis, belirtilen çalışma seviyelerinden birinde çalıştırılmış ise; bu servis belirtilen diğer  çalışma seviyelerinde de çalıştırılır.
+    </para><para>
+<command>ntsysv</command> penceresi, normalde, bir <command>Cancel</command> düğmesine sahiptir. Şayet <command>-–back</command> seçeneği belirtilmişse, bu düğme yerine  bir <command>Back</command> düğmesi belirir.
+    </para>
+  </refsect1><refsect1><title>ÇIKIŞ DURUMU</title>
+    <para>
+<command>ntsysv</command>, işlem başarılı ise 0, hata durumunda 2 ve kullanıcının yazılımı iptal etmesi durumunda 1 döndürür.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-chkconfig"/>, <link linkend="tr-man8-tksysv"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Erik Troan <email>ewt@redhat.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

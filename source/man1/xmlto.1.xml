@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: xmlto.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-xmlto">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>xmlto</refentrytitle>
+    <refmiscinfo class="header">xmlto</refmiscinfo>
+    <refmiscinfo class="domain">Linux</refmiscinfo>
+    <refmiscinfo class="date">Ekim 2002</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>xmlto</refname>
+    <refpurpose>bir XSL dönüşüm dosyasını bir XML belgesine uygular</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>xmlto</command> [<command>-o </command><emphasis>çıktı_dizini</emphasis>] [<command>-x </command><emphasis>özel_xsl</emphasis>] [<command>-m </command><emphasis>xsl_parçası</emphasis>]
+      [<command>-v</command>] [<command>-p </command><emphasis>ardişlem_seçenekleri</emphasis>] [<command>--extensions</command>]
+      [<command>--searchpath </command><emphasis>dosyayolu</emphasis>] [<command>--skip-validation</command>] {<emphasis>biçim</emphasis>} {<emphasis>dosya</emphasis>}
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>xmlto</command>’nun amacı, gereken bütün her şeyin kullanılarak, bir XML belgesinin arzu edilen biçime dönüştürülmesini sağlamaktır. Bu iki basamaklı bir işlemdir:
+  </para><para><orderedlist userlevel="3"><listitem><para>
+Bir XSL-T işlemcisi kullanılarak uygun bir XSL dönüşüm dosyasının uygulanması.
+  </para></listitem><listitem><para>
+Diğer araçlar ile sonraki işlemlerin gerçekleştirilmesi. Bu ikinci adım zorunlu değildir, kullanılmasa da olur.
+  </para></listitem></orderedlist></para><para>
+Hangi dönüşüm dosyasının kullanılacağına ve gerekli ise işlem sonrası çıktıya neler yapılacağına karar vermek için, <command>xmlto</command> biçim betiklerini kullanır. Bunlar <command>xmlto</command> tarafından dönüşüm sırasında çağrılan basit kabuk betikleridir.
+    </para><para>
+Uygun biçim betikleri, XML dosyasının ve arzu edilen çıktı dosyasının biçimine bağlıdır. <command>xmlto</command>, DocBook XML dosyalarını çeşitli biçimlere çevirmeye yarayan hazır betikler ile birlikte gelir. Kullanmak istediğiniz biçim betiğinin tam adını komut satırından belirterek, istediğiniz betiği kullanabilirsiniz.
+    </para><para>
+İlk olarak, <command>xmlto</command>’ya, <command>–x</command> seçeneği belirtilerek, tam olarak hangi dönüşüm dosyasının kullanılacağı belirtilmemişse, dönüşüm dosyasını ayarlamak için <command>$1</command> ile biçim betiği çağrılır. <literal>XSLT_PROCESSOR</literal> ortam değişkeni ile, XSL-T dönüşümünü sağlayacak uygulamanın ismi belirtilebilir (örneğin <command>xsltproc</command>); <literal>XSL_DIR</literal> ortam değişkeni <command>xmlto</command> ile birlikte gelen birkaç faydalı dönüşüm dosyasının bulunduğu dizine giden yolu tanımlar. Biçim betiği, standart çıktı için kullanılacak dönüşüm dosyasının adını yazmalı ve başarılı bir şekilde çıkmalıdır. Kullanılacak uygun bir dönüşüm dosyası yok ise sıfır harici bir çıkış değeri döner (örneğin; elimizdeki tek dönüşüm dosyası kullanılacak XSL-T işlemcisi ile çalışmıyorsa). Şayet standart çıktıya hiçbir şey yazılmaz ama betik başarılı bir şekilde çıkar ise, XSL-T dönüşümü gerçekleşmez.
+    </para><para>
+İkinci olarak (bir dönüşüm dosyası kullanılarak bir XSL-T işlemi yapıldıktan sonra), biçim betiği tekrar çağrılır. Bu sefer <command>$1</command> süreç sonrası için ayarlanır. Biçim betiği XSL-T uygulanmış çıktıyı arzu edilen biçime sokmak için gereken bütün işlemleri, çıktıyı istenen dizine kopyalamak dahil, gerçekleştirmelidir. İşlem sonrası için, biçim betiği, sadece işlenen çıktıyı (bu çıktının ismi <literal>XSLT_PROCESSED</literal> içinde saklanır ve bu isim, orjinal XML dosyasının uzantısının <literal>.proc</literal> ile değiştirilmiş halidir). <literal>INPUT_FILE</literal> orjinal XML dosyasının adına ayarlanır, <literal>OUTPUT_DIR</literal> çıktının en sonunda gönderileceği dizine ayarlanır ve <literal>SEARCHPATH</literal> ise iki nokta üst üste işareti ile ayrılmış son çare dizinlerine ayarlanır. Bu dizinler girdinin (örneğin resimlerin) arandığı yerlerdir. Şayet bu adım başarısız olursa, biçim betiği sıfırdan farklı bir değer döndürür ve çıkar.
+  </para></refsect1><refsect1><title>SEÇENEKLER</title><para>
+    <glosslist><glossentry>
+      <glossterm><command>-v</command></glossterm>
+      <glossdef><para>Ayrıntılı kip (<command>-vv</command> çok ayrıntılı kip).
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-x </command><varname>özel_xsl</varname> </glossterm>
+      <glossdef><para>Bir biçim betiği yerine belirtilen <varname>özel_xsl</varname> dosyası kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-m </command><varname>xsl_parçası</varname> </glossterm>
+      <glossdef><para>Dönüşüm dosyasında değişiklik yapmak için <varname>xsl_parçası</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-o </command><varname>dizin</varname> </glossterm>
+      <glossdef><para>Çıktıyı, içinde çalışılan dizin yerine, belirtilen <varname>dizin</varname>e koyar.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>-p </command><varname>ardişlem_seçenekleri</varname></glossterm>
+      <glossdef><para>Dönüşüm dosyası uygulamasından sonraki işlem evrelerine bu seçenekleri aktarır (örneğin; HTML çıktının links veya lynx'e aktarılması veya Tex’den DVI’ya giderken çıktının xmltex'e aktarılması) şayet <command>–p</command> ikinci bir defa daha belirtmişse, seçenekler dönüşüm sonrası ikinci aşama uygulamalara gönderilir. Bu sadece xmltex ve dvips’ten PostScript çıktı elde edilirken uygulanabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+         <glossterm><command>--extensions</command></glossterm>
+      <glossdef><para>Kullandığınız araç zinciri için dönüşüm genişletmelerini kullanmayı mümkün kılar. Örneğin, PassiveTeX kullanılıyorsa “passivetex.extensions” ve “use.extensions” etkinleştirilmelidir. Etkinleştirilen değişkenler Norman Walsh’ın DocBook XSL dönüşüm dosyalarında kullandıklarıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>--searchpath </command><varname>dosyayolu</varname></glossterm>
+      <glossdef><para>Girdi için olanlar da dahil olmak üzere son çare olarak kullanılacak dizin isimlerinin iki nokta üstüste işaretleri ile ayrılmış listesi.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--skip-validation</command></glossterm>
+        <glossdef><para>Normalde uygulanan geçerlilik işlemini atlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Kısa bir kullanım iletisi görüntüler. Kullanılabilir çıktı biçimlerini ve <command>xmlto</command> seçeneklerini açıklar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </para></refsect1><refsect1><title>ÖRNEKLER</title><para>
+Bir DocBook XML belgesini PDF’ye çevirmek için:
+  </para><para>
+<screen>
+xmlto pdf belgem.xml
+</screen>
+  </para><para>
+Bir DocBook XML belgesini HTML’ye çevirmek ve çıktıyı HTML dosyası olarak başka bir dizinde saklamak için:
+  </para><para>
+<screen>
+xmlto -o html-dizini html belgem.xml
+</screen>
+  </para><para>
+Bir DocBook XML belgesinden tek sayfalık bir HTML dosyası elde etmek için:
+  </para><para>
+<screen>
+xmlto html-nochunks belgem.xml
+</screen>
+  </para><para>
+Çıktıyı bir XSL parçası kullanarak düzenlemek için:
+  </para><para>
+<screen>
+xmlto -m ulink.xsl pdf belgem.xml
+</screen>
+  </para><para>
+Hangi dönüşüm dosyasının kullanılacağını tanımlamak için (biçim betiğinin
+seçtiğini göz ardı etmek için):
+  </para><para>
+<screen>
+xmlto -x dosyam.xsl pdf belgem.xml
+</screen>
+  </para></refsect1><refsect1><title>YAZAN</title><para>
+Tim Waugh <email>twaugh@redhat.com</email> tarafından yazılmıştır.
+  </para></refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Şubat 2004</para>
+  </refsect1>
+</refentry>
+
+
+
+
+
+
+
+
+
+
+

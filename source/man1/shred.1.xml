@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: shred.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man1-shred">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>shred</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>shred</refname>
+    <refpurpose>içeriğini gizlemek bazan da silmek için dosyanın üzerine yazar</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis>
+<command>shred </command>[<emphasis>seçenekler</emphasis>] <emphasis>dosya</emphasis> [...]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+Belirtilen <varname>dosya</varname>(ların) üzerine bir kaç defa yazarak pahalı donanım çözümleri ile bile dosya içeriğinin kurtarılabilmesini zorlaştırır.
+</para><para>
+Uzun seçenekler için zorunlu olan argümanlar kısa seçenekler için de zorunludur.
+    </para><glosslist><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--force</command></glossterm>
+        <glossdef><para>
+Eğer gerekli olursa yazma izni vermek için izinleri değiştirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>--iterations=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>
+Öntanımlı 25 defa üzerine yazma yerine <varname>sayı</varname> defa üzerine yazar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--random-source=</command><varname>dosya</varname> </glossterm>
+        <glossdef><para>
+Rasgele baytları <varname>dosya</varname>dan okur (öntanımlı: <filename>/dev/urandom</filename>).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--size=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>
+<varname>sayı</varname> baytı bu işlemden geçirir (k, M, G gibi sonekler kabul edilir).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossterm><command>--remove</command></glossterm>
+        <glossdef><para>
+Üzerine yazdıktan sonra dosyayı sıfırlar ve siler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>İlerlemeyi gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x</command></glossterm>
+        <glossterm><command>--exact</command></glossterm>
+        <glossdef><para>
+Dosya boyutunu sonraki tam bloğa yuvarlamaz. Bu işlem, normal olmayan dosyalar için öntanımlıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-z</command></glossterm>
+        <glossterm><command>--zero</command></glossterm>
+        <glossdef><para>
+İşlemi gizlemek için en son olarak üzerine sıfırlarla yazar
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist><para>
+Eğer <varname>dosya</varname> - ise işlem standart çıktıya uygulanır.
+</para><para>
+Eğer <command>--remove</command> (<command>-u</command>) belirtilmişse <varname>dosya</varname>(ları) siler. Öntanımlı değer dosyaları silmez çünkü bu komut genelde <filename>/dev/hda</filename> gibi aygıt dosyaları üzerinde çalıştırılır ve o dosyalar genelde silinmemelidir.  Normal dosyalar üzerinde çalıştırıldığı zaman genelde <command>--remove</command> seçeneği kullanılır.
+</para><para><caution><para>
+<command>shred</command> komutu dosya sisteminin veriyi yerinde üzerine yazdığı varsayımına dayanır. Bu genelde yapılan işlemdir, fakat pek çok modern dosya sistemi bu varsayıma uymaz. Aşağıda <command>shred</command> komutunun işe yaramadığı dosya sistemleri örneklenmiştir:
+</para><para><itemizedlist userlevel="3"><listitem><para>
+AIX ve Solaris ile gelen (ve JFS, ReiserFS, XFS vs.) gibi kayıt düzenli veya jurnalli dosya sistemleri
+</para></listitem><listitem><para>
+RAID gibi çoklu veri yazan ve bazı yazma işlemleri başarısız olsa bile devam edebilen dosya sistemleri
+</para></listitem><listitem><para>
+Network Appliance'ın NFS sunucusu gibi dosya sisteminin bir görüntüsünü kaydeden dosya sistemleri
+</para></listitem><listitem><para>
+geçici yerlerde arabellek oluşturan dosya sistemleri (NFS sürüm 3 istemcileri gibi)
+</para></listitem><listitem><para>
+sıkıştırılmış dosya sistemleri
+</para></listitem></itemizedlist></para><para>
+ext3 dosya sistemlerinde de, sadece <literal>data=journal</literal> kipinde yukarıdaki feragatname uygulanır (<command>shred</command>'in sınırlı etkililiğinden dolayı). <literal>data=ordered</literal> (öntanımlı) ve <literal>data=writeback</literal> kiplerinde <command>shred</command> beklendiği gibi çalışır. <command>mount</command> kılavuz sayfasında (<command>man mount</command>) açıklandığı gibi <filename>/etc/fstab</filename> dosyasında ilgili dosya sisteminin seçeneklerine <literal>data=</literal><varname>birşey</varname> seçeneği eklenerek ext3 günlükleme kipini değiştirmek mümkündür.
+</para></caution></para><para>
+Buna ek olarak, dosyasistem yedekleri ve uzak yansılar dosyanın silinemeyen kopyalarını taşıyabilir ve bu <command>shred</command> işleminden geçirilmiş bir dosyanın tekrar oluşturulabilmesini sağlayabilir.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Colin Plumb tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<command>shred</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>shred</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils shred</command></para></glossdef>
+       </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>
+
+

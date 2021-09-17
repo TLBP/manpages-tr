@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_domain.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_domain">
+ <refmeta>
+  <refentrytitle>CREATE DOMAIN</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE DOMAIN</refname>
+  <refpurpose>yeni bir veri alanı tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE DOMAIN</command> <emphasis>isim</emphasis> [<command>AS</command>] <emphasis>veri_türü</emphasis>
+    [ <command>DEFAULT</command> <emphasis>ifade</emphasis> ]
+    [ <emphasis>kısıt</emphasis> [ ... ] ]
+
+burada <emphasis>kısıt</emphasis>:
+
+[ <command>CONSTRAINT</command> <emphasis>kısıt_ismi</emphasis> ]
+{ <command>NOT NULL</command> | <command>NULL</command> | <command>CHECK</command> (<emphasis>ifade</emphasis>) }
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE DOMAIN</command> yeni bir veri alanı tanımlar.  Yeni veri alanını tanımlayan kullanıcı o veri alanının sahibi olur.
+  </para><para>
+Eğer bir şema ismi belirtilmişse (<command>CREATE DOMAIN
+   myschema.mydomain ...</command> gibi) veri alanı bu şema içinde oluşturulur. Aksi takdirde geçerli olan şemada oluşturulur. Veri alanının ismi şemanın mevcut veri alanları ve veri türleri arasında eşsiz olmalıdır.
+  </para><para>
+Veri alanları bakım kolaylığı bakımından tablolar arasında ortak alanları tek bir yerle soyutlamak için yararlıdır. Örneğin eposta adresi sütunu çeşitli tablolarda hepsi aynı özelliklerle kullanılabilir. Bir veri alanı tanımlayıp her tablonun kısıtlarını ayrı ayrı ayarlamaktan kurtulabilirsiniz.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Oluşturulacak veri alanının ismi (şema nitelemeli olabilir).
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>veri_türü</replaceable></term>
+      <listitem><para>Veri alanının veri türü; dizi belirteçleri içerebilir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>DEFAULT </command><replaceable>ifade</replaceable></term>
+      <listitem><para>Veri alanının kullanıldığı sütunlar için bir öntanımlı değer belirtir. Değer herhangi bir ifade olabilir (altsorgulara izin verilmez). Öntanımlı ifadenin veri türü, veri alanının veri türü ile aynı olmalıdır. Bir öntanımlı değer belirtilmezse, NULL öntanımlı olur.
+       </para><para>
+Öntanımlı ifade, sütun için değer belirtilmeyen veri girme işlemlerinde kullanılacaktır. Bir sütun için bir öntanımlı değer zaten varsa, veri alanının öntanımlısı değil, bu öntanımlı kullanılır. Ancak, bir sütunun veri türünün öntanımlısı değil, veri alanının öntanımlısı kullanılır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>CONSTRAINT <replaceable>kısıt_ismi</replaceable></command></term>
+      <listitem><para>Bir kısıtın isteğe bağlı ismi. Belirtilmezse, sistem bir isim üretecektir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>NOT NULL</command></term>
+      <listitem><para>Veri alanı değerinin NULL olamayacağını belirtir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><command>NULL</command></term>
+      <listitem><para>Veri alanı değerinin NULL olabileceğini belirtir. Bu öntanımlıdır.
+       </para><para>
+Bu sözcük standartdışı SQL veritabanları ile uyumluluk için vardır. Yeni uygulamalarda kullanılmasa daha iyi olur.
+      </para></listitem></varlistentry><varlistentry>
+    <term><literal><command>CHECK </command>(<emphasis>ifade</emphasis>)</literal></term>
+    <listitem><para>Doğruluk kısıtlarını ya da veri alanı değerlerinin sağlaması gereken sınamaları belirtmek için kullanılır. Her kısıt bir mantıksal sonuç üreten bir ifade olmalıdır. Sınanacak değeri belirtmek için isim olarak <literal>VALUE</literal> kullanılmalıdır.
+     </para><para>
+Şimdilik, <command>CHECK</command> ifadeleri altsorgular içerememekte ve ifade içinde <literal>VALUE</literal> dışında değişken belirtilememektedir.
+      </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+Bu örnekte <type>us_postal_code</type> veri alanı oluşturulmakta ve bu alan bir tablo tanımında kullanılmaktadır. Değerin geçerli bir US posta kodu olup olmadığı bir düzenli ifade ile sınanmaktadır.
+  </para><para>
+<programlisting>
+    CREATE DOMAIN us_postal_code AS TEXT
+    CHECK(
+         VALUE ~ '^\d{5}$'
+      OR VALUE ~ '^\d{5}-\d{4}$'
+    );
+
+    CREATE TABLE us_snail_addy (
+      address_id SERIAL NOT NULL PRIMARY KEY
+    , street1 TEXT NOT NULL
+    , street2 TEXT
+    , street3 TEXT
+    , city TEXT NOT NULL
+    , postal us_postal_code NOT NULL
+    );
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>CREATE DOMAIN</command> SQL standardıyla uyumludur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_domain" xreflabel="ALTER DOMAIN"/>,
+<link linkend="tr-man7-drop_domain" xreflabel="DROP DOMAIN"/>.
+ </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

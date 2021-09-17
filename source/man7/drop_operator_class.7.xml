@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_operator_class.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_operator_class">
+ <refmeta>
+  <refentrytitle>DROP OPERATOR CLASS</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP OPERATOR CLASS</refname>
+  <refpurpose>bir işleç sınıfını kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP OPERATOR CLASS</command> <emphasis>isim</emphasis> <command>USING</command> <emphasis>indeksleme_yöntemi</emphasis> [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP OPERATOR CLASS</command> mevcut bir işleç sınıfını kaldırır. Bu komutu çalıştırabilmek için, işleç sınıfının sahibi olmalısınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Kaldırılacak işleç sınıfının ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>indeksleme_yöntemi</replaceable></term>
+    <listitem><para>İşleç sınıfının kullanıldığı indeks erişim yönteminin ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>İşleç sınıfına bağımlı nesnelerin de silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>İşleç sınıfına bağımlı nesneler varsa işleç sınıfının kaldırılmasını engeller. Bu öntanımlıdır.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+<literal>widget_ops</literal> isimli B-tree işleç sınıfını kaldırmak için:
+  </para><para>
+<programlisting indent="4">DROP OPERATOR CLASS widget_ops USING btree;
+</programlisting>
+  </para><para>
+İşleç sınıfını kullanan bir indeks varsa, bu komut başarısız olur. Böyle indeksleri işleç sınıfı ile birlikte kaldırmak için cümleye <command>CASCADE</command> ekleyin.
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>DROP OPERATOR CLASS</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_operator_class" xreflabel="ALTER OPERATOR CLASS"/>,<sbr/>
+<link linkend="tr-man7-create_operator_class" xreflabel="CREATE OPERATOR CLASS"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: vdir.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-vdir">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>vdir</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>vdir</refname>
+    <refpurpose>dizinlerin içindekileri listeler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>vdir</command> [<emphasis>seçenek</emphasis>]... [<emphasis>dosya</emphasis>]...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>AÇIKLAMA</title>
+    <para>
+(Öntanımlı olarak içinde bulunulan dizindeki) <varname>dosya</varname>larla ilgili bilgileri görüntüler. Ne <command>-cftuvSUX</command> seçeneklerinden biri ne de <command>--sort</command> verilmişse, alfabetik sıraya göre listeleme yapar.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar kısa seçenekler için de zorunludur.
+    </para><para>
+      <glosslist><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--all</command></glossterm>
+        <glossdef><para>
+<command>.</command> (nokta) ile başlayan dosyaları gizlemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-A</command></glossterm>
+        <glossterm><command>--almost-all</command></glossterm>
+        <glossdef><para>
+İsimlerinde <command>.</command> ve <command>..</command> bulunan dosyaları  listelemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><option>--author</option></glossterm>
+        <glossdef><para>Her dosyanın yazarını basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossterm><command>--escape</command></glossterm>
+        <glossdef><para>
+Basılamayan karakterler için sekizlik tabandaki değerlerini basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>--block-size</command>=<emphasis>boyut </emphasis></literal></glossterm>
+        <glossdef><para>
+<varname>boyut</varname> baytlık bloklar kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-B</command></glossterm>
+        <glossterm><command>--ignore-backups</command></glossterm>
+        <glossdef><para>
+<command>~</command> ile sona eren dosya isimlerini listelemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>
+<command>-lt</command> ile birlikte dosya durum bilgilerinin son düzenlendiği zamana göre sıralar ve ve bu zamanı gösterir. <command>-l</command> ile birlikte kullanıldığında ise isme göre sıralar ve dosya durum bilgilerinin son düzenlendiği zamanı gösterir. Aksi takdirde, dosya durum bilgilerinin son düzenlendiği zamana göre sıralar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-C</command></glossterm>
+        <glossdef><para>Sütunlar halinde listeleme yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>--color</command>[=<emphasis>koşul</emphasis>] </literal></glossterm>
+        <glossdef><para>
+Dosya türlerini ayırdetmek için renklendirme yapılıp yapılmayacağı belirtilir. <varname>koşul</varname> olarak, `never' (asla), `always' (daima) veya `auto' verilebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossterm><command>--directory</command></glossterm>
+        <glossdef><para>
+<command>-l</command> seçeneği ile birlikte sadece dizine ilişkin bilgileri gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-D</command></glossterm>
+        <glossterm><command>--dired</command></glossterm>
+        <glossdef><para>
+Emacs'ın `dired' kipi için tasarlanmış çıktı üretir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para>
+Sıralama yapmaz, <command>-aU</command> etkinleştirilir, <command>-lst</command> edilginleştirilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-F</command></glossterm>
+        <glossterm><command>--classify</command></glossterm>
+        <glossdef><para>
+Liste girdilerine <literal>*/=@|</literal> göstergelerinden birini ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--file-type</command></glossterm>
+        <glossdef><para>
+Liste girdilerine <literal>/=@|</literal> göstergelerinden birini ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>--format</command>=<emphasis>sözcük</emphasis> </literal></glossterm>
+        <glossdef><para>
+<varname>sözcük</varname> olarak verilebilecek değerler ve karşılığı olan seçenekler:
+<literal>across </literal><command>-x</command>, <literal>commas </literal><command>-m</command>, <literal>horizontal </literal><command>-x</command>, <literal>long </literal><command>-l</command>, <literal>single-column </literal><command>-1</command>, <literal>verbose </literal><command>-l</command>, <literal>vertical </literal><command>-C</command>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--full-time</command></glossterm>
+        <glossdef><para>
+<command>-l --time-style</command>=<varname>full-iso</varname> seçeneklerine eşdeğerdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g</command></glossterm>
+        <glossdef><para>
+Dosya sahibini göstermemesi dışında <command>-l</command> gibidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-G</command></glossterm>
+        <glossterm><command>--no-group</command></glossterm>
+        <glossdef><para>Grup sütununu göstermez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--group-directories-first</command></glossterm>
+        <glossdef><para>Dizinleri dosyalardan önce gruplar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossterm><command>--human-readable</command></glossterm>
+        <glossdef><para>
+Boyutları kullanıcı tarafından kolay okunabilecek biçimde (1K 234M 2G gibi) gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-si</command></glossterm>
+        <glossdef><para>
+Yukarıdaki seçeneğe benzer ama 1024 yerine 1000'lik katlar kullanılır (1 MB=1000KB kabul edilir, 1024 değil).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H</command></glossterm>
+        <glossterm><command>--dereference-command-line</command></glossterm>
+        <glossdef><para>
+Komut satırındaki sembolik bağlar takip edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--dereference-command-line-symlink-to-dir</command> </glossterm>
+        <glossdef><para>
+Hedefi bir dizin olan her komut satırı sembolik bağı izlenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--hide=</command><varname>şablon</varname> </glossterm>
+        <glossdef><para>
+Komut şablonu ile eşleşen girdiler gösterilmez (<command>-a</command> veya <command>-A</command> ile iptal edilir)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--indicator-style=</command><varname>sözcük</varname></glossterm>
+        <glossdef><para>
+Listedeki girdilere <varname>sözcük</varname> ile belirtilen tarzda gösterge ekler: <literal>none</literal> (öntanımlı değer), <literal>classify </literal>(<command>-F</command>), <literal>file-type </literal>(<command>--file-type</command>), <literal>slash </literal>(<command>-p</command>)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--inode</command></glossterm>
+        <glossdef><para>Her dosyanın indis numarasını basar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-I</command></glossterm>
+        <glossterm><command>--ignore=</command><varname>şablon</varname> </glossterm>
+        <glossdef><para>
+<varname>şablon</varname> ile eşleşen girdileri listelemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-k</command></glossterm>
+        <glossdef><para>
+<command>--block-size</command><literal>=1K</literal> ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossdef><para>Uzun liste biçimi kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-L</command></glossterm>
+        <glossterm><command>--dereference</command></glossterm>
+        <glossdef><para>
+Bir sembolik bağın bilgileri gösterilirken, bağın kendisinin değil gösterdiği dosyanın bilgileri gösterilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossdef><para>
+Listeyi virgül ile ayrılmış girdiler halinde gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>--numeric-uid-gid</command></glossterm>
+        <glossdef><para>
+Kullanıcı ve grup isimleri yerine numaralarını göstermesi dışında <command>-l</command> gibidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-N</command></glossterm>
+        <glossterm><command>--literal</command></glossterm>
+        <glossdef><para>
+Ham dosya isimlerini basar (kontrol karakterleri özel olarak değerlendirilmez).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o</command></glossterm>
+        <glossdef><para>
+Grup sütununu göstermemesi dışında <command>-l</command> gibidir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossterm><command>--indicator-style=slash</command></glossterm>
+        <glossdef><para>
+Dizinleree <literal>/</literal> göstergesini ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-q</command></glossterm>
+        <glossterm><command>--hide-control-chars</command></glossterm>
+        <glossdef><para>
+Basılamayan kontrol karakterlerini ? ile gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--show-control-chars</command></glossterm>
+        <glossdef><para>
+Basılamayan konrol karakterlerini oldukları gibi gösterir (uygulama <command>vdir</command> ve çıktılama birimi uçbirim olmadıkça öntanımlıdır).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-Q</command></glossterm>
+        <glossterm><command>--quote-name</command></glossterm>
+        <glossdef><para>Girdi isimlerini tırnak içine alır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal><command>--quoting-style</command>=<emphasis>sözcük </emphasis></literal></glossterm>
+        <glossdef><para>
+Girdi isimleri tırnak içine alınırken <varname>sözcük</varname> ile belirtilen tarz kullanılır: <literal>literal, locale, shell, shell-always, c, escape</literal>
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--reverse</command></glossterm>
+        <glossdef><para>Ters sıralama yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>--recursive</command></glossterm>
+	<glossdef><para>
+Altdizinleri ardışık olarak listeler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--size</command></glossterm>
+        <glossdef><para>Dosya boyutlarını blok cinsinden gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossdef><para>Dosya boyutuna göre sıralama yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--sort=</command><varname>sözcük</varname> </glossterm>
+        <glossdef><para>
+<varname>sözcük</varname> ile belirtilen türde sıralama yapılır: <literal>extension</literal> (uzantısına göre <command>-X</command>), <literal>none</literal> (yok <command>-U</command>), <literal>size</literal> (boyuta göre <command>-S</command>), <literal>time</literal> (zamana göre <command>-t</command>), <literal>version</literal> (sürüme göre <command>-v</command>).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--time=</command><varname>sözcük</varname> </glossterm>
+        <glossdef><para>
+Zaman bilgisi gösterilirken değişiklik zamanı yerine <varname>sözcük</varname> ile belirtilen zaman kullanılır. Erişim zamanı için: <literal>atime</literal>,  <literal>access</literal>, <literal>use</literal>. Oluşturulma zamanı için: <literal>ctime</literal>. Duruma göre:  <literal>status</literal>. Sıralama türü <command>--sort</command><literal>=time</literal> olarak belirtildiğinde sıralama burada belirtilen zamana göre yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--time-style=</command><varname>tarz</varname> </glossterm>
+        <glossdef><para>
+-l seçeneği ile çıktılanann listede zaman belirtilen <varname>tarz</varname>da gösterilir: <literal>full-iso</literal>,  <literal>long-iso</literal>, <literal>iso</literal>, <varname>+biçim</varname>. <varname>biçim</varname> <command>date</command> komutundaki gibi yorumlanır. Eğer <varname>biçim</varname>, <varname>biçim1</varname><literal>&lt;satırsonu></literal><varname>biçim2</varname> biçiminde verilirse, en yeni dosyalara <varname>biçim2</varname>, daha eski olanlara da <varname>biçim1</varname> uygulanır. Eğer <varname>biçim</varname> `<literal>posix-</literal>' ile başlıyorsa <varname>biçim</varname> sadece POSIX yereli dışında etkin olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossdef><para>Değişiklik  zamanına göre sıralama yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T</command></glossterm>
+        <glossterm><command>--tabsize=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>
+Sekme durakları için 8 yerine, <varname>sayı</varname> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossdef><para>
+<command>-lt</command> ile birlikte erişim zamanına göre ile sıralar ve bu zamanı gösterir. <command>-l</command> ile birlikte kullanıldığında ise isme göre sıralar ve erişim zamanını gösterir. Aksi takdirde, erişim zamanına göre sıralar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-U</command></glossterm>
+        <glossdef><para>
+Sıralama yapılmaz; girdiler dizindeki sırasına göre listelenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para>Sıralama sürüme göre yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossterm><command>--width=</command><varname>sayı</varname> </glossterm>
+        <glossdef><para>
+Ekran genişliği <varname>sayı</varname> karakterlik kabul edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x</command></glossterm>
+        <glossdef><para>
+Listeleme sütunlar halinde değil satıra dizilerek yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-X</command></glossterm>
+        <glossdef><para>
+Alfabetik sıralama dosya uzantısına göre yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-1</command></glossterm>
+        <glossdef><para>
+Listeleme her satıra bir dosya yazılarak yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para><para>
+<varname>boyut</varname> şu dizge ya da eşdeğeri olan tamsayılardan biri ile belirtilebilir: <literal>kB 1000, K 1024, MB 1000*1000, M 1024*1024</literal> ve benzer şekilde <literal>G, T, P, E, Z, Y</literal>.
+    </para><para>
+Öntanımlı olarak, dosyaların türlerini ayırdetmek için renkler kullanılmaz. Bu, <command>--color</command><literal>=none</literal> kullanımına eşdeğerdir. <command>--color</command> seçeneğinin argümansız kullanımı <command>--color</command><literal>=always</literal> anlamına gelir. Renkli kodlama sadece <command>--color</command><literal>=auto</literal> ile ve standart çıktı bir uçbirime (tty) bağlı ise yapılır. Renkler <literal>LS_COLORS</literal> ortam değişkeninden alınırlar; <command>dircolors</command> komutu tarafından kolayca <literal>LS_COLORS</literal> ortam değişkenine atanabilirler.
+    </para><para>
+Çıkış durumu, küçük bir sorun varsa 1, büyük bir sorun varsa 2, sorun yoksa 0'dır.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Richard Stallman ve David MacKenzie tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<command>vdir</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>vdir</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils vdir</command></para></glossdef>
+       </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Kasım 2006</para>
+  </refsect1>
+</refentry>
+
+

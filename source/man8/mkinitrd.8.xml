@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: mkinitrd.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-mkinitrd">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>mkinitrd</refentrytitle>
+    <refmiscinfo class="domain">4. Berkeley Dağıtımı</refmiscinfo>
+    <refmiscinfo class="date">27 Mart 1999</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>mkinitrd</refname>
+    <refpurpose>öncelikli yüklenen modüller için ilk ramdisk biteşlemini oluşturur</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mkinitrd</command> [<command>--version</command>] [<command>-v</command> ] [<command>-f</command>]
+         [<command>--preload=</command><emphasis>modül</emphasis>] [<command>--omit-scsi-modules</command>]
+         [<command>--omit-raid-modules</command>] [<command>--omit-lvm-modules</command>]
+         [<command>--with=</command><emphasis>modül</emphasis>] [<command>--image-version</command>]
+         [<command>--fstab=</command><emphasis>fstab</emphasis>] [<command>--nocompress</command>]
+         [<command>--builtin=</command><emphasis>modül</emphasis>] [<command>--nopivot</command>]
+         <emphasis>biteşlem</emphasis> <emphasis>çekirdek-sürümü</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>mkinitrd</command>, Linux ilk ramdisk (initrd) biteşlemleri olarak kullanılabilecek dosya sistemi biteşlemlerini oluşturur. Bu tür biteşlem dosyaları genellikle, root dosya sistemine erişim için gerekli olan blok aygıt modüllerinin (örneğin: IDE, SCSI veya RAID) önyüklemesi için gereklidir. <command>mkinitrd</command> özdevinimli olarak, dosya sistemi modüllerini (ext2, jbd gibi), bütün IDE modüllerini, <filename>/etc/modules.conf</filename> içindeki bütün <filename>scsi_hostadapter</filename> girdilerini ve sistemin kök bölümü bir raid aygıt üzerinde ise raid modüllerini yükler. Böylece çekirdeğe modüler aygıt sürücüleri desteği vererek derlemek ve kullanmak mümkün olur.
+    </para><para>
+İlk ramdisk tarafından modüller yüklenirken, <filename>/etc/modules.conf</filename> içinde tanımlanmış bütün modül seçenekleri bu modüllere uygulanır.
+    </para><para>
+Şayet kök aygıt bir dönüş aygıt üzerinde ise (örneğin <filename>/dev/loop0</filename> gibi), <command>mkinitrd</command> aygıt dosyasını uygun bir şekilde ayarlayan bir <filename>initrd</filename> oluşturur. Bunu yapmak için, <filename>fstab</filename> aşağıdaki gibi bir açıklama satırı içermelidir:
+    </para><para>
+<screen># LOOP0: /dev/hda1 vfat /linux/rootfs</screen>
+    </para><para>
+<literal>LOOP0</literal> ayarlanması gereken dönüş aygıtının adı olmalıdır ve tamamen büyük harfler ile yazılmalıdır. İki nokta üstüste işaretinden sonraki parametreler; geridönüş biteşlemli dosya sisteminin bulunduğu aygıt, aygıtın dosya sistemi türü ve geridönüş biteşleminin tam yoludur. Şayet dosya sistemi modüler yapıda ise, <command>mkinitrd</command> özdevinimli olarak, dosya sisteminin modüllerini <filename>initrd</filename> biteşlemine ekleyecektir.
+    </para><para>
+Çekirdek tarafından kullanılan kök dosya sistemi daima önyükleyici yapılandırma dosyasında belirtilir. Geleneksel <command>root=/dev/hda1</command> tarzı aygıt belirtimi mümkündür. Kök dosya sistemi, <command>root=LABEL=kok</command> gibi bir etiket ile belirtilirse, <filename>initrd</filename> bu etikete sahip bir ext2 ya da ext3 dosya sistemini bulmak için kullanımdaki tüm aygıtları tarar ve bu aygıtı kök dosya sistemi olarak bağlar.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry><glossterm>
+        <command>--builtin=</command><replaceable>modül</replaceable>
+        </glossterm><glossdef><para><replaceable>modül</replaceable>, çekirdek içinde derlenmiş gibi ele alınır. <command>mkinitrd</command> bu modül için arama yapmayacak ve bulamazsa bir hata vermeyecektir. Bu seçenek defalarca kullanılabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossdef><para><command>mkinitrd</command>, varolan bir biteşlem dosyasının üzerine yazabilecektir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>--fstab=</command><replaceable>fstab</replaceable>
+        </glossterm><glossdef><para>Kök aygıttaki dosya sisteminin türünü özdevinimli saptamak için <replaceable>fstab</replaceable> kullanılır. Normalde <command>/etc/fstab</command> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--image-version</command></glossterm>
+        <glossdef><para>Biteşlem oluşturulmadan önce initrd biteşlemine çekirdeğin sürüm numarası eklenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nocompress</command></glossterm>
+        <glossdef><para>Normalde oluşturulan <filename>initrd</filename> biteşlemi <command>gzip</command> ile sıkıştırılır. Bu seçenek belirtilmişse sıkıştırma yapılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nocompress</command></glossterm>
+        <glossdef><para>Normalde oluşturulan <filename>initrd</filename> biteşlemi <command>gzip</command> ile sıkıştırılır. Bu seçenek belirtilmişse sıkıştırma yapılmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--nopivot</command></glossterm>
+        <glossdef><para><filename>initrd</filename>'nin parçası olarak <command>pivot_root</command> sistem çağrısı kullanılmaz. Bazı özellikler pahasına Linux 2.2 çekirdekler için münasip bir biteşlem oluşturmak için kullanılır. Özellikle, bazı dosya sistemleri (ext3 gibi) olması gerektiği gibi çalışmayacak ve kökü bağlamada kullanılan dosya sistemi seçenekleri kullanılmayacaktır. Bu seçeneğin kullanılması önerilmez, zaten ileri sürümlerde kaldırılacaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--omit-lvm-modules</command></glossterm>
+        <glossdef><para><filename>/etc/fstab</filename> içerse bile hiç bir lvm modülü yüklenmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--omit-raid-modules</command></glossterm>
+        <glossdef><para><filename>/etc/fstab</filename> ve <filename>/etc/raidtab</filename> içerse bile hiç bir raid modülü yüklenmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--omit-scsi-modules</command></glossterm>
+        <glossdef><para>’<filename>scsi_mod</filename>’ and  ’<filename>sd_mod</filename>’ modülleri dahil mevcut olsa bile hiç bir scsi modülü yüklenmez.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>--preload=</command><replaceable>modül</replaceable>
+        </glossterm><glossdef><para><replaceable>modül</replaceable> modülünü <filename>initrd</filename> biteşlemine yükler. Modül, <filename>/etc/modules.conf</filename> içinde belirtilmiş olan SCSI modüllerinden önce yüklenmek üzere ele alınır. Gerekliyse bu seçenek defalarca kullanılabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossdef><para><filename>initrd</filename> biteşlemi oluşturulurken daha ayrıntılı bilgi verilir (normalde hiçbir bilgi verilmez).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para><command>mkinitrd</command> sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>--with=</command><replaceable>modül</replaceable>
+        </glossterm><glossdef><para><replaceable>modül</replaceable> modülünü <filename>initrd</filename> biteşlemine yükler. Modül, <filename>/etc/modules.conf</filename> içinde belirtilmiş olan SCSI modüllerinden sonra yüklenmek üzere ele alınır. Gerekliyse bu seçenek defalarca kullanılabilir.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <glosslist>
+      <glossentry><glossterm>
+        <command>/dev/loop*</command>
+      </glossterm><glossdef><para>Geridönüş blok aygıtı desteği olmadığı için bu betiğin kullanışsız olduğu sistemlerde biteşlemi oluşturmak için kullanılan geridönüş blok aygıtı.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>/etc/modules.conf</command>
+      </glossterm><glossdef><para>Yüklenecek SCSI modülleri ve kullanılacak modül seçeneklerinin tanımlandığı dosya.
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-fstab"/>, <link linkend="tr-man8-insmod"/>, <link linkend="tr-man8-kerneld"/>, <link linkend="tr-man8-lilo"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Erik Troan <email>ewt@redhat.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

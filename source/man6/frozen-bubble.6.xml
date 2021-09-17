@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: frozen-bubble.6.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man6-frozen-bubble">
+  <refmeta>
+    <manvolnum>6</manvolnum>
+    <refentrytitle>frozen-bubble</refentrytitle>
+    <refmiscinfo class="header">Frozen-Bubble oyunu</refmiscinfo>
+    <refmiscinfo class="domain">FB</refmiscinfo>
+    <refmiscinfo class="date">2 Şubat 2003</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>frozen-bubble</refname>
+    <refpurpose>galeri türü, çabuk tepki vermeye dayalı bir oyun</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>frozen-bubble</command> [<emphasis>seçenek</emphasis>]...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>Frozen-Bubble</command>, sevilen, galeri türü, çabuk tepki vermeye dayalı bir oyunun özgür yazılıma uyarlanmış halidir. Oyun, temelde,  rastgele seçilen balonları  tahtaya doğru fırlatmaya dayanır. Atışın sonunda, aynı renkte en az üç adet balon kümelenirse, bunlar düşer. Düşen kümeye yapışmış durumdaki  balonlar da düşerler. Tek oyunculu kipte, amaç tahta üzerindeki bütün balonları en kısa süre içinde düşürmektir.  iki oyunculu kipte, rakibin sizden önce ölmesini beklemek/sağlamak  zorundasınız.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <para><glosslist>
+      <glossentry>
+        <glossterm><command>-h</command></glossterm>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Komut satırı seçeneklerini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-fs</command></glossterm>
+        <glossterm><command>--fullscreen</command></glossterm>
+        <glossdef><para>Oyunu tam ekran kipinde başlatır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-ns</command></glossterm>
+        <glossterm><command>--nosound</command></glossterm>
+        <glossdef><para>Müzik ve ses gösterilerini kapatır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-nm</command></glossterm>
+        <glossterm><command>--nomusic</command></glossterm>
+        <glossdef><para>Sadece müziği kapatır, ses gösterileri açık kalır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-nfx</command></glossterm>
+        <glossterm><command>--nosfx</command></glossterm>
+        <glossdef><para>Sadece ses gösterilerini kapatır, müzik açık kalır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--playlist </command><varname>dizin</varname></glossterm>
+        <glossdef><para>Belirtilen <varname>dizin</varname> içindeki bütün dosyaları müzik dosyası olarak kullanır ve bu dosyaları çalar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-sl</command></glossterm>
+        <glossterm><command>--slow_machine</command></glossterm>
+        <glossdef><para>Eğer <command>frozen-bubble</command> makinanızda oldukça yavaş çalışıyorsa, bu seçeneği kullanın.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-vs</command></glossterm>
+        <glossterm><command>--very_slow_machine</command></glossterm>
+        <glossdef><para>Şayet üstteki seçenek yeterli gelmedi ise, bunu kullanın.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-so</command></glossterm>
+        <glossterm><command>--solo</command></glossterm>
+        <glossdef><para>Rastgele seviyede, tek oyunculu kipte oyunu başlatır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-di</command></glossterm>
+        <glossterm><command>--direct</command></glossterm>
+        <glossdef><para>İki oyunculu kipte oyunu başlatır (menü görüntülenmez).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-cr</command></glossterm>
+        <glossterm><command>--chain_reaction</command></glossterm>
+        <glossdef><para>Zincirleme reaksiyonu etkinleştirir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l </command><varname>seviye</varname></glossterm>
+        <glossterm><command>--level </command><varname>seviye</varname></glossterm>
+        <glossdef><para><varname>seviye</varname> ile belirtilen seviyeden oyunu başlatır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-cb</command></glossterm>
+        <glossterm><command>--colourblind</command></glossterm>
+        <glossdef><para>Renk körleri için, özel renkler kullanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-pm </command><varname>sayı</varname></glossterm>
+        <glossterm><command>--playermalus </command><varname>sayı</varname></glossterm>
+        <glossdef><para><varname>sayı</varname> ile belirtilen malusu sol oyuncuya ekler (negatif olabilir).
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Guillaume  Cottenceau  <email>guillaume.cottenceau@free.fr</email> tarafından yazılmıştır. Bu kılavuz sayfasının orjinali  Josselin  Mouette  <email>josselin.mouette@ens-lyon.org</email> tarafından yazılmıştır.<sbr/>
+Ayrıntılar  için sanalyöremizi ziyaret edebilirsiniz: <ulink url="http://www.frozen-bubble.org/"/>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man6-frozen-bubble-editor"/>
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı  2000, 2001, 2002, 2003 Guillaume Cottenceau.<sbr/>
+Bu bir serbest yazılımdır. FSF tarafından yayınlanmış olan GPL sürüm 2 ile lisanslanmıştır. Hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Kasım 2003</para>
+  </refsect1>
+</refentry>
+

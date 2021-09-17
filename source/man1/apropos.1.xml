@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: apropos.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-apropos">
+<remark>.\" Copyright (c) 1990, 1991, John W. Eaton.
+.\"
+.\" You may distribute under the terms of the GNU General Public
+.\" License as specified in the README file that comes with the man 1.0
+.\" distribution.
+.\"
+.\" John W. Eaton
+.\" jwe@che.utexas.edu
+.\" Department of Chemical Engineering
+.\" The University of Texas at Austin
+.\" Austin, Texas  78712
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>apropos</refentrytitle>
+    <refmiscinfo class="date">15 Ocak 1991</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>apropos</refname>
+    <refpurpose>whatis veritabanında anahtar sözcüğü arar</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>apropos </command><emphasis>anahtar_kelime</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>apropos</command>, verilmiş <varname>anahtar_kelime</varname>ler ışığında, sistem komutlarının kısa açıklamalarını içeren veri tabanlarında arama yapar ve sonuçları standart çıktıya yazar.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-man"/>, <link linkend="tr-man1-whatis"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Mart 2004</para>
+  </refsect1>
+</refentry>

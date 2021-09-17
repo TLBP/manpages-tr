@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: cp.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-cp">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>cp</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>cp</refname>
+    <refpurpose>dosya ve dizinleri kopyalar</refpurpose>
+  </refnamediv>
+
+<refsynopsisdiv>
+<synopsis><command>cp</command> [<emphasis>seçenek</emphasis>]... [<command>-T</command>] <emphasis>kaynak hedef</emphasis>
+<command>cp</command> [<emphasis>seçenek</emphasis>]... <emphasis>kaynak</emphasis>... <emphasis>dizin</emphasis>
+<command>cp</command> [<emphasis>seçenek</emphasis>]... <command>-t </command><emphasis>dizin kaynak</emphasis>...
+</synopsis>
+</refsynopsisdiv>
+
+  <refsect1>
+    <title>AÇIKLAMA</title>
+    <para>
+Belirtilen <varname>kaynak</varname> dosyasını <varname>hedef</varname> dosyaya veya birden fazla <varname>kaynak</varname> dosyasını <varname>dizin</varname>'e kopyalar.
+    </para><para>
+     Uzun seçeneklerde zorunlu olan argümanlar kısa seçeneklerde de zorunludur.
+     </para><glosslist><glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--archive</command></glossterm>
+        <glossdef><para><literal>-dpR</literal> ile aynı.</para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--backup</command><literal>[=</literal><varname>yöntem</varname><literal>]</literal></glossterm>
+        <glossdef><para>
+Varolan hedef dosyalarının herbirini yedekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossdef><para>
+<command>--backup</command> gibidir fakat herhangi bir argüman kabul etmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>--copy-contents</command></glossterm>
+       <glossdef><para>Ardışık işlem yaparken özel dosyaların içeriğini kopyalar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para><command>--no-dereference --preserve=link</command> ile aynıdır.</para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--force</command></glossterm>
+        <glossdef><para>
+Varolan bir hedef dosya açılamazsa, onu siler ve tekrar dener.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--interactive</command></glossterm>
+        <glossdef><para>
+Üzerine yazmadan önce kullanıcıya sorar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-H</command></glossterm>
+        <glossdef><para>
+Komut satırı sembolik bağlarını izler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossterm><command>--link</command></glossterm>
+        <glossdef><para>
+Kopyalamak yerine bağ oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-L</command></glossterm>
+        <glossterm><command>--dereference</command></glossterm>
+        <glossdef><para>
+Sembolik bağlar daima izlenir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-P</command></glossterm>
+        <glossterm><command>--no-dereference</command></glossterm>
+        <glossdef><para>Sembolik bağlar asla izlenmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>-p</command></glossterm>
+       <glossdef><para><command>--preserve=</command><literal>mode,ownership,timestamps</literal> ile aynı.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>--preserve</command><literal>[=<emphasis>öznitelikler</emphasis>]</literal></glossterm>
+       <glossdef><para>Belirtilen <varname>öznitelikler</varname> korunur (öntanımlı olanlar:  <literal>mode,ownership,timestamps</literal> - kip, sahiplik, zaman damgası), eğer mümkünse bunlar da: <literal>links, all</literal> (bağlar, tümü).
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>--no-preserve=</command><varname>öznitelikler</varname></glossterm>
+       <glossdef><para>Belirtilen <varname>öznitelikler</varname> korunmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--parents</command></glossterm>
+        <glossdef><para>Kaynak dosya yolunu <varname>dizin</varname>'e ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--recursive</command></glossterm>
+        <glossdef><para>
+Dizinleri alt dizinleriyle ardışık olarak kopyalar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--remove-destination</command></glossterm>
+        <glossdef><para>
+Hedefte dosya varsa, açmaya çalışmaz ve kopyalamaya başlamadan önce onu siler (<command>--force</command> seçeneğinin tersine).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--symbolic-link</command></glossterm>
+        <glossdef><para>
+Kopyalamak yerine sembolik bağ oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--sparse</command><varname>=koşul</varname></glossterm>
+        <glossdef><para>
+Seyrek dosyaların oluşturulmasını kontrol eder.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--strip-trailing-slashes</command></glossterm>
+        <glossdef><para>
+<varname>kaynak</varname> argümanlarının her birinin sonundaki bölü işaretini kaldırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossterm><command>--suffix</command><varname>=sonek</varname></glossterm>
+        <glossdef><para>
+Belirtilen yedekleme <varname>sonek</varname>i kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>-t</command></glossterm>
+       <glossterm><command>--target-directory</command><varname>=dizin</varname></glossterm>
+        <glossdef><para>
+Bütün <varname>kaynak</varname> argümanlarını <varname>dizin</varname> içine taşır.
+        </para></glossdef>
+      </glossentry><glossentry>
+       <glossterm><command>-T</command></glossterm>
+       <glossterm><command>--no-target-directory</command></glossterm>
+       <glossdef><para>
+<varname>hedef</varname>, normal dosya olarak ele alınır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossterm><command>--update</command></glossterm>
+        <glossdef><para>
+Sadece hedef dosya <varname>kaynak</varname> dosyadan daha eski ise veya hedef dosya yoksa kopyalar. Böylece dosya güncellemesi yapılmış olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>
+Yapılan işlem hakkında daha ayrıntılı bilgi verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x</command></glossterm>
+        <glossterm><command>--one-file-system</command></glossterm>
+        <glossdef><para>
+Aynı dosya sistemi içinde kalınır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    <para>
+Öntanımlı olarak, seyrek <varname>kaynak</varname> dosyalarının seyrekliği bir kurallar kümesine göre kabaca tespit edilir ve karşılık gelen <varname>hedef</varname> dosya da buna göre seyrek yapılır. Bu davranış <command>--sparse=</command><varname>auto</varname> ile seçilir. <varname>kaynak</varname> dosyanın içerdiği sıfır bayt dizilimlerine bağlı olarak <varname>hedef</varname> dosyanın oluşturulması için ise <command>--sparse=</command><varname>always</varname> belirtilir. Seyrek dosyaların oluşturulmaması için <command>--sparse=</command><varname>never</varname> kullanılır.
+    </para><para>
+<command>--suffix</command> seçeneği ile veya <literal>SIMPLE_BACKUP_SUFFIX</literal> ile belirtilmediği sürece, yedekleme soneki '<command>~</command>' dir. Sürüm kontrol yöntemi <literal>VERSION_CONTROL</literal> ortam değişkeni ile veya <command>--backup</command> seçeneği ile seçilebilir. Değerler şunlardır:
+    </para><para>
+      <glosslist><glossentry>
+        <glossterm><literal>none</literal></glossterm>
+        <glossterm><literal>off</literal></glossterm>
+        <glossdef><para>
+Asla yedekleme yapmaz (<command>--backup</command> belirtilmiş olsa bile)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>numbered</literal></glossterm>
+        <glossterm><literal>t</literal></glossterm>
+        <glossdef><para>
+Numaralı yedekleme yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>existing</literal></glossterm>
+        <glossterm><literal>nil</literal></glossterm>
+        <glossdef><para>
+Numaralandırılmış yedekler varsa, numaralı, aksi durumda basit yedekleme yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>simple</literal></glossterm>
+        <glossterm><literal>never</literal></glossterm>
+        <glossdef><para>
+Daima basit yedekleme yapar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para><para>
+Özel  bir durum olarak; <command>--force</command> ve <command>--backup</command> seçenekleri verilmişse ve <varname>kaynak</varname> ve
+<varname>hedef</varname> dosyalar mevcut ve aynı isimde normal dosyalarsa, <command>cp</command> komutu <varname>kaynak</varname> dosyaların bir yedeğini yapar.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Torbjorn Granlund, David MacKenzie ve Jim Meyering tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+     Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<command>cp</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>cp</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils cp</command></para></glossdef>
+       </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın KOLUKISA <email>yalcink01@yahoo .com</email>, Ekim 2003</para>
+   <para>Kasım 2006'da güncellenmiştir.</para>
+  </refsect1>
+</refentry>
+
+

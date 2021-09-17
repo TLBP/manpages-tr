@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_trigger.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_trigger">
+ <refmeta>
+  <refentrytitle>CREATE TRIGGER</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE TRIGGER</refname>
+  <refpurpose>yeni bir tetik tanımlar</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE TRIGGER</command> <emphasis>isim</emphasis> { <command>BEFORE</command> | <command>AFTER</command> } { <emphasis>olay</emphasis> [ <command>OR</command> ... ] }
+    <command>ON</command> <emphasis>tablo</emphasis> [ <command>FOR</command> [ <command>EACH</command> ] { <command>ROW</command> | <command>STATEMENT</command> } ]
+    <command>EXECUTE PROCEDURE</command> <emphasis>işlev_ismi</emphasis> ( <emphasis>argümanlar</emphasis> )
+</synopsis>
+ </refsynopsisdiv>
+
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE TRIGGER</command> yeni bir tetik oluşturur. Tetik belirtilen tablo ile ilişkilendirilecek ve belli bir olay meydana geldiğinde <replaceable>işlev_ismi</replaceable> ile belirtilen işlevi çalıştıracaktır.
+  </para><para>
+Tetiğin ya bir satır üzerinde işlem yapılmaya çalışılmadan önce (kısıtlar sınanmadan ve <command>INSERT</command>, <command>UPDATE</command> veya <command>DELETE</command> yapılmadan önce) ya da işlem tamamlandıktan sonra (kısıtlar sınandıktan ve <command>INSERT</command>, <command>UPDATE</command> veya <command>DELETE</command> tamamlandıktan sonra) çalışacağı belirtilebilir. Eğer tetik olaydan önce çalışırsa, geçerli satır için işlemi atlayabilir ya da veri girilen satır değişebilir (sadece <command>INSERT</command> ve <command>UPDATE</command> işlemleri için). Eğer tetik olaydan sonra çalışırsa, tüm değişiklikler, son veri girme, güncelleme veya silme işlemi tetiğe görünür olur.
+  </para><para>
+<command>FOR EACH ROW</command> imli bir tetik işlemi değiştiren her satır için bir defa çağrılır. Örneğin, 10 satırı etkileyen bir <command>DELETE</command>, her satır silinişinde bir kere olmak üzere 10 ayrı defa <command>ON DELETE</command> tetiğinin çağrılmasına sebep olur. Tersine, <command>FOR EACH STATEMENT</command> imli bir tetik belirtilen bir işlem için işlemin kaç satırı etkilediğinden bağımsız olarak, sadece bir defa çalıştırılır (hatta, işlem hiçbir satırı değiştirmese bile tetik yine de çalıştırılacaktır).
+  </para><para>
+Eğer aynı olay için aynı türden çok sayıda tetik tanımlanmışsa, bunlar isimlerine göre alfabetik sırayla çalıştırılırlar.
+  </para><para>
+<command>SELECT</command> herhangi bir satırı değiştirmediğinden, <command>SELECT</command> tetikleri oluşturamazsınız. Kurallar ve sanal tablolar böyle durumlarda daha uygundur.
+  </para><para>
+Tetikler hakkında daha fazla bilgi edinmek için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/triggers.html"/> adresine bakınız.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Yeni tetiği belirtecek isim. Bu isim, aynı tablodaki diğer tetiklerin isimlerinden farklı olmalıdır.
+     </para></listitem></varlistentry><varlistentry>
+    <term><command>BEFORE</command></term>
+    <term><command>AFTER</command></term>
+    <listitem><para>İşlevin olaydan önce mi sonra mı çağrılacağını belirler.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>olay</replaceable></term>
+    <listitem><para><command>INSERT</command>, <command>UPDATE</command> veya <command>DELETE</command>'den biri; tetiği çalıştıracak olayı belirtmek için kullanılır. <command>OR</command> kullanarak çok sayıda olay belirtilebilir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>tablo</replaceable></term>
+    <listitem><para>Tetiği içerecek tablonun ismi (şema nitelemeli olabilir).
+     </para></listitem></varlistentry><varlistentry>
+    <term><command>FOR EACH ROW</command></term>
+    <term><command>FOR EACH STATEMENT</command></term>
+    <listitem><para>Tetik işlevinin tetikleyici olay tarafından her satır için bir kere mi yoksa her SQL deyimi için bir kere mi çalıştırılacağını belirler. Eğer hiçbiri belirtilmemişse, <command>FOR EACH STATEMENT</command> öntanımlıdır.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>işlev_ismi</replaceable></term>
+    <listitem><para>Tetikle çalıştırılan, kullanıcı tarafından argümansız ve dönüş türü <command>trigger</command> olarak bildirilmiş ve tanımlanmış bir işlev.
+     </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>argümanlar</replaceable></term>
+    <listitem><para>Tetik tarafından çalıştırıldığında işleve aktarılacak isteğe bağlı argümanların virgülle ayrılmış listesi. Argümanlar dizge sabitlerdir. Basit isimler ve sayısal sabitler de burada yazılabilir, fakat her biri dizgeye dönüştürülecektir. Tetikleyici işlev dilinin nasıl gerçeklendiğini incelemeniz ve işlev içinde tetik argümanlarına nasıl erişildiğini öğrenmeniz önerilir; normal işlev argümanlarından farklı ele alınıyor olabilirler.
+     </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title><para>
+Bir tablo içinde bir tetik oluşturmak için, kullanıcı tablo üzerinde <command>TRIGGER</command> yetkisine sahip olmalıdır.
+  </para><para>
+7.3 öncesi <productname>PostgreSQL</productname> sürümlerinde, işlevin dönüş türü olarak <type>trigger</type> değil, <type>opaque</type> bildiriliyordu. Eski sürüme ait döküm dosyalarını desteklemek için, <command>CREATE TRIGGER</command> <type>opaque</type> türünde değer döndüren işlevleri kabul edecek, ama işlevin bildirilen dönüş türünün <type>trigger</type> olarak değiştirilmesini belirten bir uyarı alacaksınız.
+  </para><para>
+Bir tetiği silmek için <link linkend="tr-man7-drop_trigger" xreflabel="DROP TRIGGER"/> kullanın.
+  </para></refsect1><refsect1>
+  <title>Örnekler</title><para>
+<ulink url="http://www.postgresql.org/docs/8.0/static/triggers.html"/> adresinde eksiksiz bir örnek bulacaksınız.
+  </para></refsect1><refsect1>
+  <title>Uyumluluk</title><para>
+<command>CREATE TRIGGER</command> cümlesinin <productname>PostgreSQL</productname> gerçeklenimi SQL:1999 standardının bir alt kümesini içerir. (SQL-92'de tetikler için bir madde yoktur.) Mevcut olmayan işlevsellik şöyle sıralanabilir:
+   </para><para><itemizedlist><listitem><para>
+SQL:1999 belli sütunların güncellenmesiyle çalıtırılacak tetiklere izin verir (<command>AFTER UPDATE OF col1, col2</command> gibi).
+     </para></listitem><listitem><para>
+SQL:1999 "eski" ve "yeni" satırlar için ya da tetikleyen eylemin (<command>CREATE TRIGGER ... ON tabloismi REFERENCING OLD ROW AS birisim NEW ROW AS yeniisim ...</command> gibi) tanımında kullanmak için tablolara takma isim tanımlamanıza izin verir. <productname>PostgreSQL</productname> tetik işlevlerinin kullanıcının seçimine bağlı olarak herhangi bir dilde yazılmasına izin verdiğinden veriye erişim seçilen dile özel yollarla olur.
+     </para></listitem><listitem><para>
+<productname>PostgreSQL</productname> sadece tetikleyen eylem için kullanıcı tanımlı bir işlevin çalıştırılmasına izin verir. SQL:1999 ise, tetiklenen eylem olarak <command>CREATE TABLE</command> gibi başka SQL cümlelerinin çalıştırılmasına izin verir. Bu sınırlamanın, istenen SQL cümlelerini çalıştıracak kullanıcı tanımlı bir işlev oluşturarak çevresinden dolanmak hiç de zor değildir.
+     </para></listitem></itemizedlist>
+   </para><para>
+SQL:1999, çok sayıda tetiğin oluşturulma zamanı sırasına göre çalıştırılmasına izin verir. <productname>PostgreSQL</productname> ise çalışılması daha uygun olan isim sıralamasını kullanır.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_function" xreflabel="CREATE FUNCTION"/>,
+<link linkend="tr-man7-alter_trigger" xreflabel="ALTER TRIGGER"/>,
+<link linkend="tr-man7-drop_trigger" xreflabel="DROP TRIGGER"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

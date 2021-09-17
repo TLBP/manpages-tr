@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: rmdir.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-rmdir">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>rmdir</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>rmdir</refname>
+    <refpurpose>boş dizinleri siler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>rmdir</command> [<emphasis>seçenek</emphasis>]... <emphasis>dizin</emphasis>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>AÇIKLAMA</title>
+    <para>
+<varname>dizin</varname>(ler)i boşsa siler.
+    </para><para>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>--ignore-fail-on-non-empty</command></glossterm>
+        <glossdef><para>
+Dizinlerin boş olmadığı durumlarda meydana gelen hataları yok sayar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossterm><command>--parents</command></glossterm>
+        <glossdef><para>
+Verilen dizini kaldırır ve daha sonra dizini gösteren yol ismindeki diğer dizinleri silmeye çalışır. Örneğin: <command>rmdir -p a/b/c</command> komutu `<filename>a/b/c</filename>' dizinini sildikten sonra `<filename>a/b</filename>' dizinini ve sonra da `<filename>a</filename>' dizinini silmeye çalışır. Yani bu komut <command>rmdir a/b/c a/b a</command> komutu ile aynıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>İşlem yapılan her bir dizin için bir tanı bilgisi çıktılar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım metnini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini görüntüler ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.</para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man2-rmdir"/>.
+     </para><para>
+<command>rmdir</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>rmdir</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils rmdir</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Ekim 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>

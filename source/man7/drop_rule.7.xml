@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_rule.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_rule">
+ <refmeta>
+  <refentrytitle>DROP RULE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP RULE</refname>
+  <refpurpose>bir yeniden yazma kuralını kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP RULE</command> <emphasis>isim</emphasis> <command>ON</command> <emphasis>tablo</emphasis> [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklamalar</title><para>
+<command>DROP RULE</command> bir yeniden yazma kuralını kaldırır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Kaldırılacak kuralın ismi.
+    </para></listitem></varlistentry><varlistentry>
+    <term><replaceable>tablo</replaceable></term>
+    <listitem><para>Kuralın uygulandığı tablo ya da sanal tablonun ismi (şema nitelemeli olabilir).
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>Kurala bağımlı nesnelerin de silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>Kurala bağımlı nesneler varsa kuralın kaldırılmasını engeller. Bu öntanımlıdır.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+<literal>newrule</literal> yeniden yazma kuralını kaldırmak için:
+ </para><para>
+<programlisting indent="4">DROP RULE newrule ON mytable;</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>DROP RULE</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-create_rule" xreflabel="CREATE RULE"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: passwd.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-passwd">
+<remark>
+.\" Copyright Red Hat, Inc., 1998, 1999, 2002.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, and the entire permission notice in its entirety,
+.\"    including the disclaimer of warranties.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. The name of the author may not be used to endorse or promote
+.\"    products derived from this software without specific prior
+.\"    written permission.
+.\"
+.\" ALTERNATIVELY, this product may be distributed under the terms of
+.\" the GNU Public License, in which case the provisions of the GPL are
+.\" required INSTEAD OF the above restrictions.  (This clause is
+.\" necessary due to a potential bad interaction between the GPL and
+.\" the restrictions contained in a BSD-style copyright.)
+.\"
+.\"  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED
+.\" WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+.\" OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+.\" DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
+.\" INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+.\" (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+.\" STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+.\" ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+.\" OF THE POSSIBILITY OF SUCH DAMAGE.
+.\"
+.\" Copyright (c) Cristian Gafton, 1998, &lt;gafton@redhat.com>
+.\"
+</remark>
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>passwd</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">Red Hat Linux</refmiscinfo>
+    <refmiscinfo class="date">3 Ocak 1998</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>passwd</refname>
+    <refpurpose>kullanıcının parolasını günceller</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>passwd </command>[<command>-k</command>] [<command>-l</command>] [<command>-u </command>[<command>-f</command>]] [<command>-d</command>] [<command>-n </command><emphasis>asgari_ömür</emphasis>] [<command>-x </command><emphasis>azami_ömür</emphasis>]
+       [<command>-w </command><emphasis>uyarı_süresi</emphasis>] [<command>-i </command><emphasis>askı_süresi</emphasis>] [<command>-S</command>] [<emphasis>kullanıcı</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>passwd</command>, bir kullanıcının parolasını günceller
+    </para><para>
+<command>passwd</command>, <command>Linux-PAM API</command>'si aracılığı ile çalışmak üzere ayarlanmıştır. Aslında, <command>passwd</command>, kendisini Linux-Pam ile birlikte bir "passdw" servisi olarak başlatır ve  yetkilendirme için ayarlanmış parola modüllerini kullanır. Daha sonra kullanıcının parolası güncellenir.
+    </para><para>
+Bu servis için, Linux-PAM ayar dosyası, basitçe, şu şekilde olurdu:
+    </para><para>
+<screen indent="2">#
+# bir parola güncellenmeden önce, bu önerilen parolanın sağlamlığını
+# kontrol eden passwd servis girdisi.
+#
+passwd password requisite \
+            /usr/lib/security/pam_cracklib.so retry=3
+passwd password required \
+            /usr/lib/security/pam_unix.so use_authtok
+#
+</screen>
+    </para><para>
+NOT: Bu uygulamanın düzgün çalışması için, diğer modül türlerine ihtiyaç yoktur.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-k</command></glossterm>
+        <glossdef><para>Bu seçenek, güncellemenin, sadece geçerlilik süresi bitmiş parolaları kapsadığı anlamaına gelir. Kullanıcı geçerlilik süresi dolmamış parolalarını kullanmaya devam edebilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-l</command></glossterm>
+        <glossdef><para>Bu seçeneği sadece root kullanıcı kullanabilir. Belirtilen hesabı
+kilitlemeye yarar. Kilitleme işlemi; şifrelenmiş parolanın sözdizimi geçersiz hale getirilerek uygulanır (şifreli sözdiziminin başına ! getirmek suretiyle).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--stdin</command></glossterm>
+        <glossdef><para>Bu seçenek, yeni parolanın borulanabilen standart girdiden okunacağı anlamına gelir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossdef><para><command>-l</command> seçeneğinin tersidir. Kilitlenmiş hesap parolalarının önündeki ! önekini kaldırarak, hesabı kullanıma açar. Bu seçenek, sadece root kullanıcıya tahsis edilmiştir. Öntanımlı olarak, <command>passdw</command>, parolasız bir hesap oluşturmayı reddedecektir (parola olarak sadece ! işaretine sahip bir hesabın kilidini kaldıramaz). <command>-f</command> seçeneği, bu korumayı aşmak için kullanılabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d</command></glossterm>
+        <glossdef><para>Bu seçenek, bir hesabın parolasını yok etmenin en kolay ve hızlı yoludur. Belirtilen hesabın parolasız açılmasını sağlar. Sadece root kullanıcı bu seçeneği kullanabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossdef><para>Kullanıcının hesabı parola için bir geçerlilik süresi tanımlanmasını destekliyorsa, bu seçenekle parolanın geçerli olduğu asgari süre gün cinsinden belirtilebilir. Sadece root kullanıcı bu seçeneği kullanabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-x</command></glossterm>
+        <glossdef><para>Kullanıcının hesabı parola için bir geçerlilik süresi tanımlanmasını destekliyorsa, bu seçenekle parolanın geçerli olduğu azami süre gün cinsinden belirtilebilir. Sadece root kullanıcı bu seçeneği kullanabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-w</command></glossterm>
+        <glossdef><para>Kullanıcının hesabı parola için bir geçerlilik süresi tanımlanmasını destekliyorsa, bu seçenekle, kullanıcının parolasının zamanaşımına uğrayacağı tarihten kaç gün önceden itibaren uyarılacağı gün cinsinden belirtilebilir. Sadece root kullanıcı bu seçeneği kullanabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossdef><para>Kullanıcının hesabı parola için bir geçerlilik süresi tanımlanmasını destekliyorsa, kullanıcı parolası zamanaşımına uğradıktan sonra kullanıcı hesabı tamamen iptal edilene kadar kaç gün süreyle bekleneceği belirtilir. Sadece root kullanıcı bu seçeneği kullanabilir.
+        </para></glossdef>
+      </glossentry>
+    </glosslist>
+  </refsect1><refsect1><title>İKİ ÖNEMLİ KURAL</title>
+    <refsect2><title>Parolanızı koruyun</title>
+    <para>
+Parolanızı herhangi bir yere not etmeyin. Bunun yerine ezberinizde tutun. Parolanızı şifrelenmemiş bir dosya içine yazıp, ortalıkta bırakmayın. Birbirinden bağımsız parolalar kullanın. Her yere aynı parola ile üye olmayın. Bilgisayar destek veya satış görevlileri ile parolanızı paylaşmayın. Parolanızı yazarken, kimsenin sizi izlemesine izin vermeyin. Güvenli olduğuna inanmadığınız bir sistemden, parolanız aracılığı ile giriş yapmayın. Parolanız için geçerlilik süreleri tahsis edin ve parolanızı düzenli olarak değiştirin. Bir sistemdeki parolanız sizin her şeyinizdir. Bu konuda paronoyak davranmak, vurdumduymazlıktan daha mantıklı bir yöntemdir.
+    </para></refsect2>
+    <refsect2><title>Tahmin edilmesi güç bir parola seçin</title>
+    <para>
+<command>passwd</command>, sizin kötü bir parola seçmenizi önlemeye çalışacaktır, fakat bu çok güvenilir bir sistem değildir. Parolalarınızı, mantıklı bir şekilde oluşturun. Herhangi bir sözlükte (hangi dilde olursa olsun) bulunabilecek kelimeler kullanmayın. Çocuğunuzun, en sevdiğiniz film kahramanınızın, evcil hayvanlarınızın, ana-babanızın, mekanların ve ünlü kişilerin adlarını parola olarak seçmeyin. Telefon numarası, araç plakanız, doğum tarihiniz, SSK numaranız gibi başkaları tarafından ulaşılabilecek bilgileri, parola olarak kullanmayınız. Basit şablonlu parolalardan uzak durun. Bunun yerine, küçük ve büyük harflerin karışımından oluşan ve mümkünse içerisinde rakamlar bulunan parolalar seçin. Uzun parolalar kullanın. Noktalama işaretlerinin kullanıldığı kelime çiftleri oldukça iyi bir seçim olacaktır. Uzun ve akılda kalır bir cümlenin ilk harflerinden oluşmuş anlamsız bir kelime de oldukça iyi bir seçim sayılır.
+    </para>
+  </refsect2>
+    <para>
+Sistem, sizi bu iki kurala uymak konusunda biraz zorlayacaktır ama buradaki en önemli etken "insan"dır. Sistemlerin daha güvenli hale gelmesini sağlayan en önemli etken uyanık kullanıcılardır.
+    </para>
+  </refsect1><refsect1><title>ÇIKIŞ DURUMU</title>
+    <para>
+Çıkış durumu olarak <command>0</command>, işlemin başarıyla tamamlandığını gösterir. Hata oluştuğu durumlarda <command>1</command> ile çıkar. Metin olarak çıktılanabilen hatalar standart hataya yazılır.
+    </para>
+  </refsect1><refsect1><title>UYUMLULUK</title>
+    <para>
+Linux-PAM (Linux için Eklenebilir Kimlik Kanıtlama modülleri).<sbr/>
+Şayet, elinizdeki Linux-PAM sürümü, Linux dosya sistemi standartları ile uyumlu ise, modülleri <filename>/usr/lib/security</filename> dizini (örnekte gösterilen)
+yerine <filename>/lib/security</filename> altında bulabilirsiniz.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<command>/etc/pam.d/passwd</command> - <command>Linux-PAM</command> yapılandırma dosyası
+    </para>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>Bilinen herhangi bir yazılım hatası yoktur.</para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man2-pam_chauthok"/>, <link linkend="tr-man8-pam"/>.
+    </para><para>
+<command>Linux-PAM</command> ile bu uygulamanın birlikte nasıl yapılandırıldığı hakkında daha ayrıntılı bilgiyi<sbr/><ulink url="http://parc.power.net/morgan/Linux-PAM/index.html"/><sbr/> adresindeki, <command>Linux-PAM System Administrators' Guide</command> içinde bulabilirsiniz.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Cristian Gafton  <email>gafton@redhat.com</email> tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>

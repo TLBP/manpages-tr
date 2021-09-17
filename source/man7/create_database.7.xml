@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: create_database.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-create_database">
+ <refmeta>
+  <refentrytitle>CREATE DATABASE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>CREATE DATABASE</refname>
+  <refpurpose>yeni bir veritabanı oluşturur</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>CREATE DATABASE</command> <emphasis>isim</emphasis>
+     [ [ <command>WITH</command> ] [ <command>OWNER</command> [=] <emphasis>dbsahibi</emphasis> ]
+           [ <command>TEMPLATE</command>   [=] <emphasis>şablon</emphasis> ]
+           [ <command>ENCODING</command>   [=] <emphasis>kodlama</emphasis> ]
+           [ <command>TABLESPACE</command> [=] <emphasis>tablo_alanı</emphasis> ] ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>CREATE DATABASE</command> yeni bir <productname>PostgreSQL</productname> veritabanı oluşturur.
+  </para><para>
+Bir veritabanını oluşturmak için ya ayrıcalıklı kullanıcı olmalısınız ya da <command>CREATEDB</command> izniniz olmalıdır (<link linkend="tr-man7-create_user" xreflabel="CREATE USER"/> kılavuz sayfasına bakınız).
+  </para><para>
+Normalde yeni bir veritabanı oluşturan aynı zamanda bu veritabanının sahibi olur. Ayrıcalıklı kullanıcılar <command>OWNER</command> deyimini kullanarak başka kullanıcılar adına veritabanı oluşturabilirler. Hatta özel izinleri olmayan kullanıcılar için bile bunu yapabilirler. <command>CREATEDB</command> yetkisi olan sıradan kullanıcılar sadece kendi veritabanlarını oluşturabilirler.
+  </para><para>
+Öntanımlı olarak, yeni bir veritabanı standart sistem veritabanı olan <literal>template1</literal> veritabanının bir kopyası olarak oluşturulur. <command>TEMPLATE </command><varname>isim</varname> deyimi kullanılarak farklı bir şablon belirtilebilir. Özel bir durum olarak, <command>TEMPLATE template0</command> ile sadece PostgreSQL tarafından tanımlanmış standart nesneleri içeren bakir bir veritabanı oluşturabilirsiniz. Bu, <literal>template1</literal>'e eklenen kuruluma özgü nesnelerin veritabanınıza kopyalanmasını istemediğiniz durumlarda yararlıdır.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Oluşturulacak veritabanının ismi.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>dbsahibi</replaceable></term>
+      <listitem><para>Yeni veritabanının sahibi olacak kullanıcı. Veritabanını oluşturan kullanıcıyı belirtmek için <command>DEFAULT</command> kullanılır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>şablon</replaceable></term>
+      <listitem><para>Yeni veritabanını oluştururken kullanılacak şablonun ismi. Öntanımlı şablon (<literal>template1</literal>) kullanılacaksa değer olarak <command>DEFAULT</command> belirtilir.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>kodlama</replaceable></term>
+      <listitem><para>Yeni veritabanında kullanılacak karakter kümesinin kodlaması. Bir dizge sabiti (<command>'SQL_ASCII'</command> gibi), bir tamsayı kodlama numarası ya da öntanımlı kodlamayı kullanmak için <command>DEFAULT</command> belirtilebilir. PostgreSQL sunucusu tarafından desteklen karakter kümeleri<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/multibyte.html"/> adresinde açıklanmıştır.
+      </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>tablo_alanı</replaceable></term>
+      <listitem><para>Yeni veritabanı ile ilişkilendirilecek tablo alanının ismi. Şablon veritabanının tablo alanı kullanılacaksa, <command>DEFAULT</command> belirtilebilir. Bu tablo alanı bu veritabanında oluşturulan neseneler için öntanımlı tablo alanı olacaktır. Daha fazla bilgi için <link linkend="tr-man7-create_tablespace" xreflabel="CREATE TABLESPACE"/> kılavuz sayfasına bakınız.
+      </para></listitem></varlistentry></variablelist><para>
+İsteğe bağlı parametrelerin yukarıda belirtilen sırada yazılması şart değildir, istediğiniz sırada yazabilirsiniz.
+  </para></refsect1><refsect1><title>Ek Bilgi</title><para>
+<command>CREATE DATABASE</command> bir hareket kümesinin içinde bulunamaz.
+   </para><para>
+"veritabanı dizini ilklendirilemedi" (could not initialize database directory) satırı bulunan hatalar çoğunlukla veri dizininde yeterli izinlerin olmaması, diskin dolmuş olması ya da diğer dosya sistemi sorunlarıyla ilgilidir.
+   </para><para>
+Bir veritabanını kaldırmak için <link linkend="tr-man7-drop_database" xreflabel="DROP DATABASE"/> kullanılır.
+   </para><para>
+<link linkend="tr-man1-creatdb"/> uygulaması bu komutun yerine kullanılabilir, rahatlık için sağlanmıştır.
+   </para><para>
+Şablon olarak öntanımlı <literal>template1</literal> veritabanı yerine ismi belirtilerek başka bir veritabanın belirtilebilmesi, genel amaçlı olan <command>COPY DATABASE</command> yerine kullanılabilecekmiş gibi düşünülmemelidir; bu amaçla (henüz) tasarlanmamıştır. Şablon olarak kullanılan veritabanlarını salt okunur olarak düşünmenizi öneririz. Daha fazla bilgi için<sbr/><ulink url="http://www.postgresql.org/docs/8.0/static/manage-ag-templatedbs.html"/> adresinde bakınız.
+  </para></refsect1><refsect1><title>Örnekler</title><para>
+Yeni bir veritabanı oluşturmak için:
+  </para><para>
+<programlisting>    CREATE DATABASE lusiadas;
+</programlisting>
+  </para><para>
+Öntanımlı <literal>salesspace</literal> tablo alanlı, sahibi <literal>salesapp</literal> kullanıcısı olacak <literal>sales</literal> veritabanını oluşturmak için:
+  </para><para>
+<programlisting>    CREATE DATABASE sales OWNER salesapp TABLESPACE salesspace;
+</programlisting>
+  </para><para>
+ISO-8859-1 karakter kümesini destekleyen <literal>music</literal> veritabanını oluşturmak için:
+  </para><para>
+<programlisting>    CREATE DATABASE music ENCODING 'LATIN1';
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>CREATE DATABASE</command> diye bir deyim yoktur. Veritabanları, oluşturulması gerçeklenim tanımlı kataloglara eşdeğerdir.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+

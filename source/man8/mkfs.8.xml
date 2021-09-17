@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: mkfs.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-mkfs">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>mkfs</refentrytitle>
+    <refmiscinfo class="footerleft">sürüm 1.9</refmiscinfo>
+    <refmiscinfo class="footermid">8 Haziran 1995</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>mkfs</refname>
+    <refpurpose>bir Linux dosya sistemi oluşturur</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mkfs</command> [ <command>-V</command> ] [ <command>-t </command><emphasis>dstürü</emphasis> ] [ <command> ds-seçenekleri</command> ] <emphasis>dosyasistemi</emphasis>
+     [ <emphasis>blok-sayısı</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>mkfs</command>, genellikle sabit disklerde, Linux dosya sistemi oluşturmak için kullanılır.  <varname>dosyasistemi</varname>, dosya sistemi için, ya aygıtın adıdır (örneğin: <filename>/dev/hda1</filename>, <filename>/dev/sdb2</filename>) ya da bağlantı noktasının adıdır (örneğin:  <filename>/</filename>, <filename>/usr</filename>, <filename>/home</filename>).  <varname>blok-sayısı</varname> olarak belirtilen seçenek ise dosya sisteminde kullanılacak blok sayısını belirtmek için kullanılır.
+    </para><para>
+Dosya sisteminin başarıyla oluşturulması durumunda dönen değer 0; hata oluşması durumunda ise 1’dir.
+    </para><para>
+Aslında, <command>mkfs</command>, Linux içinde bulunan çeşitli dosya sistemi yapıcıları için bir önyüzdür (<command>mkfs</command>.dstürü).  Dosya sistemine özgü oluşturma araçları çeşitli dizinler altında aranır. Örneğin: <filename>/sbin</filename>, <filename>/sbin/fs</filename>,  <filename>/sbin/fs.d</filename>,  <filename>/etc/fs</filename>, vs. (tam liste derleme işlemi esnasında tanımlanır ama en azından <filename>/sbin</filename> ve <filename>/sbin/fs</filename> bu listede mevcuttur) ve son olarak <literal>PATH</literal> çevre değişkeninde listelenen dizinlere bakılır. Ayrıntılı bilgi için dosya sistemlerine özgü oluşturma araçlarının kılavuz sayfalarına bakınız.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist>
+      <glossentry>
+        <glossterm><command>-V</command></glossterm>
+        <glossdef><para>Ayrıntılı bir çıktı verir. Bu çıktıda, çalıştırılmış olan bütün
+dosya sistemine özgü komutları belirtir. Bu seçeneğin bir kereden fazla belirtilmesi, dosya sistemine özgü komutların yürütülmesini engeller. Bu durum sadece sınama amaçlı olarak kullanıma uygundur. Bunun dışında bir faydası yoktur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t </command><varname>dstürü</varname></glossterm>
+        <glossdef><para>Oluşturulacak dosya sisteminin türü belirtilir. Şayet bu seçenek belirtilmemişse, öntanımlı dosya sistemi oluşturulur (güncel olarak: ext2).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>ds-seçenekleri</command></glossterm>
+        <glossdef><para>Gerçek dosya sistemi oluşturucusuna gönderilen dosya sistemine özgü
+seçenekler belirtilir. Herhangi bir garantisi olmamakla birlikte aşağıdaki seçenekler pek çok dosya sistemi tarafından desteklenir:
+        </para><para><glosslist>
+          <glossentry>
+            <glossterm><command>-c</command></glossterm>
+            <glossdef><para>Dosya sistemini oluşturmadan önce, aygıtı bozuk bloklar bakımından kontrol eder.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>-l </command><varname>dosyaismi</varname></glossterm>
+            <glossdef><para><varname>dosyaismi</varname> ile belirtilen dosyadan bozuk blokların listesini okur.
+            </para></glossdef>
+          </glossentry><glossentry>
+            <glossterm><command>-v</command></glossterm>
+            <glossdef><para>Ayrıntılı bir çıktı verir.
+            </para></glossdef>
+          </glossentry></glosslist>
+        </para></glossdef>
+      </glossentry></glosslist>
+  </refsect1><refsect1><title>YAZILIM HATALARI</title>
+    <para>
+Bütün genel seçenekler önceden belirtilmeli ve dosya sistemine özgü seçenekler ile harmanlanmaMAlıdır. Bazı dosya sistemlerine özgü yazılımlar <command>-v</command> (ayrıntılı çıktı) seçeneğini desteklemez ve geçerli çıkış kodları üretmezler. Ayrıca bazıları da aygıt boyutunu kendiliklerinden tanıyamazlar ve blok parametrelerinin belirtilmesi gerektiriler.
+    </para>
+ </refsect1><refsect1><title>YAZANLAR</title>
+    <para>
+David Engel <email>david@ods.com</email><sbr/>
+Fred N. van Kempen <email>waltje@uwalt.nl.mugnet.org</email><sbr/>
+Ron Sommeling <email>sommel@sci.kun.nl</email><sbr/>
+Bu kılavuz sayfası, utanmadan, Remy Card’ın ext2 dosya sistemi için
+olan sürümünden  uyarlanmıştır.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-fs"/>, <link linkend="tr-man8-badblocks"/>, <link linkend="tr-man8-fsck"/>, <link linkend="tr-man8-mkdosfs"/>, <link linkend="tr-man8-mke2fs"/>, <link linkend="tr-man8-mkfs.ext2"/>, <link linkend="tr-man8-mkfs.minix"/>, <link linkend="tr-man8-mkfs.msdos"/>, <link linkend="tr-man8-mkfs.xfs"/>,
+<link linkend="tr-man8-mkfs.xiafs"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

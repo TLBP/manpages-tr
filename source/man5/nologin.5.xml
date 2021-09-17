@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: nologin.5.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man5-nologin">
+<remark>.\" Copyright (c) 1993 Michael Haardt (michael@moria.de), Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 11:06:34 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Corrected Mon Oct 21 17:47:19 EDT 1996 by Eric S. Raymond (esr@thyrsus.com)
+</remark>
+  <refmeta>
+    <manvolnum>5</manvolnum>
+    <refentrytitle>nologin</refentrytitle>
+    <refmiscinfo class="header">Linux Yazılımcısının Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">Linux</refmiscinfo>
+    <refmiscinfo class="date">29 Aralık 1992</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>nologin</refname>
+    <refpurpose>sıradan kullanıcıların sisteme bağlanmasını önler</refpurpose>
+  </refnamediv>
+
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+Şayet sistemde bir <command>/etc/nologin</command> dosyası varsa, <link linkend="tr-man1-login"/> sisteme sadece <literal>root</literal> kullanıcının bağlanmasına izin verir.  Diğer kullanıcılar bağlanmaya çalışınca bu dosyanın içeriği görüntülenir ve bağlantı istekleri reddedilir.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para><filename>/etc/nologin</filename></para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-login"/>, <link linkend="tr-man8-shutdown"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Ağustos 2004</para>
+  </refsect1>
+</refentry>
+

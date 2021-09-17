@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: rm.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-rm">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>rm</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>rm</refname>
+    <refpurpose>dosya ve dizinleri siler</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>rm</command> [<emphasis>seçenek</emphasis>]... <emphasis>dosya</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+Bu kılavuz sayfası <command>rm</command> komutunun GNU sürümünü belgelemektedir. <command>rm</command> belirtilen dosyayı siler. Öntanımlı olarak, dizinleri silmez.
+    </para><para>
+Eğer <command>-I</command> veya <command>--interactive=once</command> seçeneği verilmiş ve üçten fazla dosya varsa veya <command>-r</command>,  <command>-R</command> veya <command>--recursive</command> verilmişse, <command>rm</command> kullanıcıya işlemin tamamı için devam edilip edilmeyeceğini sorar. Eğer yanıt, olumlu değilse işlemi yapmaz ve çıkar.
+    </para><para>
+Aksi takdirde, eğer bir dosya yazılamaz durumdaysa, standart girdi bir uçbirim olup <command>-f</command> veya <command>--force</command> seçeneği verilmemişse ya da <command>-i</command> veya <command>--interactive=always</command> seçeneği verilmişse <command>rm</command> kullanıcıya "dosya silinsin mi?" diye sorar. Yanıt olumlu değilse dosya atlanır.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title><para>
+<varname>dosya</varname>ları siler (bağları kaldırır).
+    </para><para>
+      <glosslist><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--force</command></glossterm>
+        <glossdef><para>Silerken sormaz, varolmayan bir dosya için bilgi vermez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossdef><para>Silmeden önce sorar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-I</command></glossterm>
+        <glossdef><para>
+Ardışık silerken veya üçten fazla dosyayı silerken silmeden önce sorar. Çoğu yanlışlığı önlemek bakımından hala koruyucu olmakla beraber <command>-i</command> seçeneğinden daha teklifsizdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--interactive</command><literal>[=<emphasis>nezaman</emphasis>]</literal></glossterm>
+        <glossdef><para><varname>nezaman</varname> istemde bulunması gerektiği belirtilir: <literal>never</literal> [asla], <literal>once</literal>  (<command>-I</command>) [bir kere],  <literal>always</literal>  (<command>-i</command>) [daima]. Bir değer belirtilmezse <literal>always</literal> belirtildiği varsayılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--one-file-system</command></glossterm>
+        <glossdef><para>Bir dizin içindeki dizinleri ve dosyaları ardışık silerken, başka bir dosya sistemine ait bir dizini silmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--no-preserve-root</command></glossterm>
+        <glossdef><para>`/' özel olarak ele alınmaz
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--preserve-root</command></glossterm>
+        <glossdef><para>`/' silinmez (öntanımlı)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>-R</command></glossterm>
+        <glossterm><command>--recursive</command></glossterm>
+        <glossdef><para>
+Dizinlerin ve alt dizinlerin içeriklerini ardarda siler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>
+Yapılan işlem hakkında daha ayrıntılı bilgi verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para><para>
+Öntanımlı olarak <command>rm</command> dizinleri silmez. Listedeki dizinleri de içindekilerle birlikte silmek için <command>--recursive</command> (<command>-r</command> veya <command>-R</command>) seçeneğini kullanın.
+    </para><para>
+'<literal>-</literal>' ile başlayan bir dosyayı silebilmek için aşağıdaki yöntemlerden birisini kullanın (örnek dosya: '<filename>-foo</filename>'):
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para>
+<command>rm </command><literal>-- -foo</literal>
+         </para></glossdef>
+       </glossentry><glossentry>
+         <glossdef><para>
+<command>rm </command><literal>./-foo</literal>
+         </para></glossdef>
+       </glossentry></glosslist>
+     </para><para>
+<command>rm</command> komutu ile bir dosyayı sildikten sonra, bu dosyanın içeriğini geri getirmenin mümkün olduğunu unutmayın. Şayet dosya içeriğinin geri getirilmesini önlemek istiyorsanız, <command>shred</command> kullanmayı ciddi ciddi düşünmelisiniz.
+      </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Paul Rubin, David MacKenzie, Richard Stallman, and Jim Meyering tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-chattr"/>,
+<link linkend="tr-man1-shred"/>,
+<link linkend="tr-man1-unlink"/>,
+<link linkend="tr-man2-unlink"/>.
+     </para><para>
+<command>rm</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>rm</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils rm</command></para></glossdef>
+       </glossentry></glosslist>
+     </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Ekim 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>
+
+

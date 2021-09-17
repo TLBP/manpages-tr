@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: drop_language.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-drop_language">
+ <refmeta>
+  <refentrytitle>DROP LANGUAGE</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>DROP LANGUAGE</refname>
+  <refpurpose>bir yordamsal dili kaldırır</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>DROP</command> [ <command>PROCEDURAL</command> ] <command>LANGUAGE</command> <emphasis>isim</emphasis> [ <command>CASCADE</command> | <command>RESTRICT</command> ]
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>DROP LANGUAGE</command>, <replaceable>isim</replaceable> adlı evvelce kaydedilmiş yordamsal dilin tanımını siler.
+  </para></refsect1><refsect1><title>Parametreler</title>
+  <variablelist><varlistentry>
+    <term><replaceable>isim</replaceable></term>
+    <listitem><para>Mevcut bir yordamsal dilin ismi. Geriye uyumlulk bakımından, isim tektırnakların içine alınmış olabilir.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>CASCADE</command></term>
+    <listitem><para>Dile bağımlı nesnelerin de (örn, dilin işlevleri) silinmesini sağlar.
+    </para></listitem></varlistentry><varlistentry>
+    <term><command>RESTRICT</command></term>
+    <listitem><para>Dile bağımlı nesneler varsa dilin kaldırılmasını engeller. Bu öntanımlıdır.
+    </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Örnekler</title><para>
+<literal>plsample</literal> yordamsal dilini kaldırmak için:
+ </para><para>
+<programlisting indent="4">DROP LANGUAGE plsample;</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+SQL standardında <command>DROP LANGUAGE</command> diye bir deyim yoktur.
+  </para></refsect1><refsect1><title>İlgili Belgeler</title><para>
+<link linkend="tr-man7-alter_language" xreflabel="ALTER LANGUAGE"/>,<sbr/>
+<link linkend="tr-man7-create_language" xreflabel="CREATE LANGUAGE"/>,
+<link linkend="tr-man1-droplang"/>.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Nisan 2005
+</para></refsect1>
+</refentry>
+
+

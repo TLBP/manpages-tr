@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: kill.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man1-kill">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>kill</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>kill</refname>
+    <refpurpose>süreçlere sinyal gönderir veya sinyalleri listeler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>kill</command> [ <command>-s </command> <emphasis>sinyal</emphasis> | -<emphasis>sinyal</emphasis> ] <emphasis>pid</emphasis> ...
+<command>kill  -l</command> [ <emphasis>sinyal</emphasis> ] ...
+<command>kill  -t</command> [ <emphasis>sinyal</emphasis> ] ...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>kill</command> komutu belirtilen sinyali, belirtilen süreç veya süreç grubuna gönderir.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar kısa seçenekler için de zorunludur.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <glosslist><glossentry>
+      <glossterm><command>-s </command></glossterm>
+      <glossterm><command>--signal=</command><varname>sinyal</varname> </glossterm>
+      <glossterm><command>-</command><varname>sinyal</varname></glossterm>
+      <glossdef><para>
+Gönderilecek <varname>sinyal</varname> belirtilir. Sinyal, adı ile veya numarası ile belirtilebilir.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-l</command></glossterm>
+      <glossdef><para>
+Sinyal isimlerinin bir listesini basar veya sinyal isimleri ile sinyal numaraları arasında dönüşüm yapar.
+      </para></glossdef>
+    </glossentry><glossentry>
+      <glossterm><command>-t</command></glossterm>
+      <glossterm><command>--table</command></glossterm>
+      <glossdef><para>Bir sinyal bilgileri tablosu basar.
+      </para></glossdef>
+    </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist><para>
+<varname>sinyal</varname> `<literal>HUP</literal>' gibi bir sinyal ismi, `1' gibi bir sinyal numarası veya bir sinyal tarafından sonlandırılmış bir sürecin çıkış durumu olabilir. <varname>pid</varname> bir tamsayıdır; eğer negatifse bir süreç grubunu ifade eder.
+      </para><warning><para>Kullandığınız kabuk burada açıklanandan farklı bir <command>kill</command> komutu içeriyor olabilir. Desteklenen seçenekler için kullanmakta olduğunuz kabuğun belgelerine göz atmanız faydalı olabilir.
+    </para></warning>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Paul Eggert tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<command>kill</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>kill</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils kill</command></para></glossdef>
+       </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın KOLUKISA <email>yalcink01@yahoo .com</email>, Ekim 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>
+
+

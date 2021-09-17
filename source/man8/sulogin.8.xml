@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: sulogin.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-sulogin">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>sulogin</refentrytitle>
+    <refmiscinfo class="header">Linux Sistem Yöneticisinin Kılavuzu</refmiscinfo>
+    <refmiscinfo class="date">20 Kasım 1998</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>sulogin</refname>
+    <refpurpose>tek kullanıcılı kipte sisteme giriş</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>sulogin</command> [ <command>-t </command><emphasis>zamanaşımı</emphasis> ] [ <command>-p </command> ] [ <emphasis>tty-aygıtı</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>sulogin</command>, sistem tek kullanıcılı kipe geçerken, <link linkend="tr-man8-init"/> tarafından çağrılır (bu <link linkend="tr-man5-inittab"/> içindeki bir girdi üzerinden yapılır).  Önyükleyicide (örneğin; LILO) <command>–b</command> seçeneği belirtildiği durumlarda da, <command>init</command>, <command>sulogin</command>’i çalıştırmayı dener.
+    </para><glosslist><glossentry>
+    <glossterm>Kullanıcı şöyle bir uyarı alır:</glossterm><glossdef><para>
+Give root password for system maintenance<sbr/>
+(or type Control-D for normal startup):
+    </para></glossdef></glossentry>
+    <glossentry><glossterm>Türkçesi:</glossterm><glossdef><para>
+Sistemi onarmak için root parolasını giriniz<sbr/>
+(normal açılış için ise Ctrl-D tuşlayınız):
+    </para></glossdef></glossentry></glosslist>
+    <para>
+Şayet <command>–p</command> seçeneği belirtilmişse, tek kullanıcılı kabuk, <literal>argv[0]</literal>'daki ilk karakter olarak tire ile çağrılır. Bu, pek çok kabuğun, bir giriş kabuğu gibi davranmasına sebep olur. Öntanımlı olarak bu böyle olmaz; kabuk  başlangıçta, <command>/etc/profile</command> ve <command>$HOME/.profile</command> dosyalarını okumayacaktır.
+    </para><para>
+Kullanıcı tek kullanıcılı kipten çıktıktan sonra veya başta Ctrl-D tuşlarına basılmış ise, sistem öntanımlı açılış seviyesinde açılışı yapar (açılış yapmaya devam eder).
+    </para>
+  </refsect1><refsect1><title>ORTAM DEĞİŞKENLERİ</title>
+    <para>
+<command>sulogin</command>, hangi kabuğu başlatacağına karar vermek için, <command>SUSHELL</command> veya <command>sushell</command> değişkenlerine bakar.  Şayet bu değişkenler tanımlı değilse, <filename>/etc/passwd</filename> içinde root kullanıcı için belirtilen kabuğu çalıştırmayı dener. Bunda da başarılı olamazsa, <command>/bin/sh</command>’a düşer.
+    </para><para>
+Bu, <command>–b</command> seçeneği ile birlikte, <command>init</command> için çok önemlidir. Sistemi (kök dosya sistemi oku/yaz kipinde bağlanmış olarak) tek kullanıcılı kipte açmak için (durağan olarak  bağlanmış özel bir "başarısız olmayan" (failsafe) kabuk kullanarak) LILO açılış ekranında şunu yazın:
+    </para><para>
+<screen indent="4">
+boot: linux -b rw sushell=/sbin/sash
+</screen>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout><command>/etc/mtab</command> - bağlı dosya sistemleri tablosunu tutan dosya
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+Sulogin, root parolasını bulmak için aşağıdaki dosyaları inceler. Şayet bu dosyalar yoksa veya bozulmuş ise <command>/bin/sh</command>’a düşer. Şayet bu dosyalar onarılamaz bir biçimde bozulmuş ise, size root parolasını sormaksızın, kabuğa düşer.
+    </para><para>
+<literallayout indent="4">
+/etc/passwd,
+/etc/shadow    (şayet varsa)
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man5-inittab"/>, <link linkend="tr-man8-init"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Miquel van Smoorenburg <email>miquels@cistron.nl</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+

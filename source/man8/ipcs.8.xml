@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: ipcs.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-ipcs">
+<remark>.\" Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>ipcs</refentrytitle>
+    <refmiscinfo class="header">Linux Yazılımcısının Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">Linux 0.99</refmiscinfo>
+    <refmiscinfo class="date">9 Ekim 1993</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>ipcs</refname>
+    <refpurpose>süreçlerarası iletişim oluşumları hakkında bilgi verir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>ipcs </command>[ <command>-asmq</command> ] [ <command>-tclup</command> ]
+<command>ipcs </command>[ <command>-smq</command> ] <command>-i </command><emphasis>kimlik</emphasis>
+<command>ipcs -h</command>
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+IPC, InterProcess Communications (süreçlerarası iletişim) kısaltmasıdır.
+   </para><para>
+<command>-i</command> seçeneği belirli bir kimlik belirtilebilmesini sağlar. Sadece bu süreç kimliği hakkındaki bilgi görüntülenir.
+    </para><para>
+Özkaynaklar şöyle belirtilebilir:
+    </para><para><glosslist><glossentry>
+    <glossterm><command>-m</command></glossterm>
+    <glossdef><para>Paylaşımlı bellek segmanları
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-q</command></glossterm>
+    <glossdef><para>İleti kuyrukları
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-s</command></glossterm>
+    <glossdef><para>Semafor dizileri
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-a</command></glossterm>
+    <glossdef><para>Hepsi (öntanımlı davranış)
+    </para></glossdef>
+    </glossentry></glosslist></para><para>
+Çıktı biçimi aşağıdakilerden biri olarak tanımlanabilir:
+    </para><para><glosslist><glossentry>
+    <glossterm><command>-t</command></glossterm>
+    <glossdef><para>zaman
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-p</command></glossterm>
+    <glossdef><para>süreç kimliği (PID)
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-c</command></glossterm>
+    <glossdef><para>oluşturucu
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-l</command></glossterm>
+    <glossdef><para>sınırlar
+    </para></glossdef>
+    </glossentry><glossentry>
+    <glossterm><command>-u</command></glossterm>
+    <glossdef><para>özet
+    </para></glossdef>
+    </glossentry></glosslist></para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-ipcrm"/>
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Krishna Balasubramanian <email>balasub@cis.ohio-state.edu</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Mart 2004</para>
+  </refsect1>
+</refentry>
+

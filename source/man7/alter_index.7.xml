@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: alter_index.7.xml,v 1.8 2002/12/20 22:46:09 nilgun Exp $
+     ******************************************************************** -->
+
+<refentry id="tr-man7-alter_index">
+ <refmeta>
+  <refentrytitle>ALTER INDEX</refentrytitle>
+  <manvolnum>7</manvolnum>
+  <refmiscinfo class="header">SQL - Dil Deyimleri</refmiscinfo>
+  <refmiscinfo class="domain">PostgreSQL</refmiscinfo>
+ </refmeta>
+
+ <refnamediv>
+  <refname>ALTER INDEX</refname>
+  <refpurpose>bir indeksin tanımını değiştirir</refpurpose>
+ </refnamediv>
+
+ <refsynopsisdiv>
+<synopsis><command>ALTER INDEX</command> <emphasis>isim</emphasis> <command>RENAME TO</command> <emphasis>yeni_isim</emphasis>
+
+<command>ALTER INDEX</command> <emphasis>isim</emphasis> <emphasis>eylem</emphasis> [, ... ]
+
+burada <emphasis>eylem</emphasis> şunlardan biri olabilir:
+
+    <command>OWNER TO</command> <emphasis>yeni_aidiyet</emphasis>
+    <command>SET TABLESPACE</command> <emphasis>tablo_alanı_ismi</emphasis>
+</synopsis>
+ </refsynopsisdiv>
+ <refsect1><title>Açıklama</title><para>
+<command>ALTER INDEX</command> mevcut bir indeksin tanımını değiştirir. Çeşitli altbiçimleri vardır:
+  </para><para>
+  <variablelist><varlistentry>
+    <term><command>OWNER</command></term>
+    <listitem><para>Bu biçim belirtilen kullanıcıyı indeksin sahibi  yapar. Sadece ayrıcalıklı kullanıcı tarafından uygulanabilir.
+     </para></listitem></varlistentry><varlistentry>
+    <term><command>SET TABLESPACE</command></term>
+    <listitem><para>Bu biçim belirtilen tablo alanını indeksin tablo alanı yapar ve indeks ile ilgili veri dosyalarını yeni tablo alanına taşır. Ayrıca, <link  linkend="tr-man7-create_tablespace" xreflabel="CREATE TABLESPACE"/> kılavuz sayfasına da bakınız.
+     </para></listitem></varlistentry><varlistentry>
+    <term><command>RENAME</command></term>
+    <listitem><para>Bu biçim indeksin ismini değiştirir. Kayıtlı veriler üzerinde etkisizdir.
+     </para></listitem></varlistentry></variablelist>
+  </para><para>
+<command>RENAME</command> dışındaki tüm eylemler çok sayıda değişikliğin birlikte uygulanması için bir liste halinde birleştirilebilir.
+  </para></refsect1><refsect1><title>Parametreler</title>
+    <variablelist><varlistentry>
+      <term><replaceable>isim</replaceable></term>
+      <listitem><para>Değiştirilecek mevcut bir indeksin ismi (şema nitelemeli olabilir)
+       </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>yeni_isim</replaceable></term>
+      <listitem><para>İndeksin yeni ismi.
+       </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>yeni_aidiyet</replaceable></term>
+      <listitem><para>İndeksin yeni sahibinin kullanıcı ismi.
+       </para></listitem></varlistentry><varlistentry>
+      <term><replaceable>tablo_alanı_ismi</replaceable></term>
+      <listitem><para>İndexin taşınacağı tablo alanının ismi.
+       </para></listitem></varlistentry></variablelist>
+ </refsect1><refsect1><title>Ek Bilgi</title> <para>
+Bu işlemleri <link linkend="tr-man7-alter_table" xreflabel="ALTER TABLE"/> kullanarak da yapmak mümkündür. <command>ALTER INDEX</command> aslında, <command>ALTER TABLE</command> deyiminin indekslere uygulanan bir benzeridir.
+   </para><para>
+Sistem katalog indekslerinde değişikliğe izin verilmez.
+   </para></refsect1><refsect1><title>Örnekler</title><para>
+Mevcut bir indeksin ismini değiştirmek için:
+   </para><para>
+<programlisting indent="4">ALTER INDEX distributors RENAME TO suppliers;
+</programlisting>
+  </para><para>
+Bir indeksi başka bir tablo alanına taşımak için:
+  </para><para>
+<programlisting indent="4">ALTER INDEX distributors SET TABLESPACE fasttablespace;
+</programlisting>
+  </para></refsect1><refsect1><title>Uyumluluk</title><para>
+<command>ALTER INDEX</command>, bir <productname>PostgreSQL</productname> oluşumudur.
+  </para></refsect1><refsect1><title>Çeviren</title><para>
+Nilgün Belma Bugüner <email>nilgun@belgeler·gen·tr</email>, Mart 2005
+</para></refsect1>
+</refentry>
+
+

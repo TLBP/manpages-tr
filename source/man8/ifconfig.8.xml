@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: ifconfig.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-ifconfig">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>ifconfig</refentrytitle>
+    <refmiscinfo class="header">Linux Sistem Yöneticisinin Kılavuzu</refmiscinfo>
+    <refmiscinfo class="domain">net-tools</refmiscinfo>
+    <refmiscinfo class="date">14 Ağustos 2000</refmiscinfo>
+  </refmeta>
+
+  <refnamediv><refname>ifconfig</refname>
+    <refpurpose>bir ağ arayüzünü yapılandırır</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>ifconfig</command> [<emphasis>arayüz</emphasis>]
+<command>ifconfig</command> <emphasis>arayüz</emphasis> [<emphasis>adres_ailesi</emphasis>] <emphasis>seçenekler</emphasis> | <emphasis>adres</emphasis>
+</synopsis></refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title><para>
+<command>ifconfig</command>, çekirdek içinde bulunan ağ arayüzlerini ayarlamak için kullanılır.  Gerekli olan arayüzleri açılış esnasında ayarlamak için kullanılır. Bu işlem sonrasında sadece sistemi yeniden yapılandırmak gerekirse ya da hata ayıklamak için kullanılabilir.
+    </para><para>
+Şayet herhangi bir argüman belirtilmemişse, <command>ifconfig</command> o an için geçerli olan arayüzlerin durumu hakkında bilgi verir. Şayet tek bir <varname>arayüz</varname> belirtilirse, sadece bu arayüz hakkında bilgiler alınabilir. Şayet sadece <command>–a</command> seçeneği belirtilmiş ise, sistemde bulunan bütün arayüzler hakkında bilgi görüntülenir. Bu arayüzlerin etkin olup olmaması önemli değildir. Diğer durumlarda arayüzleri ayarlamak için kullanılır.
+    </para><refsect2><title>Adres Aileleri</title><para>
+Şayet arayüzden sonraki ilk argüman desteklenen adres ailelerinden biri ise,
+bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: <command>inet</command> (TCP/IP, öntanımlıdır), <command>inet6</command> (IPv6), <command>ax25</command> (AMPR paket radyo), <command>ddp</command> (Appletalk Phase  2), <command>ipx</command> (Novell  IPX)  ve <command>netrom</command> (AMPR paket radyo).
+   </para></refsect2></refsect1><refsect1><title>SEÇENEKLER</title>
+   <para><glosslist><glossentry>
+     <glossterm><varname>arayüz</varname></glossterm>
+        <glossdef><para>Arayüzün adı. Bu genellikle bir sayı ile biten bir  sürücü adı olur. Örneğin; ilk Ethernet arayüzü için <command>eth0</command> kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>up</command></glossterm>
+        <glossdef><para>Bu seçenek arayüzün etkinleştirilmesini sağlar. Şayet arayüze bir adres atanmış ise, bu seçenek dolaylı olarak tanımlanmış olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>down</command></glossterm>
+        <glossdef><para>Bu seçenek belirtilen arayüz sürücüsünün kapanmasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>[-]</literal><command>arp</command></glossterm>
+        <glossdef><para>Belirtilen arayüzde ARP protokolünün kullanılması/kullanılmamasını sağlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>[-]</literal><command>promisc</command></glossterm>
+        <glossdef><para>Belirtilen arayüzün ayrım gözetmeme (promiscuous) kipi etkin kılınır/iptal edilir. Şayet bu seçenek etkin duruma getirilirse, belirtilen arayüz, ağ üzerindeki bütün paketleri toplar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>[-]</literal><command>allmulti</command></glossterm>
+        <glossdef><para>Çoğa gönderim (all-multicast) kipi etkin kılınır/iptal edilir. Şayet bu seçenek etkin duruma getirilirse, belirtilen arayüz, ağ üzerindeki bütün çoğa gönderilmiş paketleri toplar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>metric </command><varname>N</varname></glossterm>
+        <glossdef><para>Bu parametre arayüzün Metric alanını ayarlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>dstaddr </command><varname>adres</varname></glossterm>
+        <glossdef><para>İki nokta arası bağlantı için (mesela PPP bağlantısı) uzak bilgisayar IP adresini ayarlar. Bu seçenek günümüzde pek kullanılmamaktadır. Onun yerine <command>pointtopoint</command> seçeneğini kullanın.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>netmask </command><varname>adres</varname></glossterm>
+        <glossdef><para>Arayüz için IP ağ maskesini ayarlar. Öntanımlı olarak bu değer, A, B veya C sınıfı ağ maskelerinden biridir (Arayüz IP adresinden elde edilen), fakat herhangi bir değer de kullanılabilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>add </command><varname>adres/önek_uzunluğu</varname></glossterm>
+        <glossdef><para>Arayüze bir IPv6 adresi ekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>del </command><varname>adres/önek_uzunluğu</varname></glossterm>
+        <glossdef><para>Arayüzden bir IPv6 adresini kaldırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>tunnel </command><varname>aa.bb.cc.dd</varname></glossterm>
+        <glossdef><para>Belirtilen hedefi tünelleyerek yeni bir SIT (IPv4 içinde IPv6) aygıtı oluşturur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>irq </command><varname>adres</varname></glossterm>
+        <glossdef><para>Aygıt tarafından kullanılan donanım kesmesini ayarlar. Bütün aygıtlar kendi IRQ ayarlarını özdevinimli değiştiremez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>io_adres </command><varname>adres</varname></glossterm>
+        <glossdef><para>Aygıtın I/O uzayındaki başlangıç adresini ayarlar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>mem_start </command><varname>adres</varname></glossterm>
+        <glossdef><para>Aygıt tarafından kullanılan paylaşmlı belleğin başlangıç adresini ayarlar.  Çok az aygıt için bu ayara ihtiyaç vardır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>media </command><varname>tür</varname></glossterm>
+        <glossdef><para>Aygıt tarafından kullanılan ortam türünü ya da fiziksel portu ayarlar. Bütün aygıtlar bu ayarları değiştiremez ve bunu yapabilen aygıtlar da destekledikleri değerler açısından çeşitlilik gösterirler. Genel <varname>tür</varname> değerleri şunlardır:  <command>10base2</command> (ince Ethernet), <command>10baseT</command> (ikili-bükülü 10Mbps Ethernet),  <command>AUI</command>  (harici verici) ve benzerleri.  <varname>tür</varname> olarak <command>auto</command> değeri belirtilerek aygıtın ortamı kendinin tespit etmesi sağlanabilir. Bunu bütün aygıtların yapamayacağını unutmayın.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>[-]</literal><command>broadcast </command><literal>[<emphasis>adres</emphasis>]</literal></glossterm>
+        <glossdef><para>Şayet <varname>adres</varname> belirtilmişse, bu arayüz için protokol yayın adresini ayarlar, belirtilmezse bu arayüz için <command>IFF_BROADCAST</command> seçeneği etkinleştirilir ya da iptal edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>[-]</literal><command>pointopoint </command><literal>[<emphasis>adres</emphasis>]</literal></glossterm>
+        <glossdef><para>Bu seçenekle noktadan noktaya kipini etkin duruma getirebilirsiniz. Bu sayede kimsenin dinleyemeyeceği, iki nokta arası doğrudan bir bağ kurulmuş olur.  Şayet <varname>adres</varname> argümanı da verilmiş ise, tıpkı <command>dstaddr</command> seçeneği ile yapıldığı gibi bağlantının diğer ucu için protokol adresini ayarlar, verilmezse bu arayüz için  <command>IFF_POINTOPOINT</command> seçeneği etkinleştirilir ya da iptal edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>hw </command><varname>sınıf adres</varname></glossterm>
+        <glossdef><para>Şayet aygıt sürücüsü destekliyorsa, bu arayüzün donanım adresini ayarlar.  Bu seçenekte donanımın <varname>sınıf</varname> ismi ve <varname>adres</varname>in basılabilir ASCII eşdeğeri belirtilmek zorundadır. Desteklenen donanım sınıfları şunlardır: <command>ether</command> (Ethernet), <command>ax25</command> (AMPR AX.25), <command>ARCnet</command> ve <command>netrom</command> (AMPR NET/ROM).
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>multicast</command></glossterm>
+        <glossdef><para>Arayüz için <command>MULTICAST</command> seçeneğini etkin duruma getirir. Normalde, bu seçeneği aygıtlar kendi başlarına doğru bir şekilde ayarlayabildiğinden gerekli değildir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><varname>adres</varname></glossterm>
+        <glossdef><para>Arayüze atanacak IP adresi.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>txqueuelen </command><varname>uzunluk</varname></glossterm>
+        <glossdef><para>Aygıtın iletim kuyruğunun uzunluğunu ayarlar. Yüksek iletim zamanlı (modem hatları, ISDN) yavaş aygıtlar için bu değeri küçük tutmak, telnet gibi çok fazla etkileşimli ağ trafiği yaratan protokollerin hızlı ve hacimli aktarımlarından kaçınmak için faydalı olur.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>EK BİLGİLER</title>
+    <para>
+2.2 çekideğinden beri takma isimli arayüzler için ayrıntılı arayüz istatistikleri bulunmamaktadır. Orijinal adres için basılan istatistikler, aynı aygıttaki bütün takma isimli adresler ile paylaşılır. Şayet her bir adres için ayrı bir istatistik elde etmek istiyorsanız, <link linkend="tr-man8-ipchains"/> kullanarak her bir adres için ayrı hesap kuralları belirlemek zorundasınız.
+    </para><para>
+Donanım kesmesi sorunu olan Ethernet aygıtı sürücüleri <literal>EAGAIN</literal> ile başarısız olur. Bu konuda daha ayrıntılı bilgiyi<sbr/><ulink url="http://cesdis.gsfc.nasa.gov/linux/misc/irq-conflict.html"/> adresinde bulabilirsiniz.
+    </para></refsect1><refsect1><title>İLGİLİ DOSYALAR</title><para>
+<literallayout indent="0">
+<filename>/proc/net/socket</filename>
+<filename>/proc/net/dev</filename>
+<filename>/proc/net/if_inet6</filename>
+</literallayout>
+  </para></refsect1><refsect1><title>YAZILIM HATALARI</title><para>
+Appletalk DDP ve IPX adresleri görüntüleneceği zaman, bu komut ile değişiklik yapılamamaktadır.
+  </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+<link linkend="tr-man8-arp"/>, <link linkend="tr-man8-ipchains"/>, <link linkend="tr-man8-netstat"/>, <link linkend="tr-man8-rarp"/>, <link linkend="tr-man8-route"/>.
+  </para></refsect1><refsect1><title>YAZANLAR</title>
+    <para>Fred N. van Kempen <email>waltje@uwalt.nl.mugnet.org</email><sbr/>Alan Cox, <email>Alan.Cox@linux.org</email><sbr/>Phil Blundell, <email>Philip.Blundell@pobox.com</email><sbr/>Andi Kleen</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcin@belgeler.org</email>, Ağustos 2004</para>
+  </refsect1>
+</refentry>
+

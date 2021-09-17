@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: init.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-init">
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>init</refentrytitle>
+    <refmiscinfo class="header">Linux Sistem Yöneticisinin Kılavuzu</refmiscinfo>
+    <refmiscinfo class="date">23 Ağustos 2001</refmiscinfo>
+  </refmeta>
+  <refnamediv><refname>init</refname>
+    <refpurpose>süreç kontrol başlangıcı</refpurpose>
+  </refnamediv><refnamediv><refname>telinit</refname>
+    <refpurpose>çalışma seviyesini değiştirir</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>/sbin/init   </command> [ <command>-a</command> ] [ <command>-s</command> ] [ <command>-b</command> ] [ <command>-z </command><emphasis>xxx</emphasis>] [ <command>0123456Ss</command> ]
+<command>/sbin/telinit</command> [ <command>-t </command><emphasis>saniye</emphasis> ] [ <command>0123456sSQqabcUu</command> ]
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>init</command>, bütün süreçlerin atasıdır. <command>init</command>’in birincil görevi <command>/etc/inittab</command> içinde saklı betikten süreçler oluşturmaktır (ayrıntılar için <link linkend="tr-man5-inittab"/>’a bakınız). Bu dosyada, <command>init</command>’in çeşitli hatlar üzerinden kullanıcıların bağlanmasını sağlamak üzere <link linkend="tr-man1-getty"/> süreçleri oluşturmasını sağlayan girdiler vardır. Ayrıca belirli sistemler tarafından ihtiyaç duyulan özerk süreçleri de kontrol eder.
+    </para>
+  </refsect1><refsect1><title>ÇALIŞMA SEVİYELERİ</title>
+    <para>
+Çalışma seviyesi, sistemde varolan süreçlerden belirtilmiş olanların
+çalışmasını sağlayan yazılım yapılandırmasına verilen addır. Her bir çalışma seviyesi için, <command>init</command> tarafından başlatılan süreçler <command>/etc/inittab</command> dosyası içinde tanımlıdır. <command>init</command> sekiz değişik çalışma seviyesinden birinde olabilir: <command>0-6</command>, <command>S</command> veya <command>s</command>. Çalışma seviyesi <command>telinit</command> kullanılarak yetkili bir kullanıcı tarafından, <command>init</command>'e uygun bir sinyal gönderilerek değiştirilir.
+    </para><para>
+Çalışma seviyeleri <command>0</command>, <command>1</command> ve <command>6</command> ayrılmış seviyelerdir. <command>0</command> sistemi durdurmak için, <command>6</command> tekrar başlatmak için ve <command>1</command> ise tek kullanıcılı kipe döndürmek için kullanılır. <command>S</command> seviyesi doğrudan kullanıcı ile alakalı değildir, daha çok çalışma seviyesi <command>1</command>’e girerken çalıştırılan betikleri ifade eder. Bu konuda daha fazla bilgi için <link linkend="tr-man8-shutdown"/> ve <link linkend="tr-man5-inittab"/>'a bakınız.
+    </para><para>
+7-9 arası çalışma seviyeleri de geçerlidir ama bu seviyeler hakkında
+belgelendirme yapılmamıştır. Çünkü “geleneksel” Unix türevleri bu seviyeleri kullanmazlar. Sırf merakınız gidermek için belirteyim ki <command>S</command> ve <command>s</command> aynıdır ve aynı çalışma seviyesini belirtirler.
+    </para>
+  </refsect1><refsect1><title>SİSTEM AÇILIŞI</title>
+    <para>
+Çekirdek açılış töreninin son halkası olarak <command>init</command> çalıştırıldığı zaman, içinde öntanımlı çalışma seviyesi girdisi olup olmadığını kontrol etmek için <command>/etc/inittab</command> dosyasına bakılır (bakınız <link linkend="tr-man5-inittab"/>). Bu öntanımlı çalışma seviyesi, sistem açılışı sonrası düşülecek çalışma seviyesini belirtir. Bu tür bir girdi yok ise veya <command>/etc/inittab</command> dosyası yok ise, konsoldan bir çalışma seviyesi girilmesi gerekir.
+    </para><para>
+Çalışma seviyeleri <command>S</command> veya <command>s</command>, sistemi tek kullanıcı kipe sokar ve <command>/etc/initab</command> dosyasına ihtiyaç duymazlar. Tek kullanıcılı kipte, <command>/dev/console</command> üzerinde bir root kullanıcı kabuğu açılır.
+    </para><para>
+Tek kullanıcılı kipine girilince, <command>init</command> konsolun <link linkend="tr-man2-ioctl"/> durumunu <command>/etc/ioctl.save</command> dosyasında okur. Şayet bu dosya yok ise, <command>init</command> hattı <command>9600 baud</command> ve <command>CLOCAL</command> ile ilklendirir. <command>init</command> tek kullanıcılı kipi terk ederken konsolun <command>ioctl</command> ayarlarını bu dosyaya kaydeder. Böylece tekrar tek kullanıcılı kipe geçildiği zaman bu ayarları kullanabilir.
+    </para><para>
+Çok kullanıcılı kipe ilk sefer girişte, kullanıcılar bağlanmadan önce dosya sisteminin bağlanmasını sağlayabilmek için <command>boot</command> ve <command>bootwait</command> girdileri <command>init</command> tarafından çalıştırılır. Daha sonra çalışma seviyesi ile eşleşen bütün girdiler çalıştırılır.
+    </para><para>
+Yeni bir süreç başlatılırken, <command>init</command> ilk olarak <filename>/etc/initscript</filename> dosyasının var olup olmadığını kontrol eder. Şayet var ise, bu dosyada bulunan betikler süreci başlatmak için kullanılır.
+    </para><para>
+Bir alt süreç her sonlandığında, bunun sebebi <command>init</command> tarafından <command>/var/run/utmp</command> ve <command>/var/log/wtmp</command> içine yazılır (bu dosyaların mevcut olup olmadığı önce kontrol edilir).
+    </para>
+  </refsect1><refsect1><title>ÇALIŞMA SEVİYELERİNİN DEĞİŞTİRİLMESİ</title>
+    <para>
+Belirtilen bütün süreçler çalıştırıldıktan sonra <command>init</command>; kendi oluşturduğu bir sürecin sonlandırılmasını, bir enerji kesme sinyalinin veya <command>telinit</command> tarafından gönderilen bir çalışma seviyesi değiştirme sinyalinin gelmesini bekler. Bu üç durumdan biri gerçekleşirse, <command>/etc/inittab</command> dosyasını tekrar kontrol eder. Bu dosyaya yeni girdiler eklenmiş olabilir. Bununla birlikte, <command>init</command> bunlardan birinin gerçekleşmesini bekler. Durumlara anında tepki verebilmek için, <command>telinit</command>'in <command>Q</command> veya <command>q</command> komutu ile <command>init</command>’in <command>/etc/inittab</command> dosyasını tekrar kontrol etmesi sağlanabilir.
+
+Şayet <command>init</command> tek kullanıcılı kipte değilse ve bir enerji kesme sinyali alırsa (<literal>SIGPWR</literal>), gidip <command>/etc/powerstatus</command> dosyasını okur. Daha sonra bu dosyanın içeriğine bağlı olarak şu komutlardan birini uygular:
+    </para><para><glosslist><glossentry>
+      <glossterm><command>F</command><literal>(AIL)</literal></glossterm>
+      <glossdef><para>Enerji KGK tarafından sağlanıyordur ve bir süre sonra enerji kesilecektir. <command>powerwait</command> ve <command>powerfail</command> girdileri çalıştırılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>O</command><literal>(K)</literal></glossterm>
+      <glossdef><para>Enerji tekrar gelmiştir. <command>powerokwait</command> girdisi çalıştırılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+      <glossterm><command>L</command><literal>(OW)</literal></glossterm>
+      <glossdef><para>KGK'nın akülerindeki enerji azalmaktadır ve enerji kesilecektir. <command>Powerfailnow</command> girdisi çalıştırılır.
+        </para></glossdef>
+      </glossentry></glosslist></para><para>
+Şayet <filename>/etc/powerstatus</filename> yok ise veya <command>F</command>, <command>O</command> veya <command>L</command> harflerinden farklı bir
+şey ihtiva ediyorsa, <command>init</command>, <command>F</command> harfini okuduğunu kabul eder ve ona göre davranır.
+      </para><para>
+<command>SIGPWR</command> ve <command>/etc/powerstatus</command> kullanımı tavsiye edilmez. <command>init</command> ile etkileşimli kipe geçmek isteyen birisinin <command>/dev/initctl</command>’yi kullanması daha uygun olur. Bu konuda daha ayrıntılı bilgi için <command>sysvinit</command> paketinin kaynak kodundaki belgelere bakınız.
+
+Çalışma seviyesi değiştirme isteği <command>init</command>’e iletilince; <command>init</command> yeni seviyede tanımlanmamış olan bütün süreçlere <command>SIGTERM</command> sinyali gönderir. Daha sonra bu süreçleri sonlandırmadan önce 5 saniye bekler. 5 saniye sonra <command>SIGKILL</command> sinyali gönderir. NOT: <command>init</command> bütün süreçlerin ve onların alt süreçlerinin aynı süreç grubu içinde kaldığını varsayar. Şayet herhangi bir süreç, süreç grubunu üyeliğini değiştirmiş ise, o süreç bu sonlandırma sinyalini almaz. Bu tür süreçlerin ayrıca sonlandırılması gerekir.
+    </para>
+  </refsect1><refsect1><title>TELINIT</title>
+    <para>
+<command>/sbin/telinit, /sbin/init</command>’e bir bağdır. Tek karakterlik argümanlar ve sinyalleri kabul eder. Aşağıdaki argümanlar <command>telinit</command>’e talimat olarak verilebilir:
+    </para><para><glosslist>
+      <glossentry><glossterm>
+        <command>0,1,2,3,4,5</command> veya <command>6</command>
+      </glossterm><glossdef><para><command>init</command>'in, belirtilen çalışma seviyesine geçmesi istenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>a,b</command> veya <command>c</command>
+      </glossterm><glossdef><para><command>init</command>'in, sadece <command>a,b</command> veya <command>c</command> çalışma seviyesi için verilmiş olan <command>/etc/inittab</command> dosyası girdilerini çalıştırması istenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>Q</command> veya <command>q</command>
+      </glossterm><glossdef><para><command>init</command>'in, <command>/etc/inittab</command> dosyasını tekrar kontrol etmesi istenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>S</command> veya <command>s</command>
+      </glossterm><glossdef><para><command>init</command>'in tek kullanıcılı kipe geçmesi istenir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>U</command> veya <command>u</command>
+      </glossterm><glossdef><para><command>init</command>'in, durumunu koruyarak, kendini tekrar başlatması istenir. <command>/etc/inittab</command> dosyası tekrar okunmaz. Çalışma seviyeleri <command>Ss12345</command>’den birisi olmalıdır. Aksi taktirde istek sessizce yok sayılır. Herhangi bir hata dönmez.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para><para>
+Ayrıca <command>telinit</command>, <command>init</command>’e <literal>SIGTERM</literal> ve <literal>SIGKILL</literal> sinyalleri arasında ne kadar beklemesi gerektiğini de söyleyebilir. Öntanımlı değer 5 saniyedir fakat
+<command>–t</command> seçeneği kullanılarak bu değer değiştirilebilir.
+
+<command>telinit</command>, sadece uygun yetkiye sahip kullanıcılar tarafından kullanılabilir.
+
+<command>init</command> çalıştırılabiliri,  kendinin <command>init</command> mi yoksa <command>telinit</command> mi olduğunu anlamak için süreç numarasını kontrol eder, gerçek <command>init</command>’in süreç numarası daima <command>1</command>’dir. Buradan, <command>telinit</command> kullanmak yerine, <command>init</command>’in kısa yol olarak kullanılabileceği de ortaya çıkar.
+    </para>
+  </refsect1><refsect1><title>ORTAM DEĞİŞKENLERİ</title>
+    <para>
+<command>init</command>, çalıştırdığı alt süreçler için aşağıdaki ortam değişkenlerini ayarlar:
+    </para><para><glosslist><glossentry><glossterm>
+      <command>PATH</command></glossterm><glossdef><para>
+<literal>/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin</literal>
+      </para></glossdef></glossentry><glossentry><glossterm>
+        <command>INIT_VERSION</command></glossterm><glossdef><para>
+<command>init</command> sürüm numarası. Bir betiğin doğrudan <command>init</command> tarafından çalıştırıp çalıştırmadığını anlamak açısından faydalıdır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>RUNLEVEL</command></glossterm><glossdef><para>
+Geçerli sistem çalışma seviyesi.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>PREVLEVEL</command></glossterm><glossdef><para>
+Bir önceki sistem çalışma seviyesi. Çalışma seviyesinin değiştirilmesi durumunda, öncekini tespit etme açısından faydalıdır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>CONSOLE</command></glossterm><glossdef><para>
+Sistem konsolu. Gerçekte çekirdekten miras alınır. Şayet bu seçenek ayarlanmaz ise, <command>init</command> tarafından öntanımlı olarak <command>/dev/console</command> kullanılır.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+  </refsect1><refsect1><title>AÇILIŞ SEÇENEKLERİ</title>
+    <para>
+Açılış esnasında <command>init</command>'e seçenekler girilebilir (LILO içinden). <command>init</command> şu seçenekleri kabul eder:
+    </para><para><glosslist>
+      <glossentry><glossterm>
+        <command>-s, S, single</command>
+      </glossterm><glossdef><para>Tek kullanıcı kipinde açılış. Bu kipte <filename>/etc/inittab</filename> dosyası incelenir ve açılış <filename>rc</filename> betikleri, tek kullanıcılı kip kabuğu başlatılmadan önce çalıştırılır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>1-5</command>
+      </glossterm><glossdef><para>Açılış sonrası girilecek çalışma seviyesini belirtir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-b, emergency</command>
+      </glossterm><glossdef><para>Herhangi bir açılış betiğini çalıştırmadan doğrudan tek kullanıcılı kip kabuğuna düşer.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-a, auto</command>
+      </glossterm><glossdef><para>Çekirdek, kullanıcının müdahalesine gerek kalmadan öntanımlı komut satırı ile yüklenmişse, LILO önyükleyicisi komut satırına "auto" sözcüğünü ekler. Şayet bu bulunursa, <command>init</command> <literal>AUTOBOOT</literal> ortam değişkenine "yes" değerini atar. Bunu bir güvenlik ölçüsü olarak kullanamayacağınızı unutmayın, çünkü kullanıcı komut satırını kendi de tanımlayabilir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>-z </command><varname>xxx</varname>
+      </glossterm><glossdef><para><command>-z</command>’ye verilen argüman yok sayılır. Bu seçeneği komut satırını biraz daha genişletmek için kullanabilirsiniz, böylece yığıt içinde daha fazla yer kaplaması sağlanmış olur. <command>init</command> komut satırını büyük bir ustalıkla yönetir, böylece <link linkend="tr-man1-ps"/> geçerli çalışma seviyesini gösterebilir.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+  </refsect1><refsect1><title>ARAYÜZ</title>
+    <para>
+<command>init</command> iletiler için; <filename>/dev</filename> içindeki <filename>/dev/initctl</filename> fifosunu dinler. Arayüz tam olarak bitmemiş ve belgeleme işlemleri de bitirilmemiştir. İlgilenenler <filename>/src</filename> dizinindeki <command>init</command> kaynak kodlarının tar arşivindeki <filename>initreq.h</filename> dosyasına bakabilirler.
+    </para>
+  </refsect1><refsect1><title>SİNYALLER</title>
+    <para><command>init</command> çeşitli sinyallere tepki verir:
+    </para><para><glosslist>
+      <glossentry><glossterm>
+        <command>SIGHUP</command>
+      </glossterm><glossdef><para><command>init</command> <filename>/etc/initrunlvl</filename> ve <filename>/var/log/initrunlvl</filename> dosyalarını arar. Şayet bu dosyalardan birisi var ise ve bir ASCII çalışma seviyesi içeriyorsa, <command>init</command>  bu çalışma seviyesine geçer. Bu sadece geçmişe uyum için konulmuştur. Normal durumlarda (dosyanın olmadığı durumlarda) <command>init</command>, <command>telinit</command>’in <command>-q</command> seçeneği ile çalıştırıldığını kabul eder ve buna göre davranır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>SIGUSR1</command>
+      </glossterm><glossdef><para>Bu sinyali alınca, <command>init</command> kendi denetim fifosu olan <command>/dev/initctl</command>'u kapatır ve tekrar açar. <filename>/dev</filename> dizinin tekrar bağlandığı zamanlarda, açılış betikleri için oldukça faydalıdır.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>SIGINT</command>
+      </glossterm><glossdef><para>CTRL-ALT-DEL üçlemesine basıldığı durumlarda, çekirdek <command>init</command>'e bu sinyali gönderir. O da <command>ctrlaltdel</command> eylemini etkinleştirir.
+        </para></glossdef>
+      </glossentry><glossentry><glossterm>
+        <command>SIGWINCH</command>
+      </glossterm><glossdef><para><literal>KeyboardSignal</literal> tuşuna basıldığı durumlarda, çekirdek <command>init</command>'e bu sinyali gönderir. O da <command>kbrequest</command> eylemini etkinleştirir.
+        </para></glossdef>
+      </glossentry></glosslist></para>
+  </refsect1><refsect1><title>UYUM</title>
+    <para>
+<command>init</command>, System V init ile uyumludur. <filename>/etc/init.d</filename> ve <filename>/etc/rc{çalışmaseviyesi}.d</filename> dizinleri içindeki betikler ile birlikte uyum içinde çalışır. Eğer sisteminiz geleneksel yapıya uyuyorsa, <filename>/etc/init.d</filename> içinde bu betiklerin nasıl çalıştığını açıklayan bir README dosyası bulacaksınız.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout indent="0">
+/etc/inittab
+/etc/initscript
+/dev/console
+/etc/ioctl.save
+/var/run/utmp
+/var/log/wtmp
+/dev/initctl</literallayout></para>
+  </refsect1><refsect1><title>UYARILAR</title>
+    <para>
+<command>init</command>, süreçlerin ve bu süreçlerin soyundan gelen diğer süreçlerin orijinal süreç grupları içinde kaldıklarını varsayar.  Şayet bir süreç, süreç grubunu değiştirirse, <command>init</command> bu süreci öldüremez ve aynı uçbirim hattında iki süreç ile karşılaşabilirsiniz.
+    </para>
+  </refsect1><refsect1><title>TANI KOYMA</title>
+    <para>
+Şayet bir girdi 2 dakika içinde 10 kereden fazla çoğaltılıyorsa, <command>init</command>, bu girdi satırında bir hata olduğunu düşünecek, sistem konsolundan bir hata iletisi verecek ve 5 dakika geçmeden veya bir sinyal almadan bu girdinin tekrar çoğalmasına izin vermeyecektir. Buradaki amaç, <command>/etc/inittab</command> içinde hatalı bir girdinin sistem kaynaklarını yok etmesini önlemektir.
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Miquel  van  Smoorenburg  <email>miquels@cistron.nl</email> tarafından yazılmıştır, ilk kılavuz sayfası Michael Haardt <email>u31b3hs@pool.informatik.rwthaachen.de</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-bash"/>, <link linkend="tr-man1-getty"/>, <link linkend="tr-man1-kill"/>, <link linkend="tr-man1-login"/>, <link linkend="tr-man5-initscript"/>, <link linkend="tr-man5-inittab"/>, <link linkend="tr-man5-utmp"/>, <link linkend="tr-man8-runlevel"/>, <link linkend="tr-man8-shutdown"/>.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Şubat 2004</para>
+  </refsect1>
+</refentry>
+

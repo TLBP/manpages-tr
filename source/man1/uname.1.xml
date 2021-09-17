@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: uname.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-uname">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>uname</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>uname</refname>
+    <refpurpose>sistem bilgilerini gösterir</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>uname</command> [<emphasis>seçenek</emphasis>]...
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+O anki sistem bilgilerini görüntüler. <varname>seçenek</varname> belirtilmemişse, <command>-s</command> ile aynıdır.
+    </para><para><glosslist>
+      <glossentry>
+        <glossterm><command>-a</command></glossterm>
+        <glossterm><command>--all</command></glossterm>
+        <glossdef><para>bütün bilgileri aşağıdaki seçenek sırasıyla gösterir; <command>-p</command> ve <command>-i</command> bilinmiyorsa atlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s</command></glossterm>
+        <glossterm><command>--kernel-name</command></glossterm>
+        <glossdef><para>çekirdek ismini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossterm><command>--nodename</command></glossterm>
+        <glossdef><para>ağ düğümü konak ismini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossterm><command>--kernel-release</command></glossterm>
+        <glossdef><para>çekirdeğin derleniş sürümünü gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--kernel-version</command></glossterm>
+        <glossdef><para>çekirdeğin sürümünü gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossterm><command>--machine</command></glossterm>
+        <glossdef><para>makine donanım ismini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p</command></glossterm>
+        <glossterm><command>--processor</command></glossterm>
+        <glossdef><para>işlemci türünü veya "unknown" gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--hardware-platform</command></glossterm>
+        <glossdef><para>donanım platformunu veya "unknown" gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-o</command></glossterm>
+        <glossterm><command>--operating-system</command></glossterm>
+        <glossdef><para>işletim sistemini gösterir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>David MacKenzie tarafından yazılmıştır.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>GERİBİLDİRİM</title>
+    <para>Lütfen, böcekleri ve hataları <email>bug-sh-utils@gnu.org</email> adresine bildirin.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para></refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man2-uname"/>
+   </para><para>
+<command>uname</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>uname</command> yazılımları düzgün bir şekilde sisteminizde mevcutsa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils uname</command></para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Kasım 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>
+

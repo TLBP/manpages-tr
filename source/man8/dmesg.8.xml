@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: dmesg.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-dmesg">
+<remark>.\" Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>dmesg</refentrytitle>
+  </refmeta>
+
+  <refnamediv>
+    <refname>dmesg</refname>
+    <refpurpose>çekirdek halka tamponlarını görüntüler veya denetler</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>dmesg</command> [ <command>-c</command> ] [ <command>-n </command><emphasis>seviye</emphasis> ] [ <command>-s </command><emphasis>tampon-boyu</emphasis> ]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <para>
+<command>dmesg</command>, çekirdek halka tamponunu incelemek ve denetlemek için kullanılır.
+    </para><para>
+Kullanıcıya açılış iletilerini görüntüleme imkanı verir. Açılış iletilerini kullanıcının kendisinin kopyalaması yerine, tek bir komut ile çıktı almasını sağlar:
+    </para><blockquote><para>
+<literal>dmesg > önyükleme.iletileri</literal>
+    </para></blockquote><para>
+Daha sonra <filename>önyükleme.iletileri</filename> dosyasını istediğiniz bir kişiye postalayabilirsiniz.
+    </para>
+  </refsect1><refsect1><title>SEÇENEKLER</title>
+    <para><glosslist>
+      <glossentry>
+        <glossterm><command>-c</command></glossterm>
+        <glossdef><para>Görüntüledikten sonra sonra halka tamponun içeriğini temizler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n </command><replaceable>seviye</replaceable></glossterm>
+        <glossdef><para>Konsola gönderilecek iletilerin seviyesini ayarlar. Örneğin; <command>-n 1</command> bütün iletilerin, panik iletileri hariç, konsola basılması önler. Bütün seviyelerdeki iletiler <filename>/proc/kmsg</filename>’ye yazılmaya devam eder, böylece <command>syslogd</command>(8) bütün çekirdek iletilerinin nerede görüntüleneceğini belirlemek için kullanılabilir. <command>–n</command> seçeneği kullanılmış ise,  <command>dmesg</command>, çekirdek halka tamponunu basmaz veya temizlemez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><replaceable>tampon-boyu</replaceable></glossterm>
+        <glossdef><para>Çekirdek halka tamponu sorgulamak için <replaceable>tampon-boyu</replaceable> ile belirtilen boyutta bir tampon kullanır. Öntanımlı olarak bu değer 16392 dir. (Çekirdek syslog tampon boyutu en başta 4096 idi, 1.3.54 den sonra 8192 oldu, 2.1.113 çekirdek sürümünden sonra 16384). Şayet çekirdek tamponunu öntanımlı değerden daha büyük ayarlamak isterseniz, bu seçenek bütün tamponu görmek için kullanılabilir.
+        </para></glossdef>
+      </glossentry>
+    </glosslist></para><para>
+<command>-n</command> ve <command>-s</command> seçenekleri birlikte kullanıldığında, komut satırındaki son seçenek geçerli olur.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man8-syslogd"/>
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>Theodore Ts’o <email>tytso@athena.mit.edu</email> tarafından yazılmıştır.</para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Ocak 2004</para>
+  </refsect1>
+</refentry>
+

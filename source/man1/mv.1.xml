@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************
+     $Id: mv.1.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man1-mv">
+  <refmeta>
+    <manvolnum>1</manvolnum>
+    <refentrytitle>mv</refentrytitle>
+    <refmiscinfo class="header">Kullanıcı Komutları</refmiscinfo>
+    <refmiscinfo class="domain">coreutils 6.5</refmiscinfo>
+    <refmiscinfo class="date">Kasım 2006</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname>mv</refname>
+    <refpurpose>dosyaları taşır (ismini değiştirir)</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv><title>KULLANIM</title>
+<synopsis><command>mv</command> [<emphasis>seçenek</emphasis>]... [<command>-T</command>] <emphasis>kaynak hedef</emphasis>
+<command>mv</command> [<emphasis>seçenek</emphasis>]... <emphasis>kaynak</emphasis>... <emphasis>dizin</emphasis>
+<command>mv</command> [<emphasis>seçenek</emphasis>]... <command>-t </command><emphasis>dizin kaynak</emphasis>...
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>AÇIKLAMA</title><para>
+Belirtilen <varname>kaynak</varname> dosyasının ismini <varname>hedef</varname> olarak değiştirir veya birden fazla <varname>kaynak</varname> dosyasını <varname>dizin</varname>'e taşır.
+    </para><para>
+Uzun seçenekler için zorunlu olan argümanlar kısa seçenekler için de zorunludur.
+    </para><para>
+      <glosslist><glossentry>
+        <glossterm><command>--backup</command><literal>[=</literal><varname>yöntem</varname><literal>] </literal></glossterm>
+        <glossdef><para>
+Varolan hedef dosyalarının herbirini yedekler.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-b</command></glossterm>
+        <glossdef><para>
+<command>--backup</command> gibidir fakat herhangi bir argüman kabul etmez.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f</command></glossterm>
+        <glossterm><command>--force</command></glossterm>
+        <glossdef><para>
+Varolan bir hedefin üzerine yazmak için sormaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-i</command></glossterm>
+        <glossterm><command>--interactive</command></glossterm>
+        <glossdef><para>
+Varolan bir hedefin üzerine yazmadan önce sorar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--strip-trailing-slashes</command></glossterm>
+        <glossdef><para>
+<varname>kaynak</varname> argümanlarının her birinin sonundaki bölü işaretini kaldırır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-S</command></glossterm>
+        <glossterm><command>--suffix</command><varname>=sonek</varname></glossterm>
+        <glossdef><para>
+Belirtilen yedekleme <varname>sonek</varname>i kullanılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-t</command></glossterm>
+        <glossterm><command>--target-directory</command><varname>=dizin </varname></glossterm>
+        <glossdef><para>
+Bütün <varname>kaynak</varname> argümanlarını <varname>dizin</varname> içine taşır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-T</command></glossterm>
+        <glossterm><command>--no-target-directory</command></glossterm>
+        <glossdef><para>
+<varname>hedef</varname> normal dosya olarak ele alınır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u</command></glossterm>
+        <glossterm><command>--update</command></glossterm>
+        <glossdef><para>
+Sadece hedef dosya <varname>kaynak</varname> dosyadan daha eski ise veya hedef dosya yoksa taşır. Böylece dosya güncellemesi yapılmış olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-v</command></glossterm>
+        <glossterm><command>--verbose</command></glossterm>
+        <glossdef><para>
+Yapılan işlem hakkında daha ayrıntılı bilgi verir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--help</command></glossterm>
+        <glossdef><para>
+Bu yardım iletisini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>--version</command></glossterm>
+        <glossdef><para>
+Sürüm bilgilerini gösterir ve çıkar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para><para>
+<command>--suffix</command> seçeneği ile veya <literal>SIMPLE_BACKUP_SUFFIX</literal> ile belirtilmediği sürece, yedekleme soneki '<command>~</command>' dir. Sürüm kontrol yöntemi <literal>VERSION_CONTROL</literal> ortam değişkeni ile veya <command>--backup</command> seçeneği ile seçilebilir. Değerler şunlardır:
+    </para><para>
+      <glosslist><glossentry>
+        <glossterm><literal>none</literal></glossterm>
+        <glossterm><literal>off</literal></glossterm>
+        <glossdef><para>
+Asla yedekleme yapmaz (<command>--backup</command> belirtilmiş olsa bile)
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>numbered</literal></glossterm>
+        <glossterm><literal>t</literal></glossterm>
+        <glossdef><para>
+Numaralı yedekleme yapılır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>existing</literal></glossterm>
+        <glossterm><literal>nil</literal></glossterm>
+        <glossdef><para>
+Numaralandırılmış yedekler varsa, numaralı, aksi durumda basit yedekleme yapar.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><literal>simple</literal></glossterm>
+        <glossterm><literal>never</literal></glossterm>
+        <glossdef><para>
+Daima basit yedekleme yapar.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Mike Parker, David MacKenzie ve Jim Meyering tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>GERİBİLDİRİM</title>
+    <para>
+Lütfen, böcekleri ve hataları <email>bug-coreutils@gnu.org</email> adresine bildirin.
+    </para>
+  </refsect1><refsect1><title>TELİF HAKKI</title>
+    <para>
+Telif hakkı © 2006 Free Software Foundation, Inc.<sbr/>Bu bir özgür yazılımdır; GNU Genel Kamu Lisansının &lt;http://www.gnu.org/licenses/gpl.html> koşullarına bağlı kalarak kopyalarını yeniden dağıtabilirsiniz. Yasaların izin verdiği ölçüde hiçbir garantisi yoktur; hatta SATILABİLİRLİĞİ veya ŞAHSİ KULLANIMINIZA UYGUNLUĞU için bile garanti verilmez.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title><para>
+     <link linkend="tr-man2-rename"/>
+   </para><para>
+<command>mv</command> komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. Şayet <command>info</command> ve <command>mv</command> yazılımları düzgün bir şekilde sisteminizde kuruluysa, aşağıdaki komut ile bu kılavuzu görüntüleyebilirsiniz.
+    </para><para>
+      <glosslist><glossentry>
+        <glossdef><para><command>info coreutils mv</command></para></glossdef>
+       </glossentry></glosslist>
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo .com</email>, Ekim 2003</para><para>Kasım 2006'da güncellendi.</para>
+  </refsect1>
+</refentry>
+
+

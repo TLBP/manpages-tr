@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************
+     $Id: useradd.8.xml,v 1.4 2002/12/20 22:54:36 nilgun Exp $
+     ******************************************************************** -->
+<refentry id="tr-man8-useradd">
+<remark>.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+</remark>
+  <refmeta>
+    <manvolnum>8</manvolnum>
+    <refentrytitle>useradd</refentrytitle>
+  </refmeta>
+
+  <refnamediv>
+    <refname>useradd</refname>
+    <refpurpose>yeni bir kullanıcı oluşturur veya öntanımlı yeni kullanıcı bilgilerini günceller</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+<synopsis><command>useradd</command> [<command>-c </command><emphasis>açıklama</emphasis>] [<command>-d </command><emphasis>evdizini</emphasis>]
+        [<command>-e </command><emphasis>bitiş_tarihi</emphasis>] [<command>-f </command><emphasis>askı_süresi</emphasis>]
+        [<command>-g </command><emphasis>birincil_grup</emphasis>] [<command>-G </command><emphasis>grup</emphasis>[,...]]
+        [<command>-m </command>[<command>-k </command><emphasis>iskelet_dizin</emphasis>] | <command>-M</command>] [<command>-p </command><emphasis>parola</emphasis>]
+        [<command>-s </command><emphasis>kabuk</emphasis>] [<command>-u </command><emphasis>kull_kiml</emphasis> [ <command>-o</command>]] [<command>-n</command>] [<command>-r</command>] <emphasis>kullanıcı</emphasis>
+
+<command>useradd -D</command> [<command>-g </command><emphasis>öntanımlı_grup</emphasis>] [<command>-b </command><emphasis>öntanımlı_ev</emphasis>]
+        [<command>-f </command><emphasis>öntanımlı_askı_süresi</emphasis>] [<command>-e </command><emphasis>öntanımlı_bitiş_tarihi</emphasis>]
+        [<command>-s </command><emphasis>öntanımlı_kabuk</emphasis>]
+</synopsis>
+  </refsynopsisdiv>
+
+  <refsect1><title>AÇIKLAMA</title>
+    <refsect2><title>Yeni Kullanıcıların Oluşturulması</title>
+    <para>
+<command>-D</command> seçeneği belitilmeden çağrıldığında, <command>useradd</command> komutu, komut satırında tanımlanan değerleri ve sistemdeki öntanımlı değerleri kullanarak yeni bir kullanıcı oluşturur. Komut satırında belirtilen seçeneklere bağlı olarak, gerekli sistem dosyalarına yeni kullanıcının bilgileri girilir; ev dizini oluşturulur;  ilk dosyalar kopyalanır.  Red Hat Linux’da kullanılan sürümünde, <command>-n</command> seçeneği belirtilmediği sürece, oluşturulan her kullanıcı için yeni bir grup oluşturulur. Kullanabileceğiniz seçenekler şunlardır:
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-c </command><varname>açıklama</varname></glossterm>
+        <glossdef><para>Yeni kullanıcının parola dosyasındaki açıklama alanı.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-d </command><varname>evdizini</varname></glossterm>
+        <glossdef><para>Oluşturulan yeni kullanıcının sisteme girişte kullanacağı ev dizinini belirtir. Öntanımlı olarak, <varname>kullanıcı</varname> ismi <varname>öntanımlı_ev</varname>'e eklenecek ve sisteme giriş dizini ismi olarak kullanılacaktır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-e </command><varname>bitiş_tarihi</varname></glossterm>
+        <glossdef><para>Kullanıcı hesabının son kullanma tarihini belirtir. Tarih <literal>YYYY-AA-GG</literal> (Y: yıl, A: ay, G: gün) şeklinde belirtilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f </command><varname>askı_süresi</varname></glossterm>
+        <glossdef><para>Kullanıcı parolasının son kullanma tarihinden itibaren, bu hesabın
+tamamen kapatılacağı tarihe kadar geçecek olan sürenin gün cinsinden değeri belirtilir. Bu değer 0 olarak belirtilirse, parolanın son kullanma tarihinde hesap kapatılır. -1 değeri verilirse, bu özellik iptal edilmiş olur. -1 değeri öntanımlı değerdir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>birincil_grup</varname></glossterm>
+        <glossdef><para>Kullanıcının üyesi olacağı birincil grubun adı veya numarası belirtilir. Belirtilen grup, sistemde önceden tanımlanmış olmalıdır. Şayet grup numarası belirtilmiş ise, bu numara sistemde var olan bir gruba ait olmalıdır. Olmayan gruba ait bir isim veya numara kullanamazsınız. Öntanımlı değer 1 dir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>grup</varname><literal>[,...]</literal></glossterm>
+        <glossdef><para>Kullanıcının üyesi olacağı ilave gruplar belirtilir. Her grup, diğerinden virgül ile ayrılır, arada boşluk bırakılmaz. Burada tanımlanan gruplar, <command>-g</command> ile tanımlanan grubun kısıtlamalarına tabidirler. Öntanımlı olarak, kullanıcının sadece <varname>birincil_grup</varname> üyesi olduğu kabul edilir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-m</command></glossterm>
+        <glossdef><para>Şayet sistemde kullanıcının ev dizini yok ise, yeni bir dizin oluşturulur. Eğer <command>–k</command> seçeneği belirtilmişse <varname>iskelet_dizin</varname> içindeki dosyalar ev dizinine kopyalanır. Aksi taktirde <filename>/etc/skel</filename> içindeki dosyalar kullanılır. <varname>iskelet_dizin</varname> veya <filename>/etc/skel</filename> içindeki bütün dizinler, ev dizininde de oluşturulur. <command>–k</command> seçeneği, sadece <command>–m</command> seçeneği ile birlikte kullanıldığında etkilidir. Öntanımlı olarak, dizin oluşturulmaz ve dosyalar kopyalanmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-M</command></glossterm>
+        <glossdef><para><filename>/etc/login.defs</filename> içinde tanımlı bütün sistemi kapsayan ayarlarda ev dizininin yaratılması gerektiği belirtilmiş olsa bile, kullanıcı ev dizini oluşturulmaz.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-n</command></glossterm>
+        <glossdef><para>Öntanımlı olarak, oluşturulan yeni kullanıcı ile aynı adlı yeni bir grup oluşturulur. Bu seçenek belirtilir ise, bu Red Hat Linux’a özel davranış kapatılmış olur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-r</command></glossterm>
+        <glossdef><para>Bu seçenek, yeni bir sistem hesabı açmak için kullanılır. Böylece, <filename>/etc/login.defs</filename> içinde belirtilen <literal>UID_MIN</literal> değerinden daha küçük kullanıcı kimlikli kullanıcı oluşturulabilir. <filename>/etc/login.defs</filename> içindeki öntanımlı değerler ne olursa olsun, <command>useradd</command> komutu böyle bir kullanıcı için ev dizini oluşturmayacaktır. Oluşturulacak sistem hesabı için bir ev dizini istiyorsanız, <command>-m</command> seçeneğini kullanmak zorundasınız. Bu, Red Hat tarafından eklenmiş bir seçenektir.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-p </command><varname>parola</varname></glossterm>
+        <glossdef><para><command>crypt</command>(3) tarafından döndürülen şifrelenmiş paroladır. Öntanımlı olarak hesap kapalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><varname>kabuk</varname></glossterm>
+        <glossdef><para>Kullanıcının sisteme girişte kullanacağı kabuğun adıdır. Öntanımlı olarak bu değer boştur, böylece sistemin öntanımlı kabuğunun seçilmesi sağlanır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-u </command><varname>kull_kiml</varname></glossterm>
+        <glossdef><para>Kullanıcı kimliğinin sayısal değeridir. Bu değer, <command>-o</command> seçeneği kullanılmadığı sürece, eşsiz olmalıdır. Değer mutlaka pozitif bir sayı olmalıdır. Öntanımlı olarak, diğer kullanıcıların numaralarından ve 99’dan büyük, en küçük numara kullanılır. 0 ile 99 arasındaki değerler sistem hesapları için ayrılmıştır.
+        </para></glossdef>
+      </glossentry></glosslist>
+    </refsect2><refsect2><title>Öntanımlı Değerlerin Değiştirilmesi</title>
+      <para>
+<command>-D</command> seçeneği ile birlikte kullanıldığı zaman, <command>useradd</command> ya geçerli değerleri görüntüler, ya da öntanımlı değerleri, komut satırından belirtilenler ile günceller. Kullanabileceğiniz seçenekler şunlardır:
+    </para><glosslist>
+      <glossentry>
+        <glossterm><command>-b </command><varname>öntanımlı_ev</varname></glossterm>
+        <glossdef><para>Yeni bir kullanıcının ev dizini için ilk dosyayolu önekini belirtir. <emphasis>Yeni bir hesap açarken <command>–d</command> seçeneği belirtilmemişse</emphasis>, yeni kullanıcının adı <varname>öntanımlı_ev</varname>'in sonuna eklenir ve yeni dizin oluşturulur.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-e </command><varname>öntanımlı_bitiş_tarihi</varname></glossterm>
+        <glossdef><para>Kullanıcı hesabının kapatılacağı tarih.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-f </command><varname>öntanımlı_askı_süresi</varname></glossterm>
+        <glossdef><para>Kullanıcı parolasının son kullanma tarihinden itibaren, bu hesabın tamamen kapatılacağı tarihe kadar geçecek olan sürenin gün cinsinden değeri.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-g </command><varname>öntanımlı_grup</varname></glossterm>
+        <glossdef><para>Yeni bir kullanıcı için birincil grup adı veya grup kimliği. Belirtilen grup ismi sistemde mevcut olmalı ve sayısal grup kimliği için mevcut bir girdi bulunmalıdır.
+        </para></glossdef>
+      </glossentry><glossentry>
+        <glossterm><command>-s </command><varname>öntanımlı_kabuk</varname></glossterm>
+        <glossdef><para>Yeni bir kullanıcının sisteme girişte kullanacağı kabuğun adı. Belirtilen kabuk gelecekte açılacak bütün yeni hesaplarda kullanılır.
+        </para></glossdef>
+      </glossentry></glosslist>
+    <para>
+Şayet herhangi bir seçenek belirtilmezse, <command>useradd</command> geçerli öntanımlı değerleri görüntüleyecektir.
+    </para></refsect2>
+  </refsect1><refsect1><title>NOTLAR</title>
+    <para>
+<filename>/etc/skel</filename> dizinindeki öntanımlı dosyaların yerleştirilmesi sistem yöneticilerinin sorumluluğundadır. <command>useradd</command> komutunun bu sürümü, Red Hat tarafından, Red Hat kullanıcı/grup uyumluluğunu sağlayamak için düzenlenmiştir.
+    </para>
+  </refsect1><refsect1><title>YETERSİZLİKLER</title>
+    <para>NIS grubuna kullanıcı ekleyemezsiniz. Bu NIS sunucusu üzerinde yapılmalıdır.
+    </para>
+  </refsect1><refsect1><title>İLGİLİ DOSYALAR</title>
+    <para>
+<literallayout indent="0">
+<command>/etc/passwd</command>          - kullanıcı hesabı bilgileri
+<command>/etc/shadow</command>          - güvenli kullanıcı hesabı bilgileri
+<command>/etc/group</command>           - grup bilgileri
+<command>/etc/gshadow</command>         - güvenli grup bilgileri
+<command>/etc/default/useradd</command> - öntanımlı bilgiler
+<command>/etc/login.defs</command>      - sistem genelinde geçerli kurallar
+<command>/etc/skel</command>            - öntanımlı dosyaları içeren dizin
+</literallayout>
+    </para>
+  </refsect1><refsect1><title>İLGİLİ BELGELER</title>
+    <para>
+<link linkend="tr-man1-chfn"/>, <link linkend="tr-man1-chsh"/>, <link linkend="tr-man1-passwd"/>, <link linkend="tr-man3-crypt"/>, <link linkend="tr-man8-groupadd"/>, <link linkend="tr-man8-groupdel"/>, <link linkend="tr-man8-groupmod"/>, <link linkend="tr-man8-userdel"/>, <link linkend="tr-man8-usermod"/>.
+    </para>
+ </refsect1><refsect1><title>YAZAN</title>
+    <para>
+Julianne Frances Haugh <email>jockgrrl@ix.netcom.com</email> tarafından yazılmıştır.
+    </para>
+  </refsect1><refsect1><title>ÇEVİREN</title>
+    <para>Yalçın Kolukısa <email>yalcink01@yahoo.com</email>, Aralık 2003</para>
+  </refsect1>
+</refentry>
+
