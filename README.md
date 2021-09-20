@@ -1,6 +1,6 @@
-###GNU/Linux Kılavuz Sayfaları Çeviri Çalışmaları
+### GNU/Linux Kılavuz Sayfaları Çeviri Çalışmaları
 
-####Tarihçe
+#### Tarihçe
 Uzun süredir kılavuz sayfalarının çevrilmesi, Linux Belgelendirme Çalışma
 Grubunun görevleri arasında yer almaktaydı. Ancak bu görev bir alt ekip
 oluşturulmasını gerektirdiğinden Ekim 2003'de Yalçın Kolukısa "ben bu görevi
@@ -17,7 +17,7 @@ böyle bir bilgi sayfası ile bu amaca uygun bir iletişim listesi oluşturulmas
 ihtiyacı doğdu (Mart 2004).
 
 
-####Kılavuz Sayfası Nedir?
+#### Kılavuz Sayfası Nedir?
 
 Kılavuz sayfaları (man pages) genellikle komut satırı uygulamalarının nasıl
 kullanılacaklarını açıklayan yardım dosyalarıdır. Ancak yardım alanı sadece
@@ -50,7 +50,7 @@ sonuç isteneni veriyor. Yani biz kılavuz sayfalarını hep aynı dil elemanlar
 ile üretiyoruz.
 
 
-####Çeviri ekibi nasıl çalışır?
+#### Çeviri ekibi nasıl çalışır?
 
 GNU/Linux Kılavuz Sayfaları Çeviri Ekibi, Linux Belgelendirme Çalışma Grubunun
 Kılavuz sayfaları çeviri projesini gerçekleştiren bir alt grubudur.
