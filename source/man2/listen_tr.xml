@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<refentry id="tr-man2-listen">
+<refmeta>
+        <manvolnum>2</manvolnum>
+        <refentrytitle>listen</refentrytitle>
+        <refmiscinfo class="header">Linux Programcısının Kılavuzu</refmiscinfo>
+        <refmiscinfo class="date">27 Temmuz 2022</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+        <refname>listen</refname>
+        <refpurpose>soket üzerinde bağlantıları dinle</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+        <title>KULLANIM</title>
+        <synopsis>#include &lt;sys/types.h>          /* NOTLAR'a bakın */
+                #include &ls;sys/socket.h>
+
+               int <command>listen</command>(int <varname>sockfd</varname>, int <varname>backlog</varname>);
+       </synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+        <title>AÇIKLAMA</title>
+               <para>
+                       <command>listen()</command>, sockfd ile gösterilen soketi pasif soket olarak işaretler ve
+                       <command>accept(2)</command> ile gelen bağlantı isteklerini kabul edecek sokete dönüştürür.
+                       sockfd argümanı <varname>SOCK_STREAM</varname> veya <varname>SOCK_SEQPACKET</varname> ile gösterilen bir dosya tanımlayıcısıdır.
+               </para>
+               <para>
+                       Eğer sıra tam dolu olduğunda bir bağlantı isteği gelirse, istemci <varname>ECONNREFUSED</varname>
+                       hatası alabilir veya kullanılan protokol yeniden iletime müsade ediyorsa,
+                       bağlantı isteği görmezden gelinir, böylece tekrar gelen bağlantı isteği kabul 
+                       edilir.
+               </para>
+</refsect1>
+<refsect1>
+        <title>DÖNÜŞ DEĞERİ</title>
+        <para>
+                Başarılı olduğunda sıfır döndürülür. Hata olduğunda -1 döndürülür ve 
+                <varname>errno</varname>'ya uygun bir değer atanır.
+        </para>
+</refsect1>
+
+<refsect1>
+        <title>HATALAR</title>
+        <varname>EADDRINUSE</varname>
+        <para>Başka bir soket aynı port'ta dinliyor.</para>
+        
+        <varname>EADDRINUSE</varname>
+        <para>
+                (İnternet domain soketleri) sockfd ile belirtilen soket, önceden bir
+                adres ile bağlanmamış ve soketi geçici bir porta bağlamaya çalışırken
+                geçici port aralığındaki tüm değerlerin kullanımda olduğu anlaşılmış.
+                ip(7)'deki /proc/sys/net/ipv4/ip_local_port_range tartışmaya bakın.
+        </para>
+
+        <varname>EBADF</varname>  <para>Verilen sockfd uygun bir dosya tanımlayıcısı değil.</para>
+
+        <varname>ENOTSOCK</varname>
+        <para>Verilen sockfd'nin bir soketle ilgisi yok.</para>
+        
+        <varname>EOPNOTSUPP</varname>
+        <para>Soket, <command>listen()</command>'ı destekleyen türden değil.</para>
+</refsect1>
+
+<refsect1>
+        <title>UYUMLULUK</title>
+        <para>POSIX.1-2001, POSIX.1-2008, 4.4BSD (<command>listen()</command> ilk defa 4.2BSD ile ortaya çıktı).</para>
+</refsect1>
+
+<refsect1>
+        <title>NOTLAR</title>
+        <para>Bağlantıları kabul etmek için verilen adımlar uygulanır:</para>
+
+        <para>1. <command>socket(2)</command> ile socket oluşturulur.</para>
+
+        <para>2. Diğer soketlerin oluşturulan sokete bağlanabilmesi için
+                oluşturulan soket, <command>bind(2)</command> kullanılarak lokal adres ile bağlanır.</para>
+
+        <para>3. Gelen bağlantıları kabul etme isteği ve gelen bağlantılar için
+                sıra limiti <command>listen()</command> ile belirtilir.</para>
+
+        <para>4. Gelen bağlantılar <command>accept()</command> ile kabul edilir.</para>
+
+        <para>
+        POSIX.1'de, &lt;sys/types.h> dahil edilmeyi gerektirmez ve yine bu başlık dosyası
+        Linux'da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık
+        gerekir, taşınabilir uygulamalar için dahil edilmesi akıllıca olacaktır.
+        </para>
+
+        <para>
+        backlog argümanının TCP soketleri üzerindeki etkisi Linux 2.2 ile beraber
+        değişti. Şimdi, tamamlanmamış bağlantı isteklerinin sıra uzunluğunu belirlemek
+        yerine, kabul edilmeyi bekleyen kurulmuş soketlerin sıra uzunluğunu belirler.
+        </para>
+        
+        <para>
+        Eğer <varname>backlog</varname> değeri /proc/sys/net/core/somaxonn'dan daha büyükse, bu değere düşürülür. 
+        Linux 5.4'ten bu yana bu dosyanın varsayılan değeri 4096'dır; eski çekirdeklerde 
+        varsayılan değer 128'di. 2.4.15'ten önceki çekirdeklerde <varname>SOMAXCONN</varname>'a 128 değeriyle 
+        sabit kodlanmıştı.
+        </para>
+</refsect1>
+
+<refsect1>
+        <title>ÖRNEKLER</title>
+        <para><command>bind(2)</command>'e bakın.</para>
+</refsect1>
+
+<refsect1>
+        <title>İLGİLİ BELGELER</title>
+        <para>
+        <command>accept(2)</command>, <command>bind(2)</command>, <command>connect(2)</command>, <command>socket(2)</command>, <command>socket(7)</command>
+        </para>
+</refsect1>
+
+<refsect1>
+        <title>ÇEVİREN</title>
+        <para>Fatih Koçer <email>fatihkocerc@gmail.com</email>, Temmuz 2022</para>
+</refsect1>
+</refentry>
