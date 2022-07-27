@@ -14,7 +14,7 @@
 </refnamediv>
 
 <refsynopsisdiv>
-        <title>KULLANIM</title>
+        <title>BİLDİRİM</title>
         <synopsis>#include &lt;sys/types.h>          /* NOTLAR'a bakın */
                 #include &ls;sys/socket.h>
 
