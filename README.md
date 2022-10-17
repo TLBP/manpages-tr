@@ -36,15 +36,14 @@ yapıştır yöntemiyle basitçe bir metin düzenleyicisine yapıştırıp çevr
 hazır hale getiriyorduk.
 
 Çeviri yapıldıktan sonra bu metni Docbook-XML'in kılavuz sayfaları yazmak için
-kullanılan yapısıyla bu sayfaları işlenebilir duruma getiriyorduk. Bundan
-sonrası dosya dönüşüm uygulamalarıyla çeviriyi istenen dosya biçimlerine
-dönüştürmek oluyor. HTML'ye dönüştürüp belgeler.org'da yayınlıyoruz. Kılavuz
-sayfalarının biçimine dönüştürüp paket halinde dağıtıyoruz.
+kullanılan yapısıyla bu sayfaları işlenebilir duruma getiriyorduk. Şimdi,
+artık önce groff dosyasını XML haline getirerek çeviriye hazır hale
+getiriyoruz. Bundan sonrası dosya dönüşüm uygulamalarıyla çeviriyi istenen
+dosya biçimlerine dönüştürmek oluyor. HTML'ye dönüştürüp belgeler.org.tr'de
+yayınlıyoruz. Kılavuz sayfalarının biçimine dönüştürüp paket halinde
+dağıtıyoruz.
 
-Şimdi, artık önce groff dosyasını XML haline getirerek çeviriye hazır hale
-getiriyoruz. Böylece elimizde orjinalin de XML dosyası oluyor.
-
-Kılavuz sayfası biçimi artık dosyanın orjinal kodlamasına benzemiyor olsa da
+Kılavuz sayfası biçimi artık dosyanın özgün kodlamasına benzemiyor olsa da
 (biz özgün halinin hangi belge yazma dili ile yazıldığıyla ilgilenmiyoruz),
 sonuç isteneni veriyor. Yani biz kılavuz sayfalarını hep aynı dil elemanları
 ile üretiyoruz.
@@ -59,13 +58,15 @@ GNU/Linux Kılavuz Sayfaları Çeviri Ekibi gönüllülerden oluşur.
 
 Ekibin üyesi olmak için en az bir çeviriyi üstlenmiş olmak yeterlidir.
 
-Seçtiğiniz henüz çevirisi üstlenilmemiş bir dosyayı üstlendiğinizi `issues`
-altında bir konu açıp herkesin bunu bilmesini sağlayın.
+Seçtiğiniz henüz çevirisi üstlenilmemiş bir dosyayı üstlendiğinizi
+https://github.com/TLBP/source/issues adresinde "New Issue" düğmesine
+tıklayıp yeni bir konu açarak herkesin bunu bilmesini sağlayın.
 
-Çevrilecek kılavuz sayfasının XML dosyası en kısa zamanda depoya
+Çevrilecek kılavuz sayfasının XML dosyası en kısa zamanda
+https://github.com/TLBP/source/tree/main/source/manpages altında ilgili dizine
 yerleştirilecek ve size bilgi verilecektir. Depoyu çatallamak suretiyle,
 depoyu makinenize indirerek veya dosya içeriğine kopyala yapıştır yaparak
 dosyayı elde edebilirsiniz. Ancak çevirisi bitmiş dosyayı depoya teslim
 etmek için PR yapmanız gerekeceğinden, depoyu çatallamanızı öneririz. Çok
-sayıda çeviri yaparak bizi rahatsız etmekte başarılı olursanız size depoya
-doğrudan yazma izni de verebiliriz.
+sayıda çeviri yaparak bizi rahatsız etmeyi başarırsanız size doğrudan
+depoya yazma izni de verebiliriz.

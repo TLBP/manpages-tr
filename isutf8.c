@@ -21,7 +21,7 @@
 #include <string.h>
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
   char *lcl = setlocale (LC_ALL, "");
   

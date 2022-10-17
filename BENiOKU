@@ -1,116 +1,38 @@
-	    man-pages-tr-1.0.5 hakkında
-Bundan önceki pakette, 'make all' paketi gerektiği gibi derlemiyordu.
-Bildirilen bu hata bu sürümde düzeltildi. Ayrıca Debian manpages paketi 
-oluşturma sistemindeki değişiklikler de pakete yansıtıldı.22 Nisan 2008
+man-pages-tr-2.0.x hakkında
 
-	    man-pages-tr-1.0.4 hakkında
-Paket önceki sürümlerin aksine derlenmiş kurulmaya hazır kılavuz sayfalarından
-değil o paketleri derlerken kullandığımız dosyalardan oluşuyor. Yani bu
-paket tam bir kaynak paketi. Paketi siz derleyip kuracaksınız. Bunu böyle
-yapmamızın sebebi, 1.0.3 sürümünden beri Türkçe kılavuz sayfalarının
-görüntülenebilmesi için bazı dağıtımların farklı farklı çözümler üretmeleri.
-Biz her ne kadar bir kaynak paket dağıtmış olmasak da kaynak dosyalarımız 
-CVS depomuzda duruyordu ve onları alıp her dağıtım kendine göre derledi.
-Çeşit çeşit çözüm ortaya çıktı. Biz de o çözümleri bu pakette bir araya
-getirdik.
+Paket içeriği XML belgelerden üretilmiştir.
+Paketi oluşturan kaynak belgeler ve betikler
+https://github.com/TLBP/source/tree/main/source/manpages
+adresinden temin edilebilir.
 
-Bu sürümde hem daha fazla kılavuz sayfası çevirisi var hem de hemen herkese 
-uyacak olası bir görüntüleme çözümü var.  Biri olmazsa diğer bir çözümü 
-uygulayarak size uyan çözümü bulabilirsiniz.
+Paketi kurmak için
+    # make install
+Paket içeriğini sistemden silmek için
+    # make uninstall
 
-Paketi derleyebilmek için standart paket derleme ve kurulum araçlarından
-başka libxslt ve libxml paketlerinin kurulu olması gerekiyor. Bunların
-kaynak paketlerinin en son sürümlerini
-ftp://ftp.gnome.org/pub/GNOME/sources/libxslt/
-ftp://ftp.gnome.org/pub/GNOME/sources/libxml2/
-adreslerinden temin edebilirsiniz. Aslında bu paketler ya sisteminizde 
-kuruludur ya da dağıtımınızın paketleri arasında mevcuttur.
-
-Kılavuz sayfalarını görüntülemek için bazı dağıtımlar man paketini kullanırken
-bazıları da man-db paketini kullanmaktadır. man-db paketini kullanan
-dağıtımlardan Debian için Debian kullanıcıları
-    $ make deb
-komutuyla deb paketi üretip üst dizine çıktıktan sonra bu paketi
-    # dpkg -i *.deb
-komutu ile sistemlerine kurabilirler. Debian paketi çözümü için 
-Oğuz Yarımtepe'ye ve 1.0.5 sürümündeki değişiklikler için
+Debian paketi çözümü için  Oğuz Yarımtepe'ye ve 
+1.0.5 sürümündeki değişiklikler ve Debian'da paket sorumlumuz olduğu için 
 Murat Demirten'e teşekkür ederiz.
 
-Debian dışında man-db paketini kullanıp Debian'ınkinden farklı bir yapılanma
-ile kılavuz sayfalarını görüntüleyen dağıtımlar için henüz bir çözümümüz yok.
-Kullanıcıları bir yol bulup çözümü bildirirlerse bizim de bu paketin ileriki
-sürümlerinde onlar için hazır bir çözümümüz olur.
+Mdoc kullanan sistemler için (FreeBSD gibi), mandoc biçemli sayfalarda sayfa 
+üst başlığını tamamen Türkçe yapacak bir çözüm bulamadığımız için bir mdoc 
+çözümümüz henüz yok.
 
-man paketini kullanan dağıtımlardan Pardus 2007 için Pardus kullanıcıları paketi
-    $ make utf8
-komutu ile derleyip
-    # make install
-komutu ile sistemlerine kurabilirler. groff-utf8 paketini kullanan diğer
-dağıtımlar da bu çözümü kullanabilirler. Öğrenmek için konsolda komut satırına
-    $ groff
-yazdıktan sonra iki defa <tab> tuşuna basınız. Listelenen sözcükler arasında
-groff-utf8 varsa kurulu demektir, bu çözümü kullanabilirsiniz.
+Bu paket Türkçe Linux Belgelendirme Projesi tarafından hazırlanmıştır.
+Türkçe Linux Belgelendirme Projesi çalışmalarını https://github.com/TLBP
+adresinde yürütmektedir.
 
-man paketini kullanan diğer dağıtımların kullanıcıları için işler birazcık 
-daha karışık. Sistemlerinde hangi groff sürümünün kurulu olduğuna bağlı olarak 
-şu iki çözümden birini seçmek durumundalar:
+Kılavuz sayfalarının en güncel (henüz dağıtıma girmemiş olanlar dahil)
+çevirilerini http://tlbp.org.tr/manpages
+adresinde bulabilirsiniz. 
+
+Kılavuz sayfaları çeviri çalışmalarına çevirilerinizle katkıda bulunmak
+veya bulduğunuz hataları bildirmek isterseniz, 
+https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine 
+tıklayıp yeni bir konu açarak isteğinizi belirtebilirsiniz.
 
 
-1. groff-1.19.1 ve daha üst sürümleri kullananlar::
-    $ make
-komutu ile paketi derleyip
-    # make install
-ile paketi kurmaları ve /etc/man.conf dosyasında NROFF ile başlayan satırı
-    NROFF nroff -mandoc
-haline getirmeliler. Bu çözüm olması gereken çözüm olmakle beraber tercih
-edilmemesinin sebebi groff paketinin diğer dosya biçimlerine dönüşümde 
-(örn. HTML'ye dönüşüm) yeterli desteği içermemesidir. Dilimize özgü karakterler
-konsol dışında maalesef düzgün görünmemektedir. 
-
-
-2. groff-1.18.1 ve daha üst sürümü kullananlar:
-Bu çözümü 1.19.1 ve daha üst sürümü kullananlar da tercih edebilirler. 
-Pardus'ta da bu yöntem kullanılmaktadır ve diğer dosya biçimlerine dönüşümde 
-yeterli destek groff-utf8 paketi ile sağlanmıştır. Bu cümleden de anlayacağınız 
-üzere bu çözüm sisteme ilave bir paketin kurulmasını gerektirmektedir.
-http://www.haible.de/bruno/gnu/groff-utf8.tar.gz
-adresinden groff-utf8 paketini indirip
-    $ tar xvfz groff-utf8.tar.gz
-    $ cd groff-utf8
-    $ make
-    $ make install PREFIX=/usr
-komutlarıyla sistemlerine kurduktan sonra /etc/man.conf (adı man.config de 
-olabilir) dosyasında TROFF ve NROFF ile başlayan satırları bulup onları 
-TROFF    groff-utf8 -Tutf8 -mandoc
-NROFF    groff-utf8 -Tutf8 -mandoc
-olarak düzeltiniz. Bu işlemden sonra hala mevcut kılavuz sayfalarını
-bir değişiklik olmaksızın okuyor olmanız gerekir. man man yazıp deneyin.
-Bu paketin kurulumu için yukarıdaki Pardus kurulumunu aynen uygulayacaksınız:
-    $ make utf8
-    # make install
-
-
-Paketi bir kere derledikten sonra başka bir yöntemle tekrar derlemek isterseniz
-    $ make clean
-ile derlenmiş dosyaları paketten silmeyi ihmal etmeyiniz. Aksi takdirde sonuç
-beklediğiniz gibi olmayabilir. 
-Debian kullanıcıları ise
-    $ make debclean
-ile sonradan üretilenleri silebilirler.
-
-Buraya kadar anlattıklarımızda eksik ya da hatalı bulduğunuz bir yer varsa
-lütfen bizi uyarın. 
-
-Dikkat: Sisteminizin yerel ayarı tr_TR.UTF-8 olmak zorundadır.
-Bunun ne anlama geldiğini bilmiyorsanız, Türkçe NASIL'a bakınız.
-
-
-Bu paket Linux Belgelendirme Çalışma Grubu tarafından hazırlanmıştır.
-Linux Belgelendirme Çalışma Grubu çalışmalarını http://belgeler.org
-adresinde Linux Kitaplığı olarak yayınlamaktadır.
-
-21 Nisan 2008
+17 Ekim 2022
 Nilgün Belma Bugüner
-http://belgeler.org
-
+http://github.com/nilgun
 
