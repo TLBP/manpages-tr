@@ -2,7 +2,7 @@ MANDIR = /usr/share/man/tr
 
 # hem paket içinde hem de sistemde varolan dosyaları
 # sistemden silelim ve dosyaları kuralım.
-install:
+install: ilc
 	@cd tr; for dir in man?; do \
 		if [ -d $$dir ]; then for i in $$dir/*; do \
 	    		file=`basename $$i .gz`; \
@@ -22,3 +22,11 @@ uninstall:
 			rm -f $(MANDIR)/$$i; \
 		done; fi; \
 	done; cd -;
+
+ilc:
+	@LANG=C gcc -Wall -o isutf8 isutf8.c; \
+	str=`./isutf8`; if [ $$str != "yes" ]; then \
+	    echo "Yerel karakter kodlamasi UTF-8 olmak zorunda"; \
+	    exit 1; \
+	fi
+

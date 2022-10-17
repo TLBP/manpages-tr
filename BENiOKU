@@ -1,4 +1,4 @@
-man-pages-tr-2.0.x hakkında
+man-pages-tr-2.0.1 hakkında
 
 Paket içeriği XML belgelerden üretilmiştir.
 Paketi oluşturan kaynak belgeler ve betikler
@@ -10,12 +10,12 @@ Paketi kurmak için
 Paket içeriğini sistemden silmek için
     # make uninstall
 
-Debian paketi çözümü için  Oğuz Yarımtepe'ye ve 
-1.0.5 sürümündeki değişiklikler ve Debian'da paket sorumlumuz olduğu için 
+Debian paketi çözümü için  Oğuz Yarımtepe'ye ve
+1.0.5 sürümündeki değişiklikler ve Debian'da paket sorumlumuz olduğu için
 Murat Demirten'e teşekkür ederiz.
 
-Mdoc kullanan sistemler için (FreeBSD gibi), mandoc biçemli sayfalarda sayfa 
-üst başlığını tamamen Türkçe yapacak bir çözüm bulamadığımız için bir mdoc 
+Mdoc kullanan sistemler için (FreeBSD gibi), mandoc biçemli sayfalarda sayfa
+üst başlığını tamamen Türkçe yapacak bir çözüm bulamadığımız için bir mdoc
 çözümümüz henüz yok.
 
 Bu paket Türkçe Linux Belgelendirme Projesi tarafından hazırlanmıştır.
@@ -24,11 +24,11 @@ adresinde yürütmektedir.
 
 Kılavuz sayfalarının en güncel (henüz dağıtıma girmemiş olanlar dahil)
 çevirilerini http://tlbp.org.tr/manpages
-adresinde bulabilirsiniz. 
+adresinde bulabilirsiniz.
 
 Kılavuz sayfaları çeviri çalışmalarına çevirilerinizle katkıda bulunmak
-veya bulduğunuz hataları bildirmek isterseniz, 
-https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine 
+veya bulduğunuz hataları bildirmek isterseniz,
+https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine
 tıklayıp yeni bir konu açarak isteğinizi belirtebilirsiniz.
 
 
