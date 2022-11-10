@@ -1,0 +1,113 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SHRED" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+shred - içeriğini gizlemek bazan da silmek için dosyanın üzerine yazar
+.sp
+.SH KULLANIM
+.IP \fBshred\fR 6
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen \fIDOSYA\fR(ların) üzerine bir kaç defa yazarak pahalı donanım çözümleri ile bile dosya içeriğinin kurtarılabilmesini zorlaştırır.
+.sp
+Eğer \fIDOSYA\fR - ise standart çıktı işlem görür.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Eğer gerekli olursa yazma izni için izinleri değiştirir.
+.sp
+.TP 4
+\fB-n\fR, \fB--iterations=\fR\fISAYI\fR
+Öntanımlı 25 defa üzerine yazma yerine \fISAYI\fR defa üzerine yazar.
+.sp
+.TP 4
+\fB--random-source=\fR\fIDOSYA\fR
+Rasgele baytları \fIDOSYA\fRdan okur (öntanımlı: \fI/dev/urandom\fR).
+.sp
+.TP 4
+\fB-s\fR, \fB--size=\fR\fISAYI\fR
+\fISAYI\fR baytı işlemden geçirir (K, M, G gibi sonekler kabul edilir).
+.sp
+.TP 4
+\fB-u\fR
+Üzerine yazdıktan sonra dosyayı sıfırlar ve siler.
+.sp
+.TP 4
+\fB--remove\fR[=\fIYÖNTEM\fR]
+\fB-u\fR gibidir ancak silmek için denetimi \fIYÖNTEM\fRe devreder. Aşağıya bakınız.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İlerlemeyi gösterir.
+.sp
+.TP 4
+\fB-x\fR, \fB--exact\fR
+Dosya boyutunu sonraki tam bloğa yuvarlamaz. Bu işlem, sıradışı dosyalar için öntanımlıdır.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero\fR
+İşlemi gizlemek için en son olarak üzerine sıfırlarla yazar
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+Eğer \fB--remove\fR (\fB-u\fR) belirtilmişse \fIDOSYA\fR(ları) siler. Öntanımlı değer dosyaları silmez çünkü bu komut genelde \fI/dev/hda\fR gibi aygıt dosyaları üzerinde çalıştırılır ve o dosyalar genelde silinmemelidir. Seçimlik \fIYÖNTEM\fR değiştirgesi ile bir dizin içeriğinin nasıl kaldırılacağı belirtilebilir:
+.sp
+.RS 4
+.nf
+’\fBunlink\fR’ => standart unlink çağrısı kullanılır.
+’\fBwipe\fR’ => ayrıca addaki ilk baytları gizler.
+’\fBwipesync\fR’ => ayrıca aygıta gizlenmiş her baytı eşler.
+.fi
+.sp
+.RE
+’\fBwipesync\fR’ öntanımlıdır, ancak daha masraflı olabileceği unutulmamalıdır.
+.sp
+.TP 4
+\fBDikkat:\fR
+\fBshred\fR komutu dosya sisteminin veriyi yerinde üzerine yazdığı varsayımına dayanır. Bu genelde yapılan işlemdir, fakat günümüzdeki pek çok dosya sistemi bu varsayıma uymaz. Buna ek olarak, dosya sistemi yedekleri ve uzak yansılar dosyanın silinemeyen kopyalarını taşıyabilir ve bu \fBshred\fR işleminden geçirilmiş bir dosyanın tekrar oluşturulabilmesini sağlayabilir. GNU coreutils belgelerinde ayrıntılı bilgi bulunabilir.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Colin Plumb tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/shred>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) shred invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

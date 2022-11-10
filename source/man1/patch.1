@@ -1,0 +1,554 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PATCH" 1 "Şubat 2018" "patch 2.7.6" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+patch - yama dosyasını uygular
+.sp
+.SH KULLANIM
+.IP \fBpatch\fR 6
+[\fIseçenekler\fR] [\fIözgün\fR [\fIyama\fR]]
+.sp
+.PP
+Genellikle şöyle kullanılır:
+.sp
+.IP \fBpatch\fR 6
+\fB-p\fR\fIsayı\fR \fB<\fR \fIyama\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBpatch\fR, \fBdiff\fR(1) ile üretilmiş bir fark listesi içeren bir yama dosyası alır ve bu yama dosyasındaki farkları bir veya daha fazla özgün dosyaya uygulayarak özgün dosyaların yamalı sürümlerini üretir. Normalde yamalı sürümler özgün dosyalara yazılarak oluşturulur. Yedekler oluşturulabilir; \fB-b\fR ve \fB--backup\fR seçeneklerine bakınız. Yamanacak dosyaların isimleri normalde yama dosyasından alınır, ancak eğer sadece bir yamanacak dosya varsa ismi komut satırında \fIözgün\fR olarak belirtilebilir.
+.sp
+\fBpatch\fR çalıştırıldığında fark listesinin türü \fB-c\fR (\fB--context\fR), \fB-e\fR (\fB--ed\fR), \fB-n\fR (\fB--normal\fR) veya \fB-u\fR (\fB--unified\fR) seçenekleri ile belirtilmemişse önce fark listesinin türünü saptamaya çalışır. \fBed\fR fark dosyaları bir boru ile \fBed\fR(1) metin düzenleyicisine uygulanırken, bağlamsal fark dosyaları (eski, yeni ve birleşik) ve normal fark dosyaları doğrudan \fBpatch\fR tarafından uygulanır.
+.sp
+\fBpatch\fR yama dosyasındaki olası bozuk alanları atlayarak yamayı uygulamaya çalışır. Bu özelliğinden yararlanarak yama dosyası içine bir açıklama yerleştirebilirsiniz ve buna rağmen yama uygulanır. Eğer diff dosyasının içeriği sürekli aynı biçimde girintilenmişse veya bir bağlamsal fark dpsyasında satırlar CRLF ile bitiyorsa ya da Internet RFC 934’de "-" için belirtildiği gibi "-" ile başlayan satırlar varsa bunlar hesaba katılır.
+.sp
+Bağlamsal fark dosyaları ile ve bir daha az genişletme yapan normal fark dosyaları ile \fBpatch\fR, yama içindeki satır numaraları yanlış olduğunda bunu saptayabilir ve yama listesinin her elemanının uygulanacağı doğru yeri bulmaya çalışır. Önce listedeki her eleman ile ilgili satır numaralarını alır ve yamanın uygulanmasında kullanılan artı ve eksi ile belirlenmiş satırlara bakar. Eğer satır numaraları doğru yeri belirtmiyorsa, eksi ile belirtilmiş satırları bulmak üzere metni ileri ve geri her iki yönde tarar. \fBpatch\fR ilk taramada değiştirilecek satırların tamamı için bir eşleşme arar. Böyle bir eşleşme bulamazsa, yama dosyası bir bağlamsal yama dosyası ise ve belirsizlik faktörü de 1 ise değiştirilecek satırların ilkini ve sonuncusunu yok sayarak bir arama daha yapar. Bulamazsa ve belirsizlik faktörü 2 veya 2 den büyükse bu kez ilk ve son iki satırı yok sayarak bir arama daha yapar. (Öntanımlı belirsizlik faktörü 2’dir.)
+.sp
+Sonek bağlamından daha az önek içeriğine sahip olan yama parçaları (belirsizlik uygulandıktan sonra), ilk satır numarası 1 ise dosyanın başlangıcına uygulanmalıdır. Önek bağlamından daha az sonek içeriğine sahip olan yama parçaları ise (belirsizlik uygulandıktan sonra) dosyanın sonuna uygulanmalıdır.
+.sp
+\fBpatch\fR yamanın uygulanacağı yeri bulamazsa, uygulayamadığı bölümü bir red dosyasına yazar. Bu dosyanın ismi normalde yama dosyasının ismine \fI.rej\fR eklenerek elde edilir. Eğer \fI.rej\fR eki çok uzun bir dosya ismi oluşturacaksa dosya isminin sonuna \fI#\fR eklenir, bu karakter de fazla geliyorsa dosya isminin son karakteri \fI#\fR ile değiştirilir. (Rededdilen kısım yamanın biçiminden bağımsız olarak sıradan bağlamsal fark biçiminde çıktılanır. Eğer girdi bir normal fark dosyası ise bağlamın çoğu basitçe boş olur.)
+.sp
+Reddedilen parça, birleşik veya bağlam farkı biçeminde çıkar. Girdi normal bir farksa, bağlamların çoğu basitçe boştur. Red dosyasındaki reddedilen kısımlarla ilgili satır numaraları yama dosyasındaki satır numaralarından farklı olabilir: yeni satır numaraları yamanın eski dosyada değil de yeni (yamanmış) dosyada bulunabileceği yaklaşık yeri belirtecek şekilde oluşturulur.
+.sp
+Her yama parçası tamamlandığında, eğer parçanın uygulanması başarısız olmuşsa (yeni dosyadaki) hangi satırdan itibaren devam edeceğini size bildirilir. Eğer yama parçası fark dosyasında belirtilen satırdan farklı numaralı bir satıra uygulanmışsa size yeni konumu bildirir. Yeni konumun çok farklı olması parçanın yanlış yeri yamamakta kullanıldığını belirtebilir. Bir eşleşme bulunurken belirsizlik faktörü kullanmak gerekmişse, biraz kuşku duyasınız diye bu da ayrıca bildirilir. \fB--verbose\fR seçeneğini belirtmişseniz başarıyla uygulanan yama parçaları hakkında da bilgi verilir.
+.sp
+Komut satırında \fIözgün\fR dosya belirtilmemişse \fBpatch\fR, yama dosyasındaki yama olarak uygulanabilecek alanların dışındaki alanları değerlendirerek aşağıdaki kurallara bağlı olarak yamanın uygulanacağı dosyanın ismini tespit etmeye çalışır.
+.sp
+Önce, aday dosya isimlerinin listesini elde etmeye çalışır. Bunu şöyle yapar:
+.sp
+.PD 1
+.RS 2
+.IP \(bu 3
+Başlık bir bağlamsal fark dosyası başlığı ise, \fBpatch\fR eski ve yeni dosya isimlerini başlıktan alır. Eğer isimdeki bölü çizgilerinin sayısı \fB-p\fR\fIsayı\fR veya \fB--strip=\fR\fIsayı\fR seçenekleri ile belirtilen kadar değilse bu isim yoksayılır. \fI/dev/null\fR ismi de ayrıca yoksayılır.
+.IP \(bu 3
+Yama olarak uygulanacak alanların dışında \fBIndex:\fR ile başlayan satırlar varsa ve hem yeni hem de eski dosya isimleri belirtilmemişse veya \fBpatch\fR POSIX uyumlu ise, \fBpatch\fR dosya isimlerini \fBIndex:\fR ile başlayan satırlardan alır.
+.IP \(bu 3
+Bundan sonraki kurallara uygun olmak üzere, aday dosya isimlerinin, başlıkta göründükleri sıraya bakılmaksızın, (eski, yeni, index) düzeninde olacakları varsayılır.
+.sp
+.RE
+.PD 0
+\fBpatch\fR bir dosya ismini aday dosya listesinden şu kurallara göre seçer:
+.sp
+.PD 1
+.RS 2
+.IP \(bu 3
+Bazı isimli dosyalar mevcutsa, \fBpatch\fR POSIX uyumluysa ilk dosya ismi değilse en iyi isim seçilir.
+.IP \(bu 3
+Eğer \fBpatch\fR RCS, ClearCase, Perforce ve SCCS’yi yoksaymıyorsa (\fB-g \fR\fIsayı\fR veya \fB--get=\fR\fIsayı\fR seçeneklerine bakınız) ve belirtilen dosya mevcut değilse ama bir RCS, ClearCase, Perforce veya SCCS ana dosyası varsa \fBpatch\fR belirtilen ilk dosyayı RCS, ClearCase, Perforce veya SCCS ana dosyası ile seçer.
+.IP \(bu 3
+Belirtilen dosya mevcut değilse, bir RCS, ClearCase, Perforce veya SCCS ana dosyası da yoksa ama bazı dosya isimleri verilmişse, \fBpatch\fR POSIX uyumlu değilse ve yamanın bir dosya oluşturması gerekiyorsa, \fBpatch\fR en az dizin oluşturulacak şekilde en iyi dosya ismini seçer.
+.IP \(bu 3
+Şimdiye dek bahsedilen kurallarla bir dosya ismi seçilememişse, yamanacak dosyanın ismi size sorulur ve \fBpatch\fR dosya ismini buna göre seçer.
+.sp
+.RE
+.PD 0
+Belirtilen dosyalar listesinden "en iyi" dosya ismi şöyle seçilir: önce en az sayıda dizini dosya yolu olarak alır, bundan sonra, uzantısız en kısa dosya isimleri, bunlardan sonra en kısa isimlerin tümü ve son olarak da kalan ilk isim alınır.
+.sp
+Ek olarak, Yama olarak uygulanacak alanların dışında \fBPrereq:\fR ile başlayan bir satır varsa, \fBpatch\fR bu öngereklilikler satırındaki ilk sözcüğü (normalde bir sürüm numarasıdır) alır ve özgün dosyaya bu sözcük var mı diye bakar. Yoksa \fBpatch\fR işine devam etmeden önce bir doğrulama isteği yapar.
+.sp
+Tüm bunların nihayetinde, şöyle bir bildirim de yapabilirsiniz:
+.sp
+.RS 4
+.nf
+\fB| patch -d /usr/src/local/blurfl\fR
+.fi
+.sp
+.RE
+ve, \fIblurfl\fR dizinindeki dosya yama dosyasıyla yamanır.
+.sp
+Eğer yama dosyası bir yamadan fazlasını içeriyorsa \fBpatch\fR onların her birini farklı birer yama dosyasından geliyormuşçasına uygular. Yama olarak uygulanabilecek her satır grubundan önce gelen satırlarda bulunan dosya isimleri ve sürüm numaralarından yukarıda bahsedildiği gibi yamanacak dosyanın ismi saptanarak bu işlem gerçekleştirilir.
+.sp
+.SH "SEÇENEKLER"
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-b\fR, \fB--backup\fR
+Dosyaların yedeğini oluşturur. Bir dosya yamanırken özgün dosya silinmez, ya başka bir yere kopyalanır ya da ismi değiştirilir. Mevcut olmayan bir dosyanın yedeği yapılırken, olmayan dosyayı belirtmek için sadece ismi olan cismi olmayan (boş) bir dosya oluşturulur. Yedek dosya isimlerinin nasıl oluşturulduğu \fB-V\fR veya \fB--version-control\fR seçeneklerinin açıklamalarında bulunabilir.
+.sp
+.TP 4
+\fB--backup-if-mismatch\fR
+Yama bir dosya ile tam uyuşmazsa ve yedekleme istenmese de dosya yedeklenir. \fBpatch\fR POSIX uyumlu değilse bu seçenek öntanımlı olarak uygulanır.
+.sp
+.TP 4
+\fB--no-backup-if-mismatch\fR
+Yama bir dosya ile tam uyuşmazsa ve yedekleme istense de dosya yedeklenmez. \fBpatch\fR POSIX uyumlu değilse bu seçenek öntanımlı olarak uygulanır.
+.sp
+.TP 4
+\fB-B\fR, \fB--prefix=\fR\fIönek\fR
+Basit yedek dosya ismi oluşturulurken dosya isminin önüne \fIönek\fR getirilir. Örneğin, \fB-B /junk/\fR ile dosya ismi \fIsrc/patch/util.c\fR olan bir dosyanın basit yedeği yapılırken dosya ismi \fI/junk/src/patch/util.c\fR yapılır.
+.sp
+.TP 4
+\fB--binary\fR
+Standart çıktı veya \fI/dev/tty\fR dışında tüm dosyalar için okuma ve yazma işlemleri ikil kipte yapılır. Bu seçenek POSIX uyumlu sistemlerde etkisizdir. DOS benzeri sistemlerde ise bu seçeneğin bir fark oluşturması için yama \fBdiff -a --binary\fR ile üretilmiş olmalıdır.
+.sp
+.TP 4
+\fB-c\fR, \fB--context\fR
+Yama dosyası sıradan bir bağlamsal fark dosyası olarak yorumlanır.
+.sp
+.TP 4
+\fB-d\fR, \fB--directory=\fR\fIdizin\fR
+Hiçbir şey yapmadan, hemen \fIdizin\fRe geçilir.
+.sp
+.TP 4
+\fB-D \fR, \fB--ifdef=\fR\fItanım\fR
+Değişiklikleri işaretlemede \fB#ifdef ... #endif\fR yapısı \fItanım\fR farklılaştırma simgesi ile kullanılır.
+.sp
+.TP 4
+\fB--dry-run\fR
+Hiçbir dosyada değişiklik yapmaksızın uygulanan yamaların sonuçları basılır.
+.sp
+.TP 4
+\fB-e\fR, \fB--ed\fR
+Yama dosyası bir \fBed\fR betiği olarak yorumlanır.
+.sp
+.TP 4
+\fB-E\fR, \fB--remove-empty-files\fR
+Yama uygulandıktan sonra boşalan dosyalar silinir. Aslında, bu seçenek gereksizdir, çünkü \fBpatch\fR yamadıktan sonra dosyanın varolup olmayacağını saptamak için başlıktaki tarih damgasını inceler. Buna rağmen, girdi bir bağlamsal fark dosyası değilse ya da \fBpatch\fR POSIX uyumlu ise, \fBpatch\fR bu seçenek verilmedikçe yamandıktan sonra boşalan dosyaları silmez. \fBpatch\fR böyle bir dosyayı sildikten sonra boşalmışsa dosyanın bulunduğu dizini de silmeye çalışır.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Kullanıcının ne yaptığını tam olarak bildiği varsayılır ve kullanıcıya herhangi bir soru yöneltilmez. Hangi dosyaların yamanacağını belirtmeyen başlıklar içeren yamalar atlanır; \fBPrereq:\fR ile başlayan satırlarda yanlış sürüm bilgisi olsa bile dosya yamanır; eski ve yeni dosyaların yer değiştirilmesi gerekse bile yamaların bu işlem yapılmadan uygulanacağı varsayılır. Bu seçenek açıklamaları engellemez, bunun için \fB-s\fR seçeneğine bakınız.
+.sp
+.TP 4
+\fB-F \fR, \fB--fuzz=\fR\fIsayı\fR
+En büyük belirsizlik faktörünü belirtmekte kullanılır. Bu seçenek sadece bağlamsal fark dosyalarına uygulanır ve \fBpatch\fR yamanacak yeri bulurken yama olarak kullanılacak satırların baştan ve sondan bu kadarını yoksayar. Çok büyük belirsizlik faktörlerinin yamanın başarısızlığını arttıracağını unutmayın. Öntanımlı belirsizlik faktörü 2’dir ve bağlamsal fark dosyalarında bağlamsal satır sayısından daha yüksek bir değer (genelde 3’tür) atanmamalıdır.
+.sp
+.TP 4
+\fB-g \fR, \fB--get=\fR\fIsayı\fR
+Bir dosya RCS veya SCCS denetimindeyken, böyle bir dosya yoksa veya salt-okunursa ya da öntanımlı sürümüyle eşleşiyorsa; veya ClearCase denetimindeyken, böyle bir dosya yoksa, bu seçenek, \fBpatch\fR’in eylemlerini denetlemekte kullanılır. \fIsayı\fR pozitifse, \fBpatch\fR dosyayı sürüm denetim sisteminden alır; sıfırsa, RCS, SCCS veya ClearCase yoksayılır ve dosya alınmaz; negatifse dosyanın alınıp alınmayacağı kullanıcıya sorulur. Bu seçeneğin öntanımlı değeri eğer atanmışsa, \fBPATCH_GET\fR ortam değişkeninden alınır; atanmamışsa öntanımlı değer sıfırdır.
+.sp
+.TP 4
+\fB--help\fR
+Seçeneklerin bir özetini basar ve çıkar.
+.sp
+.TP 4
+\fB-i\fR, \fB--input=\fR\fIyamadosyası\fR
+Yama \fIyamadosyası\fR dosyasından okunur. \fIyamadosyası\fR olarak - verilmişse öntanımlı olarak standart girdi okunur.
+.sp
+.TP 4
+\fB-l\fR, \fB--ignore-whitespace\fR
+Yamanacak dosyaların içindeki sekmeler ve boşluklar için yama içindeki boşluklarla birebir eşleşme aranmaz, ancak herhangi bir uzunlukta boşluğun her iki dosyada da karşılıklı varlığı şarttır, satır sonlarındaki boşluklar eşleşme açısından yoksayılır. Normal karakterler tam olarak eşleştirilir. Bağlamsal her satır yamanacak dosyadaki satırlarla daima eşleştirilir.
+.sp
+.TP 4
+\fB--merge\fR, \fB-merge=merge\fR, \fB-merge=diff3\fR
+< Yama dosyasını özgün dosyaya \fBdiff3\fR(1) veya \fBmerge\fR(1) gibi uygular. Bir çelişki bulunursa \fBpatch\fR bir uyarı çıktılar ve çelişkiyi <<<<<<< ve >>>>>>> satırları arasına yerleştirir. Bir çelişki genelde şuna benzer:
+.sp
+.RS 4
+.RS 3
+.nf
+<<<<<<<
+özgün dosyadaki satırlar
+|||||||
+yamadaki özgün satırlar
+=======
+yamadaki yeni satırlar
+>>>>>>>
+.fi
+.sp
+.RE
+.RE
+.IP
+\fB--merge\fR seçeneğinin seçimlik değiştirgesi çelişkinin çıktılanma biçemini değiştirir: \fIdiff3\fR biçeminde ||||||| bölümünden sonra yamadaki özgün satırlar gösterilir; \fImerge\fR biçeminde, bu bölüm olmaz. \fImerge\fR biçemi öntanımlıdır.
+.sp
+Bu seçenek \fB--forward\fR seçeneğini de uygularken \fB--fuzz=\fR\fIsayı\fR seçeneğini yok sayar.
+.sp
+.TP 4
+\fB-n\fR, \fB--normal\fR
+Yama dosyası, normal yama dosyası olarak yorumlanır.
+.sp
+.TP 4
+\fB-N\fR, \fB--forward\fR
+Eski ve yeni dosyaların yer değiştirileceği görünen veya zaten uygulanmış yamalar yoksayılır. \fB-R\fR seçeneğine de bakınız.
+.sp
+.TP 4
+\fB-o\fR, \fB--output=\fR\fIçıktıdosyası\fR
+Dosyaların yerinde yamanması yerine çıktı, \fIçıktıdosyası\fR dosyasına gönderilir.
+.sp
+.TP 4
+\fB-p\fR, \fB--strip=\fR\fIsayı\fR
+Yama dosyasında bulunan her dosya isminin başından \fIsayı\fR ile belirtilen sayıda bölü çizgisi içeren dizge yoksayılır. Birden fazla yanyana bölü çizgisi varsa bunlar tek bir bölü çizgisi sayılır. Yama dosyasının yamanacak dosyalardan farklı bir dizinde tutulması durumunda yamanacak dosyaların nasıl bulunacağını belirtmek amacıyla kullanılır. Örneğin, yama dosyasında yamanacak dosya isminin şöyle verildiğini varsayalım:
+.sp
+.RS 4
+.RS 3
+.nf
+\fB/u/howard/src/blurfl/blurfl.c\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Seçenek \fB-p0\fR olarak verilirse bu dizge olduğu gibi ele alınır, \fB-p1\fR verilirse,
+.sp
+.RS 4
+.RS 3
+.nf
+\fBu/howard/src/blurfl/blurfl.c\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+baştaki bölü çizgisi atılır, \fB-p4\fR verilirse,
+.sp
+.RS 4
+.RS 3
+.nf
+\fBblurfl/blurfl.c\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+olur. \fB-p\fR hiç belirtilmezse sonuç \fIblurfl.c\fR olacaktır. Bu durumda dosya yamanın bulunduğu dizinde aranacağından dosya daha farklı bir yerdeyse bu da \fB-d\fR seçeneği ile belirtilebilir.
+.sp
+.TP 4
+\fB--posix\fR
+POSIX standardına kesinlikle uyulur:
+.sp
+.PD 1
+.RS 5
+.IP \(bu 3
+Fark dosyası başlıklarından dosya isimleri öğrenilirken, listedeki (eski, yeni, birleşik) ilk mevcut dosya alınır.
+.IP \(bu 3
+Yamandıktan sonra boşalan dosyalar silinmez.
+.IP \(bu 3
+RCS, ClearCase veya SCCS’deki dosyalar için alınacak mı diye sormaz.
+.IP \(bu 3
+Komut satırında seçeneklerin dosyalardan önce verilmesi gerekir.
+.IP \(bu 3
+Eşleşmeyen dosyaların yedeklemesi yapılmaz.
+.sp
+.RE
+.IP
+.PD 0
+.sp
+.TP 4
+\fB--quoting-style=\fR\fIsözcük\fR
+Çıktılanan isimler sarmalanırken \fIsözcük\fR ile belirtilen tarz kullanılır. \fIsözcük\fR şunlardan biri olabilir:
+.sp
+.RS
+.TP 4
+\fBliteral\fR
+İsimler olduğu gibi çıktılanır.
+.sp
+.TP 4
+\fBshell\fR
+İsimler kabuk metakarakterleri içeriyorsa kabuk için sarmalanır yoksa anlamı belirsiz çıktılama yapılır.
+.sp
+.TP 4
+\fBshell-always\fR
+Normalde sarmalanmaları gerekmese bile isimler daima kabuk için sarmalanır.
+.sp
+.TP 4
+\fBc\fR
+İsimler C dilinde dizgelere uygulandığı gibi sarmalanır.
+.sp
+.TP 4
+\fBescape\fR
+İsimler çevreleyen çifttırnakların ihmal edilmesi dışında \fBc\fR tarzındaki gibi sarmalanır.
+.sp
+.PP
+.RE
+.IP
+\fB--quoting-style\fR seçeneği için öntanımlı değeri \fBQUOTING_STYLE\fR ortam değişkeninde belirtebilirsiniz. Bu ortam değikeni atanmamışsa öntanımlı değer \fBshell\fR’dir.
+.sp
+.TP 4
+\fB-r\fR, \fB--reject-file=\fR\fIreddosyası\fR
+Reddedilenler öntanımlı \fI.rej\fR dosyası yerine \fIreddosyası\fRna konulur. \fIreddosyası\fR olarak - belirtilmişse reddedilenler yok sayılır.
+.sp
+.TP 4
+\fB-R\fR, \fB--reverse\fR
+Bu yamanın eski ve yeni dosyalar yer değiştirilerek uygulanacağı varsayılır. Yama olarak kullanılacak her bölümdeki eski ve yeni satırlar yer değiştirilerek uygulanmaya çalışılır. Yer değiştirildiğinde anlamsız olan kısımlar reddedilir. \fB-R\fR seçeneği \fBed\fR fark betikleri ile çalışmaz, çünkü yer değiştirme işlemini gerçekleştirmek için çok az bilgi içerirler.
+.sp
+Yama içindeki kısımlardan ilkinin uygulanması başarısız olursa, \fBpatch\fR bu kısmın eski ve yeni satırlarını yer değiştirerek böyle uygulanabiliyor mu diye bakar. Böyle uygulanabiliyorsa kullanıcıya \fB-R\fR seçeneğinin uygulanmasını isteyip istemediğini sorar. Uygulanamıyorsa, \fBpatch\fR normal olarak uygulamaya devam eder. (Bilgi: Eğer yama bir normal yama ise ve boş bir içerik bile daima eşleşeceğinden ilk komut yamanın bir ek uygulanacağını belirtiyorsa bu yöntem yer değiştirmeli yamayı saptayamaz. Tesadüfen, çoğu yama bir satırın tamamen silinmesini değil ya bir ek ya da bir değişiklik yapılmasını gerektirir, bu durumda yer değiştirmeli normal fark dosyalarından silme işlemi ile başlayanlar başarıyı arttıran kuralların uygulanmasına bağlı olarak başarısız olur.)
+.sp
+.TP 4
+\fB--read-only=\fR\fIdavranış\fR
+Salt-okunur bir dosyada değişiklik yapılırken belirtilen \fIdavranış\fRa uyulur: \fBignore\fR ise olası sorunlar yok sayılır, \fBwarn\fR ise bu konuda uyarır, \fBfail\fR ise işlem başarısız olur.
+.sp
+.TP 4
+\fBreject-format=\fR\fIbiçem\fR
+Reddedilenler dosyaları belirtilen \fIbiçem\fRde üretir (\fBcontext\fR veya \fBunified\fR). Bu seçenek olmaksızın yama unified (birleşik) ise reddedilen parçalar da unified diff biçeminde olur. Aksi takdirde, context (bağlamsal) diff biçeminde olur.
+.sp
+.TP 4
+\fB-s\fR, \fB--silent\fR, \fB--quiet\fR
+Bir hata oluşmadıkça bilgilendirici hiçbir şey çıktılanmaz.
+.sp
+.TP 4
+\fB--follow-symlinks\fR
+Girdi dosyalarını aranırken sembolik bağlar izlenir. Sembolik bağların işaret ettiği dosyaları değiştirmek yerine sembolik bağları değiştirir. Sembolik bağlara Git tarzı yamalar artık uygulanmamaktadır. Bu seçenek, yamanın önceki sürümleriyle geriye dönük uyumluluk için mevcuttur; kullanımı önerilmez.
+.sp
+.TP 4
+\fB-t\fR, \fB--batch\fR
+\fB-f\fR seçeneğinde olduğu gibi sorular engellenir ama bu biraz farklı kabulllerle yapılır: başlıklarında dosya isimlerini içermeyen yamalar atlanır (\fB-f\fR ile aynı); yamanın \fBPrereq:\fR satırında yanlış sürüm belirtilen dosyalar için yamalar atlanır; ve yer değiştirme uygulanması gerekliliği saptanan yamaların yer değiştirme ile uygulanacağı varsayılır.
+.sp
+.TP 4
+\fB-T\fR, \fB--set-time\fR
+Yamanmış dosyaların erişim ve değiştirme zamanları, bağlamsal fark dosyalarının başlıklarındaki zaman bilgisinin yerel zamanı gösterdiği varsayımıyla bu zamana ayarlanır.
+.sp
+Bu seçeneğin kullanılması önerilmez, çünkü yerel zaman kullanılarak uygulanan yamaları diğer zaman dilimlerindeki kulanıcılar kolayca kullanamazlar, ayrıca yaz saati uygulamasından dolayı yerel zaman damgaları yamanın geçmişte uygulanması gibi tuhaflıklara sebep olabilir. Bu seçenek yerine \fB-Z\fR veya \fB--set-utc\fR seçeneklerini kullanarak zamanı UTC’ye göre belirtmeyi tercih edin.
+.sp
+.TP 4
+\fB-u\fR, \fB--unified\fR
+Yama dosyası birleşik bağlamsal fark dosyası olarak yorumlanır.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+\fBpatch\fR’in sürümünü ve yama seviyesini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version-control=\fR\fIyöntem\fR
+Yedek dosya isimleri saptanırken \fIyöntem\fR kullanılır. Bu yöntem ayrıca bu seçenek ile gerektiğinde değiştirilmek üzere \fBPATCH_VERSION_CONTROL\fR (veya bu atanmamışsa \fBVERSION_CONTROL\fR) ortam değişkeni ile atanabilir. Burada bir yöntemin atanması yedekleme yapılacağı anlamına gelmez, sadece yedekleme yapılacaksa yedek dosyalarının ismi bu yöntem kullanılarak saptanır.
+.sp
+\fIyöntem\fR değeri GNU Emacs’ın ’version-control’ değişkeni gibidir; farklı olarak \fBpatch\fR daha açıklayıcı olan eşanlamlılarını da tanır. Geçerli \fIyöntem\fR değerleri şunlardır (eşsiz kısaltmalar da kabul edilir):
+.sp
+.RS
+.TP 4
+\fBexisting\fR, \fBnil\fR
+Zaten varolan dosyaların numaralı yedekleri yapılır, aksi takdirde basit yedekleme yapılır. Bu öntanımlıdır.
+.sp
+.TP 4
+\fBnumbered\fR, \fBt\fR
+Numaralı yedekleme yapılır. \fIF\fR dosyasının yedek dosyası N sürüm numarasını belirtmek üzere \fIF.~N~\fR biçiminde isimlendirilir.
+.sp
+.TP 4
+\fBsimple\fR, \fBnever\fR
+Basit yedekleme yapılır. \fB-B\fR (\fB--prefix\fR), \fB-Y\fR (\fB--basename-prefix\fR) ve \fB-z\fR (\fB--suffix\fR) seçenekleri ile basit yedek dosyası ismi belirtilebilir. Bu seçeneklerin hiçbiri belirtilmemişse, basit yedekleme soneki kullanılır; sonek değeri \fBSIMPLE_BACKUP_SUFFIX\fR ortam değişkeni ile belirtilmemişse öntanımlı olarak \fI.orig\fR soneki kullanılır.
+.sp
+.PP
+.RE
+.IP
+Numaralı ve basit yedeklemede dosya ismi çok uzun olursa bunlar yerine sonek olarak \fB~\fR kullanılır, bu işlem de dosya isminin çok uzun olmasına sebep oluyorsa dosya ismindeki son karakter \fB~\fR karakteri ile değiştirilir.
+.sp
+.TP 4
+\fB--verbose\fR
+Yapılan işlem hakkında daha ayrıntılı bilgi verilir.
+.sp
+.TP 4
+\fB-x\fR, \fB--debug=\fR\fIsayı\fR
+Sadece \fBpatch\fR yamacılarını ilgilendiren hata ayıklama seçeneklerini belirtmek için kullanılır.
+.sp
+.TP 4
+\fB-Y\fR, \fB--basename-prefix=\fR\fIönek\fR
+Basit yedek dosyası ismi oluşturulurken dizinlerden arındırılmış dosya isminin önüne \fIönek\fR getirilir. Örneğin basit yedek dosya ismi \fB-Y .del/\fR ile belirtilmişse \fIsrc/patch/util.c\fR dosyasının ismi \fIsrc/patch/.del/util.c\fR yapılır.
+.sp
+.TP 4
+\fB-z\fR, \fB--suffix=\fR\fIsonek\fR
+Basit yedek dosyası ismi oluşturulurken dosya isminin sonuna \fIsonek\fR getirilir. Örneğin basit yedek dosya ismi \fB-z -\fR ile belirtilmişse \fIsrc/patch/util.c\fR dosyasının ismi \fIsrc/patch/util.c-\fR yapılır. Yedekleme soneki gerektiğinde bu seçenek ile değiştirilmek üzere \fBSIMPLE_BACKUP_SUFFIX\fR ortam değişkeni ile de atanabilir.
+.sp
+.TP 4
+\fB-Z\fR, \fB--set-utc\fR
+Yamanmış dosyaların erişim ve değiştirme zamanları, bağlamsal fark dosyalarının başlıklarındaki zaman bilgisinin koordinatlı evrensel zamanı (UTC; GMT olarak da bilinir) gösterdiği varsayımıyla bu zamana ayarlanır. Ayrıca \fB-T\fR veya \fB--set-time\fR seçeneklerinin açıklamasına da bakınız.
+.sp
+Dosyanın özgün zamanı yama başlığında belirtilen zamanla eşleşmezse ya da onun içeriği yama ile tam olarak eşleşmezse, \fB-Z\fR (\fB--set-utc\fR) ve \fB-T\fR (\fB--set-time\fR) seçenekleri bir dosyanın zamanını ayarlamaktan kaçınır. Buna rağmen \fB-f\fR (\fB--force\fR) seçeneği belirtilmişse dosyanın zamanı ne olursa olsun ayarlanır.
+.sp
+\fBdiff\fR çıktı biçiminin sınırlamalarından dolayı, dosyaları içeriği değiştirilmeyecekse, bu seçeneklerle bu dosyaların zamanı güncellenemez. Ayrıca, bu seçenekleri kullandığınız takdirde, zamanları güncellenmiş dosyalara bağımlı dosyaları kaldırmalısınız (\fBmake clean\fR gibi). Böylece sonraki \fBmake\fR çağrılarında yamanmış dosyaların zamanlarından dolayı hatalarla/uyarılarla karşılaşmazsınız.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBPATCH_GET\fR
+Eksik ya da salt-okunur dosyaların RCS, ClearCase, Perforce veya SCCS’den öntanımlı olarak alınıp alınmayacağını belirtmek için kullanılır. \fB-g\fR (\fB--get\fR) seçeneğinin açıklamasına bakınız.
+.sp
+.TP 4
+\fBPOSIXLY_CORRECT\fR
+Bu değişken atanmışsa \fBpatch\fR öntanımlı olarak POSIX standardına uyumlu davranır. \fB--posix\fR seçeneğinin açıklamasına bakınız.
+.sp
+.TP 4
+\fBQUOTING_STYLE\fR
+\fB--quoting-style\fR seçeneğinin öntanımlı değeridir.
+.sp
+.TP 4
+\fBSIMPLE_BACKUP_SUFFIX\fR
+Bu ortam değişkeninin değeri basit yedekleme dosyalarında \fI.orig\fR soneki yerine kullanılacak sonektir.
+.sp
+.TP 4
+\fBTMPDIR, TMP, TEMP\fR
+Geçici dosyaları konulacağı dizindir. \fBpatch\fR bu listeden atanmış değerlerden ilkinin değeri kullanır. Hiçbiri atanmamışsa sisteme bağlı öntanımlı değer kullanılır. Unix makinalar için bu değer normalde \fI/tmp\fR dizinidir.
+.sp
+.TP 4
+\fBVERSION_CONTROL, PATCH_VERSION_CONTROL\fR
+Sürüm denetim tarzını belirtir. \fB-v\fR (\fB--version-control\fR) seçeneğinin açıklamasına bakınız.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fB/dev/tty\fR
+denetim uçbirimi; kullanıcıya sorulan soruların yanıtlarını almak için kullanılır
+.sp
+.TP 4
+\fI$TMPDIR/\fR\fBp*\fR
+geçici dosyalar
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBdiff\fR(1), \fBed\fR(1).
+.sp
+Marshall T. Rose ve Einar A. Stefferud, Proposed Standard for Message Encapsulation, Internet RFC 934 <URL: http://ftp.isi.edu/innotes/rfc934.txt> (1985-01).
+.sp
+.SH "YAMA GÖNDERENLER İÇİN"
+Yama göndermeye hazırlanıyorsanız, hatırlamanız gereken bir sürü şey olacaktır.
+.br
+Yamanızı sistemli olarak oluşturmalısınız. İyi bir yöntem
+.sp
+\fBdiff -Naur \fR\fIeski yeni\fR komutunu kullanmaktır. Burada \fIeski\fR ve \fIyeni\fR ile eski ve yeni dizin isimleri belirtilir. Bu isimler herhangi bir eğik çizgi çizgisi içermemelidir. \fBdiff\fR komutunun başlıkları yama uygulayıcıların yamayı \fB-Z\fR (\fB--set-utc\fR) seçeneği ile uygulayabilecekleri şekilde Evrensel Zamanda geleneksel Unix tarih ve zaman biçeminde içermelidir. Bu örnekte, komut Bourne kabuğu (\fBbash\fR) sözdizimiyle yazılmıştır:
+.sp
+.RS 4
+.nf
+\fBLC_ALL=C TZ=UTC0 diff -Naur gcc-2.7 gcc-2.8\fR
+.fi
+.sp
+.RE
+Yamanızı uygulayacak olanlara hangi dizine geçip hangi \fBpatch\fR seçeneğini kullanacağını söyleyin. Seçenek dizgesi olarak \fB-Np1\fR önerilir. Yaptığınız yamayı kendinizi yamayı alacakların yerine koyarak deneyin, yani özgün dosyaların bir kopyasına bu yamayı uygulayın.
+.sp
+İlk diff’e göre yama seviyesini arttırmak için yamanmış bir \fIpatchlevel.h\fR dosyası tutmaktan dolayı çok üzgün kişileri gönderdiğiniz yama sayesinde kazanabilirsiniz. Yama içine bir \fBPrereq:\fR satırı koyarsanız onların sıradışı yamaları uygularken bazı uyarılar almamasını sağlamış olursunuz.
+.sp
+Bir dosyanın yama uygulanırken oluşturulmasını isterseniz, oluşturulacak dosyayı \fI/dev/null\fR ile ya da zaman damgası Unix çağ başlangıcına (Epoch: 1970-01-01 00:00:00 UTC) ayarlanmış boş bir dosya ile karşılaştırılarak yapılmış bir fark dosyası ile bunu sağlayabilirsiniz. Bu sadece, oluşturulacak dosya hedef dizinde yoksa çalışır. Tersine, yama uygulanıren mevcut bir dosyanın silinmesini isterseniz, silinecek dosyayı yine zaman damgası Unix çağ başlangıcına ayarlanmış boş bir dosya ile karşılaştırılarak yapılmış bir fark dosyası ile bunu sağlayabilirsiniz. Silinmesini istediğiniz dosya, \fBpatch\fR POSIX uyumlu değilse ve \fB-E\fR (\fB--remove-empty-files\fR) seçeneği verilmişse, silinecektir. Dosyaları oluşturan ya da silen yamalar üretmenin kolay bir yolu GNU \fBdiff\fR’in \fB-N\fR (\fB--new-file\fR) seçeneğini kullanmaktır.
+.sp
+Alıcıların \fB-p\fR\fIN\fR seçeneğini kullanacağını varsayıyorsanız, böyle bir çıktıya sahip yamayı göndermeyin:
+.sp
+.RS 4
+.nf
+\fBdiff -Naur v2.0.29/prog/README prog/README\fR
+--- v2.0.29/prog/README   Mon Mar 10 15:13:12 1997
++++ prog/README   Mon Mar 17 14:58:22 1997
+.fi
+.sp
+.RE
+Çünkü burada eski ve yeni dosya isimleri farklı sayıda bölü çizgisi içermektedir ve \fBpatch\fR’in farklı sürümleri dosya isimlerini farklı yorumlarlar. Karışıklığı önlemek için böyle bir çıktı üreten yamalar gönderin:
+.sp
+.RS 4
+.nf
+\fBdiff -Naur v2.0.29/prog/README v2.0.30/prog/README\fR
+--- v2.0.29/prog/README   Mon Mar 10 15:13:12 1997
++++ v2.0.30/prog/README   Mon Mar 17 14:58:22 1997
+.fi
+.sp
+.RE
+\fIREADME.orig\fR gibi yedek dosya ismi olarak kullanılabilecek bir dosya ismi ile karşılaştırılarak üretilmiş yamalar göndermekten kaçının. Böyle bir yama \fBpatch\fR’in gerçek dosyayı değil yedekleme dosyasını yamamasına yol açabilir. Bunun yerine \fIold/README\fR ve \fInew/README\fR gibi farklı dizinlerde bulunan aynı isimli iki dosyayı karşılaştırın.
+.sp
+Yer değiştirmeli yamalar göndermemeye çalışın. Böyle bir yama zaten uygulanmış bir yama gibi görüneceğinden insanları şaşırtır.
+.sp
+Yamanızın türetilerek elde edilen dosyaları yamamasına dikkat edin (\fImakefile\fR’ınızın içinde \fBconfigure: configure.in\fR diye bir satır var diye \fBconfigure\fR dosyasını yamamak gibi.). Alıcılar bu tür türetilerek elde edilen dosyaları zaten kendileri türetebilmelidir. Türetilen dosyalar için fark dosyaları göndermek zorundaysanız, fark dosyalarını UTC kullanarak üretin. Böylece alıcılar yamayı \fB-Z\fR (\fB--set-utc\fR) seçeneği ile uygulayıp yamanmış dosyalara bağımlı yamanmamış dosyaları kaldırmak zorunda kalırlar (\fBmake clean\fR yapmak gibi).
+.sp
+Beş yüz bilmem kaç farklık bir listeyi tek bir dosyaya koymaktan kaçınmak iyi olurdu. Birbiriyle ilgileri nedeniyle gruplanabilen dosyalarla ilgili yamaları farklı dosyalara koymak akıllıca olur.
+.sp
+.SH "TANI İLETİLERİ"
+Tanı iletilerinin varlığı genellikle \fBpatch\fR’in yama dosyanızı çözümleyemediğini belirtir.
+.sp
+\fB--verbose\fR seçeneği verilmişse bir \fBHmm...\fR iletisi, yama dosyasında işlenemeyen bir metinin varlığını ve \fBpatch\fR’in bu metin içinde bir yama var mı acaba, varsa bu ne tür bir yamadır acaba diye bir saptama yapmaya çalıştığını gösterir.
+.sp
+\fBpatch\fR’in çıkış durumu 0 ise, listedeki yamaların hepsi başarıyla uygulanmış demektir. 1 ise bazıları uygulanamamıştır. 2 ise biraz daha fazla sorun vardır. Bir döngü içinde çok sayıda yama uyguluyorsanız her seferinde bu çıkış durumuna bakmanız icabeder, böylece kısmen yamanmış dosyalara sonraki yamayı uygulamamış olursunuz.
+.sp
+.SH "YETERSİZLİKLER"
+Bağlamsal fark dosyaları boş dosyaların ve boş dizinlerin ya da sembolik bağ gibi özel dosyaların oluşturulması ve silinmesi için güvenilir bir içerik sunamazlar. Sahiplik, dosya izinleri gibi dosyaların temel verilerinde bir değişiklik bilgisi sunamadıkları gibi bir dosyanın başka bir dosyaya sabit bağ mı olacağı gibi bilgileri de içeremezler. Bu tür değişiklikler gerekliyse, bunları gerçekleştirecek bir betik yamaya eşlik etmelidir.
+.sp
+\fBpatch\fR, bir ed betiğinde olmayan satır numaraları hakkında birşey söyleyemediği gibi, bir normal fark dosyasında da sadece bir değişiklik ya da silme işlemi bulursa hatalı satır numaralarını saptayabilir. Belirsizlik faktörü olarak 3 verildiğinde bağlamsal fark dosyaları da sorun yaratabilir. Elverişli bir etkileşimli arayüz eklenene kadar, bir bağlamsal fark dosyasının böyle bir durumda sorun çıkarıp çıkarmayacağını kendiniz saptamalısınız. Şüphesiz, hatasız gerçekleşen bir derleme işlemi yamanın hatasız uygulandığını gösteriyor gibi görünse de bu daima böyle olmaz.
+.sp
+\fBpatch\fR, bazan biraz fazla tahmin yapması gerekse bile genellikle doğru sonuçlar üretir. Yine de, yamanın üretildiği dosya ile yamanın uygulandığı dosya aynı sürüme ait olduğu zaman sonuçların doğru olacağı garanti edilmiştir.
+.sp
+.SH "UYUMLULUK BİLGİLERİ"
+POSIX standardı, \fBpatch\fR’in geleneksel davranışından farklı davranışlar belirtir. \fBpatch\fR’in POSIX uyumluluğu olmayan 2.1 ve daha önceki sürümleri ile çalışmak zorundaysanız bu farklardan haberdar olmanız gerekir.
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+Geleneksel \fBpatch\fR’de \fB-p\fR seçeneğinin terimi isteğe bağlıdır. Yalnız başına \fB-p\fR seçeneği \fB-p0\fR’a eşdeğerdir. Şimdiki durumda ise \fB-p\fR seçeneğinin bir terime sahip olması zorunludur ve \fB-p 0\fR seçeneği \fB-p0\fR seçeneğine eşdeğerdir. En yüksek derecede uyumluluk adına seçeneği \fB-p0\fR ve \fB-p1\fR gibi kullanın.
+.sp
+Ayrıca, geleneksel \fBpatch\fR dosya yolunu saptarken bölü çizgilerinin sayısına bakarken yeni sürümleri dosya yolunu oluşturan elemanların sayısına bakmaktadır. Bundan dolayı, birden fazla yanyana bölü çizgisi tek bir bölü çizgisi olarak ele alınmaktadır. En yüksek derecede uyumluluk adına gönderilen yamaların içindeki dosya isimlerinde \fB//\fR olmamasına dikkat edin.
+.IP \(bu 3
+Geleneksel \fBpatch\fR’de yedekleme öntanımlı olarak etkindir. Bu davranış şimdi sadece \fB-b\fR (\fB--backup\fR) seçeneği ile etkin kılınabilmektedir.
+.sp
+Bunun tersine, POSIX \fBpatch\fR’de bir eşleşmeme olsa bile yedekleme asla yapılmaz. GNU \fBpatch\fR’de bu davranış \fB--posix\fR seçeneği kullanılarak yahut \fBPOSIXLY_CORRECT\fR ortam değişkeninin varlığı sayesinde POSIX uyumluluğu sağlanarak aksi takdirde \fB--no-backup-if-mismatch\fR seçeneği ile etkinleştirilir.
+.sp
+Geleneksel \fBpatch\fR’in \fB-b \fR\fIsonek\fR seçeneği ile GNU \fBpatch\fR’in \fB-b -z \fR\fIsonek\fR seçenekleri eşdeğerdir.
+.IP \(bu 3
+Geleneksel \fBpatch\fR yama başlığından yamanacak dosyanın ismini öğrenmek için karmaşık (ve iyi belgelenmemiş) bir yöntem kullanır. Bu yöntem POSIX ile uyumlu olmadığı gibi, birkaç yanlış gibi görünmeyen yanlış içerir. Şimdi \fBpatch\fR aynı karmaşıklıkta (ama daha iyi belgelenmiş) ve isteğe bağlı olarak POSIX uyumlu olabilen bir yöntem kullanmaktadır; onun artık daha az yanlış gibi görünmeyen yanlış içerdiğini düşünüyoruz. Bağlamsal fark dosyasının başlığında ve \fBIndex:\fR satırında dosya isimlerinden önek ayırması yapıldıktan sonra kalan dosya isimleri aynı ise bu iki yöntem birbiriyle uyumludur. Yamanız, her başlıktaki dosya isimleri eşit sayıda bölü çizgisi içeriyorsa, normal olarak uyumludur.
+.IP \(bu 3
+Geleneksel \fBpatch\fR kullanıcıya bir soru yönelteceği zaman soruyu standart hataya gönderir ve yanıtı bir uçbirim olarak sırayla şu dosyalarda arar: standart hata, standart çıktı, \fI/dev/tty\fR ve standard girdi. Şimdi ise \fBpatch\fR soruyu standart çıtıya gönderip yanıtı \fI/dev/tty\fR’den okur. Bazı soruların öntanımlı yanıtları değiştirilmiştir, böyle öntanımlı yanıtları olan sorularda \fBpatch\fR artık sonsuz bir döngüye girip yanıt beklememektedir.
+.IP \(bu 3
+Geleneksel \fBpatch\fR gerçek bir hata durumunda 1 ile dönerken, uygulanamayan yamalar olduğunda bunların sayısını belirten bir çıkış değeri ile döner. Şimdi ise \fBpatch\fR uygulanamayan yamalar olduğunda 1 ile, gerçek bir sorun olması durumunda 2 çıkış değeri ile döner.
+.IP \(bu 3
+GNU \fBpatch\fR, geleneksel \fBpatch\fR ve POSIX uyumlu \fBpatch\fR için ortak olan seçeneklerle kendinizi sınırlarsanız iyi olur. Bu seçenekler aşağıda listelenmiştir. Terimli seçeneklerde terimler zorunludur ve terim ile seçenek arasındaki boşluğun olup olmaması önemlidir.
+.sp
+.RS 4
+.RS 3
+.nf
+\fB-c\fR
+\fB-d\fR \fIdizin\fR
+\fB-D\fR \fItanım\fR
+\fB-e\fR
+\fB-l\fR
+\fB-n\fR
+\fB-N\fR
+\fB-o\fR \fIçıktıdosyası\fR
+\fB-p\fR\fIsayı\fR
+\fB-R\fR
+\fB-r\fR \fIreddosyası\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.RE
+.PD 0
+.sp
+.SH "YAZILIM HATALARI"
+Yazılım hatalarını lütfen eposta ile <bug-patch (at) gnu.org> adresine bildiriniz.
+.sp
+Kod eğer yinelenmişse (örneğin, \fB#ifdef ESKİKOD ... #else ... #endif\fR ile) \fBpatch\fR her iki sürümüde yamayamayacatır ve bu her ikisi için de uygulanabiliyorsa, yanlış sürüm yamanabilecek ve size işlemin başarılı olduğunu söylececektir.
+.sp
+Evvelce uygulanmış bir yamayı uygularsanız, \fBpatch\fR yamanın yer değiştirmeli yama olarak uygulanacağını varsayabilir ve size bu yamayı uygulamamayı teklif eder. Bu bir özellik olarak yorumlanabilirdi.
+.sp
+Bir yama parçasının nasıl birleştirileceğini hesaplamak, standart bulanık algoritmayı kullanmaktan çok daha zordur. Daha büyük parçalar, daha fazla bağlam, özgün konumdan daha büyük bir sapma ve daha kötü bir eşleşme, algoritmayı yavaşlatır.
+.sp
+.SH "TELİF HAKKI VE LİSANS"
+Telif Hakkı © 1984, 1985, 1986, 1988 Larry Wall.
+.br
+Telif hakkı © 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2009 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>. Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "YAZARLAR"
+\fBpatch\fR’in özgün sürümü Larry Wall tarafından yazılmıştır. Paul Eggert \fBpatch\fR’in keyfî sınırlarını kaldırdı; ikilik dosyaların desteklenmesi, dosya zamanlarının ayarlanması, dosyaları silinmesi özelliklerini ekledi; ve daha iyi POSIX uyumluluğu sağladı. Diğer destekleyicilerden Wayne Davison unidiff desteğini, David MacKenzie yapılandırma ve yedekleme desteklerini sağladı. Andreas Grünbacher birleştirme desteğini sağladı.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

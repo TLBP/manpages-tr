@@ -1,0 +1,351 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1983, 1990, 1991 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * %%%LICENSE_START(BSD_4_CLAUSE_UCB)
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ * This product includes software developed by the University of
+ * California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * %%%LICENSE_END
+ *
+ *     $Id: recv.2,v 1.3 1999/05/13 11:33:38 freitag Exp $
+ *
+ * Modified Sat Jul 24 00:22:20 1993 by Rik Faith <faith@cs.unc.edu>
+ * Modified Tue Oct 22 17:45:19 1996 by Eric S. Raymond <esr@thyrsus.com>
+ * Modified 1998,1999 by Andi Kleen
+ * 2001-06-19 corrected SO_EE_OFFENDER, bug report by James Hawtin
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "RECV" 2 "11 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+recv - bağlantılı soket üzerinden ileti alır
+.br
+recvfrom - bağlantısız soket üzerinden ileti alır
+.br
+recvmsg - soket üzerinden bir dizi ileti alır
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <sys/types.h>\fR
+\fB#include <sys/socket.h>\fR
+.fi
+.sp
+.IP "ssize_t \fBrecv\fR" 13
+(int \fIsockfd\fR, 
+void *\fIbuf\fR, 
+size_t \fIlen\fR, 
+int \fIflags\fR);
+.sp
+.IP "ssize_t \fBrecvfrom\fR" 17
+(int \fIsockfd\fR, 
+void *\fIbuf\fR, 
+size_t \fIlen\fR, 
+int \fIflags\fR, 
+struct sockaddr *\fIsrc_addr\fR, 
+socklen_t *\fIaddrlen\fR);
+.sp
+.IP "ssize_t \fBrecvmsg\fR" 16
+(int \fIsockfd\fR, 
+struct msghdr *\fImsg\fR, 
+int \fIflags\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBrecv\fR(), \fBrecvfrom\fR() ve \fBrecvmsg\fR() sistem çağrıları bir soketten veri almak için kullanılır. Bu sistem çağrıları hem bağlantılı hem de bağlantısız soketlerde kullanılabilir. Bu sayfada önce bu üç çağrının genel özellikleri ve ardından aralarındaki fark anlatılmıştır.
+.sp
+\fBrecv\fR() ve \fBread\fR(2) arasındaki tek fark \fIflags\fR değiştirgesinin varlığıdır. \fIflags\fR değiştirgesine sıfır değeri atanmış \fBrecv\fR() genel olarak \fBread\fR(2) ile eşdeğerdir (ancak yine de \fBEK BİLGİ\fR bölümüne bakın). Ayrıca aşagıdaki
+.sp
+.RS 4
+.nf
+recv(sockfd, buf, len, flags);
+.fi
+.sp
+.RE
+çağrısı
+.sp
+.RS 4
+.nf
+recvfrom(sockfd, buf, len, flags, NULL, NULL);
+.fi
+.sp
+.RE
+çağrısına eşdeğerdir.
+.sp
+Üç sistem çağrısı da başarı durumunda iletinin boyutunu döndürür. Eğer ileti verilen tampona sığamayacak kadar uzunsa, iletiyi alan soket türüne bağlı olarak fazlalık baytlar atılabilir.
+.sp
+Eğer sokette ileti yoksa ve soket engellemesiz değilse çağrılar bir iletinin gelmesini bekler (\fBfcntl\fR(2) sayfasına bakın), eğer soket engellemeliyse \fB-1\fR döner ve \fIerrno\fR harici değişkenine \fBEAGAIN\fR veya \fBEWOULDBLOCK\fR sabitlerinden bir tanesi atanır. Bu sistem çağrıları, talep edilen miktarın tamamının alınmasını beklemek yerine mevcut olan tüm verileri döndürür.
+.sp
+Bir uygulamada \fBselect\fR(2), \fBpoll\fR(2) veya \fBepoll\fR(2) çağrıları kullanılarak sokete fazla verinin ne zaman geleceğine karar verilebilir.
+.sp
+.SS "flags değerleri"
+\fIflags\fR değiştirgesinin değeri aşağıdaki değerlerin VEYAlanmasıyla elde edilir.
+.sp
+.TP 4
+\fBMSG_CMSG_CLOEXEC\fR (sadece \fBrecvmsg\fR() için geçerlidir, Linux 2.6.23 ve sonrası)
+\fBSCM_RIGHTS\fR işlemi kullanılarak sağlanan UNIX alan dosya tanıtıcısını (\fBunix\fR(7) sayfasında açıklanmıştır) close-on-exec kipine ayarlar. Bu kip, \fBopen\fR(2) çağrısına ait \fBO_CLOEXEC\fR ile aynı sebeplerden ötürü kullanışlıdır.
+.sp
+.TP 4
+\fBMSG_DONTWAIT\fR (Linux 2.2. ve sonrası)
+Engellemesiz işlemi etkinleştirir; eğer işlem engellenirse, \fBEAGAIN\fR veya \fBEWOULDBLOCK\fR döner. \fBO_NONBLOCK\fR seçeneği tanımlanmış (\fBfcntl\fR(2) üzerinden \fBF_SETFL\fR işlemi ile) gibi davranır, fakat \fBMSG_DONTWAIT\fR çağrıya özel olmasıyla fark oluşturur. \fBO_NONBLOCK\fR seçeneği ise açık dosya tanıtıcısı içindir (\fBopen\fR(2) sayfasına bakın), çağrı sürecindeki tüm evreleri ve aynı zamanda aynı açık dosyanın dosya tanıtıcılarına sahip diğer süreçleri de etkiler.
+.sp
+.TP 4
+\fBMSG_ERRQUEUE\fR (Linux 2.2 ve sonrası)
+Bu seçenek, hata kuyruğunun soket hata kuyruğundan alınmasını belirtir. Hata, protokole bağlı türden yardımcı veri olarak iletilir (IPv4 için \fBIP_RECVERR\fR). Kullanıcı yeteri boyutta bir tampon belirtmelidir. Daha ayrıntılı bilgi için \fBcmsg\fR(3) ve \fBip\fR(7) sayfalarına bakın. Esas paketteki hataya sebep olan yük \fImsg_iovec\fR ile normal veri olarak aktarılır. Hataya sebep olan verikatarının özgün hedef adresi \fImsg_name\fR ile sağlanır.
+.sp
+\fIsock_extended_err\fR yapısında sağlanan hatalar:
+.sp
+.RS 4
+.RS 4
+.nf
+#define SO_EE_ORIGIN_NONE    0
+#define SO_EE_ORIGIN_LOCAL   1
+#define SO_EE_ORIGIN_ICMP    2
+#define SO_EE_ORIGIN_ICMP6   3
+\&
+struct sock_extended_err
+{
+    uint32_t ee_errno;   /* Hata sayısı */
+    uint8_t  ee_origin;  /* Hatanın kaynağı */
+    uint8_t  ee_type;    /* Tür */
+    uint8_t  ee_code;    /* Kod */
+    uint8_t  ee_pad;     /* Dolgu */
+    uint32_t ee_info;    /* Ek bilgiler */
+    uint32_t ee_data;    /* Diğer veriler */
+    /* Fazladan veri takip edebilir */
+};
+\&
+struct sockaddr *SO_EE_OFFENDER(struct sock_extended_err *);
+.fi
+.sp
+.RE
+.RE
+.IP
+\fIee_errno\fR kuyruğa alınmış \fIerrno\fR hata numarasını içerir. \fIee_origin\fR hatanın kodda oluştuğu yeri gösterir. Diğer alanlar protokole özeldir. \fBSOCK_EE_OFFENDER\fR makrosu, yardımcı iletinin göstericisinden kaynaklanan hatanın kaynaklandığı ağ nesnesinin adresine bir gösterici döndürür. Eğer adres bilinmiyorsa, \fIsockaddr\fR yapısının \fIsa_family\fR alanı \fBAF_UNSPEC\fR içerirken yapının diğer alanları tanımsız kalır. Hataya sebep olan paket yükü normal veri olarak aktarılır.
+.sp
+Yerel hatalar için adres belirtilmez (bu, \fIcmsghdr\fR üyesi \fIcmsg_len\fR ile sınanabilir). Hata alımı için \fImsghdr\fR değiştirgesine \fBMSG_ERRQUEUE\fR atanır. Bir hata aktarıldıktan sonra, bekleyen soket hatası, hata kuyruğundaki sonraki hataya göre yeniden oluşturulur ve sonraki soket işleminde aktarılır.
+.sp
+.TP 4
+\fBMSG_OOB\fR
+Bu seçenek normalde veri akımında alınmayacak bantdışı (Out Of Band) veri alındısı isteğinde bulunur. Bazı protokoller hızlandırılmış veriyi normal veri kuyruğunun başına yerleştirir, bu yüzden bu seçenek bu tür protokollerde kullanılamaz.
+.sp
+.TP 4
+\fBMSG_PEEK\fR
+Bu seçenek alım işlemini, alım kuyruğunun başındaki veriyi kuyruktaki veriyi silmeden almasına neden olur. Bu sebepten, sonraki alım çağrısında aynı veriyi döndürür.
+.sp
+.TP 4
+\fBMSG_TRUNC\fR (Linux 2.2 ve sonrası)
+Ham (\fBAF_PACKET\fR), İnternet verikatarı (Linux 2.4.27/2.6.8 ve sonrası), ağ bağlantısı (Linux 2.6.22 ve sonrası) ve UNIX verikatarı (Linux 3.4 ve sonrası) soketleri için: Tampona aktarılandan büyük olsa bile, paketin veya verikatarının gerçek uzunluğunu döndürür.
+.sp
+İnternet akım soketleriyle kullanmak için \fBtcp\fR(7) sayfasına bakın.
+.sp
+.TP 4
+\fBMSG_WAITALL\fR (Linux 2.2. ve sonrası)
+Bu seçenek, tüm istekler tamamlandığında işlemin engellemesi içindir. Ancak çağrı, bir sinyal yakaladığında, bir hata veya bağlantı kopması meydana geldiğinde, alınacak kuyruktaki verinin türü alınan veri türünden farklıysa daha az veri döndürür. Bu seçeneğin verikatarı soketleri için herhangi bir etkisi yoktur.
+.sp
+.PP
+.sp
+.SS "recvfrom()"
+\fBrecvfrom\fR() gelen iletiyi \fIbuf\fR tamponuna yerleştirir. Çağrıcı tamponun boyutunu \fIlen\fR değiştirgesi ile belirtmelidir.
+.sp
+Eğer \fIsrc_addr\fR NULL değilse ve ilgili protokol iletinin kaynak adresini sağlıyorsa \fIsrc_addr\fR tampon içine yerleştirilen kaynak adrese göstericidir. Bu durumda, \fIaddrlen\fR hem aktarılan değere hem de dönen sonuca göstericidir. \fIaddrlen\fR, çağrıdan önce \fIsrc_addr\fR ile ilişkilendirilmiş tamponun boyutuna gösterici olmalıdır. İşlev döndüğünde, \fIaddrlen\fR, kaynak adresin gerçek boyutunu gösterecek şekilde güncellenir. Sağlanan tampon çok küçükse döndürülen adres kırpılır; bu durumda, \fIaddrlen\fR çağrıdan önceki boyuttan daha büyük bir değer döndürür.
+.sp
+Eğer çağrıcı kaynak adresiyle ilgilenmiyorsa \fIsrc_addr\fR ve \fIaddrlen\fR değiştirgelerinde NULL aktarmalıdır.
+.sp
+.SS "recv()"
+\fBrecv\fR() çağrısı normalde \fIconnected\fR (bağlantılı) soketlerle kullanılır (\fBconnect\fR(2) sayfasına bakın). Bu çağrı:
+.sp
+.RS 4
+.nf
+recvfrom(fd, buf, len, flags, NULL, 0);
+.fi
+.sp
+.RE
+çağrısıyla eşdeğerdir.
+.sp
+.SS "recvmsg()"
+\fBrecvmsg\fR(), \fImsghdr\fR yapısını kullanarak doğrudan sağlanan değiştirge sayısını azaltır. Bu yapı, \fI<sys/socket.h>\fR içerisinde şu şekilde tanımlanmıştır:
+.sp
+.RS 4
+.nf
+struct iovec {         /* Dağıtma/toplama dizisinin öğeleri */
+    void  *iov_base;              /* Başlangıç adresi */
+    size_t iov_len;               /* Aktarılacak bayt saysı */
+};
+.fi
+.sp
+.RE
+.RS 4
+.nf
+struct msghdr {
+    void         *msg_name;       /* İsteğe bağlı adres */
+    socklen_t     msg_namelen;    /* Adresin boyutu */
+   struct iovec *msg_iov;         /* Dağıtma/toplama dizisi */
+    size_t        msg_iovlen;     /* msg_iov dizisinin öğe sayısı*/
+    void         *msg_control;    /* Yardımcı veri tamponu, aşağıya bakın*/
+    size_t        msg_controllen; /* Yardımcı veri tampon boyutu */
+    int           msg_flags;      /* Alınan iletideki seçenekler */
+};
+.fi
+.sp
+.RE
+Soket bağlantısızsa, \fImsg_name\fR alanı çağrıcı tarafından tahsis edilen kaynak adresi döndürmek için kullanılan tampona göstericidir. Çağrıcı çağrıyı yapmadan önce tamponun boyutunu \fImsg_namelen\fR’e belirtmelidir; başarılı bir çağrıdan sonra \fImsg_namelen\fR dönen adresin uzunluğunu içerir. Eğer uygulama kaynak adresi bilmeye ihtiyaç duymuyorsa \fImsg_name\fR NULL olarak belirtilebilir.
+.sp
+\fBreadv\fR(2) sayfasında açıklandığı üzere, \fImsg_iov\fR ve \fImsg_iovlen\fR alanları dağıtma-toplama konumlarını belirler.
+.sp
+\fImsg_controllen\fR uzunluğundaki \fImsg_control\fR alanı, diğer protokollere ait denetim iletileri veya çeşitli yardımcı verilere göstericidir. \fBrecvmsg\fR() çağrıldığında, \fImsg_controllen\fR \fImsg_control\fR içindeki kullanılabilir tamponun boyutunu içermelidir; başarılı bir çağrıda denetim ileti dizisinin boyutunu içerir.
+.sp
+İletinin yapısı:
+.sp
+.RS 4
+.nf
+struct cmsghdr {
+    size_t cmsg_len;    /* Başlıkla beraber verinin bayt sayısı
+                           (POSIX’de veri türü socklen_t’dir) */
+    int    cmsg_level;  /* Kaynak protokol */
+    int    cmsg_type;   /* Protokole özgü tür */
+/* devamında,
+    unsigned char cmsg_data[];  */
+};
+.fi
+.sp
+.RE
+Yardımcı veriye sadece \fBcmsg\fR(3) içinde tanımlanan makrolarla erişilmedir.
+.sp
+Örnek olarak, Linux bu yardımcı veri mekanizmasını genişletilmiş hataları, IP seçeneklerini veya UNIX alan soketleri üzerinden dosya tanıtıcılarını aktarmak için kullanır. Yardımcı verinin diğer çeşitli soket alanlarında kullanımına ilişkin ayrıntılı bilgi için \fBunix\fR(7) ve \fBip\fR(7) sayfalarına bakın.
+.sp
+\fImsghdr\fR yapısına ait \fImsg_flags\fR alanı, \fBrecvmsg\fR() dönüdüğünde şu sabitler için sınanabilir:
+.sp
+.TP 4
+\fBMSG_EOR\fR
+Döndürülen verilerin bir kaydı tamamladığını yani kayıt sonunu (End Of Record) belirtir (genellikle \fBSOCK_SEQPACKET\fR türündeki soketlerle kullanılır).
+.sp
+.TP 4
+\fBMSG_TRUNC\fR
+Verikatarının sağlanan tampondan daha uzun olmasından dolayı kalan kısmın atılacağını belirtir.
+.sp
+.TP 4
+\fBMSG_CTRUNC\fR
+Yardımcı veri için tampondaki boşluğun az olmasından dolayı denetim verisinin atılacağını belirtir.
+.sp
+.TP 4
+\fBMSG_OOB\fR
+Hızlandırılmış veya bantdışı (Out Of Band) veri alındığını belirtir.
+.sp
+.TP 4
+\fBMSG_ERRQUEUE\fR
+Bir veri alınmadığını ancak soket hata kuyruğundaki genişletilmiş bir hatanın alındığını belirtir.
+.sp
+.PP
+.sp
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Başarı durumunda bu çağrılar alınan baytların sayısını döndürür. Hata durumunda, \fB-1\fR döner ve hata \fIerrno\fR değişkenine atanır.
+.sp
+Akım soketinin bağlantısı karşıdan düzenli ollarak kapatılıyorsa dönen değer \fB0\fR olur (geleneksel dosya sonu dönüş değeri).
+.sp
+Çeşitli alanlardaki verikatarı soketleri (örneğin UNIX ve İnternet alan soketleri) sıfır uzunluktaki verikatarlarına izin verir. Böyle bir verikatarı alınırsa dönüş değeri \fB0\fR olur.
+.sp
+Eğer akım soketinden istenilen bayt boyutu 0 ise aynı şekilde \fB0\fR değeri döner.
+.sp
+.SH "HATALAR"
+Soket katmanı tarafından üretilen bazı standart hatalar vardır. Ayrıca, kullanılan protokol modülleri tarafından üretilen ve döndürülen hatalar da olabilir; bilgi için bunlarla ilgili kılavuz sayfalarına bakın.
+.sp
+.TP 4
+\fBEAGAIN\fR veya \fBEWOULDBLOCK\fR
+Soket engellemesiz olarak işaretlenmiş ama talep edilen işlem soketi engelleyecek veya veri alım zaman aşımı ayarlanmış ve veri gelmeden önce zaman aşımı süresi dolmuş. POSIX.1 her iki hatanın da döndürülmesine izin verir ve bu sabitlerin aynı değerde olmasını gerektirmez, bu bakımdan taşınabilir uygulamalar her iki seçeneği de sınamalıdır.
+.sp
+.TP 4
+\fBEBADF\fR
+Belirtilen \fIsockfd\fR geçerli bir açık dosya tanıtıcısı değil.
+.sp
+.TP 4
+\fBECONNREFUSED\fR
+Uzak konak ağ bağlantısını reddetti (genelde sebep, talep edilen hizmeti çalıştırmamasıdır).
+.sp
+.TP 4
+\fBEFAULT\fR
+Alım tamponu göstericisi/göstericileri süreç adres alanının dışını gösteriyor.
+.sp
+.TP 4
+\fBEINTR\fR
+Herhangi bir veri alınmadan aktarım bir sinyal ile kesilmiş; \fBsignal\fR(7) sayfasına bakın.
+.sp
+.TP 4
+\fBEINVAL\fR
+Belirtilen değiştirge geçersiz.
+.sp
+.TP 4
+\fBENOMEM\fR
+\fBrecvmsg\fR() için yeterli bellek ayrılamıyor.
+.sp
+.TP 4
+\fBENOTCONN\fR
+Soket, bağlantılı bir protokolle ilişkilendirilmiş ancak bağlanmamış (\fBconnect\fR(2) ve \fBaccept\fR(2) sayfalarına bakın).
+.sp
+.TP 4
+\fBENOTSOCK\fR
+Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+.sp
+.PP
+.sp
+.SH "UYUMLULUK"
+POSIX.1-2001, POSIX.1-2008, 4.4BSD (Bu arayüzler ilk defa 4.2BSD ile ortaya çıktı.)
+.sp
+POSIX.1 sadece \fBMSG_OOB\fR, \fBMSG_PEEK\fR ve \fBMSG_WAITALL\fR seçeneklerini açıklar.
+.sp
+.SH "EK BİLGİ"
+Eğer sıfır uzunluğunda bir verikatarı beklemedeyse, sıfır \fIflags\fR değiştirgeli \fBread\fR(2) ve \fBrecv\fR() farklı davranışlar sergiler. Bu koşullarda, \fBrecv\fR() bekleyen verikatarını tüketirken \fBread\fR(2) hiçbir etkiye sahip değildir (verikatarı beklemede kalır).
+.sp
+\fIsocklen_t\fR POSIX ile icat edilmiştir. Ayrıca \fBaccept\fR(2) sayfasına bakın.
+.sp
+POSIX.1’e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünde, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
+.sp
+Tek çağrıda çok sayıda verikatarı alabilmek için kullanılan Linux’a özgü sistem çağrısı hakkında bilgi edinmek için \fBrecvmmsg\fR(2) sayfasına bakın.
+.sp
+.SH "ÖRNEKLER"
+\fBrecvfrom\fR() kullanım örneği \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfcntl\fR(2), \fBgetsockopt\fR(2), \fBread\fR(2), \fBrecvmmsg\fR(2), \fBselect\fR(2), \fBshutdown\fR(2), \fBsocket\fR(2), \fBcmsg\fR(3), \fBsockatmark\fR(3), \fBip\fR(7), \fBipv6\fR(7), \fBsocket\fR(7), \fBtcp\fR(7), \fBudp\fR(7), \fBunix\fR(7)
+.sp
+.SH "ÇEVİREN"
+© 2022 Fatih Koçer
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

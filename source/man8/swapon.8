@@ -1,0 +1,255 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1980, 1991 Regents of the University of California.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *     This product includes software developed by the University of
+ *     California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *     @(#)swapon.8    6.3 (Berkeley) 3/16/91
+ *
+ * Sun Dec 27 12:31:30 1992: Modified by faith (at) cs.unc.edu
+ * Sat Mar  6 20:46:02 1993: Modified by faith (at) cs.unc.edu
+ * Sat Oct  9 09:35:30 1993: Converted to man format by faith (at) cs.unc.edu
+ * Sat Nov 27 20:22:42 1993: Updated authorship information, faith(at)cs.unc.edu
+ * Mon Sep 25 14:12:38 1995: Added -v and -p information
+ * Tue Apr 30 03:32:07 1996: Added some text from A. Koppenhoefer
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "SWAPON" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+swapon - aygıt ve dosyalar için sayfalama ve takaslama işlemlerini etkinleştirir
+.br
+swapoff - aygıt ve dosyalar için sayfalama ve takaslama işlemlerini kapatır
+.sp
+.SH KULLANIM
+.IP \fBswapon\fR 7
+[\fIseçenekler\fR] [\fIözeldosya\fR...]
+.sp
+.PP
+.IP \fBswapoff\fR 8
+[\fB-va\fR] [\fIözeldosya\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA" 
+\fBswapon\fR, sayfalama ve takaslama işlemlerinin gerçekleşeceği aygıtları belirtmek için kullanılır.
+.sp
+\fIözeldosya\fR’da kullanılan aygıt veya dosya belirtilir. Bir aygıtı etiket veya UUID ile belirtmek için \fB-L\fR \fIetiket\fR veya \fB-U\fR \fIuuid\fR seçenekleri kullanılmalıdır
+.sp
+\fBswapon\fR çağrıları normalde sistem önyükleme betiklerinden yapılır ve tüm takas aygıtlarını kullanılabilir hale getirir, böylece sayfalama ve takas etkinliği birkaç aygıt ve dosya arasında serpiştirilir.
+.sp
+\fBswapoff\fR belirtilen aygıtlar ve dosyalar üzerinde takası devre dışı bırakır. \fB-a\fR seçeneği belirtilirse, \fI/proc/swaps\fR veya \fI/etc/fstab\fR içinde bulunan tüm takas aygıt ve dosyalarında takas devre dışı bırakılır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB-a\fR
+\fI/etc/fstab\fR içinde “sw” olarak işaretlenmiş bütün takas aygıtları, "noauto" seçeneği belirtilenler dışında erişilebilir hale getirilir. Kullanılmakta olan takas aygıtları sessizce atlanır.
+.sp
+.TP 4
+\fB-d\fR, \fB--discard\fR[=\fIilke\fR]
+Takas destek cihazı iptal veya kırpma işlemini destekliyorsa takas iptallerini etkinleştirir. Bu, bazı Katı Hal Aygıtlarında (SSD) başarımı artırabilir, ancak çoğu zaman bir etkisi olmaz. İki takas iptal \fIilke\fRsinden biri belirtilebilir:
+.sp
+.RS
+.TP 4
+\fBonce\fR
+\fBswapon\fR’da tüm takas alanı için tek seferlik bir iptal işlemi gerçekleştirir.
+.sp
+.TP 4
+\fBpages\fR
+Serbest bırakılan takas sayfalarını, yeniden kullanıma hazır hale gelmeden önce eşzamansız olarak iptal eder.
+.sp
+.PP
+.RE
+.IP
+\fIilke\fR belirtilmezse, ön tanımlı davranış, her iki iptal türünü de etkinleştirmektir. \fI/etc/fstab\fR bağlama seçenekleri \fBdiscard\fR, \fBdiscard=once\fR veya \fBdiscard=pages\fR de \fIilke\fRleri etkinleştirmek için kullanılabilir.
+.sp
+.TP 4
+\fB-e\fR, \fB--ifexists\fR
+Var olmayan aygıtlar sessizce atlanır. \fI/etc/fstab\fR bağlama seçeneği \fBnofail\fR de, var olmayan aygıtı atlamak için kullanılabilir.
+.sp
+.TP 4
+\fB-f\fR, \fB--fixpgsz\fR
+Sayfa boyutu çalışan çekirdeğinkiyle eşleşmiyorsa, takas alanını yeniden ilklendirir (\fBmkswap\fR ile). \fBmkswap\fR(8) tüm aygıtı ilkendirir ve bozuk blokları denetlemez.
+.sp
+.TP 4
+\fB-L\fR \fIetiket\fR
+\fIetiket\fR’i belirtilen disk bölümü kullanılır. (Disk bölümü için \fI/proc/partitions\fR dosyasına bakılır.)
+.sp
+.TP 4
+\fB-o\fR, \fB--options\fR \fIseçenekler\fR
+Takas \fIseçenekler\fRi fstab benzeri virgül ayraçlı bir dizge olarak belirtilir. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBswapon -o pri=1,discard=pages,nofail /dev/sda2\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+\fIseçenekler\fR dizgesi en son değerlendirilir ve diğer tüm komut satırı seçeneklerini geçersiz kılar.
+.sp
+.TP 4
+\fB-p\fR, \fB--priority\fR \fIöncelik\fR
+\fBswapon\fR için öncelik belirtilir. Öncelik -1 ila 32767 arasındadır. Yüksek sayı yüksek öncelik belirtir. Takas önceliklerinin ayrıntılı bir açıklaması için bkz: \fBswapon\fR(2). \fBswapon -a\fR ile birlikte kullanmak için \fI/etc/fstab\fR dosyasının seçenek alanına “\fBpri\fR=\fIdeğer\fR” seçeneği eklenebilir.
+.sp
+.TP 4
+\fB-s\fR, \fB--summary\fR
+Aygıta göre takas kullanım özetini gösterir. \fBcat /proc/swaps\fR ile eşdeğerdir. Bu çıktı biçemi yerine, çıktı verileri üzerinde daha iyi denetim sağlayan --show seçeneğinin kullanılması ÖNERİLMEKTEDİR.
+.sp
+.TP 4
+\fB--show\fR[=\fIsütun\fR...]
+Takas alanları tablosunda gösterilecek sütunları belirlemek için kullanılır. Sütunların tam listesi için \fB--help\fR çıktısına bakılabilir.
+.sp
+.TP 4
+\fB--output-all\fR
+Kullanılabilir tüm sütunlar çıktılanır.
+.sp
+.TP 4
+\fB--noheadings\fR
+\fB--show\fR çıktısında başlıklar gösterilmez.
+.sp
+.TP 4
+\fB--raw\fR
+\fB--show\fR çıktısında sütunlar hizalanmadan gösterilir.
+.sp
+.TP 4
+\fB--bytes\fR
+\fB--show\fR çıktısında takas boyutu, kullanıcı dostu birimler yerine bayt cinsinden gösterilir.
+.sp
+.TP 4
+\fB-U\fR \fIuuid\fR
+\fIuuid\fR ile belirtilen disk bölümü kullanılır.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Çıktı ayrıntılı olur.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBswapon\fR 2.36 sürümünden beri aşağıdaki çıkış durumları ile çıkmaktadır:
+.sp
+.RS 4
+.nf
+0   başarılı
+2   sistem takası durdurmak için yeterli belleğe sahip değil (OOM)
+4   swapoff(2) çağrısı başka bir sebepten başarısız oldu
+8   non-swapoff(2) çağrısı sistem hatası (bellek yetersiz, ...)
+16  kullanım veya sözdizimi hatası
+32  swapoff --all ile hepsi başarısız
+64  swapoff --all ile bazısı başarılı
+.fi
+.sp
+.RE
+\fBswapoff --all\fR komutu 0 (hepsi başarılı), 32 (hepsi başarısız) veya 64 (bazısı başarılı, bazısı başarısız) döndürür.
+.sp
+2.36 sürümü öncesinde çıkış durumu belgelendirilmemişti ve tüm sürümlerde 0 başarılı anlamındaydı.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBLIBBLKID_DEBUG=all\fR
+Libblkid hata ayıklama çıktısı etkin olur.
+.sp
+.TP 4
+\fBLIBMOUNT_DEBUG=all\fR
+Libmount hata ayıklama çıktısı etkin olur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fI/dev/sd??\fR  - standart sayfalama aygıtları
+\fI/etc/fstab\fR - ascii dosya sistemi tanımlama tablosu
+.fi
+.sp
+.RE
+.sp
+.SH "EK BİLGİ"
+.SS "Delikli dosyalar"
+Çekirdekteki takas dosyası uygulaması, dosya sisteminin yardımı olmadan doğrudan dosyaya yazabilmelidir. Bu, delikli dosyalardaki veya Btrfs gibi dosya sistemlerindeki gibi yazarak kopyalanan dosyalardaki bir sorundur. (Veriler geçerli dosya boyutunun ötesinde bir konuma yazıldığında veya dosya boyutu geçerli dosya boyutundan daha büyük bir değerle kırpıldığında bir delik oluşturulur.)
+.sp
+\fBcp\fR(1) veya \fBtruncate\fR(1) gibi komutlar, delikli dosyalar oluşturur. Bu dosyalar swapon tarafından reddedilir.
+.sp
+\fBfallocate\fR(1) tarafından oluşturulan önceden tahsisli dosyalar da, dosya sistemine bağlı olarak delikli dosyalar olarak yorumlanabilir. Önceden tahsisli takas dosyaları, Linux 4.18’den beri XFS’de desteklenmektedir.
+.sp
+Takas dosyası oluşturmanın en taşınabilir çözümü \fBdd\fR(1) ve \fI/dev/zero\fR kullanmaktır.
+.sp
+.SS "Btrfs"
+Btrfs’deki takas dosyaları, \fBnocow\fR özniteliğine sahip dosyalarda Linux 5.0’dan beri desteklenmektedir. Daha fazla ayrıntı için bkz: \fBbtrfs\fR(5)
+.sp
+.SS "NFS"
+NFS üzerinden takas çalışmayabilir.
+.sp
+.SS "Suspend"
+swapon, eski yazılım askıya alma verileriyle (örneğin, \fBS1SUSPEND\fR, \fBS2SUSPEND\fR, ...) bir takas alanı imzasını otomatik olarak algılar ve yeniden yazar. Burada bir sorun ortaya çıkar: Bu yapılmazsa bir dahaki sefere askıya alma girişiminde bulunulduğunda veri bozulması yaşanabilir.
+.sp
+.sp
+.SH "TARİHÇE"
+\fBswapon\fR komutu BSD 4.0’da kullanılmaya başladı.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfdisk\fR(8), \fBmkswap\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBblkid\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

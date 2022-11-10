@@ -1,0 +1,162 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Vixie Cron Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1988,1990,1993 by Paul Vixie
+ * All rights reserved
+ *
+ * Distribute freely, except: don’t remove my name from the source or
+ * documentation (don’t take credit for my work), mark your changes (don’t
+ * get me blamed for your possible bugs), don’t alter or remove this
+ * notice.  May be sold if buildable source is provided to buyer.  No
+ * warrantee of any kind, express or implied, is included with this
+ * software; use at your own risk, responsibility for damages (if any) to
+ * anyone resulting from the use of this software rests entirely with the
+ * user.
+ *
+ * Send bug reports, bug fixes, enhancements, requests, flames, etc., and
+ * I’ll try to keep a version up to date.  I can be reached as follows:
+ * Paul Vixie          (paul (at) vix.com)      uunet!decwrl!vixie!paul
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "CRON" 8 "Nisan 2010" "Debian Cron" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+cron - zamanlanmış komutları çalıştıran süreç (Debian Cron)
+.sp
+.SH KULLANIM
+.IP \fBcron\fR 5
+[\fB-f\fR] [\fB-l\fR] [\fB-L\fR \fIDÜZEY\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBcron\fR, çok kullanıcılı çalışma düzeyine girerken \fB/etc/init.d\fR tarafından otomatik olarak çalıştırılır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-f\fR
+Önalanda kalır, ardalan süreci haline gelmez.
+.sp
+.TP 4
+\fB-l\fR
+\fI/etc/cron.d\fR dosyaları için LSB uyumlu isimler etkin olur. Bunun \fI/etc/cron.hourly\fR (saatlik), \fI/etc/cron.daily\fR (günlük), \fI/etc/cron.weekly\fR (haftalık) veya \fI/etc/cron.monthly\fR (aylık) altındaki dosyaların çözümlenmesinde bir etkisi olmaz.
+.sp
+.TP 4
+\fB-n\fR
+Epostaları gönderirken konu alanında tam nitelenmiş alan adları yer almaz. \fBcron\fR öntanımlı olarak konak adını kısaltır.
+.sp
+.TP 4
+\fB-L\fR \fIDÜZEY\fR
+İşler hakkında turulacak günlükleri aşağıdaki değerlerin toplamı olarak belirler (hatalar bu seçeneğe bakılmaksızın günlüklenir):
+.sp
+.RS 4
+.RS 4
+.nf
+1   tüm cron işlerinin başlangıcını günlüğe kaydeder
+2   tüm cron işlerinin bitişini günlüğe kaydeder
+4   tüm başarısız (çıkış durumu != 0) cron işlerini günlüğe kaydeder
+8   tüm cron işlerinin süreç kimliklerini günlüğe kaydeder
+.fi
+.sp
+.RE
+.RE
+.IP
+Tüm cron işlerinin başlangıcının günlüğe kaydedilmesi öntanımlıdır. \fIDÜZEY\fR 0 olursa günlükleme devre dışı bırakılır. 15 değeri tüm seçeneklerin seçilmesini sağlar.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+\fBcron\fR biriktirme alanını (\fI/var/spool/cron/crontabs\fR) \fIcrontab\fR dosyaları için (\fI/etc/passwd\fR içindeki hesaplara göre adlandırılır) arar; bulunan \fIcrontab\fR dosyaları belleğe yüklenir. Bu dizindeki \fIcrontab\fR dosyalarına doğrudan erişilmemeli, bunlara erişmek ve güncellemek için \fBcrontab\fR(1) komutu kullanılmalıdır.
+.sp
+\fBcron\fR ayrıca biraz farklı bir biçimde olan \fI/etc/crontab\fR’ı da okur (bkz. \fBcrontab\fR(5)). Debian’da \fI/etc/crontab\fR içeriği, \fI/etc/cron.hourly\fR, \fI/etc/cron.daily\fR, \fI/etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR altında uygulama çalıştırmak için önceden tanımlanmıştır. Bu yapılandırma Debian’a özeldir, bkz: \fBDEBIAN’A ÖZEL\fR.
+.sp
+Ek olarak, Debian’da \fBcron\fR, \fI/etc/cron.d\fR dizinindeki dosyaları okur. \fBcron\fR, \fI/etc/cron.d\fR içindeki dosyalara \fI/etc/crontab\fR dosyasına davrandığı gibi davranır (bu dosyanın özel biçimini izler, yani kullanıcı alanını içerir). Ancak, \fI/etc/crontab\fR’dan bağımsızdır: örneğin, ortam değişkenlerini ondan devralmaz. Bu değişiklik Debian’a özeldir, bkz: \fBDEBIAN’A ÖZEL\fR.
+.sp
+\fI/etc/crontab\fR gibi, \fI/etc/cron.d\fR dizinindeki dosyalar da değişiklikler için izlenir. Genel olarak, sistem yöneticisi \fI/etc/cron.d/\fR kullanmamalı, standart sistem geneli \fBcrontab\fR’ı \fI/etc/crontab\fR dosyasını kullanmalıdır.
+.sp
+\fI/etc/crontab\fR ve \fI/etc/cron.d\fR içindeki dosyalar \fBroot\fR kullanıcısına ait olmalı, grup veya başkaları tarafından yazılabilir olmamalıdır. Biriktirme alanının aksine, \fI/etc/cron.d\fR altındaki dosyalar veya \fI/etc/cron.hourly\fR, \fI/etc/cron.daily\fR, \fI/etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR altındaki dosyalar sembolik bağ olabilir, ancak hem sembolik bağın hem de hedefinin \fBroot\fR iyeliğinde olması şarttır. \fI/etc/cron.d\fR altındaki dosyaların çalıştırılabilir olması gerekmezken, \fI/etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR altındaki dosyaların \fBrun-parts\fR(8) tarafından çalıştırılabilir olması gerekir.
+.sp
+\fBcron\fR daha sonra her dakika uyanır, saklanan tüm \fIcrontab\fR dosyalarını inceler, her komutun o dakika çalıştırılıp çalıştırılmayacağına bakar. Komutları yürütürken, her çıktı \fIcrontab\fR dosyasının sahibinden (veya -varsa - \fIcrontab\fR dosyasındaki \fBMAILFROM\fR ortam değişkeninde belirtilen e-posta adresinden) \fIcrontab\fR dosyasının sahibine (veya varsa \fIcrontab\fR dosyasındaki \fBMAILTO\fR ortam değişkeninde adı geçen kullanıcıya) postalanır. Bu süreçleri çalıştıran \fBcron\fR’un alt süreçlerinin adları, \fBsyslog\fR(2) ve \fBps\fR(1) çıktısında görüleceği gibi, büyük harfe dönüşmeye zorlanır.
+.sp
+Ek olarak, \fBcron\fR, biriktirme dizininin değişiklik zamanını (veya \fI/etc/crontab\fR dosyasındaki değişiklik zamanını) değişip değişmediğini görmek için denetler ve değiştiyse, \fBcron\fR tüm \fIcrontab\fR dosyalarının değişiklik zamanını inceler ve değişenleri yeniden yükler. Bu nedenle, bir \fIcrontab\fR dosyası değiştirildiğinde \fBcron\fR’un yeniden başlatılması gerekmez. \fBcrontab\fR(1) komutunun, bir \fIcrontab\fR dosyasını değiştirdiğinde biriktirme dizininin değişiklik zamanını da güncellediği unutulmamalıdır.
+.sp
+Zaman 3 saatten daha az değiştiğinde, örneğin yaz saatinin başında ve sonunda, özel durumlar söz konusudur. Zaman ileri alınmışsa, atlanan zamanda çalışacak olan süreçler, değişiklikten hemen sonra çalıştırılır. Tersine, zaman 3 saatten daha az geriye alınmışsa, tekrarlanan zamana denk gelen işler yeniden çalıştırılmayacaktır. Yalnızca belirli bir zamanda çalışan işler (saatlik olarak veya saat veya dakika belirtecinde ’*’ ile belirtilmeyenler) etkilenir. Joker karakter ile belirtilen işler yeni saate göre anında çalıştırılır.
+.sp
+3 saatten fazla olan saat değişiklikleri, saatte yapılan düzeltmeler olarak kabul edilir ve yeni saat hemen kullanılır.
+.sp
+\fBcron\fR, eylemini \fBLOG_CRON\fR syslog oluşumuna kaydeder ve günlük kaydı standart \fBsyslogd\fR(8) kullanılarak denetlenebilir.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+Debian sistemlerinde \fBcron\fR artalan sürecinin yerelleştirme ortamı \fI/etc/default/cron\fR içinde yapılandırılırsa, \fI/etc/environment\fR kullanılarak veya önceki değerleri geçersiz kılan sonraki değerlerle \fI/etc/default/locale\fR kullanılarak ortam yönetilebilir. Bu dosyalar okunur ve bunlar \fBLANG\fR, \fBLC_ALL\fR ve \fBLC_CTYPE\fR ortam değişkenlerini ayarlamak için kullanılır. Bu değişkenler daha sonra, öntanımlı olarak ’C’ yerelinde olan postaların karakter kümesini ayarlamak için kullanılır.
+.sp
+Bu, \fBcron\fR altında çalışan görevlerin ortamını ETKİLEMEZ. Görev ortamının nasıl değiştirileceği hakkında ayrıntılı bilgi için bkz: \fBcrontab\fR(5).
+.sp
+Artalan süreci, saat dilimi için varsa, \fI/etc/timezone\fR’daki tanımı kullanır.
+.sp
+Ortam, kullanıcının \fIcrontab\fR tanımlarında yeniden tanımlanabilir, ancak \fBcron\fR, görevleri yalnızca tek bir saat diliminde işleyecektir.
+.sp
+.SH "DEBIAN’A ÖZEL"
+Debian, \fBcron\fR’a başlangıçta mevcut olmayan bazı değişiklikler getiriyor. Getirilen en önemli değişiklikler şunlardır:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+\fI/etc/crontab\fR üzerinden, \fI/etc/cron.{hourly,daily,weekly,monthly}\fR desteği,
+.IP \(bu 3
+/\fIetc/cron.d\fR desteği (paket \fIcrontab\fR’ları için özel dizin),
+.IP \(bu 3
+PAM desteği,
+.IP \(bu 3
+SELinux desteği,
+.IP \(bu 3
+auditlog desteği,
+.IP \(bu 3
+DST ve zamanla ilgili diğer değişiklikler ve düzeltmeler,
+.IP \(bu 3
+SUID root yerine SGID \fBcrontab\fR(1),
+.IP \(bu 3
+Debian’a özgü dosya konumları ve komutlar,
+.IP \(bu 3
+Debian’a özgü yapılandırma (\fI/etc/default/cron\fR),
+.IP \(bu 3
+çeşitli daha küçük özellik ve düzeltmeler.
+.sp
+.RE
+.PD 0
+\fI/etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR için destek Debian’da \fI/etc/crontab\fR dosyasındaki öntanımlı yapılandırma ile sağlanır (\fBcrontab\fR(5) sayfasındaki sistem çapında örneklere bakılabilir). Sistem çapında öntanımlı \fIcrontab\fR, dört görev içerir: her saat, her gün, her hafta ve her ay çalıştır. Bu görevlerin her birini, dizinlerin her birini bir değiştirge olarak sağlayan \fBrun-parts\fR(8) yürütür. \fBanacron\fR(8) kuruluysa, iki artalan süreci arasındaki çakışmaları önlemek için bu görevler (saatlik görev hariç) devre dışı bırakılır.
+.sp
+Yukarıda açıklandığı gibi, bu dizinler altındaki dosyaların bazı uygunluk denetimlerinden geçmesi gerekir: çalıştırılabilir olmak, root’a ait olmak, grup veya başkaları tarafından yazılabilir olmamak ve sembolik bağlar varsa, root ait dosyalara işaret etmek. Ek olarak, dosya adları \fBrun-parts\fR(8)’ın dosya adı gereksinimlerine uygun olmalıdır: bunlar tamamen harflerden, rakamlardan oluşmalı, alt çizgi (’_’) ve kısa çizgi (’-’) dışında özel imler içermemelidir. Bu gereksinimlere uymayan hiçbir dosya \fBrun-parts\fR(8) tarafından yürütülmeyecektir. Örneğin, noktalar içeren her dosya yok sayılır. Bu, \fI/etc/cron.d/\fR içindeki dosyaları yapılandırma dosyaları olarak işlerken, Debian paket yönetim sistemi tarafından bırakılan dosyalardan (yani \fI.dpkg-dist, .dpkg-orig, .dpkg-old\fR ve \fI.dpkg-new\fR) herhangi birinin \fBcron\fR tarafından çalıştırılmasını önlemek için yapılır .
+.sp
+Bu özellik, sistem yöneticileri ve paketler tarafından belirli aralıklarla çalıştırılacak görevleri içerecek şekilde kullanılabilir. Bu dizinlerdeki paketler tarafından oluşturulan dosyalar, onları sağlayan paketin adını almalıdır.
+.sp
+\fI/etc/cron.d/\fR desteği, bu konumu sistem çapında \fIcrontab\fR biriktirme alanı olarak kullanan \fBcron\fR artalan sürecinin kendisinde bulunur. Bu dizin, \fI/etc/crontab\fR içinde kullanılan biçimde görevleri tanımlayan dosyalar içerebilir, yani kullanıcı \fBcron\fR biriktirme alanındakinden farklı olarak, bu dosyaların adları, görev tanımında olduğu gibi görevi çalıştıracak kullanıcının adını içermelidir.
+.sp
+Bu dizindeki dosyaların root’a ait olması gerekir, yürütülebilir olmaları gerekmez (bunlar \fI/etc/crontab\fR gibi yapılandırma dosyalarıdır) ve \fBrun-parts\fR(8) tarafından kullanılanla aynı adlandırma kuralına uymaları gerekir: yalnızca büyük ve küçük harf, rakam, alt çizgi ve kısa çizgiden oluşur. Bu, herhangi bir nokta içeremeyecekleri anlamına gelir. \fBcron\fR’a \fB-l\fR seçeneği belirtilmişse (bu seçenek /\fIetc/default/cron\fR üzerinden ayarlanabilir, aşağıya bakın), \fBrun-parts\fR(8)’ın \fB--lsbsysinit\fR seçeneğinde belirtildiği gibi LSB isim uzayı belirtimine tam olarak uymaları gerekir.
+.sp
+Bu özelliğin amacı, \fI/etc/cron.{hourly,daily,weekly,monthly}\fR dizinlerinden daha iyi zamanlama gerektiren paketlerin \fI/etc/cron.d\fR dizinine bir \fIcrontab\fR dosyası eklemesine izin vermektir. Bu tür dosyalar, onları sağlayan paketin adını almalıdır.
+.sp
+Ayrıca, \fBcron\fR’un öntanımlı yapılandırması, \fBcron\fR artalan sürecini başlatan \fBinit.d\fR betiği tarafından okunan \fI/etc/default/cron\fR dosyasında bulunur. Bu dosya, \fBcron\fR’un sistemin ortam değişkenlerini okuyup okumayacağını belirler ve yürütülmeden önce, günlük kaydını yapılandırmak veya \fI/etc/cron.d\fR altındaki dosyalara nasıl davranacağını belirlemek için \fBcron\fR uygulamasına seçenek eklemeyi mümkün kılar.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBcrontab\fR(1), \fBcrontab\fR(5), \fBrun-parts\fR(8)
+.sp
+.SH "YAZAN"
+Paul Vixie bu kılavuz sayfasının ilk metninin yazarıdır. Bu kılavuz sayfası Debian için Steve Greenland, Javier Fernandez-Sanguino ve Christian Kastner tarafından yeniden yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

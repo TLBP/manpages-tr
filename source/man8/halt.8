@@ -1,0 +1,97 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
+ * https://github.com/systemd/systemd
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "HALT" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+halt - sistemi durdurur (makine kapatılmaz)
+.br
+poweroff - makineyi kapatır
+.br
+reboot - makineyi yeniden başlatır
+.sp
+.SH KULLANIM
+.IP \fBhalt\fR 5
+[\fISEÇENEKLER\fR...]
+.IP \fBpoweroff\fR 9
+[\fISEÇENEKLER\fR...]
+.IP \fBreboot\fR 7
+[\fISEÇENEKLER\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBhalt\fR, \fBpoweroff\fR ve \fBreboot\fR sistemi durdurmak, makineyi kapatmak veya yeniden başlatmak için kullanılabilir. Komutların üçü de aynı seçeneklerle kulllanılır.
+.sp
+.SH "SEÇENEKLER"
+Aşağıdaki seçenekler kullanılabilir:
+.sp
+.TP 4
+\fB--help\fR
+Kısa bir yardım metni basar ve çıkar.
+.sp
+.TP 4
+\fB--halt\fR
+Sistemi durdurur. Üç komuttan hangisinin kullanıldığının önemi yoktur.
+.sp
+.TP 4
+\fB-p\fR, \fB--poweroff\fR
+Makineyi kapatır. Üç komuttan hangisinin kullanıldığının önemi yoktur.
+.sp
+.TP 4
+\fB--reboot\fR
+Makineyi yeniden başlatır. Üç komuttan hangisinin kullanıldığının önemi yoktur.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Sistemi anında durdurmak, makineyi kapatmak veya yeniden başlatmak için zorlar. Belirtilirse, komut init sistemiyle iletişim kurmaz. Çoğu durumda, bağlı dosya sistemleri makine kapatılmadan önce düzgün şekilde ayrılmaz. Örneğin, \fBreboot -f\fR komutu, \fBsystemctl reboot -f\fR yerine çoğunlukla \fBsystemctl reboot -ff\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fB-w\fR, \fB--wtmp-only\fR
+Yalnızca wtmp "shutdown" girdisini yazar ama kapatma, durdurma ve yeniden başlatma işlemleri yapılmaz.
+.sp
+.TP 4
+\fB-d\fR, \fB--no-wtmp\fR
+wtmp "shutdown" girdisi yazılmaz.
+.sp
+.TP 4
+\fB-n\fR, \fB--no-sync\fR
+Kapatma, durdurma ve yeniden başlatma öncesi sabit diskleri ve saklama ortamlarını eşzamanlamaz.
+.sp
+.TP 4
+\fB--no-wall\fR
+Kapatma, durdurma ve yeniden başlatma öncesi \fBwall\fR(1) iletisi gönderilmez.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+Başarı durumunda 0, başarısızlık durumunda sıfırdan farklı bir değer ile çıkar.
+.sp
+.SH "EK BİLGİLER"
+Bu komutlar, özgün SysV komutlarıyla temel uyumluluğu koruyacak şekilde uygulanır. \fBsystemctl\fR(1) fiilleri \fBhalt\fR, \fBpoweroff\fR ve \fBreboot\fR bazı ek özelliklerle aynı işlevselliği sağlar.
+.sp
+Birçok SysV sisteminde \fBhalt\fR’ın eskiden \fBpoweroff\fR ile eşanlamlı olduğu, yani her iki komutun da aynı şekilde makinenin kapanmasıyla sonuçlandığı unutulmamalıdır. \fBsystemd\fR(1) daha doğru işlem yapar ve \fBhalt\fR, yalnızca sistemin durdurulması ile sonuçlanır (makine kapatılmaz), gerçekten kapatmak için \fBpoweroff\fR gerekir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsystemd\fR(1), \fBsystemctl\fR(1), \fBshutdown\fR(8), \fBwall\fR(1).
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

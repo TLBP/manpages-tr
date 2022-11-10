@@ -1,0 +1,90 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "STDBUF" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+stdbuf - satırları rasgele karar
+.sp
+.SH KULLANIM
+.IP \fBstdbuf\fR 7
+\fISEÇENEK\fR... \fIKOMUT\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIKOMUT\fR’u standart akımı için değiştirilmiş tamponlama işlemleri ile çalıştırır.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-i\fR, \fB--input=\fR\fIKİP\fR
+Standart Girdi akım tamponunu ayarlar.
+.sp
+.TP 4
+\fB-o\fR, \fB--output=\fR\fIKİP\fR
+Standart Çıktı akım tamponunu ayarlar.
+.sp
+.TP 4
+\fB-e\fR, \fB--error=\fR\fIKİP\fR
+Standart Hata akım tamponunu ayarlar.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fIKİP\fR ’L’ ise ilgili akım satır tamponlu olur. Bu seçenek standart girdi için geçersizdir.
+.sp
+\fIKİP\fR ’0’ ise ilgili akım tamponlanmaz.
+.sp
+\fIKİP\fR ’0’ dışında bir sayı ise şu soneklerden birini içerebilir: KB (1000), K (1024), MB (1000*1000), M (1024*1024) ve G, T, P, E, Z, Y için benzer şekilde. İkil sonekler de kullanılabilir: KiB=K, MiB=M ve benzerleri. Bu durumda ilgili akım \fIKİP\fR baytlık bir tamponla tamamen tamponlanır.
+.sp
+.TP 4
+\fBBilgi:\fR
+\fIKOMUT\fR, standart akımlarının tamponlanmasına ayarlanırsa (örneğin \fBtee\fR(1) gibi), \fBstdbuf\fR ile ilgili değişiklikler geçersiz kılınır. Ayrıca G/Ç için akımlarını kullanmayan bazı süzgeçler (\fBdd\fR(1) ve \fBcat\fR(1) gibi) \fBstdbuf\fR ayarlarından etkilenmez.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.IP "
+\fBtail -f access.log | stdbuf -oL cut -d ’ ’ -f1 | uniq\fR
+" 4
+Erişim günlüğündeki eşsiz girdilerin anında gösterilmesini sağlar.
+.sp
+.SH "BÖRTÜBÖCEK"
+Glibc kullanılan sistemlerde, tampon boyutunun belirtilmesinin (örneğin, tamamen tamponlu kip) sonuçları belirsizdir.
+.sp
+.SH "YAZAN"
+Padraig Brady tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/stdbuf>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) stdbuf invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

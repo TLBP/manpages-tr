@@ -1,0 +1,134 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "JOIN" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+join - iki dosyanın satırlarını ortak bir alanda birleştir
+.sp
+.SH KULLANIM
+.IP \fBjoin\fR 5
+[\fISEÇENEK\fR]... \fIDOSYA1 DOSYA2\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Aynı birleştirme alanlarına sahip her girdi satırı çifti için standart çıktıya bir satır yazar. Öntanımlı birleştirme alanı, boşluklarla sınırlı ilk alandır. \fIDOSYA1\fR ve \fIDOSYA2\fR’den biri yerine (ikisi birden değil) - verilirse standart girdi okunur.
+.sp
+.TP 4
+\fB-a\fR \fIDOSYANUM\fR
+\fIDOSYANUM\fRuncu dosyadan gelen eşleştirilememiş satırları yazdırır. \fIDOSYANUM\fR, \fIdosya1\fR veya \fIdosya2\fR dosyasına karşılık olarak 1 veya 2 olabilir.
+.sp
+.TP 4
+\fB-e\fR \fIBOŞ\fR
+Eksik girdi alanlarının yerine \fIBOŞ\fR yazılır.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-case\fR
+Alanlar karşılaştırılırken harf büyüklükleri ile ilgili farklar yoksayılır.
+.sp
+.TP 4
+\fB-j\fR \fIALAN\fR
+’\fB-1\fR \fIALAN\fR \fB-2\fR \fIALAN\fR’ ile aynıdır.
+.sp
+.TP 4
+\fB-o\fR \fIBİÇEM\fR
+Çıktı satırları oluşturulurken \fIBİÇEM\fRe uyulur.
+.sp
+.TP 4
+\fB-t\fR \fIKARAKTER\fR
+Girdi ve çıktı alanı ayracı olarak \fIKARAKTER\fR kullanılır.
+.sp
+.TP 4
+\fB-v\fR \fIDOSYANUM\fR
+Birleştirilmiş çıktı satırlarını göstermemesi dışında \fB-a\fR \fIDOSYANUM\fR gibidir.
+.sp
+.TP 4
+\fB-1\fR \fIALAN\fR
+\fIDOSYA1\fRin bu \fIALAN\fRını kullanarak birleştirir.
+.sp
+.TP 4
+\fB-2\fR \fIALAN\fR
+\fIDOSYA2\fRnin bu \fIALAN\fRını kullanarak birleştirir.
+.sp
+.TP 4
+\fB--check-order\fR
+Tüm girdi satırları eşlense bile girdinin sıralaması doğrulanır.
+.sp
+.TP 4
+\fB--nocheck-order\fR
+Girdinin sıralaması doğrulanmaz.
+.sp
+.TP 4
+\fB--header\fR
+Her dosyanın ilk satırını alan başlığı olarak ele alır ve onları eşleştirmeye çalışmadan basar.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero-terminated\fR
+Satırlar satır sonu karakteri ile değil, boş karakter (\\0) ile sonlandırılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fB-t\fR \fIKARAKTER\fR verilmedikçe, baştaki boş alanlar ayrılıp yoksayılır, aksi takdirde alanların arasına \fIKARAKTER\fR konur. Her \fIALAN\fR 1’den başlayan bir alan numarasıdır. \fIBİÇEM\fR, her biri \fIDOSYANUM.ALAN\fR biçiminde veya ’0’ olabilen bir veya daha fazla virgül veya boşlukla ayrılmış belirtimden oluşur. \fIBİÇEM\fR olarak ’auto’ anahtar sözcüğü verilirse, her dosyanın ilk satırı, her satır için çıktı alan sayısını belirler.
+.sp
+Öntanımlı \fIBİÇEM\fRde her çıktı satırı sırayla, birleştirme alanını, \fIDOSYA1\fRin kalan alanları, \fIDOSYA2\fRin kalan alanlarından oluşur ve tümü \fIKARAKTER\fR ile ayrılmış olarak verilir. Örnek:
+.sp
+.RS 4
+.nf
+$ \fBcat dosya1\fR
+a a1
+c c1
+b b1
+\&
+$ \fBcat dosya2\fR
+a a2
+c c2
+b b2
+\&
+$ \fBjoin dosya1 dosya2\fR
+a a1 a2
+c c1 c2
+b b1 b2
+.fi
+.sp
+.RE
+.SS "Önemli:"
+\fIDOSYA1\fR ve \fIDOSYA2\fR birleştirme alanları bakımından sıralanmış olmalıdırlar. Örneğin, eğer \fBjoin\fR seçeneksizse, "\fBsort -k 1b,1\fR" kullanın. \fBsort\fR seçeneksizse "\fBjoin -t ’’\fR" kullanın. Karşılaştırmaların \fBLC_COLLATE\fR ile belirtilen kurallara uyduğunu unutmayın. Girdi sıralı değilse ve bazı satırlar birleştirilemezse bir uyarı iletisi verilir.
+.sp
+.sp
+.SH "YAZAN"
+Mike Haertel tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/join>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) join invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

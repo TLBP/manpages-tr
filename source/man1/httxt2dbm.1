@@ -1,0 +1,82 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "HTTXT2DBM" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+httxt2dbm - RewriteMap ile kullanmak için DBM dosyaları üretir
+.sp
+.SH KULLANIM
+.IP \fBautoconf\fR 9
+[ \fB-v\fR ] [ \fB-f\fR \fIDBM_türü\fR ] \fB-i\fR \fIkaynak_metin\fR \fB-o\fR \fIDBM_çıktı\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+httxt2dbm, RewriteMap ile kullanmak için düz metin dosyalardan DBM dosyaları üretir.
+.sp
+Çıktı dosyası mevcutsa dosya kırpılmaz. Yeni anahtarlar eklenir, mevcutlar da güncellenir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-v\fR
+Çıktı daha ayrıntılı olur.
+.sp
+.TP 4
+\fB-f\fR \fIDBM_türü\fR
+Çıktı için kullanılacak DBM türü belirtilir. Belirtilmediği takdirde APR öntanımlısı kullanılır. Belirtilebilecek DBM türleri: GDBM dosyalar için GDBM, SDBM dosyalar için SDBM, Berkeley DB dosyalar için DB, NDBM dosyalar için NDBM, öntanımlı DBM türü için \fBdefault\fR
+.sp
+.TP 4
+\fB-i\fR \fIkaynak_metin\fR
+DBM dosyasının üretiminde kullanılacak girdi dosyası belirtilir. Bu dosya, her satırda bir kayıt bulunmak üzere her satırı şöyle biçemlenmiş olmalıdır: \fIanahtar değer\fR. Bu dosyanın biçemi ve manası ile ilgili ayrıntılar için RewriteMap yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-o\fR \fIDBM_çıktı\fR
+Çıktılanacak DBM dosyasının ismi belirtilir.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.RS 7
+.nf
+httxt2dbm -i rewritemap.txt -o rewritemap.dbm
+httxt2dbm -f SDBM -i rewritemap.txt -o rewritemap.dbm
+.fi
+.sp
+.RE
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

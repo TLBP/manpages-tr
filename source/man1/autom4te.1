@@ -1,0 +1,252 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "AUTOM4TE" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+autom4te - M4 sayesinde dosya ve komut dosyaları oluşturur
+.sp
+.SH KULLANIM
+.IP \fBautom4te\fR 9
+[\fISEÇENEK\fR]... [\fIDOSYALAR\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+GNU M4’ü gereksiz çalıştırmalardan kaçınarak \fIDOSYALAR\fR üzerinde çalıştırır. İzleme yapılıyorsa izleri, dondurma işlemi yapılıyorsa donmuş dosyayı, aksi takdirde \fIDOSYALAR\fR’ın açılımını çıktılar.
+.sp
+\fIDOSYALAR\fR’ın bazılarının adı ’\fIDOSYA\fR\fI.m4f\fR’ ise, bunlar önceki tüm dosyaların M4 donmuş dosyaları olarak kabul edilir (bu nedenle yüklenmezler). ’\fIDOSYA\fR\fI.m4f\fR’ bulunamazsa, önceki tüm dosyalarla birlikte ’\fIDOSYA\fR\fI.m4\fR’ kullanılır.
+.sp
+Bazı dosyalar isteğe bağlı olabilir, yani yalnızca içerilecek dosyalar yolunda (include path) bulunursa işlenir, ancak bunların uzantısı ’\fI.m4?\fR’ olmalıdır (dosya uzantısında o soru imi yoktur).
+.sp
+.SS "İşlem kipleri:"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İşlemi ayrıntılı raporlar.
+.sp
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Geçici dosyalar kaldırılmaz.
+.sp
+.TP 4
+\fB-o\fR, \fB--output=\fR\fIDOSYA\fR
+Çıktıyı \fIDOSYA\fR’ya kaydeder (’-’ öntanımlı olup standart çıktıya yazılır).
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Önbelleğe alınmış değerlere güvenilmez.
+.sp
+.TP 4
+\fB-W\fR, \fB--warnings\fR=\fISINIF\fR
+\fISINIF\fR ile belirtilen sınıfa ait uyarılar gösterilir.
+.sp
+.TP 4
+\fB-l\fR, \fB--language\fR=\fIDiL\fR
+Kullanılacak M4 makrolarını belirtir.
+.sp
+.TP 4
+\fB-C\fR, \fB--cache\fR=\fIDiZiN\fR
+İleride \fIDiZiN\fR içinde yapılacak çalıştırmalar için sonuçlar saklanır.
+.sp
+.TP 4
+\fB--no-cache\fR
+Önbellek iptal edilir.
+.sp
+.TP 4
+\fB-m\fR, \fB--mode\fR=\fISEKiZLİK\fR
+İzsiz çıktı dosyası kipini değiştir (0666)
+.sp
+.TP 4
+\fB-M\fR, \fB--melt\fR
+Donmuş M4 dosyaları kullanılmaz.
+.sp
+.PP
+.sp
+.SS "Diller:"
+.TP 4
+Autoconf
+Autoconf configure betikleri oluşturur
+.sp
+.TP 4
+Autotest
+Autotest sınama araçları oluşturur
+.sp
+.TP 4
+M4sh
+M4sh kabuk betikleri oluşturur
+.sp
+.TP 4
+M4sugar
+M4sugar çıktısı oluşturur
+.sp
+.PP
+.sp
+.SS "Uyarı SINIFları:"
+.TP 4
+’cross’
+çapraz derleme sorunları
+.sp
+.TP 4
+’obsolete’
+atıl duruma gelmiş özellikler ve yapılar (öntanımlı)
+.sp
+.TP 4
+’override’
+kullanıcının yaptığı Automake kural ve değişken tanımları
+.sp
+.TP 4
+’portability’
+taşınabilirlik sorunları (gnu ve gnits kiplerinde öntanımlı)
+.sp
+.TP 4
+’portability-recursive’
+iç içe make değişkenleri (\fB-Wportability\fR ile öntanımlı)
+.sp
+.TP 4
+’extra-portability’
+belirsiz araçlarla ilgili ek taşınabilirlik sorunları
+.sp
+.TP 4
+’syntax’
+sözdizimsel olarak belirsiz yapılar (öntanımlı)
+.sp
+.TP 4
+’unsupported’
+desteklenmeyen ve tamamlanmamış özellikler (öntanımlı)
+.sp
+.TP 4
+’all’
+Bütün uyarılar
+.sp
+.TP 4
+’no-\fISINIF\fR’
+\fISINIF\fRa ilişkin tüm uyarıları kapatır
+.sp
+.TP 4
+’none’
+bütün uyarıları kapatır
+.sp
+.TP 4
+’error’
+uyarılar hata sayılır
+.sp
+.PP
+Ortam değişkenleri ’\fBM4\fR’ ve ’\fBWARNINGS\fR’ önemsenir.
+.sp
+.SS "Kütüphane dizinleri:"
+.TP 4
+\fB-B\fR, \fB--prepend-include\fR=\fIDiZiN\fR
+\fIDiZiN\fR olarak verilen dizini arama yolunun önüne ekler.
+.sp
+.TP 4
+\fB-I\fR, \fB--include\fR=\fIDiZiN\fR
+\fIDiZiN\fR olarak verilen dizini arama yolunun sonuna ekler.
+.sp
+.PP
+.sp
+.SS "İzleme:"
+.TP 4
+\fB-t\fR, \fB--trace\fR=\fIMAKRO\fR[:\fIBiÇEM\fR]
+\fIMAKRO\fR çağrılarının listesini gösterir.
+.sp
+.TP 4
+\fB-p\fR, \fB--preselect\fR=\fIMAKRO\fR
+Gelecekteki bir çalıştırma için \fIMAKRO\fR’yu izlemeye hazırlar.
+.sp
+.PP
+.sp
+.SS "Dondurma:"
+.TP 4
+\fB-F\fR, \fB--freeze\fR
+\fIDOSYALAR\fR için M4 donmuş durum dosyası oluşturulur.
+.sp
+.PP
+.sp
+.SS "BiÇEM için ’$f:$l:$n:$%’ öntanımlıdır ve aşağıdaki öncelemler kullanılabilir:"
+.TP 4
+$$
+özel $ karakteri
+.sp
+.TP 4
+$f
+makronun çağrıldığı dosya
+.sp
+.TP 4
+$l
+makronun çağrıldığı satır
+.sp
+.TP 4
+$d
+makro çağrısının iç içelik derinliği
+.sp
+.TP 4
+$n
+makronun ismi
+.sp
+.TP 4
+$NUM
+NUMuncu değiştirge, satır sonu karakteriyle tırnaksız olarak.
+.sp
+.TP 4
+$SEP@
+SEP ayraçlı, satır sonu karakterli ve tırnaklı olarak tüm değiştirgeler
+.sp
+.TP 4
+$SEP*
+SEP ayraçlı, satır sonu karakterli ve tırnaksız olarak tüm değiştirgeler
+.sp
+.TP 4
+$SEP%
+SEP ayraçlı, satır sonu karaktersiz ve tırnaksız olarak tüm değiştirgeler
+.sp
+.PP
+SEP öntanımlı olarak boş (@ ve * için virgül, % için iki nokta üst üste) olabilir, bir karakteri belirtmek için karakterin kendisi veya bir dizge belirtmek için {DİZGE} olabilir.
+.sp
+.sp
+.SH "YAZAN"
+Akim Demaille tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <bug-autoconf (at) gnu.org> adresine bildirin.
+.br
+GNU Autoconf sayfası: <http://www.gnu.org/software/autoconf/>
+.br
+GNU yazılımları genel kullanım yardımı: <http://www.gnu.org/gethelp/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+/Autoconf: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>, <http://gnu.org/licenses/exceptions.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBautoconf\fR(1), \fBautomake\fR(1), \fBautoreconf\fR(1), \fBautoheader\fR(1), \fBautoscan\fR(1), \fBautoupdate\fR(1), \fBconfig.guess\fR(1), \fBconfig.sub\fR(1), \fBifnames\fR(1), \fBlibtool\fR(1).
+.sp
+\fBautom4te\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBautom4te\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo autom4te\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,310 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "LS" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ls - dizin içeriğini listeler
+.sp
+.SH KULLANIM
+.IP \fBls\fR 3
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+(Öntanımlı olarak içinde bulunulan dizindeki) \fIDOSYA\fR’larla ilgili bilgileri görüntüler. Ne \fB-cftuvSUX\fR seçeneklerinden biri ne de \fB--sort\fR verilmişse, abecesel sıraya göre listeleme yapar.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+\fB.\fR (nokta) ve \fB..\fR ile başlayan dosyaları gizlemez.
+.sp
+.TP 4
+\fB-A\fR, \fB--almost-all\fR
+İsimlerinde \fB.\fR ve \fB..\fR bulunan dosyaları listelemez.
+.sp
+.TP 4
+\fB--author\fR
+\fB-l\fR ile birlikte her dosyanın yazarını basar.
+.sp
+.TP 4
+\fB-b\fR, \fB--escape\fR
+Basılamayan karakterler için sekizlik tabandaki değerlerini basar.
+.sp
+.TP 4
+\fB--block-size=\fR\fIBOYUT\fR
+\fB-l\fR ile birlikte boyutlar \fIBOYUT\fR ile oranlanır. Örn, ’\fB--block-size=M\fR’. Aşağıda, BOYUTlarla ilgili bölümüne bakınız.
+.sp
+.TP 4
+\fB-B\fR, \fB--ignore-backups\fR
+\fB~\fR ile sona eren dosya isimlerini listelemez.
+.sp
+.TP 4
+\fB-c\fR
+\fB-lt\fR ile birlikte dosya durum bilgilerinin son düzenlendiği zamana göre sıralar ve ve bu zamanı gösterir. \fB-l\fR ile birlikte kullanıldığında ise isme göre sıralar ve dosya durum bilgilerinin son düzenlendiği zamanı gösterir. Aksi takdirde, dosya durum bilgilerinin son düzenlendiği zamana göre sıralar.
+.sp
+.TP 4
+\fB-C\fR
+Sütunlar halinde listeleme yapar.
+.sp
+.TP 4
+\fB--color\fR[=\fIKOŞUL\fR]
+Dosya türlerini ayırdetmek için renklendirme yapılıp yapılmayacağı belirtilir. \fIKOŞUL\fR olarak, \fBnever\fR (asla), \fBalways\fR (daima; öntanımlıdır) veya \fBauto\fR verilebilir.
+.sp
+.TP 4
+\fB-d\fR, \fB--directory\fR
+Sadece dizine ilişkin bilgileri gösterir, içeriğini değil.
+.sp
+.TP 4
+\fB-D\fR, \fB--dired\fR
+Emacs’ın ’dired’ kipi için tasarlanmış çıktı üretir.
+.sp
+.TP 4
+\fB-f\fR
+Tüm girdiler dizin sırasıyla görüntülenir.
+.sp
+.TP 4
+\fB-F\fR, \fB--classify\fR[=\fIKOŞUL\fR]
+Liste girdilerine */=@| göstergelerinden birini ekler. \fIKOŞUL\fR olarak, \fBnever\fR (asla), \fBalways\fR (daima; öntanımlıdır) veya \fBauto\fR verilebilir.
+.sp
+.TP 4
+\fB--file-type\fR
+* eklenmemesi dışında \fB-F\fR gibi.
+.sp
+.TP 4
+\fB--format=\fR\fISÖZCÜK\fR
+\fISÖZCÜK\fR olarak verilebilecek değerler ve karşılığı olan seçenekler: across \fB-x\fR, commas \fB-m\fR, horizontal \fB-x\fR, long \fB-l\fR, single-column \fB-1\fR, verbose \fB-l\fR, vertical \fB-C\fR
+.sp
+.TP 4
+\fB--full-time\fR
+\fB-l --time-style\fR=\fIfull-iso\fR seçeneklerine eşdeğerdir.
+.sp
+.TP 4
+\fB-g\fR
+Dosya sahibini göstermemesi dışında \fB-l\fR gibidir.
+.sp
+.TP 4
+\fB--group-directories-first\fR
+Dizinleri dosyalardan önce gruplar. \fB--sort\fR ile birlikte sıralama yapılabilir ama \fB--sort\fR\fI=none\fR gruplamayı iptal eder.
+.sp
+.TP 4
+\fB-G\fR, \fB--no-group\fR
+Uzun listelemede grup sütununu göstermez.
+.sp
+.TP 4
+\fB-h\fR, \fB--human-readable\fR
+\fB-l\fR ve \fB-s\fR ile birlikte, boyutları kullanıcı tarafından kolay okunabilecek biçimde (1K 234M 2G gibi) gösterir.
+.sp
+.TP 4
+\fB-si\fR
+Yukarıdaki seçeneğe benzer ama 1024 yerine 1000’lik katlar kullanılır (1 MB=1000KB kabul edilir, 1024 değil).
+.sp
+.TP 4
+\fB-H\fR, \fB--dereference-command-line\fR
+Komut satırındaki sembolik bağlar takip edilir.
+.sp
+.TP 4
+\fB--dereference-command-line-symlink-to-dir\fR
+Komut satırındaki, dizine sembolik bağlar takip edilir.
+.sp
+.TP 4
+\fB--hide=\fR\fIİFADE\fR
+Kabuk \fIİFADE\fRsi ile eşleşen girdiler gösterilmez (\fB-a\fR veya \fB-A\fR ile geçersiz kılınan girdiler).
+.sp
+.TP 4
+\fB--hyperlink\fR[=\fIKOŞUL\fR]
+Dosya ismlerini köprüler. \fIKOŞUL\fR olarak, \fBnever\fR (asla), \fBalways\fR (daima; önatanımlıdır) veya \fBauto\fR verilebilir.
+.sp
+.TP 4
+\fB--indicator-style=\fR\fISÖZCÜK\fR
+Listedeki girdilere \fISÖZCÜK\fR ile belirtilen tarzda gösterge ekler: none (öntanımlı değer), classify (\fB-F\fR), file-type (\fB--file-type\fR), slash (\fB-p\fR)
+.sp
+.TP 4
+\fB-i\fR, \fB--inode\fR
+Her dosyanın indis numarasını basar.
+.sp
+.TP 4
+\fB-I\fR, \fB--ignore=\fR\fIİFADE\fR
+Kabuk \fIİFADE\fRsi ile eşleşen girdileri listelemez.
+.sp
+.TP 4
+\fB-k\fR, \fB--kibibytes\fR
+\fB--block-size\fR=1K ile aynıdır. Sadece \fB-s\fR ile birlikte ve dizin toplamlarında kullanılır.
+.sp
+.TP 4
+\fB-l\fR
+Uzun liste biçimi kullanılır.
+.sp
+.TP 4
+\fB-L\fR, \fB--dereference\fR
+Bir sembolik bağın bilgileri gösterilirken, bağın kendisinin değil gösterdiği dosyanın bilgileri gösterilir.
+.sp
+.TP 4
+\fB-m\fR
+Listeyi virgül ile ayrılmış girdiler halinde gösterir.
+.sp
+.TP 4
+\fB-n\fR, \fB--numeric-uid-gid\fR
+Kullanıcı ve grup isimleri yerine numaralarını göstermesi dışında \fB-l\fR gibidir.
+.sp
+.TP 4
+\fB-N\fR, \fB--literal\fR
+Ham dosya isimlerini basar (denetim karakterleri özel olarak değerlendirilmez).
+.sp
+.TP 4
+\fB-o\fR
+Grup sütununu göstermemesi dışında \fB-l\fR gibidir.
+.sp
+.TP 4
+\fB-p\fR, \fB--indicator-style=slash\fR
+Dizinlere / göstergesini ekler.
+.sp
+.TP 4
+\fB-q\fR, \fB--hide-control-chars\fR
+Basılamayan denetim karakterlerini ? ile gösterir.
+.sp
+.TP 4
+\fB--show-control-chars\fR
+Basılamayan denetim karakterlerini oldukları gibi gösterir (uygulama \fBls\fR ve çıktı birimi uçbirim olmadıkça öntanımlıdır).
+.sp
+.TP 4
+\fB-Q\fR, \fB--quote-name\fR
+Girdi isimlerini çift tırnak içine alır.
+.sp
+.TP 4
+\fB--quoting-style=\fR\fISÖZCÜK\fR
+Girdi isimleri tırnak içine alınırken \fISÖZCÜK\fR ile belirtilen tarz kullanılır: \fBliteral, locale, shell, shell-always, shell-escape, shell-escape-always, c, escape\fR (\fBQUOTING_STYLE\fR ortam değikenini geçersiz kılar.)
+.sp
+.TP 4
+\fB-r\fR, \fB--reverse\fR
+Ters sıralama yapar.
+.sp
+.TP 4
+\fB-R\fR, \fB--recursive\fR
+Alt dizinleri ardışık olarak listeler.
+.sp
+.TP 4
+\fB-s\fR, \fB--size\fR
+Dosyaya ayrılan blok sayısını gösterir.
+.sp
+.TP 4
+\fB-S\fR
+Dosya boyutuna göre sıralama yapar. En büyüğü önce.
+.sp
+.TP 4
+\fB--sort=\fR\fISÖZCÜK\fR
+\fISÖZCÜK\fR ile belirtilen türde sıralama yapılır: extension (uzantısına göre \fB-X\fR), none (yok \fB-U\fR), size (boyuta göre \fB-S\fR), time (zamana göre \fB-t\fR), version (sürüme göre \fB-v\fR).
+.sp
+.TP 4
+\fB--time=\fR\fISÖZCÜK\fR
+Zaman bilgisi gösterilirken değişiklik zamanı yerine \fISÖZCÜK\fR ile belirtilen zaman kullanılır. Erişim zamanı için: atime, access, use. Oluşturulma zamanı için: ctime. Duruma göre: status. Sıralama türü \fB--sort\fR=time olarak belirtildiğinde sıralama burada belirtilen zamana göre yapılır.
+.sp
+.TP 4
+\fB--time-style=\fR\fITARZ\fR
+\fB-l\fR seçeneği ile çıktılanan listede zaman belirtilen \fITARZ\fRda gösterilir: full-iso, long-iso, iso, locale, \fI+BİÇEM\fR. \fIBİÇEM\fR \fBdate\fR(1) komutundaki gibi yorumlanır. Eğer \fIBİÇEM\fR, \fIBİÇEM1\fR<satırsonu>\fIBİÇEM2\fR biçiminde verilirse, en yeni dosyalara \fIBİÇEM2\fR, daha eski olanlara da \fIBİÇEM1\fR uygulanır. Eğer \fIBİÇEM\fR ’posix-’ ile başlıyorsa \fIBİÇEM\fR sadece POSIX yereli dışında etkin olur. Ayrıca, \fBTIME_STYLE\fR ortam değişkeni kullanılacak öntanımlı tarzı belirler.
+.sp
+.TP 4
+\fB-t\fR
+Değişiklik zamanına göre sıralama yapılır. En yenisi önce. \fB--time\fR seçeneğine bakın.
+.sp
+.TP 4
+\fB-T\fR, \fB--tabsize=\fR \fISEKME\fR
+Sekme durakları için 8 yerine, \fISEKME\fR kullanılır.
+.sp
+.TP 4
+\fB-u\fR
+\fB-lt\fR ile birlikte erişim zamanına göre ile sıralar ve bu zamanı gösterir. \fB-l\fR ile birlikte kullanıldığında ise isme göre sıralar ve erişim zamanını gösterir. Aksi takdirde, erişim zamanına göre sıralar. En yenisi önce.
+.sp
+.TP 4
+\fB-U\fR
+Sıralama yapılmaz; girdiler dizindeki sırasına göre listelenir.
+.sp
+.TP 4
+\fB-v\fR
+Sıralama metin içindeki sürüm numaralarına göre yapılır.
+.sp
+.TP 4
+\fB-w\fR, \fB--width=\fR\fISAYI\fR
+Ekran genişliği \fISAYI\fR karakterlik kabul edilir.
+.sp
+.TP 4
+\fB-x\fR
+Listeleme sütunlar halinde değil satıra dizilerek yapılır.
+.sp
+.TP 4
+\fB-X\fR
+Abecesel sıralama dosya uzantısına göre yapılır.
+.sp
+.TP 4
+\fB-Z\fR, \fB--context\fR
+Her dosyanın güvenlik bağlamını basar.
+.sp
+.TP 4
+\fB--zero\fR
+Çıktılanan satırların sonuna satır sonu karakteri değil NUL (\\0) konur.
+.sp
+.TP 4
+\fB-1\fR
+Listeleme her satıra bir dosya yazılarak yapılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fIBOYUT\fR şu dizge ya da eşdeğeri olan tamsayılardan biri ile belirtilebilir: kB 1000, K 1024, MB 1000*1000, M 1024*1024 ve benzer şekilde G, T, P, E, Z, Y. Bibaytlık birimler de belirtilebilir (KiB=K, MiB=M, ... gibi)
+.sp
+Öntanımlı olarak, dosyaların türlerini ayırdetmek için renkler kullanılmaz. Bu, \fB--color\fR=none kullanımına eşdeğerdir. \fB--color\fR seçeneğinin değiştirgesiz kullanımı \fB--color\fR=always anlamına gelir. Renkli kodlama sadece \fB--color\fR=auto ile ve standart çıktı bir uçbirime (tty) bağlı ise yapılır. Renkler \fBLS_COLORS\fR ortam değişkeninden alınır; \fBdircolors\fR(1) komutu ile kolayca \fBLS_COLORS\fR ortam değişkenine atanabilir.
+.sp
+.SS "Çıkış Durumu:"
+.TP 3
+0
+Başarı durumunda.
+.sp
+.TP 3
+1
+Küçük sorunlarda (alt dizine erişememek gibi)
+.sp
+.TP 3
+2
+Ciddi sorunlarda (komut satırı değiştirgesinin okunamaması gibi)
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Richard Stallman ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/ls>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) ls invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2003, 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

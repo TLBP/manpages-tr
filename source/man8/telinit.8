@@ -1,0 +1,89 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
+ * https://github.com/systemd/systemd
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "TELINIT" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+telinit - Sistem çalışma seviyelerini değiştirir
+.sp
+.SH KULLANIM
+.IP \fBtelinit\fR 8
+[SEÇENEKLER]... {KOMUT}
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBtelinit\fR SysV çalışma seviyesi değiştirmekte kullanılablir. SysV çalışma seviyeleri kavramının modası geçtiğinden, çalışma seviyesi istekleri şeffaf bir şekilde systemd birim etkinleştirme isteklerine çevrilir.
+.sp
+.TP 4
+\fBBilgi:\fR
+Bu, yalnızca uyumluluk için var olan eski bir komuttur. Çalışma seviyeleri kavramının modası geçtiği için artık kullanılmamalıdır.
+.sp
+.PP
+.sp
+.SH "SEÇENEKLER"
+Aşağıdaki seçenekler kullanılabilir:
+.sp
+.TP 4
+\fB--help\fR
+Kısa bir yardım metni basar ve çıkar.
+.sp
+.TP 4
+\fB--no-wall\fR
+Kapatma, durdurma ve yeniden başlatma öncesi \fBwall\fR(1) iletisi gönderilmez.
+.sp
+.PP
+.sp
+.SH "KOMUTLAR"
+Aşağıdaki komutlar kullanılabilir:
+.sp
+.TP 4
+\fB0\fR
+Makineyi kapatır. \fBsystemctl poweroff\fR eşdeğeri olan \fBpoweroff.target\fR etkinleştirme isteğine dönüştürülür.
+.sp
+.TP 4
+\fB6\fR
+Makineyi yeniden başlatır. \fBsystemctl reboot\fR eşdeğeri olan \fBreboot.target\fR etkinleştirme isteğine dönüştürülür.
+.sp
+.TP 4
+\fB2, 3, 4, 5\fR
+SysV çalışma seviyesini değiştirir. \fBsystemctl isolate runlevel2.target, systemctl isolate runlevel3.target, ...\fR eşdeğeri olan \fBrunlevel2.target, runlevel3.target, ...\fR etkinleştirme isteğine dönüştürülür.
+.sp
+.TP 4
+\fB1, s, S\fR
+Sistem kurtarma kipine geçer. \fBsystemctl rescue\fR eşdeğeri olan \fBrescue.target\fR etkinleştirme isteğine dönüştürülür.
+.sp
+.TP 4
+\fBq, Q\fR
+Yeniden yükleme sürecini yapılandırır. \fBsystemctl daemon-reload\fR eşdeğeridir
+.sp
+.TP 4
+\fBu, U\fR
+Surumu dizgeleştirir, süreci yeniden çalıştırır ve durumu yeniden nesnelleştirir.Makineyi kapatır. \fBsystemctl daemon-reexec\fR eşdeğeridir.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+Başarı durumunda 0, başarısızlık durumunda sıfırdan farklı bir değer ile çıkar.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsystemd\fR(1), \fBsystemctl\fR(1), \fBwall\fR(1).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

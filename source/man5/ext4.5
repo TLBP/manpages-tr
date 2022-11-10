@@ -1,0 +1,716 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "EXT4" 5 "Aralık 2021" "E2fsprogs 1.46.5" "Dosya Biçimleri ve Dosya Dönüşümleri"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ext2 - ikinci genişletilmiş dosya sistemi
+.br
+ext3 - üçüncü genişletilmiş dosya sistemi
+.br
+ext4 - dördüncü genişletilmiş dosya sistemi
+.sp
+.SH "AÇIKLAMA"
+İkinci, üçüncü ve dördüncü genişletilmiş dosya sistemleri veya yaygın olarak bilindikleri gibi ext2, ext3 ve ext4, geçmişte birçok Linux dağıtımı için öntanımlı dosya sistemi olan Linux dosya sistemleridir. Genişletilebilirlik ve geriye dönük uyumluluk için tasarlanmış genel amaçlı dosya sistemleridir. Özellikle, daha önce ext2 ve ext3 dosya sistemleriyle kullanılması amaçlanan dosya sistemleri, ext4 dosya sistemi sürücüsü kullanılarak bağlanabilir ve aslında birçok modern Linux dağıtımında, ext4 dosya sistemi sürücüsü, ext2 ve ext3 dosya sistemlerini bağlama isteklerini yerine getirmek üzere yapılandırılmıştır.
+.sp
+.SH "DOSYA SİSTEMİNİN ÖZELLİKLERİ"
+Ext2, ext3 veya ext4 için biçimlendirilmiş bir dosya sistemi, aşağıdaki dosya sistemi özellik bayraklarından uygun olanlarını etkinleştirilerek özel bir birleşim oluşturabilir. Bu özelliklerden bazıları, kullanılan Linux çekirdek sürümüne bağlı olarak ext2, ext3 ve ext4 dosya sistemi sürücülerinin tüm gerçeklenimlerinde desteklenmez. GNU/HURD veya FreeBSD gibi başka işletim sistemlerinin ext2 gerçeklenimlerinde ise yalnızca çok kısıtlayıcı bir dizi dosya sistemi özelliği desteklenmiş olabilir.
+.sp
+.TP 4
+\fB64bit\fR
+Dosya sisteminin 2^32 bloktan daha büyük olmasını sağlar. Bu özellik gerektiğinde otomatik olarak ayarlanır, ancak dosya sisteminin ilk oluşturulduğunda bu eşikten daha küçük olsa bile, 2^32 bloktan daha büyük olarak yeniden boyutlandırılması gerekiyorsa bu özelliğin açıkça belirtilmesi yararlı olabilir. Bazı eski çekirdeklerin ve e2fsprogs’un eski sürümlerinin, bu ext4 özelliği etkinleştirilmiş dosya sistemlerini desteklemeyeceği unutulmamalıdır.
+.sp
+.TP 4
+\fBbigalloc\fR
+Bu ext4 özelliği, kümelenmiş blok tahsisini mümkün kılar, böyle bir tahsis birimindeki blok sayısı ikinin üstellerinden biri (8, 16, vb.) olmalıdır. Böylece, geleneksel olarak blok ayırma bit eşlemi olarak bilinen eşlemdeki her bit, öntanımlı olarak 16 bloktan oluşan bir kümenin kullanımda olup olmadığını gösterir. Bu özellik, blok ayırma için harcanan zamanı azaltabilir ve özellikle büyük dosyalar için daha az saçılım sağlar. Küme boyutu, \fBmke2fs\fR(8) komutunun \fB-C\fR seçeneği kullanılarak belirtilebilir.
+.sp
+.RS 4
+.TP 4
+\fBUyarı:\fR
+\fBbigalloc\fR özelliği hala geliştirme aşamasındadır ve çekirdeğiniz tarafından tam olarak desteklenmeyebilir veya çeşitli hataları olabilir. Ayrıntılar için: http://ext4.wiki.kernel.org/index.php/Bigalloc.
+.br
+Gecikmeli tahsis ile çakışabilir (bkz: \fBnodelalloc\fR bağlama seçeneği).
+.sp
+.RE
+.IP
+Bu özellik \fBextent\fR özelliğinin etkin olmasını gerektirir.
+.sp
+.TP 4
+\fBcasefold\fR
+Bu ext4 özelliği, harf büyüklüğüne duyarlılık (\fB+F\fR) bayrağının etkin olduğu dizinler için dosya sistemi düzeyinde karakter kodlama desteği sağlar. Bu özellik diskte ad koruyucudur, ancak uygulamaların dosya adına eşdeğer sürümde bir kodlama kullanarak dosya sisteminde bir dosya aramasına olanak tanır.
+.sp
+.TP 4
+\fBdir_index\fR
+Büyük dizinlerde ad aramalarını hızlandırmak için aşlı b-ağaçları (b-tree) kullanılır. Bu özellik, ext3 ve ext4 dosya sistemleri tarafından desteklenir, ext2 dosya sistemleri tarafından yok sayılır.
+.sp
+.TP 4
+\fBdir_nlink\fR
+Normalde, ext4, bir dosya düğümünün en fazla 65.000 sabit bağa sahip olmasına izin verir. Bu, dizinlerin yanı sıra normal dosyalar için de geçerlidir; bu, bir dizinde 64.998’den fazla alt dizin bulunamayacağı anlamına gelir (çünkü ’.’ ve ’..’ girişlerinin her biri ve dizinin üst dizindeki kendi dizin girdisi sabit bağ sayılır). Bu özellik, bir dizine giden sabit bağ sayısının azami sınır aşıldığında bilinmediğini belirtmek için ext4’ün bağ sayısı olarak 1’i kullanmasına neden olarak bu sınırı yükseltir.
+.sp
+.TP 4
+\fBea_inode\fR
+Normalde, bir dosyanın genişletilmiş öznitelikleri ve ilişkili meta verileri, düğüme veya düğümün ilişkili genişletilmiş öznitelik bloğuna sığmalıdır. Bu özellik, her bir genişletilmiş öznitelik değerinin, gerekirse başka bir düğümün veri bloklarına yerleştirilmesine olanak vererek, dosya başına genişletilmiş özniteliklerin boyutu ve sayısı üzerindeki sınırı yükseltir.
+.sp
+.TP 4
+\fBencrypt\fR
+Veri bloklarının ve dosya adlarının dosya sistemi düzeyinde şifrelenmesi için destek sağlar. Dosya düğümü meta verileri (zaman damgaları, dosya boyutu, kullanıcı/grup sahipliği vb.) şifrelenmez.
+.sp
+Bu özellik en çok, birden fazla kullanıcıya sahip dosya sistemlerinde veya tüm dosyaların şifrelenmemesinin gerektiği durumlarda kullanışlıdır. Çoğu kullanımda, özellikle tek kullanıcılı sistemlerde, dm-crypt kullanarak blok aygıtı katmanında şifreleme çok daha iyi güvenlik sağlayabilir.
+.sp
+.TP 4
+\fBext_attr\fR
+Bu özellik, genişletilmiş özniteliklerin kullanılmasını sağlar. Bu özellik ext2, ext3 ve ext4 tarafından desteklenir.
+.sp
+.TP 4
+\fBextent\fR
+Bu ext4 özelliği, ext2 ve ext3 dosya sistemleri tarafından kullanılan geleneksel dolaylı blok şemasından daha verimli bir veri yapısı olan genişletilmiş (extent) ağacı kullanarak, belirli bir düğüm için mantıksal blok numaralarının depolanacağı depolama aygıtındaki fiziksel bloklara eşlenmesine olanak sağlar. Genişletilmiş ağacın kullanılması, meta veri bloğunun ek yükünü azaltır, dosya sistemi başarımını iyileştirir ve dosya sisteminde \fBe2fsck\fR(8) çalıştırma gereksinimini azaltır.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Geriye uyumluluk adına \fBextent\fR ve \fBextents\fR her ikisi de bu özellik için geçerli ad olarak kabul edilmektedir.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fBextra_isize\fR
+Bu ext4 özelliği, nanosaniye zaman damgaları ve dosya oluşturma süresi gibi genişletilmiş meta veriler için, mevcut çekirdeğin bu kadar fazla alan ayırması gerekmese de, her dosya düğümünde belirli bir miktarda alan ayırır. Bu özellik olmadan, çekirdek, o an ihtiyaç duyulan özellikler için alan ayırır ve geri kalanı genişletilmiş öznitelikler tarafından tüketilebilir.
+.sp
+Bu özelliğin kullanışlı olabilmesi için dosya düğümü boyutunun en azından 256 bayt veya üstü olması gerekir.
+.sp
+.TP 4
+\fBfiletype\fR
+Bu özellik dosya türü bilgilerinin dizin girdilerinde saklanmasını sağlar. Bu özellik ext2, ext3 ve ext4 tarafından desteklenir.
+.sp
+.TP 4
+\fBflex_bg\fR
+Bu ext4 özelliği, her bloğun grup meta verilerinin (tahsis bit eşlemleri ve dosya düğümü tabloları) depolama ortamında herhangi bir yere yerleştirilmesine olanak sağlar. Ek olarak, \fBmke2fs\fR(8), her \fBflex_bg\fR grubunun ilk blok grubundan başlayarak her bloğun grup meta verilerini bir arada yerleştirecektir. \fBflex_bg\fR grubunun boyutu \fBmke2fs\fR(8) komutunun \fB-G\fR seçeneği kullanılarak belirlenebilir.
+.sp
+.TP 4
+\fBhas_journal\fR
+Temiz olmayan sistem kapanmalarında bile dosya sistemi tutarlılığını sağlamak için bir günlük oluşturur. Bu özelliği etkinleştirmek, \fBmke2fs\fR(8) veya \fBtune2fs\fR(8) ile \fB-j\fR seçeneğini kullanmaya eşdeğerdir. Bu özellik ext3 ve ext4 tarafından desteklenir, ext2 dosya sistemi sürücüsü tarafından yok sayılır.
+.sp
+.TP 4
+\fBhuge_file\fR
+Bu ext4 özelliği, dosya boyutunun 2 terabayttan büyük olmasına izin verir.
+.sp
+.TP 4
+\fBinline_data\fR
+Verilerin dosya düğümünde ve genişletilmiş öznitelik alanında depolanmasına izin verir.
+.sp
+.TP 4
+\fBjournal_dev\fR
+Bu özellik, harici günlük aygıtında bulunan süper blokta etkinleştirilir. Harici günlüğün blok boyutu, onu kullanan dosya sistemi ile aynı olmalıdır.
+.sp
+Harici günlük aygıtı, \fBmke2fs\fR(8) veya \fBtune2fs\fR(8) komutuna \fB-j device=\fR\fIharici-aygıt\fR seçeneği belirtilerek dosya sistemi tarafından kullanılabilir.
+.sp
+.TP 4
+\fBlarge_dir\fR
+Bu özellik, dizinlerin azami boyutunu yükselterek dizin başına dosya sayısı sınırını ve aşlı b-ağacı dizinleri için (bkz: \fBdir_index\fR), dizin girdilerini saklamakta kullanılan aşlı b-ağacının azami boyutunu artırır.
+.sp
+.TP 4
+\fBlarge_file\fR
+Bu özelliğin bayrağı, 2 gigabayttan daha büyük bir dosya oluşturulduğunda günümüz çekirdekleri tarafından otomatik olarak tanımlanır. Çok eski çekirdekler büyük dosyaları işleyemezdi, bu nedenle bu özelliğin bayrağı, bu çekirdeklerin anlayamadıkları dosya sistemlerini bağlamalarını engellemek için kullanılmaktadır.
+.sp
+.TP 4
+\fBmetadata_csum\fR
+Bu ext4 özelliği, meta veri sağlama toplamını etkinleştirir. Bu özellik, tüm dosya sistemi meta verilerinin (süper blok, grup tanımlayıcı bloklar, dosya düğüm ve blok bit eşlemleri, dizinler ve genişletilmiş ağaç blokları) sağlama toplamlarını saklar. Meta veri blokları için kullanılan sağlama toplamı algoritması, \fBuninit_bg\fR özellikli grup tanımlayıcıları için kullanılandan farklıdır. Bu iki özellik uyumsuzdur ve \fBuninit_bg\fR yerine tercihli olarak \fBmetadata_csum\fR kullanılır.
+.sp
+.TP 4
+\fBmetadata_csum_seed\fR
+Bu özellik, dosya sisteminin meta veri sağlama toplamı tohumunu süper blokta saklamasına izin verir; bu, yöneticinin, dosya sistemi bağlıyken \fBmetadata_csum\fR özelliğini kullanarak bir dosya sisteminin UUID’sini değiştirmesine olanak tanır.
+.sp
+.TP 4
+\fBmeta_bg\fR
+Bu ext4 özelliği, blok grubu tanıtıcılarının boyutundaki büyüme için açıkça yer ayırmaya gerek kalmadan dosya sistemlerinin çevrimiçi olarak yeniden boyutlandırılmasına olanak tanır. Bu şema ayrıca 2^32 bloktan daha büyük dosya sistemlerini yeniden boyutlandırmak için de kullanılır. Yeni bir dosya sistemi oluşturulurken bu özelliğin atanması önerilmez, çünkü blok grubu tanıtıcılarının bu yöntemle depolanması, dosya sistemini bağlamak için gereken süreyi yavaşlatacaktır. Daha yeni çekirdekler, çevrimiçi yeniden boyutlandırma yaparken yeniden boyutlandırma düğümünde ayrılmış daha fazla alan yoksa gereken boyutu ayarlamak için bu özelliği otomatik olarak etkinleştirebilir.
+.sp
+.TP 4
+\fBmmp\fR
+Bu ext4 özelliği, çoklu bağlama koruması sağlar. \fBmmp\fR, dosya sisteminin birden fazla bağlanmadan korunmasına yardımcı olur. Paylaşılan depolama ortamlarında kullanışlıdır.
+.sp
+.TP 4
+\fBproject\fR
+Bu ext4 özelliği proje kota desteği sağlar. Bu özellik ile dosya sistemi bağlandığında dosya düğümünün proje kimliği yönetilir.
+.sp
+.TP 4
+\fBquota\fR
+Kota düğümleri oluşturur (3. dosya düğümü: kullanıcı kotası, 4. dosya düğümü: grup kotası) ve süperblokta bunları tanımlar. Bu özellik ile dosya sistemi bağlandığında kotalar otomatik olarak etkinleştirilir.
+.sp
+Kota dosyalarının (yani, eski kota tasarımında bulunan user.quota ve group.quota dosyalarının) dosya düğümlerinin gizlenmesine neden olur.
+.sp
+.TP 4
+\fBresize_inode\fR
+Bu dosya sistemi özelliği, bağlı bir dosya sistemini yeniden boyutlandırılırken blok grubu tanım tablosunun genişletilebilmesi için gerekecek yedek alanın ayrıldığını gösterir. Çevrimiçi yeniden boyutlandırma işlemi, \fBresize2fs\fR(8) tarafından tetiklenir ve çekirdek tarafından gerçekleştirilir. Öntanımlı olarak \fBmke2fs\fR(8), dosya sisteminin başlangıç boyutunun 1024 katına kadar büyüyebileceği alanı ayırmaya çalışır. Bu, genişletilmiş yeniden boyutlandırma seçeneği kullanılarak değiştirilebilir.
+.sp
+Bu özellik, aşağıdaki \fBsparse_super\fR veya \fBsparse_super2\fR özelliğinin etkin olmasını gerektirir.
+.sp
+.TP 4
+\fBsparse_super\fR
+Bu dosya sistemi özelliği, günümüzde ext2, ext3 ve ext4 dosya sistemlerinin tamamında etkindir. Süperblok ve blok grubu tanıtıcılarının yedek kopyalarının bütün blok gruplarında değil, yalnızca birkaçında mevcut olduğunu gösterir.
+.sp
+.TP 4
+\fBsparse_super2\fR
+Bu özellik, süperblok ve blok grubu tanıtıcılarının en fazla iki yedeği olacağını gösterir. Yedek süperblok(lar)ı ve blok grubu tanıtıcı(lar)ını depolamak için kullanılan blok grupları süperblokta saklanır, ancak genelde bir süperblok dosya sisteminin 1. blok grubunun başlangıcında saklanırken diğeri ise dosya sisteminin son blok grubunda yer alır. Bu özellik aslında \fBsparse_super\fR’in daha uç bir çeşidi olup veri dosyaları için kullanılan bitişik blokların diskin daha büyük bir yüzdesini kaplamasına izin verecek şekilde tasarlanmıştır.
+.sp
+.TP 4
+\fBstable_inodes\fR
+Dosya sisteminin dosya düğümü numaralarını ve UUID’yi kararlı olarak imler. Bu özellikli bir dosya sisteminin daraltılmasına \fBresize2fs\fR(8) ve UUID’sinin değiştirilmesine de \fBtune2fs\fR(8) izin vermez. Bu özellik, dosya düğüm numaralarını ve UUID’yi kullanan özel şifreleme özelliklerinin kullanılmasına izin verir. Şifreleme özelliğinin yine de ayrıca etkinleştirilmesi gerektiği unutulmamalıdır. \fBstable_inodes\fR eski çekirdeklerde kullanılabilen geriye uyumlu bir özelliktir.
+.sp
+.TP 4
+\fBuninit_bg\fR
+Bu ext4 dosya sistemi özelliği, blok grubu tanıtıcılarının sağlama toplamları kullanılarak korunacağını ve böylece \fBmke2fs\fR(8)’nin tüm blok gruplarını ilklendirmeden bir dosya sisteminin oluşturmasını güvenli hale getireceğini belirtir. Çekirdek, kullanılmayan düğümleri için bu sağlama toplamlarını tutacak ve düğüm tablolarını ve bloklarını yavaş yavaş ilkendirecektir. Bu özellik, \fBe2fsck\fR(8) kullanılarak dosya sisteminin denetlenme süresini hızlandırır ve ayrıca dosya sistemini oluştururken \fBmke2fs\fR(8) için gereken süreyi de kısaltır.
+.sp
+.TP 4
+\fBverity\fR
+Doğruluk korumalı dosyalar için desteği etkinleştirir. Doğruluk korumalı dosyalar salt okunurdur ve verileri, dosyanın sonunda gizlenmiş bir Merkle ağacı kullanılarak şeffaf bir şekilde doğrulanır. Merkle ağacının kök aşı kullanılarak, bir doğruluk korumalı dosyanın kimliği, dosyanın boyutundan bağımsız olarak verimli bir şekilde doğrulanabilir.
+.sp
+Bu özellik, oku-yaz dosya sistemlerinde önemli salt okunur dosyaların kimliğini doğrulamak için çok kullanışlıdır. Dosya sisteminin kendisi salt okunursa, tüm blok aygıtının kimliğini doğrulamak için \fBdm-verity\fR kullanmak çok daha iyi güvenlik sağlayabilir.
+.sp
+.PP
+.sp
+.SH "BAĞLAMA SEÇENEKLERİ"
+Bu bölümde, ext2, ext3 ve ext4’e özgü bağlama seçenekleri açıklanmıştır. Diğer genel bağlama seçenekleri de kullanılabilir; ayrıntılar için bkz: \fBmount\fR(8)
+.sp
+.SS "Ext2 için bağlama seçenekleri"
+’ext2’ dosya sistemi standart Linux dosya sistemidir. Linux çekirdeğinin 2.5.46 sürümünden beri, çoğu bağlama seçeneği için öntanımlılar dosya sisteminin süper bloğu tarafından belirlenir. Bunlar \fBtune2fs\fR(8) ile tanımlanabilir.
+.sp
+.TP 4
+\fBacl\fR|\fBnoacl\fR
+POSIX Erişim Denetim Listeleri desteklenir|desteklenmez. Bkz: \fBacl\fR(5) kılavuz sayfası.
+.sp
+.TP 4
+\fBbsddf\fR|\fBminixdf\fR
+\fBstatfs\fR(2) sistem çağrısının davranışını belirler. \fBminixdf\fR davranışı, dosya sisteminin toplam blok sayısının \fIstatfs\fR yapısının \fIf_blocks\fR alanında döndürülmesi, \fBbsddf\fR davranışı ise (öntanımlıdır), ext2 dosya sistemi tarafından dosya depolama için kullanılamayan ek blokların döndürülen toplam blok sayısından çıkarılmasıdır. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+% \fBmount /k -o minixdf; df /k; umount /k\fR
+\&
+Dosyasistemi   1K-blok     Dolu       Boş   Kull%    Bağlanılan yer
+/dev/sda6      2630655    86954   2412169      3%     /k
+\&
+% \fBmount /k -o bsddf; df /k; umount /k\fR
+\&
+Dosyasistemi   1K-blok     Dolu       Boş   Kull%    Bağlanılan yer
+/dev/sda6      2543714       13   2412169      0%     /k
+.fi
+.sp
+.RE
+.RE
+.IP
+(Bu örneğin, \fI/etc/fstab\fR içinde verilen seçeneklere komut satırı seçeneklerinin eklenebileceğini gösterdiğine dikkat edilmelidir)
+.sp
+.TP 4
+\fBcheck=none\fR|\fBnocheck\fR
+Bağlama sırasında denetim yapılmaz. Bu öntanımlı ve hızlıdır. Örneğin sistem önyüklemesi sırasında veya ertesinde bir \fBe2fsck\fR(8) çağrısı akıllıca olur. Öntanımlı olmayan davranış desteklenmemektedir (\fBcheck=normal\fR ve \fBcheck=strict\fR seçenekleri kaldırıldı). Ext2 ve ext3 dosya sistemleri için ext4 çekirdek sürücüsü kullanılıyorsa, bu bağlama seçeneklerinin desteklenmesi gerekmediği unutulmamaldır.
+.sp
+.TP 4
+\fBdebug\fR
+Her bağlama veya yeniden bağlama sırasında hata ayıklama bilgileri basılır.
+.sp
+.TP 4
+\fBerrors\fR={continue|remount-ro|panic}
+Bir hata saptandığında davranışı belirler.
+.br
+continue: Hatalar yok sayılır ve dosya sistemi hatalı olarak imlenir.
+.br
+remount-ro: Dosya sistemi yeniden salt okunur olarak bağlanır.
+.br
+panic: Panikleyip sistem kapatılır.
+.sp
+Öntanımlı davranış dosya sisteminin süper bloğuna yazılır ve \fBtune2fs\fR(8) kullanılarak değiştirilebilir.
+.sp
+.TP 4
+\fBgrpid\fR|\fBbsdgroups\fR ve \fBnogrpid\fR|\fBsysvgroups\fR
+Bu seçenekler, yeni oluşturulan bir dosyanın hangi grup kimliğini alacağını tanımlar. \fBgrpid\fR seçeneğiyle oluşturulduğu üst dizinin grup kimliğini alır; aksi halde (öntanımlı) \fBbsdgroups\fR ile üst dizin setgid bitlerine sahip olmadığı sürece mevcut sürecin dosya sistemi grup kimliğini alır, üst dizin setgid bitlerine sahipse üst dizinin grup kimliğini alır ve ayrıca kendisi dizin ise üst dizinin setgid bitlerini de alır.
+.sp
+.TP 4
+\fBgrpquota\fR|\fBnoquota\fR|\fBquota\fR|\fBusrquota\fR
+\fBusrquota\fR (\fBquota\fR ile aynıdır) bağlama seçeneği dosya sisteminde kullanıcı kotası desteğini etkin kılar. \fBgrpquota\fR bağlama seçeneği ise grup kotası desteğini etkin kılar. Kota sistemini gerçekten etkin kılmak ve yönetmek için kota araçları gerekir.
+.sp
+.TP 4
+\fBnouid32\fR
+32 bitlik kullanıcı ve grup kimliklerini devre dışı bırakır. Bu, yalnızca 16 bitlik değerleri saklayan ve bekleyen eski çekirdeklerle birlikte çalışabilirlik içindir.
+.sp
+.TP 4
+\fBoldalloc\fR veya \fBorlov\fR
+Yeni dosya düğümleri için eski yer ayırıcı veya Orlov yer ayırıcı kullanılır. Orlov öntanımıdır.
+.sp
+.TP 4
+\fBresgid\fR=\fIN\fR|\fBresuid\fR=\fIN\fR
+Ext2 dosya sistemi boş alanın belli bir miktarını yedek olarak ayırır (öntanımlı olarak %5, bkz: \fBmke2fs\fR(8) ve \fBtune2fs\fR(8)). Bu seçenekler yedek blokları kimin kullanacağını belirler. (Kabaca: Belirtilen kullanıcı kimlik kime aitse o veya belirtilen grup kimlik kimlere aitse onlar.)
+.sp
+.TP 4
+\fBsb\fR=\fIN\fR
+Normal süper blok yerine numarası \fIN\fR olan süper blok kullanılır. Bu seçenek normalde birincil süper blok bozulduğunda kullanılır. Yedek süper blokların yerleri dosya sisteminin blok boyuna, her gruptaki blok sayısına ve \fBsparse_super\fR gibi özelliklere bağlıdır.
+.sp
+\fBmke2fs\fR(8)’in dosya sistemini tutarlı değerlerle (örneğin, blok boyutu, gruptaki blok sayısı, \fBsparse_super\fR, vb.) yapılandırıldığı varsayımıyla, süper blokların yerleri \fBmke2fs\fR(8) komutunun \fB-n\fR seçeneği ile çıktılanarak ek yedek süper blokların yerleri saptanabilir.
+.sp
+Buradaki bloklar 1 kilobaytlık birimlerden oluşur. Yani, 4 kilobaytlık bloklardan 32768 mantıksal blok ile oluşturulmuş bir dosya sisteminde "\fBsb=131072\fR" olur (yedek süper bloğun dosya sisteminin son bloğuna yerleştirilmesi nedeniyle).
+.sp
+.TP 4
+\fBuser_xattr\fR|\fBnouser_xattr\fR
+"user." ile başlayan gelişmiş öznitelikler desteklenir|desteklenmez.
+.sp
+.PP
+.sp
+.SS "Ext3 için bağlama seçenekleri"
+Ext3 dosya sistemi, günlük kayıtlı ext2 dosya sistemidir. Ext2 ile aynı seçenekleri ve ek olarak aşağıdakileri destekler:
+.sp
+.TP 4
+\fBjournal_dev\fR=\fIaygıtno\fR|\fBjournal_path\fR=\fIyol\fR
+Harici günlükleme aygıtının büyük/küçük aygıt numaraları değiştiğinde, bu seçenekler kullanıcının yeni günlük konumunu belirlemesine olanak tanır. Günlük aygıtı, \fIaygıtno\fR ile kodlanmış yeni büyük/küçük aygıt numaraları aracılığıyla veya aygıta giden bir \fIyol\fR aracılığıyla tanımlanır.
+.sp
+.TP 4
+\fBnorecovery\fR|\fBnoload\fR
+Günlüğü dosya sistemini bağlarken yüklemez. Dosya sistemi temiz şekilde ayrılmamışsa, günlüğün geri yüklenmesinin atlanırsa, bunun dosya sisteminde bir takım sorunlara yol açabilecek tutarsızlıklara sebep olabileceği unutulmamalıdır.
+.sp
+.TP 4
+\fBdata\fR={journal|ordered|writeback}
+Dosya verileri için günlükleme kipini belirler. Meta veriler daima günlüğe kaydedilir. Kök dosya sisteminde ordered dışındaki kipleri kullanmak için, kip önyükleme değiştirgesi olarak çekirdeğe aktarılabilir (örn, \fBrootflags=data=journal\fR).
+.sp
+.RS
+.TP 4
+\fBjournal\fR
+Tüm veriler, ana dosya sistemine yazılmadan önce günlüğe kaydedilir.
+.sp
+.TP 4
+\fBordered\fR
+Bu öntanımlı kiptir. Tüm veriler, meta veriler günlüğe kaydedilmeden önce doğrudan ana dosya sistemine yazılmaya çalışılır.
+.sp
+.TP 4
+\fBwriteback\fR
+Veri sıralaması korunmaz – veriler, meta veriler günlüğe işlendikten sonra ana dosya sistemine yazılabilir. Bunun en verimli çıktılama seçeneği olduğuna dair bir rivayet vardır. Dahili dosya sistemi bütünlüğünü garanti eder, ancak bir çökme ve günlüklü kurtarma sonrasında eski verilerin dosyalarda görünmesi olasılığı da vardır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBdata_err=ignore\fR
+ordered kipte bir dosyanın veri tamponunda bir hata oluşursa, sadece hata iletisini basar.
+.sp
+.TP 4
+\fBdata_err=abort\fR
+ordered kipte bir dosyanın veri tamponunda bir hata oluşursa, günlüklemeden çıkılır.
+.sp
+.TP 4
+\fBbarrier=0\fR|\fBbarrier=1\fR
+Bu, jbd kodunda yazma engellerinin kullanımını devre dışı bırakır|etkinleştirir. \fBbarrier=0\fR devre dışı bırakır, \fBbarrier=1\fR etkinleştirilir (öntanımlıdır). Bu aynı zamanda engelleri destekleyebilen bir G/Ç yığıtı da gerektirir ve jbd bir engel yazılırken bir hata alırsa, bir uyarı ile engelleri tekrar devre dışı bırakır. Yazma engelleri, günlük teslimatların disk üzerinde uygun şekilde sıralanmasını zorlayarak, geçici disk yazma önbelleklerinin kullanımını bir miktar başarım düşüşüyle güvenli hale getirir. Diskleriniz batarya ile besleniyorsa, engelleri devre dışı bırakmak başarımı güvenli bir şekilde artırabilir.
+.sp
+.TP 4
+\fBcommit\fR=\fISÜRE\fR
+Günlükleme \fISÜRE\fR saniyede bir yapılır. 5 saniye öntanımlıdır. 0 değeri öntanımlı değerin geçerli olacağı anlamına gelir.
+.sp
+.TP 4
+\fBuser_xattr\fR
+Gelişmiş kullanıcı öznitelikleri etkin olur. Bkz: \fBattr\fR(5)
+.sp
+.TP 4
+\fBjqfmt\fR={vfsold|vfsv0|vfsv1}
+Eski kota sisteminin (ext2’deki \fBjqfmt=vfsold\fR, yani kotanın 1. sürümünün) yanı sıra ext3 günlüklü kotaları da (kotanın 2. sürümü) desteklenir. \fBjqfmt=vfsv0\fR veya \fBjqfmt=vfsv1\fR seçeneği günlüklü kotaları etkinleştirir. Günlüklü kotaların getirisi, bir çökmeden sonra bile kota denetiminin gerekmemesidir. Kotalı dosya sistemi özelliği etkinleştirildiğinde, günlüklü kotalar otomatik olarak kullanılır ve bu bağlama seçeneği yok sayılır.
+.sp
+.TP 4
+\fBusrjquota=aquota.user\fR|\fBgrpjquota=aquota.group\fR
+Günlüklü kotalar için (\fBjqfmt=vfsv0\fR veya \fBjqfmt=vfsv1\fR), kota sistemine kullanılacak kota veritabanı dosyalarının hangileri olacağı \fBusrjquota=aquota.user\fR ve \fBgrpjquota=aquota.group\fR bağlama seçenekleri ile belirtilir.
+.sp
+.PP
+.sp
+.SS "Ext4 için bağlama seçenekleri"
+Ext4 dosya sistemi, büyük dosya sistemini desteklemek için ölçeklenebilirlik ve güvenilirlik geliştirmelerini içeren, ext3 dosya sisteminin genişletilmiş üst sürümüdür.
+.sp
+\fBjournal_dev, journal_path, norecovery, noload, data, commit, orlov, oldalloc, [no]user_xattr, [no]acl, bsddf, minixdf, debug, errors, data_err, grpid, bsdgroups, nogrpid, sysvgroups, resgid, resuid, sb, quota, noquota, nouid32, grpquota, usrquota, usrjquota, grpjquota\fR ve \fBjqfmt\fR seçenekleri ext3 veya ext2 ile geriye yönelik uyumludur.
+.sp
+.TP 4
+\fBjournal_checksum\fR|\fBnojournal_checksum\fR
+\fBjournal_checksum\fR, günlükleme işlemlerinde sağlama toplamlarına olanak tanır. Bu, \fBe2fsck\fR(8)’da kurtarma koduna izin verir ve çekirdeğin, çekirdekteki bozulmayı algılamasını sağlar. Geriye uyumlu bir değişikliktir ve eski çekirdekler tarafından yok sayılır.
+.sp
+.TP 4
+\fBjournal_async_commit\fR
+Teslimat bloğu, tanımlayıcı bloklar beklenmeden diske yazılabilir. Etkinleştirilirse, eski çekirdekler aygıtı bağlayamaz. Bu, dahili olarak \fBjournal_checksum\fR seçeneğini etkinleştirir.
+.sp
+.TP 4
+\fBbarrier=0\fR|\fBbarrier=1\fR|\fBbarrier\fR|\fBnobarrier\fR
+Bu bağlama seçenekleri, ext3’teki seçenek ile aynı etkiye sahiptir. Diğer ext4 bağlama seçenekleriyle tutarlı olması için \fBbarrier\fR ve \fBnobarrier\fR seçenekleri eklenmiştir.
+.sp
+Ext4 dosya sisteminde engeller öntanımlı olarak etkindir.
+.sp
+.TP 4
+\fBinode_readahead_blks\fR=\fIN\fR
+Ext4’ün dosya düğümü tablosunu ileri doğru okuma algoritmasının tampon önbelleğine önceden okuyacağı azami dosya düğümü tablosu bloklarının sayısını belirler. Değer 2’nin üsteli olmalıdır. Öntanımlı değer 32 bloktur.
+.sp
+.TP 4
+\fBstripe\fR=\fIN\fR
+\fBmballoc\fR’un ayırma boyutu ve hizalama için kullanmaya çalışacağı dosya sistemi bloklarının sayısı. RAID 5/6 sistemleri için, (veri disklerinin sayısı) * (blok sayısı olarak RAID bölütünün boyu) olmalıdır.
+.sp
+.TP 4
+\fBdelalloc\fR
+Blok tahsisini yazma zamanına kadar erteler.
+.sp
+.TP 4
+\fBnodelalloc\fR
+Gecikmeli tahsis devre dışı bırakılır. Veri kullanıcı önbelleğinden sayfa önbelleğine kopyalanınca, bloklar tahsis edilir.
+.sp
+.TP 4
+\fBmax_batch_time\fR=\fIµSANİYE\fR
+Ek dosya sistemi işlemlerinin eşzamanlı bir yazma işlemiyle birlikte toplu hale getirilmesi için ext4’ün beklemesi gereken mikrosaniye cinsinden azami süre. Eşzamanlı (sırasını bekleyen) bir yazma işlemi bir teslimatı ve ardından girdi/çıktının tamamlanmasını beklemeyi gerektirdiğinden, çok maliyetli olmayacağı ve büyük bir verim kazancı sağlayabileceği için, eşzamanlı yazma işlemini üstlenebilecek başka bir aktarım olup olmadığını görmek için kısa bir süre bekletilir. Kullanılan algoritma, bir aktarımın teslimatı için geçen süreyi (ortalama olarak) ölçerek diskin hızını otomatik olarak ayarlamak üzere tasarlanmıştır. Bu zaman, "teslimat zamanı" olarak adlandırılır. Aktarım süresi, teslimat süresinden azsa, ext4, işleme başka aktarımların katılıp katılmayacağını görmek için teslimat süresi tamamlanana dek uyumayı dener. \fBmax_batch_time\fR teslimat süresini öntanımlı olarak 15000 µs (15 ms) ile sınırlandırılır. Bu en iyileme, \fBmax_batch_time\fR seçeneğine 0 atanarak tamamen kapatılabilir.
+.sp
+.TP 4
+\fBmin_batch_time\fR=\fIµSANİYE\fR
+Bu seçenek (yukarıda açıklanan) teslimat süresinin asgarisini belirler. 0 (sıfır) mairosaniye öntanımlıdır. Bu değerin arttırılması çok evreliliğin, çok hızlı disklerdeki eşzamanlı iş yüklerinin verimini artan gecikme pahasına arttırabilir.
+.sp
+.TP 4
+\fBjournal_ioprio\fR=\fIÖNCELİK\fR
+Bir teslimat sırasında kjournald2 tarafından gönderilen G/Ç işlemleri için kullanılan G/Ç önceliği (0 ila 7 arası, 0 \fIÖNCELİK\fR en yüksek önceliktir). Öntanımlı değer 3 olup öntanımlı G/Ç önceliğinden biraz daha yüksektir.
+.sp
+.TP 4
+\fBabort\fR
+Hata ayıklama amacıyla \fBext4_abort\fR() çağrısını taklit eder. Bu normalde, zaten bağlı bir dosya sistemini yeniden bağlarken kullanlılır.
+.sp
+.TP 4
+\fBauto_da_alloc\fR|\fBnoauto_da_alloc\fR
+Birçok bozuk uygulama, mevcut dosyaları
+.sp
+.RS 4
+.RS 4
+.nf
+fd = open("foo.new")/write(fd,...)/close(fd)/ rename("foo.new", "foo")
+.fi
+.sp
+.RE
+.RE
+.IP
+veya daha kötüsü
+.sp
+.RS 4
+.RS 4
+.nf
+fd = open("foo", O_TRUNC)/write(fd,...)/close(fd).
+.fi
+.sp
+.RE
+.RE
+.IP
+gibi kalıplarla değiştirirken \fBfsync\fR(2) çağrısını kullanmaz. \fBauto_da_alloc\fR etkinse, ext4, yeniden-adlandırarak-değiştir ve kırparak-değiştir kalıplarını algılayacak ve gecikmeli tahsis bloklarının tahsisini zorlayacaktır, öyle ki bir sonraki günlük teslimatında, öntanımlı \fBdata=ordered\fR kipinde, yeni dosyanın veri bloklarının \fBrename\fR(2) işleminden önce diske teslimatı zorlanacaktır. Bu, ext3 ile kabaca aynı seviyede garanti sağlar ve gecikmeli tahsis blokları diske zorlanmadan önce sistem çöktüğünde ortya çıkabilecek "sıfır uzunluk" sorununu önler.
+.sp
+.TP 4
+\fBnoinit_itable\fR
+İlklendirilmemiş dosya düğümü tablosu blokları artalanda ilklendirilmez. Bu özellik, kurulum işleminin olabildiğince çabuk tamamlanabilmesi için kurulum CD’leri tarafından kullanılabilir; dosya düğümü tablosunun ilklendirilmesi, dosya sisteminin bir sonraki bağlanmasına kadar ertelenir.
+.sp
+.TP 4
+\fBinit_itable\fR=\fIN\fR
+Tembel dosya düğümü tablosu ilklendirme kodu, önceki blok grubunun dosya düğümü tablosunu sıfırlamak için geçen milisaniye cinsinden sürenin \fIN\fR katı bekler. Bu, dosya sisteminin dosya düğümü tablosu ilklendirilirken ortalama sistem yükünü en aza indirir.
+.sp
+.TP 4
+\fBdiscard\fR|\fBnodiscard\fR
+Bloklar serbest bırakılırken ext4’ün ilgili blok aygıtına devre-dışı-bırak/kırparak-değiştir komutları verip vermeyeceğini belirler. Bu, SSD aygıtları ve seyrek/ince olarak sağlanan LUN’lar için kullanışlıdır, ancak yeterli sınama yapılıncaya kadar öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBblock_validity\fR|\fBnoblock_validity\fR
+Bu seçenek, dahili veri yapıları içinde yer alan dosya sistemi meta veri bloklarını izlemek için çekirdek içi oluşumu etkinleştirir veya devre dışı bırakır. Bu, çoklu blok ayırıcının ve diğer yordamların, dosya sistemi meta veri bloklarıyla örtüşebilecek genişletilmiş ağaçları hızlı bir şekilde bulmasını sağlar. Bu seçenek hata ayıklama amaçlıdır ve başarımı olumsuz etkilediği için öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBdioread_lock\fR|\fBdioread_nolock\fR
+Ext4’ün doğrudan G/Ç okuma kilidini kullanıp kullanmayacağını belirler. \fBdioread_nolock\fR seçeneği belirtilirse, ext4, tampona yazmadan önce ilklendirilmemiş genişletilmiş ağaca yer tahsis eder ve G/Ç tamamlandıktan sonra genişletilmiş ağacı ilklendirilmiş ağaca dönüştürür. Bu yaklaşım, ext4 kodunun yüksek hızlı depolamalarda ölçeklenebilirliği artıran dosya düğümü mutekslerini kullanmaktan kaçınmasını sağlar. Ancak bu, veri günlükleme ile çalışmaz ve çekirdek uyarısıyla \fBdioread_nolock\fR seçeneği yok sayılır. \fBdioread_nolock\fR seçeneğinin yalnızca genişletilmiş ağaç tabanlı dosyalar için kullanıldığı unutulmamalıdır. Bu seçenekler içerdikleri kısıtlamalar nedeniyle öntanımlı olarak etkin değildir. (örneğin, \fBdioread_lock\fR).
+.sp
+.TP 4
+\fBmax_dir_size_kb\fR=\fIN\fR
+Dizin boyutunu sınırlar, böylece \fIN\fR kilobaytlık sınırın ötesine genişletme girişimi \fBENOSPC\fR hatasına neden olur. Bu, çok büyük bir dizinin ciddi başarım kaybına neden olabileceği ve hatta "yetersiz bellek katili"ni tetikleyebileceği, belleğin kısıtlı olduğu ortamlarda kullanışlıdır. (Örneğin, yalnızca 512 MB kullanılabilir bellek varsa, 176 MB’lık bir dizin, sistemde ciddi kramplara yol açabilir.)
+.sp
+.TP 4
+\fBi_version\fR
+64 bitlik dosya düğümü sürümü desteğini etkinleştirir; öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBnombcache\fR
+Bu seçenek, genişletilmiş öznitelik tekilleştirmesi için mbcache kullanımını devre dışı bırakır. Genişletilmiş özniteliklerin dosyalar arasında nadiren paylaşıldığı veya hiç paylaşılmadığı sistemlerde, veri tekilleştirme için mbcache kullanımı hesaplama yükünü gereksiz yere arttırır.
+.sp
+.TP 4
+\fBprjquota\fR
+Dosya sisteminde proje kotası desteğini etkinleştirir. Kota sistemini gerçekten etkinleştirmek ve yönetmek için kota araçlarına ihtiyacınız vardır. Bu bağlama seçeneği, \fBproject\fR dosya sistemi özelliğinin etkin olmasını gerektirir.
+.sp
+.TP 4
+\fBfast_commit\fR
+\fBfsync\fR(2) gecikmesini iyileştirmek için hızlı gönderi günlük kaydı özelliğini etkinleştirir.
+.sp
+.PP
+.sp
+.sp
+.SH "DOSYA ÖZNİTELİKLERİ"
+ext2, ext3 ve ext4 dosya sistemleri, Linux sistemlerinde \fBchattr\fR(1) komutu ile aşağıdaki dosya özniteliklerini destekler:
+.sp
+.RS 4
+.nf
+\fBa\fR - yalnızca sona ekle
+\fBA\fR - erişim zamanı güncellenmez
+\fBd\fR - dosya dump uygulamasından etkilenmez
+\fBD\fR - dizin güncellemelerini eşzamanlı olur
+\fBi\fR - dosya değiştirilemez
+\fBS\fR - synchronous updates
+\fBu\fR - dosya silinince kurtarılabilir
+.fi
+.sp
+.RE
+Ek olarak, ext3 ve ext4 dosya sistemleri şu seçeneği destekler::
+.sp
+.RS 4
+.nf
+\fBj\fR - dosya sistemi günlüklemesi yapılır
+.fi
+.sp
+.RE
+Son olarak, ext4 dosya sistemi şu seçeneği destekler:
+.sp
+.RS 4
+.nf
+\fBe\fR - blokları eşlemek için uzantılar kullanılır
+.fi
+.sp
+.RE
+Bu dosya özniteliklerinin açıklamaları \fBchattr\fR(1) kılavuz sayfasında bulunabilir.
+.sp
+.SH "ÇEKİRDEK DESTEĞİ"
+Bu bölümde, belirli bir dosya sistemi özelliğinin desteklendiği dosya sistemi sürücüsü (örneğin, ext2, ext3, ext4) ve desteklendiği çekirdek sürümü listelenmiştir. Bazı durumlarda özelliğin erken çekirdek sürümlerinde de mevcut olduğu, ancak bilinen ciddi yazılım hatalarının da bulunduğu unutulmamalıdır. Diğer durumlarda, özellik hala deneysel durumda kabul edilebilir. Son olarak, bazı dağıtımların desteklenmiş özelliklere sahip eski çekirdekler içerebileceği unutulmamalıdır; özellikle belirli "enterprise" dağıtımlardaki çekirdek sürümleri son derece yanıltıcı olabilir.
+.sp
+.TS
+tab(:) allbox;
+l1 1l1 1l.
+\fBÖzellik\fR :\fBDosya Sistemi\fR :\fBÇekirdek Sürümü\fR
+T{
+\fBfiletype\fR
+T}:T{
+ext2
+T}:T{
+2.2.0
+T}
+T{
+\fBsparse_super\fR
+T}:T{
+ext2
+T}:T{
+2.2.0
+T}
+T{
+\fBlarge_file\fR
+T}:T{
+ext2
+T}:T{
+2.2.0
+T}
+T{
+\fBhas_journal\fR
+T}:T{
+ext3
+T}:T{
+2.4.15
+T}
+T{
+\fBext_attr\fR
+T}:T{
+ext2/ext3
+T}:T{
+2.6.0
+T}
+T{
+\fBdir_index\fR
+T}:T{
+ext3
+T}:T{
+2.6.0
+T}
+T{
+\fBresize_inode\fR
+T}:T{
+ext3
+T}:T{
+2.6.10 (online resizing)
+T}
+T{
+\fB64bit\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBdir_nlink\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBextent\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBextra_isize\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBflex_bg\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBhuge_file\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBmeta_bg\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBuninit_bg\fR
+T}:T{
+ext4
+T}:T{
+2.6.28
+T}
+T{
+\fBmmp\fR
+T}:T{
+ext4
+T}:T{
+3.0
+T}
+T{
+\fBbigalloc\fR
+T}:T{
+ext4
+T}:T{
+3.2
+T}
+T{
+\fBquota\fR
+T}:T{
+ext4
+T}:T{
+3.6
+T}
+T{
+\fBinline_data\fR
+T}:T{
+ext4
+T}:T{
+3.8
+T}
+T{
+\fBsparse_super2\fR
+T}:T{
+ext4
+T}:T{
+3.16
+T}
+T{
+\fBmetadata_csum\fR
+T}:T{
+ext4
+T}:T{
+3.18
+T}
+T{
+\fBencrypt\fR
+T}:T{
+ext4
+T}:T{
+4.1
+T}
+T{
+\fBmetadata_csum_seed\fR
+T}:T{
+ext4
+T}:T{
+4.4
+T}
+T{
+\fBproject\fR
+T}:T{
+ext4
+T}:T{
+4.5
+T}
+T{
+\fBea_inode\fR
+T}:T{
+ext4
+T}:T{
+4.13
+T}
+T{
+\fBlarge_dir\fR
+T}:T{
+ext4
+T}:T{
+4.13
+T}
+T{
+\fBcasefold\fR
+T}:T{
+ext4
+T}:T{
+5.2
+T}
+T{
+\fBverity\fR
+T}:T{
+ext4
+T}:T{
+5.4
+T}
+T{
+\fBstable_inodes\fR
+T}:T{
+ext4
+T}:T{
+5.5
+T}
+T{
+\fBfast_commit\fR
+T}:T{
+ext4
+T}:T{
+5.10
+T}
+.TE
+.sp
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmke2fs\fR(8), \fBmke2fs.conf\fR(5), \fBe2fsck\fR(8), \fBdumpe2fs\fR(8), \fBtune2fs\fR(8) \fBdebugfs\fR(8), \fBmount\fR(8), \fBchattr\fR(1).
+.sp
+.SH "TELİF HAKKI VE LİSANS"
+Telif hakkı ©1993, 1994, 1995 Theodore Ts’o
+.br
+Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

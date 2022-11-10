@@ -1,0 +1,259 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 2000 Kjetil Torgrim Homme
+ *           2017-2020 Craig Small
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PGREP" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+pgrep - çalışan süreçler hakkında bilgi verir
+.br
+pkill - çalışan süreçlere sinyal gönderir
+.br
+pidwait - çalışan süreçleri bekler
+.sp
+.SH KULLANIM
+.IP \fBpgrep\fR 6
+[\fIseçenekler\fR] \fIşablon\fR
+.IP \fBpkill\fR 6
+[\fIseçenekler\fR] \fIşablon\fR
+.IP \fBpidwait\fR 8
+[\fIseçenekler\fR] \fIşablon\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBpgrep\fR çalışan süreçler arasından seçim koşullarıyla eşleşen süreç kimliklerini standart çıktıya listeler. Tüm koşullar eşleşmek zorundadır. Örneğin,
+.sp
+.RS 4
+.nf
+$ pgrep -u root sshd
+.fi
+.sp
+.RE
+komutu yalnızca, root iyeliğinde çalışan süreçlerden \fBsshd\fR(8) süreçlerini listeler. Diğer taraftan,
+.sp
+.RS 4
+.nf
+$ pgrep -u root,daemon
+.fi
+.sp
+.RE
+komutu root VEYA daemon iyeliğinde çalışan tüm süreçleri listeleyecektir.
+.sp
+\fBpkill\fR eşleşen her sürece belirtilen sinyali gönderir (\fBSIGTERM\fR öntanımlıdır), onları standart çıktıya listelemez.
+.sp
+\fBpidwait\fR eşleşen her süreci bekler, onları standart çıktıya listelemez.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-\fR\fIsignal\fR\p \fB--signal\fR \fIsignal\fR
+Eşleşen her sürece gönderilecek sinyali tanımlar. Sinyal ismi veya sinyal numarası belirtilebilir. (Yalnızca \fBpkill\fR)
+.sp
+.TP 4
+\fB-c\fR, \fB--count\fR
+Normal çıktıyı engeller; onun yerine eşleşen süreç sayısı çıktılanır. Eşleşen süreç yoksa (örn, 0) komut sıfırdan farklı bir değer ile döner. \fBpkill\fR ve \fBpidwait\fR için sayı eşleşen süreç sayısıdır, başarıyla sinyallenen veya beklenmekte olan süreçlerin sayısı değil.
+.sp
+.TP 4
+\fB-d\fR, \fB--delimiter\fR \fIayraç\fR
+Çıktıda süreç kimlikleri arasında kullanılacak dizgeyi tanımlar (satır sonu öntanımlıdır). (Yalnızca \fBpgrep\fR)
+.sp
+.TP 4
+\fB-e\fR, \fB--echo\fR
+Öldürülen sürecin kimliği veya ismi gösterilir. (Yalnızca \fBpkill\fR)
+.sp
+.TP 4
+\fB-f\fR, \fB--full\fR
+\fIşablon\fR normalde yalnızca süreç ismiyle eşleşir. \fB-f\fR seçeneğiyle komut satırının tamamı kullanılır.
+.sp
+.TP 4
+\fB-g\fR, \fB--pgroup\fR \fIsüreç-grup-kiml\fR,...
+Yalnızca belirtilen süreç grup kimlikleriyle eşleşen süreçler listelenir. Süreç grubu 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR’in kendi süreç grubuna dönüştürülür.
+.sp
+.TP 4
+\fB-G\fR, \fB--group\fR \fIgrup-kiml\fR,...
+Yalnızca belirtilen gerçek grup kimlikleriyle eşleşen süreçler listelenir. \fIgrup-kiml\fR grup ismi veya grup numarası olabilir.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-case\fR
+Süreçler eşleştirilirken harf büyüklüğü dikkate alınmaz.
+.sp
+.TP 4
+\fB-l\fR, \fB--list-name\fR
+Süreçlerin kimlikleriyle birlikte süreç isimleri de listelenir. (Yalnızca \fBpgrep\fR)
+.sp
+.TP 4
+\fB-a\fR, \fB--list-full\fR
+Süreçlerin kimlikleriyle birlikte komut satırlarının tamamı da listelenir. (Yalnızca \fBpgrep\fR)
+.sp
+.TP 4
+\fB-n\fR, \fB--newest\fR
+Yalnızca eşleşen süreçlerin en yenisi (en son başlatılanı) seçilir.
+.sp
+.TP 4
+\fB-o\fR, \fB--oldest\fR
+Yalnızca eşleşen süreçlerin en eskisi (ilk başlatılanı) seçilir.
+.sp
+.TP 4
+\fB-O\fR, \fB--older\fR \fIsüre\fR
+Belirtilen \fIsüre\fR saniyeden daha eski süreçler listelenir.
+.sp
+.TP 4
+\fB-P\fR, \fB--parent\fR \fIüst-süreç-kiml\fR,...
+Yalnızca belirtilen ebeveyn süreç kimlikleriyle eşleşen süreçler listelenir.
+.sp
+.TP 4
+\fB-s\fR, \fB--session\fR \fIsüreç-oturum-kiml\fR,...
+Yalnızca belirtilen süreç oturum kimlikleriyle eşleşen süreçler listelenir. Oturum kimliği 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR’in kendi oturum kimliğine dönüştürülür.
+.sp
+.TP 4
+\fB-t\fR, \fB--terminal\fR \fIuçbirim\fR,...
+Yalnızca belirtilen denetim uçbirimleriyle eşleşen süreçler listelenir. Uçbirim ismi \fI/dev/\fR öneki olmaksızın belirtilmelidir.
+.sp
+.TP 4
+\fB-u\fR, \fB--euid\fR \fIetkin-kull-kiml\fR,...
+Yalnızca belirtilen etkin kullanıcı kimlikleriyle eşleşen süreçler listelenir. Kullanıcı ismi veya numarası belirtilebilir.
+.sp
+.TP 4
+\fB-U\fR, \fB--uid\fR \fIkull-kiml\fR,...
+Yalnızca belirtilen kullanıcı kimlikleriyle eşleşen süreçler listelenir. Kullanıcı ismi veya numarası belirtilebilir.
+.sp
+.TP 4
+\fB-v\fR, \fB--inverse\fR
+Eşleşmeyi olumsuzlar. Bu seçenek mormalde \fBpgrep\fR veya \fBpidwait\fR’in bağlamında kullanılır. \fBpkill\fR’in bağlamında, seçeneğin kazayla kullanımından kaçınmak için kısa seçenek devre dışı bırakılır.
+.sp
+.TP 4
+\fB-w\fR, \fB--lightweight\fR
+\fBpgrep\fR veya \fBpidwait\fR’in bağlamında süreç kimlikleri yerine tüm evre kimlikleri listelenir. \fBpkill\fR’in bağlamında, bu seçenek devre dışı bırakılır.
+.sp
+.TP 4
+\fB-x\fR, \fB--exact\fR
+Yalnızca, \fIşablon\fR ile KESİNLİKLE (exactly) eşleşen süreç isimleriyle eşleşir.
+.sp
+.TP 4
+\fB-F\fR, \fB--pidfile\fR \fIdosya\fR
+Süreç kimliklerini \fIdosya\fRdan okur. Bu seçenek \fBpgrep\fR’ten ziyade özellikle \fBpkill\fR veya \fBpidwait\fR için yararlıdır.
+.sp
+.TP 4
+\fB-L\fR, \fB--logpidfile\fR
+Süreç kimlikleri dosyası kilitli değilse başarısız olur. (bkz, \fB-F\fR)
+.sp
+.TP 4
+\fB-r\fR, \fB--runstates\fR \fID,R,S,Z\fR,...
+Yalnızca süreç durumu eşleşen süreçlerle eşleşir.
+.sp
+.TP 4
+\fB--ns\fR \fIsüreç-kiml\fR,...
+Aynı isim uzayına sahip süreçlerle eşleşme sağlanır. Diğer kullanıcıların aidiyetinde çalışan süreçlerle de eşleşme sağlanabilmesi için root tarafından kullanılması gerekir. Eşleşen isim uzayları sınırlanmak istenirse aşağıdaki \fB--nslist\fR seçeneği de kullanılmalıdır.
+.sp
+.TP 4
+\fB--nslist\fR \fIisim\fR,...
+Belirtilen isim uzayları ile eşleşme sağlanır. Kullanılabilir isim uzayları: ipc, mnt, net, pid, user, uts
+.sp
+.TP 4
+\fB-q\fR, \fB--queue\fR \fIdeğer\fR
+\fBkill\fR(2) çağrısından ziyade \fBsigqueue\fR(3) işlevi ve sinyal ile gönderilecek tamsayıyı belirtmek için \fIdeğer\fR kullanılır. Eğer sinyali alan süreç \fBsigaction\fR(2) çağrısında \fBSA_SIGINFO\fR kullanarak bu sinyal için bir işleyici tanımlamışsa, bu veri \fBsiginfo_t\fR yapısının \fIsi_value\fR alanı üzerinden sağlanabilir.
+.sp
+.TP 4
+\fB--help\fR
+Kullanım bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "DEĞİŞTİRGELER"
+.IP "\fIşablon\fR" 4
+Komut satırları veya süreç isimleriyle eşleşme sağlamak için belirtilen genişletilmiş düzenli ifade.
+.sp
+.SH "ÖRNEKLER"
+.IP "Örnek 1: \fBnamed\fR artalan sürecinin süreç kimliğinin bulunması" 4
+.RS 4
+.nf
+$ pgrep -u root named
+.fi
+.sp
+.RE
+.IP "Örnek 2: \fBsyslog\fR kendi yapılandırma dosyasını yeniden okusun" 4
+.RS 4
+.nf
+$ pkill -HUP syslogd
+.fi
+.sp
+.RE
+.IP "Örnek 3: Tüm \fBsystemd\fR süreçleri hakkında bilgi edinilmesi" 4
+.RS 4
+.nf
+$ ps -fp $(pgrep -d, -x systemd)
+.fi
+.sp
+.RE
+.IP "Örnek 4: Tüm \fBchrome\fR süreçlerinin önceliklerinin değiştirilmesi" 4
+.RS 4
+.nf
+$ renice +4 $(pgrep chrome)
+.fi
+.sp
+.RE
+.sp
+.SH "ÇIKIŞ DURUMU"
+.TP 4
+0
+Koşulla bir veya daha fazla süreç eşleşti. \fBpkill\fR ve \fBpidwait\fR için bir veya daha fazla süreç başarıyla sinyallenmiş veya beklenmektedir.
+.sp
+.TP 4
+1
+Eşleşen süreç yok veya hiçbiri sinyallenemedi.
+.sp
+.TP 4
+2
+Komut satırında sözdizimi hatası.
+.sp
+.TP 4
+3
+Ölümcül hata: bellek yetersiz, vb.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+Eşleşme için kullanılan süreç ismi \fI/proc/pid/stat\fR çıktısında bulunan 15 karakterle sınırlıdır. Komut satırının tamamı, \fI/proc/pid/cmdline\fR ile eşleşmek için \fB-f\fR seçeneği kullanılabilir.
+.sp
+\fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR sürecinin çalıştırılması asla kendisiyle bir eşleşme sağlamaz.
+.sp
+.SH "GERİBİLDİRİM"
+\fB-n\fR, \fB-o\fR ve \fB-v\fR seçenekleri birlikte kullanılamaz. Buna ihtiyaç olursa bildirilmesi beklenmektedir.
+.sp
+Kusurlu süreçler raporlanır.
+.sp
+Hata bildirimi için lütfen <procps (at) freelists.org> adresini kullanın.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBps\fR(1), \fBregex\fR(7), \fBsignal\fR(7), \fBsigqueue\fR(3), \fBkillall\fR(1), \fBskill\fR(1), \fBkill\fR(1), \fBkill\fR(2).
+.sp
+.SH "YAZAN"
+Kjetil Torgrim Homme tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

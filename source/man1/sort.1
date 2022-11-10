@@ -1,0 +1,194 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SORT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+sort - metin dosyalarının satırlarını sıralar
+.sp
+.SH KULLANIM
+.IP \fBsort\fR 5
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.IP \fBsort\fR 5
+[\fISEÇENEK\fR]... \fB--files0-from=\fR\fID\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen \fIDOSYA\fR(ların)nın satırlarını sıralayıp standart çıktıya yazar.
+.sp
+\fIDOSYA\fR verilmediğinde veya - olduğunda standart girdi okunur.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.SS "Sıralama seçenekleri:"
+.TP 4
+\fB-b\fR, \fB--ignore-leading-blanks\fR
+Sıralanacak alanlarda ve sıralama anahtarlarından önce gelen boşlukları dikkate almaz.
+.sp
+.TP 4
+\fB-d\fR, \fB--dictionary-order\fR
+Anahtarlarda sadece boşluklar ve [a-zA-Z0-9] karakterlerini dikkate alır.
+.sp
+.TP 4
+\fB-f\fR, \fB--ignore-case\fR
+Sıralarken büyük/küçük harf farklılıklarını dikkate almaz.
+.sp
+.TP 4
+\fB-g\fR, \fB--general-numeric-sort\fR
+Sayısal değere bakarak sıralar.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-nonprinting\fR
+Anahtarlarda sadece yazılabilir karakterleri dikkate alır.
+.sp
+.TP 4
+\fB-M\fR, \fB--month-sort\fR
+Anahtarın ilk üç harfini alır, bir ay isminin kısaltmasıysa, ayların sırasına göre sıralar. Ay isimlerinin kısa yazılışlarını LC_TIME ortam değişkeninin belirttiği yerel dosyasından okur.
+.sp
+.TP 4
+\fB-h\fR, \fB--human-numeric-sort\fR
+İnsanlarca okunabilen sayılara (2K, 1G gibi) göre sıralar.
+.sp
+.TP 4
+\fB-n\fR, \fB--numeric-sort\fR
+Sayısal dizgeye göre sıralar.
+.sp
+.TP 4
+\fB-R\fR, \fB--random-sort\fR
+Eş anahtarlara göre gruplayarak satırları karar. Bkz: \fBshuf\fR(1)
+.sp
+.TP 4
+\fB--random-source=\fR\fIDOSYA\fR
+Rasgele baytları \fIDOSYA\fRdan okur.
+.sp
+.TP 4
+\fB-r\fR, \fB--reverse\fR
+Karşılaştırma sonucunu tersine sıralar.
+.sp
+.TP 4
+\fB--sort=\fR\fISÖZCÜK\fR
+\fISÖZCÜK\fR’e göre sıralar: genel-sayısal: \fB-g\fR, insan-sayısal: \fB-h\fR, sayısal: \fB-n\fR, aylar: \fB-m\fR, rastgele: \fB-R\fR, sürüm: \fB-V\fR
+.sp
+.TP 4
+\fB-V\fR, \fB--version-sort\fR
+Metin içindeki (sürüm) numaralarına doğal sıralama uygular.
+.sp
+.PP
+.sp
+.SS "Diğer seçenekler:"
+.TP 4
+\fB--batch-size=\fR\fISAYI\fR
+Bir kerede en fazla \fISAYI\fR sayı girdi sıralanır. Geçici dosyaların kullanımı içindir.
+.sp
+.TP 4
+\fB-c\fR, \fB--check\fR, \fB--check=diagnose-first\fR
+Dosyalar sıralı mı diye bakar; sıralamaz.
+.sp
+.TP 4
+\fB-c\fR, \fB--check=quiet\fR, \fB--check=silent\fR
+\fB-c\fR gibidir, ancak ilk kötü satırı bildirmez.
+.sp
+.TP 4
+\fB--compress-program=\fR\fIUYGULAMA\fR
+Geçici çıktı \fIUYGULAMA\fR ile sıkıştırılır. Bu sıkıştırma \fIUYGULAMA\fR \fB-d\fR ile çözülür.
+.sp
+.TP 4
+\fB--debug\fR
+Satırın sıralamak için kullanılan kısmına açıklama ekler ve şüpheli kullanım hakkında standart hataya uyarı verir.
+.sp
+.TP 4
+\fB--files0-from=\fR\fID\fR
+Girdi, \fID\fR dosyasında belirtilen sıfır sonlandırmalı dosya isimlerinden okunur. \fID\fR - olduğunda dosya isimleri standart girdiden okunur.
+.sp
+.TP 4
+\fB-k\fR, \fB--key=\fR\fIANAHTAR\fR
+Sıralama için \fIANAHTAR\fR belirtmekte kullanılanılır. Anahtar konum ve tür belirtir.
+.sp
+.TP 4
+\fB-m\fR, \fB--merge\fR
+Sıralama yapmaz; daha önceden sıralanmış dosyaları birleştirir.
+.sp
+.TP 4
+\fB-o\fR, \fB--output=\fR\fIDOSYA\fR
+Sonucu standat çıktı yerine \fIDOSYA\fRya yazar.
+.sp
+.TP 4
+\fB-s\fR, \fB--stable\fR
+Son çare karşılaştırmasını devre dışı bırakarak sıralamayı sabitler.
+.sp
+.TP 4
+\fB-S\fR, \fB---buffer-size=\fR\fIBOYUT\fR
+Ana bellek tamponu için \fIBOYUT\fR ayırır.
+.sp
+.TP 4
+\fB-t\fR, \fB--field-separator=\fR\fIAYRAÇ\fR
+Geçiş için boşluk yerine \fIAYRAÇ\fR kullanılır.
+.sp
+.TP 4
+\fB-T\fR, \fB--temporary-directory=\fR\fIDİZİN\fR
+Geçici dosyalar için $TMPDIR veya \fI/tmp\fR değil, \fIDİZİN\fR kullanılır. Çok sayıda dizin çok sayıda seçenek ile belirtilir.
+.sp
+.TP 4
+\fB--parallel=\fR\fISAYI\fR
+Aynı anda \fISAYI\fR sıralama yapılır.
+.sp
+.TP 4
+\fB-u\fR, \fB--unique\fR
+\fB-c\fR seçeneği ile birlikte, kesin sıralama mı diye bakar; \fB-c\fR olmaksızın sadece ilk eşitlik durumunu çıktılar.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero-terminated\fR
+Satırları satır sonu karakteri (\\n) yerine boş karakterle (\\0) sonlandırır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fIANAHTAR\fR başlangıç ve bitiş konumu için \fIA\fR[.\fIK\fR][\fISÇN\fR][,\fIA\fR[.\fIK\fR][\fISÇN\fR]] biçimindedir, burada \fIA\fR alan numarası ve \fIK\fR alandaki karakter konumudur; her ikisi de 1’den başlar ve durma konumu öntanımlı olarak satırın sonudur. Ne \fB-t\fR ne de \fB-b\fR etkinse, konum alandaki karakterlerden önceki boşluk karakterinden itibaren sayılır. \fISÇN\fR, o anahtar için genel sıralama seçeneklerini geçersiz kılan bir veya daha fazla tek harfli sıralama seçeneğinden [\fBbdfgiMhnRrV\fR] oluşur. \fIANAHTAR\fR verilmezse, tüm satır anahtar olarak kullanılır. Hatalı anahtar kullanımını teşhis etmek için \fB--debug\fR kullanılabilir.
+.sp
+\fIBOYUT\fRdan sonra şu soneklerden biri gelebilir: belleği yüzdeyle belirtmek için \fB%\fR (1% olarak, %1 değil), bayt için \fBb\fR, 1024 bayt için \fBk\fR (öntanımlı) ve \fBM, G, T, P, E, Z, Y\fR diye gider.
+.sp
+.TP 4
+\fBUyarı:\fR
+Ortam değişkenlerince belirlenen yerel, sıralamayı etkiler. ASCII sıralama için \fBLC_ALL=C\fR kullanılmalıdır.
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+Mike Haertel ve Paul Eggert tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBshuf\fR(1), \fBuniq\fR(1).
+.br
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/sort>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) sort invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,210 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DF" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+df - dosya sisteminin disk alanı kullanımını gösterir
+.sp
+.SH KULLANIM
+.IP \fBdf\fR 3
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Bu kılavuz sayfası, \fBdf\fR komutunun GNU sürümünü belgelendirmektedir. \fBdf\fR, \fIDOSYA\fR ile belirtilen dosya sistemindeki kullanılabilir disk alanı miktarını görüntüler. Şayet \fIDOSYA\fR belirtilmemişse, o an bağlı olan bütün dosya sistemlerindeki kullanılabilir alan görüntülenir. \fBPOSIXLY_CORRECT\fR ortam değişkeni tanımlanmadığı müddetçe, öntanımlı olarak disk alanı 1 kB’lık bloklar halinde gösterilir, aksi takdirde 512 baytlık bloklar halinde gösterilir.
+.sp
+\fIDOSYA\fR, bağlanmış bir dosya sistemini içeren bir disk aygıt düğümünün tam dosya adı ise \fBdf\fR, bu aygıt düğümünü içeren dosya sistemi yerine, bu dosya sistemindeki kullanılabilir alanı görüntüler. \fBdf\fR’nin bu sürümü bağlanmamış dosya sistemlerindeki boş alanları gösterme yeteneğine sahip değildir, çünkü bunu yapabilen sistemlerin pek çoğu, dosya sistemi yapısının taşınabilir olmayan bilgilerine ihtiyaç duyar.
+.sp
+.SH "SEÇENEKLER"
+\fIDOSYA\fR ile belirtilen dosya sistemi hakkındaki bilgileri gösterir. Öntanımlı olarak bütün dosya sistemlerini görüntüler.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler, kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Sözde, yinelenen, erişilemeyen dosya sistemleri dahil edilir.
+.sp
+.TP 4
+\fB-B\fR, \fB--block-size\fR=\fIBOYUT\fR
+\fIBOYUT\fR baytlık bloklar kullanır. Boyutlar yazdırılmadan önce \fIBOYUT\fR’a göre ölçeklendirilir; örneğin, \fB-BM\fR boyutları 1.048.576 baytlık birimler halinde yazdırır; aşağıdaki \fIBOYUT\fR açıklamasına bakın.
+.sp
+.TP 4
+\fB-h\fR, \fB--human-readable\fR
+Boyutları, 1024’ün katları olarak gösterir (1K, 234M, 2G gibi).
+.sp
+.TP 4
+\fB-H\fR, \fB--si\fR
+Boyutları, 1000’in katları olarak gösterir (1.1G gibi).
+.sp
+.TP 4
+\fB-i\fR, \fB--inodes\fR
+Blok kullanımı yerine dosya düğümü bilgileri görüntülenir.
+.sp
+.TP 4
+\fB-k\fR
+\fB--block-size\fR\fI=1K\fR ile aynıdır.
+.sp
+.TP 4
+\fB-l\fR, \fB--local\fR
+Listelemeyi yerel dosya sistemleri ile sınırlandırır.
+.sp
+.TP 4
+\fB--no-sync\fR
+Kullanım bilgisini almadan önce sync çağrısı yapmaz (öntanımlıdır).
+.sp
+.TP 4
+\fB--output\fR[=\fIALANLAR\fR]
+Çıktı belirtilen \fIALANLAR\fR’a göre biçimlenir. \fIALANLAR\fR belirtilmezse tüm alanlar basılır. İkinci durumda, sütunların sırası aşağıdaki alan açıklamalarının sırasına uygun olur.
+.sp
+\fB--output\fR \fB-i\fR, \fB-P\fR ve \fB-T\fR seçeneklerinden yalnızca biri ile kullanılabilir, diğer biri veya birkaçı ile birlikte belirtilemez.
+.sp
+\fIALANLAR\fR, \fBdf\fR çıktısına dahil edilecek sütunların virgüllerle ayrılmış bir listesidir ve bu nedenle çıktı sütunlarının sırası etkin bir şekilde denetlenebilir. Böylece her alan tercih edilen yerde kullanılabilir, ancak yine de her alan yalnızca bir kez kullanılmalıdır.
+.sp
+\fIALANLAR\fR şunları içerebilir:
+.sp
+.RS
+.TP 4
+\fBsource\fR
+Bağlantı noktasının kaynağı, genellikle bir aygıttır.
+.sp
+.TP 4
+\fBfstype\fR
+Dosya sistemi türü.
+.sp
+.TP 4
+\fBitotal\fR
+Dosya düğümlerinin toplam sayısı.
+.sp
+.TP 4
+\fBiused\fR
+Kullanılan dosya düğümü sayısı.
+.sp
+.TP 4
+\fBiavail\fR
+Kullanılabilir dosya düğümü sayısı.
+.sp
+.TP 4
+\fBipcent\fR
+Yüzde olarak,\fBiused\fR’nin \fBitotal\fR’a oranı.
+.sp
+.TP 4
+\fBsize\fR
+Toplam blok sayısı.
+.sp
+.TP 4
+\fBused\fR
+Kullanılan blok sayısı.
+.sp
+.TP 4
+\fBavail\fR
+Kullanılabilir blok sayısı.
+.sp
+.TP 4
+\fBpcent\fR
+Yüzde olarak,\fBused\fR’nin \fBsize\fR’a oranı.
+.sp
+.TP 4
+\fBfile\fR
+Komut satırında belirtilmişse dosyanın adı.
+.sp
+.TP 4
+\fBtarget\fR
+Bağlama noktası.
+.sp
+.PP
+.RE
+.IP
+Blok ve dosya düğümü istatistikleri alanları, her zamanki gibi ’\fB-h\fR’ gibi ölçekleme seçeneklerinden etkilenir.
+.sp
+\fIALANLAR\fR listesini birkaç \fB--output\fR kullanımına bölmek mümkündür.
+.sp
+.RS 4
+.RS 3
+.nf
+# HEDEF’i (bağlama noktasını), bloklar ve dosya düğümleriyle
+# ilgili yüzdelik istatistiklerle birlikte göster.
+df --out=target --output=pcent,ipcent
+\&
+# Olası tüm alanları bas.
+df --o
+.fi
+.sp
+.RE
+.RE
+.IP
+(Ç.N.: Dikkat edilirse, örnek henüz belgelenmemiş bazı seçenekler içeriyor.)
+.sp
+.TP 4
+\fB-P\fR, \fB--portability\fR
+POSIX çıktılama biçimi kullanılır.
+.sp
+.TP 4
+\fB--sync\fR
+Kullanım bilgisi alınmadan önce sync çağrısı yapılır.
+.sp
+.TP 4
+\fB--total\fR
+Kullanılabilir alan için önemsiz olan tüm girdiler elenip genel bir toplam üretilir.
+.sp
+.TP 4
+\fB-t\fR, \fB--type\fR=\fITÜR\fR
+Sadece belirtilen \fITÜR\fR’deki dosya sistemleri listelenir.
+.sp
+.TP 4
+\fB-T\fR, \fB--print-type\fR
+Dosya sistemi türünü gösterir.
+.sp
+.TP 4
+\fB-x\fR, \fB--exclude-type\fR=\fITÜR\fR
+Belirtilen \fITÜR\fR’de olmayan dosya sistemleri listelenir.
+.sp
+.TP 4
+\fB-v\fR
+yoksayılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+Boyut değerleri \fB--block-size\fR seçeneğinde belirtilen \fIBOYUT\fR’lardan ilkine veya \fBDF_BLOCK_SIZE\fR, \fBBLOCK_SIZE\fR ve \fBBLOCKSIZE\fR ortam değişkenlerinde belirtilen boyuta göre gösterilir. Hiçbiri yoksa 1024 baytlık boyut öntanımlıdır (\fBPOSIXLY_CORRECT\fR tanımlıysa 512 bayt).
+.sp
+\fIBOYUT\fR bir tamsayı ve seçimlik bir birimden oluşur (10K örneğin, 10*1024’tür). Birimler K,M,G,T,P,E,Z,Y (1024’ün katları) veya KB, MB,... (1000’in katları) olabilir. Bibaytlık birimler de belirtilebilir (KiB, MiB gibi).
+.sp
+.SH "YAZAN"
+Torbjorn Granlund, David MacKenzie, Larry McVoy ve Paul Eggert tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/df>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) df invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,337 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1990 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "LOGIN" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+login - Kullanıcının sisteme girişini sağlar
+.sp
+.SH KULLANIM
+.IP \fBlogin\fR 6
+[\fB-p\fR] [\fB-h\fR \fIKONAK\fR] [\fIİSİM\fR] [\fIDEĞİŞKEN=DEĞER\fR]...
+.IP \fBlogin\fR 6
+[\fB-p\fR] [\fB-h\fR \fIKONAK\fR] \fB-f\fR \fIİSİM\fR
+.IP \fBlogin\fR 6
+[\fB-p\fR] \fB-r\fR \fIKONAK\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBlogin\fR sisteme yeni bir oturum açmak için kullanılır. Normalde, kullanıcının uçbirimdeki login: istemine yanıt vermesiyle çağrılır. \fBlogin\fR kabuğa özel olabilir ve bir alt süreç olarak çağrılamayabilir. Bir kabuktan çağrıldığında, kullanıcının kabuğunu sonlandırmalıdır (böylece yeni oturum açan kullanıcının mevcut kullanıcının oturumunu kullanması önlenir). Oturum açma kabuğu yerine herhangi bir kabuktan oturum açmaya çalışmak bir hata iletisi üretir.
+.sp
+Daha sonra, uygun olduğunda kullanıcıdan bir parola istenir. Parolanın açığa çıkmasını önlemek için \fBecho\fR devre dışı bırakılır. Oturum açılmadan ve iletişim bağlantısı kesilmeden önce yalnızca az sayıda parola hatasına izin verilir.
+.sp
+Hesabınız için parola eskimesi etkinse, devam etmeden önce yeni bir parola girmeniz istenebilir. Devam etmeden önce eski parolanızı ve yeni parolanızı vermek zorunda kalacaksınız. Daha fazla bilgi için lütfen \fBpasswd\fR(1) sayfasına bakın.
+.sp
+Başarılı bir girişten sonra, herhangi bir sistem iletisi ve postanın varlığı hakkında bilgilendirilirsiniz. Posta kutunuzun durumuna göre "Yeni postanız var.", "Postanız var" veya "Posta Yok" iletilerinden birini alırsınız. Ev dizininizde sıfır uzunluklu \fI.hushlogin\fR adında bir dosya oluşturarak, \fI/etc/motd\fR günün iletisinin ve en son bağlantı zamanının ekrana basılmasını ve eposta denetimini engelleyebilirsiniz.
+.sp
+Kullanıcı ve grup kimliğiniz, \fB$HOME, $SHELL, $PATH, $LOGNAME\fR ve \fB$MAIL\fR değerleri \fI/etc/passwd\fR dosyasındaki değerlere göre ayarlanır. \fBulimit\fR, \fBumask\fR ve \fBnice\fR değerleri de GECOS alanındaki girdilere göre ayarlanır.
+.sp
+Bazı kurulumlarda, \fB$TERM\fR ortam değişkenine, \fI/etc/ttytype\fR’da belirtildiği gibi, \fBtty\fR satırınızdaki uçbirim türü atanır.
+.sp
+Komut yorumlayıcınız bir ilklendirme betiği çalıştırabilir.
+.sp
+Bir alt sistem oturumunda, oturum açma kabuğunun ilk karakteri "*" olur. Belirtilen ev dizini, kullanıcının oturum açacağı yeni dosya sisteminin kök dizini olarak kullanılır.
+.sp
+\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)’in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-f\fR \fIİSİM\fR
+Kimlik doğrulaması yapılmaz, kullanıcının kimliği önceden doğrulanmıştır.
+.sp
+.TP 4
+\fB-h\fR \fIKONAK\fR
+Oturum açmak için kullanılacak uzak \fIKONAK\fR adı.
+.sp
+.TP 4
+\fB-p\fR
+Ortam değişkenlerinin korunmasını sağlar.
+.sp
+.TP 4
+\fB-r\fR \fIKONAK\fR
+\fBrlogin\fR(1) için otomatik oturum açma işlemi başlatır.
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+Bu \fBlogin\fR sürümünün belli durumlarda kullanılabilen farklı derleme seçenekleri vardır.
+.sp
+Dosya konumları sistem yapılandırmasına bağlı olarak farklı olabilir.
+.sp
+\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)’in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
+.sp
+Her uygulamada olduğu gibi, \fBlogin\fR görünümü de sahte olabilir. Güvenilmez kullanıcıların bir makineye fiziksel erişimi varsa, saldırgan bunu makinenin başına oturacak bir sonraki kişinin parolasını almak için kullanabilir. Linux altında, SAK mekanizması, kullanıcılar tarafından güvenilir bir yol başlatmak ve bu tür saldırıları önlemek için kullanılabilir.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için \fI/etc/login.defs\fR dosyasında bulunan aşağıdaki değişkenler kullanılabilir:
+.sp
+.TP 4
+\fBCONSOLE\fR (dizge)
+Tanımlanmışsa, aygıt adlarını (her satırda bir tane) içeren dosyanın tam yol adı veya ":" ile ayrılmış aygıt adları listesi. root kullanıcısının yalnızca bu aygıtlarda oturum açmasına izin verilir.
+.sp
+Tanımlanmamışsa, root kullanıcısı hiçbir aygıtta oturum açamaz.
+.sp
+Aygıtlar \fI/dev/\fR öneki olmadan belirtilmelidir.
+.sp
+.TP 4
+\fBCONSOLE_GROUPS\fR (dizge)
+Konsolda oturum açarken kullanıcının tamamlayıcı gruplarına eklenecek grupların listesi (\fBCONSOLE\fR ile belirlenen şekilde). Öntanımlı değer: \fBnone\fR (hiçbiri).
+.sp
+Dikkatli kullanılmalıdır - konsoldan oturum açmasalar bile kullanıcıların bu gruplara kalıcı erişim kazanmaları mümkündür.
+.sp
+.TP 4
+\fBDEFAULT_HOME\fR (mantıksal)
+Ev dizinine \fBcd\fR yapılamıyorsa, oturum açmaya izin verilip verilmeyeceği belirtilir. Öntanımlı değer: \fBno\fR (hayır).
+.sp
+\fByes\fR atanırsa ve ev dizinine \fBcd\fR yapılamazsa, kullanıcı kök (\fI/\fR) dizine oturum açar.
+.sp
+.TP 4
+\fBENV_HZ\fR (dizge)
+Tanımlıysa, kullanıcı oturum açınca \fBHZ\fR ortam değişkeninin tanımlanmasını sağlar. Değer, \fBHZ=\fR ile başlamalıdır. \fBHZ=100\fR Linux için uygun bir değerdir.
+.sp
+.TP 4
+\fBENV_PATH\fR (dizge)
+Tanımlıysa, sıradan bir kullanıcı oturum açtığında \fBPATH\fR ortam değişkeninin tanımlanmasını sağlar. Değer, dosya yollarının iki nokta üst üste imleriyle ayrılmış listesi olmalı ve \fBPATH=\fR ile başlamalıdır. Öntanımlı değer: \fBPATH=/bin:/usr/bin\fR
+.sp
+.TP 4
+\fBENV_SUPATH\fR (dizge)
+Tanımlıysa, root oturum açtığında \fBPATH\fR ortam değişkeninin tanımlanmasını sağlar. Değer, dosya yollarının iki nokta üst üste imleriyle ayrılmış listesi olmalı ve \fBPATH=\fR ile başlamalıdır. Öntanımlı değer: \fBPATH=/sbin:/bin:/usr/sbin:/usr/bin\fR.
+.sp
+.TP 4
+\fBENV_TZ\fR (dizge)
+Tanımlıysa, kullanıcı oturum açtığında \fBTZ\fR ortam değişkeninin tanımlanmasını sağlar. Değer, \fBTZ=\fR ile başlayan bir zaman dilimi ismi (örn, TZ=CST6CDT) veya zaman dilimi belirtimini içeren dosyanın tam adı (örn, \fI/etc/tzname\fR) olmalıdır.
+.sp
+Tam dosya yolu belirtilmiş ama dosya okunamıyorsa ya da mevcut değilse öntanımlı değer kullanılır. Öntanımlı değer: \fBTZ=CST6CDT\fR.
+.sp
+.TP 4
+\fBENVIRON_FILE\fR (dizge)
+Dosya mevcut ve okunabiliyorsa, oturum ortamı bu dosyadan okunur. Dosyanın her satırı \fIisim=değer\fR biçiminde olmalıdır.
+.sp
+\fB#\fR ile başlayan satırlar açıklama olarak ele alınır ve yok sayılır.
+.sp
+.TP 4
+\fBERASECHAR\fR (tamsayı)
+Uçbirim silme (ERASE) karakteri (010 = backspace, 0177 = DEL).
+.sp
+"0" ile başlayan değerler sekizlik, 0x ile başlayanlar onaltılık tabanda değerlendirilir.
+.sp
+.TP 4
+\fBFAIL_DELAY\fR (tamsayı)
+Saniye cinsinden, başarısız bir oturum açma işleminden sonraki oturum açma gecikmesi.
+.sp
+.TP 4
+\fBFAILLOG_ENAB\fR (mantıksal)
+Oturum açma başarısızlıklarının \fI/var/log/faillog\fR dosyasına günlüklenmesini ve gösterilmesini sağlar.
+.sp
+.TP 4
+\fBFAKE_SHELL\fR (dizge)
+Tanımlıysa, \fBlogin\fR tarafından, kullanıcının \fI/etc/passwd\fR dosyasında tanımlı kabuğu yerine bu kabuk çalıştırılır.
+.sp
+.TP 4
+\fBFTMP_FILE\fR (dizge)
+Tanımlıysa, oturum açma başarısızlıkları \fButmp\fR biçeminde bu dosyaya kaydedilir.
+.sp
+.TP 4
+\fBHUSHLOGIN_FILE\fR (dizge)
+Tanımlıysa, bu dosya, oturum açma sırasındaki tüm olağan bildirimleri engelleyebilir. Tam bir yol adı belirtilirse, dosyada kullanıcının adı veya kabuğu bulunuyorsa, sessiz kip etkinleştirilir. Tam yol adı verilmemişse ve dosya kullanıcının ev dizininde varsa sessiz kip etkinleştirilir.
+.sp
+.TP 4
+\fBISSUE_FILE\fR (dizge)
+Tanımlıysa, her login: isteminden önce bu dosya gösterilir.
+.sp
+.TP 4
+\fBKILLCHAR\fR (tamsayı)
+Sonlandırıcı (KILL) karakter (025 = CTRL/U).
+.sp
+"0" ile başlayan değerler sekizlik, 0x ile başlayanlar onaltılık tabanda değerlendirilir.
+.sp
+.TP 4
+\fBLASTLOG_ENAB\fR (mantıksal)
+Oturum açma bilgilerinin \fI/var/log/faillog\fR dosyasına günlüklenmesini ve gösterilmesini sağlar.
+.sp
+.TP 4
+\fBLOGIN_RETRIES\fR (tamsayı)
+Parola başarısız olduğunda oturum açma yinelemesinin azami miktarı.
+.sp
+.TP 4
+\fBLOGIN_STRING\fR (dizge)
+Parola istemi için kullanılacak dizge. Öntanımlı değer: "\fBPassword: \fR" veya bu dizgenin çevirisi. Bu değişkene bir değer tanımlarsanız çeviriler kullanılmaz.
+.sp
+Dizge, \fI%s\fR içeriyorsa, kullanıcı ismi ile değiştirilir.
+.sp
+.TP 4
+\fBLOGIN_TIMEOUT\fR (tamsayı)
+Oturum açmak için tanınan azami süre.
+.sp
+.TP 4
+\fBLOG_OK_LOGINS\fR (mantıksal)
+Tanımlısa, başarılı oturum açmalar da günlüklenir.
+.sp
+.TP 4
+\fBLOG_UNKFAIL_ENAB\fR (mantıksal)
+Oturum açama başarısızlıkları günlüklenirken bilinmeyen kullanıcı isimlerinin gösterilmesini etkinleştirir.
+.sp
+Dikkat: Bilinmeyen kullanıcı isimlerinin kaydedilmesi, kullanıcının isim yerine parola yazması durumunda bir güvenlik açığı oluşturabilir.
+.sp
+.TP 4
+\fBMAIL_CHECK_ENAB\fR (mantıksal)
+Oturm açarken posta kutusuna bakılması ve gösterilmesi etkinleştirilir.
+.sp
+Kabuk başlatma dosyaları posta kutusuna zaten bakıyorsa ("mailx -e" veya eşdeğeri) bunu iptal etmelisiniz.
+.sp
+.TP 4
+\fBMAIL_DIR\fR (dizge)
+Posta kuyruğu dizini. İlgili kullanıcı hesabı silindiğinde veya değişikliğe uğradığında posta kutusunu elden geçirmek için bu gereklidir. Tanımsızsa, derleme sırasında atanan öntanımlı değer kullanılır. Eposta kuyruğunun oluşturulup oluşturulmadığı \fI/etc/default/useradd\fR dosyasındaki \fBCREATE_MAIL_SPOOL\fR değişkeni ile belirlenir.
+.sp
+.TP 4
+\fBMAIL_FILE\fR (dizge)
+Kullanıcının eposta kuyruğu dosyalarının konumu ev dizinine göreli tanımlanır.
+.sp
+.PP
+\fBMAIL_DIR\fR ve \fBMAIL_FILE\fR değişkenleri \fBuseradd\fR, \fBusermod\fR ve \fBuserdel\fR tarafından eposta kuyruğunun oluşturulması, taşınması ve silinmesi için kullanılır.
+.sp
+Bunlar ayrıca, \fBMAIL_CHECK_ENAB\fR için \fByes\fR tanımlıysa, \fBMAIL\fR ortam değişkenini tanımlamak için de kullanılır.
+.sp
+.TP 4
+\fBMOTD_FILE\fR (dizge)
+Tanımlıysa, oturum açarken gösterilen günün iletisi dosyalarının ":" ayraçlı listesidir.
+.sp
+.TP 4
+\fBNOLOGINS_FILE\fR (dizge)
+Tanımlıysa, varlığında root kullanıcısının oturum açmasını engelleyen dosyanın ismidir. Bu dosyanın içeriği oturum açılamama sebebini açıklayan ileti olmalıdır.
+.sp
+.TP 4
+\fBPORTTIME_CHECKS_ENAB\fR (mantıksal)
+\fI/etc/porttime\fR dosyasında belirtilen zaman kısıtlamalarının denetimini etkinleştirir.
+.sp
+.TP 4
+\fBQUOTAS_ENAB\fR (mantıksal)
+Kullanıcının parola GECOS alanındaki nice, ulimit ve umask ile \fI/etc/limits\fR dosyasındaki özkaynak sınırlarının atanmasını etkinleştirir.
+.sp
+.TP 4
+\fBTTYGROUP\fR (dizge), \fBTTYPERM\fR (dizge)
+Uçbirim ayrıcalıkları: Oturum açma uçbiriminin grubu \fBTTYGROUP\fR olur ve izinler \fBTTYPERM\fR’e atanır.
+.sp
+Öntanımlı olarak, uçbirimin sahibi kullanıcının birincil grubu ve izinleri 0600 olur.
+.sp
+\fBTTYGROUP\fR ya grup ismi ya da sayısal grup kimliği olmaldır.
+.sp
+Uçbirimlerin sahibi olan özel bir grubun sahibi olduğu \fBwrite\fR uygulamanız varsa, \fBTTYGROUP\fR’u grup numarası ve \fBTTYPERM\fR’i 0620 yapın. Aksi takdirde, \fBTTYGROUP\fR satırını yorum satırı ve \fBTTYPERM\fR’i 622 veya 600 yapın.
+.sp
+.TP 4
+\fBTTYTYPE_FILE\fR (dizge)
+Tanımlıysa, tty satırını \fBTERM\fR ortam değişkenine eşleyen dosyadır. Dosyadanın her satırı "vt100 tty01" benzeri bir girdi içermelidir.
+.sp
+.TP 4
+\fBULIMIT\fR (tamsayı)
+Öntanımlı \fBulimit\fR değeri.
+.sp
+.TP 4
+\fBUMASK\fR (tamsayı)
+Dosya kipi oluşturma maskesi bu değerle ilklendirilir. Belirtilmezse maske 022 ile ilklendirilir.
+.sp
+\fBuseradd\fR(8) ve \fBnewusers\fR(8) komutları \fBHOME_MODE\fR tanımlıysa ev dizininin kipini atamak için bu maskeyi kullanır.
+.sp
+Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask’ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
+.sp
+.TP 4
+\fBUSERGROUPS_ENAB\fR (mantıksal)
+root olmayan kullanıcılar için, kullanıcı ve grup kimlikleri aynıyken kullanıcı ve grup adı da aynı ise umask grup bitlerinin, sahip bitleri ile aynı olmasını sağlar (örn, 022 -> 002, 077 -> 007).
+.sp
+\fIyes\fR atanırsa, \fBuserdel\fR(8) başka üyesi yoksa kullanıcını grubunu siler ve \fBuseradd\fR(8) kullanıcı ile aynı isimde bir grup oluşturur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/var/run/utmp\fR
+Geçerli login oturumlarının listesi
+.sp
+.TP 4
+\fI/var/log/wtmp\fR
+Önceki login oturumlarının listesi
+.sp
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesap bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+Güvenli kullanıcı hesap bilgileri
+.sp
+.TP 4
+\fI/etc/motd\fR
+Günün iletisi dosyası
+.sp
+.TP 4
+\fI/etc/nologin\fR
+root olmayan kullanıcıların oturum açmasını engeller
+.sp
+.TP 4
+\fI/etc/ttytype\fR
+Uçbirim türlerinin listesi
+.sp
+.TP 4
+\fI~/.hushlogin\fR
+Sistem iletilerinin ekrana basılmasını engeller
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Gölge parola yapılandırması
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmail\fR(1), \fBpasswd\fR(1), \fBsh\fR(1), \fBsu\fR(1), \fBlogin.defs\fR(5), \fBnologin\fR(5), \fBpasswd\fR(5), \fBsecuretty\fR(5), \fBgetty\fR(8).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh, Thomas Kłoczko ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2005 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

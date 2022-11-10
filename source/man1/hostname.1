@@ -1,0 +1,174 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * hostname -- set the host name or show the host/domain name
+ *
+ * Copyright (C) 1994-1997 Peter Tobias <tobias@et-inf.fho-emden.de>
+ *               2009-     Michael Meskes <meskes@debian.org>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "HOSTNAME" 1 "16 Eylüll 2009" "hostname 3.23" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+hostname - sistemin konak adını tanımlar ya da gösterir
+.br
+domainname - sistemin NIS/YP alan adını tanımlar ya da gösterir
+.br
+dnsdomainname - sistemin DNS alan adını gösterir
+.br
+nisdomainname - sistemin NIS/YP alan adını tanımlar ya da gösterir
+.br
+ypdomainname - sistemin NIS/YP alan adını tanımlar ya da gösterir
+.sp
+.SH KULLANIM
+.IP \fBhostname\fR 9
+[\fB-a\fR|\fB--alias\fR] [\fB-d\fR|\fB--domain\fR] [\fB-f\fR|\fB--fqdn\fR|\fB--long\fR] [\fB-A\fR|\fB--all-fqdns\fR] [\fB-i\fR|\fB--ip-address\fR] [\fB-I\fR|\fB--all-ip-address\fR] [\fB-s\fR|\fB--short\fR] [\fB-y\fR|\fB--yp\fR|\fB--nis\fR]
+.IP \fBhostname\fR 9
+[\fB-b\fR|\fB--boot\fR] [\fB-F\fR|\fB--file\fR \fIdosya\fR] [\fIalanadı\fR]
+.IP \fBhostname\fR 9
+[\fB-h\fR|\fB--help\fR] [\fB-V\fR|\fB--version\fR]
+.IP \fBdomainname\fR 11
+[\fB-v\fR] [\fB-F\fR|\fB--file\fR \fIdosya\fR] [\fIalanadı\fR]
+.sp
+.PP
+.sp
+.IP \fBdomainname\fR 11
+[\fInis-alanadı\fR] [\fB-F\fR \fIdosya\fR]
+.IP \fBypdomainname\fR 13
+[\fInis-alanadı\fR] [\fB-F\fR \fIdosya\fR]
+.IP \fBnisdomainname\fR 14
+[\fInis-alanadı\fR] [\fB-F\fR \fIdosya\fR]
+.sp
+.PP
+.sp
+.IP \fBdnsdomainname\fR 14
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBhostname\fR, sistemin DNS adını gösteren ve konak adını ya da NIS alan adını gösteren veya atayan uygulamadır.
+.sp
+.SS "İsmin Öğrenilmesi"
+Değiştirgesiz çağrıldığında komutlar kullanılmakta olan isimleri gösterir:
+.sp
+\fBhostname\fR, \fBgethostname\fR(2) işlevi tarafından döndürülen sistem ismini gösterir.
+.sp
+\fBdomainname\fR sistemin NIS alan adını gösterir, \fBnisdomainname\fR ve \fBypdomainname\fR uygulamaları \fBgetdomainname\fR(2) işlevi tarafından döndürülen sistem ismini gösterirken, \fBdomainname\fR uygulaması \fBgethostname\fR(2) işlevi tarafından döndürülen sistem ismini gösterir.
+.sp
+\fBdnsdomainname\fR ise, tam alan adının (FQDN - Fully Qualified Domain Name) alan adı parçasını basacaktır. Sistemin tam alan adı \fBhostname --fqdn\fR ile döndürülür. Aşağıda \fBTam Alan Adı (FQDN)\fR bölümündeki uyarılara bakınız.
+.sp
+.SS "İsmin Atanması"
+Tek değiştirgeyle ya da \fB--file\fR seçeneği ile çağrıldığında komutlar, konak adının veya NIS/YP alan adının atanmasını sağlar. Atama işleminde \fBhostname\fR, \fBsethostname\fR(2) işlevini kullanırken, \fBdomainname\fR, \fBnisdomainname\fR ve \fBypdomainname\fR uygulamaları \fBsetdomainname\fR(2) işlevini kullanır. Sistem yeniden başlatılana kadar atanan ad geçerli olmayacaktır. Kalıcı değişiklik için atanacak adı doğrudan \fI/etc/hostname\fR dosyasına yazın.
+.sp
+Bu atamaları sadece root kullanıcısı yapabilir.
+.sp
+Tam alan adının (FQDN) ve DNS alan adının \fBdnsdomainname\fR komutuyla atanması mümkün değildir. (Aşağıdaki \fBTam Alan Adı (FQDN)\fR bölümüne bakınız.)
+.sp
+Konak adı genellikle sistem açılışı sırasında bir kerelik \fI/etc/init.d/hostname.sh\fR betiği tarafından bir dosyadan (örn. \fI/etc/hostname\fR) okunarak atanır.
+.sp
+.SS "Tam Alan Adı (FQDN)"
+Sistemin tam alan adı, konak adı için \fBresolver\fR(3) tarafından döndürülen addır (örn, \fIursula.example.com\fR). genellikle konak adı, alan adının öncesine yazılır (ilk noktadan sonraki ad, alan adıdır) Tam alan adını \fBhostname --fqdn\fR ile ve DNS alan adını \fBdnsdomainname\fR ile öğrenebilirsiniz.
+.sp
+\fBhostname\fR ve \fBdnsdomainname\fR ile tam alan adını (FQDN’yi) değiştiremezsiniz.
+.sp
+Tam alan adını atamak için önerilen yöntem, konak adını DNS, NIS veya \fI/etc/hosts\fR dosyasını kullanarak tam alan adının takma adı yapmaktır. Örneğin, konak adı "ursula" ise \fI/etc/hosts\fR dosyasının içeriği şöyle olurdu:
+.sp
+.RS 4
+.nf
+127.1.1.1    ursula.example.com ursula
+.fi
+.sp
+.RE
+Çok sayıda IP adresine sahip bir makina da (çok sayıda ethernet arayüzü olması ya da ethernet ve wifi arayüzlerinin paylaşımlı kullanımı gibi) \fBhostname --fqdn\fR, \fBhostname --domain\fR ve \fBdnsdomainname\fR komutlarını kullanmaktan kaçınmanız önerilir. \fBhostname --ip-address\fR komutu da bu sınırlamalara tabidir.
+.sp
+Ç.N.: 127.0.0.1 localhost.localdomain localhost satırına asla dokunmayın. İsim atamalarını buradaki gibi farklı bir yerel bloka, makinenizin adını içeren alan adını ise ethernet/wifi arabirimine atanan IP adresinize uygulayın. Bu adresi \fBifconfig\fR(8) komutuyla öğrenebilirsiniz. Bu arabirimlere isim atamaları için doğrudan \fI/etc/hosts\fR dosyasını kullanın. (\fI/etc/hosts\fR dosyası sadece yerel adları tanımlamak için değildir. Bir dış DNS sunucusu sorgulanmadan bulunmasını/bulunmamasını istediğiniz alan adlarını da IP adresleri ile bu dosyaya yazabilirsiniz.)
+.sp
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB--alias\fR
+Konağın takma adını (kullanılmışsa) gösterir. Bu seçeneğin kullanımı artık önerilmemektedir.
+.sp
+.TP 4
+\fB-A\fR, \fB--all-fqdns\fR
+Makinenin tam alan adlarının hepsini gösterir. Bu seçenek, yapılandırılmış tüm ağ arabirimlerindeki tüm yapılandırılmış ağ adreslerini numaralandırır ve bunları DNS alan adlarına çevirir. Çevrilemeyen adresler (yani ters IP adresine sahip olmayanlar) atlanır. Farklı adreslerin aynı ada çözümlenebileceğini ve bu nedenle çıktının yinelenen girdiler içerebileceğini unutmayın. Çıktının sırası hakkında herhangi bir varsayımda bulunmayın.
+.sp
+.TP 4
+\fB-d\fR, \fB--domain\fR
+DNS alan adını gösterir. DNS alan adını öğrenmek için \fBdomainname\fR komutunu kullanmayın, çünkü o DNS alan adını değil NIS alan adını gösterecektir. Yerine \fBdnsdomainname\fR komutunu kullanın. Yukarıdaki \fBTam Alan Adı (FQDN)\fR bölümüne bakın ve bu seçeneği kullanmaktan kaçının.
+.sp
+.TP 4
+\fB-f\fR, \fB--fqdn\fR, \fB--long\fR
+Tam alan adını (FQDN - Fully Qualified Domain Name) gösterir. Tam alan adı bir kısa konak adı ile DNS alan adından oluşur. Konak adı aramaları için bind ya da NIS kullanmıyorsanız, tam alan adını ve DNS alan adını (tam alan adının parçasıdır) \fI/etc/host\fR dosyasından değiştirebilirsiniz. Yukarıdaki \fBTam Alan Adı (FQDN)\fR bölümüne bakın ve bu seçenek yerine mümkün olduğunca \fBhostname --all-fqdns\fR komutunu kullanmaya çalışın.
+.sp
+.TP 4
+\fB-F\fR, \fB--file \fR \fIdosya\fR
+Konak adı belirtilen dosyadan okunur. Açıklamalar (\fB#\fR ile başlayan satırlar) yoksayılır.
+.sp
+.TP 4
+\fB-i\fR, \fB--ip-address\fR
+Konak adının ağ adres(ler)ini gösterir. Bu seçenek, sadece konak adı çözümlenebiliyorsa çalışır. Bu seçeneği kullanmaktan kaçının ve yerine \fBhostname --all-ip-addresses\fR komutunu kullanın.
+.sp
+.TP 4
+\fB-I\fR, \fB--all-ip-addresses\fR
+Konak adının tüm ağ adreslerini gösterir. Bu seçenek, tüm ağ arabirimlerinde yapılandırılmış tüm adresleri numaralandırır. Geri dönüş arabirimi ve yerel bağlantılı IPv6 adresleri atlanır. \fB-i\fR seçeneğinin aksine, bu seçenek isim çözümlemesine bağlı değildir. Çıktının sırası hakkında herhangi bir varsayımda bulunmayın.
+.sp
+.TP 4
+\fB-s\fR, \fB--short\fR
+Kısa konak adını gösterir. Bu, tam alan adının ilk noktadan önceki kısmıdır.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini standart çıktıya basar ve çıkar.
+.sp
+.TP 4
+\fB-y\fR, \fB--yp\fR, \fB--nis\fR
+NIS alan adını gösterir. Bir değiştirge verilmişse (veya \fB--file dosya\fR) yeni NIS alan adı root kullanıcısı tarafından atanabilir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bir kullanım iletisi gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+FQDN, takma adlar ve konağın ağ adresleri aranırken \fBhostname\fR tarafından denenen adres aileleri, çözümleyicinizin yapılandırmasına göre belirlenir. Örneğin, GNU Libc sistemlerinde, çözümleyiciye \fI/etc/resolv.conf\fR içinde \fBinet6\fR seçeneği kullanılarak önce IPv6 aramalarını denemesi talimatı verilebilir.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.IP "\fI/etc/hostname\fR" 4
+Tarihsel olarak bu dosyanın, tam standart FQDN’yi değil, yalnızca konak adını içermesi gerekiyordu. Günümüzde çoğu yazılım burada tam bir FQDN ile başa çıkabilmektedir. Bu dosya, konak adını ayarlamak için sistem ilklendirme betikleri tarafından önyükleme sırasında okunur.
+.IP "\fI/etc/hosts\fR" 4
+Genellikle burası, konak adını tam alan adına takma ad olarak vererek alan adının ayarlandığı yerdir.
+.sp
+.SH "YAZANLAR"
+Peter Tobias, Bernd Eckenfels (NIS ve kılavuz sayfası) ve Michael Meskes tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

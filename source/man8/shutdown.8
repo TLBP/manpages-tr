@@ -1,0 +1,95 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
+ * https://github.com/systemd/systemd
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "SHUTDOWN" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+shutdown - sistemi durdurur, makineyi kapatır veya yeniden başlatır
+.sp
+.SH KULLANIM
+.IP \fBshutdown\fR 9
+[\fISEÇENEKLER\fR...] [\fIZAMAN\fR] [\fIİLETİ\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBshutdown\fR, sistemi durdurmak, makineyi kapatmak veya yeniden başlatmak için kullanılabilir.
+.sp
+İlk değiştirge bir \fIZAMAN\fR dizgesi olabilir (genellikle "now" (şimdi) olur). Ardından, isteğe bağlı olarak, oturum açan tüm kullanıcılara sistem kapanmadan önce gönderilecek bir \fBwall\fR(1) \fIİLETİ\fRsi gelebilir.
+.sp
+\fIZAMAN\fR dizgesi, kapanma zamanını belirten, 24 saatlik gösterimle saat/dakika belirtimi için "ss:dd" biçiminde olabilir. Bunu yerine, şu andan itibaren belirtilen dakika sayısına atıfta bulunan "+m" sözdizimi de kullanılabilir. "now" ve "+0" aynıdır, yani kapanmayı "hemen" tetiklemek içindir. \fIZAMAN\fR belirtilmezse, "+1" öntanımlıdır.
+.sp
+Bir \fBwall\fR(1) \fIİLETİ\fRsi belirtebilmek için \fIZAMAN\fR da belirtilmelidir.
+.sp
+\fIZAMAN\fR belirtilirse, sistem kapanmadan 5 dakika önce \fI/run/nologin\fR dosyası oluşturulur, böylece daha fazla oturum açmaya izin verilmemiş olur.
+.sp
+.SH "SEÇENEKLER"
+Aşağıdaki seçenekler kullanılabilir:
+.sp
+.TP 4
+\fB--help\fR
+Kısa bir yardım metni basar ve çıkar.
+.sp
+.TP 4
+\fB-H\fR, \fB--halt\fR
+Sistemi durdurur (Makine kapanmaz).
+.sp
+.TP 4
+\fB-P\fR, \fB--poweroff\fR
+Makineyi kapatır (Öntanımlıdır).
+.sp
+.TP 4
+\fB-r\fR, \fB--reboot\fR
+Makineyi yeniden başlatır.
+.sp
+.TP 4
+\fB-h\fR
+\fB--poweroff\fR ile aynıdır, ancak gerçekleştirilecek eylem "sistemi durdur ama makineyi kapatma" ise bunu geçersiz kılmaz. Örneğin, \fBshutdown --reboot -h\fR komutu "makineyi kapat" anlamına gelirken \fBshutdown --halt -h\fR "sistemi durdur ama makineyi kapatma" anlamına gelir.
+.sp
+.TP 4
+\fB-k\fR
+Yalnızca \fBwall\fR(1) \fIİLETİ\fRsini yazar ama kapatma, durdurma veya yeniden başlatma işlemleri yapılmaz.
+.sp
+.TP 4
+\fB--no-wall\fR
+Kapatma, durdurma ve yeniden başlatma öncesi \fBwall\fR(1) iletisi gönderilmez.
+.sp
+.TP 4
+\fB-c\fR
+Askıdaki \fBshutdown\fR iptal edilir. "+0" veya "now" dışında bir \fIZAMAN\fR değeriyle başlatılan kapatma işlemini iptal etmek için kullanılabilir.
+.sp
+.TP 4
+\fB--show\fR
+Bekleyen bir kapatma eylemini ve varsa zamanını gösterir.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+Başarı durumunda 0, başarısızlık durumunda sıfırdan farklı bir değer ile çıkar.
+.sp
+.SH "UYUMLULUK"
+Önceki init sistemlerindeki (sysvinit dahil) \fBshutdown\fR komutunun öntanımlısı, makineyi kapatmak değil tek kullanıcılı kipe düşmekti. Tek kullanıcılı kipe düşmek için artık \fBsystemctl rescue\fR komutu kullanılmalıdır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsystemd\fR(1), \fBsystemctl\fR(1), \fBhalt\fR(8), \fBwall\fR(1).
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

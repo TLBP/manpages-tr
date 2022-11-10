@@ -1,0 +1,132 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1990 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CHFN" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+chfn - kişisel bilgileri değiştirir
+.sp
+.SH KULLANIM
+.IP \fBchfn\fR 5
+[\fIseçenekler\fR] [\fIKULLANICI\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBchfn\fR, kullanıcı hesabında tutulan, ad ve soyad, işyeri oda numarası, işyeri telefon numarası, ev telefon numarası (bu alanlara ek bir alanla birlikte hepsine birden GECOS denir) bilgilerini değiştirir. Bu bilgiler genellikle \fBfinger\fR(1) ve benzeri bir komutla basılır. Normal bir kullanıcı \fI/etc/login.defs\fR dosyasındaki kısıtlamaların izin verdiği ölçüde sadece kendi hesabındaki alanlarda değişiklik yapabilir. (Öntanımlı yapılandırma kullanıcıların kendi ad ve soyadlarını değiştirmesini engellemek içindir.) root kullanıcısı her hesabın her ayrıntısını değiştirebilir. Buna ek olarak, GECOS alanındaki ek bilgiyi değiştirmek için \fB-o\fR seçeneğini sadece root kullanabilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-f\fR, \fB--full-name\fR \fIAD_SOYAD\fR
+Kullanıcının adı ve soyadını değiştirir.
+.sp
+.TP 4
+\fB-h\fR, \fB--home-phone\fR \fIEV_TLF\fR
+Kullanıcının ev telefonu numarasını değiştirir.
+.sp
+.TP 4
+\fB-r\fR, \fB--room\fR \fIODA_NUM\fR
+Kullanıcının işyeri oda numarasını değiştirir.
+.sp
+.TP 4
+\fB-w\fR, \fB--work-phone\fR \fIİŞ_TLF\fR
+Kullanıcının işyeri telefon numarasını değiştirir.
+.sp
+.TP 4
+\fB-o\fR, \fB--other\fR \fIEK_BİLGİ\fR
+Kullanıcının GECOS alanlarından beşincisini değiştirir. Bu alan diğer uygulamalar tarafından kullanılan hesap bilgilerini saklamakta kullanılır ve sadece root kullanıcısı değiştirebilir.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikler \fICHROOT_DİZİNİ\fR altında uygulanır ve \fICHROOT_DİZİNİ\fRindeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-u\fR, \fB--help\fR
+Kullanım bilgisini görüntüler ve çıkar.
+.sp
+.PP
+Hiçbir seçenek belirtilmezse, \fBchfn\fR etkileşimli kipe girer ve kullanıcıya ilgili alanların geçerli değerlerini göstererek girdi bekler. Yeni bir değer girilmesi alandaki değeri değiştirir, boş geçilirse geçerli değer korunur. Geçerli değerler köşeli ayraçların \fB[ ]\fR içinde gösterilir. \fIKULLANICI\fR belirtilmezse geçerli kullanıcı hesabı ile ilgili girdi beklenir.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştiren \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBCHFN_AUTH\fR (mantıksal)
+\fIyes\fR belirtilirse, \fBchfn\fR root tarafından kullanılmıyorsa, herhangi bir değişiklik yapılmadan önce kimlik kanıtlaması yapılması zorunludur.
+.sp
+.TP 4
+\fBCHFN_RESTRICT\fR (dizgesel)
+Sıradan kullanıcıların \fBchfn\fR kullanarak \fI/etc/passwd\fR dosyasının hangi GECOS alanlarında değişiklik yapabileceği bu yönergede belirtilir. Ad-soyad için \fIf\fR, oda numarası için \fIr\fR, iş telefonu için \fIw\fR, ev telefonu için \fIh\fR harflerinden gerekenler herhangi bir sırada belirtilebilir. Geriye uyumluluk adına, \fIyes\fR değeri \fIrwh\fR, \fIno\fR değeri ise \fIfrwh\fR değerine eşdeğerdir. Hiçbiri belirtilmezse değişiklikleri sadece root yapabilir. En kısıtlayıcı yapılandırmaya, SUID olmayan \fBchfn\fR ile ulaşılır.
+.sp
+.TP 4
+\fBLOGIN_STRING\fR (dizgesel)
+Parola isteminde kullanılacak dizgeyi belirtmekte kullanılır. "Password: " veya bu dizgenin çevirileri öntanımlıdır. Bu değişkene bir değer atanırsa parola isteminin çevirisi kullanılmayacaktır.
+.sp
+Dizge %s içeriyorsa, parola isteminde yerine kullanıcı ismi konur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/login.defs\fR
+Kullanıcı bilgileri yapılandırması
+.sp
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesabı bilgileri.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchsh\fR(1), \fBlogin.defs\fR(5), \fBpasswd\fR(5).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh, Thomas Kłoczko ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

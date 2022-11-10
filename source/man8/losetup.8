@@ -1,0 +1,219 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "LOSETUP" 8 "Ocak 2021" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+losetup - dönüş aygıtlarını ayarlar ve denetler
+.sp
+.SH KULLANIM
+.SS ""
+Bilgi almak için:
+.IP \fBlosetup\fR 8
+[\fB/dev/loop\fR[\fIN\fR]]
+.IP \fBlosetup\fR 8
+\fB-l\fR [\fB-a\fR]
+.IP \fBlosetup\fR 8
+\fB-j\fR \fIDOSYA\fR [\fB-o\fR \fIBOYUT\fR]
+.sp
+.PP
+Dönüş aygıtını ayırmak için:
+.IP \fBlosetup\fR 8
+\fB-d\fR [\fB/dev/loop\fR[\fIN\fR]]
+.sp
+.PP
+İlişkili dönüş aygıtlarının tümünü ayırmak için:
+.IP \fBlosetup\fR 8
+\fB-D\fR
+.sp
+.PP
+Dönüş aygıtını tanımlamak için:
+.IP \fBlosetup\fR 8
+[\fB-o\fR \fIBOYUT\fR] [\fB--sizelimit\fR \fIBOYUT\fR] [\fB--sector-size\fR \fIBOYUT\fR] [\fB-Pr\fR] [\fB--show\fR] [\fB-o\fR \fIBOYUT\fR] \fB-f\fR| \fB/dev/loop\fR[\fIN\fR] \fIDOSYA\fR
+.sp
+.PP
+Dönüş aygıtını yeniden boyutlandırmak için:
+.IP \fBlosetup\fR 8
+\fB-c\fR \fB/dev/loop\fR[\fIN\fR]
+.sp
+.PP
+.sp
+.sp
+.SH "AÇIKLAMA"
+\fBlosetup\fR, dönüş aygıtlarını normal dosyalar veya blok aygıtlarıyla ilişkilendirmek, dönüş aygıtlarını sistemden ayırmak ve bir dönüş aygıtının durumunu sorgulamak için kullanılır. Yalnızca \fI/dev/loop\fR\fIN\fR verilirse, \fIN\fR’inci dönüş aygıtının durumu gösterilir. Herhangi bir seçenek verilmezse, tüm dönüş aygıtlarının durumu gösterilir.
+.sp
+.TP 4
+\fBBilgi:\fR
+Virgülle ayrılmış dizgeleri olan eski çıktı biçimi (yani, \fBlosetup -a\fR) kullanımdan kaldırılmış, yerini \fB--list\fR çıktı biçimi almıştır.
+.sp
+.PP
+Aynı yedekleme dosyası için daha bağımsız dönüş aygıtları oluşturmak mümkündür. Bu işlem tehlikeli olabilir, veri kaybına, bozulmaya ve üzerine yazmaya neden olabilir. Bu sorunu önlemek için \fB--nooverlap\fR ile \fB--find\fR seçeneği de kullanılmalıdır.
+.sp
+Dönüş aygıtının oluşturulması \fB--find\fR ile kullanıldığında bozulamaz bir işlem değildir ve \fBlosetup\fR bu işlemi herhangi bir kilitle korumaz. Deneme sayısı dahili olarak 16 ile sınırlıdır. Yoğun çoklu kullanımda bir çarpışmayı önlemek için örneğin \fBflock\fR(1) kullanılması önerilir.
+.sp
+.SH "SEÇENEKLER"
+\fIBOYUT\fR için birim belirtilebilir: KiB (=1024), MiB (=1024*1024), GiB, TiB, PiB, EiB, ZiB ve YiB birimlerinde "iB" isteğe bağlıdır, örneğin "K" ile "KiB" aynı anlama gelir veya KB (=1000), MB (=1000*1000), GB, TB, PB, EB, ZB ve YB birimleri de kullanılabilir.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Tüm dönüş aygıtlarının durumunu gösterir. root olmayan kullanıcıların tüm bilgilere erişemediği unutulmamalıdır. Ayrıca bkz. \fB--list\fR. Eski çıktı biçimi (\fB--list\fR olmadan çıktılama durumu) kullanımdan kaldırılmıştır.
+.sp
+.TP 4
+\fB-d\fR, \fB--detach\fR \fI/dev/loop\fR[\fIN\fR]
+Belirtilen dönüş aygıt(lar)ıyla ilişkili dosyayı veya aygıtı ayırır. Linux v3.7 çekirdeğinin "tembel aygıt imhası" kullandığı unutulmamalıdır. Ayırma işlemi, aygıt sistem tarafından etkin olarak kullanılıyorsa artık \fBEBUSY\fR hatası vermemekte, ancak \fBautoclear\fR ile imlenip ve daha sonra imha edilmektedir.
+.sp
+.TP 4
+\fB-d\fR, \fB--detach-all\fR
+İlişkili dönüş aygıtlarının tümünü sistemden ayırır.
+.sp
+.TP 4
+\fB-f\fR, \fB--find\fR [\fIDOSYA\fR]
+Kullanılmayan ilk dönüş aygıtını bulur. \fIDOSYA\fR belirtilmişse bulunan aygıt, dönüş aygıtı olarak kullanılır. Aksi takdirde, sadece adını gösterir.
+.sp
+.TP 4
+\fB--show\fR
+\fB-f\fR seçeneği bir \fIDOSYA\fR ile birlikte belirtilmişse bu seçenek ilgili dönüş aygıtının adını gösterir.
+.sp
+.TP 4
+\fB-L\fR, \fB--nooverlap\fR
+Aynı yedekleme dosyası daha fazla dönüş aygıtı arasında paylaşıldığı durumda dönüş aygıtları arasındaki çakışmalar için denetim yapar. Dosya zaten başka bir aygıt tarafından kullanılıyorsa, yeni bir aygıt yerine mevcut aygıt yeniden kullanılır. Seçenek yalnızca \fB--find\fR seçeneği ile birlikte anlamlıdır.
+.sp
+.TP 4
+\fB-j\fR, \fB--associated\fR \fIDOSYA\fR [\fB-o\fR \fIKONUM\fR]
+Belirtilen \fIDOSYA\fR ile ilişkili tüm dönüş aygıtlarının durumunu gösterir.
+.sp
+.TP 4
+\fB-o\fR \fB--offset\fR \fIBOYUT\fR
+Veri başlangıcı, \fIDOSYA\fR veya aygıtta \fIBOYUT\fR bayta taşınır. \fIBOYUT\fR ile birlikte birim belirtilebilir. Bkz: Bölüm başlangıcındaki birim açıklaması.
+.sp
+.TP 4
+\fB--sizelimit\fR \fIBOYUT\fR
+Veri sonu, veri başlangıcından itibaren \fIBOYUT\fR bayta ayarlanır. \fIBOYUT\fR ile birlikte birim belirtilebilir. Bkz: Bölüm başlangıcındaki birim açıklaması.
+.sp
+.TP 4
+\fB-b\fR, \fB--sector-size\fR \fIBOYUT\fR
+Dönüş aygıtının mantıksal sektör boyutunu \fIBOYUT\fR bayta ayarlar (Linux 4.14’ten beri). Seçenek, yeni bir dönüş aygıtı oluşturulurken veya halihazırda var olan dönüş aygıtının sektör boyutunu değiştirmek için bağımsız komut oluştururken kullanılabilir.
+.sp
+.TP 4
+\fB-c\fR, \fB--set-capacity\fR \fI/dev/loop\fR[\fIN\fR]
+Dönüş aygıtı sürücüsünü, belirtilen dönüş aygıtıyla ilişkili dosyanın boyutunu yeniden okumaya zorlar.
+.sp
+.TP 4
+\fB-P\fR, \fB--partscan\fR
+Çekirdeği, yeni oluşturulan bir dönüş aygıtındaki bölüm tablosunu taramaya zorlar. Bölüm tablosu ayrıştırmasının sektör boyutlarına bağlı olduğu unutulmamalıdır. Dönüş aygıtı için ön tanımlı sektör boyutu 512 bayt olup bunu geçersiz kılmak için bu seçeneğin \fB--sector-size\fR seçeneğiyle birlikte kullanılması gerekir.
+.sp
+.TP 4
+\fB-r\fR, \fB--read-only\fR
+Dönüş aygıtı salt-okunur olur.
+.sp
+.TP 4
+\fB--direct-io\fR[=\fBon\fR|\fBoff\fR]
+Yedekleme dosyası için doğrudan G/Ç etkinleştirilir veya devre dışı bırakılır. İsteğe bağlı değer olarak \fBon\fR veya \fBoff\fR belirtilebilir, belirtilmezse \fBon\fR ön tanımlıdır.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Ayrıntı kipi.
+.sp
+.TP 4
+\fB-l\fR, \fB--list\fR
+Bir dönüş aygıtı veya \fB-a\fR seçeneği belirtilirse, belirtilen dönüş aygıtı veya tüm dönüş aygıtları için ön tanımlı sütunları basar. Tüm aygıtlar hakkında bilgi verilmesi ön tanımlıdır. Ayrıca bkz: \fB--output\fR, \fB--noheadings\fR, \fB--raw\fR, \fB--json\fR.
+.sp
+.TP 4
+\fB-O\fR, \fB--output\fR \fIsütun\fR[.\fIsütun\fR]...
+\fB--list\fR çıktısına basılacak sütunları belirler. Desteklenen sütunların listesini almak için \fB--help\fR seçeneği kullanılmalıdır.
+.sp
+.TP 4
+\fB--output-all\fR
+Kullanılabilen tüm sütunları çıktılar.
+.sp
+.TP 4
+\fB-n\fR, \fB--noheadings\fR
+\fB--list\fR çıktı biçeminde başlıklar basılmaz.
+.sp
+.TP 4
+\fB--raw\fR
+Ham \fB--list\fR çıktı biçemi kullanılır.
+.sp
+.TP 4
+\fB-J\fR, \fB--json\fR
+İlişkili tüm dönüş aygıtları sistemden ayrılır.
+.sp
+.PP
+.sp
+.SH "ŞİFRELEME"
+\fBcryptoloop artık dm-crypt lehine desteklenmemektedir.\fR Ayrıntılar için bkz: \fBcryptsetup\fR(8)
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBlosetup\fR başarılı olması durumunda 0 döndürür. \fBlosetup\fR, dönüş aygıtının durumunu görüntülediği durumlarda, aygıt yapılandırılmamışsa 1, aygıtın durumunu saptamaktan alıkoyan bir hata olması durumunda 2 döndürür.
+.sp
+.SH "EK BİLGİ"
+2.37 sürümünden beri, \fBlosetup\fR, bir \fBioctl\fR(2) çağrısı ile yeni bir dönüş aygıtı oluşturmak için \fBioctl\fR çağrısında \fBLOOP_CONFIGURE\fR komutunu kullanmaktadır.
+.br
+Eski sürümlerinde bu işlem \fBioctl\fR çağrısında \fBLOOP_SET_FD\fR ve \fBOOP_SET_STATUS64\fR komutları kullanılarak yapılırdı.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.IP "\fBLOOPDEV_DEBUG\fR=all" 4
+Hata ayıklama çıktısı etkin olur.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fI/dev/loop[0..N]\fR
+    dönüş blok aygıtları
+\&
+\fI/dev/loop-control\fR
+    dönüş denetim aygıtı
+.fi
+.sp
+.RE
+.sp
+.SH "ÖRNEK"
+Dönüş aygıtının kullanımına örnek olarak aşağıdaki komutlar kullanılabilir.
+.sp
+.RS 4
+.nf
+# dd if=/dev/zero of=~/dosya.img bs=1024k count=10
+# losetup --find --show ~/dosya.img
+/dev/loop0
+# mkfs -t ext2 /dev/loop0
+# mount /dev/loop0 /mnt
+\&...
+# umount /dev/loop0
+# losetup --detach /dev/loop0
+.fi
+.sp
+.RE
+.sp
+.SH "YAZANLAR"
+Özgün sürüm: Theodore Ts’o
+.br
+Özgün DES: Eric Young
+.br
+Sürdüren: Karel Zak
+.sp
+.SH "LİSANS"
+Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBlosetup\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

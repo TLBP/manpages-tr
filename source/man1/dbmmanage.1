@@ -1,0 +1,196 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DBMMANAGE" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dbmmanage - DBM biçemli kullanıcı kimlik doğrulama dosyalarını yönetir
+.sp
+.SH KULLANIM
+.IP \fBdbmmanage\fR 10
+[ \fIkodlama\fR ] \fIdosyaismi\fR \fBadd\fR | \fBadduser\fR | \fBcheck\fR | \fBdelete\fR | \fBupdate\fR \fIkullanıcı\fR [ \fIşifreli_parola\fR [ \fIgrup\fR[,\fIgrup\fR...] [ \fIaçıklama\fR ] ] ]
+.IP \fBdbmmanage\fR 10
+\fIdosyaismi\fR \fBview\fR [ \fIkullanıcı\fR ]
+.IP \fBdbmmanage\fR 10
+\fIdosyaismi\fR \fBimport\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBdbmmanage\fR, \fBmod_authn_dbm\fR üzerinden HTTP kullanıcılarının temel kimlik doğrulaması için kullanıcı isimlerinin ve parolalarının saklanmasında kullanılacak DBM dosyalarını oluşturmak ve güncellemek için kullanılır. Apache HTTP sunucusunun mevcut özkaynaklarının kullanımı sadece \fBdbmmanage\fR tarafından oluşturulan dosyalarda listelenmiş kullanıcılara tahsis edilebilir. \fBdbmmanage\fR sadece, kullanıcı isimleri bir DBM dosyasında saklanmak istenirse işe yarar. Düz metin bir veritabanı kullanmak isterseniz \fBhtpasswd\fR(1) sayfasına bakınız.
+.sp
+DBM parola veritabanı sağlayan diğer bir araç da \fBhtdbm\fR(1)’dir.
+.sp
+Bu kılavuz sayfası sadece komut satırı değiştirgelerini listeler. Kullanıcı kimlik doğrulamasını \fBhttpd\fR(8)’de yapılandırmak için gerekli yönergelerle ilgili ayrıntılar için Apache dağıtımının bir parçası olan ve http://httpd.apache.org/ adresinde de bulunan Apache HTTP Sunucusu Belgelerine bakınız.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fIdosyaismi\fR
+DBM dosyasının ismi. Genellikle, \fI.db\fR, \fI.pag\fR veya \fI.dir\fR eklentisi olmaksızın belirtilir.
+.sp
+.TP 4
+\fIkullanıcı\fR
+İşlemleri gerçekleştirecek kullanıcı ismi. \fIkullanıcı\fR ismi iki nokta imi (\fB:\fR) içeremez.
+.sp
+.TP 4
+\fIşifreli_parola\fR
+\fBupdate\fR ve \fBadd\fR komutları için kullanılacak şifreli paroladır. Parolanın istenmesini sağlamak, fakat hemen ardından alanları doldurmak için bir tire imi (\fB-\fR) kullanabilirsiniz. Buna ek olarak, \fBupdate\fR komutunu kullanırken özgün parolaya dokunulmaması için bir nokta imi (\fB.\fR) kullanabilirsiniz.
+.sp
+.TP 4
+\fIgrup\fR
+Kullanıcının üyesi olduğu grup. Grup ismi ikinokta imi (\fB:\fR) içeremez.Kullanıcıyı bir gruba atamadan açıklama alanını doldurmak istiyorsanız bir tire imi (\fB-\fR) kullanabilirsiniz. Buna ek olarak, \fBupdate\fR komutunu kullanırken özgün gruba dokunulmaması için bir nokta imi (\fB.\fR) kullanabilirsiniz.
+.sp
+.TP 4
+\fIaçıklama\fR
+Adı ve soyadı, eposta adresi gibi kullanıcıyla ilgili bir takım bilgiler buraya yazılır. Sunucu bu alanı yok sayar.
+.sp
+.PP
+.SS "Şifreleme Seçenekleri"
+.TP 4
+\fB-d\fR
+CRYPT şifrelemesi (Win32 ve Netware hariç, öntanımlı)
+.sp
+.TP 4
+\fB-m\fR
+MD5 şifrelemesi (Win32 ve Netware için öntanımlı)
+.sp
+.TP 4
+\fB-s\fR
+SHA1 şifrelemesi
+.sp
+.TP 4
+\fB-p\fR
+düz metin (\fIönerilmez\fR)
+.sp
+.PP
+.sp
+.SS "Komutlar"
+.TP 4
+\fBadd\fR
+\fIşifreli_parola\fR’yı kullanarak \fIdosyaismi\fR dosyasına \fIkullanıcı\fR için bir girdi ekler. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat add rbowen foKntnEF3KSXA
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBadduser\fR
+Parola sorduktan sonra \fIdosyaismi\fRdosyasına \fIkullanıcı\fR için bir girdi ekler. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat adduser krietz
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBcheck\fR
+Parola sorduktan sonra belirtilen \fIkullanıcı\fR, \fIdosyaismi\fR dosyasında var mı diye bakar; varsa belirtilen parolayı kullanıcınınkiyle eşleştirmeye çalışır. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat check rbowen
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBdelete\fR
+\fIdosyaismi\fR dosyasından \fIkullanıcı\fR girdisini siler. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat delete rbowen
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBimport\fR
+Standart girdiden \fIkullanıcı\fR:\fIparola\fR satırlarını (her satırda bir tane) okur ve bunları \fIdosyaismi\fR dosyasına ekler. Parola şifrelenmiş olmalıdır.
+.sp
+.TP 4
+\fBupdate\fR
+Belirtilen \fIkullanıcı\fR’nın \fIdosyaismi\fR dosyasında mevcut olması dışında \fBadduser\fR komutu gibidir. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat update rbowen
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBview\fR
+Sadece, DBM dosyasının içeriğini gösterir. Bir \fIkullanıcı\fR belirtirseniz sadece o kaydı gösterir. Örnek:
+.sp
+.RS 4
+.RS 7
+.nf
+dbmmanage passwords.dat view
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.PP
+.sp
+.sp
+.SH "YETERSİZLİKLER"
+Birden fazla DBM dosya biçemi vardır ve büyük bir olasılıkla da sisteminizde bu birden fazla biçemle ilgili kütüphaneler vardır. SDBM, NDBM, GNU’nun GDBM projesi ve Berkeley DB 2 bunların başlıcalarıdır. Ne yazık ki, bu kütüphanelerin her birinin dosya biçimleri farklıdır. Bu bakımdan, \fIdosyaismi\fR dosyasında kullanılan dosya biçeminin \fBdbmmanage\fR tarafından kullanılanla aynı biçemde olduğundan emin olmalısınız. \fBdbmmanage\fR hangi tür DBM dosyasına baktığını saptayacak yeterliliğe sahip değildir. Yanlış biçemli bir dosya belirtirseniz hiçbir şey dönmeyebileceği gibi, başka isimde bir DBM dosyasının oluşturulması veya daha da kötüsü üzerine yazmaya çalışıyorsanız DBM dosyasının bozulması bile olasıdır.
+.sp
+\fBdbmmanage\fR yazılımının başlangıcında \fB@AnyDBM::ISA\fR dizisi olarak tanımlanmış DBM biçem tercihlerinin bir listesi vardır. Berkeley DB 2 biçemini tercih ettiğimizden \fBdbmmanage\fR sistem kütüphanelerini şu sıraya göre arar: Berkeley DB 2, NDBM, GDBM ve SDBM. \fBdbmmanage\fR DBM dosyası hareketleri için bu sıralamaya göre bulduğu ilk kütüphaneyi kullanacaktır. Sıralama Perl’deki \fBdbmopen\fR(3) çağrısının kullandığından farklı olduğu gibi, Perl’deki standart \fB@AnyDBM::ISA\fR sıralamasından da oldukça farklıdır. Bu bakımdan, DBM dosyalarınızı yönetmek için \fBperl\fR(1) ile yazılmış başka araçlar kullanıyorsanız, onların da bu tercih sırasını izlemesini sağlamalısınız. Benzer şekilde, bu dosyalara erişmek için diğer dillerde (C gibi) yazılmış uygulamalar kullanıyorsanız bunlar için de aynı durum geçerlidir.
+.sp
+Unix sistemlerinde, kullanılan DBM dosyasının biçemini öğrenmek için \fBfile\fR(1) komutu kullanılabilir.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

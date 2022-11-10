@@ -1,0 +1,477 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
+ * https://sourceforge.net/p/net-tools/code/ci/master/tree/
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "NETSTAT" 8 "Ekim 2014" "net-tools 2.10" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+netstat - ağ bağlantılarını, yönlendirme tablolarını, arabirim istatistilerini, maskeleme bağlantılarını ve çoklu yayın üyeliklerini gösterir
+.sp
+.SH KULLANIM
+.IP \fBnetstat\fR 8
+[\fIadres_ailesi_seçenekleri\fR] [\fB--tcp\fR|\fB-t\fR] [\fB--udp\fR|\fB-u\fR] [\fB--udplite\fR|\fB-U\fR] [\fB--sctp\fR|\fB-S\fR] [\fB--raw\fR|\fB-w\fR] [\fB--l2cap\fR|\fB-2\fR] [\fB--rfcomm\fR|\fB-f\fR] [\fB--listening\fR|\fB-l\fR] [\fB--all\fR|\fB-a\fR] [\fB--numeric\fR|\fB-n\fR] [\fB--numeric-hosts\fR] [\fB--numeric-ports\fR] [\fB--numeric-users\fR] [\fB--symbolic\fR|\fB-N\fR] [\fB--extend\fR|\fB-e\fR[\fB--extend\fR|\fB-e\fR]] [\fB--timers\fR|\fB-o\fR] [\fB--program\fR|\fB-p\fR] [\fB--verbose\fR|\fB-v\fR] [\fB--continuous\fR|\fB-c\fR] [\fB--wide\fR|\fB-W\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--route\fR|\fB-r\fR} [\fIadres_ailesi_seçenekleri\fR] [\fB--extend\fR|\fB-e\fR[\fB--extend\fR|\fB-e\fR]] [\fB--verbose\fR|\fB-v\fR] [\fB--numeric\fR|\fB-n\fR] [\fB--numeric-hosts\fR] [\fB--numeric-ports\fR] [\fB--numeric-users\fR] [\fB--continuous\fR|\fB-c\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--interfaces\fR|\fB-i\fR} [\fB--all\fR|\fB-a\fR] [\fB--extend\fR|\fB-e\fR[\fB--extend\fR|\fB-e\fR]] [\fB--verbose\fR|\fB-v\fR] [\fB--program\fR|\fB-p\fR] [\fB--numeric\fR|\fB-n\fR] [\fB--numeric-hosts\fR] [\fB--numeric-ports\fR] [\fB--numeric-users\fR] [\fB--continuous\fR|\fB-c\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--groups\fR|\fB-g\fR} [\fB--numeric\fR|\fB-n\fR] [\fB--numeric-hosts\fR] [\fB--numeric-ports\fR] [\fB--numeric-users\fR] [\fB--continuous\fR|\fB-c\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--masquerade\fR|\fB-M\fR} [\fB--extend\fR|\fB-e\fR] [\fB--numeric\fR|\fB-n\fR] [\fB--numeric-hosts\fR] [\fB--numeric-ports\fR] [\fB--numeric-users\fR] [\fB--continuous\fR|\fB-c\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--statistics\fR|\fB-s\fR} [\fB--tcp\fR|\fB-t\fR] [\fB--udp\fR|\fB-u\fR] [\fB--udplite\fR|\fB-U\fR] [\fB--sctp\fR|\fB-S\fR] [\fB--raw\fR|\fB-w\fR]
+.sp
+.PP
+.IP \fBnetstat\fR 8
+{\fB--version\fR|\fB-V\fR}
+.IP \fBnetstat\fR 8
+{\fB--help\fR|\fB-h\fR}
+.sp
+.PP
+\fIadres_ailesi_seçenekleri\fR:
+.sp
+.IP \fB\fR 1
+[\fB--inet\fR|\fB-4\fR] [\fB--inet6\fR|\fB-6\fR] [\fB--protocol\fR={\fIinet,inet6,unix,ipx,ax25,netrom,ddp,bluetooth,...\fR}] [\fB--unix\fR|\fB-x\fR] [\fB--inet\fR|\fB--ip\fR|\fB--tcpip\fR] [\fB--ax25\fR] [\fB--x25\fR] [\fB--rose\fR] [\fB--ash\fR] [\fB--bluetooth\fR] [\fB--ipx\fR] [\fB--netrom\fR] [\fB--ddp\fR|\fB--appletalk\fR] [\fB--econet\fR|\fB--ec\fR]
+.sp
+.PP
+.TP 4
+\fBUyarı:\fR
+Bu uygulama oldukça eskidir. \fBnetstat\fR yerine \fBss\fR(8), \fBnetstat -r\fR yerine \fBip route\fR, \fBnetstat -g\fR yerine \fBip maddr\fR kullanılabilir.
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBnetstat\fR, Linux ağ alt sistemi hakkında bilgi verir. Çıktılanacak bilginin türü ilk değiştirge ile belirlenir:
+.sp
+.TP 4
+\fB(yok)\fR
+Öntanımlı olarak \fBnetstat\fR açık soketleri gösterir. Herhangi bir adres ailesi belirtilmezse yapılandırılmış tüm adres ailelerinin etkin soketleri gösterilir.
+.sp
+.TP 4
+\fB-r\fR, \fB--route\fR
+Çekirdeğin IP yönlendirme tablosunu gösterir. Ayrıntılar için \fBroute\fR(8) kılavuz sayfasına bakılabilir. \fBnetstat -r\fR ve \fBroute -e\fR aynı çıktıyı üretir.
+.sp
+.TP 4
+\fB-g\fR, \fB--groups\fR
+IPv4 ve IPv6 için çoğa gönderim grup üyelikleri hakkında bilgi verir.
+.sp
+.TP 4
+\fB-i\fR, \fB--interfaces\fR
+Tüm ağ arabirimlerini tablo halinde gösterir.
+.sp
+.TP 4
+\fB-M\fR, \fB--masquerade\fR
+Maskelenmiş bağlantıları listeler.
+.sp
+.TP 4
+\fB-s\fR, \fB--statistics\fR
+Her protokol için istatistiklerin özetini gösterir.
+.sp
+.PP
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Çıktı ayrıntılı olur. Özellikle, yapılandırılmamış adres aileleri hakkında yararlı bilgiler verir.
+.sp
+.TP 4
+\fB-W\fR, \fB--wide\fR
+Çıktıyı gerektiği kadar geniş kullanarak IP adreslerini kırpmaz. Bu, mevcut betikleri bozmamak için şimdilik isteğe bağlıdır.
+.sp
+.TP 4
+\fB-n\fR, \fB--numeric\fR
+Sembolik konak, port veya kullanıcı adlarını belirlemeye çalışmak yerine sayısal adresleri gösterilir.
+.sp
+.TP 4
+\fB--numeric-hosts\fR
+Sayısal konak adreslerini gösterir ancak port veya kullanıcı adlarının çözünürlüğünü etkilemez.
+.sp
+.TP 4
+\fB--numeric-ports\fR
+Port numaralarını gösterir ancak konak veya kullanıcı adlarının çözünürlüğünü etkilemez.
+.sp
+.TP 4
+\fB--numeric-users\fR
+Sayısal kullanıcı kimlikleri gösterir ancak konak veya port adlarının çözünürlüğünü etkilemez.
+.sp
+.TP 4
+\fB-A\fR, \fB--protocol\fR=\fIadres_ailesi\fR
+Bağlantıların gösterileceği adres ailelerini (belki de düşük seviyeli protokoller olarak daha iyi tanımlanır) belirler. \fIadres_ailesi\fR, \fBinet\fR, \fBinet6\fR, \fBunix\fR, \fBipx\fR, \fBax25\fR, \fBnetrom\fR, \fBeconet\fR, \fBddp\fR ve \fBbluetooth\fR gibi adres ailesi anahtar sözcüklerinin virgülle (’,’) ayrılmış bir listesidir. Bu, \fB--inet\fR|\fB-4\fR, \fB--inet6\fR|\fB-6\fR, \fB--unix\fR|\fB-x\fR, \fB--ipx\fR, \fB--ax25\fR, \fB--netrom\fR, \fB--ddp\fR ve \fB--bluetooth\fR seçenekleri kullanılmış gibi etki eder.
+.sp
+\fBinet\fR (IPv4) adres ailesi raw, udp, udplite ve tcp protokollerinin soketlerini içerir.
+.sp
+\fBbluetooth\fR (IPv4) adres ailesi l2cap ve rfcomm protokollerinin soketlerini içerir.
+.sp
+.TP 4
+\fB-c\fR, \fB--continuous\fR
+\fBnetstat\fR’ın seçilen bilgileri her saniye sürekli olarak ekrana yazmasına neden olur.
+.sp
+.TP 4
+\fB-e\fR, \fB--extend\fR
+Ek bilgi gösterir. Seçenek iki kere belirtilirse azami ayrıntı elde edilir.
+.sp
+.TP 4
+\fB-o\fR, \fB--timers\fR
+Ağ zamanlayıcılarıyla ilgili bilgileri eklenir.
+.sp
+.TP 4
+\fB-p\fR, \fB--program\fR
+Her soketin ait olduğu sürecin kimliğini (PID) ve adını gösterir. Soket çekirdeğe aitse bir tire gösterilir (örneğin, bir çekirdek hizmeti veya süreç çıktı ancak soket henüz kapanmayı bitirmediyse).
+.sp
+.TP 4
+\fB-l\fR, \fB--listening\fR
+Yalnızca dinleme soketlerini gösterilir. (Bu öntanımlı olarak atlanır.)
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Hem dinleyen hem de dinlemeyen soketler gösterilir. \fB--interfaces\fR seçeneğiyle, çalışmayan arabirimler de gösterilir.
+.sp
+.TP 4
+\fB-F\fR
+Çekirdeğin FIB (Forwarding Information Base) yönlendirme bilgilerini gösterir.
+.sp
+.TP 4
+\fB-C\fR
+route önbelleğindeki yönlendirme bilgilerini gösterir.
+.sp
+.PP
+.sp
+.SH "ÇIKTI"
+.SS "Active Internet connections"
+Etkin Internet bağlantıları (TCP, UDP, UDPLite, raw)
+.sp
+.SS "Proto"
+Soketin protokolü (tcp, udp, udpl, raw)
+.sp
+.SS "Recv-Q"
+Established: (Kuruldu:) Bu sokete bağlı kullanıcı uygulaması tarafından kopyalanmayan bayt sayısı.
+.br
+Listening: (Dinleme:) Kernel 2.6.18’den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için kuyruk uzunluğunu (SYN backlog) içerir.
+.sp
+.SS "Send-Q"
+Established: (Kuruldu:) Uzak soketten alındısı (ACK) dönmeyen bayt sayısı.
+.br
+Listening: (Dinleme:) Kernel 2.6.18’den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için azami kuyruk uzunluğunu (\fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR) içerir.
+.sp
+.SS "Local Address"
+Soketin yerel uç adresi ve port numarası. \fB--numeric\fR (\fB-n\fR) seçeneği belirtilmedikçe, soket adresi nitelikli konak adına (FQDN) çözümlenir ve port numarası karşılık gelen hizmet adına dönüştürülür.
+.sp
+.SS "Foreign Address"
+Soketin uzak uç adresi ve port numarası. "Local Address"e benzer.
+.sp
+.SS "State"
+Soketin durumu. Ham kip durumsuz olduğundan ve genellikle UDP ve UDPLite da durumsuz kullanıldığından, bu sütun boş kalabilir. Normalde aşağıdaki değerlerden biri olabilir:
+.sp
+.TP 4
+\fIESTABLISHED\fR
+Soket bağlantı kurmuş.
+.sp
+.TP 4
+\fISYN_SENT\fR
+Soket hala bağlantı kurmaya çalışıyor
+.sp
+.TP 4
+\fISYN_RECV\fR
+Ağdan bağlantı isteği alındı.
+.sp
+.TP 4
+\fIFIN_WAIT1\fR
+Soket kapalı ve bağlantı kesilecek.
+.sp
+.TP 4
+\fIFIN_WAIT2\fR
+Bağlantı kapalı ve soket uzak ucun durmasını bekliyor.
+.sp
+.TP 4
+\fITIME_WAIT\fR
+Soket, hala ağda bulunan paketleri işlemek için kapandıktan sonra bekliyor.
+.sp
+.TP 4
+\fICLOSE\fR
+Soket kullanılmıyor.
+.sp
+.TP 4
+\fICLOSE_WAIT\fR
+Uzak uç durmuş ve soket kapanmayı bekliyor.
+.sp
+.TP 4
+\fILAST_ACK\fR
+Uzak uç durmuş ve soket kapalı. Alındı bekleniyor.
+.sp
+.TP 4
+\fILISTEN\fR
+Soket gelen bağlantılar için dinlemede. \fB--listening\fR (\fB-l\fR) veya \fB--all\fR (\fB-a\fR) seçeneği belirtilmedikçe çıktıya böyle soketler dahil edilmez.
+.sp
+.TP 4
+\fICLOSING\fR
+Her iki soket de durmuş ama hala veri gönderilmemiş.
+.sp
+.TP 4
+\fIUNKNOWN\fR
+Soketin durumu bilinmiyor.
+.sp
+.PP
+.sp
+.SS "User"
+Soket sahibinin kullanıcı adı veya kulanıcı kimliği.
+.sp
+.SS "PID/Program name"
+Soketin sahibi olan sürecin kimliği (PID) / Sürecin adı. Bu sütun yalnızca \fB--program\fR seçeneği belirtilmişse gösterilir. Ayrıca, sahibi olmadığınız süreçlerin bilgilerini görebilmek için root ayrıcalıkları gerekir. Bu sütun IPX soketleri için henüz kullanılabilir değildir.
+.sp
+.SS "Timer"
+Soketle ilişkili TCP zamanlayıcı. Biçem: timer(a/b/c). Zamanlayıcı aşağıdaki değerlerden biri olabilir:
+.sp
+.TP 4
+\fIoff\fR
+Sokete bir zamanlayıcı atanmamış.
+.sp
+.TP 4
+\fIon\fR
+Soket için yeniden aktarım zamanlayıcısı etkin.
+.sp
+.TP 4
+\fIkeepalive\fR
+Canlı tutma zamanlayıcısı soket için etkin.
+.sp
+.TP 4
+\fItimewait\fR
+Bağlantı kapanıyor ve soket için bekleme süresi etkin.
+.sp
+.PP
+Ayraçlar arasındaki değerler:
+.sp
+.TP 4
+\fIa\fR
+Zamanlayıcı değeri.
+.sp
+.TP 4
+\fIb\fR
+Gönderilmiş yeniden aktarım sayısı.
+.sp
+.TP 4
+\fIc\fR
+Gönderilmiş canlı tutmaların sayısı.
+.sp
+.PP
+.sp
+.SS "Active UNIX domain Sockets"
+Etkin UNIX alan Soketleri
+.sp
+.SS "Proto"
+Soketin protokolü (genellikle unix).
+.sp
+.SS "RefCnt"
+Atıf sayısı (soket ile ilişkili süreç sayısı).
+.sp
+.SS "Flags"
+Gösterilen bayraklar \fBSO_ACCEPTON\fR (ACC olarak gösterilir), \fBSO_WAITDATA\fR (W) veya \fBSO_NOSPACE\fR (N) olup diğer bayraklar normalde önemsenmez. Bağlantısız soketlerle ilgili süreçler bir bağlantı isteği bekliyorsa, \fBSO_ACCEPTON\fR bağlantısız soketlerde kullanılır.
+.sp
+.SS "Type"
+Soket erişim türleri:
+.sp
+.TP 4
+\fBSOCK_DGRAM\fR
+Soket verikatarı kipinde (bağlantısız) kullanılır.
+.sp
+.TP 4
+\fBSOCK_STREAM\fR
+Bu bir akım soketidir (bağlantılı).
+.sp
+.TP 4
+\fBSOCK_RAW\fR
+Soket ham kipte kullanılır.
+.sp
+.TP 4
+\fBSOCK_RDM\fR
+Güvenilir şekilde ileti tesliminde kullanılır.
+.sp
+.TP 4
+\fBSOCK_SEQPACKET\fR
+Sıralı paket soketidir.
+.sp
+.TP 4
+\fBSOCK_PACKET\fR
+Ham arabirim erişim soketi.
+.sp
+.TP 4
+\fBUNKNOWN\fR
+Soketin türü bilinmiyor.
+.sp
+.PP
+.sp
+.SS "State"
+Bu alan aşağıdaki anahtar sözcüklerden birini içerir:
+.sp
+.TP 4
+\fBFREE\fR
+Soket bir süreç için ayrılmamış.
+.sp
+.TP 4
+\fBLISTENING\fR
+Soket gelen bağlantılar için dinlemede. \fB--listening\fR (\fB-l\fR) veya \fB--all\fR (\fB-a\fR) seçeneği belirtilmedikçe çıktıya böyle soketler dahil edilmez.
+.sp
+.TP 4
+\fBCONNECTING\fR
+Soket bağlantı kurmaya hazırlanıyor.
+.sp
+.TP 4
+\fBCONNECTED\fR
+Soket bağlı.
+.sp
+.TP 4
+\fBDISCONNECTING\fR
+Soket bağlantısı kesiliyor.
+.sp
+.TP 4
+\fB(boş)\fR
+Soket, diğerine bağlı değil.
+.sp
+.TP 4
+\fBUNKNOWN\fR
+Bu durum asla olmamalı.
+.sp
+.PP
+.sp
+.SS "PID/Program name"
+Soketin sahibi olan sürecin kimliği (PID) / Sürecin adı. Bu sütun yalnızca \fB--program\fR seçeneği belirtilmişse gösterilir. Ayrıca, sahibi olmadığınız süreçlerin bilgilerini görebilmek için root ayrıcalıkları gerekir. Bu sütun IPX soketleri için henüz kullanılabilir değildir.
+.sp
+.SS "Path"
+İlgili süreçlerin sokete eklediği dosya yoludur.
+.sp
+.SS "Active IPX sockets"
+Etkin IPX soketleri
+.sp
+.SS "Active NET/ROM sockets"
+Etkin NET/ROM soketleri
+.sp
+.SS "Active AX.25 sockets"
+Etkin AX.25 soketleri
+.sp
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/services\fR
+Hizmet isimlerine ilişkin port numaraları listesi.
+.sp
+.TP 4
+\fI/etc/services\fR
+Hizmet isimlerine ilişkin port numaraları listesi.
+.sp
+.TP 4
+\fI/proc\fR
+proc dosya sisteminin bağlantı noktası; altındaki dosyalarla çekirdeğin durumuna ilişkin bilgi verir.
+.sp
+.TP 4
+\fI/proc/net/dev\fR
+Ağ aygıtları bilgisi.
+.sp
+.TP 4
+\fI/proc/net/raw\fR
+Ham soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/tcp\fR
+TCP soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/udp\fR
+UDP soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/udplite\fR
+UDPLite soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/igmp\fR
+IGMP çoğa gönderim bilgileri.
+.sp
+.TP 4
+\fI/proc/net/unix\fR
+Unix alan adı soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/ipx\fR
+IPX soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/ax25\fR
+AX25 soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/appletalk\fR
+DDP (appletalk) soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/nr\fR
+NET/ROM soket bilgileri.
+.sp
+.TP 4
+\fI/proc/net/route\fR
+IP yönlendirme bilgileri.
+.sp
+.TP 4
+\fI/proc/net/ax25_route\fR
+AX25 yönlendirme bilgileri.
+.sp
+.TP 4
+\fI/proc/net/ipx_route\fR
+IPX yönlendirme bilgileri.
+.sp
+.TP 4
+\fI/proc/net/nr_nodes\fR
+NET/ROM düğüm listesi.
+.sp
+.TP 4
+\fI/proc/net/ip_masquerade\fR
+Maskelenmiş bağlantılar.
+.sp
+.TP 4
+\fI/sys/kernel/debug/bluetooth/l2cap\fR
+Bluetooth L2CAP bilgileri.
+.sp
+.TP 4
+\fI/sys/kernel/debug/bluetooth/rfcomm\fR
+Bluetooth seri hat bağlantıları.
+.sp
+.TP 4
+\fI/proc/net/snmp\fR
+İstatistikler.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBroute\fR(8), \fBifconfig\fR(8), \fBiptables\fR(8), \fBproc\fR(8), \fBss\fR(8), \fBip\fR(8).
+.sp
+.SH "HATA AYIKLAMA"
+Bir soket görüntülendiğinde değişirse bazen garip bilgiler görünebilir. Bunun gerçekleşmesi olası değildir.
+.sp
+.SH "YAZAN"
+Netstat kullanıcı arayüzü Fred Baumgarten tarafından, kılavuz sayfası ise temelde Matt Welsh tarafından yazılmıştır. Alan Cox tarafından güncellendikten sonra Tuan Hoang tarafından tekrar güncellenmiştir. Net-tools paketindeki kılavuz sayfası ve komut Bernd Eckenfels tarafından tamamen yeniden yazılmıştır. UDPLite seçenekleri Brian Micek tarafından eklendi.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

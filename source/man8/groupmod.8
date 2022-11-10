@@ -1,0 +1,199 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2000 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2011, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "GROUPMOD" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+groupmod - bir grubun niteliklerini düzenler
+.sp
+.SH KULLANIM
+.IP \fBgroupmod\fR 9
+[\fIseçenekler\fR] \fIGRUP\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBgroupmod\fR komutu, belirtilen \fIGRUP\fRa ait bilgilerdeki değişiklikleri, sistem hesap dosyaları üzerinde değiştirmek için kullanılır.
+.sp
+.SH "SEÇENEKLER"
+Bu komuta verilebilecek seçenekler şunlardır:
+.sp
+.TP 4
+\fB-a\fR, \fB--append\fR \fIgrup-kimliği\fR
+Grup üyeleri \fB-U\fR ile belirtilmişse onları değiştirmek yerine mevcut üye listesine ekler.
+.sp
+.TP 4
+\fB-g\fR, \fB--gid\fR \fIgrup-kimliği\fR
+\fIgrup-kimliği\fR sıfırdan büyük bir tamsayı olmalıdır. \fB–o\fR seçeneği belirtilmediği sürece bu değer benzersiz olmalıdır.
+.sp
+Grubu birincil grup olarak kullanan kullanıcılar grubu birincil grup olarak tutmak için güncellenir.
+.sp
+Dosya grup numarası, eski grup numarası olan bütün dosyaların dosya grup numaraları el ile değiştirilmelidir.
+.sp
+/etc/login.defs dosyasındaki \fBGID_MIN, GID_MAX, SYS_GID_MIN\fR ve \fBSYS_GID_MAX\fR değerleri üzerinden denetim yapılmaz.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-n\fR, \fB--new-name\fR \fIYENİ-GRUP\fR
+\fIGRUP\fR ile belirtilen grubun adını \fIYENİ-GRUP\fR olarak değiştirir.
+.sp
+.TP 4
+\fB-o\fR, \fB--non-unique\fR
+\fB–g\fR seçeneği ile birlikte kullanıldığında grup kimliğinin eşsiz olmayan bir değerle değiştirilmesini sağlar.
+.sp
+.TP 4
+\fB-p\fR, \fB--password\fR \fIPAROLA\fR
+\fBcrypt\fR(3) tarafından döndürülen gibi şifreli parola. Parolanın devre dışı bırakılması öntanımlıdır.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Süreçleri listeleyen kullanıcılara parola (veya şifreli parola) görünür olacağından bu seçeneğin kullanımı önerilmemektedir.
+.sp
+.RE
+.IP
+\fIPAROLA\fR sistemin parola politikasına uygun olmalıdır.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--prefix\fR \fIPREFIX_DİZİNİ\fR
+Değişiklikleri \fIPREFIX_DİZİNİ\fRnde uygular ve \fIPREFIX_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır. Bu seçenek chroot yapmaz ve çapraz derlemeye hazırlık için tasarlanmamıştır. Bazı sınırlamalar: NIS ve LDAP kullanıcı ve grupları doğrulanmaz. PAM kimlik kanıtlaması konak dosyalarını kulllanılır. SELinux desteklenmez.
+.sp
+.TP 4
+\fB-U\fR, \fB--users\fR
+Grup üyeleri olarak eklenecek kullanıcıların listesi.
+.sp
+Öntanımlı davranış \fBlogin.defs\fR(5) dosyasında \fBUSERGROUPS_ENAB\fR değişkeni ile tanımlanır (\fB-g\fR, \fB-N\fR ve \fB-U\fR seçenekleri belirtilmezse.)
+.sp
+.PP
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için \fI/etc/login.defs\fR dosyasında bulunan aşağıdaki değişkenler kullanılabilir:
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fB/etc/group\fR      - grupların hesap bilgileri
+\fB/etc/gshadow\fR    - güvenli grup bilgileri
+\fB/etc/login.defs\fR - Shadow parola yapılandırma dosyası
+\fB/etc/passwd\fR     - Kullanıcı hesap bilgileri
+.fi
+.sp
+.RE
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBgroupmod\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+E_SUCCESS: başarılı
+.sp
+.TP 4
+\fI2\fR
+E_USAGE: geçersiz komut sözdizimi
+.sp
+.TP 4
+\fI3\fR
+E_BAD_ARG: seçenek değiştirgesi geçersiz
+.sp
+.TP 4
+\fI4\fR
+E_GID_IN_USE: grup kimliği zaten kullanılıyor
+.sp
+.TP 4
+\fI6\fR
+E_NOTFOUND: böyle bir grup yok
+.sp
+.TP 4
+\fI9\fR
+E_NAME_IN_USE: grup ismi zaten kullanılıyor
+.sp
+.TP 4
+\fI10\fR
+E_GRP_UPDATE: \fI/etc/group\fR dosyası güncellenemiyor
+.sp
+.TP 4
+\fI11\fR
+E_CLEANUP_SERVICE: temizlik hizmeti kurulamıyor
+.sp
+.TP 4
+\fI12\fR
+E_PAM_USERNAME: pam ile kullanılacak kullanıcı ismi saptanamadı
+.sp
+.TP 4
+\fI13\fR
+E_PAM_ERROR: pam bir hata döndürdü, hata iletisi için syslog günlüğünde groupmod ile ilgili iletiye bakın
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBgpasswd\fR(1), \fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBlogin.defs\fR(5), \fBuseradd\fR(8), \fBuserdel\fR(8), \fBusermod\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

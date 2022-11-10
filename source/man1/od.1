@@ -1,0 +1,209 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "OD" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+od - dosyayı sekizlik veya başka bir biçimde dökümler
+.sp
+.SH KULLANIM
+.IP \fBod\fR 3
+[\fISEÇENEK\fR]... \fIDOSYA\fR...
+.IP \fBod\fR 3
+[\fB-abcdfilosx\fR]... \fIDOSYA\fR [[+]\fIKONUM\fR[.][b]]
+.IP \fBod\fR 3
+\fB--traditional\fR [\fISEÇENEK\fR]... \fIDOSYA\fR [[+]\fIKONUM\fR[.][b] [+][\fIETİKET\fR][.][b]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIDOSYA\fRnın, hiçbir seçenek belirtilmediğinde sekizlik sayı sisteminde, tek başına anlamlı bir suretini standart çıktıya yazar. Birden fazla \fIDOSYA\fR verildiğinde, girdi sırasıyla bunları birbirine ekler.
+.sp
+\fIDOSYA\fR adı verilmemişse veya - olarak verilmişse, standart girdiden okur.
+.sp
+Eğer ilk ve ikinci çağrı biçimlerinin ikisi de uygulanmışsa ikinci biçimin + ile başlayan son terim veya (iki terim varsa) bir rakam olduğu varsayılır. Bir \fIKONUM\fR terimi \fB-j \fR\fIKONUM\fR anlamına gelir. \fBod\fR her satırın başına bir adres yazar, \fIETİKET\fR belirtilmişse ilk satırın başına bu yafta yazılır, diğer satırlar buna göre numaralanır. \fIkonum\fR veya \fIETİKET\fRin başlarına 0x veya 0X koyarak bu sayıların onaltılık sistemde olduğunu belirtebilirsiniz. Sonlarına \fB.\fR koyarsanız sekizlik sistemde olduklarını, \fBb\fR koyarsanız 512 ile çarpılmalarını istediğinizi belirtmiş olursunuz.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-A\fR, \fB--address-radix\fR=\fITABAN\fR
+Dosya konumlarını \fITABAN\fR sayı sisteminde yazar. \fITABAN\fR olarak onluk için \fBd\fR, sekizlik için \fBo\fR, onaltılık için \fBx\fR, hiçbiri için \fBn\fR belirtilebilir.
+.sp
+.TP 4
+\fB--endian\fR={big|little}
+Girdi baytlarının yerlerini belirtilen sıraya göre değiştirir.
+.sp
+.TP 4
+\fB-j\fR, \fB--skip-bytes\fR=\fISAYI\fR
+Her dosyanın ilk \fISAYI\fR baytını atlar.
+.sp
+.TP 4
+\fB-N\fR, \fB--read-bytes\fR=\fISAYI\fR
+Çıktıyı dosya başına \fISAYI\fR girdi baytıyla sınırlar.
+.sp
+.TP 4
+\fB-S\fR, \fB--strings\fR[=\fISAYI\fR]
+En az \fISAYI\fR grafik karakterlik dizgeler çıktılar. Öntanımlı: 3.
+.sp
+.TP 4
+\fB-t\fR, \fB--format\fR=\fITÜR\fR
+Çıktı \fITÜR\fRünü belirler.
+.sp
+.TP 4
+\fB-v\fR, \fB--output-duplicates\fR
+Art arda gelen birbirinin aynı satırları * kullanmadan yazar.
+.sp
+.TP 4
+\fB-w\fR, \fB--width\fR[=\fISAYI\fR]
+Her satıra \fISAYI\fR bayt yazar. Öntanımlı: 32.
+.sp
+.TP 4
+\fB--traditional\fR
+Değiştirgeleri üçüncü kullanıma göre kabul eder.
+.sp
+.TP 4
+\fB--help\fR
+Bu yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.SS "Geleneksel biçem belirtimleri birlikte kullanılabilir:"
+.TP 4
+\fB-a\fR
+\fB-t a\fR ile aynı, kıymetli biti yoksayarak isimli karakterleri seçer.
+.sp
+.TP 4
+\fB-b\fR
+\fB-t o1\fR ile aynı, sekizlik baytlar seçer.
+.sp
+.TP 4
+\fB-c\fR
+\fB-t c\fR ile aynı, yazdırılabilir karakterleri ve ters eğik çizgi ile öncelenmiş karakterleri seçer.
+.sp
+.TP 4
+\fB-d\fR
+\fB-t u2\fR ile aynı, onluk tabanda işaretsiz 2 baytlık birimleri seçer.
+.sp
+.TP 4
+\fB-f\fR
+\fB-t fF\fR ile aynı, gerçel sayıları seçer.
+.sp
+.TP 4
+\fB-i\fR
+\fB-t dI\fR ile aynı, onluk tamsayıları seçer.
+.sp
+.TP 4
+\fB-l\fR
+\fB-t dL\fR ile aynı, onluk uzun tamsayıları seçer.
+.sp
+.TP 4
+\fB-o\fR
+\fB-t o2\fR ile aynı, sekizlik 2 baytlık birimleri seçer.
+.sp
+.TP 4
+\fB-s\fR
+\fB-t d2\fR ile aynı, onluk 2 baytlık birimleri seçer.
+.sp
+.TP 4
+\fB-x\fR
+\fB-t x2\fR ile aynı, onaltılık 2 baytlık birimleri seçer
+.sp
+.PP
+.sp
+.SS "TÜR şunlardan biri veya birkaçı olabilir:"
+.TP 4
+\fBa\fR
+Kıymetli biti yoksayarak isimli karakterleri yazar.
+.sp
+.TP 4
+\fBc\fR
+Yazdırılabilir karakterleri ve ters eğik çizgi ile öncelenmiş karakterleri yazar.
+.sp
+.TP 4
+\fBd\fR[\fIBOYUT\fR]
+İşaretli onluk tamsayıyı \fIBOYUT\fR baytlık yazar.
+.sp
+.TP 4
+\fBf\fR[\fIBOYUT\fR]
+Gerçel sayıyı \fIBOYUT\fR baytlık sayı olarak yazar.
+.sp
+.TP 4
+\fBo\fR[\fIBOYUT\fR]
+Sekizlik sayıyı \fIBOYUT\fR baytlık sayı olarak yazar.
+.sp
+.TP 4
+\fBu\fR[\fIBOYUT\fR]
+İşaretsiz onluk tamsayıyı \fIBOYUT\fR baytlık yazar.
+.sp
+.TP 4
+\fBx\fR[\fIBOYUT\fR]
+Onaltılık sayıyı \fIBOYUT\fR baytlık sayı olarak yazar.
+.sp
+.PP
+\fIBOYUT\fR bir sayıdır. \fITÜR\fR [doux] olduğunda, \fIBOYUT\fR sizeof(char) için \fBC\fR, sizeof(short) için \fBS\fR, sizeof(int) için \fBI\fR veya sizeof(long) için \fBL\fR olabilir. \fITÜR\fR \fBf\fR olduğunda, \fIBOYUT\fR sizeof(float) için \fBF\fR, sizeof(double) için \fBD\fR veya sizeof(long double) için \fBL\fR olabilir.
+.sp
+Bir \fITÜR\fRe \fBz\fR soneki eklenmesi, çıktılanacak her satırın sonuna o satırdaki basılabilir karakterlerin hepsinin yazılmasına sebep olur.
+.sp
+.SS "Onaltılık sayıların çarpan sonekleri:"
+.TP 4
+b
+512
+.sp
+.TP 4
+KB
+1000
+.sp
+.TP 4
+K
+1024
+.sp
+.TP 4
+MB
+1000*1000
+.sp
+.TP 4
+M
+1024*1024
+.sp
+.PP
+G, T, P, E, Z, Y için benzer şekilde devam eder. Bibaytlık önekler de kullanılabilir: KiB=K, MiB=M,...
+.sp
+.sp
+.SH "ÖRNEKLER"
+.IP "\fBod -A x -t x1z -v\fR" 4
+Onaltılık biçimde çıktı gösterir.
+.IP "\fBod -A o -t oS -w16\fR" 4
+Öntanımlı komut satırı.
+.sp
+.SH "YAZAN"
+Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/od>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) od invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

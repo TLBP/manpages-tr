@@ -1,0 +1,155 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ ****************************************************************************
+ * Copyright 2018-2021,2022 Thomas E. Dickey                                *
+ * Copyright 1998-2016,2017 Free Software Foundation, Inc.                  *
+ *                                                                          *
+ * Permission is hereby granted, free of charge, to any person obtaining a  *
+ * copy of this software and associated documentation files (the            *
+ * "Software"), to deal in the Software without restriction, including      *
+ * without limitation the rights to use, copy, modify, merge, publish,      *
+ * distribute, distribute with modifications, sublicense, and/or sell       *
+ * copies of the Software, and to permit persons to whom the Software is    *
+ * furnished to do so, subject to the following conditions:                 *
+ *                                                                          *
+ * The above copyright notice and this permission notice shall be included  *
+ * in all copies or substantial portions of the Software.                   *
+ *                                                                          *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS  *
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF               *
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.   *
+ * IN NO EVENT SHALL THE ABOVE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,   *
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR    *
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR    *
+ * THE USE OR OTHER DEALINGS IN THE SOFTWARE.                               *
+ *                                                                          *
+ * Except as contained in this notice, the name(s) of the above copyright   *
+ * holders shall not be used in advertising or otherwise to promote the     *
+ * sale, use or other dealings in this Software without prior written       *
+ * authorization.                                                           *
+ ****************************************************************************
+ *
+ * $Id: clear.1,v 1.27 2022/02/12 20:07:29 tom Exp $
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CLEAR" 1 "12 Şubat 2022" "ncurses-6.3 (patch 20220326)" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+clear - uçbirim ekranını temizler
+.sp
+.SH KULLANIM
+.IP \fBclear\fR 6
+[\fB-T\fR\fItür\fR]... [\fB-V\fR] [\fB-x\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBclear\fR, mümkün ise ekranınızı, geri kaydırma tamponu dahil ("E3" yetenek eklentisi tanımlıysa) temizler. \fBclear\fR ekranı nasıl temizleyeceğini saptamak için önce \fBTERM\fR ortam değişkeninde verilmiş uçbirim türü için ortama, ardından \fBterminfo\fR veritabanına bakar.
+.sp
+\fBclear\fR, standart çıktıya yazar. Standart çıktı bir dosyaya yönlendirilebilir (bu durumda ekran temizlenmez) ve daha sonra dosya \fBcat\fR ile ekrana yazdırılarak ekran temizlenebilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-T\fR \fItür\fR
+Uçbirirm \fItür\fR’ünü belirler. Normalde bu seçenek gereksizdir, çünkü öntanımlı değer \fBTERM\fR ortam değişkeninden alınır. \fB-T\fR belirtilmişse \fBLINES\fR ve \fBCOLUMNS\fR ortam değişkenleri de yok sayılır
+.sp
+.TP 4
+\fB-V\fR
+Bu komutu içeren ncurses paketinin sürümünü gösterir ve çıkar.
+.sp
+.TP 4
+\fB-x\fR
+"E3" yetenek eklentisini kullanarak uçbirimin geri kaydırma tamponunu temizlemeye çalışmaz.
+.sp
+.PP
+.sp
+.SH "TARİHÇE"
+\fBclear\fR ilk olarak 24 Şubat 1979’da 2.79 BSD’de, ardından 1985 yılında Unix’in 8. baskısında göründü.
+.sp
+AT&T \fBtput\fR diye bir komut içeren farklı bir BSD uygulaması (\fBtset\fR) uyarladı ve bunu \fBtput clear\fR çağrısı yapan bir kabuk betiği olan \fBclear\fR komutunda aşağıdaki gibi kullandı:
+.sp
+.RS 4
+.nf
+/usr/bin/tput ${1:+-T$1} clear 2> /dev/null
+exit
+.fi
+.sp
+.RE
+1989’da Keith Bostic, BSD \fBtput\fR komutunu AT&T \fBtput\fR’una benzer hale getirmek için değiştirdiğinde, \fBclear\fR komutu için şöyle bir kabuk betiği ekledi:
+.sp
+.RS 4
+.nf
+exec tput clear
+.fi
+.sp
+.RE
+Komut dosyasının geri kalanı her durumda bir telif hakkı bildirimidir.
+.sp
+1995 yılında ncurses, özgün BSD \fBclear\fR komutundan kendi \fBclear\fR komutunu uyarlamaya başladı (şüphesiz, terminfo ile).
+.sp
+Daha sonra \fBE3\fR eklentisi geldi:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+Haziran 1999’da \fBxterm\fR, ekranı temizlemek için standart denetim dizisine bir eklenti sağladı:
+.sp
+.RS 4
+.RS 4
+.nf
+printf ’\\033[2J’
+.fi
+.sp
+.RE
+.RE
+.IP
+kullanarak ekranın sadece görünen kısmını temizlemek yerine
+.sp
+.RS 4
+.RS 4
+.nf
+printf ’\\033[3J’
+.fi
+.sp
+.RE
+.RE
+.IP
+kullanarak geri kaydırma da temizlenebilir oldu. Bu, \fBxterm\fR’den kaynaklanan bir özellik olarak \fIXTerm Denetim Dizilimleri\fR altında belgelenmiştir.
+.IP \(bu 3
+Birkaç uçbirim geliştiricisi daha, örneğin 2006’da PuTTY, bu özelliği benimsedi.
+.IP \(bu 3
+Nisan 2011’de Red Hat’tan bir geliştirici, aynı şeyi yapmak için konsol sürücüsünü değiştirerek Linux çekirdeğine bir yama gönderdi. Linux 3.0 sürümünün bir parçası olan değişiklikte, değişikliğe yol açan Red Hat hata raporuna (#683733) atıfta bulunulmasına rağmen \fBxterm\fR’den bahsedilmedi.
+.IP \(bu 3
+Yine, birkaç uçbirim geliştiricisi daha bu özelliği benimsedi. Ancak daha sonraki adım, bu eklentiyi dahil etmek için 2013’te \fBclear\fR uygulamasında yapılan bir değişiklikti.
+.IP \(bu 3
+2013 yılında \fBtput\fR’ta \fBE3\fR eklentisi “clear” değiştirgesi ile gözden kaçmıştı. Bu, 2016’da, \fBtput\fR’un mantığı \fBclear\fR ve \fBtset\fR ile paylaşılacak şekilde yeniden düzenlenerek ele alındı.
+.sp
+.RE
+.PD 0
+.sp
+.SH "TAŞINABİLİRLİK"
+Ne IEEE Std 1003.1/The Open Group Base Belirtimleri Sayı 7 (POSIX.1-2008) ne de X/Open Curses Sayı 7 belgelerinde tset veya reset’ten bahsedilir.
+.sp
+Sonuncusu tput’u şöyle belgelelendirmiştir: Bir kabuk betiği aracılığıyla ya da bir takma adla (sembolik bağ gibi) \fBtput\fR, \fBclear\fR olarak çalıştırılmak üzere kullanılabilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBtput\fR(1), \fBterminfo\fR(5), \fBxterm\fR(1).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

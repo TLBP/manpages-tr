@@ -1,0 +1,182 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "HTCACHECLEAN" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+htcacheclean - Disk arabelleğini temizler
+.sp
+.SH KULLANIM
+.IP \fBhtcacheclean\fR 13
+[ \fB-D\fR ] [ \fB-v\fR ] [ \fB-t\fR ] [ \fB-r\fR ] [ \fB-n\fR ] [ \fB-R\fR\fIboyut\fR ] \fB-p\fR\fIyol\fR [ \fB-l\fR\fIsınır\fR ] [ \fB-L\fR\fIsınır\fR ]
+.IP \fBhtcacheclean\fR 13
+[ \fB-n\fR ] [ \fB-t\fR ] [ \fB-i\fR ] [ \fB-P\fR\fIpiddosyası\fR ] [ \fB-R\fR\fIboyut\fR ] \fB-d\fR\fIsüre\fR \fB-p\fR\fIyol\fR [ \fB-l\fR\fIsınır\fR ] [ \fB-L\fR\fIsınır\fR ]
+.IP \fBhtcacheclean\fR 13
+[ \fB-v\fR ] [ \fB-R\fR\fIboyut\fR ] \fB-p\fR\fIyol\fR [ \fB-a\fR ] [ \fB-A\fR ]
+.IP \fBhtcacheclean\fR 13
+[ \fB-D\fR ] [ \fB-v\fR ] [ \fB-t\fR ] [ \fB-R\fR\fIboyut\fR ] \fB-p\fR\fIyol url\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBhtcacheclean\fR, \fBmod_cache_disk\fR deposunun boyutlarını belli sınırlar içinde veya kullanımdaki dosya düğümlerinin sınırları içinde tutmak için kullanılır. Bu araç ya elle ya da bir artalan süreci olarak çalıştırılır. Artalan süreci olarak çalıştırıldığında, silinecek arabellek içeriğini tespit etmek için arabellek dizinlerine belli aralıklarla bakmak dışında uykuda olur. Artalan sürecini temiz olarak durdurmak için TERM veya INT sinyali göndermeniz yeterlidir. Elle çalıştırıldığında, silinecek arabellek içeriğini tespit etmek için arabellek dizinlerine bir kereliğine bakar. Bir veya daha fazla URL belirtilmesi durumunda arabellekte olanlar arabellekten silinir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-d\fR\fIsüre\fR
+Artalanda çalışarak \fIsüre\fR dakikada bir arabelleği temizler. Bu seçenek \fB-D\fR, \fB-v\fR ve \fB-r\fR seçenekleri ile birlikte kullanılamaz. Artalan sürecini temiz olarak sonlandırmak için \fBSIGTERM\fR veya \fBSIGINT\fR göndermek yeterlidir.
+.sp
+.TP 4
+\fB-D\fR
+Kuru kuruya çalışıp, hiçbir şeyi silmez. \fB-d\fR seçeneği ile birlikte kullanılamaz. Kuru çalıştırma sırasında \fB-t\fR seçeneği ile dizinler silinmek istenirse, statlarda silinmiş görünen dosya düğümleri silinmiş dizinler olarak hesaba katılmaz ve tahmini olarak imlenir.
+.sp
+.TP 4
+\fB-v\fR
+Çıktı daha ayrıntılı olur. \fB-d\fR seçeneği ile birlikte kullanılamaz.
+.sp
+.TP 4
+\fB-r\fR
+İyice temizlik yapılır. Bunun için Apache HTTP sunucusunun çalışmadığı varsayılır (aksi takdirde arabellek içeriği bozulabilir). \fB-t\fR seçeneğinin de uygulanmasını sağlar. \fB-d\fR seçeneği ile birlikte kullanılamaz.
+.sp
+.TP 4
+\fB-n\fR
+Nazik olur. Diğer süreçlerin yararına daha yavaş çalışır.
+.sp
+.PD 1
+.RS 5
+.IP a. 3
+Disk G/Ç işlemlerinde gecikmeler olursa,
+.IP b. 3
+çekirdek bu arada başka bir süreci öne çekmişse
+.sp
+.RE
+.IP
+.PD 0
+\fBhtcacheclean\fR uyumayı tercih edecektir.
+.sp
+.TP 4
+\fB-t\fR
+Tüm boş dizinleri siler. Öntanımlı olarak, sadece arabellek dosyaları silinirse de bazı yapılandırmalarda büyük miktarda dizin oluşturulması bu seçeneğin kullanılmasını gerektirebilir. Yapılandırmanız çok sayıda dizin gerektiriyorsa ve dosya düğümlerinin veya dosya ayırma tablolarının tükenmesi sözkonusu ise bu seçeneğin kullanılması önerilir.
+.sp
+.TP 4
+\fB-p\fR\fIyol\fR
+\fIyol\fR, disk arabelleğinin kök dizini olarak belirtilir. \fBCacheRoot\fR yönergesinde belirtilen dizin olmalıdır.
+.sp
+.TP 4
+\fB-P\fR\fIpiddosyası\fR
+Artalan süreci olarak çalışmada süreç kimliğinin yazılacağı dosyanın adını belirtmek için kullanılır.
+.sp
+.TP 4
+\fB-R\fR\fIboyut\fR
+Disk bloklarının boyunu denkleştirmek için yuvarlanacak üst boyutu belirtmekte kullanılır. Arabellek bölümünün blok boyutunu belirler.
+.sp
+.TP 4
+\fB-l\fR\fIsınır\fR
+\fIsınır\fR, disk arabelleğinin toplam boyutu olarak belirtilir. Değerin öntanımlı olarak bayt cinsinden belirtileceği varsayılır. Değerin sonuna kilobayt için \fBK\fR, megabayt \fBM\fR, Gbayt için \fBG\fR harfi konulabilir.
+.sp
+.TP 4
+\fB-L\fR\fIlimit\fR
+Disk arabellek dosyası düğümü toplamının sınırını belirlemekte kullanılır. Değerin sonuna kilobayt için \fBK\fR, megabayt \fBM\fR, Gigabayt için \fBG\fR harfi konulabilir.
+.sp
+.TP 4
+\fB-i\fR
+Akıllı olup sadece disk arabelleği değiştiği zaman çalışır. Bu seçenek \fB-d\fR seçeneği ile birlikte belirtilmek zorundadır.
+.sp
+.TP 4
+\fB-a\fR
+O an arabellekte saklanmakta olan URL’leri listeler. Birden fazla aynı URL varsa yalnız biri listelenir.
+.sp
+.TP 4
+\fB-A\fR
+O an arabellekte saklanmakta olan URL’leri öznitelikleri ile listeler. Öznitelikler şu sırayla verilir: url, header size, body size, status, entity version, date, expiry, request time, response time, body present, head request
+.sp
+.PP
+.sp
+.SH "BELLİ BİR URL’NİN SİLİNMESİ"
+\fBhtcacheclean\fR tarafından aktarılan URL’ler arabellekten silinir. Bir URL birden fazla mevcutsa hepsi silinir.
+.sp
+Ters vekilli bir URL silinmişse, etkin URL \fBHost\fR başlığı \fBport\fR, \fByol\fR ve \fBsorgu\fR ile oluşturulur. Bir sorgu dizgesi olsun olmasın, URL içinde ’?’ daima açıkça belirtilmelidir. Örneğin, \fBlocalhost\fR sunucusundaki \fB/\fR yolu silinmek istenirse silinecek URL \fBhttp://localhost:80/?\fR olurdu.
+.sp
+.SH "ARABELLEKTEKİ URL’LERİN LİSTELENMESİ"
+\fBhtcacheclean\fR’e \fB-a\fR veya \fB-A\fR seçeneğinin aktarılmasıyla, arabellekteki URL’ler bulundukça her satıra bir URL gelecek biçemde listelenir. \fB-A\fR seçeneği URL’nin ardından arabellek içeriğini tamamını şu sırayla dökümler:
+.sp
+.TP 4
+\fBurl\fR
+Öğenin URL’si.
+.sp
+.TP 4
+\fBheader size\fR
+Bayt cinsinden başlık uzunluğu.
+.sp
+.TP 4
+\fBbody size\fR
+Bayt cinsinden gövde uzunluğu.
+.sp
+.TP 4
+\fBstatus\fR
+Arabellekteki yanıtın durumu.
+.sp
+.TP 4
+\fBentity version\fR
+Öğenin silinmeksizin kaç kere doğrulandığı.
+.sp
+.TP 4
+\fBdate\fR
+Yanıt tarihi.
+.sp
+.TP 4
+\fBexpiry\fR
+Yanıtın zaman aşımı tarihi.
+.sp
+.TP 4
+\fBrequest time\fR
+İsteğin başlama zamanı.
+.sp
+.TP 4
+\fBresponse time\fR
+İsteğin bitiş zamanı.
+.sp
+.TP 4
+\fBbody present\fR
+0 ise istekle birlikte gövde saklanmaz, 1 ise saklanır.
+.sp
+.TP 4
+\fBhead request\fR
+1 ise, öğe, gövde olmaksızın arabellekli bir HEAD isteği içerir, 0 ise içermez.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBhtcacheclean\fR, tüm işlemler başarıyla yerine getirildiğinde \fB0\fR, aksi takdirde \fB1\fR döndürür. Bir URL belirtildiğinde, bu URL arablleklenmi ve silinmişse \fB0\fR, aksi takdirde \fB2\fR döndürür. URL’nin silinmesi sırasında bir hata oluşursa \fB1\fR döndürür.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

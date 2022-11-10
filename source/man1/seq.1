@@ -1,0 +1,75 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SEQ" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+seq - bir sayı dizisi basar
+.sp
+.SH KULLANIM
+.IP \fBseq\fR 4
+[\fISEÇENEK\fR]... \fISON\fR
+.IP \fBseq\fR 4
+[\fISEÇENEK\fR]... \fIİLK SON\fR
+.IP \fBseq\fR 4
+[\fISEÇENEK\fR]... \fIİLK ARTIŞ SON\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIİLK\fRten başlayıp \fISON\fRa kadar \fIARTIŞ\fRar atlayarak bir sayı dizisi basar.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-f\fR, \fB--format=\fR\fIBİÇEM\fR
+printf tarzı gerçel sayı \fIBİÇEM\fRi kullanılır (öntanımlı: %g).
+.sp
+.TP 4
+\fB-s\fR, \fB--separator=\fR\fIDİZGE\fR
+Sayıları ayırmak için \fIDİZGE\fR kullanılır (öntanımlı: \\n).
+.sp
+.TP 4
+\fB-w\fR, \fB--equal-width\fR
+Sayıların soluna sıfır ekleyerek genişliği eşitler.
+.sp
+.TP 4
+\fB--help\fR
+Bu yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+Eğer \fIİLK\fR ve \fIARTIŞ\fR belirtilmezse, 1 oldukları varsayılır. \fISON İLK\fRten küçük bile olsa verilmeyen \fIARTIŞ\fRın 1 olduğu varsayılır. \fIİLK, ARTIŞ\fR ve \fISON\fR gerçel sayı değerler olarak yorumlanır. Genellikle \fISON İLK\fRten büyük olduğunda \fIARTIŞ\fR pozitif, küçük olduğunda ise negatif olur. \fIBİÇEM\fR ’double’ türünde tek bir sayı basmaya elverişli olmalıdır. \fIİLK, ARTIŞ\fR ve \fISON\fR azami duyarlılığı \fIDUY\fR olan ondalık sayılarsa \fIBİÇEM\fRin \fB%.\fR\fIDUY\fR\fBf\fR olduğu aksi takdirde \fB%g\fR olduğu varsayılır.
+.sp
+.SH "YAZAN"
+Ulrich Drepper tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/seq>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) seq invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

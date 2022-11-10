@@ -1,0 +1,235 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1989, 1990, 1993
+ *     The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Kim Letkeman.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *    This product includes software developed by the University of
+ *    California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *     @(#)cal.1       8.1 (Berkeley) 6/6/93
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CAL" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+cal - bir takvim görüntüler
+.sp
+.SH KULLANIM
+.IP \fBcal\fR 4
+[\fIseçenekler\fR] [[[\fIgün\fR] \fIay\fR] \fIyıl\fR]
+.IP \fBcal\fR 4
+[\fIseçenekler\fR] [\fIzaman_damgası\fR|\fIay_adı\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBcal\fR basit bir takvim görüntülemek için kullanılır. Şayet herhangi bir değiştirge belirtilmemişse, geçerli ay görüntülenir.
+.sp
+\fIay\fR geçerli yerele uygun olarak bir sayı (1-12), ay ismi veya kısa ay ismi olarak belirtilebilir.
+.sp
+Gregoryen ve Jülyen olmak üzere iki farklı takvim sistemi kullanılmaktadır. Jülyen takvimi, artık yıllar için küçük bir ayarlama yapan Gregoryen takvimi ile hemen hemen aynı olmakla beraber Gregoryen takvimindeki bu küçük ayarlama, gece gündüz eşitliği gibi güneş olaylarının takvimle eşzamanlamasını kolaylaştırır. Gregoryen takvim reformu 1582’de tanıtıldı, ancak benimsenmesi 1923’e kadar devam etti. Öntanımlı olarak \fBcal\fR, kabul tarihi olarak 3 Eylül 1752’yi kullanır. Gregoryen takvimi bu tarihten itibaren görüntülenir; önceki tarihler Jülyen takvim sistemini kullanır. Takvimi güneş olaylarıyla eşzamanlamak için takvimin kabulü sırasında 11 gün kaldırıldı. Bu nedenle 1752 Eylül’ü, Gregoryen takviminin 2 Eylül’den sonra 14 Eylül gelmesi nedeniyle Jülyen takviminden farklıdır.
+.sp
+Seçimlik olarak Gregoryen veya Jülyen takvimi kullanılabilir ama ikisi birden değil. Aşağıda, \fB--reform\fR seçeneğine bakınız.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-1\fR, \fB--one\fR
+Bir aylık çıktı gösterilir. (Öntanımlıdır.)
+.sp
+.TP 4
+\fB-3\fR, \fB--three\fR
+Önceki/tarihi içeren/sonraki ayı gösterir.
+.sp
+.TP 4
+\fB-n\fR, \fB--months\fR \fIsayı\fR
+Tarihi içeren aydan başlayarak ay sayısını gösterir.
+.sp
+.TP 4
+\fB-S\fR, \fB--span\fR
+Tarihi içeren ayı gösterir.
+.sp
+.TP 4
+\fB-s\fR, \fB--sunday\fR
+Pazar’ı, haftanın ilk günü kabul ederek görüntüler.
+.sp
+.TP 4
+\fB-m\fR, \fB--monday\fR
+Pazartesi’yi, haftanın ilk günü kabul ederek görüntüler.
+.sp
+.TP 4
+\fB-v\fR, \fB--vertical\fR
+Görüntülemede dikey yerleşim kullanılır (\fBncal\fR(1) kipi de denir.)
+.sp
+.TP 4
+\fB--iso\fR
+Sadece Gregoryen takvimi görüntülenir. Bu seçenek hafta numaralarını ve haftanın ilk gününü etkilemez. Aşağıda \fB--reform\fR seçeneğine bakınız.
+.sp
+.TP 4
+\fB-j\fR, \fB--julian\fR
+Tüm takvimler için yılın günü numaralandırması kullanılır. Bunlara sıralı günler de denir. Sıralı günler 1 ile 366 arasındadır. Bu seçenek, Gregoryen takvim sisteminden \fB--reform\fR seçeneği ile denetlenen Jülyen takvim sistemine geçişi sağlamaz.
+.sp
+Bazen sıralı tarihleri kullanan Gregoryen takvimlerine Jülyen takvimleri dendiği olur. Bu, Julian adıyla birlikte kullanılan uzlaşımlardan dolayı kafa karıştırıcı olabilir: (sıralı) jülyen tarihi, jülyen (takvim) tarihi, (astronomik) jülyen tarihi, (değiştirilmiş) jülyen tarihi ve daha fazlası. Bu seçeneğe julian adının verilme sebebi, sıralı günlerin POSIX standardında julian olarak tanımlanmasıdır. Bununla birlikte, \fBcal\fR uygulamasının Jülyen takvim sistemini de kullandığını unutmayın. Yukarıda \fBAÇIKLAMA\fR bölümüne bakınız.
+.sp
+.TP 4
+\fB--reform\fR \fIdeğer\fR
+Bu seçenek, Gregoryen takvim reformunun kabul tarihini belirler. Reformdan önceki takvim tarihlerinde Jülyen takvim sistemi kullanılır. Reformdan sonraki takvim tarihlerinde ise Gregoryen takvim sistemi kullanılır. \fIdeğer\fR şunlaran biri olabilir:
+.sp
+.RS
+.TP 4
+\fI1752\fR
+Reform tarihi olarak 3 Eylül 1752 atanır (öntanımlı). Bu, Gregoryen takvim reformunun İngiliz İmparatorluğu tarafından kabul edildiği tarihtir.
+.sp
+.TP 4
+\fIgregorian\fR
+Özellikle Gregoryen takvimler görüntülenir. Bu özel yer tutucu, reform tarihini \fBcal\fR uygulamasının kullanabileceği en küçük yıldan önceki bir tarih olarak belirler. Yani tüm takvim çıktıları Gregoryen takvim sistemini kullanır. Buna sonuca ermiş Gregoryen takvimi denir, çünkü takvim sisteminin oluşturulmasından önceki tarihler için tahmini değerler kullanılır.
+.sp
+.TP 4
+\fIiso\fR
+\fIgregorian\fR seçeneği için takma ad. Bilgi alışverişinde tarih ve saatlerin temsili için ISO 8601 standardı, sonuca ermiş Gregoryen takviminin kullanılmasını gerektirir.
+.sp
+.TP 4
+\fIjulian\fR
+Özellikle Jülyen takvimler görüntülenir. Bu özel yer tutucu, reform tarihini \fBcal\fR uygulamasının kullanabileceği en büyük yıldan sonraki bir tarih olarak belirler. Yani tüm takvim çıktıları Jülyen takvim sistemini kullanır.
+.sp
+.PP
+.RE
+.IP
+Yukarıda \fBAÇIKLAMA\fR bölümüne bakınız.
+.sp
+.TP 4
+\fB-y\fR, \fB--year\fR
+Yıllık takvimi gösterir.
+.sp
+.TP 4
+\fB-Y\fR, \fB--twelve\fR
+Sonraki oniki ayın takvimini gösterir.
+.sp
+.TP 4
+\fB-w\fR, \fB--week\fR[=\fIsayı\fR]
+Takvimde hafta numaralarını gösterir (US veya ISO-8601). Ayrıntılar için \fBEK BİLGİ\fR bölümüne bakın.
+.sp
+.TP 4
+\fB--color\fR[=\fInezaman\fR]
+Çıktıyı renklendirir. Seçimlik \fInezaman\fR değiştirgesinde \fBauto\fR, \fBnever\fR ya da \fBalways\fR belirtilebilir. Belirtilmezse \fBauto\fR öntanımlıdır. Renklendirme iptal edilebilir. Geçerli kurulumun öntanımlısını görmek için \fB--help\fR çıktısına bakın. Ayrıca \fBRENKLER\fR böümüne de bakın.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "DEĞİŞTİRGELER"
+.TP 4
+\fBSadece sayı içeren tek değiştirge\fR (’\fBcal 2020\fR’ gibi)
+Gösterilecek yıl belirtilir. Ancak, yılın eksiksiz belirtilmesi gerekir. \fBcal 89\fR 1989 takvimini göstermeyecektir.
+.sp
+.TP 4
+\fBSadece dizge içeren tek değiştirge\fR (’\fBcal tomorrow\fR’, ’\fBcal Temmuz\fR’ gibi)
+Geçerli yerele uygun \fIay_adı\fR, kısa ay adı veya \fIzaman_damgası\fR belirtilir.
+.sp
+\fIzaman_damgası\fR için özel sözcükler kabul edilmektedir. "now" içinde bulunulan an,"today" bugün, "yesterday" dün, "tomorrow" yarın anlamında belirtilebilir.
+.sp
+Göreli tarih belirtimleri de kabul edilir, bu durumda "+" geçerli saat artı belirtilen zaman aralığına göre değerlendirilir. Buna uygun olarak, ön eki "-" olan bir zaman aralığı, geçerli zamandan belirtilen zaman aralığının çıkarılmasıyla hesaplanır, örneğin ’+2days’. Zaman aralığının önüne "+" veya "-" koymak yerine, sonuna bir boşluk ve "left" veya "ago" kelimesi de eklenebilir (örneğin ’1 week ago’).
+.sp
+.TP 4
+\fBİki değiştirge\fR (’\fBcal 11 2020\fR’ gibi)
+Ay (1 - 12) ve yıl belirtilir.
+.sp
+.TP 4
+\fBÜç değiştirge\fR (’\fBcal 25 11 2020\fR’ gibi)
+Gün (1-31), ay ve yıl belirtilir ve takvim bir uçbirimde görüntülenirse gün vurgulanır. Herhangi bir değiştirge belirtilmezse, içinde bulunulan ayın takvimi görüntülenir.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+Yıl, 1 Ocak’ta başlar. Haftanın ilk günü yerele göre saptanır veya \fB--sunday\fR ve \fB--monday\fR seçenekleri ile belirtilir.
+.sp
+Hafta numaralandırması haftanın ilk günü seçimine bağımlıdır. Haftanın ilk günü Pazar ise, geleneksel Kuzey Amerika numaralandırması kullanılır, burada 1 Ocak 1. haftadadır. Haftanın ilk günü Pazartesi (-m) ise, hafta numaralandırması 1. haftanın ilk gününü Perşembe kabul eden ISO 8601 standardına göre yapılır.
+.sp
+.SH "RENKLER"
+Çıktı renklendirmesi, \fBterminal-colors.d\fR(5) işlevselliği kullanılarak gerçekleştirilir. Örtülü renklendirme, \fBcal\fR uygulaması için boş bir
+.sp
+.RS 4
+.nf
+/etc/terminal-colors.d/cal.disable
+.fi
+.sp
+.RE
+dosyasıyla veya
+.sp
+.RS 4
+.nf
+/etc/terminal-colors.d/disable
+.fi
+.sp
+.RE
+ile tüm araçlar için devre dışı bırakılabilir.
+.sp
+Kullanıcıya özel \fI$XDG_CONFIG_HOME/terminal-colors.d\fR veya \fI$HOME/.config/terminal-colors.d\fR, genel tanımları geçersiz kılar.
+.sp
+Çıktı renklendirmesinin öntanımlı olarak etkinleştirilebileceğini ve bu durumda \fBterminal-colors.d\fR(5) dizinlerinin henüz mevcut olması gerekmediğini unutmayın.
+.sp
+.SH "TARİHÇE"
+\fBcal\fR uygulaması ilk olarak AT&T UNIX Sürüm 6’da görünmüştür.
+.sp
+.SH "YETERSİZLİKLER"
+Öntanımlı \fBcal\fR çıktısı, Gregoryen takvim reform tarihi olarak 3 Eylül 1752’yi kullanır. Ekim 1582’deki tanıtımı da dahil olmak üzere tarihi reform tarihleri diğer yereller için gerçeklenmedi.
+.sp
+Ümmü’l-Kura, Hicri Güneş, Ge’ez, veya Hindu ay-güneş takvimi gibi takvimler desteklenmiyor.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBcal\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

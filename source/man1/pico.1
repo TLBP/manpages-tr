@@ -1,0 +1,243 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Pine, Pico, and Pilot software and its included text are Copyright
+ * 1989-2005 by the University of Washington.
+ *
+ * This product is in part based on The Elm Mail System 2.13
+ ***********************************************************************
+ *  The Elm Mail System  -  Revision: 2.13                             *
+ *                                                                     *
+ *                     Copyright (c) 1986, 1987 Dave Taylor            *
+ *                     Copyright (c) 1988, 1989 USENET Community Trust *
+ ***********************************************************************
+ *
+ * This product is in part based on MicroEMACS 3.6, written by Dave G.
+ * Conroy; modified by Steve Wilhite, and George Jones; and greatly
+ * modified by Daniel Lawrence.
+ *
+ * Some of the code dealing with temporary files in this product was derived
+ * from 4.3 BSD code, which was developed by the University of California.
+ *
+ *********************************************************************
+ *  This code is derived from software contributed to Berkeley by
+ *  Chris Torek.
+ *
+ *  Copyright (c) 1990, 1993, 1994
+ *       The Regents of the University of California.  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *  1. Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *  2. Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in the
+ *     documentation and/or other materials provided with the distribution.
+ *  3. All advertising materials mentioning features or use of this software
+ *     must display the following acknowledgement:
+ *       This product includes software developed by the University of
+ *       California, Berkeley and its contributors.
+ *  4. Neither the name of the University nor the names of its contributors
+ *     may be used to endorse or promote products derived from this software
+ *     without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ *  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ *  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ *  PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS
+ *  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ *  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ *  BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ *  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *********************************************************************
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PICO" 1 "pico 5.09" "pico 5.09" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+pico - Alpine eposta istemcisi tarzında basit bir metin düzenleyici
+.sp
+.SH KULLANIM
+.IP \fBpico\fR 5
+[\fIseçenekler\fR] [\fIdosya\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBpico\fR, Alpine eposta istemcisinin düzenleyicisi üzerine kurulu, ekran yönlenimli, basit bir metin düzenleyicidir. Alpine’da olduğu gibi, komutlar ekranın altında görüntülenir ve bağlama duyarlı bir yardım sistemi vardır. Karakterler girilir girilmez, metin içine yerleştirilirler.
+.sp
+Düzenleme komutları, Ctrl tuşu ile birlikte kullanılan tuşlarla girilir. İletişim uygulamalarının bazı karakterleri yutması problemini, iki kere ESCAPE tuşuna basarak Ctrl tuşunun taklit edilmesini sağlayarak aşabilirsiniz. Örneğin; "ESC ESC c" Ctrl+c ile aynı anlamdadır. Düzenleyici beş temel özelliğe sahiptir: paragraf hizalama, arama, blok kesme ve yapıştırma, yazım denetleyici ve dosya tarayıcı.
+.sp
+Paragraf hizalama (veya doldurma) imlecin içinde bulunduğu paragrafta gerçekleşir. Şayet imleç satırlar arasında ise, alttaki paragrafta gerçekleşir. Paragraflar, boş satırlar ile veya boşluk ya da sekme ile başlayan satırlar ile ayrımlanır. Hizalamanın kaldırması, hizalama yapıldıktan hemen sonra Ctrl+U tuşları ile yapılabilir.
+.sp
+Dizge aramaları büyük/küçük harf ayrımına duyarlı değildir. Arama, imlecin bulunduğu konumdan başlar ve metnin sonuna kadar devam eder. Son kullanılan arama dizgeleri, sonraki aramalarda öntanımlı olarak önerilirler. Yani, arama kutusu açıldığında bu dizgelerin orada yazılı olduğunu görürsünüz.
+.sp
+Metin blokları mark/işaretleme (Ctrl-^), delete/silme (Ctrl-k) ve undelete/geri alma (Ctrl-u) komutlarının yaratıcı biçimde kullanılması ile taşınabilir, kopyalanabilir veya silinebilir. Delete/Silme komutu, "mark/işaretlenen konum" ile imlecin bulunduğu konum arasındaki bütün metni silecektir. Daha sonra bu metin parçası "kesme" tamponuna yerleştirilir. "undelete/gerialma" komutu, imlecin o an bulunduğu noktaya "yapıştırma" yapacaktır.
+.sp
+Yazım denetleyicisi (spell checker), metnin içindeki bütün kelimeleri araştırır. Daha sonra hatalı gördüğü kelimeler için doğru karşılıkları önerir. Bunları sıra ile aydınlatarak gösterir. Yazım denetimi istenilen an iptal edilebilir. Öte yandan, pico, \fBSPELL\fR ortam değişkeni içinde tanımlı bir yazım denetim yordamını öntanımlı olarak kullanabilir. Bu yordam standart girdiyi okur ve standart çıktıya yazar.
+.sp
+Dosya tarayıcısı (file browser), "Read File/dosya oku" ve "Write Out/dışarı yaz" komutları için seçenek olarak önerilir. Dizin ağacı içinde gezinmek ve belirli dosyaları aramak ve tasarlanmıştır. Çalışma dizini içindeki dizinler isimleriyle, dosyalar isimleri ve boyutları ile seçilebilir olarak gösterilir. Komut isimleri alttan ikinci sırada gösterilirken, içinde bulunulan dizin ekranın en üst satırında gösterilir. Temel dosya işleme işlevlerinden desteklenenler şunlardır: dosyaların tekrar isimlendirilmesi, kopyalama ve silme.
+.sp
+Daha ayrıntılı yardım bilgileri \fBpico\fR’nun çevrimiçi yardımında bulunabilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fI+n\fR
+\fBpico\fR, imleç dosya içinde \fIn\fR. satırda yerleştirilmiş olarak başlayacaktır (artı işareti ve sayı arasında boşluk olmamalıdır).
+.sp
+.TP 4
+\fB-a\fR
+\fB.\fR (nokta) ile başlayanlar da dahil olmak üzere bütün dosyaları listeler.
+.sp
+.TP 4
+\fB-b\fR
+Değiştirilecek (Replace) metnin "Where is" komutu kullanılarak bulunan metinle değiştirilmesi seçeneğini etkinleştirir.
+.sp
+.TP 4
+\fB-d\fR
+Delete/Silme tuşunun imlecin solundaki karakter yerine imlecin altındaki karakteri silmesini sağlar.
+.sp
+.TP 4
+\fB-e\fR
+Dosya ismi tamamlamayı etkinleştirir.
+.sp
+.TP 4
+\fB-f\fR
+Komutlar için işlev tuşları kullanılır. Bu seçenek, UW Enhanced NCSA telnet ile uyum adına desteklenmiştir.
+.sp
+.TP 4
+\fB-h\fR
+Geçerli komut satırı seçeneklerini listeler.
+.sp
+.TP 4
+\fB-j\fR
+Dosya tarayıcıdaki "Goto/Git" komutunu etkinleştirir. Bu seçenek, gidilecek dizinin komuta açıkça belirtilmesini sağlar.
+.sp
+.TP 4
+\fB-g\fR
+Dosya tarayıcısında "Show Cursor/İmleci Göster" kipini etkinleştirir. İmlecin ekranın sol altı yerine seçili bölgenin öncesine yerleştirilmesini sağlar.
+.sp
+.TP 4
+\fB-k\fR
+"Cut Text/metni kes" komutunun, bütün satırı silmesi yerine, sadece imlecin bulunduğu yerden satır sonuna kadar silinmesini sağlar.
+.sp
+.TP 4
+\fB-m\fR
+Fare işlevselliğini etkinleştirir. Bu seçenek sadece, Pico’nun, X oturumunda bir "xterm" penceresi içinde çalıştığı durumlarda geçerlidir.
+.sp
+.TP 4
+\fB-n\fR\fIn\fR
+Yeni posta uyarısını etkinleştirir. \fIn\fR değiştirgesi isteğe bağlıdır ve posta kutusunun saniye cinsinden hangi sıklıkla kontrol edileceğini belirtir. Örneğin; -n60 yazarsanız, pico her dakika, yeni posta olup olmadığını kontrol edecektir. Öntanımlı olarak bu süre 180 saniyedir. Mümkün en küçük değer 30 saniyedir. "n" ile sayı arasında boşluk olmamalıdır.
+.sp
+.TP 4
+\fB-o\fR \fIdizin\fR
+Çalışılacak dizini ayarlar. Sadece bu dizin içindeki dosyalar ulaşılabilir olur. Benzer şekilde, dosya arayıcısı bu dizin ve alt dizinleriyle sınırlandırılmış olur.
+.sp
+.TP 4
+\fB-r\fR\fIn\fR
+"Justify/Hizala" komutunun sağ kenar boşluğunun kaç karakter olacağı belirtilir.
+.sp
+.TP 4
+\fB-s\fR \fIyazım-denetleyici\fR
+Yazım denetimi için kullanılmak üzere başka bir yazım denetimi uygulamasının belirtilmesini sağlar.
+.sp
+.TP 4
+\fB-t\fR
+"Tool/araç" kipini etkinleştirir. Pico’nun, diğer araçların içinde (Elm, Pnews gibi) metin düzenleyi olarak kullanıldığı durumlar için tasarlanmıştır. Çıkışta kayıt için uyarı verilmez ve "Write Out/Dışarıya Yaz" komutu esnasında tampon yeniden adlandırılmaz.
+.sp
+.TP 4
+\fB-v\fR
+Dosyayı sadece görüntüler, düzenlemeye izin verilmez.
+.sp
+.TP 4
+\fB-w\fR
+Satır sarmalamayı iptal eder, böylece uzun satırların düzenlenebilmesi mümkün olur.
+.sp
+.TP 4
+\fB-x\fR
+Ekranın altındaki tuş menüsünü kapatır.
+.sp
+.TP 4
+\fB-z\fR
+Pico’nun ^Z ertelemesini etkinleştirir.
+.sp
+.TP 4
+\fB-p\fR
+Bazen iletişim yollarında farklı hızlarda çalışan aygıtlar arasındaki veri akışını denetlemek için kullanılan Ctrl-Q ve Ctrl-S, "start" and "stop" karakterleri korunur.
+.sp
+.TP 4
+\fB-Q\fR\fIalıntıdizgesi\fR
+Alıntılama dizgesini tanımlar. Özellikle e-posta oluştururken kullanışlıdır, bunu ayarlamak, paragrafları yaslarken alıntı dizgesinin denetlenebilmesini sağlar. Alıntı dizgesi genelde "> " dizgesidir.
+.sp
+.TP 4
+\fB-W\fR\fIsözcük-ayracı\fR
+Burada listelenen karakterler, abecesayısal karakterlerle çevrili bir kelimenin ortasında görünüyorsa, o kelime iki kelimeye bölünür. Bu, Forward (İleri) ve Backward (Geri) sözcük komutları ve yazım denetleyicisi tarafından kullanılır.
+.sp
+.TP 4
+\fB-q\fR
+Bu seçenek, Piconun TERMCAP_WINS tanımlaması ile birlikte derlendiği durumlarda geçerlidir. Girdi önceleme dizilimleri için termcap veya terminfo tanımlamaları, öntanımlı olarak tanımlanmış dizilimleri öncelemek için kullanılır.
+.sp
+.TP 4
+\fB-setlocale_ctype\fR
+Mümkünse setlocale(LC_CTYPE) yapar. Yereli belirtmemek öntanımlıdır.
+.sp
+.TP 4
+\fB-no_setlocale_collate\fR
+setlocale(LC_CTYPE) yapmaz. Bu seçenek, yereli belirtmemek öntanımlıdır.
+.sp
+.PP
+Son olarak, çalışan bir pico sonlanırsa (örneğin; bir SIGHUP sinyali alırsa), pico çıkmadan önce üzerinde çalışılan dosyayı -gerekli ise- kaydedecektir. Bu dosya aynı dosya ismi ve \fI.save\fR uzantısı ile kaydedilir. Şayet dosya o an için henüz isimlendirilmemişse, \fIpico.save\fR adı ile kaydedilecektir.
+.sp
+.SH "YAZILIM HATALARI"
+Ekran genişliğini aşan satırların durumu net değildir. Ekran kenarını aşmış satırların sonunda bir $ karakteri bulunur. Şayet imleci bu satır üzerinde hareket ettirirseniz, satır yatay olarak kaydırılır.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fIpico.save\fR
+Henüz bir isim verilmemiş ama çalışması yarıda kalmış dosyalar bu isimle kaydedilir.
+.sp
+.TP 4
+\fI*.save\fR
+İsmi olan ve çalışması yarıda kesilen dosyalar bu şekilde kaydedilir.
+.sp
+.PP
+.sp
+.SH "YAZANLAR"
+Michael Seibel ve Laurence Lundblade tarafından yazılmıştır.
+.br
+Pico, özgün olarak Dave G. Conroy tarafından, MicroEmacs 3.6’dan uyarlanmıştır.
+.br
+Pico, Washington Üniversitesine ait ticari bir markadır.
+.br
+Telif Hakkı © 1989-2008 Washington Üniversitesi.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBalpine\fR(1).
+.br
+Kaynak Koduna erişim için (Alpine eposta istemcisinin bir parçası olarak):
+.br
+https://alpine.x10host.com/alpine/release/src/
+.br
+$Date: 2009-02-02 13:54:23 -0600 (Mon, 02 Feb 2009) $
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

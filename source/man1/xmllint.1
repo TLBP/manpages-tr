@@ -1,0 +1,434 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (C) 1998-2022 Daniel Veillard.  All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files
+ * (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "XMLLINT" 1 "17 Ağustos 2022" "libxml2 2.10.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+xmllint - komut satırı XML aracı
+.sp
+.SH KULLANIM
+	
+.IP \fBxmllint\fR 8
+[ \fB--version\fR | \fB--debug\fR | \fB--shell\fR | \fB--xpath\fR \fI"XPath_ifadesi"\fR | \fB--debugent\fR | \fB--copy\fR | \fB--recover\fR | \fB--noent\fR | \fB--noout\fR| \fB--nonet\fR | \fB--path\fR \fI"YOL"\fR | \fB--load-trace\fR | \fB--htmlout\fR | \fB--nowrap\fR | \fB--valid\fR | \fB--postvalid\fR | \fB--dtdvalid\fR \fIURL\fR | \fB--dtdvalidfpi\fR \fIBGT\fR | \fB--timing\fR | \fB--output\fR \fIDOSYA\fR | \fB--repeat\fR | \fB--insert\fR | \fB--compress\fR | \fB--html\fR | \fB--xmlout\fR | \fB--push\fR | \fB--memory\fR| \fB--maxmem\fR \fISAYI\fR | \fB--nowarning\fR | \fB--noblanks\fR | \fB--nocdata\fR | \fB--format\fR | \fB--encode\fR \fIKODLAMA\fR | \fB--dropdtd\fR | \fB--nsclean\fR | \fB--testIO\fR | \fB--catalogs\fR | \fB--nocatalogs\fR | \fB--auto\fR | \fB--xinclude\fR | \fB--noxincludenode\fR | \fB--loaddtd\fR | \fB--dtdattr\fR | \fB--stream\fR | \fB--walker\fR | \fB--pattern\fR \fIŞABLON\fR | \fB--chkregister\fR | \fB--relaxng\fR \fIŞEMA\fR | \fB--schema\fR \fIŞEMA\fR | \fB--c14n\fR ] { \fIXML-DOSYA\fR ...| - }
+	
+.IP \fBxmllint\fR 8
+\fB--help\fR
+.sp
+.PP
+.sp
+.SH "GİRİŞ"
+\fBxmllint\fR, komut satırında \fIXML-DOSYA\fR olarak belirtilen bir veya daha fazla XML dosyasını (- olarak belirtilmişse standart girdiyi) denetler. Belirtilen seçeneklere göre çeşitli türde çıktı üretir. Hem XML kodlarındaki, hem de XML çözümleyicideki hataları tespit etmek için oldukça faydalı bir araçtır.
+.sp
+\fBlibxml\fR(3) içinde gelmektedir.
+.sp
+.SH "SEÇENEKLER"
+\fBxmllint\fR şu seçenekleri kabul eder (abecesel sıralıdır):
+.sp
+.TP 4
+\fB--auto\fR
+Denemek amacıyla küçük bir belge üretir.
+.sp
+.TP 4
+\fB--catalogs\fR
+\fBSGML_CATALOG_FILES\fR ortam değişkeninde belirtilen katalogları kullanır. Aksi taktirde, öntanımlı olarak \fI/etc/xml/catalog\fR kullanılır.
+.sp
+.TP 4
+\fB--chkregister\fR
+Düğüm kaydını açar. Geliştiriciler için \fBlibxml\fR(3) düğüm izleme kodlarını sınarken faydalıdır.
+.sp
+.TP 4
+\fB--compress\fR
+Çıktıya \fBgzip\fR(1) sıkıştırması uygular.
+.sp
+.TP 4
+\fB--copy\fR
+Gerçeklemenin dahili kopyasını sınar.
+.sp
+.TP 4
+\fB--c14n\fR
+Çözümleme sonucunu standart çıktıda dizgeleştirmek W3C XML Kurallılaştırmasını (C14N) kullanır. Yorumlar sonuçların içinde tutulur.
+.sp
+.TP 4
+\fB--dtdvalid\fR \fIURL\fR
+Geçerlilik doğrulamasında kullanılacak DTD \fIURL\fR’den (İnternette kaynağın bulunduğu konumu belirten eşsiz adresten) okunur.
+.sp
+.TP 4
+\fB--dtdvalidfpi\fR \fIBGT\fR
+Geçerlilik doğrulaması için Biçimsel Genel Tanımlayıcı \fIBGT\fR ile belirtilen DTD’yi kullanır, bunun çalışması için Biçimsel Genel Tanımlayıcıyı dışa aktaran bir katalog gerekeceği unutulmamalıdır.
+.sp
+Biçimsel Genel Tanımlayıcı, DOCTYPE bildirimi içinde PUBLIC sözcüğünden sonra, URL/URI’den önce gelir ve 4 alandan oluşur. Bir DOCTYPE örneği (BGT vurgulanmıştır):
+.sp
+.RS 4
+.RS 4
+.nf
+<!DOCTYPE html PUBLIC "\fB-//W3C//DTD XHTML 1.0  Transitional//EN\fR"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+.fi
+.sp
+.RE
+.RE
+.IP
+\fB//\fR bir ayraçtır ve BGT’nin alanlarını ayırmakta kullanılır.
+.sp
+İlk alan \fB-\fR, DTD’nin biçimsel bir standarda bağlı olup olmadığını gösterir. DTD onaylanmamışsa (örneğin siz yazmışsınızdır) \fB-\fR, standart dışı bir kuruluş tarafından onaylamışsa \fB+\fR kullanılır. Resmi bir standart tarafından onaylanmışsa bu alan resmi standarda bir başvuru içermelidir.
+.sp
+İkinci alan, DTD’den sorumlu kişi veya kuruluşu betimler (örnekte: "W3C").
+.sp
+Üçüncü alan, DTD’de açıklanan belge türünü betimler (örnekte: "DTD XHTML 1.0 Transitional"). Genelde sürüm numarası gibi ayırıcı özellikler içerir.
+.sp
+Dördüncü alan, DTD’de kullanılan dili iki harfle betimler (örnekte: "EN" - ingilizce).
+.sp
+.TP 4
+\fB--debug\fR
+Bir dosyayı çözümler ve belgenin bellekteki sürümünün açıklamalı ağacını çıktılar.
+.sp
+.TP 4
+\fB--debugent\fR
+Belgede tanımlı ENTITY alanlarında hata ayıklar.
+.sp
+.TP 4
+\fB--dropdtd\fR
+Çıktıdan DTD kaldırılır.
+.sp
+.TP 4
+\fB--dtdattr\fR
+Harici DTD alınır ve ağaç, miras alınan öznitelikler ile oluşturulur.
+.sp
+.TP 4
+\fB--encode\fR \fIKODLAMA\fR
+Belirtilen karakter kodlamasında çıktı üretilir. Bunun, XPath sorgularından kaynaklanan parçalar veya sonuçlar için değil, tüm belge için çalıştığı unutulmamalıdır.
+.sp
+.TP 4
+\fB--format\fR
+Çıktıyı yeniden biçimler ve girintiler. Girintileme için \fBXMLLINT_INDENT\fR ortam değişkeninde belirtilen boşluklar kullanılır. İki boşluk " " öntanımlıdır (XML desteklemediği için sekme karakteri, yani TAB tuşu kullanılmamalıdır).
+.sp
+.TP 4
+\fB--help\fR
+Kısa kullanım bilgisi gösterir ve çıkar.
+.sp
+.TP 4
+\fB--html\fR
+HTML çözümleyicisi kullanılır.
+.sp
+.TP 4
+\fB--htmlout\fR
+Sonuçları HTML dosyası olarak çıktılar. Bu seçenekle \fBxmllint\fR sonuç ağacının çıktısını HTML etiketleri ile sarmalayarak, çıktının bir HTTP istemcisinde görüntülenebilmesini sağlar.
+.sp
+.TP 4
+\fB--insert\fR
+Geçerli yerleştirmeleri sınar.
+.sp
+.TP 4
+\fB--loaddtd\fR
+Harici DTD okunur.
+.sp
+.TP 4
+\fB--load-trace\fR
+İşlem sırasında yüklenen tüm belgeleri standart hataya döker.
+.sp
+.TP 4
+\fB--maxmem\fR \fISAYI\fR
+Çözümleyici için bellek desteğini sınar. \fISAYI\fR kütüphanenin kullanımına ayrılan azami bellek miktarının bayt değeridir. Ayrıca, XML dosyalarının betik kipinde işlenmesi sırasında, sanal belleğin tüketmemesini sağlamak için de kullanılabilir.
+.sp
+.TP 4
+\fB--memory\fR
+Çözümleme bellekten yapılır.
+.sp
+.TP 4
+\fB--noblanks\fR
+Yoksayılabilir boş alanları kaldırır.
+.sp
+.TP 4
+\fB--nocatalogs\fR
+Herhangi bir katalog kullanılmaz.
+.sp
+.TP 4
+\fB--nocdata\fR
+CDATA bölümleri yerine eşdeğeri metin düğümleri kullanılır.
+.sp
+.TP 4
+\fB--noent\fR
+Öğe başvurularını değerleriyle değiştirir. Öntanımlı olarak, \fBxmllint\fR, bu başvurulara (&\fIbaşvuru\fR;) dokunmaz.
+.sp
+.TP 4
+\fB--nonet\fR
+DTD’ler ve öğe başvuruları için interneti kullanmaz.
+.sp
+.TP 4
+\fB--noout\fR
+Sonuçlar çıktılanmaz. Öntanımlı olarak, \fBxmllint\fR sonuç ağacını çıktılar.
+.sp
+.TP 4
+\fB--nowarning\fR
+Çözümleme sırasında ve geçerlilik doğrulamasında uyarılar çıktılanmaz.
+.sp
+.TP 4
+\fB--nowrap\fR
+HTML etiketleri ile sarmalama yapılmaz.
+.sp
+.TP 4
+\fB--noxincludenode\fR
+XInclude işlemesi yapar ama XInclude başlangıç ve bitiş düğümlerini üretmez.
+.sp
+.TP 4
+\fB--nsclean\fR
+Gereksiz isim uzayı bildirimleri kaldırılır.
+.sp
+.TP 4
+\fB--output\fR \fIDOSYA\fR
+\fBxmllint\fR’in çözümleme sonucunu kaydedeceği dosyanın yolu belirtilir. Genellikle uygulama bir ağaç oluşturur ve bunu standart çıktıya gönderir, bu seçenekle sonuçlanan XML ağacı \fIDOSYA\fRya kaydedilir.
+.sp
+.TP 4
+\fB--path\fR \fI"YOL(LAR)"\fR
+DTD’leri veya öğeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
+.sp
+.TP 4
+\fB--pattern\fR \fIŞABLON\fR
+Ayrıştırıcıya yönelik okuyucu arayüzü ile kullanılabilen örüntü tanıma motorunu çalıştırmak için kullanılır. Bir XPath (alt küme) ifadesine dayalı olarak belgedeki bazı düğümlerin seçilmesini sağlar. Hata ayıklama için kullanılır.
+.sp
+.TP 4
+\fB--postvalid\fR
+DTD geçerlilik doğrulaması belge çözümlendikten sonra yapılır.
+.sp
+.TP 4
+\fB--push\fR
+Çözümleyicinin itme kipi kullanılır.
+.sp
+.TP 4
+\fB--recover\fR
+Geçersiz bir belgenin çözümlenebilir bölümlerini çıktılar.
+.sp
+.TP 4
+\fB--relaxng\fR \fIŞEMA\fR
+Geçerliliği doğrulamak için \fIŞEMA\fR isimli RELAXNG dosyası kullanılır.
+.sp
+.TP 4
+\fB--repeat\fR
+Zamanlama ve en iyileme için işlemi 100 kere tekrarlar.
+.sp
+.TP 4
+\fB--schema\fR \fIŞEMA\fR
+Geçerliliği doğrulamak için \fIŞEMA\fR isimli W3C XML şeması dosyası kullanılır.
+.sp
+.TP 4
+\fB--shell\fR
+Etkileşimli kabuk kipini başlatır. Kabuk kipinde kullanılan komutların listesi \fBKABUK KİPİ\fR bölümünde açıklanmıştır.
+.sp
+.TP 4
+\fB--stream\fR
+G/Ç akımları kullanılır. \fB--relaxng\fR veya \fB--valid\fR seçeneğinin kullanımında geçerlik doğrulaması için tutulan dosyalar bellekte çok yer kaplayacaksa bu seçenek yararlıdır.
+.sp
+.TP 4
+\fB--testIO\fR
+Kullanıcı G/Ç desteğini sınar.
+.sp
+.TP 4
+\fB--timing\fR
+\fBxmllint\fR’in çeşitli adımları gerçekleştirmek için harcadığı sürenin görüntülenmesini sağlar.
+.sp
+.TP 4
+\fB--valid\fR
+Belgenin kullanılan DTD’ye uygun olarak hazırlanıp hazırlanmadığına bakar (DTD: Document Type Definition - Belge Türü Tanımlaması). DTD geçerlilik sınaması komut satırından \fB-–dtdvalid\fR seçeneği ile bir DTD belirtilerek de yapılabilir. Öntanımlı olarak, \fBxmllint\fR ayrıca, belgenin iyi biçimli olup olmadığıyla ilgili sınamaları da yapar.
+.sp
+.TP 4
+\fB--version\fR
+Kullanılan \fBlibxml\fR(3) sürüm bilgisini gösterir.
+.sp
+.TP 4
+\fB--xinclude\fR
+XInclude çözümlemesi uygulanır.
+.sp
+.TP 4
+\fB--xmlout\fR
+\fB--html\fR seçeneği ile birlikte kullanılır. Genellikle HTML çözümlendiğinde, belge HTML dizgeleştiricisi ile kaydedilir. Ancak bu seçenekle elde edilen belge, XML dizgeleştiricisi ile kaydedilir. Bu seçenek, özellikle HTML girdiden XHTML belge oluşturmak için kullanılır.
+.sp
+.TP 4
+\fB--xpath\fR \fI"XPath ifadesi"\fR
+Belirtilen \fI"XPath ifadesi"\fRni çalıştırır ve sonucunu çıktılar. Düğüm kümesi sonuçları durumumda, düğüm kümesindeki her düğüm çıktıda tamamen dizgeleştirilir. Boş düğüm kümesi durumunda, "XPath set is empty" ("XPath kümesi boş") iletisini çıktılar ve bir çıkış kodu ile çıkar.
+.sp
+.PP
+.sp
+.SH "KABUK KİPİ"
+\fBxmllint\fR, \fB--shell\fR seçeneği ile çalıştırıldığında etkileşimli bir kabuk açar. Bu kabukta kullanılabilecek komutlar şunlardır:
+.sp
+.TP 4
+\fBbase\fR
+Düğümün XML kökünü gösterir.
+.sp
+.TP 4
+\fBbye\fR
+Kabuktan çıkar.
+.sp
+.TP 4
+\fBcat\fR \fIDÜĞÜM\fR
+Geçerli olan düğümü veya belirtilen düğümü görüntüler.
+.sp
+.TP 4
+\fBcd\fR \fIYOL\fR
+\fIYOL\fR düğümünü (eşsiz ise) geçerli düğüm yapar. \fIYOL\fR belirtilmemişse kök düğüm geçerli düğüm olur.
+.sp
+.TP 4
+\fBdir\fR \fIYOL\fR
+Düğüm bilgilerini (isim uzayı, öznitelikler, içerik) dökümler.
+.sp
+.TP 4
+\fBdu\fR \fIYOL\fR
+Belirtilmişse \fIYOL\fR düğümünün, belirtilmemişse geçerli düğümün alt ağacının yapısını görüntüler.
+.sp
+.TP 4
+\fBexit\fR
+Kabuğu bırakır.
+.sp
+.TP 4
+\fBfree\fR
+Bellek kullanımını görüntüler.
+.sp
+.TP 4
+\fBhelp\fR
+Bu yardım iletilerini görüntüler.
+.sp
+.TP 4
+\fBload\fR \fIDOSYA\fR
+\fIDOSYA\fR içeriğini yeni belge yapar.
+.sp
+.TP 4
+\fBls\fR \fIYOL\fR
+\fIYOL\fR’un (şayet belirtilmişse) veya geçerli dizinin içeriğini listeler.
+.sp
+.TP 4
+\fBpwd\fR
+Geçerli düğümün yolunu görüntüler.
+.sp
+.TP 4
+\fBquit\fR
+Kabuğu bırakır.
+.sp
+.TP 4
+\fBsave\fR \fIDOSYA\fR
+Belgeyi belirtilmişse \fIDOSYA\fR adı ile, belirtilmemişse kendi adı ile kaydeder.
+.sp
+.TP 4
+\fBvalidate\fR
+Belgenin hatalara karşı doğruluğunu sınar.
+.sp
+.TP 4
+\fBwrite\fR \fIDOSYA\fR
+Geçerli düğümü \fIDOSYA\fRya yazar.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBSGML_CATALOG_FILES\fR
+SGML kataloğunun davranışı, sorgular kullanıcının kendi katalog listesine yönlendirilerek değiştirilebilir. Bu, katalog listesi \fBSGML_CATALOG_FILES\fR ortam değişkenine atanarak yapılabilir. Boş değer belirtilirse sorgular \fI/etc/sgml/catalog\fR dosyasının içeriğindeki kataloglara yönlendirilir.
+.sp
+.TP 4
+\fBXML_CATALOG_FILES\fR
+XML kataloğunun davranışı, sorgular kullanıcının kendi katalog listesine yönlendirilerek değiştirilebilir. Bu, katalog listesi \fBXML_CATALOG_FILES\fR ortam değişkenine atanarak yapılabilir. Boş değer belirtilirse sorgular \fI/etc/xml/catalog\fR dosyasının içeriğindeki kataloglara yönlendirilir.
+.sp
+.TP 4
+\fBXML_DEBUG_CATALOG\fR
+\fBXML_DEBUG_CATALOG\fR ortam değişkenine sıfırdan farklı bir değer atanarak, katalog işlemleri ile ilgili hata ayıklama bilgilerinin çıktılanması sağlanabilir.
+.sp
+.TP 4
+\fBXMLLINT_INDENT\fR
+\fBXMLLINT_INDENT\fR ortam değişkenine atanan değer girintileme seviyesini belirler. Öntanımlı değer iki boşluktur (" ").
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBxmllint\fR çıkış kodları, betiklerden çağrılırken kullanılabilecek bilgileri sağlar.
+.sp
+.TP 4
+0
+Hata yok.
+.sp
+.TP 4
+1
+Sınıflandırılmadı.
+.sp
+.TP 4
+2
+DTD’de hata var.
+.sp
+.TP 4
+3
+Geçerlilik doğrulama hatası.
+.sp
+.TP 4
+4
+Geçerlilik doğrulama hatası.
+.sp
+.TP 4
+5
+Şema derlenirken hata.
+.sp
+.TP 4
+6
+Çıktı yazılırken hata.
+.sp
+.TP 4
+7
+Şablonda hata (\fB--pattern\fR seçeneği kullanılırken üretilir)
+.sp
+.TP 4
+8
+Düğüm kaydında hata. (\fB--chkregister\fR seçeneği kullanılırken üretilir)
+.sp
+.TP 4
+9
+Bellek yetersiz.
+.sp
+.TP 4
+10
+XPath değerlendirme hatası.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+John Fleck, Ziying Sherwin ve Heiko Rupp tarafından yazılmıştır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlibxml\fR(3)
+.br
+Daha fazla bilgi için: <https://gitlab.gnome.org/GNOME/libxml2>
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

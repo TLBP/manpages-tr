@@ -1,0 +1,89 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "AUTOSCAN" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+autoscan - Öncü bir configure.in üretir
+.sp
+.SH KULLANIM
+.IP \fBautoscan\fR 9
+[\fISEÇENEK\fR]... [\fIKAYNAKDiZiNi\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilmişse \fIKAYNAKDiZiNi\fR olarak verilen dizinin altındaki dizinleri kapsayacak şekilde, verilmediyse komutun çalıştırıldığı dizinin altındaki dosyaları inceler. Kaynak dosyalarında genel taşınabilirlik sorunları bakımından arama yapar, ’\fIconfigure.ac\fR’nin eksiksizliğini denetler ve paketin ’\fIconfigure.ac\fR’ dosyasının öncüsü olan ’\fIconfigure.scan\fR’ dosyasını oluşturur.
+.sp
+.SS "Seçenekler:"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İşlemi ayrıntılı raporlar.
+.sp
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Geçici dosyalar kaldırılmaz.
+.sp
+.PP
+.sp
+.SS "Kütüphane dizinleri:"
+.TP 4
+\fB-B\fR, \fB--prepend-include\fR=\fIDiZiN\fR
+\fIDiZiN\fR olarak verilen dizini arama yolunun önüne ekler.
+.sp
+.TP 4
+\fB-I\fR, \fB--include\fR=\fIDiZiN\fR
+\fIDiZiN\fR olarak verilen dizini arama yolunun sonuna ekler.
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+David J. MacKenzie ve Akim Demaille tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <bug-autoconf (at) gnu.org> adresine bildirin.
+.br
+GNU Autoconf sayfası: <http://www.gnu.org/software/autoconf/>
+.br
+GNU yazılımları genel kullanım yardımı: <http://www.gnu.org/gethelp/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+/Autoconf: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>, <http://gnu.org/licenses/exceptions.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBautoconf\fR(1), \fBautomake\fR(1), \fBautoheader\fR(1), \fBautoreconf\fR(1), \fBautoupdate\fR(1), \fBconfig.guess\fR(1), \fBconfig.sub\fR(1), \fBifnames\fR(1), \fBlibtool\fR(1).
+.sp
+\fBautoscan\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBautoscan\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo autoscan\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2004 Mehmet Büyüközer
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

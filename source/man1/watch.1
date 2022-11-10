@@ -1,0 +1,237 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * watch -- execute a program repeatedly, displaying output fullscreen
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "WATCH" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+watch - tam ekran çıktı gösteren bir uygulamayı aralıklı çalıştırır
+.sp
+.SH KULLANIM
+.IP \fBwatch\fR 6
+[\fIseçenekler\fR] \fIkomut\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBwatch\fR belirtilen \fIkomut\fRu tekrar tekrar çalıştırır, çıktısını ve hatalarını görüntüler (ilk dolu ekranda). Bu, komut çıktısının zaman içindeki değişimini izlemenizi sağlar. Öntanımlı olarak, komut her 2 saniyede bir durdurulana kadar tekrar tekrar çalıştırır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-d\fR, \fB--differences\fR\fB[=permanent]\fR
+Ardışık güncellemeler arasındaki farkları vurgular. İsteğe bağlı \fBpermanent\fR değiştirgesi belirtilirse, \fBwatch\fR ilk yinelemeden itibaren tüm değişiklikleri gösterir.
+.sp
+.TP 4
+\fB-n\fR, \fB--interval\fR \fIARALIK\fR
+Güncelleme aralığını belirler. Komut, daha küçük değerlerin dönüştürüldüğü 0,1 saniyeden daha kısa aralıklara izin vermez. Ondalık ayracı olarak ’.’ veya ’,’ her yerelde çalışır. \fBWATCH_INTERVAL\fR ortam değişkeni, belli bir aralığı (aynı kurallar ve biçimlendirme ile) kalıcı hale getirmek için kullanılabilir.
+.sp
+.TP 4
+\fB-p\fR, \fB--precise\fR
+\fIkomut\fRun her \fIARALIK\fR saniyede bir çalıştırmayı dener. Bu \fBntptime\fR(8) (varsa) ile denenirse kesirli saniyelerin sürekli arttığı normal kipin aksine (neredeyse) aynı kaldığı görülebilir.
+.sp
+.TP 4
+\fB-t\fR, \fB--no-title\fR
+Ekranın üst kısmında aralık, komut ve geçerli saatin görüntülendiği başlığı ve altındaki boş satırı göstermez.
+.sp
+.TP 4
+\fB-b\fR, \fB--beep\fR
+\fIkomut\fR sıfırdan farklı bir çıkış durumu ile çıkarsa ses çıkarır.
+.sp
+.TP 4
+\fB-e\fR, \fB--errexit\fR
+\fIkomut\fR hata verirse ekranı dondurur ve bir tuşa basılırsa çıkar.
+.sp
+.TP 4
+\fB-g\fR, \fB--chgexit\fR
+\fIkomut\fR çıktısı değişirse çıkar.
+.sp
+.TP 4
+\fB-c\fR, \fB--color\fR
+ANSI renk ve biçim dizilimlerini yorumlar.
+.sp
+.TP 4
+\fB-x\fR, \fB--exec\fR
+İstenilen etkiyi elde etmek için fazladan tırnak kullanma ihtiyacını azaltan \fBsh -c\fR yerine \fIkomut\fRu \fBexec\fR(2) çağrısı kullanılır.
+.sp
+.TP 4
+\fB-w\fR, \fB--no-linewrap\fR
+Satır sarmalamayı kapatır. Uzun satırlar alt satırda devam edeceğine satır sonunda kırpılır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+.TP 4
+0
+Başarılı.
+.sp
+.TP 4
+1
+Çeşitli başarısızlıklar.
+.sp
+.TP 4
+2
+Süreci izlemek için çatallama başarısız.
+.sp
+.TP 4
+3
+Alt sürecin yazma borusuyla standart çıktıya yerleştirilmesi başarısız.
+.sp
+.TP 4
+4
+Komut çalıştırma başarısız.
+.sp
+.TP 4
+5
+Alt sürecin yazma borusunun kapatılması başarısız.
+.sp
+.TP 4
+7
+Süreçlerarası iletişim borusunu oluşturmak başarısız.
+.sp
+.TP 4
+8
+waitpid(2) ile alt sürecin dönüş değeri alınamadı veya komut hata oluşunca çıktı.
+.sp
+.TP 4
+diğer
+\fBwatch\fR, komut çıkış durumunu alt süreç çıkış durumu olarak değerlendirdi.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBwatch\fR davranışını etkileyen ortam değişkeni:
+.sp
+.TP 4
+\fBWATCH_INTERVAL\fR
+Güncelleme aralığı, \fB--interval\fR komut satırı seçeneğinin izlediği kuralları izler.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+POSIX seçenek işlemleri kullanılır (örneğin, seçenek işlemleri seçenek olmayan ilk değiştirgede durdurulur). Yani, \fIkomut\fRtan sonraki seçenekler \fBwatch\fR tarafından yorumlanmaz.
+.sp
+.SH "YETERSİZLİKLER"
+Uçbirim yeniden boyutlandırıldığında, ekran bir sonraki zamanlanmış güncellemeye kadar doğru şekilde yeniden boyanmaz. Tüm \fB--differences\fR vurgulamaları da güncelleme sırasında kaybolur.
+.sp
+Yazdırılamayan karakterler uygullama çıktısından ayıklanır. Bunların da gösterilmesi istenirse \fIkomut\fR borulamasının parçası olarak \fBcat -v\fR kullanılabilir.
+.sp
+Ekranın son sütununda yer alan karakterde görüneceği varsayılan birleştirme (aksan) karakterleri, bir önceki sütunda görünebilir veya hiç görünmeyebilir.
+.sp
+Birleştirme (aksan) karakterleri \fB--differences\fR vurgulamalarında asla fark olarak ele alınmaz. Vurgulama yalnızca ana karaktere uygulanır.
+.sp
+Son sütunda biten bir satırın hemen ardından gelen boş satırlar görüntülenmez.
+.sp
+\fB--precise\fR kipi, yürütülmesi \fIARALIK\fR saniyeden uzun süren bir \fIkomut\fRun bozduğu zamanlamayı düzeltecek gelişmiş zamansal bozunma teknolojisine henüz sahip değildir. \fBwatch\fR ayrıca, \fIARALIK\fR saniyeden uzun süren önceki bir yürütmeyi (\fBnetstat\fR’ın DNS aramalarının bazan çok uzun sürmesi gibi) yakalayabilecek kadar hızlı bir şekilde komut yürütmesini başlatma durumuna da geçebilir.
+.sp
+.SH "ÖRNEKLER"
+Posta şöyle de izlenebilir:
+.sp
+.RS 4
+.nf
+watch -n 60 from
+.fi
+.sp
+.RE
+Bir dizinde gerçekleşen değişiklikler böyle de izlenebilir:
+.sp
+.RS 4
+.nf
+watch -d ls -l
+.fi
+.sp
+.RE
+Yalnızca joe kullanıcısına ait dosyaları izlemek için:
+.sp
+.RS 4
+.nf
+ watch -d ’ls -l | fgrep joe’
+.fi
+.sp
+.RE
+Tırnak kullanımının etkilerini gözlemlemek için:
+.sp
+.RS 4
+.nf
+watch echo $$
+watch echo ’$$’
+watch echo "’"’$$’"’"
+.fi
+.sp
+.RE
+Hassas zaman tutmanın etkisini görmek için \fB-p\fR eklenebilir:
+.sp
+.RS 4
+.nf
+watch -n 10 sleep 1
+.fi
+.sp
+.RE
+Yöneticinin son çekirdeği kurmasını izlemek için:
+.sp
+.RS 4
+.nf
+watch uname -r
+.fi
+.sp
+.RE
+.TP 4
+\fBBilgi:\fR
+\fB-p\fR seçeneğinin, özellikle \fBntpdate\fR veya açılış zamanını değiştiren diğer uygulamalar nedeniyle ortaya çıkan yeniden başlatmalarda çalışacağının garantisi yoktur.
+.sp
+.PP
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimi için lütfen <procps (at) freelists.org> adresini kullanın.
+.sp
+Lütfen, çeviri ile ilgili bildirimler için <belgeler-genel (at) lists.sourceforge.net> adresini kullanın.
+.sp
+.SH "TARİHÇE"
+Gerçekleme, Tony Rems’in 1991 tarihli özgün \fBwatch\fR uygulamasına dayanmaktadır (ilk değişiklikler ve düzeltmeler Francois Pinard tarafından yapılmıştır).
+.sp
+Mike Coleman tarafından büyük ölçüde elden geçirilerek yeni özellikler (farklar seçeneği, SIGWINCH işleme, sınırsız komut uzunluğu, uzun satır işleme) Nisan 1999’da eklendi.
+.br
+2002-2003’te Albert Cahalan tarafından değişiklikler yapıldı.
+.br
+2008’de Morty Abzug tarafından standart hata işlemleri, exec ve beep seçenekleri eklendi.
+.br
+2009’da Jarrod Lowe tarafından Unicode desteği eklendi.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

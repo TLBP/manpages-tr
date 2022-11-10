@@ -1,0 +1,218 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "NUMFMT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+numfmt - sayıları biçemler
+.sp
+.SH KULLANIM
+.IP \fBnumfmt\fR 7
+[\fISEÇENEK\fR]... [\fISAYI\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Komut satırından veya standart girdiden okunan \fISAYI\fRları yeniden biçemler.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler, kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB--debug\fR
+Girdi geçersizse uyarı basar.
+.sp
+.TP 4
+\fB--d\fR, \fB--delimiter\fR=\fIAYRAÇ\fR
+Alan ayracı olarak boşluk yerine \fIAYRAÇ\fR kullanılır
+.sp
+.TP 4
+\fB--field\fR[=\fIALANLAR\fR]
+Belirtilen girdi \fIALANLAR\fRlarındaki sayılarda değişiklik yapılır (öntanımlı: 1). Aşağıda ALANLAR ile ilgili bölüme bakınız.
+.sp
+.TP 4
+\fB--format=\fR\fIBİÇEM\fR
+printf tarzı kayan nokta \fIBİÇEM\fRi kullanılır. Aşağıda BİÇEM ile ilgili bölüme bakınız.
+.sp
+.TP 4
+\fB--from\fR[=\fIBİRİM\fR]
+Belirtilen sayılar \fIBİRİM\fR ile oranlanır; öntanımlı: ’none’. Aşağıda BİRİM ile ilgili bölüme bakınız.
+.sp
+.TP 4
+\fB--from-unit\fR[=\fIBOYUT\fR]
+Girdi \fIBOYUT\fRu belirtilir (öntanımlı olan 1 yerine).
+.sp
+.TP 4
+\fB--grouping\fR
+Sayılar yerele göre gruplanır (1.000.000 gibi - C/POSIX yerelinde etkisizdir).
+.sp
+.TP 4
+\fB--header\fR[=\fISAYI\fR]
+İlk \fISAYI\fR başlık satırı dönüştürülmeden basılır (öntanımlı: 1).
+.sp
+.TP 4
+\fB--invalid\fR=\fIKİP\fR
+Geçersiz sayılar için başarısızlık \fIKİP\fRi. Şunlardan biri olabilir: abort (öntanımlı), fail, warn, ignore (sırayla: çık, başarısız ol, uyar, yoksay)
+.sp
+.TP 4
+\fB--padding\fR=\fISAYI\fR
+Çıktıyı \fISAYI\fR karakter yastıklar. +\fISAYI\fR sağa yanaştırır, -\fISAYI\fR sola yanaştırır, çıktı \fISAYI\fR’dan büyükse yastıklama yapılmaz. Öntanımlı olarak, boşluk karakteri varsa otomatik olarak yastıklama yapılır.
+.sp
+.TP 4
+\fB--round\fR=\fIYÖNTEM\fR
+Oranlama yapılırken yuvarlama \fIYÖNTEM\fRi kullanılır. Şunlardan biri olabilir: up (yukarı), down (aşağı), from-zero (sıfırdan - öntanımlıdır), towards-zero (sıfıra: pozitifler alta, negatifler üste), nearest (en yakına).
+.sp
+.TP 4
+\fB--suffix=\fR\fISONEK\fR
+Çıktılanan sayılara \fISONEK\fR ekler. Sayı girdilerinde sonek isteğe bağlıdır.
+.sp
+.TP 4
+\fB--to=\fR\fIBİRİM\fR
+Çıktılanan sayılar otomatik olarak \fIBİRİM\fR ile oranlanır. Aşağıda BİRİM ile ilgili bölüme bakınız.
+.sp
+.TP 4
+\fB--to-unit\fR[=\fIBOYUT\fR]
+Çıktı \fIBOYUT\fRu belirtilir (öntanımlı olan 1 yerine).
+.sp
+.TP 4
+\fB-z\fR, \fB--zero-terminated\fR
+Satırlar satır sonu karakteri ile değil NUL (\\0) karakteri ile sonlandırılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+.SS "BİRİM seçenekleri"
+.TP 4
+none
+Otomatik oranlama yapılmaz; sonekler hatayı tetikler.
+.sp
+.TP 4
+auto
+Seçimlik bir veya iki harfli sonek kabul eder. Örnekler:
+.br
+1K = 1000, 1Ki = 1024, 1M = 1000000, 1Mi = 1048576
+.sp
+.TP 4
+si
+Seçimlik bir harfli sonek kabul eder. Örnekler:
+.br
+1K = 1000, 1M = 1000000, ...
+.sp
+.TP 4
+iec
+Seçimlik bir harfli sonek kabul eder. Örnekler:
+.br
+1K = 1024, 1M = 1048576, ...
+.sp
+.TP 4
+iec-i
+Seçimlik iki harfli sonek kabul eder. Örnekler:
+.br
+1Ki = 1024, 1Mi = 1048576, ...
+.sp
+.PP
+.sp
+.SS "ALANLARda cut(1) tarzı desteklenir:"
+.TP 4
+N
+N’inci alan, 1’den itibaren sayılır.
+.sp
+.TP 4
+N-
+N’inci alandan, satır sonuna kadar.
+.sp
+.TP 4
+N-M
+N’inci alandan, M’inci alana kadar (M ve N dahil).
+.sp
+.TP 4
+-M
+İlkinden M’inci alana kadar.
+.sp
+.TP 4
+-
+Tüm alanlar.
+.sp
+.PP
+Çoklu alanlar/aralıklar virgüllerle ayrılabilir.
+.sp
+.SS "BİÇEM"
+\fIBİÇEM\fR tek bir kayan noktalı ’\fB%f\fR’ değiştirgesini basmaya uygun olmalıdır. Seçimlik tek tırnak (\fB%’f\fR) yerel tarafından destekleniyorsa gruplamayı etkin kılar. Seçimlik genişlik değeri (\fB%10f\fR) çıktıyı yastıklar. Seçimlik 0 (\fB%010f\fR) genişliği sıfırlarla yastıklar. Seçimlik negatif değerler (\fB%-10f\fR) alan içinde sola yanaştırır. Seçimlik hassasiyet (\fB%.1f\fR) girdiden saptanan hassasiyeti geçersiz kılar.
+.sp
+.SS "Çıkış Durumu"
+Tüm girdi sayılar başarıyla dönüştürülmüşse çıkış durumu 0’dır.
+.br
+Öntanımlı olarak ilk dönüşüm hatasında çalışmayı durdurur ve çıkış durumu 2 olur.
+.br
+\fB--invalid\fR=’fail’ ile her dönüşüm hatası için uyarı basılır ve çıkış durumu 2 olur.
+.br
+\fB--invalid\fR=’warn’ ile her dönüşüm hatası tanılanır fakat çıkış durumu 0 olur.
+.br
+\fB--invalid\fR=’ignore’ ile dönüşüm hataları tanılanmaz ve çıkış durumu 0 olur.
+.sp
+.sp
+.SH "ÖRNEKLER"
+.RS 4
+.nf
+$ numfmt --to=si 1000
+\&
+-> "1.0K"
+\&
+$ numfmt --to=iec 2048
+\&
+-> "2.0K"
+\&
+$ numfmt --to=iec-i 4096
+\&
+-> "4.0Ki"
+\&
+$ echo 1K | numfmt --from=si
+\&
+-> "1000"
+\&
+$ echo 1K | numfmt --from=iec
+\&
+-> "1024"
+\&
+$ df -B1 | numfmt --header --field 2-4 --to=si
+$ ls -l  | numfmt --header --field 5 --to=iec
+$ ls -lh | numfmt --header --field 5 --from=iec --padding=10
+$ ls -lh | numfmt --header --field 5 --from=iec --format %10f
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+Assaf Gordon tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/nohup>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) nohup invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

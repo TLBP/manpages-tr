@@ -1,0 +1,430 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "XGETTEXT" 1 "4 Temmuz 2020" "GNU gettext-tools 20200704" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+xgettext - gettext dizgelerini kaynak dosyasından seçer
+.sp
+.SH KULLANIM
+.IP \fBxgettext\fR 9
+[\fISEÇENEK\fR] [\fIGİRDİ-DOSYASI\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen \fIGİRDİ-DOSYA\fRlarından dönüştürülebilecek dizgeleri çekip alır.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur. Aynı şey isteğe bağlı değiştirgelerde de geçerlidir.
+.sp
+.SS "Girdi dosyasının yeri:"
+.TP 4
+\fIGİRDİ-DOSYASI\fR...
+Girdi dosyaları
+.sp
+.TP 4
+\fB-f\fR, \fB--files-from=\fR\fIDOSYA\fR
+Girdi dosyalarının listesini \fIDOSYA\fR’dan okur.
+.sp
+.TP 4
+\fB-D\fR, \fB--directory=\fR\fIDİZİN\fR
+Girdi dosyalarının arama yoluna \fIDİZİN\fR’i ekler.
+.sp
+.PP
+Girdi dosyası ‘-‘ ise, standart girdi okunur.
+.sp
+.SS "Çıktı dosyasının yeri:"
+.TP 4
+\fB-d\fR, \fB--default-domain=\fR\fIİSİM\fR
+Çıktı olarak \fIİSİM\fR.po kullanılır (\fImessages.po\fR yerine).
+.sp
+.TP 4
+\fB-o\fR, \fB--output=\fR\fIDOSYA\fR
+Çıktı belirtilen \fIDOSYA\fR’ya yazılır.
+.sp
+.TP 4
+\fB-p\fR, \fB--output-dir=\fR\fIDİZİN\fR
+Çıktı dosyaları belirtilen \fIDİZİN\fR içine yerleştirilir.
+.sp
+.PP
+Çıktı dosyası ‘-‘ ise, çıktı standart çıktıya yazılır.
+.sp
+.SS "Girdi dosyası dil seçimi:"
+.TP 4
+\fB-L\fR, \fB--language=\fR\fIİSİM\fR
+Dosya \fIİSİM\fR ile belirtilen dilde yorumlanır. Desteklenen diller: C, C++, ObjectiveC, PO, Shell, Python, Lisp, EmacsLisp, librep, Scheme, Smalltalk, Java, JavaProperties, C#, awk, YCP, Tcl, Perl, PHP, Ruby, GCC-source, NXStringTable, RST, RSJ, Glade, Lua, JavaScript, Vala, Desktop.
+.sp
+.TP 4
+\fB-C\fR, \fB--c++\fR
+\fB--language=\fRC++ için kısaltma.
+.sp
+.PP
+Öntanımlı olarak, dil kullanılan dosya uzantısından saptanmaya çalışılır.
+.sp
+.SS "Girdi dosyasının yorumlanması:"
+.TP 4
+\fB--from-code=\fR\fIİSİM\fR
+Girdi dosyalarını karakter kodlaması. Bu seçenek yalnızca, bazı çevrilmemiş ileti dizgeleri veya bunlara karşılık gelen yorumlar ASCII olmayan karakterler içeriyorsa gereklidir. Bu seçeneğe bakılmaksızın, Tcl ve Glade girdi dosyalarının her zaman UTF-8 olduğu varsayılır.
+.sp
+.PP
+Öntanımlı olarak, girdi dosyalarının karakter kodlamasının ASCII olduğu varsayılır.
+.sp
+.SS "İşlem kipi:"
+.TP 4
+\fB-j\fR, \fB--join-existing\fR
+İletileri mevcut dosya ile birleştirir.
+.sp
+.TP 4
+\fB-x\fR, \fB--exclude-file=\fR\fIDOSYA\fR
+\fIDOSYA\fR’daki girdiler kullanılmaz. \fIDOSYA\fR PO veya POT dosyası olmalıdır.
+.sp
+.TP 4
+\fB-c\fR, \fB--add-comments\fR[=\fIYAFTA\fR]
+\fIYAFTA\fR ile başlayan ve çıktı dosyasındaki anahtar sözcük satırlarından önceki yorum bloklarını yerleştirir. \fIYAFTA\fR olmaksızın, çıktı dosyasındaki anahtar sözcük satırlarından önceki tüm yorum blokları yerleştirilecektir.
+.sp
+Çıkarılması gereken yorum bloklarının anahtar sözcük satırlarına bitişik olması gerektiği unutulmamalıdır. Aşağıdaki C kaynak kodu ele alınırsa:
+.sp
+.RS 4
+.RS 4
+.nf
+/* Bu ilk yorum.  */
+gettext ("foo");
+\&
+/* Bu ikinci yorum: çıkarılmayacak  */
+gettext (
+  "bar");
+\&
+gettext (
+  /* Bu üçüncü yorum.  */
+  "baz");
+.fi
+.sp
+.RE
+.RE
+.IP
+Yorum satırı ile üstteki anahtar sözcük arasında boş satır olduğundan, ikinci yorum satırı çıkarılmayacaktır.
+.sp
+.TP 4
+\fB--check=\fR\fISINAMA\fR
+İletiler (msgid ve msgid_plural) üzerinde belirtilen sözdizimsel sınamaları yapar. Desteklenen sınamalar şunlardır:
+.sp
+.RS
+.TP 4
+\fBellipsis-unicode\fR
+ASCII yerine Unicode üç nokta karakteri tercih edilir.
+.sp
+.TP 4
+\fBspace-ellipsis\fR
+Üç nokta karakterinden önce boşluk karakterlerine izin verilmez.
+.sp
+.TP 4
+\fBquote-unicode\fR
+ASCII \fB"’’\fR yerine Unicode tırnak karakterleri tercih edilir.
+.sp
+.TP 4
+\fBbullet-unicode\fR
+ASCII \fB*\fR veya \fB-\fR yerine Unicode madde imi karakterleri tercih edilir.
+.sp
+.PP
+.RE
+.IP
+Seçeneğin tüm girdi dosyaları üzerinde etkisi vardır. Belirli bir dizge için denetimleri etkinleştirmek veya devre dışı bırakmak için, onu kaynak dosyada bir \fBxgettext:\fR özel yorumu ile işaretleyebilirsiniz. Örneğin, \fB--check=space-elipsis\fR seçeneğini belirtirseniz, ancak belirli bir dizgedeki denetimi bastırmak istiyorsanız, aşağıdaki yorum eklenmelidir:
+.sp
+.RS 4
+.RS 4
+.nf
+/* xgettext: no-space-ellipsis-check */
+gettext ("Üç noktadan önce boşluk bırakmak istiyoruz ...");
+.fi
+.sp
+.RE
+.RE
+.IP
+\fBxgettext:\fR yorumun ardından virgülle ayrılmış bayraklar gelebilir. Olası bayraklar ’[no-]\fISINAMA\fR-check’ biçimindedir; burada \fISINAMA\fR, geçerli bir sözdizimi sınamasının adıdır. Bir bayrağın önüne no- eklenirse, anlamını olumsuzlar.
+.sp
+Bazı sınamalar, denetimleri tüm dizge yerine \fBmsgstr\fR içindeki her tümceye uygular. \fBxgettext\fR, genellikle bir nokta ve ardından belirli sayıda boşluk arayan bir kalıp eşleşmesi gerçekleştirerek tümcenin sonunu algılar. Aranacak boşluk sayısı \fB--sentence-end\fR seçeneği ile belirtilir.
+.sp
+.TP 4
+\fB--sentence-end=\fR\fITÜR\fR
+Tümce sonunu tanımlayan \fITÜR\fR için desteklenen değerler:
+.sp
+.RS
+.TP 4
+\fBsingle-space\fR
+Noktadan sonra en az bir boşluk beklenir.
+.sp
+.TP 4
+\fBdouble-space\fR
+Noktadan sonra en az iki boşluk beklenir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.SS "Dile özgü seçenekler:"
+.TP 4
+\fB-a\fR, \fB--extract-all\fR
+Bütün dizgeleri çıkartır. Bu seçeneğin etkili olduğu diller: C, C++, ObjectiveC, Shell, Python, Lisp, EmacsLisp, librep, Java, C#, awk, Tcl, Perl, PHP, GCC-source, Glade, Lua, JavaScript, Vala, GSettings.
+.sp
+.TP 4
+\fB-k\fR, \fB--keyword=\fR\fIBELİRTİM\fR
+Ek anahtar sözcük olarak \fIBELİRTİM\fR aranır. \fIBELİRTİM\fR belirtilmezse seçeneğin kullanabileceği öntanımlı bir anahtar sözcük yoktur.
+.sp
+Tanımlanmış anahtar sözcük \fIBELİRTİM\fRlerini devre dışı bırakmak için, bir anahtar sözcük \fIBELİRTİM\fRi olmadan \fB-k\fR, \fB--keyword\fR veya \fB--keyword=\fR seçeneği kullanılabilir.
+.sp
+.PD 1
+.RS 5
+.IP \(bu 3
+\fIBELİRTİM\fR bir C tanımlayıcı kimliğiyse, \fBxgettext\fR, işlev veya makro kimliğine yapılan her çağrının ilk değiştirgesinde dizgeleri arar.
+.IP \(bu 3
+\fIBELİRTİM\fR \fIid:argnum\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum\fRuncu değiştirgesinde dizgeleri arar.
+.IP \(bu 3
+\fIBELİRTİM\fR \fIid:argnum1,argnum2\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum1\fRinci ve \fIargnum2\fRinci değiştirgesinde dizgeleri arar ve onları aynı iletinin tekil/çoğul karşılıklarını elde etmek için kullanır.
+.IP \(bu 3
+\fIBELİRTİM\fR \fIid:contextargnumc,argnum\fR veya \fIid:argnum,contextargnumc\fR biçemindeyse, \fBxgettext\fR \fIcontextargnum\fRuncu değiştirgedeki dizgeyi bağlam belirteci olarak ele alır.
+.IP \(bu 3
+GNOME için özel kullanım desteği olarak, \fIBELİRTİM id:argnumg\fR biçemindeyse \fBxgettext\fR GNOME glib ‘"\fBmsgctxt|msgid\fR"’ sözdizimini kullanarak \fIargnum\fRuncu değiştirgeyi bağlamlı bir dizge olarak ele alır.
+.IP \(bu 3
+\fIBELİRTİM ’id:…,totalnumargst’\fR biçemindeyse \fBxgettext\fR yalnızca, asıl değiştirge sayısı \fItotalnumargs\fR’a eşitse bu değiştirge belirtimini tanır. Bu, C++’da aşırı yüklenmiş işlev çağrılarının belirsizliğini gidermek için kullanışlıdır.
+.IP \(bu 3
+\fIBELİRTİM ’id:argnum...,"xcomment"’\fR biçemindeyse \fBxgettext\fR iletiyi belirtilen değiştirge dizgesinden çıkarırken, çıkarılan \fIxcomment\fR yorumunu iletiye ekler. Normal bir kabuk komut satırı aracılığıyla kullanıldığında, \fIxcomment\fR etrafındaki çift tırnakların öncelenmesi gerektiği unutulmamalıdır.
+.sp
+.RE
+.IP
+.PD 0
+Bu seçeneği etkili olduğu diller: C, C++, ObjectiveC, Shell, Python, Lisp, EmacsLisp, librep, Java, C#, awk, Tcl, Perl, PHP, GCC-source, Glade, Lua, JavaScript, Vala, GSettings, Desktop.
+.sp
+Açıkça devre dışı bırakılmamışsa aranan öntanımlı anahtar sözcük \fIBELİRTİM\fRleri daima dile bağlıdır. Bunlar:
+.sp
+.PD 1
+.RS 5
+.IP \(bu 3
+C, C++ ve GCC-source için: \fBgettext\fR, \fBdgettext:2\fR, \fBdcgettext:2\fR, \fBngettext:1,2\fR, \fBdngettext:2,3\fR, \fBdcngettext:2,3\fR, \fBgettext_noop\fR, \fBpgettext:1c,2\fR, \fBdpgettext:2c,3\fR, \fBdcpgettext:2c,3\fR, \fBnpgettext:1c,2,3\fR, \fBdnpgettext:2c,3,4\fR, \fBdcnpgettext:2c,3,4\fR
+.IP \(bu 3
+Objective C için: C gibidir, ayrıca \fBNSLocalizedString\fR, \fB_\fR, \fBNSLocalizedStaticString\fR, \fB__\fR
+.IP \(bu 3
+Kabuk betikleri için: \fBgettext\fR, \fBngettext:1,2\fR, \fBeval_gettext\fR, \fBeval_ngettext:1,2\fR, \fBeval_pgettext:1c,2\fR, \fBeval_npgettext:1c,2,3\fR
+.IP \(bu 3
+Python için: \fBgettext\fR, \fBugettext\fR, \fBdgettext:2\fR, \fBngettext:1,2\fR, \fBungettext:1,2\fR, \fBdngettext:2,3\fR, \fB_\fR
+.IP \(bu 3
+Lisp için: \fBgettext\fR, \fBngettext:1,2\fR, \fBgettext-noop\fR
+.IP \(bu 3
+EmacsLisp için: \fB_\fR
+.IP \(bu 3
+librep için: \fB_\fR
+.IP \(bu 3
+Scheme için: \fBgettext\fR, \fBngettext:1,2\fR, \fBgettext-noop\fR
+.IP \(bu 3
+Java için: \fBGettextResource.gettext:2\fR, \fBGettextResource.ngettext:2,3\fR, \fBGettextResource.pgettext:2c,3\fR, \fBGettextResource.npgettext:2c,3,4\fR, \fBgettext\fR, \fBngettext:1,2\fR, \fBpgettext:1c,2\fR, \fBnpgettext:1c,2,3\fR, \fBgetString\fR
+.IP \(bu 3
+C# için: \fBGetString\fR, \fBGetPluralString:1,2\fR, \fBGetParticularString:1c,2\fR, \fBGetParticularPluralString:1c,2,3\fR
+.IP \(bu 3
+awk için: \fBdcgettext\fR, \fBdcngettext:1,2\fR
+.IP \(bu 3
+Tcl için: \fB::msgcat::mc\fR
+.IP \(bu 3
+Perl için: \fBgettext\fR, \fB%gettext\fR, \fB$gettext\fR, \fBdgettext:2\fR, \fBdcgettext:2\fR, \fBngettext:1,2\fR, \fBdngettext:2,3\fR, \fBdcngettext:2,3\fR, \fBgettext_noop\fR
+.IP \(bu 3
+PHP için: \fB_\fR, \fBgettext\fR, \fBdgettext:2\fR, \fBdcgettext:2\fR, \fBngettext:1,2\fR, \fBdngettext:2,3\fR, \fBdcngettext:2,3\fR
+.IP \(bu 3
+Glade 1 için: \fBlabel\fR, \fBtitle\fR, \fBtext\fR, \fBformat\fR, \fBcopyright\fR, \fBcomments\fR, \fBpreview_text\fR, \fBtooltip\fR
+.IP \(bu 3
+Lua için: \fB_\fR, \fBgettext.gettext\fR, \fBgettext.dgettext:2\fR, \fBgettext.dcgettext:2\fR, \fBgettext.ngettext:1,2\fR, \fBgettext.dngettext:2,3\fR, \fBgettext.dcngettext:2,3\fR
+.IP \(bu 3
+JavaScript için: \fB_\fR, \fBgettext\fR, \fBdgettext:2\fR, \fBdcgettext:2\fR, \fBngettext:1,2\fR, \fBdngettext:2,3\fR, \fBpgettext:1c,2\fR, \fBdpgettext:2c,3\fR
+.IP \(bu 3
+Vala için: \fB_\fR, \fBQ_\fR, \fBN_\fR, \fBNC_\fR, \fBdgettext:2\fR, \fBdcgettext:2\fR, \fBngettext:1,2\fR, \fBdngettext:2,3\fR, \fBdpgettext:2c,3\fR, \fBdpgettext2:2c,3\fR
+.IP \(bu 3
+Desktop için: \fBName\fR, \fBGenericName\fR, \fBComment\fR, \fBKeywords\fR
+.sp
+.RE
+.IP
+.PD 0
+.sp
+.TP 4
+\fB--flag=\fR\fISÖZCÜK:NUM:BAYRAK\fR
+\fISÖZCÜK\fR işlevinin \fINUM\fRuncu değiştirgesinin bir parçası olarak ortaya çıkan dizgeler için ek \fIBAYRAK\fRları belirtir. Olası bayraklar, muhtemelen ’\fBpass-\fR’ ön ekli ve ’\fBno-c-format\fR’ gibi olumsuzlamaları olan ’\fBc-format\fR’ gibi, olası biçem dizgesi göstergeleridir.
+.sp
+\fB--flag=function:arg:lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, belirtilen \fBfunction\fR işlevinin \fBarg\fRıncı değiştirgesi olarak bir biçem dizgisi beklemesidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format__ (__printf__, arg, ...)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, GNU libc’deki \fBerror\fR(3) işlevini kullanırsanız, davranışını \fB--flag=error:3:c-format\fR aracılığıyla belirtebilirsiniz. Bu belirtimin etkisi, \fBxgettext\fR’in işlevin \fBarg\fRıncı değiştirgesi olarak ortaya çıkan tüm \fBgettext\fR(3) çağrılarını biçem dizgeleri olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: \fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+.sp
+\fB--flag=function:arg:pass-lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, \fBfunction\fR çağrısı, bir \fBformat\fR dizgesi vermesi gereken konumda iken gerçekleşirse, \fBarg\fRıncı değiştirgenin de ilave olarak aynı türde bir \fBformat\fR dizgesi vermesi gerektiğidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:pass-c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format_arg__ (arg)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, \fBgettext\fR(3) işlevi için ’\fB_\fR’ kısayolu kullanılırsa, seçenek olarak \fB--flag=_:1:pass-c-format\fR kullanmak gerekir. Bu belirtimin etkisi, \fBxgettext\fR’in \fB_("string")\fR çağrısı için biçem dizgesi gereksinimini ilk değiştirge olan \fBstring\fR’e yöneltmesi ve böylece onu bir biçem dizgesi olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: "\fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+.sp
+Bu seçeneğin etkili olduğu diller: C, C++, ObjectiveC, Shell, Python, Lisp, EmacsLisp, librep, Scheme, Java, C#, awk, YCP, Tcl, Perl, PHP, GCC-source, Lua, JavaScript, Vala.
+.sp
+.TP 4
+\fB-T\fR, \fB--trigraphs\fR
+Girdideki ANSI C üçlü harflerini anlar. Bu seçeneğin etkili olduğu diller: C, C++, ObjectiveC
+.sp
+.TP 4
+\fB--qt\fR
+Qt biçem dizgelerini tanır. Bu seçenek yalnızca C++ diliyle etkilidir.
+.sp
+.TP 4
+\fB--kde\fR
+KDE 4 biçem dizgelerini tanır. Bu seçenek yalnızca C++ diliyle etkilidir.
+.sp
+.TP 4
+\fB--boost\fR
+Boost biçem dizgelerini tanır. Bu seçenek yalnızca C++ diliyle etkilidir.
+.sp
+.TP 4
+\fB--debug\fR
+Bir iletiyi biçem dizesi olarak imlemekten kimin sorumlu olduğunu göstermek için \fBc-format\fR ve \fBpossible-c-format\fR bayraklarını kullanır. İkincisi, istek \fBxgettext\fR’ten geliyorsa kullanılır, ilki ise istek yazılımcıdan geliyorsa kullanılır.
+.sp
+Öntanımlı olarak \fBc-format\fR bayrağı kullanılır. Çevirmen bu ayrıntılarla ilgilenmek zorunda kalmamalıdır.
+.sp
+.PP
+Bu \fBxgettext\fR uygulaması, önişlemci makrolarındaki dizgeler, bitişik dizgelerin ANSI birleştirmesi ve devam eden dizgeler için satır sonu öncelemesi gibi birkaç tuhaf durumu işleyebilir.
+.sp
+.SS "Çıktı ayrıntıları:"
+.TP 4
+\fB--color=\fR\fIKOŞUL\fR
+Renkler ve diğer metin özniteliklerinin kullanılıp kullanılmayacağını veya ne zaman kullanılacağını belirler. \fIKOŞUL\fR değerleri: \fBalways\fR çıktının renklendirileceğini, \fBnever\fR çıktının renklendirilmeyeceğini, \fBauto\fR çıktının yalnızca çıktı aygıtı uçbirim ise renklendirileceğini, \fBhtml\fR ise çıktının renklendirileceğini ve HTML biçeminde olacağını belirtir. \fB--color\fR ile \fB--color=always\fR eşdeğerdir.
+.sp
+.TP 4
+\fB--style=\fR\fIDOSYA\fR
+\fB--color\fR seçeneği etkinse, kullanılacak CSS kurallarını içeren \fIDOSYA\fRyı belirler.
+.sp
+.TP 4
+\fB-e\fR, \fB--no-escape\fR
+C öncelemeleri çıktıda kullanılmaz (öntanımlı)
+.sp
+.TP 4
+\fB-E\fR, \fB--escape\fR
+C öncelemeleri çıktıda kullanılır, genişletilmiş karakterler kullanılmaz.
+.sp
+.TP 4
+\fB--force-po\fR
+Boş olsa bile PO dosyasını yazar.
+.sp
+.TP 4
+\fB-i\fR, \fB--indent\fR
+PO dosyasını girintili tarzda yazar.
+.sp
+.TP 4
+\fB--no-location\fR
+’#: dosyaismi:satır’ başlıkları yazılmaz. Bu seçeneğin kullanımı teknik olarak yetenekli çevirmenler için ileti bağlamını bulmayı zorlaştırır (Bazı çok satırlı hata iletileri kodun farklı yerlerinden toplanarak oluşur, bunları bulup doğru konumlamak için kodu okumak gerekir).
+.sp
+.TP 4
+\fB-n\fR, \fB--add-location\fR[=\fITÜR\fR]
+’#: dosyaismi:satır’ başlıkları yazılır (öntanımlıdır).
+.sp
+Seçimlik \fITÜR\fR ‘full’, ‘file’ veya ‘never’ olabilir. \fITÜR\fR belirtilmezse veya ‘full’ değeri belirtilirse dosyaismi ve satır her ikisi de yazılır. ‘file’ belirtilirse satır kısmı yazılmaz. ‘never’ belirtmek \fB--no-location\fR seçeneğine eşdeğerdir.
+.sp
+.TP 4
+\fB--strict\fR
+Kesin Uniforum uyumlu PO dosyası yazar. GNU eklentileri desteklemediği için bu Uniforum biçiminden kaçınılması gerektiği unutulmamalıdır.
+.sp
+.TP 4
+\fB--properties-output\fR
+Java .properties sözdiziminde bir Java ResourceBundle yazar. Bu dosya biçiminin çoğul biçemleri desteklemediği ve eski iletileri sessizce yok saydığı unutulmamalıdır.
+.sp
+.TP 4
+\fB--stringtable-output\fR
+.strings sözdiziminde NeXTstep/GNUstep yerelleştirilmiş özkaynak dosyası yazar. Bu dosya biçiminin çoğul biçemleri desteklemediği unutulmamalıdır.
+.sp
+.TP 4
+\fB--itstool\fR
+itstool yorumlarını yazar.
+.sp
+.TP 4
+\fB-w\fR, \fB--width=\fR\fISAYI\fR
+Çıktı sayfa genişliği \fISAYI\fR’ya ayarlanır. Çıktı dosyalarındaki uzun dizgeler, her satırın genişliğinin (=ekran sütunlarının sayısı) verilen \fISAYI\fR’ya eşit veya küçük olmasını sağlamak için birden çok satıra bölünecektir.
+.sp
+.TP 4
+\fB--no-wrap\fR
+Sayfa genişliğine sığmayan satırların taşan kısmı bir alt satıra indirilmez.
+.sp
+.TP 4
+\fB-s\fR, \fB--sort-output\fR
+Sıralı çıktı üretir. Bu seçeneğin kullanımı, çevirmenin ileti bağlamını anlamasını zorlaştırır.
+.sp
+.TP 4
+\fB-F\fR, \fB--sort-by-file\fR
+Çıktıyı dosya konumuna göre sıralar.
+.sp
+.TP 4
+\fB--omit-header\fR
+Başlığa ’msgid ""’ girdisini yazmaz. Ortaya çıkan dosya tamamen ASCII olmayacaksa, bu seçeneği kullanmanın hataya yol açacağı unutulmamalıdır.
+.sp
+.TP 4
+\fB--copyright-holder=\fR\fIDİZGE\fR
+Çıktıya telif hakkı \fIDİZGE\fRsi yazılır. \fIDİZGE\fR çıktıyı içeren paketin telif hakkı sahibi olmalıdır. (Paketin kaynak dosyalarından alınan msgstr dizgelerinin paketin telif hakkı sahibine ait olduğu unutulmamalıdır.) Çevirmenlerin çevirilerinin telif hakkını devretmeleri veya reddetmeleri beklenir, böylece paket sahipleri bunları yasal risk almadan dağıtabilir. Dizge boşsa, çıktı dosyaları kamu malı olarak işaretlenir; bu durumda, çevirmenlerin telif haklarını reddetmeleri beklenir, böylece paket sahipleri yasal risk almadan bunları dağıtabilir.
+.sp
+\fIDİZGE\fR için öntanımlı değer Free Software Foundation, Inc.’dir, çünkü \fBxgettext\fR ilk olarak GNU projesinde kullanılmıştır.
+.sp
+.TP 4
+\fB--foreign-user\fR
+Yabancı kullanıcılar için FSF telif hakkı çıktıda bulunmaz. Bu seçenek \fB--copyright-holder=’’\fR seçeneğine eşdeğerdir. Çevirilerinin kamu malı olmasını isteyen GNU projesi dışındaki paketler için faydalı olabilir.
+.sp
+.TP 4
+\fB--package-name=\fR\fIPAKET\fR
+Paket ismini çıktının başlığına yazar.
+.sp
+.TP 4
+\fB--package-version=\fR\fISÜRÜM\fR
+Paket sürümünü çıktının başlığına yazar. Bu seçenek \fB--package-name\fR seçeneği kulllanılmışsa etkilidir.
+.sp
+.TP 4
+\fB--msgid-bugs-address=\fR\fIEMAIL@ADRES\fR
+msgid hatalarının bildirileceği adres. Öntanımlı değer boştur. Bu seçeneğin belirtilmesi unutulmamalıdır. E-posta adresiniz veya çevirmenlerin üye olmadan yazabilecekleri bir posta listesi adresi veya çevirmenlerin sizinle iletişim kurabileceği bir sayfa adresi olabilir.
+.sp
+.TP 4
+\fB-m\fR, \fB--msgstr-prefix\fR[=\fIDİZGE\fR]
+msgstr girdileri için önek olarak \fIDİZGE\fR ya da belirtilmezse "" kullanılır.
+.sp
+.TP 4
+\fB-M\fR, \fB--msgstr-suffix\fR[=\fIDİZGE\fR]
+msgstr girdileri için sonek olarak \fIDİZGE\fR ya da belirtilmezse "" kullanılır.
+.sp
+.PP
+.sp
+.SS "Bilgilendirme seçenekleri:"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım konularını görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Ayrıntı düzeyini arttırır.
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+Ulrich Drepper tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Hatalar <https://savannah.gnu.org/projects/gettext> adresindeki hata izleyiciye veya <bug-gettext (at) gnu.org> eposta adresine bildirilebilir.
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 1995-2020 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU gettext sayfasında: <https://www.gnu.org/software/gettext/manual/html_node/xgettext-Invocation.html>
+.br
+Veya sisteminizde: \fBinfo xgettext\fR
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

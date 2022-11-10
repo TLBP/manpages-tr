@@ -1,0 +1,273 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * This library (libblkid) is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either version
+ * 2.1 of the License, or (at your option) any later version.
+ *
+ * The complete text of the license is available in the
+ * http://www.gnu.org/licenses/licenses.html
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "BLKID" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+blkid - blok aygıtının özniteliklerini basar/yerlerini belirler
+.sp
+.SH KULLANIM
+.IP \fBblkid\fR 6
+[ \fB--label\fR \fIYAFTA\fR | \fB--uuid\fR \fIUUID\fR ]
+.IP \fBblkid\fR 6
+[\fB--no-encoding --garbage-collect --list-one --cache-file\fR \fIDOSYA\fR] [\fB--output\fR \fIBİÇEM\fR] [\fB--match-tag\fR \fIYAFTA\fR] [\fB--match-token\fR \fIİSİM=DEĞER\fR] \fIAYGIT\fR...
+.IP \fBblkid\fR 6
+\fB--probe\fR [\fB--offset\fR \fIKONUM\fR] [\fB--output\fR \fIBİÇEM\fR] [\fB--size\fR \fIBOYUT\fR] [\fB--match-tag\fR \fIYAFTA\fR] [\fB--match-types\fR \fILİSTE\fR] [\fB--usages\fR \fILİSTE\fR] [\fB--no-part-details\fR] \fIAYGIT\fR...
+.IP \fBblkid\fR 6
+\fB--info\fR [\fB--output\fR \fIBİÇEM\fR] [\fB--match-tag\fR \fIYAFTA\fR] \fIAYGIT\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBblkid\fR uygulaması, \fBlibblkid\fR(3) kütüphanesinin komut satırı arayüzüdür. Bir blok aygıtının tuttuğu içerik türünü (örn. dosya sistemi veya takas) ve ayrıca içerik meta verilerinden (örn. LABEL veya UUID alanları) öznitelikleri (belirteçler, \fIİSİM=DEĞER\fR çiftleri) belirleyebilir.
+.sp
+Blok aygıtları hakkında bilgi almak için \fBlsblk\fR(8) komutunun veya dosya sistemlerine genel bir bakış için \fBlsblk --fs\fR komutunun veya önceden bağlanmış dosya sistemlerinde arama yapmak için \fBfindmnt\fR(8) komutunun kullanılması önerilir.
+.sp
+.TP 4
+\fBBilgi:\fR
+\fBlsblk\fR(8) daha fazla bilgi ve çıktı biçimlendirme üzerinde daha iyi denetim sağlar, betiklerde kullanımı kolaydır ve gerçek bilgileri almak için root olmayı gerektirmez. \fBblkid\fR, bilgileri doğrudan aygıtlardan okur ve root olmayan kullanıcılar için önbelleğe alınmış doğrulanmamış bilgileri döndürür. \fBblkid\fR çoğunlukla sistem hizmetleri ve \fBlibblkid\fR(3) işlevselliğini sınamak için tasarlanmıştır.
+.sp
+.PP
+\fIAYGIT\fR belirtildiğinde, yalnızca bu aygıttan gelen belirteçler görüntülenir. Komut satırında birden çok \fIAYGIT\fR belirtmek mümkündür. Hiçbiri aygıt belirtilmezse, \fI/proc/partitions\fR içinde görünen tüm bölümler veya bölümlenmemiş aygıtlar gösterilir.
+.sp
+\fBblkid\fR’nin iki ana işlem şekli vardır: ya belirli bir \fIİSİM=DEĞER\fR çiftine sahip bir aygıtı arar ya da belirtilen bir veya daha fazla \fIAYGIT\fR için \fIİSİM=DEĞER\fR çiftlerini görüntüler.
+.sp
+Güvenlik nedenleriyle \fBblkid\fR, sondalama sonucu çelişkili olan (çakışan birden çok dosya sistemi algılanırsa) tüm aygıtları sessizce yok sayar . Düşük seviyeli sondalama kipi (\fB-p\fR), bu durumda daha fazla bilgi ve ek çıkış durumu sağlar. Ayrıntılı bir liste elde etmek ve eski şeyleri (sihirli dizgeleri) aygıttan silmek için \fBwipefs\fR(8) kullanılması önerilir.
+.sp
+.SH "SEÇENEKLER"
+\fIBOYUT\fR ve \fIKONUM\fR değiştirgeleri, KiB (=1024), MiB (=1024*1024) ve GiB, TiB, PiB, EiB, ZiB ve YiB veya KB (=1000), MB (=1000*1000), GB, TB, PB, EB, ZB ve YB gibi çarpımsal son ekler alabilir ("iB" isteğe bağlıdır, örneğin, "K" ile "KiB" aynı anlama gelir).
+.sp
+.TP 4
+\fB-c\fR, \fB--cache-file\fR \fIDOSYA\fR
+Öntanımlı önbellek dosyasından okumak yerine belirtilen önbellek \fIDOSYA\fRsından okur (daha fazla ayrıntı \fBYAPILANDIRMA DOSYASI\fR bölümüne bulunabilir). Temiz bir önbellekle başlanmak istenirse (yani, daha evvelce taranan ancak şu anda gerekmeyen aygıtların bildirilmemesi için), \fIDOSYA\fR olarak \fI/dev/null\fR belirtilebilir.
+.sp
+.TP 4
+\fB-d\fR, \fB--no-encoding\fR
+Yazdırılmayan karakterler kodlanmaz. Yazdırılmayan karakterler öntanımlı olarak ^ ve M gösterimiyle kodlanır. \fB--output udev\fR çıktı biçiminin devre dışı bırakılamayan farklı bir kodlama kullandığı unutulmamalıdır.
+.sp
+.TP 4
+\fB-D\fR, \fB--no-part-details\fR
+Düşük seviyeli sondalama kipinde bölümleme tablosundaki bilgi (PART_ENTRY_* yaftaları) basılmaz.
+.sp
+.TP 4
+\fB-g\fR, \fB--garbage-collect\fR
+Artık var olmayan aygıtları kaldırmak için \fBblkid\fR önbelleğinde çöp toplama etkinliği gerçekleştirir.
+.sp
+.TP 4
+\fB-H\fR, \fB--hint\fR \fITANIM\fR
+Sondalama ipucunu belirler. İpuçları, sondalama işlevlerini örneğin başka bir konumu yoklamaya zorlamanın isteğe bağlı bir yoludur. Çok oturumlu UDF’de oturum konumunu belirlemek için şimdilik sadece "\fBsession_offset=\fR\fISAYI\fR" desteklenmektedir.
+.sp
+.TP 4
+\fB-i\fR, \fB--info\fR
+G/Ç sınırlamaları (diğer adıyla G/Ç topolojisi) hakkındaki bilgileri görüntüler. \fBexport\fR çıktı biçemi otomatik olarak etkinleştirilir. Bu seçenek \fB--probe\fR seçeneği ile birlikte kullanılabilir.
+.sp
+.TP 4
+\fB-k\fR, \fB--list-filesystems\fR
+Bilinen tüm dosya sistemlerini ve RAID’leri listeler ve çıkar.
+.sp
+.TP 4
+\fB-l\fR, \fB--list-one\fR
+\fB--match-token\fR seçeneğiyle belirtilen arama değiştirgeleriyle eşleşen yalnızca bir aygıt aranır. Belirtilen arama değiştirgeleriyle eşleşen birden fazla aygıt varsa, en yüksek önceliğe sahip aygıt ve/veya belirtilen önceliğe sahip ilk aygıt döndürülür (bkz: \fBudev\fR açıklaması). Azalan öncelik sırasına göre aygıt türleri şunlardır: Aygıt Eşleyici, EVMS, LVM, MD ve son olarak normal blok aygıtları. Bu seçenek belirtilmezse, \fBblkid\fR arama değiştirgeleriyle eşleşen tüm aygıtları listeler.
+.sp
+Bu seçenek, \fB--match-token\fR LABEL veya UUID belirteçleri ile kullanıldığında \fBblkid\fR’yi \fBudev\fR kullanmaya zorlar. Amaç, aynı etiketin birden fazla aygıt için kullanıldığı sistemlerde diğer araçlarla (\fBmount\fR(8) gibi) tutarlı çıktılar sağlamaktır.
+.sp
+.TP 4
+\fB-L\fR, \fB--label\fR \fIYAFTA\fR
+\fIYAFTA\fR dosya sistemi etiketini kullanan aygıtı arar; bu \fB--list-one\fR \fB--output\fR \fIAYGIT\fR \fB--match-token\fR LABEL=\fIYAFTA\fR’ya eşdeğerdir. Bu arama yöntemi, \fI/dev/disk/by-label\fR \fBudev\fR sembolik bağlarını güvenilir bir şekilde kullanabilir (sembolik bağları doğrulama olmadan kullanmanın güvenilir olmaması). \fB--label\fR seçeneği, \fBudev\fR olsun olmasın her sistemde çalışır.
+.sp
+Ne yazık ki, e2fsprogs’taki özgün \fBblkid\fR, \fB-o\fR \fILİSTE\fR ile eşanlamlı olarak \fB-L\fR seçeneğini kullanır. Daha iyi taşınabilirlik için betiklerde \fB-L\fR seçeneği yerine \fB-l\fR \fB-o\fR \fIAYGIT\fR \fB-t\fR LABEL=\fIYAFTA\fR ve \fB-o\fR \fILİSTE\fR kullanılmalıdır.
+.sp
+.TP 4
+\fB-n\fR, \fB--match-types\fR \fILİSTE\fR
+Sondalama işlevlerini, belirtilen virgül ayraçlı süperblok türleri (adları) listesiyle sınırlar. Yok sayılması gereken türleri belirtmek için liste öğelerinin önüne "no" eklenebilir. Örneğin bu komut
+.sp
+.RS 4
+.RS 4
+.nf
+blkid --probe --match-types vfat,ext3,ext4 /dev/sda1
+.fi
+.sp
+.RE
+.RE
+.IP
+yalnızca vfat, ext3 ve ext4 dosya sistemlerini sondalarken
+.sp
+.RS 4
+.RS 4
+.nf
+blkid --probe --match-types nominix /dev/sda1
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu minix dosya sistemleri hariç desteklenen tüm dosya sistemlerini sondalar. Bu seçenek yalnızca \fB--probe\fR seçeneği ile birlikte kullanışlıdır.
+.sp
+.TP 4
+\fB-o\fR, \fB--output\fR \fIBİÇEM\fR
+Belirtilen çıktı \fIBİÇEM\fRi kullanılır. Değişkenlerin ve aygıtların sıralamasının değişebileceği unutulmamalıdır. Bkz: \fB--match-tag\fR. \fIBİÇEM\fR şunlardan biri olabilir:
+.sp
+.RS
+.TP 4
+\fBfull\fR
+tüm yaftalar basılır (öntanımlıdır)
+.sp
+.TP 4
+\fBvalue\fR
+yafta değerlerini basar
+.sp
+.TP 4
+\fBlist\fR
+aygıtlar kullanıcı dostu biçemde basılır; bu çıktı biçemi düşük seviyeli sondalama için desteklenmez (\fB--probe\fR veya \fB--info\fR).
+.sp
+\fBlsblk\fR(8) lehine, bu çıktı biçeminin kullanımı ÖNERİLMEMEKTEDİR.
+.sp
+.TP 4
+\fBdevice\fR
+Yalnızca aygıt isimlerini basar; bu çıktı biçemi \fB--label\fR ve \fB--uuid\fR seçenekleri için daima etkindir.
+.sp
+.TP 4
+\fBudev\fR
+\fBudev\fR ortamına kolay aktarım için \fIanahtar="değer"\fR çiftleri basar; anahtarların önüne ID_FS_ veya ID_PART_ önekleri getirilir. Değer, \fBudev\fR ortamı için güvenli olacak şekilde değiştirilebilir; düz ASCII, onaltılık öncelemler ve geçerli UTF-8’e izin verilir, kullanımına izin verilmeyen her şey (boşluklar dahil) ’_’ ile değiştirilir. _ENC soneki içeren anahtarlar, güvenli olmayan karakterler için onaltılık öncelemleri kullanır.
+.sp
+Daha fazla süperblok algılanırsa \fBudev\fR çıktısı ID_FS_AMBIVALENT etiketini döndürür ve boş bölümler de dahil olmak üzere tüm bölümler için daima ID_PART_ENTRY_* etiketlerini döndürür.
+.sp
+Bu çıktı biçeminin kullanımı ÖNERİLMEMEKTEDİR.
+.sp
+.TP 4
+\fBexport\fR
+Ortama kolay aktarım için \fIanahtar="değer"\fR çiftleri basar; bu çıktı biçemi, G/Ç sınırlamaları (\fB--info\fR seçeneği) istendiğinde otomatik olarak etkinleştirilir.
+.sp
+Yazdırılamayan karakterler ^ ve M- gösterimiyle kodlanır ve güvensiz olması olası tüm karakterler ise öncelenir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fB-O\fR, \fB--offset\fR \fIKONUM\fR
+Belirtilen tüm \fIKONUM\fRlarda sondalama yapılır (yalnızca \fB--probe\fR ile birlikte kullanışlıdır). Bu seçenek \fB--info\fR seçeneği ile birlikte kullanılabilir.
+.sp
+.TP 4
+\fB-p\fR, \fB--probe\fR
+Düşük seviyeli sondalama kipine geçer (arabelleği yok sayarak).
+.sp
+Düşük seviyeli sondalamanın ayrıca bölüm tablosu türü (PTTYPE etiketi) ve bölümler (PART_ENTRY_* etiketleri) hakkında bilgi verdiği unutulmamalıdır. Düşük seviyeli sondalama tarafından üretilen etiket adları, dahili olarak \fBlibblkid\fR(3) tarafından kullanılan adlara dayanır ve \fB--probe\fR olmadan elde edildiklerinden bunlar farklı olabilir (örneğin PART_ENTRY_UUID=’ye karşın PARTUUID=). Bkz: \fB--no-part-details\fR.
+.sp
+.TP 4
+\fB-s\fR, \fB--match-tag\fR \fIYAFTA\fR
+Belirtilen her aygıt için yalnızca \fIYAFTA\fR ile eşleşen belirteçleri gösterir. Çok sayıda \fB--match-tag\fR seçeneği belirtmek mümkündür. Hiçbir yafta belirtilmezse, basılan tüm belirteçler belirtilen aygıtlarla ilgili olur. Hiçbir belirteç gösterilmeksizin yalnızca arabelleğin temizlenmesi istenirse başka hiçbir seçenek belitilmeden yalnızca \fB--match-tag none\fR seçeneği kullanılmalıdır.
+.sp
+.TP 4
+\fB-S\fR, \fB--size\fR \fIBOYUT\fR
+Aygıt ya da dosyanın boyutunu geçersiz kılar (yalnızca \fB--probe\fR seçeneği ile birlikte yararlıdır).
+.sp
+.TP 4
+\fB-t\fR, \fB--match-token\fR \fIİSİM=DEĞER\fR
+\fIDEĞER\fR değerine sahip \fIİSİM\fR belirteçleri olan blok aygıtlarını araştırır ve bulunan aygıtları gösterir. TYPE, LABEL ve UUID \fIİSİM\fR için uygun değerlerdir. Komut satırında hiçbir aygıt belirtilmezse tüm blok aygıtları araştırılır, aksi takdirde yalnızca belirtilen aygıtlar araştırılır.
+.sp
+.TP 4
+\fB-u\fR, \fB--usages\fR \fILİSTE\fR
+Sondalama işlevlerini belirtilen virgül ayraçlı "kullanım" türleri listesindeki türlerle sınırlar. Desteklenen "kullanım" türleri: \fBfilesystem, raid, crypto\fR vb. Yoksayılmak istenen kullanım türleri "no" ile öncelenerek belirtilebilir. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+blkid --probe --usages filesystem,other /dev/sda1
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu tüm dosya sistemlerini ve diğerlerini (takas gibi) sondalarken
+.sp
+.RS 4
+.RS 4
+.nf
+blkid --probe --usages noraid /dev/sda1
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu RAID hariç desteklenen tüm biçemleri sondalar. Bu seçenek yalnızca \fB--probe\fR seçeneği ile birlikte yararlıdır.
+.sp
+.TP 4
+\fB-U\fR, \fB--uuid\fR \fIUUID\fR
+Belirtilen \fIUUID\fR’li dosya sistemini araştırır. Ayrıntılar için bkz: \fB--label\fR seçeneği.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösteriri ve çıkar..
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+Belirtilen aygıt veya belirtilen belirteç (\fB--match-token\fR) ile adreslenen aygıt bulunursa ve aygıt hakkında herhangi bir bilgi toplamak mümkünse, çıkış durumu olarak 0 döner. \fB--match-token\fR seçeneğinin çıktılanacak yaftaları etkilediği, ancak çıkış durumunu etkilemediği unutulmamalıdır.
+.sp
+Belirtilen yafta yoksa veya (belirtilen) aygıtlar tanımlanamıyorsa ya da aygıt belirteçleri veya aygıt içeriği hakkında bilgi toplamak mümkün değilse çıkış durumu olarak 2 döner.
+.sp
+Kullanımdan kaynaklananlar ve diğer hatalarda çıkış durumu olarak 4 döner.
+.sp
+Düşük seviyeli sondalama kipinde çelişkili bir sonuç elde edilirse çıkış durumu olarak 8 döner.
+.sp
+.SH "YAPILANDIRMA DOSYASI"
+\fI/etc/blkid.conf\fR yapılandırma dosyasının standart konumu \fBBLKID_CONF\fR ortam değişkeni ile geçersiz kılınabilir.. \fBlibblkid\fR(3) kütüphanesi aşağıdaki seçeneklerle denetlenebilir:
+.sp
+.TP 4
+\fBSEND_UEVENT=\fR\fIyes|no\fR
+\fI/dev/disk/by-{label,uuid,partuuid,partlabel}/\fR sembolik bağı aygıt üzerinde LABEL, UUID, PARTUUID veya PARTLABEL/ ile eşleşmediğinde uevent gönderir. "yes" öntanımlıdır.
+.sp
+.TP 4
+\fBCACHE_FILE=\fR\fIKONUM\fR
+Önbellek dosyasının konumunu geçersiz kılar. Bu atama \fBBLKID_FILE\fR ortam değişkeni ile geçersiz kılnabilir. \fIKONUM\fR için \fI/run/blkid/blkid.tab\fR veya \fI/run\fR dizini bulunmayan sistemlerde \fI/etc/blkid.tab\fR öntanımlıdır.
+.sp
+.TP 4
+\fBEVALUATE=\fR\fIYÖNTEMLER\fR
+LABEL ve UUID değerlendirme yöntemlerini tanımlar. Şimdilik, \fBlibblkid\fR(3) kütüphanesi "\fBudev\fR" ve "\fBscan\fR" yöntemlerini desteklemektedir. Aralarına virgül konarak birden fazla yöntem belirtilebilir. "\fBudev\fR,\fBscan\fR" öntanımlıdır. "\fBudev\fR" yöntemi \fBudev\fR \fI/dev/disk/by-*\fR sembolik bağını kullanırken "\fBscan\fR" yöntemi \fI/proc/partitions\fR dosyasındaki tüm aygıt dosyalarını tarar.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBLIBBLKID_DEBUG=all\fR ile hata ayıklama çıktısı etkin olur.
+.sp
+.SH "YAZAN"
+\fBblkid\fR Andreas Dilger tarafından \fBlibblkid\fR(3) için yazıldı ve Theodore Ts’o ile Karel Zak tarafından geliştirildi.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlibblkid\fR(3), \fBfindfs\fR(8), \fBlsblk\fR(8), \fBwipefs\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBblkid\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,120 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "RM" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+rm - dosya ve dizinleri siler
+.sp
+.SH KULLANIM
+.IP \fBrm\fR 3
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Bu kılavuz sayfası \fBrm\fR komutunun GNU sürümünü belgelemektedir. \fBrm\fR belirtilen dosyayı siler. Öntanımlı olarak, dizinleri silmez.
+.sp
+Eğer \fB-I\fR veya \fB--interactive=once\fR seçeneği verilmiş ve üçten fazla dosya varsa veya \fB-r\fR, \fB-R\fR veya \fB--recursive\fR verilmişse, \fBrm\fR kullanıcıya işlemin tamamı için devam edilip edilmeyeceğini sorar. Eğer yanıt, olumlu değilse işlemi yapmaz ve çıkar.
+.sp
+Aksi takdirde, eğer bir dosya yazılamaz durumdaysa, standart girdi bir uçbirim olup \fB-f\fR veya \fB--force\fR seçeneği verilmemişse ya da \fB-i\fR veya \fB--interactive=always\fR seçeneği verilmişse \fBrm\fR kullanıcıya "dosya silinsin mi?" diye sorar. Yanıt olumlu değilse dosya atlanır.
+.sp
+.SH "SEÇENEKLER"
+\fIDOSYA\fRları siler (bağları kaldırır).
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Silerken sormaz, varolmayan bir dosya için bilgi vermez.
+.sp
+.TP 4
+\fB-i\fR
+Silmeden önce sorar.
+.sp
+.TP 4
+\fB-I\fR
+Ardışık silerken veya üçten fazla dosyayı silerken silmeden önce sorar. Çoğu yanlışlığı önlemek bakımından hala koruyucu olmakla beraber \fB-i\fR seçeneğinden daha teklifsizdir.
+.sp
+.TP 4
+\fB--interactive\fR[=\fIKOŞUL\fR]
+\fIKOŞUL\fRa göre etkileşime girer: never [asla], once (\fB-I\fR) [bir kere], always (\fB-i\fR) [daima]. Bir değer belirtilmezse always belirtildiği varsayılır.
+.sp
+.TP 4
+\fB--one-file-system\fR
+Bir dizin içindeki dizinleri ve dosyaları ardışık silerken, başka bir dosya sistemine ait dizinlerde işlem yapmaz.
+.sp
+.TP 4
+\fB--no-preserve-root\fR
+’\fI/\fR’ özel olarak ele alınmaz.
+.sp
+.TP 4
+\fB--preserve-root\fR[=\fIall\fR]
+’\fI/\fR’ silinmez (öntanımlı); ’all’ ile, ebeveyninden ayrı bir aygıt üzerinde komut satırı değiştirgelerinin tümü reddedilir.
+.sp
+.TP 4
+\fB-r\fR, \fB-R\fR, \fB--recursive\fR
+Dizinlerin ve alt dizinlerin içeriklerini ardarda siler.
+.sp
+.TP 4
+\fB-d\fR, \fB--dir\fR
+Boş dizinler silinir.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Yapılan işlem hakkında daha ayrıntılı bilgi verir.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+Öntanımlı olarak \fBrm\fR dizinleri silmez. Listedeki dizinleri de içindekilerle birlikte silmek için \fB--recursive\fR (\fB-r\fR veya \fB-R\fR) seçeneğini kullanın.
+.sp
+’-’ ile başlayan bir dosyayı silebilmek için aşağıdaki yöntemlerden birisini kullanın (örnek dosya: ’\fI-foo\fR’):
+.sp
+.RS 4
+.nf
+\fBrm \fR-- -foo
+\&
+\fBrm \fR ./-foo
+.fi
+.sp
+.RE
+\fBrm\fR komutu ile bir dosyayı sildikten sonra, bu dosyanın içeriğini geri getirmenin mümkün olduğunu unutmayın. Şayet dosya içeriğinin geri getirilmesini önlemek istiyorsanız, \fBshred\fR kullanmayı ciddi ciddi düşünmelisiniz.
+.sp
+.SH "YAZAN"
+Paul Rubin, David MacKenzie, Richard Stallman ve Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBunlink\fR(1), \fBunlink\fR(2), \fBchattr\fR(1), \fBshred\fR(1).
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/rm>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) rm invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2003, 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

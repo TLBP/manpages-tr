@@ -1,0 +1,281 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1990 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PASSWD" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+passwd - kullanıcı parolasını değiştirir
+.sp
+.SH KULLANIM
+.IP \fBpasswd\fR 7
+[\fIseçenekler\fR] [\fIİSİM\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBpasswd\fR komutu kullanıcının parolasını değiştirir. Sıradan bir kullanıcı sadece kendi parolasını değiştirebilirken sistem yöneticisi herkesin parolasını değiştirebilir. \fBpasswd\fR ayrıca kullanıcının hesabında ve parolanın geçerli olduğu sürede de değişiklik yapabilir.
+.sp
+.SS "Parola Değişiklikleri"
+Parola değişikliği yapılırken önce kullanıcıdan varsa eski parolasını girmesi istenir. Girilen parola şifrelendikten sonra kullanıcının hesabında bulunan eskisiyle karşılaştırılır. Kullanıcının eski parolasını girmek için tek bir şansı vardır. Unutulmuş parolanın yenilenmesi gerekiyorsa sistem yöneticisi eski parolanın girilmesi adımının atlanmasını sağlayabilir.
+.sp
+Eski parola girildikten sonra, parola eskitme bilgisine bakılarak kullanıcının parola değiştirme izninin olup olmadığı saptanır. İzin yoksa \fBpasswd\fR parola değişikliğini reddeder ve çıkar.
+.sp
+Kullanıcıdan yeni parolasını girmesi iki kere istenir. İkinci girilen parola birinci ile karşılaştırılır. Parola değişikliği işlemi iki parolanın aynı olmasını gerektirir.
+.sp
+Ardından parolanın yeterli karmaşıklığa sahip olup olmadığına bakılır. Genel yaklaşım, parolanın 6 ila 8 karakterden oluşmasını ve aşağıdakilerin en az birer kere kullanılmış olmasını gerektirir:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+küçük harfler
+.IP \(bu 3
+0’dan 9’a kadar rakamlar
+.IP \(bu 3
+noktalama işaretleri
+.sp
+.RE
+.PD 0
+Parola girilirken sistemde tanımlı olan silme ve geri silme karakterlerinin kullanılmamasına özen gösterilmelidir. Parola gereken karmaşıklığa sahip değilse \fBpasswd\fR değişikliği reddeder.
+.sp
+.SS "Kullanıcı parolaları için ipuçları"
+Parolanın güvenliği şifreleme algoritmasının gücüne ve anahtar uzayının genişliğine bağlıdır. Eski \fIUNIX\fR sistemlerinde şifreleme yöntemi NBS DES algoritmasına dayanıyordu. Artık daha yeni yöntemler öneriliyor (\fBENCRYPT_METHOD\fR açıklamasına bakınız). Anahtar uzayının genişliği seçilen parolanın rastgeleliğine bağlıdır.
+.sp
+Parola güvenliğindeki riskler normalde dikkatsiz parola seçimi veya kullanımından kaynaklanır. Bu nedenle sözlükte geçen veya bir yerlere yazılması gerekecek kadar karmaşık parolaları seçmemelisiniz. Parola ayrıca, gerçek adınız veya herhangi bir ad, soyad, kimlik, ehliyet veya herhangi bir kart numaranız, doğum tarihiniz veya açık adresiniz gibi kolayca tahmin edilebilecek şeyler olmamalı ve bunları içermemelidir.
+.sp
+Güçlü parola seçimi ile ilgili öneriler için https://tr.wikipedia.org/wiki/Parola adresine bakılabilir.
+.sp
+.sp
+.SH "SEÇENEKLER"
+\fBpasswd\fR komutuna uygulanan seçenekler:
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Bu seçenek sadece \fB-S\fR seçeneği ile birlikte kullanılır ve tüm kullanıcılar için durumun gösterilmesini sağlar.
+.sp
+.TP 4
+\fB-d\fR, \fB--delete\fR
+Kullanıcının parolasını siler (boş bırakır). Bu bir hesabın parolasını iptal etmenin kolay yoludur. Belirtilen kullanıcının hesabını parolasız bırakır.
+.sp
+.TP 4
+\fB-e\fR, \fB--expire\fR
+Hesabın parolası anında zaman aşımına uğrar. Bunun amacı, bir sonraki oturum açışında kullanıcıyı parolasını değiştirmeye mecbur bırakmaktır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-i\fR, \fB--inactive\fR \fISAYI\fR
+Bu seçenek, hesabın parolası zaman aşımına uğradıktan kaç gün sonra hesabın iptal edileceğini belirtmek için kullanılır. Hesabın parolasının süresi dolduktan \fISAYI\fR gün sonra kullanıcı artık oturum açamaz.
+.sp
+.TP 4
+\fB-k\fR, \fB--keep-tokens\fR
+Parola değişikliğinin yalnızca süresi dolmuş kimlik doğrulama belirteçleri (parolalar) için gerçekleştirilmesi gerektiğini belirtir. Kullanıcı, süresi dolmamış parolalarını eskisi gibi tutmak ister.
+.sp
+.TP 4
+\fB-l\fR, \fB--lock\fR
+Hesabın parolasını kilitler. Bunu, girilen parolanın saklanan şifreli parola ile eşleşmemesini sağlayarak yapar (şifreli parolanın önüne bir ünlem imi koymak gibi).
+.sp
+Burada dikkat edilmesi gereken nokta, bu işlemin oturum açmayı engellemeyeceğidir. Kullanıcı başka bir kimlik doğrulama belirtecini (örneğin SSH anahtarını) kullanarak hala oturum açabilir. Kullanıcının oturum açmasını engellemek için yönetici \fBusermod --expiredate 1\fR komutunu kullanmalıdır (bu komut, hesabın kullanım süresinin 2 Ocak 1970’te dolmasını sağlar).
+.sp
+Parolası kilitlenen kullanıcıların parola değiştirmesine izin verilmez.
+.sp
+.TP 4
+\fB-n\fR, \fB--mindays\fR \fISAYI\fR
+Parola değişiklikleri arasında geçmesi gereken asgari gün \fISAYI\fRsını belirtmek için kullanılır. Sıfır değeri kullanıcının parolasını istediği zaman değiştirebilmesini sağlar.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+Sessiz kip.
+.sp
+.TP 4
+\fB-r\fR, \fB--repository\fR \fIDEPO\fR
+Parola değişikliğinin saklanacağı \fIDEPO\fRyu belirtmekte kullanılır.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikler \fICHROOT_DİZİNİ\fRne uygulanır ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-S\fR, \fB--status\fR
+Hesap durum bilgisini görüntüler. Durum bilgisi 7 alandan oluşur. İlk alan, kullanıcının oturum açarken kullandığı adıdır. İkinci alanda, kullanıcı parolası kilitliye L, parola yoksa NP, parola geçerliyse P bulunur. Üçüncü alan, parolanın değiştiği tarihi içerir. Kalan dört alan sırasıyla, asgari süre, azami süre, uyarı süresi ve hareketsizlik süresini içerir.
+.sp
+.TP 4
+\fB-u\fR, \fB--unlock\fR
+Parola kilidini kaldırır. Şifreli parolada (\fB-l\fR seçeneği ile) yapılan değişiklik kaldırılarak eski parola yeniden kullanılabilir duruma getirilir.
+.sp
+.TP 4
+\fB-w\fR, \fB--warndays\fR \fISAYI\fR
+Parola değişikliği gerekmeden geçebilecek gün \fISAYI\fRsını belirlemekte kullanılır. Başka bir deyişle, bu \fISAYI\fR, parola süresinin dolmasından kaç gün önce kullanıcının uyarılmaya başlanacağını belirler.
+.sp
+.TP 4
+\fB-x\fR, \fB--maxdays\fR \fISAYI\fR
+Parolanın geçerli kalacağı azami gün \fISAYI\fRsını belirlemekte kullanılır. \fISAYI\fR gün sonra parolanın değişmiş olması gerekir.
+.sp
+\fI-1\fR atanırsa parola geçerlilik süresi sınaması artık yapılmaz (Parola daima geçerli kalır).
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+Parola karmaşıklık sınaması zaman zaman değişikliğe uğrar. Kullanıcıdan, kendini rahat hissettiği kadar karmaşık bir parola seçmesi istenir.
+.sp
+NIS etkinleştirilmişse, NIS sunucusunda oturum açmamış kullanıcılar bu sistemde parolalarını değiştiremeyebilir.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için kullanılabilecek \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBENCRYPT_METHOD\fR (dizgesel)
+Parolaları şifrelemek için kullanılan, sistemin öntanımlı şifreleme algoritmasını tanımlar (komut satırından herhangi bir algoritma belirtilmemişse).
+.sp
+Şu değerlerden biri olabilir: \fIDES\fR (öntanımlı), \fIMD5\fR, \fISHA256\fR, \fISHA512\fR. MD5 ve DES yeni aşlarda kullanılmamalıdır. \fBcrypt\fR(5) sayfasında bazı öneriler bulunabilir.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Bu değişken, \fBMD5_CRYPT_ENAB\fR değişkenini geçersiz kılar.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fBMD5_CRYPT_ENAB\fR (mantıksal)
+Parolaların MD5 tabanlı algoritma kullanılarak şifrelenmesi gerekip gerekmediğini belirler. \fIyes\fR atanırsa, yeni parolalar, FreeBSD’nin son sürümlerinde kullanılanla uyumlu MD5 tabanlı algoritma kullanılarak şifrelenir. Sınırsız uzunluktaki parolaları ve uzun tuz dizgelerini destekler. Yeni algoritmayı anlamayan sistemlere şifrelenmiş parolaların kopyalanması gerekiyorsa \fIno\fR atanmalıdır.
+.sp
+Bu değişken, \fBENCRYPT_METHOD\fR değişkeni ile veya şifreleme algoritmasını değiştirmek için belirtilen bir komut satırı seçeneği ile geçersiz kılınabilir.
+.sp
+Bu değişkenin kullanımı artık önerilmemektedir Yerine \fBENCRYPT_METHOD\fR kullanılmalıdır.
+.sp
+.TP 4
+\fBOBSCURE_CHECKS_ENAB\fR (mantıksal)
+Parola değişikliklerine ek denetimleri etkinleştirir.
+.sp
+.TP 4
+\fBPASS_ALWAYS_WARN\fR (mantıksal)
+Yönetici değilseniz, zayıf parolalar için uyarır (ama kullanımını engellemez).
+.sp
+.TP 4
+\fBPASS_CHANGE_TRIES\fR (sayısal)
+Reddedilirse parolayı değiştirmek için azami deneme sayısı (çok kolay).
+.sp
+.TP 4
+\fBPASS_MAX_LEN\fR (sayısal), \fBPASS_MIN_LEN\fR (sayısal)
+\fBcrypt\fR(3) işlevi için paroladaki anlamlı karakter sayısını belirleyen \fBPASS_MAX_LEN\fR için öntanımlı değer 8’dir. Sistemdeki \fBcrypt()\fR işlevi daha iyisini yapmıyorsa değiştirmeyin. \fBMD5_CRYPT_ENAB\fR değişkenine \fIyes\fR atanırsa bu değişken yok sayılır.
+.sp
+.TP 4
+\fBSHA_CRYPT_MIN_ROUNDS\fR (sayısal), \fBSHA_CRYPT_MAX_ROUNDS\fR (sayısal)
+\fBENCRYPT_METHOD\fR değişkenine \fISHA256\fR veya \fISHA512\fR atanırsa, bu değişken, şifreleme algoritması tarafından kullanılan öntanımlı SHA yineleme sayısını tanımlar (komut satırından belirtilmemişse).
+.sp
+Ne kadar yineleme yapılırsa parola o kadar zorlu olur. Ancak, kullanıcıların kimliğini doğrulamak için daha fazla CPU kaynağına ihtiyaç duyulacağı da unutulmamalıdır.
+.sp
+Belirtilmezse öntanımlı yineleme sayısını libc günümüz donanımları için oldukça küçük bir değere ayarlar (5000).
+.sp
+1000 ila 999.999.999 arasında bir değer belirtilebilir.
+.sp
+\fBSHA_CRYPT_MIN_ROUNDS\fR veya \fBSHA_CRYPT_MAX_ROUNDS\fR değişkenlerinden yalnızca birine atama yapılırsa, atanan değer kullanılır (yani, herhangi birine atama yapılabilirmiş).
+.sp
+\fBSHA_CRYPT_MIN_ROUNDS\fR > \fBSHA_CRYPT_MAX_ROUNDS\fR ise büyük olanı kullanılır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesap bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+Güvenli kullanıcı hesap bilgileri
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Sistemdeki parola yapılandırması.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBpasswd\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+izin verilmedi
+.sp
+.TP 4
+\fI2\fR
+geçersiz seçenekler
+.sp
+.TP 4
+\fI3\fR
+beklenmedik başarısızlık, yapacak birşey yok
+.sp
+.TP 4
+\fI4\fR
+beklenmedik başarısızlık, \fIpasswd\fR dosyası kayıp
+.sp
+.TP 4
+\fI5\fR
+\fIpasswd\fR çok meşgul, tekrar deneyin
+.sp
+.TP 4
+\fI6\fR
+seçeneğe belirtilen değiştirge geçersiz
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchpasswd\fR(8), \fBpasswd\fR(5), \fBshadow\fR(5), \fBlogin.defs\fR(5), \fBusermod\fR(8).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh, Thomas Kłoczko ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

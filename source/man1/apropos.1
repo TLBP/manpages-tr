@@ -1,0 +1,184 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Man page for apropos
+ *
+ * Copyright (C), 1994, 1995, Graeme W. Wilford. (Wilf.)
+ *
+ * You may distribute under the terms of the GNU General Public
+ * License as specified in the file COPYING that comes with the
+ * man-db distribution.
+ *
+ * Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "APROPOS" 1 "17 Mart 2022" "mandb 2.10.2" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+apropos - kılavuz sayfalarının isim ve kısa açıklamalarında arama yapar
+.sp
+.SH KULLANIM
+.IP \fBapropos\fR 8
+[\fB-dalv?V\fR] [\fB-e\fR|\fB-w\fR|\fB-r\fR] [\fB-s\fR \fIliste\fR] [\fB-m\fR \fIsistem\fR[,...]] [\fB-M\fR \fIyol\fR] [\fB-L\fR \fIyerel\fR] [\fB-C\fR \fIdosya\fR] \fIanahtar_kelime\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Her kılavuz sayfasında kısa bir açıklama bulunur. \fBapropos\fR belirtilen \fIanahtar_kelime\fRleri bu açıklamalarda arar.
+.sp
+\fIanahtar_kelime\fR genelde \fB-r\fR kullanıldığı durumda bir düzenli ifade, \fB-w\fR kullanılmışsa joker karakterler ya da \fB-e\fR belirtilmişse anahtar kelimenin kendisi olarak belirtilebilir. Bu seçeneklerin kullanılması durumunda, kabuk yorumlamasını engellemek için anahtar kelimeyi tırnak içine almak veya özel karakterleri tersbölü ile öncelemek gerekebilir.
+.sp
+Standart eşleştirme kuralları, açıklamadaki sayfa adı ve kelime sınırlarıyla eşleşmelerin yapılmasını sağlar.
+.sp
+\fBapropos\fR ile aranan veritabanı \fBmandb\fR tarafından güncellenir. Kurulumunuza bağlı olarak \fBmandb\fR(8), düzenli olarak bir \fBcron\fR(8) işi tarafından çalıştırılabilir veya yeni kılavuz sayfaları yüklendikten sonra elle çalıştırılması gerekebilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Hata ayıklama bilgileri basar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Uyarı iletileri daha ayrıntılı basılır.
+.sp
+.TP 4
+\fB-r\fR, \fB--regex\fR
+Her anahtar kelime düzenli ifade olarak yorumlanır. Bu davranış öntanımlıdır. Her anahtar kelime, sayfa isimlerine ve kısa açıklamalara ayrı ayrı eşleştirilmeye çalışılır. Her ikisinin de herhangi bir parçasıyla eşleşme olabilir. Eşleşme, kelime sınırlarıyla sınırlanmaz.
+.sp
+.TP 4
+\fB-w\fR, \fB--wildcard\fR
+Her anahtar kelime kabuk tarzı joker karakterlerini içeren bir kalıp olarak yorumlanır. Her anahtar kelime, sayfa isimlerine ve kısa açıklamalara ayrı ayrı eşleştirilmeye çalışılır. Ek olarak, \fB--exact\fR seçeneği de belirtilmişse, yalnızca genişletilmiş anahtar kelime tüm açıklama veya sayfa adıyla eşleşirse bir eşleşme sağlanır. Aksi takdirde, anahtar kelimenin ayrıca, açıklamadaki kelime sınırlarıyla da eşleşmesine izin verilir.
+.sp
+.TP 4
+\fB-e\fR, \fB--exact\fR
+Anahtar kelimelerle birebir eşleşen sayfa adları ve kısa açıklamalar gösterilir.
+.sp
+.TP 4
+\fB-a\fR, \fB--and\fR
+Yalnızca sağlanan anahtar kelimelerin hepsiyle eşleşen öğeler gösterilir. Herhangi bir anahtar kelimeyle eşleşen öğelerin gösterilmesi öntanımlıdır.
+.sp
+.TP 4
+\fB-l\fR, \fB--long\fR
+Çıktı uçbirim genişliğinde kırpılmaz. Normalde, kötü yazılmış İSİM bölümlerinden elde edilen çirkin sonuçları önlemek için çıktı uçbirim genişliğinde kırpılır.
+.sp
+.TP 4
+\fB-s\fR \fIliste\fR, \fB--sections\fR=\fIliste\fR, \fB--section\fR=\fIliste\fR
+Yalnızca belirtilen kılavuz bölümlerinde arama yapılır. \fIliste\fR, iki nokta üst üste veya virgülle ayrılmış bölümlerden oluşur. Listedeki bir girdi, örneğin "3" gibi basit bir bölümse, görüntülenen açıklama listesi "3", "3perl", "3x" vb. bölümlerdeki sayfaları da içerecektir; listedeki bir girdinin örneğin "3perl" gibi bir uzantısı varsa, liste, örneğimiz için, yalnızca 3. bölümdeki perl sayfalarını içerecektir.
+.sp
+.TP 4
+\fB-m\fR \fIsistem\fR[,...], \fB--systems\fR=\fIsistem\fR[,...]
+Eğer sistem diğer işletim sistemlerindeki kılavuz sayfalarının açıklamalarına da erişiyorsa, bu seçenek kullanılarak onlar da aranabilir. Örneğin, DiğerİS altındaki kılavuz sayfalarının açıklamalarında arama yapmak için -m DiğerİS seçeneği belirtilebilir.
+.sp
+Birden fazla işletim sistemi aralarına iki nokta üst üste imi konarak belirtilebilir. Üzerinde bulunduğunuz işletim sisteminde de arama yapabilmek için işletim sistemi ismi listeye eklenmelidir. Bu seçenek kullanıldığında \fB$SYSTEM\fR ortam değişkeninin içeriği kullanılmaz.
+.sp
+.TP 4
+\fB-M\fR \fIyol\fR, \fB--manpath\fR=\fIyol\fR
+Kılavuz sayfaların sırayla aranacağı yollar iki nokta üst üste imleriyle ayrılmış olarak belirtilir. Bu seçenek belirtilmedikçe, \fB$MANPATH\fR atanmış ve boş değilse içeriği kullanılır, bir atama yapılmamışsa, uygun arama yolları \fB$PATH\fR ortam değişkenine dayalı olarak belirlenir. Bu seçenek kullanılmışsa, \fB$MANPATH\fR ortam değişkeninin içeriğine bakılmaz.
+.sp
+.TP 4
+\fB-L\fR \fIyerel\fR, \fB--locale\fR=\fIyerel\fR
+\fBapropos\fR normalde geçerli yereli saptamak için, çeşitli ortam değişkenlerinin yanı sıra muhtemelen \fB$LC_MESSAGES\fR ve \fB$LANG\fR ortam değişkenlerini de sorgulayan C \fBsetlocale\fR(3) işlevini kullanır. Saptanan değeri geçici olarak geçersiz kılmak ve yereli doğrudan belirtmek için bu seçenek kullanılır. Arama başlayana dek belirtilen yerelin etkin olmayacağı unutulmamalıdır. Yardım iletisi gibi çıktılar her zaman başlangıçta belirlenen yerele göre görüntülenir.
+.sp
+.TP 4
+\fB-C\fR \fIdosya\fR, \fB--config-file\fR=\fIdosya\fR
+\fI~/.manpath\fR yerine bu yapılandırma dosyası kullanılır.
+.sp
+.TP 4
+\fB-?\fR, \fB--help\fR
+Yardım iletisini basar ve çıkar.
+.sp
+.TP 4
+\fB--usage\fR
+Kısa kullanım iletisini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+.TP 4
+0
+Başarılı.
+.sp
+.TP 4
+1
+Kullanım, sözdizimi veya yapılandırma dosyası hatası.
+.sp
+.TP 4
+2
+İşlemsel hata.
+.sp
+.TP 4
+16
+Belirtilen koşullara uyan hiçbir şey yok.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBSYSTEM\fR
+\fBSYSTEM\fR atanmışsa, \fB-m\fR seçeneğinde belirtilen değerle aynı etkiye sahiptir.
+.sp
+.TP 4
+\fBMANPATH\fR
+\fBMANPATH\fR atanmışsa, değeri kullanılacak arama yollarının sırasını belirleyen iki nokta üst üste ayraçlı bir dizge olarak yorumlanır.
+.sp
+Öntanımlı davranış ve bu ortam değişkeninin ele alınışı ile ilgili ayrıntıl bilgi için \fBmanpath\fR(5) kılavuz sayfasının \fBARAMA YOLU\fR böümüne bakınız.
+.sp
+.TP 4
+\fBMANWIDTH\fR
+\fBMANWIDTH\fR atanmışsa, değeri uçbirim genişliği olarak kullanılır (\fB--long\fR seçeneğine bakın). Atanmamışsa, uçbirim genişliği ya \fB$COLUMNS\fR değeri ile ya da kullanılabiliyorsa \fBioctl\fR(2) ile belirlenir; bunların hiçbiri işe yaramazsa son çare olarak 80 karakterlik genişlik kullanılır.
+.sp
+.TP 4
+\fBPOSIXLY_CORRECT\fR
+\fBPOSIXLY_CORRECT\fR atanmışsa, bir değer belirtilmemiş olsa bile, düzenli ifade araması öntanımlı \fBapropos\fR araması olur. Günümüzde, bu davranış zaten öntanımlıdır.
+.sp
+.PP
+.sp
+.SH "DOSYALAR"
+.TP 4
+\fI/usr/share/man/index.(bt|db|dir|pag)\fR
+Geleneksel küresel \fIindex\fR veritabanı önbelleği.
+.sp
+.TP 4
+\fI/var/cache/man/index.(bt|db|dir|pag)\fR
+FHS uyumlu küresel \fIindex\fR veritabanı önbelleği.
+.sp
+.TP 4
+\fI/usr/share/man/.../whatis\fR
+Geleneksel \fIwhatis\fR metin veritabanı.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBman\fR(1), \fBwhatis\fR(1), \fBmandb\fR(8).
+.sp
+.SH "YAZAN"
+Wilf. (<G.Wilford (at) ee.surrey.ac.uk>).
+.br
+Fabrizio Polacco (<fpolacco (at) debian.org>).
+.br
+Colin Watson (<cjwatson (at) debian.org>).
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <https://gitlab.com/cjwatson/man-db/-/issues> veya <https://savannah.nongnu.org/bugs/?group=man-db> adresine bildirin.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

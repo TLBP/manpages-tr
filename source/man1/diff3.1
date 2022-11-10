@@ -1,0 +1,129 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "DIFF3" 1 "Ağustos 2021" "GNU diffutils 3.8" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+diff3 - üç dosyayı satır satır karşılaştırır
+.sp
+.SH KULLANIM
+.IP \fBdiff3\fR 6
+[\fISEÇENEK\fR]... \fIBENİMKİ ESKİSİ SENİNKİ\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Üç dosyayı satır satır karşılaştırır.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-A\fR, \fB--show-all\fR
+Tüm değişiklikleri çıktılar. Değişiklikleri köşeli ayraç içine alır.
+.sp
+.TP 4
+\fB-e\fR, \fB-ed\fR
+\fIESKİSİ\fR ile \fISENİNKİ\fR arasındaki bütün farklılıkları \fIBENİMKİ\fRne ekleyen bir \fBed\fR betiği oluşturur.
+.sp
+.TP 4
+\fB-E\fR, \fB--show-overlap\fR
+Birinci ve üçüncü dosyadaki bir diğerini ezen değişiklikleri içeren köşeli ayraçlı satırlar dışında \fB-e\fR seçeneğine benzer.
+.sp
+.TP 4
+\fB-3\fR, \fB--easy-only\fR
+Bir diğerini ezmeyen değişiklikleri çıktılaması dışında \fB-e\fR seçeneğine benzer.
+.sp
+.TP 4
+\fB-x\fR, \fB--overlap-only\fR
+Sadece bir diğerini ezen değişiklikleri çıktılaması dışında \fB-e\fR seçeneğine benzer.
+.sp
+.TP 4
+\fB-X\fR
+Birinci ve üçüncü dosyadaki bir diğerini ezen değişiklikleri içeren köşeli ayraçlı satırlar dışında \fB-x\fR gibidir.
+.sp
+.TP 4
+\fB-i\fR
+\fBed\fR betiğinin sonunda \fBw\fR ve \fBq\fR komutlarını üretir.
+.sp
+.TP 4
+\fB-m\fR, \fB--merge\fR
+Başka bir seçenek verilmemişse \fB-A\fR seçeneğine göre, gerçek birleştirilmiş dosya çıktılanır.
+.sp
+.TP 4
+\fB-a\fR, \fB--text\fR
+Bütün dosyalar metin dosyası olarak kabul edilir.
+.sp
+.TP 4
+\fB--strip-trailing-cr\fR
+Girdideki satırbaşı karakterlerini ayıklar.
+.sp
+.TP 4
+\fB-T\fR, \fB--initial-tab\fR
+Her satırın metninden önceki boşlukları sekmelerle değiştirir. Böylece, satırların sekmelerle hizalanarak düzgün görünmesi sağlanır.
+.sp
+.TP 4
+\fB--diff-program\fR=\fIUYGULAMA\fR
+Dosyaları karşılaştırmak için \fIUYGULAMA\fR kullanılır.
+.sp
+.TP 4
+\fB-L \fR, \fB--label\fR=\fIYAFTA\fR
+Dosya ismi yerine \fIYAFTA\fR kullanılır. Üç kere yinelenebilir.
+.sp
+.TP 4
+\fB--help\fR
+Yardım metnini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+Anlaşılabilir değişiklik çıktısı üretimi öntanımlıdır.
+.sp
+\fB-e, -E, -x, -X\fR seçenekleri (ve uzun karşılıkları) öntanımlı çıktı yerine \fBed\fR(1) betiği çıktılanmasına sebep olur.
+.sp
+Son olarak, \fB-m\fR (\fB--merge\fR) seçeneği, \fBdiff3\fR’ün birleştirme işlemini dahili olarak yapmasına ve gerçek birleştirilmiş dosyayı çıktılamasına neden olur. Olağandışı girdiler için bu, \fBed\fR kullanmaktan daha sağlamdır.
+.sp
+\fIDOSYA\fR olarak ’-’ verilmişse standart girdi okunur. Girdiler aynı ise çıkış durumu 0, farklıysa 1, sorun varsa 2’dir.
+.sp
+.SH "YAZAN"
+Randy Smith tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hataları için: <bug-diffutils (at) gnu.org>
+.br
+GNU diffutils sayfası: <https://www.gnu.org/software/diffutils/>
+.br
+GNU yazılımları yardımı için: <https://www.gnu.org/software/gethelp.html>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBcmp\fR(1), \fBdiff\fR(1), \fBed\fR(1), \fBsdiff\fR(1).
+.sp
+\fBdiff3\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBdiff3\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo diff3\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

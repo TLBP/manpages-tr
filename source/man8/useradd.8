@@ -1,0 +1,478 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2000 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2012, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "USERADD" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+useradd - yeni bir kullanıcı oluşturur veya öntanımlı yeni kullanıcı bilgilerini günceller
+.sp
+.SH KULLANIM
+.IP \fBuseradd\fR 8
+[\fIseçenekler\fR] \fIKULLANICI\fR
+.IP \fBuseradd\fR 8
+\fB-D\fR
+.IP \fBuseradd\fR 8
+\fB-D\fR [\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fB-D\fR seçeneği belitilmeden çağrıldığında, \fBuseradd\fR komutu, komut satırında tanımlanan değerleri ve sistemdeki öntanımlı değerleri kullanarak yeni bir kullanıcı oluşturur. Komut satırında belirtilen seçeneklere bağlı olarak, gerekli sistem dosyalarına yeni kullanıcının bilgileri girilir, ev dizini oluşturulur, ilk dosyalar kopyalanır.
+.sp
+Öntanımlı olarak yeni kullanıcıya yeni bir grup oluşturulur (Bkz: \fB-g\fR, \fB-N\fR, \fB-U\fR ve \fBUSERGROUPS_ENAB\fR).
+.sp
+.SH "SEÇENEKLER"
+Bu komuta verilebilecek seçenekler şunlardır:
+.sp
+.TP 4
+\fB--badname\fR
+Standartlara uymayan isimlere izin verilir.
+.sp
+.TP 4
+\fB-b\fR, \fB--base-dir\fR \fIÜST_DİZİN\fR
+\fB-d\fR \fIEV_DİZİNİ\fR belirtilmemişse \fIÜST_DİZİN\fR sistem için altında kullanıcı ev dizinin oluşturulacağı dizindir. \fB-m\fR seçeneği belirtilmezse \fIÜST_DİZİN\fR sistemde mevcut olmalıdır.
+.sp
+Bu seçenek belirtilmezse, \fI/etc/default/useradd\fR içindeki \fBHOME\fR değişkeninde belirtilen üst dizin veya öntanımlı olarak \fI/home\fR kullanılır.
+.sp
+.TP 4
+\fB-c\fR, \fB--comment\fR \fIAÇIKLAMA\fR
+Yeni kullanıcının \fI/etc/passwd\fR dosyasında adı-soyadı olarak kullanılacak dizgeyi belirler.
+.sp
+.TP 4
+\fB-d\fR, \fB--home-dir\fR \fIEV_DİZİNİ\fR
+Oluşturulan yeni kullanıcının sisteme girişte kullanacağı ev dizinini belirler. Öntanımlı olarak, \fIKULLANICI\fR ismi \fIÜST_DİZİN\fR’e eklenerek belirlenir ve kullanıcının sisteme giriş dizini olarak kullanılır. \fIEV_DİZİNİ\fR sistemde mevcut değilse \fB-M\fR seçeneği belirtilmediği takdirde oluşturulacaktır.
+.sp
+.TP 4
+\fB-D\fR, \fB--defaults\fR
+Aşağıdaki \fBÖntanımlı Değerlerin Değiştirilmesi\fR bölümüne bakınız.
+.sp
+.TP 4
+\fB-e\fR, \fB--expiredate\fR \fISON_TARİH\fR
+Kullanıcı hesabının son kullanma tarihini belirler. Tarih YYYY-AA-GG (Y: yıl, A: ay, G: gün) şeklinde belirtilir.
+.sp
+.TP 4
+\fB-f\fR, \fB--inactive\fR \fIASKI_SÜRESİ\fR
+Kullanıcı parolasının \fISON_TARİH\fRten itibaren, bu hesabın tamamen devre dışı bırakıacağı tarihe kadar geçecek olan sürenin gün cinsinden değerini belirler. Bu değer 0 olarak belirtilirse, parolanın son kullanma tarihinde hesap kapatılır. -1 değeri verilirse, bu özellik iptal edilmiş olur.
+.sp
+\fIASKI_SÜRESİ\fR belirtilmezse, \fI/etc/default/useradd\fR dosyasındaki \fBINACTIVE\fR değişkeninde belirtilen değer veya öntanımlı olarak -1 kullanılır.
+.sp
+.TP 4
+\fB-g\fR, \fB--gid\fR \fIGRUP\fR
+Kullanıcının üyesi olacağı birincil grubun adı veya numarası belirtilir. Olmayan gruba ait bir isim veya numara kullanılamaz.
+.sp
+Belirtilmezse, davranış \fI/etc/login.defs\fR içindeki \fBUSERGROUPS_ENAB\fR değişkenine bağlı olur. Bu değişken "yes" olarak ayarlanırsa (veya komut satırında \fB-U\fR/\fB--user-group\fR belirtilirse), kullanıcı için oturum açma adıyla aynı ada sahip bir grup oluşturulur. Değişkene "no" değeri atanırsa (veya komut satırında \fB-N\fR/\fB--no-user-group\fR belirtilirse), yeni kullanıcının birincil grup kimliği \fI/etc/default/useradd\fR içindeki \fBGROUP\fR değişkeni tarafından belirtilen değer veya öntanımlı olarak 100 olur.
+.sp
+.TP 4
+\fB-G\fR, \fB--groups\fR \fIGRUP1\fR[,\fIGRUP2\fR[,...[\fIGRUPN\fR]]]
+Kullanıcının üyesi olacağı ek gruplar belirtilir. Her grup, diğerinden virgül ile ayrılır, arada boşluk bırakılmaz. Burada tanımlanan gruplar, \fB-g\fR ile tanımlanan grubun kısıtlamalarına tabidir. Öntanımlı olarak, kullanıcının sadece birincil grubunun üyesi olduğu varsayılır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-k\fR, \fB--skel\fR \fIİSKELET\fR
+Kullanıcının ev dizini oluşturulurken, ev dizinine kopyalanacak dosyaları ve dizinleri içeren \fIİSKELET\fR dizinin yerini belirtir.
+.sp
+Bu seçenek yalnızca \fB-m\fR/\fB--create-home\fR seçeneği ile birlikte geçerlidir.
+.sp
+Bu seçenek belirtilmezse, \fI/etc/default/useradd\fR içindeki \fBSKEL\fR değişkeni tarafından belirtilen dizin veya öntanımlı olarak \fI/etc/skel\fR dizini kullanılır.
+.sp
+Mümkünse, ACL’ler ve genişletilmiş nitelikler de kopyalanır.
+.sp
+.TP 4
+\fB-K\fR, \fB--key\fR \fIANAHTAR=DEĞER\fR
+\fI/etc/login.defs\fR öntanımlılarını (\fBUID_MIN\fR, \fBUID_MAX\fR, \fBUMASK\fR, \fBPASS_MAX_DAYS\fR ve diğerleri) geçersiz kılar.
+.sp
+Örneğin, parola daha oluşturulmamışken bile, parola eskimesini devre dışı bırakarak sistem hesabı oluştururken \fB-K PASS_MAX_DAYS=-1\fR seçeneği kullanılabilir. Birden fazla \fB-K\fR seçeneği belirtilebilir. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+-K UID_MIN=100  -K UID_MAX=499
+.fi
+.sp
+.RE
+.RE
+.IP
+Dikkat: Birden fazla anahtar-değer çifti belirtilmesi (\fB-K UID_MIN=10,UID_MAX=499\fR gibi) henüz çalışmamaktadır.
+.sp
+.TP 4
+\fB-l\fR, \fB--no-log-init\fR
+Kullanıcı \fIlastlog\fR ve \fIfaillog\fR veritabanlarına eklenmez.
+.sp
+Öntanımlı olarak, kullanıcının \fIlastlog\fR ve \fIfaillog\fR veritabanlarındaki girdileri, daha önce silinmiş bir kullanıcıdan gelen girdinin yeniden kullanılmasını önlemek için sıfırlanır.
+.sp
+Bu seçenek belirtilmezse, \fI/etc/default/useradd\fR içindeki \fBLOG_INIT\fR değişkenine "no" atanmışsa kullanıcı \fIlastlog\fR ve \fIfaillog\fR veritabanlarına eklenmez
+.sp
+.TP 4
+\fB-m\fR, \fB--create-home\fR
+Şayet sistemde kullanıcının ev dizini yok ise, yeni bir dizin oluşturulur. Eğer \fB–k\fR seçeneği belirtilmişse \fIİSKELET\fR dizinin içeriği ev dizinine kopyalanır. \fB–k\fR seçeneği, sadece \fB–m\fR seçeneği ile birlikte kullanıldığında etkilidir.
+.sp
+Öntanımlı olarak, seçenek belirtilmemişse ve \fBCREATE_HOME\fR etkin değilse dizin oluşturulmaz.
+.sp
+Kullanıcının ev dizininin oluşturulduğu \fIÜST_DİZİN\fR mevcut olmalı ve uygun SELinux bağlamına ve izinlerine sahip olmalıdır. Aksi takdirde kullanıcının ev dizini oluşturulamaz veya erişilemez.
+.sp
+.TP 4
+\fB-M\fR, \fB---no-create-home\fR
+\fI/etc/login.defs\fR içinde tanımlı bütün sistemi kapsayan ayarlarda ev dizininin yaratılması gerektiği (\fBCREATE_HOME=yes\fR) belirtilmiş olsa bile, kullanıcı ev dizini oluşturulmaz.
+.sp
+.TP 4
+\fB-N\fR, \fB--no-user-group\fR
+Oluşturulan yeni kullanıcı ile aynı adlı yeni bir grup oluşturulmaz fakat kullanıcıyı \fB-g\fR seçeneği ile belirtilen gruba veya \fI/etc/default/useradd\fR içindeki \fBGROUP\fR değişkeni tarafından belirtilen gruba ekler.
+.sp
+Öntanımlı davranış (\fB-g\fR, \fB-N\fR ve \fB-U\fR seçenekleri belirtillmemişse) \fI/etc/login.defs\fR içinde \fBUSERGROUPS_ENAB\fR değişkeni tarafından tanımanmıştır.
+.sp
+.TP 4
+\fB-o\fR, \fB--non-unique\fR
+Kullanıcı kimliği eşsiz olmayan bir kullanıcı oluşturmaya izin verir.
+.sp
+Bu seçenek yallnızca \fB-u\fR seçeneği ile birlikte geçerlidir.
+.sp
+.TP 4
+\fB-p\fR, \fB--password\fR \fIPAROLA\fR
+\fBcrypt\fR(3) tarafından döndürülen gibi şifreli parola. Parolanın devre dışı bırakılması öntanımlıdır.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Süreçleri listeleyen kullanıcılara parola (veya şifreli parola) görünür olacağından bu seçeneğin kullanımı önerilmemektedir.
+.sp
+.RE
+.IP
+\fIPAROLA\fR sistemin parola politikasına uygun olmalıdır.
+.sp
+.TP 4
+\fB-r\fR, \fB--system\fR
+Sistem hesabı oluşturur.
+.sp
+Sistem kullanıcıları, \fI/etc/shadow\fR içinde hiçbir eskime bilgisi olmaksızın oluşturulur ve bunların sayısal kimlikleri, \fBUID_MIN-UID_MAX\fR (ve GID karşılıkları) yerine \fI/etc/login.defs\fRiçinde tanımlanan \fBSYS_UID_MIN-SYS_UID_MAX\fR aralığında seçilir.
+.sp
+\fI/etc/login.defs\fR içindeki (\fBCREATE_HOME\fR) öntanımlılardan bağımsız olarak böyle bir kullanıcı için bir ev dizini oluşturulmayacağı unutulmamalıdır. Bir sistem hesabı için bir ev dizini oluşturulması isteniyorsa \fB-m\fR seçeneklerini de belirtmek gerekir.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--prefix\fR \fIPREFIX_DİZİNİ\fR
+Değişiklikleri \fIPREFIX_DİZİNİ\fRnde uygular ve \fIPREFIX_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır. Bu seçenek chroot yapmaz ve çapraz derlemeye hazırlık için tasarlanmamıştır. Bazı sınırlamalar: NIS ve LDAP kullanıcı ve grupları doğrulanmaz. PAM kimlik kanıtlaması konak dosyalarını kulllanılır. SELinux desteklenmez.
+.sp
+.TP 4
+\fB-s\fR, \fB--shell\fR \fIKABUK\fR
+Kullanıcının sisteme girişte kullanacağı kabuğun adıdır. Öntanımlı olarak bu değer boş bırakılır, böylece \fI/etc/default/useradd\fR içindeki \fBSHELL\fR değişkeni tarafından belirtilen öntanımlı oturum açma kabuğunun adı veya öntanımlı boş dizge atanır.
+.sp
+.TP 4
+\fB-u\fR, \fB--uid\fR \fIKULL_KİMLİK\fR
+Kullanıcı kimliğinin sayısal değeridir. Bu değer, \fB-o\fR seçeneği kullanılmadığı sürece, eşsiz olmalıdır. Değer mutlaka pozitif bir sayı olmalıdır. Öntanımlı olarak, diğer kullanıcıların numaralarından ve UID_MIN’den büyük, en küçük numara kullanılır.
+.sp
+Ayrıca, \fB-r\fR seçeneğine ve \fBUID_MAX\fR açıklamasına da bakılabilir.
+.sp
+.TP 4
+\fB-U\fR, \fB--user-group\fR
+Kulllanıcı ile aynı isimde bir grup oluşturulur ve kullanıcı bu gruba eklenir.
+.sp
+Öntanımlı davranış (\fB-g\fR, \fB-N\fR ve \fB-U\fR seçenekleri belirtilmezse) \fBlogin.defs\fR(5) dosyasında \fBUSERGROUPS_ENAB\fR değişkeni ile tanımlanır.
+.sp
+.TP 4
+\fB-Z\fR, \fB--selinux-user\fR \fISE_KULL\fR
+Kullanıcı için SELinux kullanıcısını belirler. Normalde bu alan boş bırakarak öntanımlı SELinux kullanıcısını sistemin seçmesi sağlanır.
+.sp
+.PP
+.SS "Öntanımlı Değerlerin Değiştirilmesi"
+\fB-D\fR seçeneği ile birlikte kullanıldığı zaman, \fBuseradd\fR geçerli öntanımlı değerleri görüntüler. \fB-D\fR diğer seçeneklerle birlikte belirtildiğinde \fBuseradd\fR öntanımlı değerleri, seçeneklerde belirtilenler ile günceller. Öntanımlıları değiştiren seçenekler şunlardır:
+.sp
+.TP 4
+\fB-b\fR, \fB--base-dir\fR \fIÜST_DİZİN\fR
+Yeni bir kullanıcının ev dizini için ilk dosyayolu önekini belirtir. Yeni bir hesap açarken \fB–d\fR seçeneği belirtilmemişse, yeni kullanıcının adı \fIÜST_DİZİN\fR’in sonuna eklenerek kulanıcının ev dizinini oluşturur.
+.sp
+Bu seçenek \fI/etc/default/useradd\fR içindeki \fBHOME\fR değişkenini tanımlar.
+.sp
+.TP 4
+\fB-e\fR, \fB--expiredate\fR \fISON_TARİH\fR
+Kullanıcı hesabının son kullanma tarihini belirler.
+.sp
+Bu seçenek \fI/etc/default/useradd\fR içindeki \fBEXPIRE\fR değişkenini tanımlar.
+.sp
+.TP 4
+\fB-f\fR, \fB--inactive\fR \fIASKI_SÜRESİ\fR
+Kullanıcı parolasının son kullanma tarihinden itibaren, bu hesabın tamamen kapatılacağı tarihe kadar geçecek olan sürenin gün cinsinden değeri.
+.sp
+Bu seçenek \fI/etc/default/useradd\fR içindeki \fBINACTIVE\fR değişkenini tanımlar.
+.sp
+.TP 4
+\fB-g\fR, \fB--gid\fR \fIGRUP\fR
+Yeni bir kullanıcı için birincil grup adı veya grup kimliği (\fI/etc/login.defs\fR içindeki \fBUSERGROUPS_ENAB\fR değişkenine "no" değeri atanırsa (veya komut satırında \fB-N\fR/\fB--no-user-group\fR belirtilirse). Belirtilen grup ismi sistemde mevcut olmalı ve sayısal grup kimliği için mevcut bir girdi bulunmalıdır.
+.sp
+Bu seçenek \fI/etc/default/useradd\fR içindeki \fBGROUP\fR değişkenini tanımlar.
+.sp
+.TP 4
+\fB-s\fR, \fB--shell\fR \fIKABUK\fR
+Yeni bir kullanıcının sisteme girişte kullanacağı kabuğun adı.
+.sp
+Bu seçenek \fI/etc/default/useradd\fR içindeki \fBSHELL\fR değişkenini tanımlar.
+.sp
+.PP
+.sp
+.sp
+.SH "EK BİLGİ"
+\fI/etc/skel\fR dizinindeki (veya \fI/etc/default/useradd\fR dosyasında veya komut satırından belirtilen diğer iskelet dizinindeki) öntanımlı dosyaların değiştirilmesi sistem yöneticisinin sorumluluğundadır.
+.sp
+.SH "YETERSİZLİKLER"
+NIS vey LDAP grubuna kullanıcı ekleyemezsiniz. Bu ilgili sunucusu üzerinde yapılmalıdır.
+.sp
+Benzer şekilde, kullanıcı adı NIS veya LDAP gibi harici bir kullanıcı veritabanında zaten mevcutsa, \fBuseradd\fR kullanıcı hesabı oluşturma isteğini reddeder.
+.sp
+Kullanıcı adları küçük harf veya alt çizgi ile başlamalı, ardından küçük harf, rakam, alt çizgi veya tire gelmelidir. Dolar işaretiyle bitebilir. Düzenli ifade olarak: \fB[a-z_][a-z0-9_-]*[$]?\fR
+.sp
+Kullanıcı adları en fazla 32 karakter uzunlukta olabilir.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için kullanılabilecek \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBCREATE_HOME\fR (mantıksal)
+Yeni kullanıcılar için öntanımlı olarak ev dizini oluşturulmasının gerekip gerekmediğini belirtir.
+.sp
+Bu tanım sistem kullanıcıları için geçerli değildir ve komut satırında geçersiz kılınabilir.
+.sp
+.TP 4
+\fBGID_MAX\fR (tamsayı), \fBGID_MIN\fR (tamsayı)
+\fBgroupadd\fR(8), \fBnewusers\fR(8) ve \fBuseradd\fR tarafından normal grupların oluşturulması için kullanılan grup kimlikleri aralığı.
+.sp
+\fBGID_MIN\fR için öntanımlı değer 1000, \fBGID_MAX\fR için 60000’dir.
+.sp
+.TP 4
+\fBHOME_MODE\fR (tamsayı)
+Yeni ev dizinleri için kip. Belirtilmezse, kipi oluşturmak için \fBUMASK\fR kullanılır.
+.sp
+\fBuseradd\fR ve \fBnewusers\fR(8), oluşturdukları ev dizinin kipini ayarlamak için bu değeri kullanır.
+.sp
+.TP 4
+\fBLASTLOG_UID_MAX\fR (tamsayı)
+\fIlastlog\fR girdilerini güncelleyecek en yüksek kullanıcı kimlik numarası. Daha yüksek kullanıcı kimlikleri genellikle uzak kullanıcı kimliği ve kimlik doğrulama hizmetleri tarafından izlendiğinden, onlar için çok büyük, seyrek bir \fIlastlog\fR dosyası oluşturmaya gerek yoktur.
+.sp
+Yapılandırmada \fBLASTLOG_UID_MAX\fR seçeneğinin olmaması, \fIlastlog\fR girdilerini yazacak kullanıcı kimliğinde sınırlama olmadığı anlamına gelir.
+.sp
+.TP 4
+\fBMAIL_DIR\fR (dizge)
+Posta kuyruğu dizini. İlgili kullanıcı hesabı silindiğinde veya değişikliğe uğradığında posta kutusunu elden geçirmek için bu gereklidir. Tanımsızsa, derleme sırasında atanan öntanımlı değer kullanılır. Eposta kuyruğunun oluşturulup oluşturulmadığı \fI/etc/default/useradd\fR dosyasındaki \fBCREATE_MAIL_SPOOL\fR değişkeni ile belirlenir.
+.sp
+.TP 4
+\fBMAIL_FILE\fR (dizge)
+Kullanıcının eposta kuyruğu dosyalarının konumu ev dizinine göreli tanımlanır.
+.sp
+.PP
+\fBMAIL_DIR\fR ve \fBMAIL_FILE\fR değişkenleri \fBuseradd\fR, \fBusermod\fR ve \fBuserdel\fR tarafından eposta kuyruğunun oluşturulması, taşınması ve silinmesi için kullanılır.
+.sp
+Bunlar ayrıca, \fBMAIL_CHECK_ENAB\fR için \fByes\fR tanımlıysa, \fBMAIL\fR ortam değişkenini tanımlamak için de kullanılır.
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.TP 4
+\fBPASS_MAX_DAYS\fR (tamsayı)
+Bir parolanın kullanılabileceği en fazla gün sayısı. Parola bundan daha eskiyse, parola değişikliği zorunlu olacaktır. Belirtilmezse, -1 öntanımlıdır (kısıtlamayı devre dışı bırakır).
+.sp
+.TP 4
+\fBPASS_MIN_DAYS\fR (tamsayı)
+Parola değişiklikleri arasında izin verilen en az gün sayısı. Bundan daha önce denenen herhangi bir şifre değişikliği reddedilecektir. Belirtilmezse, 0 öntanımlıdır (kısıtlamayı devre dışı bırakır).
+.sp
+.TP 4
+\fBPASS_WARN_AGE\fR (tamsayı)
+Parolanın süresi dolmadan önce uyarı verilen gün sayısı. Sıfır, yalnızca son kullanma gününde uyarı verildiği anlamına gelir, negatif bir değer hiçbir uyarı verilmediği anlamına gelir. Belirtilmediği takdirde herhangi bir uyarı verilmeyecektir.
+.sp
+.TP 4
+\fBSUB_GID_MIN\fR (tamsayı), \fBSUB_GID_MAX\fR (tamsayı), \fBSUB_GID_COUNT\fR (tamsayı)
+\fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_GID_MIN\fR ila \fBSUB_GID_MAX\fR aralığından \fBSUB_GID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
+.sp
+\fBSUB_GID_MIN\fR, \fBSUB_GID_MAX\fR, \fBSUB_GID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+.sp
+.TP 4
+\fBSUB_UID_MIN\fR (tamsayı), \fBSUB_UID_MAX\fR (tamsayı), \fBSUB_UID_COUNT\fR (tamsayı)
+\fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_UID_MIN\fR ila \fBSUB_UID_MAX\fR aralığından \fBSUB_UID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
+.sp
+\fBSUB_UID_MIN\fR, \fBSUB_UID_MAX\fR, \fBSUB_UID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+.sp
+.TP 4
+\fBSYS_GID_MAX\fR (tamsayı), \fBSYS_GID_MIN\fR (tamsayı)
+\fBuseradd\fR, \fBgroupadd\fR ve \fBnewusers\fR tarafından sistem grupları oluşturulurken kullanılan grup kimlikleri aralığı.
+.sp
+\fBSYS_GID_MIN\fR için 101, \fBSYS_GID_MAX\fR için \fBGID_MIN\fR-1 öntanımlıdır.
+.sp
+.TP 4
+\fBSYS_UID_MAX\fR (tamsayı), \fBSYS_UID_MIN\fR (tamsayı)
+\fBuseradd\fR ve \fBnewusers\fR(8) komutları tarafından sistem kullanıcıları oluşturulurken kullanılan kullanıcı kimlikleri aralığı.
+.sp
+\fBSYS_UID_MIN\fR için 101, \fBSYS_UID_MAX\fR için \fBUID_MIN\fR-1 öntanımlıdır.
+.sp
+.TP 4
+\fBUID_MAX\fR (tamsayı), \fBUID_MIN\fR (tamsayı)
+\fBuseradd\fR ve \fBnewusers\fR(8) komutları tarafından normal kullanıcılar oluşturulurken kullanılan kullanıcı kimlikleri aralığı
+.sp
+\fBUID_MIN\fR için öntanımlı değer 1000, \fBUID_MAX\fR için 60000’dir.
+.sp
+.TP 4
+\fBUMASK\fR (tamsayı)
+Dosya kipi oluşturma maskesi bu değerle ilklendirilir. Belirtilmezse maske 022 ile ilklendirilir.
+.sp
+\fBuseradd\fR(8) ve \fBnewusers\fR(8) komutları \fBHOME_MODE\fR tanımlıysa ev dizininin kipini atamak için bu maskeyi kullanır.
+.sp
+Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask’ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
+.sp
+.TP 4
+\fBUSERGROUPS_ENAB\fR (mantıksal)
+root olmayan kullanıcılar için, kullanıcı ve grup kimlikleri aynıyken kullanıcı ve grup adı da aynı ise umask grup bitlerinin, sahip bitleri ile aynı olmasını sağlar (örn, 022 -> 002, 077 -> 007).
+.sp
+\fIyes\fR atanırsa, \fBuserdel\fR(8) başka üyesi yoksa kullanıcını grubunu siler ve \fBuseradd\fR(8) kullanıcı ile aynı isimde bir grup oluşturur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/passwd\fR
+kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+güvenli kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/group\fR
+grup bilgileri
+.sp
+.TP 4
+\fI/etc/gshadow\fR
+güvenli grup bilgileri
+.sp
+.TP 4
+\fI/etc/default/useradd\fR
+hesap oluşumu için öntanımlı bilgiler
+.sp
+.TP 4
+\fI/etc/shadow-maint/useradd-pre.d/*\fR, \fI/etc/shadow-maint/useradd-post.d/*\fR
+Kullanıcı eklenirken çalıştırılacak \fBrun-parts\fR(8) dosyaları. \fBACTION\fR ortam değişkene \fBuseradd\fR ve kullanıcı isimli \fBSUBJECT\fR atanır. \fBuseradd-pre.d\fR, herhangi bir kullanıcı eklenmeden önce çalıştırılır. \fBuseradd-post.d\fR, kullanıcı eklendikten sonra çalıştırılır. Bir komut dosyası sıfırdan farklı bir değerle çıkarsa, çalışma sonlandırılır.
+.sp
+.TP 4
+\fI/etc/skel\fR
+öntanımlı dosyaları içeren dizin
+.sp
+.TP 4
+\fI/etc/subgid\fR
+Kullanıcı başına bağımlı grup kimlikler
+.sp
+.TP 4
+\fI/etc/subuid\fR
+Kullanıcı başına bağımlı kullanıcı kimlikler
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Shadow parola yapılandırması
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBuseradd\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+parola dosyası güncellenemiyor
+.sp
+.TP 4
+\fI2\fR
+geçersiz komut sözdizimi
+.sp
+.TP 4
+\fI3\fR
+seçenek değiştirgesi geçersiz
+.sp
+.TP 4
+\fI4\fR
+kullanıcı kimliği zaten kullanılıyor (\fB-o\fR olmaksızın)
+.sp
+.TP 4
+\fI6\fR
+böyle bir grup yok
+.sp
+.TP 4
+\fI9\fR
+kullanıcı ismi zaten kullanılıyor
+.sp
+.TP 4
+\fI10\fR
+\fI/etc/group\fR dosyası güncellenemiyor
+.sp
+.TP 4
+\fI12\fR
+ev dizini oluşturulamıyor
+.sp
+.TP 4
+\fI14\fR
+SELinux kullanıcı eşlemi güncellenemiyor
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBcrypt\fR(3), \fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBlogin.defs\fR(5), \fBnewusers\fR(8), \fBsubgid\fR(5), \fBsubuid\fR(5), \fBuserdel\fR(8), \fBusermod\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,364 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1983, 1991 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * %%%LICENSE_START(BSD_4_CLAUSE_UCB)
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ * This product includes software developed by the University of
+ * California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * %%%LICENSE_END
+ *
+ *     $Id: socket.2,v 1.4 1999/05/13 11:33:42 freitag Exp $
+ *
+ * Modified 1993-07-24 by Rik Faith <faith@cs.unc.edu>
+ * Modified 1996-10-22 by Eric S. Raymond <esr@thyrsus.com>
+ * Modified 1998, 1999 by Andi Kleen <ak@muc.de>
+ * Modified 2002-07-17 by Michael Kerrisk <mtk.manpages@gmail.com>
+ * Modified 2004-06-17 by Michael Kerrisk <mtk.manpages@gmail.com>
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "SOCKET" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+socket - iletişim için uç nokta oluşturur
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <sys/types.h>\fR       /* Bkz: \fBEK BİLGİLER\fR */
+\fB#include <sys/socket.h>\fR
+.fi
+.sp
+.IP "int \fBsocket\fR" 11
+(int \fIdomain\fR, 
+int \fItype\fR, 
+int \fIprotocol\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBsocket\fR() iletişim için uç nokta oluşturur ve bu ucu ifade eden bir dosya tanıtıcısı döndürür. Başarılı bir çağrı ile dönen dosya tanıtıcısı, süreç için açık olmayan en küçük numaralı dosya tanıtıcısı olur.
+.sp
+\fIdomain\fR değiştirgesinde belirtilen adres ailesi iletişim alanını, adres ve protokol ailesini belirler. Bu aileler \fI<sys/socket.h>\fR içerisinde tanımlanmıştır. Adres ailesi sabitlerinin isimleri \fBAF\fR, protokol ailesi sabitlerinin isimleri ise \fBPF\fR ile başlar ve bunlar eşdeğerdir. Linux çekirdeği tarafından tanınan aileler:
+.sp
+.TS
+tab(:) allbox;
+l1 lw40 1l.
+\fBİsim\fR :\fBAmaç\fR :\fBKılavuz Sayfası\fR
+T{
+\fBAF_UNIX\fR
+T}:T{
+Yerel iletişim
+T}:T{
+\fBunix\fR(7)
+T}
+T{
+\fBAF_LOCAL\fR
+T}:T{
+\fBAF_UNIX\fR için eşanlamlı sözcük
+T}:T{
+T}
+T{
+\fBAF_INET\fR
+T}:T{
+IPv4 İnternet protokolü
+T}:T{
+\fBip\fR(7)
+T}
+T{
+\fBAF_AX25\fR
+T}:T{
+Amatör radyo AX.25 protokolü
+T}:T{
+\fBax25\fR(4)
+T}
+T{
+\fBAF_IPX\fR
+T}:T{
+IPX - Novell protokolleri
+T}:T{
+T}
+T{
+\fBAF_APPLETALK\fR
+T}:T{
+AppleTalk
+T}:T{
+\fBddp\fR(7)
+T}
+T{
+\fBAF_X25\fR
+T}:T{
+ITU-T X.25 / ISO-8208 protokolü
+T}:T{
+\fBx25\fR(7)
+T}
+T{
+\fBAF_INET6\fR
+T}:T{
+IPv6 İnternet protokolü
+T}:T{
+\fBipv6\fR(7)
+T}
+T{
+\fBAF_DECnet\fR
+T}:T{
+DECnet protokol soketleri
+T}:T{
+\fBipv6\fR(7)
+T}
+T{
+\fBAF_KEY\fR
+T}:T{
+Anahtar yönetim protokolü, özgün olarak IPsec ile kullanım için geliştirildi
+T}:T{
+T}
+T{
+\fBAF_NETLINK\fR
+T}:T{
+Çekirdek kullanıcı arayüzü aygıtı
+T}:T{
+\fBnetlink\fR(7)
+T}
+T{
+\fBAF_PACKET\fR
+T}:T{
+Düşük seviye paket arayüzü
+T}:T{
+\fBpacket\fR(7)
+T}
+T{
+\fBAF_RDS\fR
+T}:T{
+Güvenilir veri katarı soketleri protokolü
+T}:T{
+\fBrds\fR(7)
+T}
+T{
+T}:T{
+T}:T{
+\fBrds-rdma\fR(7)
+T}
+T{
+\fBAF_PPPOX\fR
+T}:T{
+L2 tünellerini ayarlamak için genel PPP aktarım katmanı (L2TP ve PPPoE)
+T}:T{
+T}
+T{
+\fBAF_LLC\fR
+T}:T{
+Mantıksal bağlantı denetim (IEEE 802.2 LLC) protokolü
+T}:T{
+T}
+T{
+\fBAF_IB\fR
+T}:T{
+InfiniBand doğal adresleme
+T}:T{
+T}
+T{
+\fBAF_MPLS\fR
+T}:T{
+Çoklu protokol etiket değiştirme
+T}:T{
+T}
+T{
+\fBAF_CAN\fR
+T}:T{
+Denetleyici alan ağı otomotiv veriyolu protokolü
+T}:T{
+T}
+T{
+\fBAF_TIPC\fR
+T}:T{
+TIPC, "küme alan soketleri" protokolü
+T}:T{
+T}
+T{
+\fBAF_BLUETOOTH\fR
+T}:T{
+Bluetooth düşük seviye soket protokolü
+T}:T{
+T}
+T{
+\fBAF_ALG\fR
+T}:T{
+Çekirdek şifreleme API’sine arayüz
+T}:T{
+T}
+T{
+\fBAF_VSOCK\fR
+T}:T{
+VSOCK (aslen  "VMWare  VSockets") yüksek yönetici ile misafirin iletişimi için protokol
+T}:T{
+\fBvsock\fR(7)
+T}
+T{
+\fBAF_KCM\fR
+T}:T{
+KCM  (çekirdek bağlantı çoğullayıcı) arayüzü
+T}:T{
+T}
+T{
+\fBAF_XDP\fR
+T}:T{
+XDP (hızlı veri yolu) arayüzü
+T}:T{
+T}
+.TE
+.sp
+Yukarıdaki adres aileleri ve diğer adres aileleri için ayrıntılı bilgiler \fBaddress_families\fR(7) sayfasında bulunabilir.
+.sp
+\fBsocket\fR() çağrısının \fItype\fR değiştirgesi iletişim türünü belirler. Tanımlı türler:
+.sp
+.TP 4
+\fBSOCK_STREAM\fR
+Sıralı, güvenli, çift yönlü, bağlantı temelli bayt akımı sağlar. Bant dışı (Out Of Band) veri iletim mekanizması desteklenebilir.
+.sp
+.TP 4
+\fBSOCK_DGRAM\fR
+Veri katarını destekler (bağlantısız, sabit azami uzunluğa sahip güvenilmez iletiler).
+.sp
+.TP 4
+\fBSOCK_SEQPACKET\fR
+Sabit azami uzunluğa sahip veri katarları için sıralı, güvenli, çift yönlü bağlantı temelli veri iletim yolu sağlar; bir alıcının, her girdi sistem çağrısında bir paketin tamamını okuması gerekir.
+.sp
+.TP 4
+\fBSOCK_RAW\fR
+Ham ağ protokolü erişimi sağlar.
+.sp
+.TP 4
+\fBSOCK_RDM\fR
+Düzeni garanti etmeyen güvenli veri katarı katmanı sağlar.
+.sp
+.TP 4
+\fBSOCK_PACKET\fR
+Eskidir ve yeni programlarda kullanılmamalıdır; \fBpacket\fR(7) sayfasına bakın.
+.sp
+.PP
+Bazı soket türleri tüm protokol aileleri tarafından uygulanmayabilir.
+.sp
+Linux 2.6.27’den itibaren, \fItype\fR değiştirgesi ikinci bir işleve sahiptir: soket türünü belirtmeye ek olarak \fBsocket\fR()’in davranışını değiştirmek için aşağıdaki değerler bit düzeyinde VEYA’lanabilir:
+.sp
+.TP 4
+\fBSOCK_NONBLOCK\fR
+\fBO_NONBLOCK\fR dosya durum bayrağını yeni dosya tanıtıcısını ifade eden açık dosya tanıtıcısına ayarla (\fBopen\fR(2) sayfasına bakın). Bu bayrağı kullanmak, fazladan \fBfcntl\fR(2) çağrılarından tasarruf etmeyi sağlar.
+.sp
+.TP 4
+\fBSOCK_CLOEXEC\fR
+Yürütmeyi kapat (Close On Exec) (\fBFD_CLOEXEC\fR) bayrağını yeni dosya tanıtıcısına ayarla. Bunun neden faydalı olabileceği \fBopen\fR(2) sayfasındaki \fBO_CLOEXEC\fR bayrağının açıklamasında bulunabilir.
+.sp
+.PP
+\fIprotocol\fR değiştirgesinde, soket ile kullanılacak protokol belirtilir. Normalde, belirli bir protokol ailesindeki belirli bir soket türünü desteklemek için yalnızca tek bir protokol vardır, bu nedenle \fIprotocol\fR 0 olarak belirtilebilir. Ancak soket türünü destekleyen birden fazla protokolün var olması da mümkündür, bu durumda bir protokolün belirtilmesi gereklidir. Kullanılacak protokol numarası iletişimin gerçekleşeceği "iletişim alanına" özeldir; \fBprotocols\fR(5) sayfasına bakın. Protokol adlarının protokol numaraları ile nasıl eşleneceği \fBgetprotoent\fR(3) sayfasında açıklanmıştır.
+.sp
+\fBSOCK_STREAM\fR türündeki soketler tam çift yönlü bayt akımlarıdır. Kayıt sınırlarını korumazlar. Bir akım soketi, veri iletmeden veya almadan önce bağlanmış durumda olmalıdır. Bir başka sokete bağlantı oluşturmak için \fBconnect\fR(2) çağrısı kullanılır. Bağlandıktan sonra, veri, \fBread\fR(2) ve \fBwrite\fR(2) çağrılarıyla veya \fBsend\fR(2) ve \fBrecv\fR(2) çağrılarının bazı türevleriyle taşınabilir. Oturum tamamlandığında \fBclose\fR(2) çağrılabilir. Bant dışı (Out Of Band) veri \fBsend\fR(2) sayfasında açıklandığı gibi iletilebilir veya \fBrecv\fR(2) sayfasında açıklandığı gibi alınabilir.
+.sp
+\fBSOCK_STREAM\fR kullanan iletişim protokolleri verinin kaybolmamasını veya kopyalanmamasını sağlar. Eş protokolün tampon alanına sahip bir veri parçası mantıklı bir süre içerisinde başarıyla iletilemezse bağlantının koptuğu kabul edilir. Soket için \fBSO_KEEPALIVE\fR etkinleştirildiğinde, protokol kendine özgü şekilde karşı tarafın etkin olup olmadığına bakar. Eğer süreç, bozuk yayında veri gönderir veya alırsa \fBSIGPIPE\fR sinyali oluşturulur; bu, sinyali işlemeyen ham süreçlerin çıkmasına neden olur. Tek fark, \fBread\fR(2) çağrısının talep edilen veri miktarını döndürmesi, gelen paketteki kalan verilerin atılmasıdır. Ayrıca gelen veri katarlarındaki tüm ileti sınırları korunur.
+.sp
+\fBSOCK_DGRAM\fR ve \fBSOCK_RAW\fR soketleri \fBsendto\fR(2) çağrısında belirtilen alıcıya veri katarlarının iletilmesini sağlar. Veri katarları genellikle, gönderenin adresiyle beraber bir sonraki veri katarını döndüren \fBrecvfrom\fR(2) çağrısı ile alınır.
+.sp
+\fBSOCK_PACKET\fR kullanımı önerilmeyen bir soket türüdür ve doğrudan aygıt sürücüsünden ham paket alınması için kullanılır. Bunun yerine \fBpacket\fR(7) kullanılmalıdır.
+.sp
+\fBfcntl\fR(2) çağrısının \fBF_SETOWN\fR işlemi, bant dışı (Out Of Band) veri geldiğinde \fBSIGURG\fR veya \fBSOCK_STREAM\fR bağlantısı beklenmedik şekilde koparsa \fBSIGPIPE\fR sinyalini alacak süreci veya süreç grubunu belirtmek için kullanılabilir. Bu işlem ayrıca, sıra beklemesiz G/Ç bildirimlerini ve G/Ç’ı \fBSIGIO\fR aracılığıyla alacak süreç ve süreç gruplarını belirtmek için de kullanılabilir. \fBF_SETOWN\fR kullanımı, \fBioctl\fR(2) çağrısının \fBFIOSETWON\fR veya \fBSIOCSPGRP\fR değerleriyle kullanımına eşdeğerdir.
+.sp
+Ağ, protokol modülüne bir hata durumu (örneğin IP için ICMP iletisi kullanarak) sinyallediğinde bekleyen hata bayrağı sokete atanır. Bekleyen hatanın kodunu, soket üzerindeki sonraki işlem döndürür. Bazı protokollerde hata üzerine daha ayrıntılı bilgi edinmek için sokete özgü hata kuyruğu kullanmak mümkündür; \fBip\fR(7) sayfasındaki \fBIP_RECVERR\fR sabitine bakın.
+.sp
+Soketin işlemleri, soket seviye seçenekleri ile kontrol edilir. Bu seçenekler \fI<sys/socket.h>\fR içerisinde tanımlanmıştır. \fBsetsockopt\fR(2) ve \fBgetsockopt\fR(2) işlevleri bu seçenekleri atamak ve sorgulamak için kullanılır.
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Başarılı durumda, yeni soket için dosya tanıtıcısını döndürür. Hata durumunda, \fB-1\fR döner ve hata \fIerrno\fR değişkenine atanır.
+.sp
+.SH "HATALAR"
+.TP 4
+\fBEACCES\fR
+Belirtilen türde ve/veya protokolde soket oluşturulma izni reddedildi.
+.sp
+.TP 4
+\fBEAFNOSUPPORT\fR
+Gerçekleme, belirtilen adres ailesini desteklenmiyor.
+.sp
+.TP 4
+\fBEINVAL\fR
+Protokol bilinmiyor veya protokol ailesi mevcut değil.
+.sp
+.TP 4
+\fBEINVAL\fR
+\fItype\fR değiştirgesinde belirtilen türler geçersiz.
+.sp
+.TP 4
+\fBEMFILE\fR
+Süreç başına açık dosya tanıtıcısı sayısı sınırına ulaşıldı.
+.sp
+.TP 4
+\fBENFILE\fR
+Sistem genelinde açık dosya sayısı sınırına ulaşıldı.
+.sp
+.TP 4
+\fBENOBUFS\fR veya \fBENOMEM\fR
+Bellek yetersiz. Yeterli kaynak serbest bırakılmadığı sürece soket oluşturulamaz.
+.sp
+.TP 4
+\fBEPROTONOSUPPORT\fR
+Protokol türü veya belirtilen protokol, alan tarafından desteklenmiyor.
+.sp
+.PP
+Kullanılan protokol modülleri tarafından başka hatalar oluşturulabilir.
+.sp
+.SH "UYUMLULUK"
+POSIX.1-2001, POSIX.1-2008 4.4BSD
+.sp
+\fBSOCK_NONBLOCK\fR ve \fBSOCK_CLOEXEC\fR bayrakları Linux’a özgüdür.
+.sp
+\fBsocket\fR() 4.2BSD ile ortaya çıktı. Genellikle BSD soket katmanının klonlarını destekleyen (Sistem V türleri dahil) BSD olmayan sistemlere/sistemlerden taşınabilirdir.
+.sp
+.SH "EK BİLGİLER"
+POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+.sp
+4.x BSD altında protokol aileleri için \fBPF_UNIX\fR ve \fBPF_INET\fR vb. sabitleri kullanılırken, \fBAF_UNIX\fR ve \fBAF_INET\fR vb. sabitleri adres aileleri için kullanılmaktadır. Ancak, zaten BSD kılavuz sayfasında şunlar geçiyor: "Protokol ailesi genellikle adres ailesiyle aynıdır" ve sonraki standartlar artık her yerde AF_* sabitlerini kullanıyor.
+.sp
+.SH "ÖRNEKLER"
+\fBsocket\fR()’in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBaccept\fR(2), \fBbind\fR(2), \fBclose\fR(2), \fBconnect\fR(2), \fBfcntl\fR(2), \fBgetpeername\fR(2), \fBgetsockname\fR(2), \fBgetsockopt\fR(2), \fBioctl\fR(2), \fBlisten\fR(2), \fBread\fR(2), \fBrecv\fR(2), \fBselect\fR(2), \fBsend\fR(2), \fBshutdown\fR(2), \fBsocketpair\fR(2), \fBwrite\fR(2), \fBgetprotoent\fR(3), \fBaddress_families\fR(7), \fBip\fR(7), \fBsocket\fR(7), \fBtcp\fR(7), \fBudp\fR(7), \fBunix\fR(7)
+.sp
+"An Introductory 4.3BSD Interprocess Communication Tutorial" ve "BSD Interprocess Communication Tutorial", \fIUNIX Programcısının Ek Belgeleri Cilt 1\fR’de yeniden basılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2022 Fatih Koçer
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

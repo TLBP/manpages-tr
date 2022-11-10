@@ -1,0 +1,130 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+ * May be distributed under the GNU General Public License
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "IPCS" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ipcs - süreçlerarası iletişim oluşumları hakkında bilgi verir
+.sp
+.SH KULLANIM
+.IP \fBipcs\fR 5
+[\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBipcs\fR, System V süreçler arası iletişim oluşumları hakkında bilgi verir. Öntanımlı olarak, üç kaynağın tümü hakkında bilgi gösterir: paylaşılan bellek bölümleri, ileti kuyrukları ve semafor dizileri. IPC, InterProcess Communications (süreçlerarası iletişim) kısaltmasıdır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-i\fR, \fB--id\fR \fIkimlik\fR
+\fIkimlik\fR ile tanımlanan yalnızca bir kaynak öğesiyle ilgili tüm ayrıntıları gösterir. Bu seçeneğin üç kaynak seçeneğinden biriyle birleştirilmesi gerekir: \fB-m\fR, \fB-q\fR veya \fB-s\fR.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.SS "Özkaynak seçenekleri"
+.TP 4
+\fB-m\fR, \fB--shmems\fR
+Etkin paylaşılan bellek bölümleri hakkında bilgi verir.
+.sp
+.TP 4
+\fB-n\fR, \fB--queues\fR
+Etkin ileti kuyrukları hakkında bilgi verir.
+.sp
+.TP 4
+\fB-s\fR, \fB--semaphores\fR
+Etkin semafor kümeleri hakkında bilgi verir.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Üç özkaynağın tümü hakkında bilgi verir.
+.sp
+.PP
+.sp
+.SS "Çıktı biçemleri"
+Çıktı biçimi için aşağıdaki seçeneklerinden biri belirtilebilir ve son belirtilen etkili olur:
+.sp
+.TP 4
+\fB-c\fR, \fB--creator\fR
+Oluşturanı ve sahibini gösterir.
+.sp
+.TP 4
+\fB-l\fR, \fB--limits\fR
+Özkaynak sınırlarını gösterir.
+.sp
+.TP 4
+\fB-p\fR, \fB--pid\fR
+Oluşturanın ve son uygulayıcının süreç kimliklerini gösterir.
+.sp
+.TP 4
+\fB-t\fR, \fB--time\fR
+Zaman bilgilerini gösterir. Tüm oluşumlar için erişim izinlerini değiştiren son denetim işleminin zamanı, ileti kuyruklarındaki son \fBmsgsnd\fR(2) ve \fBmsgrcv\fR(2) çağrılarının zamanı, paylaşılan bellekte son \fBshmat\fR(2) ve \fBshmdt\fR(2) çağrılarının zamanı, semaforlarda son \fBsemop\fR(2) çağrısının zamanı.
+.sp
+.TP 4
+\fB-u\fR, \fB--summary\fR
+Durum özeti gösterir.
+.sp
+.PP
+.sp
+.SS "Sunum"
+Bu seçenekler yalnızca \fB-l\fR, (\fB--limits\fR) seçeneğini etkiler:
+.sp
+.TP 4
+\fB-b\fR, \fB--bytes\fR
+Boyutları insanlarca okunabilecek biçem yerine bayt olarak gösterir.
+.sp
+Öntanımlı olarak, boyutların ifade edildiği birim bayttır ve birim önekleri 2^10’un (1024) katlarıdır. Birimlerin kısaltmaları, daha iyi bir okunabilirlik sağlamak için, yalnızca ilk harflerinden sonrası kırpılarak gösterilir; örnekler: "1 KiB" ve "1 MiB" sırasıyla "1 K" ve "1 M" olarak gösterilir, ardından bu birimlerin bir parçası olan "iB" kasten atlanır.
+.sp
+.TP 4
+\fB--human\fR
+Boyutları insanlarca okunabilecek biçemde gösterir.
+.sp
+.PP
+.sp
+.sp
+.SH "UYUMLULUK"
+Linux \fBipcs\fR uygulaması, POSIX \fBipcs\fR uygulamasıyla tam uyumlu değildir. Linux sürümü, POSIX \fB-a\fR, \fB-b\fR ve \fB-o\fR seçeneklerini desteklemez, ancak POSIX tarafından tanımlanmayan \fB-l\fR ve \fB-u\fR seçeneklerini destekler. Taşınabilir bir uygulama \fB-a\fR, \fB-b\fR, \fB-o\fR, \fB-l\fR ve \fB-u\fR seçeneklerini kullanmamalıdır.
+.sp
+.SH "EK BİLGİ"
+Şu anki \fBipcs\fR uygulaması, \fI/proc/sysvipc\fR içindeki dosyaları ayrıştırarak mevcut süreçler arası iletişim kaynakları hakkında bilgi toplar. util-linux sürüm v2.23’ten önce, başka bir mekanizma kullanılıyordu: \fBmsgctl\fR(2), \fBsemctl\fR(2) ve \fBshmctl\fR(2)’nin IPC_STAT komutu. Bu mekanizma, \fI/proc\fR’un kullanılamadığı durumlarda sonraki util-linux sürümlerinde de kullanılmaktadır. IPC_STAT mekanizmasının bir sınırlaması, yalnızca kullanıcının okuma iznine sahip olduğu süreçler arası iletişim kaynakları hakkında bilgi almak için kullanılabilmesidir.
+.sp
+.SH "YAZAN"
+Krishna Balasubramanian tarafından yazılmıştır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBipcmk\fR(1), \fBipcrm\fR(1), \fBmsgrcv\fR(2), \fBmsgsnd\fR(2), \fBsemget\fR(2), \fBsemop\fR(2), \fBshmat\fR(2), \fBshmdt\fR(2), \fBshmget\fR(2), \fBipcrm\fR(7)
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBİPCS\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,196 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "PARTED" 8 "Eylül 2021" "parted-3.5" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+parted - disk bölümleme uygulaması
+.sp
+.SH KULLANIM
+.IP \fBparted\fR 7
+[\fIseçenekler\fR] [\fIaygıt\fR [\fIkomut\fR [\fIseçenekler\fR...]...]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBparted\fR disk bölümleme tablolarını değiştirme uygulamasıdır. MS-DOS ve GPT dahil, çok sayıda bölümleme tablosu biçemini destekler. Yeni işletim sistemleri için alan yaratmak, disk kullanımını yeniden düzenlemek ve verileri yeni sabit disklere kopyalamak için kullanışlıdır.
+.sp
+Bu kılavuz \fBparted\fR komutunu özet niteliğinde belgelendirmektedir. Tam belge uygulama paketi içinde GNU info biçiminde bulunmaktadır.
+.sp
+\fBparted\fR 3.0 sürümünden beri dosya sistemi işlemlerini desteklememektedir. Bu bakımdan, mkpartfs, mkfs, cp, move, check, resize komutları artık desteklenmiyor. Dosya sistemleri üzerinde işlem yapmak için bu işlemlere özgü bir araçlar kullanılmalıdır. Örneğin, ext2, ext3, ext4 dosya sistemleri üzerinde işlem yapmak için e2fsprogs uygulamaları kullanılabilir. Parted, bunlardan bazılarını yapmanıza izin verse de, parted’deki dosya sistemiyle ilgili kod, dosya sistemine özgü paketlerdeki kod kadar sağlıklı değildir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım iletisini görüntüler.
+.sp
+.TP 4
+\fB-l\fR, \fB--list\fR
+Tüm blok aygıtları üzerindeki disk bölümlerini listeler.
+.sp
+.TP 4
+\fB-m\fR, \fB--machine\fR
+Makine tarafından ayrıştırılabilen çıktı gösterir.
+.sp
+.TP 4
+\fB-j\fR, \fB--json\fR
+JSON çıktısı gösterir.
+.sp
+.TP 4
+\fB-o\fR, \fB--script\fR
+Kullanıcı ile etkileşime girilmez.
+.sp
+.TP 4
+\fB-f\fR, \fB--fix\fR
+Betik kipinde istisnalara otomatik olarak "düzelt" yanıtı verir.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler.
+.sp
+.TP 4
+\fB-a\fR, \fB--align\fR \fIhizalama-türü\fR
+Yeni oluşturulan bölümler için \fIhizalama-türü\fRnü belirler, geçerli hizalama türleri şunlardır:
+.sp
+.RS
+.TP 4
+\fBnone\fR
+Disk türünün izin verdiği en küçük hizalama kullanılır.
+.sp
+.TP 4
+\fBcylinder\fR
+Disk bölümlerini silindirlere hizalar.
+.sp
+.TP 4
+\fBminimal\fR
+Disk topolojisi bilgilerinde belirtilen en düşük hizalama kullanılır. Mantıksal bölüm tablosu adreslerini disklerdeki gerçek fiziksel bloklara hizalamak için disk tarafından sağlanan yerleşim bilgileri kullanılır. En küçük değer, başarımın düşmesini önleyen, bölümü fiziksel bloklara düzgün şekilde hizalamak için gereken en düşük hizalama değeridir.
+.sp
+.TP 4
+\fBoptimal\fR
+Disk topolojisi bilgilerinde belirtilen en uygun hizalama kullanılır. Bu, en uygun başarımı garanti edecek şekilde fiziksel blok boyutunun katlarına hizalanır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.SH "KOMUTLAR"
+.TP 4
+[\fIaygıt\fR]
+Bölümlenecek blok aygıtı. none belirtilirse \fBparted\fR bulduğu ilk blok aygıtını kullanır.
+.sp
+.TP 4
+[\fIkomut\fR [\fIseçenekler\fR]]
+\fBparted\fR’a bir komut belirtir. Eğer herhangi bir komut verilmemişse, \fBparted\fR bir komut istemi açar. Komutlar şunlardır:
+.sp
+.RS
+.TP 4
+\fBhelp\fR [\fIkomut\fR]
+Genel yardım konularını veya \fIkomut\fR verilmişse onunla ilgili yardım konularını görüntüler.
+.sp
+.TP 4
+\fBalign-check\fR [\fItür bölüm\fR]
+Belirtilen disk \fIbölüm\fRünün belirtilen hizalama \fItür\fRü ile ilgili kısıtlamalara uygunluğunu denetler. \fItür\fR olarak \fBminimal\fR veya \fBoptimal\fR belirtilebilir.
+.sp
+.TP 4
+\fBmklabel\fR [\fItablo-türü\fR]
+Disk bölümleme tablosu belirtilen \fItablo-türü\fRnde oluşturulur. \fItablo-türü\fR şunlardan biri olabilir: \fB"aix", "amiga", "bsd", "dvh", "gpt", "loop", "mac", "msdos", "pc98", "sun"\fR.
+.sp
+.TP 4
+\fBmkpart\fR [\fIbölüm-türü isim ds-türü\fR] \fIbaşlangıç bitiş\fR
+Yeni disk bölümü oluşturur. \fIbölüm-türü\fR yalnızca msdos ve dvh bölümleme tabloları kullanılacaksa belirtilir ve şunlardan biri olabilir: \fB"primary", "logical", "extended"\fR.
+.sp
+\fIisim\fR yalnızca GPT bölümleme tablolarında gerekir ve \fIds-türü\fRnü belirtmek isteğe bağlıdır. \fIds-türü\fR şunlardan biri olabilir: \fB"btrfs", "ext2", "ext3", "ext4", "fat16", "fat32", "hfs", "hfs+", "linux-swap", "ntfs", "reiserfs", "udf", "xfs"\fR
+.sp
+.TP 4
+\fBname\fR [\fIbölüm isim\fR]
+Disk \fIbölüm\fRüne \fIisim\fR atanır. Bu seçenek yalnızca Mac, PC98 ve GPT tablo türü için belirtilebilir. Gerekliyse \fIisim\fR çift-tırnak içine alınabilir. Kullanılan kabuğa bağlı olarak, ayrıca tek-tırnak içine de almak gerekebilir, böylece çift tırnakların kabuk tarafından ayıklanması engellenebilir.
+.sp
+.TP 4
+\fBprint\fR [\fItür\fR]
+Disk bölümleme tablosunu görüntüler. \fItür\fR isteğe bağlı olup şunlardan biri olabilir: \fBdevices, free, list, all\fR
+.sp
+.TP 4
+\fBquit\fR
+\fBparted\fR sonlandırılır.
+.sp
+.TP 4
+\fBrescue\fR \fIbaşlangıç bitiş\fR
+\fIbaşlangıç\fR ve \fIbitiş\fRi belirtilen kayıp disk bölümünü kurtarır. Belirtilen bölgede bir disk bölümü bulunursa, \fBparted\fR bulunan bölüm için disk bölümleme tablosunda bir girdi oluşturulup oluşturulmayacağını kullanıcıya sorar.
+.sp
+.TP 4
+\fBresizepart\fR \fIbölüm bitiş\fR
+Belirtilen \fIbölüm\fRün ve \fIbitiş\fRi değiştirilir. Bu işlemin bölüm üzerindeki mevcut dosya sisteminde değişiklik yapmadığı unutulmamalıdır.
+.sp
+.TP 4
+\fBrm\fR \fIbölüm\fR
+Belirtilen \fIbölüm\fR silinir.
+.sp
+.TP 4
+\fBselect\fR \fIaygıt\fR
+Düzenlenecek aygıt olarak belirtilen \fIaygıt\fR seçilir. \fIaygıt\fRın genelde Linux sabit diski olması gerekir, ancak gerekirse bir disk bölümü, yazılımsal raid aygıtı veya LVM mantıksal birimi de belirtilebilir.
+.sp
+.TP 4
+\fBset\fR \fIbölüm im durum\fR
+Belirtilen \fIbölüm\fR üzerinde \fIim\fRin \fIdurum\fRu değiştirilir. Desteklenen \fIim\fRler: \fB"boot", "root", "swap", "hidden", "raid", "lvm", "lba", "legacy_boot", "irst", "msftres", "esp", "chromeos_kernel", "bls_boot", "linux-home", "bios_grub", "palo"\fR. \fIdurum\fR olarak "on" veya "off" belirtilebilir.
+.sp
+.TP 4
+\fBunit\fR \fIbirim\fR
+Konumlar ve boyutlar görüntülenirken kullanıcı tarafından açıkça bir birim eklenmediğinde verileri yorumlamak için kullanılacak \fIbirim\fRi belirler. \fIbirim\fR şunlardan biri olabilir: "s" (sektor sayısı), "B" (bayt), "kB", "MB", "KiB", "MiB", "GB", "GiB", "TB", "TiB", "%" (aygıt boyutunun yüzdesi), "cyl" (silindir sayısı), "chs" (silindir, kafa, sektor sayısı), "compact" (girdi için megabayt ve çıktı için insan dostu biçim).
+.sp
+.TP 4
+\fBtoggle\fR \fIbölüm im\fR
+\fIbölüm im\fRi üzerinde durumu değiştirir.
+.sp
+.TP 4
+\fBdisk_set\fR \fIim durum\fR
+Belirtilen \fIim\fRim durumunu \fIdurum\fR olarak değiştirir. \fIdurum\fR "on" veya "off" olabilir. Kullanılan bölümleme tablosu türüne bağlı olarak \fIim\fRlerin hiçbiri veya bazısı olmayabilir. Desteklenen im, GPT üzerinde \fB"pmbr_boot"\fR olup GPT’nin koruyucu MBR bölümünün önyükleme imini etkinleştirir.
+.sp
+.TP 4
+\fBdisk_toggle\fR \fIim\fR
+Disk \fIim\fRi üzerinde durumu değiştirir.
+.sp
+.TP 4
+\fBversion\fR
+Sürüm ve telif hakkı bilgilerini gösterir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Bu kılavuz sayfası Timshel Knoll tarafından Debian GNU/Linux sistemi için yazılmıştır (fakat diğerlerinde de kullanılabilir).
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <bug-parted (at) gnu.org> adresine bildirin.
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 1999-2022 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfdisk\fR(8), \fBmke2fs\fR(8)
+.br
+GNU Parted sayfasında: <http://www.gnu.org/software/parted/manual/parted.html>
+.br
+Veya sisteminizde: \fBinfo parted\fR
+.sp
+.SH "ÇEVİREN"
+© 2004 Züber OMURTAK
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

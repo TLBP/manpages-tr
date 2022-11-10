@@ -1,0 +1,133 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Bzmore wrapped for bzip2,
+ * adapted from zmore by Philippe Troin <phil@fifi.org> for Debian GNU/Linux.
+ *
+ * zmore (gzip) notice:
+ * Copyright (C) 1998, 2002, 2006-2007, 2009-2021 Free Software Foundation, Inc.
+ * Copyright (C) 1992, 1993 Jean-loup Gailly
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "BZMORE" 1 "Temmuz 2019" "bzip2 1.0.8" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+bzmore - bzip2 ile sıkıştırılmış metnin ekranda görüntülenmesi için dosya inceleme aracı
+.br
+bzless - bzip2 ile sıkıştırılmış metnin ekranda görüntülenmesi için dosya inceleme aracı
+.sp
+.SH KULLANIM
+.IP \fBbzmore\fR 7
+[ \fIisim ...\fR ]
+.IP \fBbzless\fR 7
+[ \fIisim ...\fR ]
+.sp
+.PP
+.sp
+.SH "ÖNBİLGİ"
+Aşağıdaki açıklama, \fBbzless\fR ile \fBbzmore\fR ve \fBless\fR ile \fBmore\fR yer değiştirilerek okunabilir.
+.sp
+Ç.N.: Açıklamalar görme engelli ekranı ile uyumlu verilmeye çalışılmış görünüyor. Görme engelli ekranı: İşi bitince silinip tekrar kullanılmak üzere, üzerinde ısıtılarak kabartılar işlenmiş, kaydırılabilir reçine ekran kullanan bir daktilo. Buna "mekanik uçbirim" (hard-copy terminal) deniyor.
+.sp
+.SH "AÇIKLAMA"
+\fBbzmore\fR, sıkıştırılmış veya düz metin dosyaların bir elektronik uçbirimde (soft-copy terminal) birer birer taranmasını sağlayan bir araçtır. \fBbzmore\fR, \fBbzip2\fR ile sıkıştırılmış dosyalarda çalışabildiği gibi ayrıca sıkıştırılmamış dosyalarda da çalışabilir. Bir dosya yoksa, \fBbzmore\fR, aynı isimde \fI.bz2\fR uzantılı bir dosya arar.
+.sp
+\fBbzmore\fR normalde her gösterimden sonra duraklar, ekranın alt kısmında --Daha-- (veya --More--) yazdırır. Kullanıcı daha sonra bir satır başı yazarsa (enter), bir satır daha görüntülenir. Kullanıcı boşluk tuşuna basarsa, bir ekran dolusu metin "daha" görüntülenir. Diğer olasılıklar daha sonra sıralanır.
+.sp
+\fBbzmore\fR, uçbirim özelliklerini belirlemek ve öntanımlı pencere boyutunu belirlemek için \fI/etc/termcap\fR dosyasına bakar. 24 satır görüntüleyebilen bir uçbirimde öntanımlı pencere boyutu 22 satırdır. \fBbzmore\fR durakladığında yazılabilen dizilimler ve etkileri aşağıdaki gibidir (\fIi\fR, öntanımlı değeri 1 olan isteğe bağlı bir tamsayı değişkendir):
+.sp
+.TP 4
+\fIi\fR<boşluk>
+\fIi\fR satır daha gösterir (bir sayı olmaksızın boşluk tuşuna basılması metnin tam ekran ilerletilmesine sebep olur)
+.sp
+.TP 4
+^D
+11 satır daha gösterir. \fIi\fR belirtilmişse metin \fIi\fR satır ilerletilir.
+.sp
+.TP 4
+d
+^D (Ctrl-D) ile aynı.
+.sp
+.TP 4
+\fIi\fRz
+\fIi\fR olmaksızın boşluk tuşuna basamakla aynı. \fIi\fR belirtilmişse yeni pencere boyutu olarak kullanılır. Geçerli dosyanın sonuna gelindiğinde pencere boyu gerisin geri öntanımlı değerine ayarlanır.
+.sp
+.TP 4
+\fIi\fRs
+Metin \fIi\fR satır ilerletilip bir ekran dolusu metin görüntülenir.
+.sp
+.TP 4
+\fIi\fRf
+Metin \fIi\fR ekran dolusu ilerletilip bir ekran dolusu metin görüntülenir.
+.sp
+.TP 4
+q veya Q
+Geçerli dosyanın okunmasından çıkılır, (varsa) sonrakine geçilir.
+.sp
+.TP 4
+e veya q
+Komut istemine --Daha-- (Sonraki dosya: \fIdosya\fR) basıldığında, bu komut girilirse, \fBbzmore\fR’dan çıkılmasına sebep olur.
+.sp
+.TP 4
+s
+Komut istemine --Daha-- (Sonraki dosya: \fIdosya\fR) basıldığında, bu komut girilirse, \fBbzmore\fR’un sonraki dosyaya atlamasına ve devam etmesine sebep olur.
+.sp
+.TP 4
+=
+Geçerli satır numarasını gösterir.
+.sp
+.TP 4
+\fIi\fR/ifade
+Düzenli \fIifade\fR’nin \fIi\fR’inci bölümünü arar. Bu şablonla eşleşme sağlanamazsa \fBbzmore\fR (varsa) sonraki dosyaya gider. Aksi takdirde, ifadenin bulunduğu yerin iki satır öncesinden başlayan bir ekran dolusu metin görüntülenir. Kullanıcının sil ve geri sil karakterleri düzenli ifadeyi düzenlemekte kullanılabilir. İlk sütunu aşan geri silme işlemi arama komutunu iptal eder.
+.sp
+.TP 4
+\fIi\fRn
+Girilen son düzenli ifadenin \fIi\fR’inci bölümü için arama yapar
+.sp
+.TP 4
+!komut
+\fIkomut\fR ile kabuk çağrılır. Komutun başındaki "!" karakterinin yerine önceki kabuk komutu konur. "\\!" tuş dizilimi "!" ile değiştirilir.
+.sp
+.TP 4
+:q veya :Q
+Geçerli dosyanın okunmasından çıkılır, (varsa) sonrakine geçilir. (q veya Q ile aynı)
+.sp
+.TP 4
+\fB.\fR
+(nokta) Önceki komut yinelenir.
+.sp
+.PP
+Komutlar hemen etkili olur, yani bir satır başı (enter) yazmak gerekli değildir. Komut karakterinin girildiği ana kadar, kullanıcı sayısal girdiyi iptal etmek için satır silme karakterine basabilir. Ek olarak, kullanıcı --Daha-- istemini yeniden görüntülemek için silme karakterine basabilir.
+.sp
+Çıktı uçbirime gönderilirken herhangi bir anda, kullanıcı çıkış tuşuna basabilir (normalde Ctrl-\\). \fBbzmore\fR çıktı göndermeyi durduracak ve olağan --Daha-- istemini görüntüleyecektir. Kullanıcı bu sırada yukarıdaki komutlardan birini normal şekilde girebilir. Ne yazık ki, çıkış sinyali oluştuğunda uçbirimin çıktı kuyruğunda bekleyen karakterin silinmesi nedeniyle bu yapıldığında bazı çıktılar kaybolur.
+.sp
+Çıktının sürekli olabilmesi için uçbirim bu uygulama tarafından \fInoecho\fR kipine ayarlanır. / ve ! komutları hariç yazdıklarınız bu nedenle gösterilmez.
+.sp
+Standart çıktı mekanik uçbirim değilse, \fBbzmore\fR, her dosyadan önce bir başlık yazdırılması dışında, tıpkı \fBbzcat\fR gibi davranır.
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fI/etc/termcap\fR ―― Uçbirim veritabanı
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmore\fR(1), \fBless\fR(1), \fBbzip2\fR(1), \fBbzdiff\fR(1), \fBbzgrep\fR(1)
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

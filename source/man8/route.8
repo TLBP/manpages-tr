@@ -1,0 +1,334 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
+ * https://sourceforge.net/p/net-tools/code/ci/master/tree/
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "ROUTE" 8 "Ocak 2021" "net-tools 2.10" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+route - IP yönlendirme tablosunu yönetir/içeriğini gösterir
+.sp
+.SH KULLANIM
+.IP \fBroute\fR 6
+[\fB-CFvnee\fR] [\fB-A\fR \fIaile\fR |\fB-4\fR|\fB-6\fR]
+.sp
+.PP
+.IP \fBroute\fR 6
+[\fB-v\fR] [\fB-A\fR \fIaile\fR |\fB-4\fR|\fB-6\fR] \fBadd\fR [\fB-net\fR|\fB-host\fR] \fIhedef\fR [\fBnetmask\fR \fIağmaskesi\fR] [\fBgw\fR \fIağgeçidi\fR] [\fBmetric\fR \fIN\fR] [\fBmss\fR \fIN\fR] [\fBwindow\fR \fIN\fR] [\fBirtt\fR \fIN\fR] [\fBreject\fR] [\fBmod\fR] [\fBdyn\fR] [\fBreinstate\fR] [[\fBdev\fR] \fIaygıt\fR]
+.sp
+.PP
+.IP \fBroute\fR 6
+[\fB-v\fR] [\fB-A\fR \fIaile\fR |\fB-4\fR|\fB-6\fR] \fBdel\fR [\fB-net\fR|\fB-host\fR] \fIhedef\fR [\fBnetmask\fR \fIağmaskesi\fR] [\fBgw\fR \fIağgeçidi\fR] [\fBmetric\fR \fIN\fR] [[\fBdev\fR] \fIaygıt\fR]
+.sp
+.PP
+.IP \fBroute\fR 6
+[\fB-V\fR | \fB--version\fR] [\fB-h\fR | \fB--help\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBroute\fR, çekirdeğin IP yönlendirme tablosunu yönetir. Birincil kullanım şekli, \fBifconfig\fR(8) uygulaması ile yapılandırılmış bir arayüz üzerinden, belirtilmiş konaklara veya ağlara sabit yönlendirme yapmaktır.
+.sp
+\fBadd\fR veya \fBdel\fR seçeneği kullanıldığı durumlarda, \fBroute\fR uygulaması yönlendirme tablosunu tekrar düzenler. Şayet bu seçenekler kullanılmamışsa, o an geçerli olan yönlendirme tablosu görüntülenir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-A\fR \fIaile\fR
+Belirtilen adres ailesi kullanılır. (Örneğin: ’inet’) Tam listeyi elde etmek için \fBroute -–help\fR komutunu kullanın. \fB--inet6\fR yerine \fB-6\fR, \fB-A inet\fR yerine \fB-4\fR kullanılabilir.
+.sp
+.TP 4
+\fB-F\fR
+Çekirdeğin FIB (Forwarding Information Base) yönlendirme tablosu üzerinden işlem yapar. Öntanımlıdır.
+.sp
+.TP 4
+\fB-C\fR
+Çekirdeğin yönlendirme önbelleği üzerinden işlem yapar.
+.sp
+.TP 4
+\fB-v\fR
+Daha ayrıntılı bilgi verilir.
+.sp
+.TP 4
+\fB-n\fR
+Sembolik konak isimlerini saptamaya çalışmadan adreslerin sayısal değerlerini gösterir. DNS bağlantısının ortadan kaybolduğu durumlarda oldukça kullanışlı bir seçenektir.
+.sp
+.TP 4
+\fB-e\fR
+Yönlendirme tablosunu görüntülemek için için \fBnetstat\fR(8) biçimini kullanır. \fB-ee\fR seçeneği yönlendirme tablosundaki tüm başlıklarla çok uzun bir satır üretir.
+.sp
+.TP 4
+\fBdel\fR
+Belirtilen yolu siler.
+.sp
+.TP 4
+\fBadd\fR
+Belirtilen yolu ekler.
+.sp
+.TP 4
+\fIhedef\fR
+\fIhedef\fR, hedef ağ veya konaktır. Noktalar ile ayrılmış sayısal değerleri kullanabileceğiniz gibi ağ/konak ismini de yazabilirsiniz. Seçimlik olarak, \fBnetmask\fR seçeneği yerine \fI/prefixlen\fR gösterimi kullanılabilir.
+.sp
+.TP 4
+\fB-net\fR
+\fIhedef\fRin bir ağ olduğunu gösterir.
+.sp
+.TP 4
+\fB-host\fR
+\fIhedef\fRin bir konak olduğunu gösterir.
+.sp
+.TP 4
+\fBnetmask\fR \fIağmaskesi\fR
+Yeni bir ağ yolu eklenirken kullanılacak ağ maskesini gösterir.
+.sp
+.TP 4
+\fBgw\fR \fIağgeçidi\fR
+Paketler bu \fIağgeçidi\fR üzerinden yollanır.
+.sp
+.TP 4 \fBBilgi:\fR Belirtilen \fIağgeçidi\fR ilk ulaşılan olmalıdır. Bunun anlamı, öncelikle ağ geçidine sabit bir yol tanımlamış olmanız gerektiğidir. Yerel arabirimlerden birinin adresi tanımlanırsa, paketlerin hangi arabirim üzerinden gönderileceği belirtilmiş olur. Bu, BSD tarzı ile uyumluluk içindir. .sp .PP
+.sp
+.TP 4
+\fBmetric\fR \fIN\fR
+Yönlendirme tablosundaki (yönlendirme süreçleri tarafından kullanılan) metric alanına belirtilen \fIN\fR değerini atar. Seçenek belirtilmezse, inet6 (IPv6) adres için öntanımlı \fIN\fR değeri 1, inet (IPv4) için ise 0’dır. Bu öntanımlılara (iproue2’dekilerden farklıdır) güvenmek yerine daima \fIN\fR değeri açıkça belirtilmelidir.
+.sp
+.TP 4
+\fBmss\fR \fIN\fR
+Arayüzün MTU değerini \fIN\fR bayta ayarlar. \fBroute\fR komutunun kullanılan sürümü ile MSS’nin (Azami Parça Boyutu) ayarlanamadığı unutulmamalıdır.
+.sp
+.TP 4
+\fBwindow\fR \fIN\fR
+Bu yol üzerinden yapılan işlemlerde TCP pencere boyutunu \fIN\fR değerine göre ayarlar. Bu genelde AX.25 ağlarda ve peşpeşe gelen pencereler ile uyumsuz sürücülerin olması durumunda kullanılır.
+.sp
+.TP 4
+\fBirtt\fR \fIN\fR
+Bu yol üzerinden yapılan bağlantılarda ilk gidiş dönüş süresi (irtt- initial round trip time ) \fIN\fR milisaniye olarak ayarlanır. Bu değer 1-12000 arası olabilir. Bu seçenek genellikle AX.25 ağlarda kullanılır. Şayet belirtilmezse, RFC 1122 öntanımlısı olan 300 ms’lik süre kullanılır.
+.sp
+.TP 4
+\fBreject\fR
+Bir yol aramasının başarısız olmasını sağlamak için engelleyici bir yol oluşturur. Bu seçenek, öntanımlı yolun kullanılmasından önce, ağların gizlenmesini sağlamak amacı ile kullanılabilir. BU, GÜVENLİK DUVARI OLUŞTURMA ANLAMINDA ELE ALINMMALIDIR.
+.sp
+.TP 4
+\fBmod\fR, \fBdyn\fR, \fBreinstate\fR
+Düzeltilmiş veya dinamik bir yönlendirme yapar. Bu seçenekler teşhis amaçlıdır ve genelde sadece yönlendirme süreçleri tarafından kullanılır.
+.sp
+.TP 4
+\fBdev\fR \fIaygıt\fR
+Yolun belirtilen \fIaygıt\fR ile ilişkilendirilmesini zorlamak amacı ile kullanılır. Böylece çekirdeğin kendi içindeki aygıtı tespit etme denemesi yapmasına gerek kalmaz. Normal ağlar için bu seçeneğe ihtiyaç yoktur.
+.sp
+\fBdev\fR \fIaygıt\fR komut satırındaki son seçenek ise, \fBdev\fR kelimesi belirtilmeyebilir (zaten öntanımlıdır). Aksi takdirde yol düzenleyici seçeneklerinin sırası (\fBmetric netmask gw dev\fR) zaten önemli değildir.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.SS "A sınıfı ağ maskeli lo aygıtı"
+255.0.0.0 ağ maskesini kullanarak "lo" aygıtı ile ilişkili normal geridönüş aygıtı (loopback) girdisi ekler (aygıtın önceden \fBifconfig\fR(8) ile doğru bir şekilde yapılandırıldığı varsayılmaktadır).
+.sp
+.RS 4
+.nf
+route add -net 127.0.0.0 netmask 255.0.0.0 metric 1024 dev lo
+.fi
+.sp
+.RE
+.sp
+.SS "“eth0” üzerinden 192.56.76.x yerel ağına yol eklemek"
+Burada “dev” kelimesi kullanılmayabilir. Çünkü satırın en sonundaki seçenektir.
+.sp
+.RS 4
+.nf
+route add -net 192.56.76.0 netmask 255.255.255.0 metric 1024 dev eth0
+.fi
+.sp
+.RE
+.sp
+.SS "Öntanımlı yolu silmek"
+Geçerli yönlendirme tablosunun hedef alanında "default" veya 0.0.0.0 olarak etiketlenen geçerli öntanımlı yolu siler.
+.sp
+.RS 4
+.nf
+route del default
+.fi
+.sp
+.RE
+.sp
+.SS "Bir yolu silmek"
+Linux yönlendirme çekirdeği sınıfsız adresleme kullandığından, hemen hemen her zaman ’route -n’ listesinde görüldüğü gibi ağ maskesinin belirtilmesi gerekir.
+.sp
+.RS 4
+.nf
+route del -net 192.56.76.0 netmask 255.255.255.0
+.fi
+.sp
+.RE
+.sp
+.SS "Öntanımlı bir yol eklemek"
+Başka bir yolla eşleşme olmamışsa kullanmak içindir. Bu rotayı kullanan tüm paketler, "mango" adlı düğümün adresi aracılığıyla ağ geçidine bağlanır. Bu yol için kullanılacak aygıt, “mango” ağ geçidine nasıl erişildiğine bağlıdır. “mango” ağ geçidine doğrudan ulaşılabilen yol önceden yapılandırılmış olmalıdır.
+.sp
+.RS 4
+.nf
+route add default gw mango
+.fi
+.sp
+.RE
+.sp
+.SS "Bir konağa yol eklemek"
+"mango" konağına SLIP arabirimi üzerinden bir yol ekler. Burada "mango"nun bir SLIP konağı olduğu varsayılmıştır.
+.sp
+.RS 4
+.nf
+route add mango sl0
+.fi
+.sp
+.RE
+.sp
+.SS "Bir konağa ağgeçidi eklemek"
+Bu komut, "192.57.66.x" ağına, önceki SLIP arabiriminin ağ geçidi üzerinden bir yol ekler.
+.sp
+.RS 4
+.nf
+route add -net 192.57.66.0 netmask 255.255.255.0 gw mango
+.fi
+.sp
+.RE
+.sp
+.SS "Çoğa gönderim yolu eklemek"
+Bu karanlıkta kalmış bir bilgidir. Bütün D Sınıfı (multicast) IP yollarının “eth0” üzerinden geçmesini sağlar. Çok görevli bir çekirdekte doğru olan normal ayar budur.
+.sp
+.RS 4
+.nf
+route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
+.fi
+.sp
+.RE
+.sp
+.SS "Engelleyici yol eklemek"
+Özel "10.x.x.x" ağının yolunun görünmemesini sağlar.
+.sp
+.RS 4
+.nf
+route add -net 10.0.0.0 netmask 255.0.0.0 metric 1024 reject
+.fi
+.sp
+.RE
+.sp
+.SS "IPv6 yola metrik belirtmek"
+Bu, eth0 aracılığıyla doğrudan erişilebilecek, belirtilen metriğe sahip bir IPv6 yolu ekler.
+.sp
+.RS 4
+.nf
+route -6 add 2001:0002::/48 metric 1 dev eth0
+.fi
+.sp
+.RE
+.sp
+.sp
+.SH "ÇIKTI"
+Çekirdek yönlendirme tablosundaki sütunların anlamları:
+.sp
+.TP 4
+\fBDestination\fR
+Hedef ağ veya hedef konak.
+.sp
+.TP 4
+\fBGateway\fR
+Ağ geçidi adresi; belirtilmemişse “*”.
+.sp
+.TP 4
+\fBGenmask\fR
+Hedef ağ için ağ maskesi; konak hedefler için ’255.255.255.255’, öntanımlı (\fBdefault\fR) yol için ’0.0.0.0’.
+.sp
+.TP 4
+\fBFlags\fR
+Kullanılabilecek bayraklar:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBU\fR (yönlendirme açık)
+\fBH\fR (hedef bir konaktır)
+\fBG\fR (kullanılan ağ geçidi)
+\fBR\fR (dinamik yönlendirme için eski yönlendirme geri alınmış)
+\fBD\fR (bir süreç veya yönlendirme ile dinamik yüklenmiş)
+\fBM\fR (bir süreç veya yönlendirme ile dinamik değiştirilmiş)
+\fBA\fR (\fBaddrconf\fR tarafından yüklenmiş)
+\fBC\fR (önbellek girdisi)
+\fB!\fR (engellenmiş yol)
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBMetric\fR
+Hedefe olan uzaklık, genellikle atlama sayısı (hop) ile belirtilir.
+.sp
+.TP 4
+\fBRef\fR
+Bu yola yapılmış olan başvuru sayısı. Linux çekirdeğinde kullanılmamaktadır.
+.sp
+.TP 4
+\fBUse\fR
+Yol aramalarının sayısı. \fB–F\fR veya \fB–C\fR seçeneğinin kullanıma bağlı olarak yol önbelleği ıskalama (\fB-F\fR) ya da isabet (\fB-C\fR) sayısıdır.
+.sp
+.TP 4
+\fBIface\fR
+Bu yoldan gönderilecek paketler için arabirim.
+.sp
+.TP 4
+\fBMSS\fR
+Bu yol üzerindeki TCP bağlantıları için öntanımlı azami parça boyutu.
+.sp
+.TP 4
+\fBWindow\fR
+Bu yol üzerindeki TCP bağlantıları için öntanımlı pencere boyutu.
+.sp
+.TP 4
+\fBirtt\fR
+İlk RTT (ilk gidiş dönüş süresi - Round Trip Time). Çekirdek bu değeri, herhangi bir beklemeye sebebiyet vermeyecek şekilde en uygun TCP protokolünü tespit etmekte kullanır.
+.sp
+.TP 4
+\fBHH (cached only)\fR
+Önbellekli yol için donanım başlık önbelleğine atıf yapan ARP girdilerinin ve arabellekli yolların sayısını verir. Önbellekli yol arabirimi için bir donanım adresi gerekmiyor ise -1 döner. Örneğin “lo” için.
+.sp
+.TP 4
+\fBArp (cached only)\fR
+Önbellekli yol için donanım adresinin güncellenip güncellenmeyeceği.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fI/proc/net/ipv6_route\fR
+\fI/proc/net/route\fR
+\fI/proc/net/rt_cache\fR
+.fi
+.sp
+.RE
+.sp
+.SH "İLGİLİ BELGELER"
+\fBethers\fR(5), \fBarp\fR(8), \fBrarp\fR(8), \fBroute\fR(8), \fBifconfig\fR(8), \fBnetstat\fR(8).
+.sp
+.SH "TARİHÇE"
+Linux için \fBroute\fR Fred N. van Kepmen tarafından yazılmış ve pl15 için Johannes Stille ve Linus Torvalds tarafından düzenlenmiştir. \fBmss\fR ve \fBwindow\fR seçenekleri Alan Cox tarafından Linux 1.1.22 sürümünde eklenmiştir. \fBirtt\fR desteği ve bunun \fBnetstat\fR gerçeklenimi Bernd Eckenfels tarafından yapılmıştır.
+.sp
+.SH "YAZAN"
+Phil Blundell ve Bernd Eckenfels tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2005 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,121 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CHCON" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+chcon - dosya güvenlik bağlamını değiştirir
+.sp
+.SH KULLANIM
+.IP \fBchcon\fR 6
+[\fISEÇENEK\fR]... \fIBAĞLAM\fR \fIDOSYA\fR...
+.IP \fBchcon\fR 6
+[\fISEÇENEK\fR]... [\fB-u\fR \fIKULLANICI\fR] [\fB-r\fR \fIROL\fR] [\fB-l\fR \fIARALIK\fR] [\fB-t\fR \fITÜR\fR] \fIDOSYA\fR...
+.IP \fBchcon\fR 6
+[\fISEÇENEK\fR]... \fB--reference\fR=\fIÖRNEK-DOSYA\fR \fIDOSYA\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen her \fIDOSYA\fR’nın SELinux güvenlik bağlamını \fIBAĞLAM\fR olarak değiştirir. \fB--reference\fR seçeneği ile her \fIDOSYA\fR’nın güvenlik bağlamı \fIÖRNEK-DOSYA\fR’nın güvenlik bağlamına değiştirilir.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB--dereference\fR
+Sembolik bağın kendisini değil, sembolik bağın hedefini etkiler (öntanımlıdır)
+.sp
+.TP 4
+\fB-h\fR, \fB--no-dereference\fR
+Sembolik bağın hedefini değil, sembolik bağın kendisini etkiler
+.sp
+.TP 4
+\fB-u\fR, \fB--user\fR=\fIKULLANICI\fR
+Hedef güvenlik bağlamının user bileşenine \fIKULLANICI\fR atanır.
+.sp
+.TP 4
+\fB-r\fR, \fB--rol\fR=\fIROL\fR
+Hedef güvenlik bağlamının role bileşenine \fIROL\fR atanır.
+.sp
+.TP 4
+\fB-t\fR, \fB--type\fR=\fITÜR\fR
+Hedef güvenlik bağlamının type bileşenine \fITÜR\fR atanır.
+.sp
+.TP 4
+\fB-l\fR, \fB--range\fR=\fIARALIK\fR
+Hedef güvenlik bağlamının range bileşenine \fIARALIK\fR atanır.
+.sp
+.TP 4
+\fB--no-preserve-root\fR
+Kök dizin (’/’) özellikle işleme alınmaz (öntanımlı).
+.sp
+.TP 4
+\fB--preserve-root\fR
+Kök dizin (’/’) üzerinde ardışık işlem başarısız olur.
+.sp
+.TP 4
+\fB--reference\fR=\fIÖRNEK-DOSYA\fR
+Bir \fIBAĞLAM\fR değeri belirtmek yerine \fIÖRNEK-DOSYA\fR’nın güvenlik bağlamı kullanılır.
+.sp
+.TP 4
+\fB-R\fR, \fB--recursive\fR
+Dosyalar ve dizinler üzerinde ardışık işlem yapılır.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İşlem yapılan her dosya için bir tanı bilgisi çıktılanır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+Aşağıdaki seçenekler, ek olarak \fB-R\fR seçeneği de belirtildiğinde bir dizinin alt dizinlerinde nasıl işlem yapılacağını belirler. Birden fazlası belirtilirse, yalnızca sonuncusu etkili olur.
+.sp
+.TP 4
+\fB-H\fR
+\fIDOSYA\fR bir dizine sembolik bağ ise işlem bağa değil hedefine uygulanır.
+.sp
+.TP 4
+\fB-L\fR
+Bir dizine sembolik bağ olan bağlar saptandığında işlem bağa değil hedefine uygulanır.
+.sp
+.TP 4
+\fB-P\fR
+Sembolik bağlar izlenmez (öntanımlı).
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Russell Coker ve Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/chcon>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) chcon invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

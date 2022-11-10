@@ -1,0 +1,120 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * kmod-depmod - calculate modules.dep  using libkmod.
+ *
+ * Copyright (C) 2011-2013  ProFUSION embedded systems
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "DEPMOD" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+depmod - modules.dep ve .map dosyalarını üretir
+.sp
+.SH KULLANIM
+.IP \fBdepmod\fR 7
+[\fB-b\fR \fIDİZİN\fR] [\fB-e\fR] [\fB-E\fR \fIModule.symvers\fR] [\fB-F\fR \fISystem.map\fR] [\fB-n\fR] [\fB-v\fR] [\fB-A\fR] [\fB-P\fR \fIÖNEK\fR] [\fB-w\fR] [\fISÜRÜM\fR]
+.IP \fBdepmod\fR 7
+[\fB-e\fR] [\fB-E\fR \fIModule.symvers\fR] [\fB-F\fR \fISystem.map\fR] [\fB-n\fR] [\fB-v\fR] [\fB-P\fR \fIÖNEK\fR] [\fB-w\fR] [\fISÜRÜM\fR] [\fIDOSYA\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Linux çekirdek modülleri, diğer modüllerin kullanması için hizmetler ("semboller" olarak adlandırılır) sağlayabilir (koddaki \fBEXPORT_SYMBOL\fR türevlerinden birini kullanarak). İkinci bir modül bu sembolü kullanıyorsa, ikinci modül açıkça birinci modüle bağımlıdır. Bu bağımlılıklar oldukça karmaşık hale gelebilir.
+.sp
+\fBdepmod\fR, \fI/lib/modules/<sürüm>\fR altındaki her modülü okuyarak ve hangi sembollerin dışa aktarıldığını ve hangi sembollere ihtiyaç duyulduğunu belirleyerek bir modül bağımlılıkları listesi oluşturur. Öntanımlı olarak bu liste, \fImodules.dep\fR dosyasına ve aynı dizinde \fImodule.dep.bin\fR adlı ikil aşlı sürüme yazılır. Yalnızca, dosya adları komut satırından verilen modüller incelenir (tüm modüller listelenmedikçe bu nadiren yararlıdır). \fBdepmod\fR ayrıca, \fImodule.symbols\fR adlı dosyada ve ikil aşlı sürümü olan \fImodule.symbols.bin\fR adlı dosyada modüller tarafından sağlanan sembollerin bir listesini oluşturur. Son olarak, modüller önyükleme sırasında \fI/dev\fR dizini altında (systemd-tmpfiles gibi bir yardımcı araç tarafından) özel aygıt adları (devname) sağlıyorsa, \fBdepmod\fR \fImodule.devname\fR adlı bir dosya daha çıktılar.
+.sp
+\fISÜRÜM\fR belirtilmişse, geçerli çekirdek sürümü (\fBuname -r\fR tarafından döndürülen) yerine bu çekirdek sürümünün modül dizini kullanılır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB--all\fR
+Tüm modüller algılanır. Komut satırında hiçbir dosya adı verilmemişse bu seçenek öntanımlı olarak etkin olur.
+.sp
+.TP 4
+\fB-A\fR, \fB--quick\fR
+Bu seçenek, herhangi bir çalışma yapılmadan önce modüllerin \fImodule.dep\fR dosyasındakinden daha yeni olup olmadığını görmek için tarar; değilse, dosyaları yeniden oluşturmak yerine sessizce çıkar.
+.sp
+.TP 4
+\fB-b\fR, \fB--basedir\fR \fIDİZİN\fR
+Modüller normalde \fI/lib/modules/<sürüm>\fR dizininde değilse, ancak bir hazırlama alanındaysa, dizin adının önüne eklenecek bir \fIDİZİN\fR belirtilebilir. Bu dizin, sonuçlanan \fImodule.dep\fR dosya adından ayıklanır, bu nedenle normal konumuna taşınmaya hazırdır. \fBdepmod\fR’u daha sonra yeniden çalıştırmak yerine meta veri dosyalarını önceden oluşturması gereken bir dağıtım satıcısının bu seçeneği kullanması gerekir.
+.sp
+.TP 4
+\fB-C\fR, \fB--config\fR \fIDOSYA veya DİZİN\fR
+\fI/etc/depmod.d/\fR dizinindeki öntanımlı yapılandırma dizinini geçersiz kılar.
+.sp
+.TP 4
+\fB-e\fR, \fB--errsyms\fR
+\fB-F\fR seçeneği ile birleştirildiğinde, bir modülün ihtiyaç duyduğu ve diğer modüller veya çekirdek tarafından sağlanmayan tüm sembolleri bildirir. Normalde, modüller tarafından sağlanmayan herhangi bir sembolün çekirdek tarafından sağlandığı varsayılır (ki mükemmel bir dünyada bu böyle olmalıdır), ancak bu varsayım, özellikle ek olarak güncel üçüncü taraf sürücüleri doğru şekilde kurulmadığında veya yanlış derlendiğinde bozulabilir.
+.sp
+.TP 4
+\fB-E\fR, \fB--symvers\fR
+\fB-e\fR seçeneği ile birleştirildiğinde, modüller tarafından sağlanan ve \fIModule.symvers\fR dosyasında çekirdek tarafından sağlanan sembol sürümleriyle eşleşmeyen tüm sembol sürümlerini bildirir. Bu seçenek \fB-F\fR seçeneği ile karşılıklı uyumsuzdur.
+.sp
+.TP 4
+\fB-F\fR, \fB--filesyms\fR \fISystem.map\fR
+Çekirdek derlendiğinde üretilen \fISystem.map\fR ile birlikte belirtildiğinde \fB-e\fR seçeneğinin çözümlenmeyen sembolleri bildirmesini sağlar. Bu seçenek \fB-E\fR seçeneği ile karşılıklı uyumsuzdur.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-n\fR, \fB--show\fR, \fB--dry-run\fR
+Elde edilen \fImodule.dep\fR dosyasını ve çeşitli \fI.map\fR dosyalarını modül dizinine yazmak yerine standart çıktıya gönderir.
+.sp
+.TP 4
+\fB-P\fR
+Bazı mimariler, yabancı bir karaktere sahip sembollere önek ekler. Yoksayılacak bir önek karakteri (örneğin ’_’) belirtmek için kullanılır.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Ayrıntılı kipte, \fBdepmod\fR her modülün bağımlı olduğu tüm sembolleri ve bu sembolleri sağlayan modülün dosya adını standart çıktıya çıktılar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-w\fR
+Yinelenen bağımlılıklar, takma adlar, sembol sürümleri vb. konusunda uyarır.
+.sp
+.PP
+.sp
+.SH "TELİF HAKKI"
+Belgenin telif hakkı © 2002, Rusty Russell, IBM Corporation.
+.sp
+.SH "YAZAN"
+Belgenin yazımı Jon Masters, Robby Workman ve Lucas De Marchi tarafından sürdürülmektedir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBdepmod.d\fR(5), \fBmodprobe\fR(8), \fBmodules.dep\fR(5).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,158 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1993 by Thomas Koenig (ig25@rz.uni-karlsruhe.de)
+ * and Copyright (c) 2014 by Michael Kerrisk <mtk.manpages@gmail.com>
+ *
+ * %%%LICENSE_START(VERBATIM)
+ * Permission is granted to make and distribute verbatim copies of this
+ * manual provided the copyright notice and this permission notice are
+ * preserved on all copies.
+ *
+ * Permission is granted to copy and distribute modified versions of this
+ * manual under the conditions for verbatim copying, provided that the
+ * entire resulting derived work is distributed under the terms of a
+ * permission notice identical to this one.
+ *
+ * Since the Linux kernel and libraries are constantly changing, this
+ * manual page may be incorrect or out-of-date.  The author(s) assume no
+ * responsibility for errors or omissions, or for damages resulting from
+ * the use of the information contained herein.  The author(s) may not
+ * have taken the same level of care in the production of this manual,
+ * which is licensed free of charge, as they might when working
+ * professionally.
+ *
+ * Formatted or processed versions of this manual, if unaccompanied by
+ * the source, must acknowledge the copyright and authors of this work.
+ * %%%LICENSE_END
+ *
+ * Modified Sat Jul 24 17:51:15 1993 by Rik Faith (faith@cs.unc.edu)
+ * Modified 11 May 1998 by Joseph S. Myers (jsm28@cam.ac.uk)
+ * Modified 14 May 2001, 23 Sep 2001 by aeb
+ * 2004-12-20, mtk
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "SYSTEM" 3 "6 Mart 2019" "Linux man-pages 5.10" "Kütüphane İşlevleri"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+system - kabuk komutu çalıştırır
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <stdlib.h>\fR
+.fi
+.sp
+.IP "int \fBsystem\fR" 11
+(const char *\fIcommand\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBsystem\fR() kütüphane işlevi, aşağıdaki gibi \fBexec\fR(3) kullanarak belirtilen kabuk komutunu yürüten bir alt süreç oluşturmak için \fBfork\fR(2) çağrısını kullanır:
+.sp
+.RS 4
+.nf
+execl("/bin/sh", "sh", "-c", komut, (char *) NULL);
+.fi
+.sp
+.RE
+Komut tamamlanınca \fBsystem\fR() işlevi döner.
+.sp
+Komutun yürütülmesi sırasında \fBsystem\fR() çağrısının yapıldığı süreçte \fBSIGCHLD\fR engellenir, \fBSIGINT\fR ve \fBSIGQUIT\fR yok sayılır. (Bu sinyaller, komutu yürüten alt süreç içindeki öntanımlılarına göre işlenir.)
+.sp
+\fIcommand\fR NULL ise \fBsystem\fR(), sistemde bir kabuğun mevcut olup olmadığını gösteren bir durum döndürür.
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+\fBsystem\fR() işlevinin dönüş değeri şunlardan biridir:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+\fIcommand\fR NULL ise, kullanılabilir bir kabuk varsa sıfırdan farklı bir değer, yoksa 0 döner.
+.IP \(bu 3
+Bir alt süreç oluşturulamıyorsa veya durumu alınamıyorsa -1 döner ve hata kodu \fIerrno\fR değişkenine atanır.
+.IP \(bu 3
+Alt süreçte bir kabuk yürütülemezse, alt kabuk 127 durum koduyla çağrılan \fB_exit\fR(2) ile sonlandırılmış gibi bir durum koduyla (durum & 0xFF) döner.
+.IP \(bu 3
+Tüm \fBsystem\fR() çağrıları başarılı olursa dönüş değeri komutu çalıştıran alt kabuğun sonlanma durum kodudur. (Kabuğun sonlanma durum kodu, çalıştırdığı son komutun sonlanma durum kodudur.)
+.sp
+.RE
+.PD 0
+Son iki durumda dönüş değeri, \fBwaitpid\fR(2) sayfasında açıklanan makrolar (\fBWIFEXITED\fR(), \fBWEXITSTATUS\fR() vb.) kullanılarak incelenebilen bir "bekleme durumu" kodudur.
+.sp
+\fBsystem\fR() herhangi bir başka alt sürecin bekleme durumunu etkilemez.
+.sp
+.SH "HATALAR"
+\fBsystem\fR() \fBfork\fR(2) ile aynı hatalardan herhangi biriyle başarısız olabilir.
+.sp
+.SH "ÖZNİTELİKLER"
+Bu bölümde kulllanılan terimlerin açıklamaları \fBattributes\fR(7) sayfasında bulunabilir.
+.sp
+.TS
+tab(:) allbox;
+l1 1l1 1l.
+\fBİşlev\fR :\fBÖznitelik\fR :\fBDeğer\fR
+T{
+\fBsystem\fR
+T}:T{
+Evre Güvenliği
+T}:T{
+ÇEG-evet
+T}
+.TE
+.sp
+.sp
+.SH "UYUMLULUK"
+POSIX.1-2001, POSIX.1-2008, C89, C99.
+.sp
+.SH "EK BİLGİLER"
+\fBsystem\fR() basitlik ve kolaylık sağlar: \fBfork\fR(2), \fBexecl\fR(3) ve \fBwaitpid\fR(2) çağrılarının tüm ayrıntılarını ve ayrıca gerekli sinyal yönlendirimlerini ele alır; ek olarak, kabuk komut için olağan ikameleri ve G/Ç yönlendirmelerini gerçekleştirir. \fBsystem\fR() işlevinin ana maliyeti verimsizliktir: kabuğu çalıştıran süreci oluşturmak ve kabuğu çalıştırmak için ek sistem çağrıları gerekir.
+.sp
+\fB_XOPEN_SOURCE\fR özellik sınama makrosu tanımlanırsa (herhangi bir başlık dosyası dahil edilmeden önce), \fBwaitpid\fR(2) içinde açıklanan makrolar (\fBWEXITSTATUS\fR(), vb.), <stdlib.h> dahil edildiğinde kullanılabilir hale gelir.
+.sp
+Bahsedildiği gibi; \fBsystem\fR(), \fBSIGINT\fR ve \fBSIGQUIT\fR sinyalini yoksayar. Bu, uygulamaların kendi çocuklarının çıkış durumlarını kontrol etmedikleri takdirde aşağıdaki örnekteki gibi durdurulamaz bir döngüden sürekli çağrılan uygulamalara sebep olabilir.
+.sp
+.RS 4
+.nf
+while (birsey) {
+int donen = system("foo");
+\&
+if (WIFSIGNALED(donen) &&
+    (WTERMSIG(donen) == SIGINT || WTERMSIG(donen) == SIGQUIT))
+        break;
+}
+.fi
+.sp
+.RE
+POSIX.1’e göre, \fBsystem\fR() işlevinin yürütülmesi sırasında \fBpthread_atfork\fR(3) kullanılarak kaydedilen işleyicilerin çağrılıp çağrılmayacağı konusu belirlenmemiştir. glibc gerçekleniminde bu tür işleyiciler çağrılmamaktadır.
+.sp
+\fIcommand\fR NULL ise \fB/bin/sh\fR’nin kullanılabilirliğinin sınanması 2.1.3’ten önceki glibc sürümlerinde gerçekleştirilmezdi; bunun yerine her zaman kullanılabilir olduğu varsayılırdı ve \fBsystem\fR() bu durumda her zaman 1 döndürürdü. POSIX.1-2001 bir kabuk sağlamak için uyumlu bir uygulama gerektirmesine rağmen, çağıran uygulama daha önce \fBchroot\fR(2) çağrısı yapmışsa, kabuk kullanılabilir veya yürütülebilir olmayabileceğinden (POSIX.1-2001 tarafından bu durum belirtilmese de) Glibc 2.1.3’ten bu yana bu sınama yapılmaktadır.
+.sp
+Alt süreçte bir kabuğun yürütülemediği durumdan ayırt edilemeyecek şekilde, \fBsystem\fR() işlevinden dönen 127 değeri nedeniyle kabuk komutunun 127 durum koduyla sona ermiş gibi görünmesi mümkündür.
+.sp
+.SS "Yetersizlikler"
+Ayrıcalıklı bir uygulama (kullanıcı ve grup kimliklerini değiştirebilen bir uygulama) içinden \fBsystem\fR() işlevini kullanmayın, çünkü sistem bütünlüğünü bozmak için bazı ortam değişkenlerine tuhaf değerler atanabilir. Örneğin, \fBPATH\fR, keyfi bir uygulamanın ayrıcalıklı yürütülmesi için tahrif edilebilir. Bunun yerine \fBexec\fR(3) işlev ailesini kullanın, ancak \fBexeclp\fR(3) veya \fBexecvp\fR(3) işlevini kullanmayın (bir yürütülebilir dosyayı aramak için \fBPATH\fR ortam değişkenini de kullanır).
+.sp
+\fBbash\fR sürüm 2 başlatıldığında bir güvenlik önlemi olarak ayrıcalıkları düşürdüğünden, \fB/bin/sh\fR’nin \fBbash\fR sürüm 2 olduğu sistemlerde \fBsystem\fR() işlevi kullanıcı ve grup kimliklerini değiştirebilen uygulamalardan çağrıldığında düzgün çalışmayacaktır. (Debian, \fBsh\fR olarak çağrıldığında bunu yapmayan, \fBdash\fR(1) adlı farklı bir kabuk kullanır.)
+.sp
+Komutun bir parçası olarak kullanılan herhangi bir kullanıcı girişi, beklenmeyen kabuk komutlarının veya komut seçeneklerinin yürütülmemesini sağlamak için dikkatlice temizlenmelidir. \fBsystem\fR() ayrıcalıklı bir uygulamadan kullanıldığında bu tür riskler özellikle ciddidir
+.sp
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsh\fR(1), \fBexecv\fR(2), \fBfork\fR(2), \fBsigaction\fR(2), \fBsigprocmask\fR(2), \fBwait\fR(2), \fBexec\fR(3), \fBsignal\fR(7)
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,134 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "APACHE2CTL" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+apache2ctl - Apache HTTP Sunucusu Denetim Arayüzü
+.br
+apachectl - Apache HTTP Sunucusu Denetim Arayüzü
+.sp
+.SH KULLANIM
+Önalanda çalıştığında \fBhttpd\fR çalıştırılabilirinin bütün komut satırı değiştirgelerini kabul edebilir.
+.sp
+.IP \fBapache2ctl\fR 11
+[ \fIhttpd-değiştirgeleri\fR ]
+.IP \fBapachectl\fR 10
+[ \fIhttpd-değiştirgeleri\fR ]
+.sp
+.PP
+SysV başlatma betiği kipinde ise, aşağıda tanımlanan basit, tek sözcüklük komutları kabul eder.
+.sp
+.IP \fBapache2ctl\fR 11
+[ \fIkomut\fR ]
+.IP \fBapachectl\fR 10
+[ \fIkomut\fR ]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBapachectl\fR Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusu için bir denetim aracıdır. Sistem yöneticisinin Apache \fBhttpd\fR artalan sürecini denetimi altında tutabilmesine yardımcı olmak amacıyla tasarlanmıştır.
+.sp
+\fBapachectl\fR iki kipte işleyebilir. İlkinde, \fBhttpd\fR komutu için basit bir önyüz gibi davranarak, gerekli ortam değişkenlerini atar ve belirtilen komut satırı seçenekleriyle \fBhttpd\fR sürecini başlatır. İkinci kipte ise, \fBapachectl\fR bir SysV başlatma betiği olarak \fBstart\fR, \fBrestart\fR, \fBstop\fR gibi tek sözcüklük basit komutlar alır ve bunları uygun sinyallere dönüştürerek \fBhttpd\fR’ye gönderir.
+.sp
+Eğer Apache kurulumunuzda standart dışı dosya yolları kullanmışsanız, \fBhttpd\fR için uygun yolları atamak için \fBapachectl\fR betiğini elden geçirmelisiniz. Bu arada gerek gördüğünüz \fBhttpd\fR komut satırı değiştirgelerini de belirtebilirsiniz. Ayrıntılar için betik içindeki açıklamalara bakınız.
+.sp
+\fBapachectl\fR betiği başarı durumunda 0 çıkış değeri ile döner. Bir hata durumunda ise sıfırdan farklı bir değerle döner. Daha fazla bilgi için betik içindeki açıklamalara bakınız.
+.sp
+.SH "SEÇENEKLER"
+Burada sadece SysV başlatma betiğine özgü seçeneklere yer verilmiştir. Diğer seçenekler için \fBhttpd\fR(8) kılavuz sayfasına bakınız.
+.sp
+.TP 4
+\fBstart\fR
+Apache \fBhttpd\fR artalan sürecini başlatır. Zaten çalışmaktaysa bir hata verir.
+.br
+\fBapachectl -k start\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBstop\fR
+Apache \fBhttpd\fR artalan sürecini durdurur.
+.br
+\fBapachectl -k stop\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBrestart\fR
+Apache \fBhttpd\fR artalan sürecini yeniden başlatır; çalışmıyorsa çalıştırılır. Artalan sürecinin ölü olmadığından emin olmak için yeniden başlatmadan önce \fBconfigtest\fR seçeneği verilmiş gibi yapılandırma dosyaları sınanır.
+.br
+\fBapachectl -k restart\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBfullstatus\fR
+\fBmod_status\fR üzerinden tam bir durum raporu gösterir. Bunun çalışması için sunucuda \fBmod_status\fR etkinleştirilmiş olmalı ve sisteminizde \fBlynx\fR gibi bir metin kipi HTTP tarayıcı kurulu olmalıdır. Durum raporuna erişmek için kullanılacak adres betik içinde \fISTATUSURL\fR değişkenine atanabilir.
+.sp
+.TP 4
+\fBstatus\fR
+Özet halinde bir durum raporu gösterir. O an sunulmakta olan isteklerin gösterilmemesi dışında \fBfullstatus\fR seçeneği gibidir.
+.sp
+.TP 4
+\fBgraceful\fR
+Apache \fBhttpd\fR artalan sürecini \fInazikçe\fR yeniden başlatır; çalışmıyorsa çalıştırılır. O an hizmet sunmakta olan çocuk süreçleri hemen durdurmaması dışında normal yeniden başlatma gibidir. Bir yan etki olarak eski günlük dosyaları hemen kapatılmaz. Yani, günlük dosyalarını döndüren bir betik kullanıyorsanız yenilerini başlatmadan önce eski dosyaların tamamen kapandığından emin olmak için belli bir süre beklemeniz gerekecektir. Artalan sürecinin ölü olmadığından emin olmak için yeniden başlatmadan önce \fBconfigtest\fR seçeneği verilmiş gibi yapılandırma dosyaları sınanır.
+.br
+\fBapachectl -k graceful\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBgraceful-stop\fR
+Apache \fBhttpd\fR artalan sürecini \fInazikçe\fR durdurur. O an hizmet sunmakta olan çocuk süreçleri hemen durdurmaması dışında normal durdurma gibidir. Bir yan etki olarak eski günlük dosyaları hemen kapatılmaz.
+.br
+\fBapachectl -k raceful-stop\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBconfigtest\fR
+Yapılandırma dosyasında sözdizimi denetimi yapılmasını sağlar. Yapılandırma dosyaları çözümlenir ve bir sorun yoksa bir \fBSyntax Ok\fR raporu verilir fakat, bir hata varsa o hataya ilişkin ayrıntılı bilgi verilir. \fBapachectl -t\fR komutuna eşdeğerdir.
+.br
+\fBapachectl -t\fR komutuna eşdeğerdir.
+.sp
+.PP
+Aşağıdaki seçenek eski sürümlerde kullanılmaktaydı, fakat artık kullanılmamaktadır.
+.sp
+.TP 4
+\fBstartssl\fR
+\fBhttpd\fR sunucusunu SSL destekli başlatmak için, yapılandırma dosyanızı ilgili yönergeleri içermesi için elden geçirmeli ve normal \fBapachectl start\fR komutunu kullanmalısınız.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBapachectl\fR aşağıdaki ortam değişkenlerinden etkilenmektedir:
+.sp
+\fBAPACHE_HTTPD, APACHE_LYNX, APACHE_STATUSURL, APACHE_ULIMIT_MAX_FILES, APACHE_RUN_DIR, APACHE_LOCK_DIR, APACHE_RUN_USER, APACHE_ARGUMENTS, APACHE_ENVVARS\fR
+.sp
+Ayrıntılar için betikteki açıklamalara bakınız. Bu değişkenler (\fBAPACHE_ENVVARS\fR haricinde) \fI/etc/apache2/envvars\fR dosyasında atanabilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBapache2\fR(8) (veya \fBhttpd\fR(8))
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

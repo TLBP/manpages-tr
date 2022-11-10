@@ -1,0 +1,107 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "COMM" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+comm - sıralanmış iki dosyayı satır satır karşılaştırır
+.sp
+.SH KULLANIM
+.IP \fBcomm\fR 5
+[\fISEÇENEK\fR]... \fIDOSYA1\fR \fIDOSYA2\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Sıralanmış \fIDOSYA1\fR ve \fIDOSYA2\fR dosyalarını satır satır karşılaştırır.
+.sp
+\fIDOSYA1\fR veya \fIDOSYA2\fR (ikisi birden değil) yerine ’-’ belirtilmişse standart girdi okunur.
+.sp
+Seçenek verilmeksizin, üç sütunlu çıktı üretir. Birinci sütun \fIDOSYA1\fR’e özgü (\fIDOSYA2\fR’de olmayan) satırları, ikinci sütun \fIDOSYA2\fR’ye özgü (\fIDOSYA1\fR’de olmayan) satırları, son sütun ise her iki dosyada ortak olan satırları içerir.
+.sp
+.TP 4
+\fB-1\fR
+\fIDOSYA1\fR’e özgü satırları (1. sütunu) yoksayar.
+.sp
+.TP 4
+\fB-2\fR
+\fIDOSYA2\fR’ye özgü satırları (2. sütunu) yoksayar.
+.sp
+.TP 4
+\fB-3\fR
+Her iki dosyada ortak olan satırları (3. sütunu) yoksayar.
+.sp
+.TP 4
+\fB--check-order\fR
+tüm girdi satırları eşleştirilebilir olsa bile, girdi doğru sıralanmış mı diye bakar
+.sp
+.TP 4
+\fB--nocheck-order\fR
+girdi doğru sıralanmış mı diye bakmaz
+.sp
+.TP 4
+\fB--output-delimiter\fR=\fIDiZGE\fR
+\fIDiZGE\fR içeren sütunlar diğerlerinden ayrılır
+.sp
+.TP 4
+\fB--total\fR
+özet çıktılar
+.sp
+.TP 4
+\fBz\fR, \fB--zero-terminated\fR
+satırın sonuna satır sonu karakteri değil boş karakter (NUL) konur
+.sp
+.TP 4
+\fB--help\fR
+Bu yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.TP 4
+\fBEk bilgi:\fR
+Karşılaştırmalarda ’\fBLC_COLLATE\fR’ ile belirtilen kurallara uyulur.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.IP "comm -12 dosya1 dosya2" 4
+Sadece her iki dosyada ortak olan satırlar basılır.
+.IP "comm -3 dosya1 dosya2" 4
+Sadece her iki dosyada ortak olmayan satırlar basılır.
+.sp
+.SH "YAZAN"
+Richard Stallman ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBjoin\fR(1), \fBuniq\fR(1)
+.br
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/comm>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) comm invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

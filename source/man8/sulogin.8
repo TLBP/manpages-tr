@@ -1,0 +1,98 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (C) 1998-2006 Miquel van Smoorenburg.
+ * Copyright (C) 2012 Karel Zak (kzak@redhat.com)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "SULOGIN" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+sulogin - tek kullanıcılı kipte sisteme giriş
+.sp
+.SH KULLANIM
+.IP \fBsulogin\fR 8
+[\fIseçenekler\fR] [\fIuçbirim\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBsulogin\fR, sistem tek kullanıcılı kipe geçerken, \fBinit\fR(8) tarafından çağrılır.
+.sp
+Kullanıcıdan root parolasını yazması (veya normal açılış için Ctrl-D tuşlaması) istenir.
+.sp
+root hesabı kilitliyse ve \fB--force\fR belirtilmişse parola gerekmez.
+.sp
+\fBsulogin\fR geçerli uçbirime ya da komut satırından belirtilen istemlik uçbirim aygıtına (genelde \fI/dev/console\fR) bağlanır.
+.sp
+Tek kullanıcılı kabuktan çıkıldığında veya Ctrl-D tuşlandığında sistem önyükleme işlemine devam eder.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-e\fR, \fB--force\fR
+Sistemden \fBgetpwnam\fR(3) aracılığıyla root parolası alınamazsa, parolayı almak için \fI/etc/passwd\fR ve \fI/etc/shadow\fR incelenir. Bu dosyalar zarar görmüşse veya mevcut değilse veya root hesabı ’\fB!\fR’ ile kilitlendiğinde veya parolanın başında ’\fB*\fR’ varsa \fBsulogin\fR parola sormadan root kabuğunu başlatır.
+.sp
+\fB-e\fR seçeneğini yalnızca konsolun yetkisiz erişime karşı fiziksel olarak korunduğundan emin olunduğu takdirde kullanın.
+.sp
+.TP 4
+\fB-p\fR, \fB--login-shell\fR
+\fBsulogin\fR’in kabuğu oturum açma kabuğu olarak başlatmasına sebep olur.
+.sp
+.TP 4
+\fB-t\fR, \fB--timeout\fR \fISÜRE\fR
+Kullanıcı girdisi için beklenecek azami \fISÜRE\fRyi (saniye olarak) belirler. \fBsulogin\fR öntanımlı olarak sonsuza dek bekler.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBsulogin\fR, hangi kabuğu başlatacağına karar vermek için, \fBSUSHELL\fR veya \fBsushell\fR değişkenlerine bakar. Şayet bu değişkenler tanımlı değilse, \fI/etc/passwd\fR içinde root kullanıcı için belirtilen kabuğu çalıştırmayı dener. Bunda da başarılı olamazsa, \fB/bin/sh\fR’a düşer.
+.sp
+.SH "YAZAN"
+\fBsulogin\fR, ilk olarak Miquel van Smoorenburg tarafından sysvinit için yazılmış ve daha sonra Dave Reisner ve Karel Zak tarafından util-linux paketine dahil edilmiştir.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBsulogin\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimler için <belgeler-genel (at) lists.sourceforge.net> adresini kullanın.
+.sp

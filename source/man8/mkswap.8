@@ -1,0 +1,165 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1998 Andries E. Brouwer (aeb (at) cwi.nl)
+ *
+ * May be distributed under the GNU General Public License
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "MKSWAP" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+mkswap - Linux takas alanını oluşturur
+.sp
+.SH KULLANIM
+.IP \fBmkswap\fR 7
+[\fIseçenekler\fR] \fIaygıt\fR [\fIboyut\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBmkswap\fR, bir aygıt ya da dosya üzerinde Linux takas alanını oluşturur.
+.sp
+\fIaygıt\fR olarak bir disk bölümü (\fI/dev/sdb7\fR gibi) veya bir dosya belirtilebilir. Linux çekirdeği disk bölümlerinin kimliklerine bakmaz ama çoğu kurulum betiği, onaltılık tabanda türü 82 (LINUX_SWAP) olan disk bölümünü Linux takas alanı olarak kabul eder.
+.sp
+.TP 4
+\fBUyarı:\fR
+Solaris disk bölümü türü de 82’dir. Solaris disk bölümü öldürülürken dikkatli olunmalıdır.
+.sp
+.PP
+\fIboyut\fR gereksiz olmakla birlikte geriye uyumluluk amacıyla korunmuştur. İstenen takas alanı miktarını 1024 baytlık bloklar halinde belirtmek için kullanılır. Şayet \fIboyut\fR belirtilmezse, \fBmkswap\fR bütün disk bölümünü veya dosyanın tamamını takas alanı olarak kabul eder. \fIboyut\fR olarak \fB-\fR belirtmek pek akıllıca olmaz, diskin bozulmasına sebep olabilir.
+.sp
+Takas alanını oluşturduktan sonra \fBswapon\fR komutuyla etkinleştirmek gerekir. Takas alanları çoğunlukla \fI/etc/fstab\fR içinde listelenir ve sistemin açılışı sırasında \fBswapon -a\fR komutunu çalıştıran açılış betikleriyle kullanıma hazır hale getirilir.
+.sp
+.TP 4
+\fBUyarı:\fR
+Takas başlığı ilk bloğa dokunmaz. Orada bir önyükleyici veya disk etiketi olabilir, ancak bu önerilen bir kurulum değildir. Önerilen kurulum, Linux takas alanı için ayrı bir bölüm kullanmaktır.
+.sp
+\fBmkswap\fR, diğer birçok \fBmkfs\fR benzeri uygulama gibi, \fBönceki herhangi bir dosya sistemini görünmez yapmak için disk bölümünün ilk bloğunu siler\fR.
+.sp
+Ancak, \fBmkswap\fR disk etiketli (SUN, BSD, ...) bir aygıttaki ilk bloğu silmeyi reddeder.
+.sp
+.PP
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-c\fR, \fB--check\fR
+Takas alanı oluşturmadan önce aygıtı bozuk bloklar için (bir blok aygıtı ise) tarar ve bozuk blok varsa sayısını gösterir.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Baskıcı kiptir. Verilen komut salakça olsa bile, yerine getirilir. İçinde bulunduğu dosya ya da bölümden daha büyük bir takas alanı oluşturulmasını sağlar.
+.sp
+Ayrıca, bu seçenek olmaksızın, \fBmkswap\fR aygıt veya disk bölümünün ilk bloğunu silmeyi reddeder.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+Çıktı ve uyarı iletileri engellenir.
+.sp
+.TP 4
+\fB-L\fR, \fB--label\fR \fIetiket\fR
+Aygıt etiketi. \fBswapon\fR(8) komutuna aygıt etiketi belirtmek içindir.
+.sp
+.TP 4
+\fB--lock\fR[=\fIkip\fR]
+Çalıştığı aygıt veya dosya için ayrıcalıklı BSD kilidi kullanır. İsteğe bağlı \fIkip\fR yes/evet, no/hayır (veya 1 ve 0) veya \fBnonblock\fR olabilir. \fIkip\fR belirtilmezse, yes/evet öntanımlıdır. Bu seçenek, \fBLOCK_BLOCK_DEVICE\fR ortam değişkenini geçersiz kılar. Herhangi bir kilit kullanılmaması öntanımlıdır. ancak \fBsystemd-udevd\fR(8) veya diğer araçlarla çarpışmalardan kaçınmak için kullanılması önerilir.
+.sp
+.TP 4
+\fB-p\fR, \fB--pagesize\fR \fIsayfa_boyu\fR
+Bayt cinsinden kullanılacak \fIsayfa_boyu\fR belirtilir. \fBmkswap\fR sayfa boyunu çekirdekten okuduğundan bu seçenek aslında gereksizdir
+.sp
+.TP 4
+\fB-U\fR \fIUUID\fR
+Dosya sisteminin evrensel benzersiz tanımlayıcısını \fIUUID\fR olarak belirler. UUID üretimi öntanımlıdır. \fIUUID\fR, tire ayraçlı bir dizi onaltılık basamaktan oluşur, örneğin: "c1b9d5a2-f162-11cf-9ece-0020afc76f16". \fIUUID\fR olarak ayrıca şunlar belirtilebilir:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBclear\fR  dosya sistemi UUID’sini temizler
+\fBrandom\fR rastgele bir UUID üretir
+\fBtime\fR   zamana dayalı bir UUID üretir
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB-v\fR, \fB--swapversion 1\fR
+Takas alanı sürümü belirtilir. (Eski -v 0 seçeneği geçersiz olduğundan ve artık yalnızca -v 1 desteklendiğinden bu seçenek şu anda anlamsızdır. Çekirdek, 2.5.22’den (Haziran 2002) beri v0 takas alanı biçimini desteklememektedir. Yeni sürüm v1 2.1.117’den beri desteklenmektedir (Ağustos 1998).)
+.sp
+.TP 4
+\fB--verbose\fR
+Çıktı ayrıntılı olur. Bu seçenekle, takas alanının oluşturulması sırasında saptanan sorunlar hakkında daha ayrıntılı çıktı üretilir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBLIBBLKID_DEBUG=all\fR
+Libblkid hata ayıklama çıktısı etkin olur.
+.sp
+.TP 4
+\fBLOCK_BLOCK_DEVICE=\fR\fIkip\fR
+Ayrıcalıklı BSD kilidi kullanılır. \fIkip\fR "1" veya "0" olabilir. Ayrıntılar için \fB--lock\fR seçeneğine bakılabilir.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+Takas alanının kullanışlı azami boyutu mimariye ve çekirdek sürümüne bağlıdır.
+.sp
+Takas alanı başlığı ile adreslenebilecek sayfa sayısı en fazla 4.294.967.295’tir (32 bitlik işaretsiz tamsayı). Takas aygıtında kalan alan yok sayılır.
+.sp
+Şu an, Linux 32 adet takas alanına izin vermektedir. Kullanımdaki takas alanları \fI/proc/swaps\fR dosyası içinde görülebilir.
+.sp
+\fBmkswap\fR 10 sayfadan daha küçük alanları kabul etmez.
+.sp
+Kullanılan sayfa boyutu, \fBgetconf PAGESIZE\fR komutu ile öğrenilebilir.
+.sp
+Bir takas dosyası oluşturmak için, \fBmkswap\fR ile ilklendirmeden önce aşağıdakine benzer bir komutla önce bir dosya oluşturulmalıdır:
+.sp
+.RS 4
+.nf
+# dd if=/dev/zero of=swapfile bs=1MiB count=$((8*1024))
+.fi
+.sp
+.RE
+Bu komut \fIswapfile\fR adında 8GiB’lık takas dosyası oluşturur.
+.sp
+Takas dosyası kullanım kısıtlamaları (delikler, ön tahsis ve yazarak kopyalama sorunları) hakkında \fBswapon\fR(8) kılavuz sayfasındaki EK BİLGİ bölümüne bakılabilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfdisk\fR(8), \fBswapon\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBblkid\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

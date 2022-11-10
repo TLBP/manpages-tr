@@ -1,0 +1,330 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2000 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2011, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "USERMOD" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+usermod - bir kullanıcı hesabını düzenler
+.sp
+.SH KULLANIM
+.IP \fBusermod\fR 8
+[\fIseçenekler\fR] \fIKULLANICI\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBusermod\fR komutu, komut satırından belirtilen değişiklikleri yansıtmak için sistem hesap dosyalarını düzenlemeye yarar.
+.sp
+.SH "SEÇENEKLER"
+Bu komuta uygulanabilecek seçenekler şunlardır:
+.sp
+.TP 4
+\fB-a\fR, \fB--append\fR
+Kullanıcıyı ek grup(lar)a ekler. Yalnızca \fB-G\fR seçeneğiyle kullanılır.
+.sp
+.TP 4
+\fB-b\fR, \fB--badnames\fR
+Standartlara uymayan isimlere izin verilir.
+.sp
+.TP 4
+\fB-c\fR, \fB--comment\fR \fIAÇIKLAMA\fR
+Kullanıcı parola dosyasındaki açıklama alanına girilecek yeni değeri belirler. Normalde \fBchfn\fR(1) komutu ile düzenlenir.
+.sp
+.TP 4
+\fB-d\fR, \fB--home\fR \fIEVDİZİNİ\fR
+Kullanıcının sisteme girişte kullanacağı ev dizinini belirler.
+.sp
+\fB–m\fR seçeneği belirtilmişse, kullanıcının kullanmakta olduğu ev dizininin içeriği yeni oluşturulan ev dizinine aktarılır. Böyle bir dizin yoksa yeni ev dizini yoksa oluşturulur.
+.sp
+.TP 4
+\fB-e\fR, \fB--expiredate\fR \fISON_TARİH\fR
+Kullanıcı hesabının son kullanma tarihini belirtir. Tarih YYYY-AA-GG (Y: yıl, A: ay, G: gün) şeklinde belirtilir.
+.sp
+Boş bir \fISON_TARİH\fR hesabın süresinin dolmasını devre dışı bırakır.
+.sp
+Bu seçenek \fI/etc/shadow\fR dosyasının varlığını gerektirir, yoksa oluşturulur.
+.sp
+.TP 4
+\fB-f\fR, \fB--inactive\fR \fIASKI_SÜRESİ\fR
+Kullanıcı parolasının \fISON_TARİH\fRten itibaren, bu hesabın tamamen devre dışı bırakıacağı tarihe kadar geçecek olan sürenin gün cinsinden değerini belirler.
+.sp
+Bu değer 0 olarak belirtilirse, parolanın son kullanma tarihinde hesap kapatılır. -1 değeri verilirse, bu özellik iptal edilmiş olur.
+.sp
+Bu seçenek \fI/etc/shadow\fR dosyasının varlığını gerektirir, yoksa oluşturulur.
+.sp
+.TP 4
+\fB-g\fR, \fB--gid\fR \fIGRUP\fR
+Kullanıcının yeni birincil grubunun ismi veya numarası. \fIGRUP\fR mevcut olmalıdır.
+.sp
+Kullanıcının ev dizinindeki kullanıcının önceki birincil grubuna ait olan herhangi bir dosya, bu yeni gruba ait olacaktır.
+.sp
+Kullanıcının ev dizini dışındaki dosyaların grup sahipliği elle düzeltilmelidir.
+.sp
+Kullanıcının ev dizini içindeki dosyaların grup sahipliğinin değiştirilmesi, ev dizini sahibi kullanıcı kimliği mevcut veya yeni kullanıcı kimliğinden farklıysa da yapılmaz. Bu, \fI/\fR gibi özel ev dizinleri için bir güvenlik önlemidir.
+.sp
+.TP 4
+\fB-G\fR, \fB--groups\fR \fIGRUP1\fR[,\fIGRUP2\fR,...[,\fIGRUPN\fR]]
+Kullanıcının üyesi olacağı ilave grupların liistesi. Her grup, diğerinden virgül ile ayrılır, arada boşluk bırakılmaz. Burada tanımlanan gruplar, \fB-g\fR ile tanımlanan grubun kısıtlamalarına tabidir.
+.sp
+Lullanıcı listelenen gruplar haricinde bir grubun da üyesi ise, kullanıcı bu gruptan çıkarılır. Bu davranış kullanıcıyı ek gruplara ekleyen \fB-a\fR seçeneği ile değiştirilebilir.
+.sp
+.TP 4
+\fB-l\fR, \fB--login\fR \fIYENİ_KULLANICI\fR
+Kullanıcının sisteme girişte kullanacağı yeni isim, \fIKULLANICI\fR yerine \fIYENİ_KULLANICI\fR yapılır. Başka hiçbir şey değişmez. Özellikle, kullanıcının ev dizininin isminin veya posta havuzunun isminin yeni kullanıcı ismini yansıtmak üzere \fIYENİ_KULLANICI\fR olarak elle değiştirilmesi gerekebilir.
+.sp
+.TP 4
+\fB-L\fR, \fB--lock\fR
+Kullanıcının parolasını kilitler. Parolayı etkin biçimde devre dışı bırakmak için parolanın önüne ’!’ konarak yapılır. Bu seçenek \fB-p\fR veya \fB-U\fR ile birlikte kullanılamaz.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Parolalı erişimi engellemek yerine hesabın kilitlenmesi istenirse, ek olarak \fISON_TARİH\fR’e 1 (bir) atanmalıdır.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-m\fR, \fB--move-home\fR
+Kullanıcının ev dizininin içeriği yeni konuma taşınır. Geçerli ev dizini mevcut değilse, yeni ev dizini oluşturulmaz.
+.sp
+Bu seçenek yalnızca \fB-d\fR (veya \fB--home\fR) seçeneğiyle birlikte geçerlidir.
+.sp
+usermod, dosyaların sahipliğini uyarlamaya ve kipleri, ACL’yi ve genişletilmiş öznitelikleri kopyalamaya çalışır, ancak daha sonra elle değişiklik yapmak gerekebilir.
+.sp
+.TP 4
+\fB-o\fR, \fB--non-unique\fR
+\fB-u\fR seçeneğiyle birlikte kullanıldığında, kullanıcı kimliği eşsiz olmayan bir değerle değiştirilebilir.
+.sp
+.TP 4
+\fB-p\fR, \fB--password\fR \fIPAROLA\fR
+\fBcrypt\fR(3) işlevinden elde edilen şifreli parola.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Süreçleri listeleyen kullanıcılara parola (veya şifreli parola) görünür olacağından bu seçeneğin kullanımı önerilmemektedir.
+.sp
+.RE
+.IP
+\fIPAROLA\fR sistemin parola politikasına uygun olmalıdır.
+.sp
+.TP 4
+\fB-r\fR, \fB---remove\fR
+Kullanıcıyı adlı ek gruplardan çıkarır. Yalnızca \fB-G\fR seçeneğiyle birlikte kullanılır.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--prefix\fR \fIPREFIX_DİZİNİ\fR
+Değişiklikleri \fIPREFIX_DİZİNİ\fRnde uygular ve \fIPREFIX_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır. Bu seçenek chroot yapmaz ve çapraz derlemeye hazırlık için tasarlanmamıştır. Bazı sınırlamalar: NIS ve LDAP kullanıcı ve grupları doğrulanmaz. PAM kimlik kanıtlaması konak dosyalarını kulllanılır. SELinux desteklenmez.
+.sp
+.TP 4
+\fB-s\fR, \fB--shell\fR\fIKABUK\fR
+Kullanıcının sisteme girişte kullanacağı kabuğun adıdır. Bu alan boş bırakılırsa, sistemin öntanımlı kabuğunun seçilmesi sağlanır.
+.sp
+.TP 4
+\fB-u\fR, \fB--uid\fR \fIKULLANICI_KİMLİK\fR
+Kullanıcı kimliğinin sayısal değeridir.
+.sp
+Bu değer, \fB-o\fR seçeneği kullanılmadığı sürece, eşsiz olmalıdır. Değer mutlaka pozitif bir sayı olmalıdır.
+.sp
+Kullanıcının posta kutusunun ve kullanıcının sahip olduğu ve kullanıcının ev dizininde bulunan tüm dosyaların dosya kullanıcı kimliği otomatik olarak değiştirilir.
+.sp
+Kullanıcının ev dizini dışındaki dosyaların sahipliği elle düzeltilmelidir.
+.sp
+Kullanıcının ev dizini içindeki dosyaların kullanıcı sahipliği, ev dizini sahibinin kullanıcı kimliği mevcut veya yeni kullanıcı kimliğinden farklı olduğunda da değiştirilmez. Bu, \fI/\fR gibi özel ev dizinleri için bir güvenlik önlemidir.
+.sp
+\fI/etc/login.defs\fR dosyasındaki \fBUID_MIN, UID_MAX, SYS_UID_MIN\fR veya \fBSYS_UID_MAX\fR ile ilgili herhangi bir denetim yapılmaz.
+.sp
+.TP 4
+\fB-U\fR, \fB--unlock\fR
+Devre dışı bırakılmış bir kullanıcı parolasını tekrar açar. Yaptığı iş şifreli parolanın önündeki ’!’ işaretini kaldırmaktır. Bu seçenek \fB–p\fR veya \fB–L\fR seçenekleri ile birlikte kullanılamaz.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Parolalı erişim engelini kaldırmaktan başka hesabın kilidinin de kaldırılması için ek olarak \fISON_TARİH\fR’e de değer atamak gerekir (Örneğin, 99999 veya \fI/etc/default/useradd\fR içindeki \fBEXPIRE\fR değerine).
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-v\fR, \fB--add-subuids\fR \fIİLK-SON\fR
+Kullanıcının hesabına bir dizi alt kullanıcı kimliği ekler.
+.sp
+Bu seçenek, bir kullanıcı hesabına birden çok aralık eklemek için birden fazla belirtilebilir.
+.sp
+\fI/etc/login.defs\fR dosyasındaki \fBSUB_UID_MIN, SUB_UID_MAX, SUB_UID_COUNT\fR ile ilgili herhangi bir denetim yapılmaz.
+.sp
+.TP 4
+\fB-V\fR, \fB--del-subuids\fR \fIİLK-SON\fR
+Kullanıcının hesabından bir dizi alt kullanıcı kimliğini kaldırır.
+.sp
+Bu seçenek, bir kullanıcı hesabından birden çok aralığı silmek için birden fazla belirtilebilir. Hem \fB--del-subuids\fR hem de \fB--add-subuids\fR belirtildiğinde, herhangi bir alt kullanıcı kimliği aralığı eklenmeden önce tüm alt kullanıcı kimliği aralıkları kaldırılır.
+.sp
+\fI/etc/login.defs\fR dosyasındaki \fBSUB_UID_MIN, SUB_UID_MAX, SUB_UID_COUNT\fR ile ilgili herhangi bir denetim yapılmaz.
+.sp
+.TP 4
+\fB-w\fR, \fB--add-subgids\fR \fIİLK-SON\fR
+Kullanıcının hesabına bir dizi alt grup kimliği ekler.
+.sp
+Bu seçenek, bir kullanıcı hesabına birden çok aralık eklemek için birden fazla belirtilebilir.
+.sp
+\fI/etc/login.defs\fR dosyasındaki \fBSUB_GID_MIN, SUB_GID_MAX, SUB_GID_COUNT\fR ile ilgili herhangi bir denetim yapılmaz.
+.sp
+.TP 4
+\fB-W\fR, \fB--del-subgids\fR \fIİLK-SON\fR
+Kullanıcının hesabından bir dizi alt drup kimliğini kaldırır.
+.sp
+Bu seçenek, bir kullanıcı hesabından birden çok aralığı silmek için birden fazla belirtilebilir. Hem \fB--del-subgids\fR hem de \fB--add-subgids\fR belirtildiğinde, herhangi bir alt grup kimliği aralığı eklenmeden önce tüm alt grup kimliği aralıkları kaldırılır.
+.sp
+\fI/etc/login.defs\fR dosyasındaki \fBSUB_GID_MIN, SUB_GID_MAX, SUB_GID_COUNT\fR ile ilgili herhangi bir denetim yapılmaz.
+.sp
+.TP 4
+\fB-Z\fR, \fB---selinux-user\fR \fISEKULL\fR
+Kullanıcının oturum açması için yeni SELinux kullanıcısı.
+.sp
+Boş \fISEKULL\fR, \fIKULLANICI\fR için SELinux kullanıcı eşlemini kaldırır.
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+Kullanıcının sayısal kullanıcı kimliği, kullanıcı adı veya kullanıcının ev dizini değiştiriliyorsa, bu komut yürütülürken kullanıcının herhangi bir işlem yürütmediğinden emin olunmalıdır. \fBusermod\fR Linux’ta bunu saptar. Diğer platformlarda, kullanıcının oturum açıp açmadığı yalnızca \fButmp\fR ile belirlenir.
+.sp
+Herhangi bir \fBcrontab\fR veya \fBat\fR dosyasının sahibi elle değiştirilmelidir.
+.sp
+NIS sunuculardaki NIS ile alakalı bütün değişiklikler elle yapılmalıdır.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için kullanılabilecek \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBLASTLOG_UID_MAX\fR (tamsayı)
+\fIlastlog\fR girdilerini güncelleyecek en yüksek kullanıcı kimlik numarası. Daha yüksek kullanıcı kimlikleri genellikle uzak kullanıcı kimliği ve kimlik doğrulama hizmetleri tarafından izlendiğinden, onlar için çok büyük, seyrek bir \fIlastlog\fR dosyası oluşturmaya gerek yoktur.
+.sp
+Yapılandırmada \fBLASTLOG_UID_MAX\fR seçeneğinin olmaması, \fIlastlog\fR girdilerini yazacak kullanıcı kimliğinde sınırlama olmadığı anlamına gelir.
+.sp
+.TP 4
+\fBMAIL_DIR\fR (dizge)
+Posta kuyruğu dizini. İlgili kullanıcı hesabı silindiğinde veya değişikliğe uğradığında posta kutusunu elden geçirmek için bu gereklidir. Tanımsızsa, derleme sırasında atanan öntanımlı değer kullanılır. Eposta kuyruğunun oluşturulup oluşturulmadığı \fI/etc/default/useradd\fR dosyasındaki \fBCREATE_MAIL_SPOOL\fR değişkeni ile belirlenir.
+.sp
+.TP 4
+\fBMAIL_FILE\fR (dizge)
+Kullanıcının eposta kuyruğu dosyalarının konumu ev dizinine göreli tanımlanır.
+.sp
+.PP
+\fBMAIL_DIR\fR ve \fBMAIL_FILE\fR değişkenleri \fBuseradd\fR, \fBusermod\fR ve \fBuserdel\fR tarafından eposta kuyruğunun oluşturulması, taşınması ve silinmesi için kullanılır.
+.sp
+Bunlar ayrıca, \fBMAIL_CHECK_ENAB\fR için \fByes\fR tanımlıysa, \fBMAIL\fR ortam değişkenini tanımlamak için de kullanılır.
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.TP 4
+\fBSUB_GID_MIN\fR (tamsayı), \fBSUB_GID_MAX\fR (tamsayı), \fBSUB_GID_COUNT\fR (tamsayı)
+\fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_GID_MIN\fR ila \fBSUB_GID_MAX\fR aralığından \fBSUB_GID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
+.sp
+\fBSUB_GID_MIN\fR, \fBSUB_GID_MAX\fR, \fBSUB_GID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+.sp
+.TP 4
+\fBSUB_UID_MIN\fR (tamsayı), \fBSUB_UID_MAX\fR (tamsayı), \fBSUB_UID_COUNT\fR (tamsayı)
+\fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_UID_MIN\fR ila \fBSUB_UID_MAX\fR aralığından \fBSUB_UID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
+.sp
+\fBSUB_UID_MIN\fR, \fBSUB_UID_MAX\fR, \fBSUB_UID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/group\fR
+grup bilgileri
+.sp
+.TP 4
+\fI/etc/gshadow\fR
+güvenli grup bilgileri
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Shadow parola yapılandırması
+.sp
+.TP 4
+\fI/etc/passwd\fR
+kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+güvenli kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/subgid\fR
+Kullanıcı başına bağımlı grup kimlikler
+.sp
+.TP 4
+\fI/etc/subuid\fR
+Kullanıcı başına bağımlı kullanıcı kimlikler
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBcrypt\fR(3), \fBgpasswd\fR(8)\fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBlogin.defs\fR(5), \fBsubgid\fR(5), \fBsubuid\fR(5), \fBuseradd\fR(8), \fBuserdel\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,374 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DATE" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+date - sistem tarih ve saatini görüntüler veya ayarlar
+.sp
+.SH KULLANIM
+.IP \fBdate\fR 5
+[\fISEÇENEK\fR]... [\fI+BİÇEM\fR]
+.IP \fBdate\fR 5
+[\fB-u\fR|\fB--utc\fR|\fB--universal\fR] [\fIMMDDhhmm\fR[[\fICC\fR]\fIYY\fR][\fI.ss\fR]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBdate\fR geçerli zamanı belirtilen \fIBİÇEM\fR’de görüntüler veya sistem zamanını ayarlar.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-d\fR, \fB--date\fR\fI=DİZGE\fR
+\fIDİZGE\fR ile belirtilen zamanı gösterir, "şu anı" değil.
+.sp
+.TP 4
+\fB--debug\fR
+Çözümlenen tarihe açıklama ekler ve şüpheli kullanım hakkında standart hataya uyarı çıktılar.
+.sp
+.TP 4
+\fB-f\fR, \fB--file\fR\fI=DOSYA\fR
+\fIDOSYA\fRnın her satırına \fB--date\fR uygulamak gibidir.
+.sp
+.TP 4
+\fB-I\fR, \fB--iso-8601\fR=[\fIBİÇEM\fR]
+Tarih/zaman dizgesi ISO 8601 uyumlu çıktılanır. \fIBİÇEM\fR izgesinde tarih ve saat hassasiyeti belirtmek için ’date’ (öntanımlıdır), ’hours’, ’minutes’, ’seconds’ veya ’ns’ belirtilebilir.
+.br
+Örnekler:
+.sp
+.RS 4
+.RS 4
+.nf
+$ date
+Pzt 04 Nis 2022 16:05:48 +03
+$ date -I
+2022-04-04
+$ date -Ihours
+2022-04-04T16+03:00
+$ date -Ins
+2022-04-04T16:11:56,631895868+03:00
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB-R\fR, \fB--rfc-email\fR
+Tarih ve zaman RFC 5322 uyumlu çıktılanır. Örnek: Mon, 04 Apr 2022 16:17:39 +0300
+.sp
+.TP 4
+\fB--rfc-3339\fR=\fIBİÇEM\fR
+Tarih ve zaman RFC 3339 uyumlu çıktılanır. \fIBİÇEM\fR dizgesinde tarih ve saat hassasiyeti belirtmek için ’hours’, ’minutes’, ’seconds’ veya ’ns’ belirtilebilir.
+.br
+Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+$ date --rfc-3339=seconds
+2022-04-04 16:24:25+03:00
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB-r\fR, \fB--reference\fR=\fIDOSYA\fR
+\fIDOSYA\fRnın son düzenlenme zamanını gösterir.
+.sp
+.TP 4
+\fB-s\fR, \fB--set\fR=\fIDİZGE\fR
+Saati belirtilen \fIDİZGE\fR’ye göre ayarlar.
+.sp
+.TP 4
+\fB-u\fR, \fB--utc\fR, \fB--universal\fR
+Zaman, Koordinatlı Evrensel Zamana (UTC) uygun olarak gösterilir/ayarlanır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini basar ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+\fIBİÇEM\fR, çıktı biçemini denetlemek içindir. \fIBİÇEM\fRlerin yorumlanışları şu şekildedir:
+.sp
+.TP 4
+\fB%%\fR
+Sadece \fB%\fR işaretini basar.
+.sp
+.TP 4
+\fB%a\fR
+Yerele özgü kısaltılmış gün ismi (Paz, Pzt).
+.sp
+.TP 4
+\fB%A\fR
+Yerele özgü tam gün ismi; isim uzunlukları değişkendir (Pazar, Pazartesi).
+.sp
+.TP 4
+\fB%b\fR
+Yerele özgü kısaltılmış ay ismi (Ara, Oca).
+.sp
+.TP 4
+\fB%B\fR
+Yerele özgü tam gün ismi; isim uzunlukları değişkendir (Aralık, Ocak).
+.sp
+.TP 4
+\fB%c\fR
+Yerele özgü tarih ve saat (Pzt 04 Nis 2022 16:34:09).
+.sp
+.TP 4
+\fB%C\fR
+Yüzyıl (Yıl yüze bölünür, tamsayı kısım gösterilir) [00-99].
+.sp
+.TP 4
+\fB%d\fR
+Ayın günü (01..31).
+.sp
+.TP 4
+\fB%D\fR
+tarih, %m/%d/%y ile aynı (aa/gg/yy)
+.sp
+.TP 4
+\fB%e\fR
+Boşlukla yastıklanmış ayın günü, %_d ile aynı ( 1..31)
+.sp
+.TP 4
+\fB%F\fR
+\fB%+4Y\fR-\fB%m\fR-\fB%d\fR ile aynı.
+.sp
+.TP 4
+\fB%g\fR
+\fB%V\fR hafta sayısıyla eşleşen 2 basamaklı yıl.
+.sp
+.TP 4
+\fB%G\fR
+\fB%V\fR hafta sayısıyla eşleşen 4 basamaklı yıl
+.sp
+.TP 4
+\fB%h\fR
+\fB%b\fR ile aynı.
+.sp
+.TP 4
+\fB%H\fR
+Saat (00..23).
+.sp
+.TP 4
+\fB%I\fR
+Saat (01..12).
+.sp
+.TP 4
+\fB%j\fR
+Yılın günü (001..366)
+.sp
+.TP 4
+\fB%k\fR
+Boşluk yastıklı saat ( 0..23), %_H ile aynı
+.sp
+.TP 4
+\fB%l\fR
+Boşluk yastıklı saat ( 1..12), %_I ile aynı
+.sp
+.TP 4
+\fB%m\fR
+Ay (01..12).
+.sp
+.TP 4
+\fB%M\fR
+Dakika (00..59).
+.sp
+.TP 4
+\fB%n\fR
+Satır sonu karakteri.
+.sp
+.TP 4
+\fB%N\fR
+nanosaniye (000000000..999999999)
+.sp
+.TP 4
+\fB%p\fR
+Büyük harfli yerel ÖÖ/ÖS belirteci (çoğu yerelde boştur).
+.sp
+.TP 4
+\fB%P\fR
+Küçük harfli yerel öö/ös belirteci (çoğu yerelde boştur).
+.sp
+.TP 4
+\fB%q\fR
+Yılın çeyreği (1..4)
+.sp
+.TP 4
+\fB%r\fR
+12 saatlik zaman (04:48:18 ÖS).
+.sp
+.TP 4
+\fB%R\fR
+24 saatlik zaman (16:49).
+.sp
+.TP 4
+\fB%s\fR
+’00:00:00 1970-01-01 UTC’den beri geçen saniye sayısı
+.sp
+.TP 4
+\fB%S\fR
+Saniye (00..60); 60, artık saniyeyi belirtebilmek için gereklidir.
+.sp
+.TP 4
+\fB%t\fR
+Yatay sekme.
+.sp
+.TP 4
+\fB%T\fR
+24 saatlik zaman (16:51:29).
+.sp
+.TP 4
+\fB%u\fR
+Haftanın günü (1..7); 1, Pazartesi’ye karşılıktır.
+.sp
+.TP 4
+\fB%U\fR
+Yılın haftası, Pazar günü haftanın ilk günü kabul edilir (00..53).
+.sp
+.TP 4
+\fB%V\fR
+Yılın haftası (ISO), Pazartesi günü haftanın ilk günü kabul edilir (01..53).
+.sp
+.TP 4
+\fB%w\fR
+Haftanın günü (0..6); 0, Pazar gününe karşılıktır.
+.sp
+.TP 4
+\fB%W\fR
+Yılın haftası, Pazartesi günü haftanın ilk günü kabul edilir (00..53).
+.sp
+.TP 4
+\fB%x\fR
+Yerelin tarih betimlemesi (14-03-2022).
+.sp
+.TP 4
+\fB%X\fR
+Yerelin zaman betimlemesi (16:56:39).
+.sp
+.TP 4
+\fB%y\fR
+Yılın son iki basamağı (00..99).
+.sp
+.TP 4
+\fB%Y\fR
+Yıl
+.sp
+.TP 4
+\fB%z\fR
++hhmm Sayısal zaman dilimi (-0400 gibi).
+.sp
+.TP 4
+\fB%:z\fR
++hh:mm sayısal zaman dilimi (-04:00 gibi).
+.sp
+.TP 4
+\fB%::z\fR
++hh:mm:ss sayısal zaman dilimi (-04:00:00 gibi).
+.sp
+.TP 4
+\fB%:::z\fR
+gerekli hassasiyet : ile belirtilen sayısal zaman dilimi (-04, +05:30 gibi).
+.sp
+.TP 4
+\fB%Z\fR
+Zaman dilimi kısaltması (EET, +03 gibi).
+.sp
+.PP
+Öntanımlı olarak, \fBdate\fR sayısal alanları sıfırlarla yastıklar. GNU \fBdate\fR ise \fB%\fR ve bir sayısal yönerge arasında kullanıldığında aşağıdaki niteleyicileri tanır:
+.sp
+.TP 3
+\fB-\fR
+(tire) alanlar yastıklanmaz
+.sp
+.TP 3
+\fB_\fR
+(altçizgi) alanlar boşluklarla yastıklanır
+.sp
+.TP 3
+\fB0\fR
+alanlar sıfırlarla yastıklanır
+.sp
+.TP 3
+\fB÷\fR
+alanlar sıfırlarla yastıklanır ve 4’ten fazla basamaklı yılların önüne ’÷’ konur
+.sp
+.TP 3
+\fB^\fR
+mümkünse büyük harf kullanılır.
+.sp
+.TP 3
+\fB#\fR
+mümkünse büyük harf için küçük harf veya tersi kullanılır.
+.sp
+.PP
+Bu niteleyicilerden sonra isteğe bağlı olarak alan genişliği bir ondalık sayı olarak belirtilir, bunu isteğe bağlı bir değiştirici izleyebilir: E ile mümkünse yerelin diğer gösterimi, O ile eğer elverişli ise yerelin diğer sayısal simgeleri ifade edilir.
+.sp
+.SH "ÖRNEKLER"
+1970-01-01 UTC’den beri geçen saniyeleri tarihe çevir:
+.sp
+.RS 7
+.nf
+$ date --date=’@2147483647’
+.fi
+.sp
+.RE
+ABD’nin batı kıyısındaki zamanı göster (TZ’yi bulmak için \fBtzselect\fR(1) kullan):
+.sp
+.RS 7
+.nf
+$ TZ=’America/Los_Angeles’ date
+.fi
+.sp
+.RE
+ABD’nin batı kıyısında gelecek Cuma sabah 9 için yerel zamanı göster:
+.sp
+.RS 7
+.nf
+$ date --date=’TZ="America/Los_Angeles" 09:00 next Fri’
+.fi
+.sp
+.RE
+.sp
+.SH "TARİH DİZGESİ"
+\fB--date\fR\fI=DİZGE\fR girdisinde \fIDİZGE\fR, "Sun, 29 Feb 2004 16:21:42 -0800" veya "2004-02-29 16:21:42" ve hatta "next fri" (gelecek cuma) gibi çoğunlukla serbest biçimli, insan tarafından okunabilen (ingilizce olarak belirtilebilen) tarih dizgesidir. Tarih dizgesi, takvim tarihini, günün saatini, saat dilimini, haftanın gününü, göreli saati, göreli tarihi ve sayıları gösteren öğeler içerebilir. Boş dizge günün başlangıcını gösterir. Tarih dizgesi biçemi burada kolayca belgelenenden daha karmaşıktır, ancak info belgelerinde tamamen açıklanmıştır.
+.sp
+.SH "YAZAN"
+David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/date>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) date invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

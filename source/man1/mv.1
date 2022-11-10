@@ -1,0 +1,136 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "MV" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+mv - dosyaları taşır (ismini değiştirir)
+.sp
+.SH KULLANIM
+.IP \fBmv\fR 3
+[\fISEÇENEK\fR]... [\fB-T\fR] \fIKAYNAK\fR \fIHEDEF\fR
+.IP \fBmv\fR 3
+[\fISEÇENEK\fR]... \fIKAYNAK\fR... \fIDİZİN\fR
+.IP \fBmv\fR 3
+[\fISEÇENEK\fR]... \fB-t\fR \fIDİZİN\fR \fIKAYNAK\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen \fIKAYNAK\fR dosyasının ismini \fIHEDEF\fR olarak değiştirir veya birden fazla \fIKAYNAK\fR dosyasını \fIDİZİN\fR’e taşır.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB--backup\fR[=\fIYÖNTEM\fR]
+Varolan hedef dosyaları yedekler.
+.sp
+.TP 4
+\fB-b\fR
+\fB--backup\fR gibidir fakat herhangi bir değiştirge kabul etmez.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Varolan bir hedefin üzerine yazmak için sormaz.
+.sp
+.TP 4
+\fB-i\fR, \fB--interactive\fR
+Varolan bir hedefin üzerine yazmadan önce sorar.
+.sp
+.TP 4
+\fB-n\fR, \fB--no-clobber\fR
+Mevcut dosyanın üzerine yazmaz.
+.sp
+.PP
+\fBi, -f, -n\fR seçeneklerinden birini birden fazla belirtirseniz yalnızca sonununcusu etkili olur.
+.sp
+.TP 4
+\fB--strip-trailing-slashes\fR
+\fIKAYNAK\fRların sonundaki bölü işaretini kaldırır.
+.sp
+.TP 4
+\fB-S\fR, \fB--suffix\fR\fI=SONEK\fR
+Belirtilen yedekleme \fISONEK\fRi kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--target-directory\fR\fI=DİZİN\fR
+Bütün \fIKAYNAK\fR dosyaları \fIDİZİN\fR içine taşır.
+.sp
+.TP 4
+\fB-T\fR, \fB--no-target-directory\fR
+\fIHEDEF\fR normal dosya olarak ele alınır.
+.sp
+.TP 4
+\fB-u\fR, \fB--update\fR
+Sadece hedef dosya \fIKAYNAK\fR dosyadan daha eski ise veya \fIHEDEF\fR dosya yoksa taşıma işlemi yapılır. Böylece dosya güncellemesi yapılmış olur.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Yapılan işlem hakkında daha ayrıntılı bilgi verir.
+.sp
+.TP 4
+\fB-Z\fR
+SELinux güvenlik bağlamına öntanımlı türü atar.
+.sp
+.TP 4
+\fB--help\fR
+Bu yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fB--suffix\fR seçeneği ile veya SIMPLE_BACKUP_SUFFIX ile belirtilmediği sürece, yedekleme soneki ’\fB~\fR’ dir. Sürüm denetim yöntemi VERSION_CONTROL ortam değişkeni ile veya \fB--backup\fR seçeneği ile seçilebilir. Değerler şunlardır:
+.sp
+.TP 4
+none, off
+Asla yedekleme yapmaz (\fB--backup\fR belirtilmiş olsa bile)
+.sp
+.TP 4
+numbered, t
+Numaralı yedekleme yapılır.
+.sp
+.TP 4
+existing, nil
+Numaralandırılmış yedekler varsa, numaralı, aksi durumda basit yedekleme yapar.
+.sp
+.TP 4
+simple, never
+Daima basit yedekleme yapar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Mike Parker, David MacKenzie ve Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBrename\fR(2)
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/mv>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) mv invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2003, 2006 Yalçın KOLUKISA
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

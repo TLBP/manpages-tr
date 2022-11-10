@@ -1,0 +1,61 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Expect
+ *
+ * Written by: Don Libes, libes at nist.gov, NIST
+ *
+ * Design and implementation of this program was paid for by U.S. tax
+ * dollars.  Therefore it is public domain.  However, the author and NIST
+ * would appreciate credit if this program or parts of it are used.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CRYPTDIR" 1 "1 Ocak 1993" "Expect 5.45" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+cryptdir - bir dizindeki bütün dosyaları şifreler
+.br
+decryptdir - bir dizindeki bütün dosyaların şifrelemesini kaldırır
+.sp
+.SH KULLANIM
+.IP \fBcryptdir\fR 9
+[ \fIdizin\fR ]
+.IP \fBdecryptdir\fR 11
+[ \fIdizin\fR ]
+.sp
+.PP
+.sp
+.SH "GİRİŞ"
+\fBcryptdir\fR geçerli dizindeki bütün dosyaları (ya da değiştirge olarak verilen bir dizindeki bütün dosyaları) şifreler. Eğer komut \fBdecryptdir\fR olarak kullanılırsa bu sefer bütün dosyaların şifrelemeleri kaldırılır (aynı yazılım, farklı isim).
+.sp
+.SH "AÇIKLAMA"
+Şifreleme esnasında, güvenlik sebebi ile parola iki kere girilir. İstemediğiniz bir parola ile dosyaları şifrelemek talihsizlik olurdu.
+.sp
+Şifrelemeler kaldırılırken, bunun aksine, parola sadece bir kez girilir. Şayet yanlış parola girilirse, bir zarar gelmez.
+.sp
+Şifreli dosyalar \fI.crypt\fR uzantısına sahip olurlar. Bu, dosyaların ikinci kez şifrelenmelerini engeller. Şifre kaldırma esnasında bu uzantı silinir. Böylece şifreli bir dizine başka dosyaları çekinmeden ekleyebilir ve bu dizinde \fBcryptdir\fR komutunu önceden şifreli dosyaları dert etmeden çalıştırabilirsiniz.
+.sp
+.SH "HATALAR"
+Bu kılavuz sayfası komutun programından daha uzun.
+.sp
+.SH "İLGİLİ BELGELER"
+"Exploring Expect: A Tcl-Based Toolkit for Automating Interactive Programs", Don Libes, O’Reilly and Associates, January 1995.
+.sp
+.SH "YAZAN"
+Don Libes (National Institute of Standards and Technology) tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2004 Emin İslam Tatlı
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,130 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PTX" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ptx - dosya içeriğini karılmış olarak basar
+.sp
+.SH KULLANIM
+.IP \fBptx\fR 4
+[\fISEÇENEK\fR]... [\fIGİRDİ\fR]... (\fB-G\fR olmaksızın)
+.IP \fBptx\fR 4
+\fB-G\fR [\fISEÇENEK\fR]... [\fIGİRDİ\fR [\fIÇIKTI\fR]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIGİRDİ\fR dosyalarındaki sözcüklerin bağlamlarını da içererek karılmış halde basar.
+.sp
+\fIGİRDİ\fR belirtilmezse veya - belirtilirse standart girdi okunur.
+.sp
+Uzun seçeneklerde zorunlu olan değiştirgeler kısa seçeneklerde de zorunludur.
+.sp
+.TP 4
+\fB-A\fR, \fB--auto-reference\fR
+Üretilen gönderimleri satır başında otomatik olarak çıktılar.
+.sp
+.TP 4
+\fB-G\fR, \fB--traditional\fR
+System V’deki \fBptx\fR gibi davranır.
+.sp
+.TP 4
+\fB-F\fR, \fB--flag-truncation=\fR\fIDİZGE\fR
+Satırların kesilmesi gerektiğinde kesim yeri \fIDİZGE\fR ile belirtilir. ’/’ öntanımlıdır
+.sp
+.TP 4
+\fB-M\fR, \fB--macro-name=\fR\fIDİZGE\fR
+’xx’ yerine \fIDİZGE\fR makrosunu kullanılır.
+.sp
+.TP 4
+\fB-O\fR\fB--format=roff\fR
+Çıktıyı roff yönergeleri olarak oluşturur.
+.sp
+.TP 4
+\fB-R\fR, \fB--right-side-refs\fR
+\fB-A\fR seçeneği ile birlikte kullanılır ve oluşturulan gönderiler satır sonuna konur, \fB-w\fR seçeneği ile birlikte yok sayılır.
+.sp
+.TP 4
+\fB-S\fR, \fB--sentence-regexp=\fR\fIKALIP\fR
+Satır sonları veya cümle sonları için düzenli ifade.
+.sp
+.TP 4
+\fB-T\fR, \fB--format=tex\fR
+Çıktıyı TeX yönergeleri olarak oluşturur.
+.sp
+.TP 4
+\fB-W\fR, \fB--word-regexp=\fR\fIKALIP\fR
+Anahtar sözcükleri belirlemek için \fIKALIP\fR kullanılır.
+.sp
+.TP 4
+\fB-b\fR, \fB--break-file=\fR\fIDOSYA\fR
+Sözcük sonlarını \fIDOSYA\fRdaki karakterlere bakarak belirler.
+.sp
+.TP 4
+\fB-f\fR, \fB--ignore-case\fR
+Büyük/küçük harf ayrımı yapmaz.
+.sp
+.TP 4
+\fB-g\fR, \fB--gap-size=\fR\fISAYI\fR
+Çıktı alanları arasındaki boş sütunların genişliği \fISAYI\fR olur.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-file=\fR\fIDOSYA\fR
+Girdi üzerinde çalışırken yoksayılacak sözcükleri \fIDOSYA\fRdan okur.
+.sp
+.TP 4
+\fB-o\fR, \fB--only-file=\fR\fIDOSYA\fR
+Girdi üzerinde çalışırken dikkate alınacak sözcükleri \fIDOSYA\fRdan okur.
+.sp
+.TP 4
+\fB-r\fR, \fB--references\fR
+Her satırın ilk alanı gönderim olarak kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--typeset-mode\fR
+- gerçeklenmedi -
+.sp
+.TP 4
+\fB-w\fR, \fB--width=\fR\fISAYI\fR
+Çıktıdaki sütun \fISAYI\fRsı (gönderim hariç).
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+François Pinard tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/ptx>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) ptx invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

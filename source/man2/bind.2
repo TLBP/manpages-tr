@@ -1,0 +1,270 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1993 Rickard E. Faith (faith@cs.unc.edu)
+ * and Copyright 2005-2007, Michael Kerrisk <mtk.manpages@gmail.com>
+ * Portions extracted from /usr/include/sys/socket.h, which does not have
+ * any authorship information in it.  It is probably available under the GPL.
+ *
+ * %%%LICENSE_START(VERBATIM)
+ * Permission is granted to make and distribute verbatim copies of this
+ * manual provided the copyright notice and this permission notice are
+ * preserved on all copies.
+ *
+ * Permission is granted to copy and distribute modified versions of this
+ * manual under the conditions for verbatim copying, provided that the
+ * entire resulting derived work is distributed under the terms of a
+ * permission notice identical to this one.
+ *
+ * Since the Linux kernel and libraries are constantly changing, this
+ * manual page may be incorrect or out-of-date.  The author(s) assume no
+ * responsibility for errors or omissions, or for damages resulting from
+ * the use of the information contained herein.  The author(s) may not
+ * have taken the same level of care in the production of this manual,
+ * which is licensed free of charge, as they might when working
+ * professionally.
+ *
+ * Formatted or processed versions of this manual, if unaccompanied by
+ * the source, must acknowledge the copyright and authors of this work.
+ * %%%LICENSE_END
+ *
+ * Other portions are from the 6.9 (Berkeley) 3/10/91 man page:
+ *
+ * Copyright (c) 1983 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * %%%LICENSE_START(BSD_4_CLAUSE_UCB)
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *     This product includes software developed by the University of
+ *     California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *   may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * %%%LICENSE_END
+ *
+ * Modified Mon Oct 21 23:05:29 EDT 1996 by Eric S. Raymond <esr@thyrsus.com>
+ * Modified 1998 by Andi Kleen
+ * $Id: bind.2,v 1.3 1999/04/23 19:56:07 freitag Exp $
+ * Modified 2004-06-23 by Michael Kerrisk <mtk.manpages@gmail.com>
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "BIND" 2 "1 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+bind - adresi soketle ilişkilendirir
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <sys/types.h>\fR          /* NOTLAR’a bakın */
+\fB#include <sys/socket.h>\fR
+.fi
+.sp
+.IP "int \fBbind\fR" 9
+(int \fIsockfd\fR, 
+const struct sockaddr *\fIaddr\fR, 
+socklen_t \fIaddrlen\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBsocket\fR(2) kullanılarak bir soket oluşturulduğunda, bu soket bir isim uzayında (adres ailesi) ortaya çıksa da ona bağlı bir adres bulunmaz. \fBbind\fR(), \fIaddr\fR ile belirtilen adresi \fIsockfd\fR ile belirtilen soket ile ilişkilendirir. \fIaddrlen\fR, \fIaddr\fR ile belirtilen adres yapısının bayt cinsinden uzunluğunu belirler. Geleneksel olarak bu işleme "sokete isim vermek" denir.
+.sp
+\fBSOCK_STREAM\fR soketine gelen bağlantılar kabul edilmeden önce bir yerel adresi soket ile \fBbind\fR() kullanarak ilişkilendirmek gerekir (\fBaccept\fR(2) sayfasına bakın).
+.sp
+İlişkilendirmenin kuralları kullanılan adres ailesine göre değişir. Daha ayrıntılı bilgi edimnek için 7. bölüme ait şu kılavuz sayfalarına bakın. \fBAF_INET\fR için \fBip\fR(7), \fBAF_INET6\fR için \fBipv6\fR(7), \fBAF_UNIX\fR için \fBunix\fR(7), \fBAF_APLETALK\fR için \fBddp\fR(7), \fBAF_PACKET\fR için \fBpacket\fR(7), \fBAF_X25\fR için \fBx25\fR(7), \fBAF_NETLINK\fR için \fBnetlink\fR(7).
+.sp
+\fIaddr\fR için girilen asıl yapı adres ailesine göre değişir. \fIsockaddr\fR yapısı şu şekile tanımlanmıştır.
+.sp
+.RS 4
+.nf
+struct sockaddr {
+      sa_family_t sa_family;
+      char        sa_data[14];
+}
+.fi
+.sp
+.RE
+Bu yapının tek amacı \fIaddr\fR ile verilen yapı göstericisinin türünü derleyici hatalarını önlemek için dönüştürmektir. \fBÖRNEKLER\fR bölümüne bakın.
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Başarılı durumunda sıfır döner. Hata durumunda \fB-1\fR dönder ve hata \fIerrno\fR değişkenine atanır.
+.sp
+.SH "HATALAR"
+.TP 4
+\fBEACCES\fR
+Adres korumalı ve kullanıcı root değil.
+.sp
+.TP 4
+\fBEADDRINUSE\fR
+Belirtilen adres kullanımda.
+.sp
+.TP 4
+\fBEADDRINUSE\fR
+(İnternet alanı soketleri için) \fIsockfd\fR ile belirtilen soket, önceden bir adres ile ilişkilendirilmemiş ve soketi geçici bir portla ilişkilendirmeye çalışırken geçici port aralığındaki tüm portların kullanımda olduğu anlaşılmış. \fBip\fR(7) sayfasındaki \fI/proc/sys/net/ipv4/ip_local_port_range\fR ile ilgili açıklamaya bakınız.
+.sp
+.TP 4
+\fBEBADF\fR
+Belirtilen \fIsockfd\fR uygun bir dosya tanıtıcısı değil.
+.sp
+.TP 4
+\fBEINVAL\fR
+Soket zaten bir adres ile ilişkilendirilmiş.
+.sp
+.TP 4
+\fBEINVAL\fR
+\fIaddrlen\fR yanlış ya da \fIaddr\fR bu soketin alanı için geçerli değil.
+.sp
+.TP 4
+\fBENOTSOCK\fR
+Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+.sp
+.PP
+Aşağıdaki hatalar sadece UNIX (\fBAF_UNIX\fR) alan soketleri için geçerlidir.
+.sp
+.TP 4
+\fBEACCES\fR
+Verilen dizindeki bir bölüm için arama izni verilmemiş. (Ayrıca \fBpath_resolution\fR(7) sayfasına bakın).
+.sp
+.TP 4
+\fBEADDRNOTAVAIL\fR
+Var olmayan bir arayüz istenmiş veya istenen adres yerelde mevcut değil.
+.sp
+.TP 4
+\fBEFAULT\fR
+\fIaddr\fR, kullanıcının erişebileceği adres alanının dışında.
+.sp
+.TP 4
+\fBELOOP\fR
+\fIaddr\fR çözümlenirken çok fazla sembolik bağ ile karşılaşıldı.
+.sp
+.TP 4
+\fBENAMETOOLONG\fR
+\fIaddr\fR çok uzun.
+.sp
+.TP 4
+\fBENOENT\fR
+Verilen soket dizinindeki bir bölüm mevcut değil.
+.sp
+.TP 4
+\fBENOMEM\fR
+Yeterli çekirdek belleği yok.
+.sp
+.TP 4
+\fBENOTDIR\fR
+Yolun bir bölümü dizin değil.
+.sp
+.TP 4
+\fBEROFS\fR
+Soket düğümü salt-okunur bir dosya sisteminde yer alıyor.
+.sp
+.PP
+.sp
+.SH "UYUMLULUK"
+POSIX.1-2001, POSIX.1-2008, SVr4, 4.4BSD (\fBbind()\fR ilk defa 4.2BSD ile ortaya çıktı).
+.sp
+.SH "NOTLAR"
+POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+.sp
+\fIsocklen_t\fR’nin arka planı için \fBaccept\fR(2) sayfasına bakın.
+.sp
+.SH "HATALAR"
+Şeffaf vekil için seçenekler açıklanmamıştır.
+.sp
+.SH "ÖRNEKLER"
+\fBbind\fR() işlevinin internet alan soketleriyle kullanım örneğini \fBgetaddrinfo\fR(3) sayfasında bulabilirsiniz.
+.sp
+Aşağıdaki örnek, bir akım soketinin UNIX (\fBAF_UNIX\fR) alan adıyla nasıl ilişkilendirileceğini ve gelen bağlantıların nasıl kabul edileceğinizi gösterir.
+.sp
+.RS 4
+.nf
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+\&
+#define SOKET_YOLU "/somepath"
+#define LISTEN_BACKLOG 50
+\&
+#define hatayı_işle(msg) \\
+    do { perror(msg); exit(EXIT_FAILURE); } while (0)
+\&
+int
+main(int argc, char *argv[])
+{
+    int sfd, cfd;
+    struct sockaddr_un benim_addr, karşı_addr;
+    socklen_t karşı_addr_boyut;
+\&
+    sfd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (sfd == -1)
+        hatayı_işle("socket");
+\&
+    memset(&benim_addr, 0, sizeof(benim_addr));
+                        /* Yapıyı temizle */
+    benim_addr.sun_family = AF_UNIX;
+    strncpy(benim_addr.sun_path, SOKET_YOLU,
+            sizeof(benim_addr.sun_path) - 1);
+\&
+    if (bind(sfd, (struct sockaddr *) &benim_addr,
+            sizeof(benim_addr)) == -1)
+        hatayı_işle("bind");
+\&
+    if (listen(sfd, LISTEN_BACKLOG) == -1)
+        hatayı_işle("listen");
+\&
+    /* Artık gelen bağlantılar accept(2) kullanılarak
+       tek tek kabul edilebilir.*/
+\&
+    karşı_addr_boyut = sizeof(karşı_addr);
+    cfd = accept(sfd, (struct sockaddr *) &karşı_addr,
+                 &karşı_addr_boyut);
+    if (cfd == -1)
+        hatayı_işle("accept");
+\&
+    /* Gelen bağlantılarla ilgilenecek kod... */
+\&
+    /* Artık ihtiyaç yoksa, soket yol adı, SOKET_YOLU unlink(2) veya remove(3)
+       kullanılarak silinmelidir. */
+}
+.fi
+.sp
+.RE
+.sp
+.SH "İLGİLİ BELGELER"
+\fBaccept\fR(2), \fBconnect\fR(2), \fBgetsockname\fR(2), \fBlisten\fR(2), \fBsocket\fR(2), \fBgetaddrinfo\fR(3), \fBgetifaddrs\fR(3), \fBip\fR(7), \fBipv6\fR(7), \fBpath_resolution\fR(7), \fBsocket\fR(7), \fBunix\fR(7)
+.sp
+.SH "ÇEVİREN"
+© 2022 Fatih Koçer
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,183 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1990 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CHAGE" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+chage - kullanıcı parolasının ömür bilgilerini değiştirir
+.sp
+.SH KULLANIM
+.IP \fBchage\fR 6
+[\fIseçenekler\fR] \fIKULLANICI\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBchage\fR, parolanın son değiştirilme tarihinden, değiştirilmesi gerekecek olan güne kadar geçecek sürenin gün cinsinde miktarını değiştirir. Bu bilgi, sistem tarafından, kullanıcının parolasını değiştirme zamanını belirlemekte kullanılır.
+.sp
+.SH "SEÇENEKLER"
+\fBchage\fR komutunda kullanılabilecek seçenekler:
+.sp
+.TP 4
+\fB-d\fR, \fB--lastday\fR \fISON-GÜN\fR
+\fISON-GÜN\fR’ün değeri 1 Ocak 1970’den parolanın son değiştiği güne kadar olan gün sayısıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. \fISON-GÜN\fR olarak 0 değeri belirtilirse, kullanıcı, bir sonraki oturum açışında parolasını değiştirmek zorunda bırakılır.
+.sp
+.TP 4
+\fB-E\fR, \fB--expiredate\fR \fISON_TARİH\fR
+Kullanıcı hesabının hangi tarihten sonra erişilemez olacağını belirlemekte kullanılır. \fISON_TARİH\fR’in değeri; 1 Ocak 1970’den hesabın kilitleneceği güne kadar olan sürenin gün cinsinden miktarıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
+.sp
+Örneğin, bir hesabın 180 gün sonra erişilemez olacağı şöyle belirlenebilir:
+.sp
+.RS 4
+.RS 4
+.nf
+chage -E $(date -d +180days +%Y-%m-%d)
+.fi
+.sp
+.RE
+.RE
+.IP
+\fISON_TARİH\fR değeri olarak \fI-1\fR belirtilirse hesabın erişilemez olacağı tarih silinir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım iletisi gösterir ve çıkar.
+.sp
+.TP 4
+\fB-i\fR, \fB--iso8601\fR
+Tarihler basılırken YYYY-AA-GG biçimi kullanılır.
+.sp
+.TP 4
+\fB-I\fR, \fB--inactive\fR \fIKULLANIMDIŞI\fR
+Bir parolanın kullanımdışı kalmasından hesabın kilitlenmesine kadar geçecek gün miktarını ayarlamak için kullanılır. \fIKULLANIMDIŞI\fR seçeneği, hesabın kullanımdışı kalacağı gün sayısıdır. 0 (sıfır) değeri bu özelliği etkisizleştirir. Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
+.sp
+\fIKULLANIMDIŞI\fR değeri olarak \fI-1\fR belirtilirse hesabın kullanımdışılık durumu kaldırılır.
+.sp
+.TP 4
+\fB-l\fR, \fB--list\fR
+Hesap eskime bilgileri gösterilir.
+.sp
+.TP 4
+\fB-m\fR, \fB--mindays\fR \fIASGARi_GÜN_SAYISI\fR
+Parola değişiklikleri arasındaki en az gün sayısı \fIASGARi_GÜN_SAYISI\fR ile belirtilir. Sıfır belirtilirse kullanıcı parolasını istediği zaman değiştirebilir.
+.sp
+.TP 4
+\fB-M\fR, \fB--maxdays\fR \fIAZAMi_GÜN_SAYISI\fR
+Parolanın geçerli olacağı en fazla gün sayısı \fIAZAMi_GÜN_SAYISI\fR ile belirtilir. \fISON-GÜN\fR artı \fIAZAMi_GÜN_SAYISI\fR içinde bulunulan gün sayısından küçük ise kullanıcı hesabını kullanmadan önce parolasını değiştirmek zorunda kalacaktır. Bu durum, kullanıcıya önceden uyarı sağlayan \fB-W\fR seçeneği kullanılarak önceden planlanabilir.
+.sp
+\fIAZAMi_GÜN_SAYISI\fR değeri olarak \fI-1\fR belirtilirse parolanın kullanım süresi sınaması kaldırılır.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DiZiNi\fR
+Değişiklikler \fICHROOT_DiZiNi\fR dizininde uygulanır ve \fICHROOT_DiZiNi\fR dizini altındaki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-W\fR, \fB--warndays\fR \fIUYARI_GÜN_SAYISI\fR
+Parola değişikliği gerekeceği hakkında kaç gün önce uyarı verileceğini belirtmekte kullanılır. \fIUYARI_GÜN_SAYISI\fR seçeneği, kullanıcının parola süresinin dolmasına kaç günü kaldığı hakkında uyarılacağı, parola süresi dolması öncesi gün sayısını belirtmekte kullanılır.
+.sp
+.PP
+Hiçbir seçenek belirtilmezse, \fBchage\fR etkileşimli kipe geçer. O an için geçerli olan alanlardaki değerlerin tümünü ekrana yazar. Bu alanlardaki değerleri değiştirmek için yeni değerler girilir. Şayet geçerli değerleri kullanmak istiyorsanız bu satırları boş bırakın. Geçerli değerler [ ] işaretleri arasında gösterilir.
+.sp
+.SH "SINIRLAMALAR"
+\fBchage\fR uygulamasının \fI/etc/shadow\fR dosyasına ihtiyacı vardır.
+.sp
+\fBchage\fR uygulaması \fIshadow\fR parola dosyasındaki bilgileri kullanır. Yani, kullanıcının oturum açmasını etkileyen diğer kaynaklardaki yapılandırmalar (örneğin, LDAP veya \fIpasswd\fR dosyasındaki boş parola aş alanı) \fBchage\fR çıktısında gösterilmez.
+.sp
+\fBchage\fR uygulaması \fIshadow\fR ve \fIpasswd\fR dosyaları arasındaki tutarsızlıklar hakkında bilgi vermez. Böyle tutarsızlıkları araştırmak için \fBpwck\fR kullanılabilir.
+.sp
+\fBchage\fR uygulaması, kullanıcıya hesap veya parolasını kullanım süresi hakkında bilgi veren \fB-l\fR seçeneği hariç root kullanıcısı olmayanlarca kullanılamaz.
+.sp
+.SH "YAPILANDIRMA"
+\fI/etc/login.defs\fR dosyasında bulunan ve bu uygulamanın davranışını etkileyen yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBUSE_TCB\fR (mantıksal)
+Seçeneğe \fIyes\fR değeri atanmışsa \fBtcb\fR(5) parola gölgeleme şeması kullanılır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+Güvenli kullanıcı hesabı bilgileri
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ KODLARI"
+\fBchage\fR ugulaması aşağıdaki değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+izin verilmedi
+.sp
+.TP 4
+\fI2\fR
+komut sözdizimi geçersiz
+.sp
+.TP 4
+\fI15\fR
+\fIshadow\fR parola dosyası bulunamadı
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBpasswd\fR(5), \fBshadow\fR(5).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh, Thomas Kłoczko ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

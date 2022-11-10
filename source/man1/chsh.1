@@ -1,0 +1,119 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1990 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CHSH" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+chsh - kullanıcının oturum açma kabuğunu değiştirir
+.sp
+.SH KULLANIM
+.IP \fBchsh\fR 5
+[\fIseçenekler\fR] [\fIKULLANICI\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBchsh\fR, kullanıcının oturum açma kabuğunu değiştirir. Kullanıcının ilk oturum komutunun ismini belirler. Sıradan bir kullanıcı yalnızca kendi oturum açacağı kabuğu değiştirebilirken, sistem yöneticisi herkesinkini değiştirebilir.
+.sp
+.SH "SEÇENEKLER"
+\fBchsh\fR komutuna uygulanan seçenekler:
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikler \fICHROOT_DİZİNİ\fR altında uygulanır ve \fICHROOT_DİZİNİ\fRindeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-s\fR, \fB--shell\fR \fIKABUK\fR
+Kullanıcının yeni oturum açma kabuğu. Boş bir değer belirtmek sistemin öntanımlı oturum açma kabuğunun kullanılacağı anlamına gelir.
+.sp
+.PP
+\fB-s\fR seçeneği belirtilmezse, \fBchsh\fR etkileşimli kipe girer ve kullanıcıya geçerli oturum açma kağunun adını göstererek girdi bekler. Yeni bir değer girilmesi kabuğu değiştirir, boş geçilirse geçerli kabuk korunur. Geçerli değer köşeli ayraçların \fB[ ]\fR içinde gösterilir.
+.sp
+.SH "EK BİLGİ"
+Oturum açma kabuğuna getirilen tek kısıtlama, komutun kullanıcısı sistem yöneticisi olmadığı sürece kabuk adının \fI/etc/shells\fR içindekilerden biri olması gerektiğidir ve ardından herhangi bir değer eklenebilir. Oturum açma kabuğu kısıtlanmış bir kullanıcı, oturum açma kabuğunu değiştiremez. Bu nedenle, \fI/etc/shells\fR içine \fB/bin/rsh\fR yerleştirmesi önerilmez, çünkü yanlışlıkla kısıtlı kabuğa geçmek, kullanıcının oturum açma kabuğunu eski değerine döndürmesini engeller.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştiren \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBCHFN_AUTH\fR (mantıksal)
+\fIyes\fR belirtilirse, \fBchsh\fR root tarafından kullanılmıyorsa, herhangi bir değişiklik yapılmadan önce kimlik kanıtlaması yapılması zorunludur.
+.sp
+.TP 4
+\fBLOGIN_STRING\fR (dizgesel)
+Parola isteminde kullanılacak dizgeyi belirtmekte kullanılır. "Password: " veya bu dizgenin çevirileri öntanımlıdır. Bu değişkene bir değer atanırsa parola isteminin çevirisi kullanılmayacaktır.
+.sp
+Dizge %s içeriyorsa, parola isteminde yerine kullanıcı ismi konur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesabı bilgileri.
+.sp
+.TP 4
+\fI/etc/shells\fR
+Geçerli oturum açma kabuklarının listesi.
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Sistemdeki parola yapılandırması.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBlogin.defs\fR(5), \fBpasswd\fR(5).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

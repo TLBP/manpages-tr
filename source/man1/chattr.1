@@ -1,0 +1,222 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * chattr.c             - Change file attributes on an ext2 file system
+ *
+ * Copyright (C) 1993, 1994  Remy Card <card@masi.ibp.fr>
+ *                           Laboratoire MASI, Institut Blaise Pascal
+ *                           Universite Pierre et Marie Curie (Paris VI)
+ *
+ * This file can be redistributed under the terms of the GNU General
+ * Public License
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CHATTR" 1 "Aralık 2021" "E2fsprogs 1.46.5" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+chattr - Linux dosya sisteminin üzerinde dosya özniteliklerini değiştirir
+.sp
+.SH KULLANIM
+.IP \fBchattr\fR 7
+[ \fB-RV\fR ] [ \fB-v\fR \fIsürüm\fR ] [ \fB-p\fR \fIproje\fR ] [ \fIkip\fR ] \fIdosyalar\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBchattr\fR Linux dosya sistemi üzerinde dosya özniteliklerini değiştirir.
+.sp
+Sembolik kip sözdizimi: \fB+-=[aAcCdDeFijmPsStTux]\fR
+.sp
+.RS 4
+.nf
+’\fB+\fR’ belirtilen özniteliklerin varolanlara eklenmesini sağlar
+’\fB-\fR’ belirtilen öznitelikleri dosya özniteliklerinden kaldırır
+’\fB=\fR’ belirtilen özniteliklerin dosyadakilerin yerini almasını sağlar
+.fi
+.sp
+.RE
+\fBaAcCdDeFijmPsStTux\fR harfleri dosyalar için yeni öznitelikleri seçer:
+.sp
+.RS 4
+.nf
+\fBa\fR sadece dosya sonuna ekleme yapılabilir,
+\fBA\fR erişim zamanı güncellenmez
+\fBc\fR dosyalar sıkıştırılmış tutulur
+\fBC\fR yazmada kopyalama yapılmaz
+\fBd\fR dosya dump uygulamasından etkilenmez
+\fBD\fR dizin güncellemelerini eşzamanlı olur
+\fBe\fR blokları eşlemek için uzantılar kullanılır
+\fBF\fR dizin aramaları harf büyüklüğüne duyarsız olur
+\fBi\fR dosya değiştirilemez
+\fBj\fR dosya sistemi günlüklemesi yapılır
+\fBm\fR sistem dosyayı sıkıştıramaz
+\fBP\fR hiyerarşi korunur
+\fBs\fR silme güvenliği sağlanır
+\fBS\fR güncellemeler eşzamanlı olur
+\fBt\fR ardarda dosya eklemeli sistemlerde blok parçalanmaz
+\fBT\fR dizin tepe dizin varsayılır
+\fBu\fR dosya silinince kurtarılabilir
+\fBx\fR dosyalar doğrudan erişilir olur
+.fi
+.sp
+.RE
+\fBE\fR, \fBI\fR, \fBN\fR ve \fBV\fR öznitelikleri salt okunur olup \fBlsattr\fR(1) ile listelenir ama \fBchattr\fR ile değiştirilemez:
+.sp
+.RS 4
+.nf
+\fBE\fR sistem dosyayı şifreleyebilir
+\fBI\fR dizin indislenebilir
+\fBN\fR veri dosya düğümünde saklanır
+\fBV\fR dosyayı sistem doğrular
+.fi
+.sp
+.RE
+Özniteliklerin tamamını her dosya sistemi desteklemeyebileceği gibi gerekli araçlara da sahip olmayabilir. Dosya sistemine özgü ayrıntılar için \fBbtrfs\fR(5), \fBext4\fR(5) ve \fBxfs\fR(5) gibi dosya sistemine özgü kılavuz sayfalarına bakın.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-R\fR
+Dizinlerin ve içeriklerinin özniteliklerini ardışık olarak değiştirir.
+.sp
+.TP 4
+\fB-V\fR
+Yapılan işlem hakkında daha ayrıntılı çıktı verir ve sürüm bilgilerini gösterir.
+.sp
+.TP 4
+\fB-f\fR
+Çoğu hata iletisi engellenir.
+.sp
+.TP 4
+\fB-v\fR \fIsürüm\fR
+Dosyanın sürümünü/nesil numarasını ayarlar.
+.sp
+.TP 4
+\fB-p\fR \fIproje\fR
+Dosyanın proje numarasını ayarlar.
+.sp
+.PP
+.sp
+.SH "ÖZNİTELİKLER"
+.TP 4
+\fBa\fR
+\fBa\fR özniteliği atanmış bir dosya, yazmak için yalnızca ekleme kipinde açılabilir. Yalnızca root kullanıcısı veya \fBCAP_LINUX_IMMUTABLE\fR yeteneğine sahip bir süreç bu özniteliği atayabilir veya silebilir.
+.sp
+.TP 4
+\fBA\fR
+\fBA\fR özniteliği atanmış bir dosyanın erişim zamanı güncellenmez. Bu, dizüstü sistemlerde disk G/Ç sırasında bir miktar tasarruf sağlar.
+.sp
+.TP 4
+\fBc\fR
+\fBc\fR özniteliği atanmış bir dosyanın okuma-yazma sırasındaki açılması/sıkıştırılması çekirdeğin denetimindedir. Bu dosyadan okuma yapılmak istendiğinde sıkıştırılmamış veri döner. Yazılmak istendiğinde ise diske yazılmadan önce sıkıştırma yapılır. Ayrıca, \fBYAZILIM HATALARI ve SINIRLAMALAR\fR bölümü de okunmalıdır. (Ek bilgi: \fBbtrfs\fR(5) dosya sisteminde \fBc\fR atanmışsa \fBC\fR atanamaz. Ayrıca, btrfs bağlama seçeneği ’nodatasum’ ile de çelişir.)
+.sp
+.TP 4
+\fBC\fR
+\fBC\fR özniteliği atanmış bir dosyaya yazımda-kopyala güncellemeleri uygulanmaz. Bu seçenek, sadece yazımda-kopyalama yapan sistemlerde desteklenir. (Ek bilgi: \fBbtrfs\fR(5) dosya sisteminde yeni veya boş dosyalara \fBC\fR özniteliği atanamaz. Veri bloklarına sahip bir dosyada atanmışsa, dosyaya atanan blokların ne zaman tamamen kararlı olacağı tanımsızdır. \fBC\fR özniteliği bir dizine atanmışsa dizin üzerinde etkisi yoktur ama bu dizinde yeni oluşturulan dosyalara yazımda-kopyalama-yapma özniteliği atanmış olacaktır. \fBC\fR atanmışsa \fBc\fR atanamaz.)
+.sp
+.TP 4
+\fBd\fR
+\fBd\fR özniteliği atanmış bir dosya \fBdump\fR(8) çalıştırıldığında yedeklemeye aday olmayacaktır.
+.sp
+.TP 4
+\fBD\fR
+\fBD\fR özniteliği bir dizine uygulanırsa dizindeki değişiklikler diske eşzamanlı yazılır; bu, dosya alt kümesine ’dirsync’ bağlama seçeneği atanmasına eşdeğerdir.
+.sp
+.TP 4
+\fBe\fR
+\fBe\fR özniteliği atanmış bir dosya diskteki blokları eşlemek için uzantıları kullanır. \fBchattr\fR kullanarak bu öznitelik kaldırılamaz.
+.sp
+.TP 4
+\fBE\fR
+\fBE\fR özniteliği atanmış bir dosya, dizin veya sembolik bağ dosya sistemi tarafından şifrelenir. Bu öznitelik \fBchattr\fR kullanarak atanamaz ve kaldırılamaz ama \fBlsattr\fR(1) ile görüntülenebilir.
+.sp
+.TP 4
+\fBF\fR
+\fBF\fR özniteliği atanmış bir dizin içindeki tüm yol aramaları harf büyüklüğüne duyarsız olur. Bu öznitelik sadece büyük harfe dönüşüm özelliği etkin olan dosya sistemlerindeki boş dizinlerde değiştirilebilir.
+.sp
+.TP 4
+\fBi\fR
+\fBi\fR özniteliği atanmış bir dosyada değişiklik yapılamaz: Dosya silinemez, ismi değiştirilemez, dosyaya bağ oluşturulamaz, dosyanın temel verilerinin çoğu değiştirilemez ve dosya yazma kipinde açılamaz. Yalnızca root kullanıcısı veya \fBCAP_LINUX_IMMUTABLE\fR yeteneğine sahip bir süreç bu özniteliği atayabilir veya silebilir.
+.sp
+.TP 4
+\fBI\fR
+\fBI\fR özniteliği, dizinin htree kodu tarafından isim-değer çifti tabloları kullanılarak indislendiğini belirtmek için kullanılır. Bu öznitelik \fBchattr\fR kullanarak atanamaz veya kaldırılamaz ama \fBlsattr\fR(1) ile görüntülenebilir.
+.sp
+.TP 4
+\fBj\fR
+\fBj\fR özniteliği atanmış bir dosyanın tüm verisi dosyanın kendisine yazılmadan önce, etx3/ext4 günlükleme sistemine yazılır. Fakat burada dosya sisteminin "data=ordered" veya "data=writeback" seçeneklerinden biri ile bağlanmış ve dosya sisteminin günlüklü olması gerekir. Dosya sistemi "data=journalled" seçeneği ile bağlanmışsa, zaten bütün veriler günlüklenmiş durumdadır ve bu niteliğin bir anlamı kalmaz. Yalnızca root kullanıcısı veya \fBCAP_LINUX_IMMUTABLE\fR yeteneğine sahip bir süreç bu özniteliği atayabilir veya silebilir.
+.sp
+.TP 4
+\fBm\fR
+\fBm\fR özniteliği atanmış bir dosya, her dosyanın ayrıca sıkıştırıldığı bir dosya sisteminde sıkıştırmadan muaf tutulur.
+.sp
+.TP 4
+\fBN\fR
+\fBN\fR özniteliği atanmış bir dosyanın verisi doğrudan dosya düğümünün kendisinde tutulur. Bu öznitelik \fBchattr\fR kullanarak atanamaz veya kaldırılamaz ama \fBlsattr\fR(1) ile görüntülenebilir.
+.sp
+.TP 4
+\fBP\fR
+\fBP\fR özniteliği atanmış bir dizinde proje kimlikleri hiyerarşik bir yapı içinde tutulmak zorundadır.Yani, bu dizinde oluşturulan dosyalar ve dizinler bu dizinin proje kimliğini miras alır ve bunlar başka bir dizine taşınmak istenirse proje kimliklerinin eşleşmesi gerektiği için yeniden adlandırma işlemleri de kısıtlanır. Ayrıca, bu dizindeki bir dosyaya sabit bir bağ oluşturulabilmek için dosyanın proje kimliği ile hedef dizininki eşleşmek zorundadır.
+.sp
+.TP 4
+\fBs\fR
+\fBs\fR özniteliği atanmış bir dosya silindiğinde dosya blokları sıfırlarla doldurularak diske yazılır. Ayrıca, \fBYAZILIM HATALARI ve SINIRLAMALAR\fR bölümü de okunmalıdır.
+.sp
+.TP 4
+\fBS\fR
+\fBS\fR özniteliği atanmış bir dosyada değişiklik yapıldığında değişiklikler anında diske yazılır, dosya alt sisteminin ’\fBsync\fR’ seçeneği ile bağlanmasına eşdeğer özellik sağlar.
+.sp
+.TP 4
+\fBt\fR
+\fBt\fR özniteliği atanmış bir dosyanın sonunda, diğer dosyalar ile birleştirmeden dolayı blok parçalanması oluşmaz (ardarda eklemeyi destekleyen dosya sistemleri için). LILO gibi dosya sistemini doğrudan okuyan ve dosyalarda ardarda eklemeyi anlamayan uygulamalar için bu gereklidir. Ek bilgi: Bu yazı itibariyle, ext2, ext3 ve ext4 dosya sistemleri dosyaların arda arda birbirlerine eklenmesini desteklememektedir.
+.sp
+.TP 4
+\fBT\fR
+\fBT\fR özniteliği atanmış bir dizin, Orlov blok ayırıcının amacına uygun olarak, dizin yapısının tepesi olarak kabul edilir. Bu, ext3 ve ext4 tarafından kullanılan blok ayırıcıya, bu dizin altındaki alt dizinlerin ilişkili olmadığı ve bu nedenle ayırma amacıyla bloklarının ayrı tutulması gerektiğine dair bir ipucudur. Örneğin \fI/home\fR dizinine \fBT\fR özniteliğini atamak çok iyi bir fikirdir, böylece \fI/home/john\fR ve \fI/home/mary\fR ayrı blok gruplarına yerleştirilir. Bu özniteliğin ayarlanmadığı dizinler için Orlov blok ayırıcısı, mümkün olduğunca alt dizinleri birbirine daha yakın gruplandırmaya çalışacaktır.
+.sp
+.TP 4
+\fBu\fR
+\fBu\fR özniteliği atanmış bir dosya silindiğinde içeriği saklanır. Bu, kullanıcıya, silinmiş dosyanın geri getirilmesini isteme olanağı sağlar. Ayrıca, \fBYAZILIM HATALARI ve SINIRLAMALAR\fR bölümü de okunmalıdır.
+.sp
+.TP 4
+\fBx\fR
+\fBx\fR özniteliği bir dosya veya dizine atanabilir. Öznitelik var olan bir dizine atanırsa, bu dizinde daha sonra oluşturulan dizin ve dosyalar özniteliği miras alır ancak dizinde öznitelik atanmadan önce var olan dosya ve dizinlere bu uygulanmaz.
+.sp
+.TP 4
+\fBV\fR
+\fBV\fR özniteliği atanmış bir dosya, dosya sistemi doğrulamalı dosya haline gelir. Dosyanın üzerine yazılamaz ve dosya sistemi, dosyanın tüm içeriğini kapsayan bir şifreleme aşıyla, örneğin bir Merkle ağacı aracılığıyla, okunan tüm verileri otomatik olarak doğrular. Bu, dosya içeriğinin verimli bir şekilde doğrulanmasını mümkün kılar. Bu öznitelik \fBchattr\fR kullanarak atanamaz veya kaldırılamaz ama \fBlsattr\fR(1) ile görüntülenebilir.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+\fBchattr\fR Remy Card tarafından yazılmış olup Theodore Ts’o tarafından sürdürülmektedir.
+.sp
+.SH "YAZILIM HATALARI VE SINIRLAMALAR"
+\fBc\fR, \fBs\fR ve \fBu\fR öznitelikleri halen Linux çekirdeğinde gerçeklenmiş olan ext2, ext3 ve ext4 dosya sistemleri tarafından desteklenmemektedir. \fBa\fR ve \fBi\fR öznitelikleri var olan dosya tanıtıcılarına yazma yeteneğinde etkili olmaz.
+.sp
+\fBj\fR özniteliği, sadece ext3 ve ext4 dosya sistemlerinde kullanışlıdır.
+.sp
+\fBD\fR özniteliği sadece Linux çekirdeğinin 2.5.19 ve üstü sürümlerinde kullanışlıdır.
+.sp
+.SH "YARARLANIM"
+\fBchattr\fR, e2fsprogs paketinin bir parçasıdır ve http://e2fsprogs.sourceforge.net adresinden temin edilebilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlsattr\fR(1), \fBbtrfs\fR(5), \fBext4\fR(5), \fBxfs\fR(5)
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

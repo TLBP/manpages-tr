@@ -1,0 +1,249 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "ROTATELOGS" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+rotatelogs - Apache günlüklerini döndürmek için borulu günlük kayıt aracı
+.sp
+.SH KULLANIM
+.IP \fBrotatelogs\fR 11
+[ \fB-l\fR ] [ \fB-L\fR \fIisim\fR ] [ \fB-p\fR \fIuygulama\fR ] [ \fB-f\fR ] [ \fB-D\fR ] [ \fB-t\fR ] [ \fB-v\fR ] [ \fB-e\fR ] [ \fB-c\fR ] [ \fB-n\fR \fIdosya_sayısı\fR ] \fIdosyaismi süre\fR|\fIboyut\fR(B|K|M|G) [ \fIsaat_farkı\fR ]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBrotatelogs\fR, Apache’nin borulu günlük dosyaları özelliği ile birlikte kullanmak için tasarlanmış basit bir uygulamadır. Günlük dosyasının azami boyutuna göre veya belli aralıklarla günlük dosyalarını döndürür.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-l\fR
+GMT yerine yerel zamanın kullanılmasını sağlar.
+.sp
+.TP 4
+\fB-L\fR \fIbagismi\fR
+Belirtilen bağ dosyası ismine geçerli günlük dosyasından kalıcı bir bağ oluşturulur. \fBtail -F bagismi\fR gibi bir komut kullanılarak günlüğün sürekli izlenmesi için kullanılabilir.
+.sp
+Bağ ismi mutlak bir yol içermiyorsa, \fBrotatelogs\fR’un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
+.sp
+.TP 4
+\fB-p\fR \fIuygulama\fR
+Belirtildiği takdirde, \fBrotatelogs\fR yeni bir günlük dosyasının her açılışında belirtilen uygulamayı çalıştırır. Yeni açılan dosyanın ismi uygulamaya ilk değiştirge olarak aktarılır. Bu işlem bir döndürme sonrası yapılırsa eski günlük dosyası ikinci değiştirge olarak aktarılır. \fBrotatelogs\fR işlemini sürdürmek için belirtilen uygulamanın sonlanmasını beklemez, dolayısıyla sonlanma soucunda döndürülen hata kodunu günlüğe kaydetmez. Çalıştırılan uygulama \fBrotatelogs\fR ile aynı \fIstdin\fR, \fIstdout\fR ve \fIstderr\fR’i kullanır ve ortamı da miras alır.
+.sp
+.TP 4
+\fB-f\fR
+İlk günlük girdisinin okunmasını beklemeden \fBrotatelogs\fR başlar başlamaz günlük dosyasının açılmasını sağlar. Çok meşgul sitelerde, sunucu başlatılıp ilk istek sunuluncaya kadar geçen zamanda günlük dosyasının yokluğu otomatik işlemler yapan bazı günlükleme araçlarında sorunlara yol açabilir. Bu seçenek bu gibi durumlarda yararlıdır.
+.sp
+.TP 4
+\fB-D\fR
+Günlük dosyasının yerleştirileceği dizini (eğer yoksa) üst dizinleri ile birlikte yapılandırır. Bu, \fBstrftime\fR(3) işlevinin sırf dosya için değil yol için de kullanılmasını sağlar.
+.sp
+.TP 4
+\fB-t\fR
+Günlük dosyasının döndürülmek yerine tepeden kırpılmasına sebep olur. Günlüğün \fBtail\fR(1) gibi bir araç tarafından gerçek zamanda işlendiği ve veriyi saklamanın gerekmediği durumda kullanışlıdır. Dosya ismine bir sonek eklenmez, ancak biçem dizgesi ’%’ karakteri içeriyorsa buna uyulur.
+.sp
+.TP 4
+\fB-v\fR
+Standart hataya verilen çıktı daha ayrıntılı olur. Çıktı, yapılandırma çözümlemesinin sonuçlarını ve tüm dosya açma/kapama işlemlerini içerir.
+.sp
+.TP 4
+\fB-e\fR
+Günlüğü standart çıktıya basar. Günlüğün zincirdeki ilgili araç tarafından gerçek zamanda işlenmesi gerektiğinde kullanışlıdır.
+.sp
+.TP 4
+\fB-c\fR
+Her döngü için boş bile olsa, günlük dosyası oluşturur.
+.sp
+.TP 4
+\fB-n\fR \fIdosya_sayısı\fR
+Zaman damgalarına bakılmaksızın bir dosya dizisi açılır. Örneğin \fB-n3\fR belirtilirse "\fIlogfile\fR", "\fIlogfile.1\fR", "\fIlogfile.2\fR" dosyaları açılır ve "\fIlogfile\fR" üzerine yazılır. 2.4.5 ve sonraki sürümler içindir.
+.sp
+.TP 4
+\fIdosyaismi\fR
+Günlük dosyasının ismi yoluyla birlikte belirtilir. \fIdosyaismi\fR ’%’ karakterleri içeriyorsa bunlar \fBstrftime\fR(3) biçem belirteçleri olarak ele alınır. Aksi takdirde, otomatik olarak \fI.nnnnnnnnnn\fR uzantısı üretilir (\fB-t\fR seçeneği kullanılmadıkça). Uzantı saniye cinsindendir ve her iki durumda da bu değer, mevcut döngü diliminin başlangıcına göre hesaplanır. Örneğin, döndürmenin 86400 saniyede bir yapılacağı belirtilmişse, \fBstrftime\fR(3) biçeminde oluşturulan saat, dakika ve saniye alanları, 24 saatlik sürenin başlangıcını (geceyarısı) göstermek üzere sıfırlarla doldurulur.
+.sp
+\fBstrftime\fR(3) dosyaismi biçemlemesi kullanılırken, günlük dosyası biçeminin günlük dosyası döndürülürken her zaman farklı bir dosya ismi üretecek yeterlilikte parçacıklı yapıya sahip olduğundan emin olmalısınız. Aksi takdirde döndürme işlemi yeni bir dosya başlatmak yerine hep aynı dosyanın üzerine yazar. Örneğin, \fIlogfile\fR için \fI/var/log/errorlog.%Y-%m-%d\fR belirtilmişse 5 megabaytta bir yeni bir günlük dosyasına başlanacaktır. Fakat 5 megabayta gün içinde iki kez ulaşılırsa aynı günlük dosyası üretilir ve günlük hep aynı dosyanın üzerine yazılır.
+.sp
+Günlük dosyası mutlak bir yol içermiyorsa, \fBrotatelogs\fR’un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
+.sp
+.TP 4
+\fIsüre\fR
+Günlük dosyasının yenisinin kaç saniyede bir açılacağı belirtilir. Örneğin, bu süre 3600 saniye ise günlük dosyası her saat başında yenilenir; 86400 saniye ise her geceyarısı yenilenir. (Bu süre zarfında günlüğe kaydedilecek bir olay gerçekleşmemişse dosya oluşturulmaz.)
+.sp
+.TP 4
+\fIboyut\fR\fB(B|K|M|G)\fR
+Boyuta göre döndürme için azami dosya boyutu. Belirtilenin süre değil de boyut değeri olarak ele alınması için değerin sonuna şu karakterlerden biri eklenmelidir: \fBB\fR (Bayt), \fBK\fR (kilobayt), \fBM\fR (megabayt), \fBG\fR (gigabayt).
+.sp
+Süre ve boyut birlikte belirtilmişse boyut süreden sonra belirtilmelidir. Dosya yenilemesi, bunlardan hangisi daha önce aşılırsa o zaman gerçekleşir.
+.sp
+.TP 4
+\fIsaat_farkı\fR
+Koordinatlı evrensel zamana göre "dakika" cinsinden fark. Belirtilmezse, sıfır öntanımlıdır. Örneğin, -5 saatlik bir zaman diliminde bulunuyorsanız bu değer \fB-300\fR olmalıdır. Çoğu durumda, bunun yerine \fB-l\fR seçeneğini kullanmak gerekir.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.RS 7
+.nf
+CustomLog "|bin/rotatelogs /var/log/logfile 86400" common
+.fi
+.sp
+.RE
+\fInnnn\fR, günlük kaydının başladığı sistem zamanı olmak üzere \fI/var/log/logfile.\fR\fInnnn\fR dosyası oluşturulur. Bu zaman, daima döngü süresinin katları olacağından bunu cron betiklerinizi eşzamanlamakta kullanabilirsiniz. Her döngü süresinin sonunda (burada 24 saat sonra) yeni bir günlük dosyası açılır.
+.sp
+.RS 7
+.nf
+CustomLog "|bin/rotatelogs -l /var/log/logfile.%Y.%m.%d 86400" common
+.fi
+.sp
+.RE
+\fIyyyy\fR, yıl; \fImm\fR, ay; \fIdd\fR, ayın gününü belirtmek üzere \fI/var/log/logfile.\fR\fIyyyy.mm.dd\fR dosyası oluşturulur. Her gün yerel zamanla geceyarısı yeni bir günlük dosyasına geçilecektir.
+.sp
+.RS 7
+.nf
+CustomLog "|bin/rotatelogs /var/log/logfile 5M" common
+.fi
+.sp
+.RE
+Günlük dosyası 5 megabaytlık olunca yenisinin oluşturulmasını sağlar.
+.sp
+.RS 7
+.nf
+ErrorLog "|bin/rotatelogs /var/log/errorlog.%Y-%m-%d-%H_%M_%S 5M"
+.fi
+.sp
+.RE
+Hata günlüğünün 5 megabaytta bir \fIerrorlog.\fR\fIYYYY-mm-dd-HH_MM_SS\fR biçemli bir isimle oluşturulmasını sağlar.
+.sp
+.RS 7
+.nf
+CustomLog "|bin/rotatelogs -t /var/log/logfile 86400" common
+.fi
+.sp
+.RE
+\fI/var/log/logfile\fR dosyasını oluşturur, sunucu başlatılırken ve günde bir kere dosyanın tepesi kırpılır. Bu senaryoda ayrı bir sürecin (\fBtail\fR(1) gibi) dosyayı gerçek zamanlı işleyeceği umulur.
+.sp
+.SH "TAŞINABİLİRLİK"
+Aşağıdaki günlük dosyası biçem belirteçlerinin tüm \fBstrftime\fR(3) gerçeklenimlerince desteklenmesi gerekir. Kullandığınız kütüphaneye özgü belirteçler için sisteminizdeki \fBstrftime\fR(3) kılavuz sayfasına bakınız.
+.sp
+.TP 4
+\fB%A\fR
+tam gün ismi (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%a\fR
+3 harflik gün ismi (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%B\fR
+tam ay ismi (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%b\fR
+3 harflik ay ismi (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%c\fR
+tarih ve saat (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%d\fR
+2 haneli ay günü numarası
+.sp
+.TP 4
+\fB%H\fR
+2 haneli saat (24 saatlik)
+.sp
+.TP 4
+\fB%I\fR
+2 haneli saat (12 saatlik)
+.sp
+.TP 4
+\fB%j\fR
+3 hanelik yıl günü numarası
+.sp
+.TP 4
+\fB%M\fR
+2 haneli dakika
+.sp
+.TP 4
+\fB%m\fR
+2 haneli ay
+.sp
+.TP 4
+\fB%p\fR
+12 saatlik kip için öö/ös (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%S\fR
+2 haneli saniye
+.sp
+.TP 4
+\fB%U\fR
+2 haneli yılın hafta numarası (Haftanın ilk gününün Pazar olduğu varsayımıyla)
+.sp
+.TP 4
+\fB%W\fR
+2 haneli yılın hafta numarası (Haftanın ilk gününün Pazartesi olduğu varsayımıyla)
+.sp
+.TP 4
+\fB%w\fR
+1 hanelik haftanın gün numarası (Haftanın ilk gününün Pazar olduğu varsayımıyla)
+.sp
+.TP 4
+\fB%X\fR
+saat (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%x\fR
+tarih (yerelleştirilmiş)
+.sp
+.TP 4
+\fB%Y\fR
+4 hanelik yıl
+.sp
+.TP 4
+\fB%y\fR
+2 hanelik yıl
+.sp
+.TP 4
+\fB%Z\fR
+zaman dilimi ismi
+.sp
+.TP 4
+\fB%%\fR
+’%’ iminin kendisi
+.sp
+.PP
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,541 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Man page for man
+ *
+ * Copyright (C) 1994, 1995, Graeme W. Wilford. (Wilf.)
+ * Copyright (C) 2001-2019 Colin Watson.
+ *
+ * You may distribute under the terms of the GNU General Public
+ * License as specified in the file COPYING that comes with the
+ * man-db distribution.
+ *
+ * Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "MAN" 1 "Mart 2022" "mandb 2.10.2" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+man - sistem kılavuz sayfaları için arayüz
+.sp
+.SH KULLANIM
+.IP \fBman\fR 4
+[\fIman_seçenekleri\fR] [[\fIbölüm\fR] \fIsayfa\fR...]...
+.IP \fBman\fR 4
+\fB-k\fR [\fIapropos_seçenekleri\fR] \fIifade\fR...
+.IP \fBman\fR 4
+\fB-K\fR [\fIman_seçenekleri\fR] [\fIbölüm\fR] \fIkoşul\fR...
+.IP \fBman\fR 4
+\fB-f\fR [\fIwhatis_seçenekleri\fR] \fIsayfa\fR...
+.IP \fBman\fR 4
+\fB-l\fR [\fIman_seçenekleri\fR] \fIdosya\fR...
+.IP \fBman\fR 4
+\fB-w\fR|\fB-W\fR [\fIman_seçenekleri\fR] \fIsayfa\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBman\fR kılavuz sayfalarını biçimler ve görüntüler. Belirtilen her \fIsayfa\fR normalde bir uygulamanın, komutun veya işlevin adıdır. Belirtilen bu değiştirgelerin her biriyle ilişkili kılavuz sayfası bulunur ve görüntülenir. Bir \fIbölüm\fR belirtilmişse \fBman\fR yalnızca o kılavuz bölümüne bakacaktır. Öntanımlı eylem, önceden tanımlanmış bir sırayı izleyerek (bkz. \fBÖNTANIMLILAR\fR) mevcut tüm bölümlerde arama yapmak ve birkaç \fIbölüm\fRde olsa bile yalnızca bulunan ilk \fIsayfa\fRyı göstermektir.
+.sp
+Aşağıdaki tabloda, kılavuzun bölüm numaraları ve içerdikleri sayfa türleri gösterilmiştir.
+.sp
+.RS 0
+.nf
+1   Uygulamalar ve kabuk komutları
+2   Sistem çağrıları (çekirdek tarafından sağlanan işlevler)
+3   Kütüphane çağrıları (uygulama kütüphanelerindeki işlevler)
+4   Özel dosyalar (genelde \fI/dev\fR dizinindekiler)
+5   Dosya biçemleri ve uzlaşımları, örn, \fI/etc/passwd\fR gibi.
+6   Oyunlar
+7   Çeşitli (makro paketleri ve uzlaşımları), örn, \fBman\fR(7), \fBgroff\fR(7), \fBman-pages\fR(7)
+8   Sistem Yönetim Komutları (genelde root tarafından kullanılanlar)
+9   Çekirdek yordamları [standart dışı]
+.fi
+.sp
+.RE
+Bir kılavuz \fIsayfa\fRsı çeşitli bölümlerden oluşur.
+.sp
+Geleneksel bölüm adları: \fBİSİM, SÖZDİZİMİ, KULLANIM, AÇIKLAMA, SEÇENEKLER, ÇIKIŞ DURUMU, DÖNÜŞ DEĞERİ, HATALAR, ORTAM DEĞİŞKENLERİ, İLGİLİ DOSYALAR, YETERSİZLİKLER, UYUMLULUK, GERİBİLDİRİM, ÖRNEKLER, YAZAN, İLGİLİ BELGELER, ÇEVİREN\fR
+.sp
+\fBKULLANIM\fR bölümünde uygulanan geleneksel gösterimler:
+.sp
+.RS 0
+.nf
+\fBkalın yazı\fR       gösterildiği gibi yazılır
+\fIeğik yazı\fR        yerine uygun değiştirge konur
+[\fB-abc\fR]           [ ] içindeki herşey seçimliktir
+\fB-a\fR|\fB-b\fR            aralarında | bulunanlar birlikte kullanılamaz
+\fIdeğiştirge\fR ...   değiştirge yinelenebilir
+[\fIifade\fR] ...      [ ] içindeki herşey yinelenebilir
+.fi
+.sp
+.RE
+Gerçek gösterim, çıktı aygıtına bağlı olarak değişebilir. Örneğin, \fBman\fR uçbirimde çalışırken genellikle eğik yazamaz ve bunun yerine genellikle altı çizili veya renkli metin kullanır.
+.sp
+Komut veya işlev gösterimi, tüm olası çağrılarla eşleşmesi gereken bir kalıptır. Bazı durumlarda, bu kılavuz sayfasının \fBKULLANIM\fR bölümünde gösterildiği gibi birkaç özel çağrının gösterilmesi önerilir.
+.sp
+.SH "ÖRNEKLER"
+.TP 4
+\fBman\fR \fIls\fR
+\fIls\fR uygulamasının kılavuz sayfasını gösterir.
+.sp
+.TP 4
+\fBman\fR \fIman.7\fR
+\fI7\fR. bölümdeki \fIman\fR makro paketi için kılavuz sayfasını gösterir. \fBman\fR \fI7 man\fR kullanımı da geçerlidir.
+.sp
+.TP 4
+\fBman\fR \fI’man(7)’\fR
+\fI7\fR. bölümdeki \fIman\fR makro paketi için kılavuz sayfasını gösterir. Üstteki kullanımın eşdeğeridir. Kılavuz sayfasından kopyalayıp yapıştırarak kullanım için yaralıdır. (Yaylı ayraçları kabuğun yorumlamasından korumak için tırnak içine almak gerekir.)
+.sp
+.TP 4
+\fBman -a\fR \fIintro\fR
+Kılavuzda yer alan mevcut tüm \fIintro\fR kılavuz sayfalarını arka arkaya görüntüler. Sayfa geçişleri arasında çıkmak veya herhangi birini atlamak mümkündür.
+.sp
+.TP 4
+\fBman -t\fR \fIbash\fR | \fIlpr -Pps\fR
+\fIbash\fR kılavuz sayfasını öntanımlı \fBtroff\fR veya \fBgroff\fR biçeminde yorumlar ve \fIps\fR adlı yazıcıya borular. Öntanımlı \fBgroff\fR çıktısı normalde PostScript’tir. \fB-t\fR seçeneğine bağlı işlemciyi öğrenmek için \fBman --help\fR çıktısına bakılabilir.
+.sp
+.TP 4
+\fBman -l -T\fR\fIdvi ./foo.1x.gz\fR > \fI./foo.1x.dvi\fR
+Bu komut \fI/foo.1x.gz\fR adlı nroff kaynak kılavuz sayfasının sıkıştırmasını açıp içeriğini aygıttan bağımsız (dvi) bir dosya olarak biçemler. \fB-T\fR seçeneği sayfalandırıcı olmaksızın çıktıyı standart çıktıya gönderdiğinden dosyaya yönlendirme gerekmiştir. Çıktı \fBxdvi\fR(1) gibi bir uygulama ile görüntülenebileceği gibi \fBdvips\fR(1) gibi bir uygulama ile PostScript’e de dönüştürülebilir.
+.sp
+.TP 4
+\fBman -k\fR \fIprintf\fR
+Düzenli ifade olarak \fIprintf\fR sözcüğü için kılavuz sayfası isimleri ve kısa açıklamalarında arama yapar. Eşleşenleri basar. \fBapropos\fR \fIprintf\fR komutuna eşdeğerdir.
+.sp
+.TP 4
+\fBman -f\fR \fIsmail\fR
+\fIsmail\fR ile ilgili kılavuz sayfalarını arayıp bulunanların kısa açıklamalarını basar. \fBwhatis\fR \fIsmail\fR komutuna eşdeğerdir.
+.sp
+.PP
+.sp
+.SH "GİRİŞ"
+Kullanıcıya mümkün olduğunca fazla esneklik sağlamak için \fBman\fR birçok seçenek içerir. Arama yolu, bölüm sırası, çıktı işlemcisi ve aşağıda ayrıntıları verilen diğer davranış ve işlemlerde değişiklikler yapılabilir.
+.sp
+Çeşitli ortam değişkenleri tanımlandıkları takdirde, \fBman\fR’ın çalışmasını belirlemek için sorgulanır. \fB$MANOPT\fR "catch-all" değişkenine, bir seçeneğin değiştirgesinin parçası olarak kullanılan boşlukların ters eğik çizgi ile öncelenmesi gerekliliği dışında, komut satırı biçiminde herhangi bir dizgeyi atamak mümkündür. \fBman\fR, kendi komut satırını çözümlemeden önce $MANOPT’u çözümler. Bir değiştirge gerektiren seçenekler, komut satırındakiler tarafından geçersiz kılınacaktır. $MANOPT’a atanan tüm seçenekleri sıfırlamak için, ilk komut satırı seçeneği olarak \fB-D\fR belirtilebilir. Bu, \fBman\fR’ın $MANOPT’ta belirtilen seçenekleri "unutmasını" sağlar, ancak yine de geçerli olmaları gerekir.
+.sp
+Kılavuz sayfaları normalde \fI/usr/share/man\fR gibi bir dizin altında \fBnroff\fR(1) biçeminde saklanır. Bazı kurulumlarda, başarımı artırmak için önceden biçimlendirilmiş \fBcat\fR(1) sayfaları da olabilir. Bu dosyaların nerede saklandığına ilişkin ayrıntılar için bkz: \fBmanpath\fR(5)
+.sp
+Bu paket, yerel ayarınıza göre belirlenen birden çok dilde kılavuz sayfasını destekler. Sisteminiz bunu sizin için otomatik olarak ayarlamadıysa, tercih ettiğiniz yereli belirtmek için \fBLC_MESSAGES\fR, \fBLANG\fR veya sisteme bağlı başka bir ortam değişkenini ayarlamanız gerekebilir. Yerel, POSIX biçiminde şöyle belirtilebilir:
+.sp
+<dil>[_<ülke>[.<karakter-kümesi>[,<sürüm>]]]
+.sp
+İstenen sayfa yerelinizde mevcutsa, standart sayfanın (genelde ingilizcedir) yerine bu sayfa gösterilir.
+.sp
+Bu paketle birlikte verilen çevirilerin ana dilinizde mevcut olmadığını fark ederseniz ve bunları sağlamak istiyorsanız, lütfen bu tür faaliyetleri koordine edecek olan bir üstlenici ile iletişime geçin.
+.sp
+Kılavuz sayfaları normalde uygulamanın, işlevin veya belgeledikleri diğer konuların sürdürücüleri tarafından yazılır ve sürdürülür ancak bu pakete dahil değildir. Bir kılavuz sayfasının eksik veya yetersiz olduğunu fark ederseniz, lütfen bunu söz konusu paketin sürdürücülerine bildirin.
+.sp
+Bu kılavuz göstericisinde bulunan diğer özellikler ve eklentiler hakkında bilgi için lütfen paketle birlikte verilen belgeleri okuyun.
+.sp
+.SH "ÖNTANIMLILAR"
+Aranacak bölümlerin sırası \fB$MANSECT\fR ortam değişkeni veya \fI/etc/manpath.config\fR içindeki SECTION yönergesi ile yeniden belirlenebilir. Öntanımlı olarak aşağıdaki gibidir:
+.sp
+.RS 4
+.nf
+1 n l 8 3 2 3posix 3pm 3perl 3am 5 4 9 6 7
+.fi
+.sp
+.RE
+Biçimlendirilmiş kılavuz sayfası, sayfalama uygulaması kullanılarak görüntülenir. Bu, birkaç yolla belirtilebilir, belirlenmemişse öntanımlısı kullanılır (ayrıntılar için \fB-P\fR seçeneğine bakın).
+.sp
+Süzme bilgisi bir dizi yolla deşifre edilir. İlk olarak, komut satırı seçeneği \fB-p\fR veya \fBMANROFFSEQ\fR ortam değişkeni sorgulanır. \fB-p\fR kullanılmadıysa ve ortam değişkeni de atanmamışsa, \fBnroff\fR dosyasının ilk satırı bir önişlemci dizgesi olarak çözümlenir. Geçerli bir önişlemci dizgesi içermesi için, ilk satırın şuna benzemesi gerekir:
+.sp
+’\\" <dizge>
+.sp
+Burada dizge, aşağıdaki \fB-p\fR seçeneğinde açıklanan harflerin birkaçından oluşabilir.
+.sp
+Yukarıdaki yöntemlerden hiçbiri herhangi bir süzme bilgisi sağlamıyorsa, öntanımlı küme kullanılır.
+.sp
+Süzme bilgilerinden ve birincil biçimlendiriciden (\fBnroff\fR veya \fB-t\fR ile \fBtroff\fR veya \fBgroff\fR) bir biçimlendirme borusu oluşturulur ve yürütülür. Veya, man ağacı kökünde \fImandb_nfmt\fR (veya \fB-t\fR ile \fImandb_tfmt\fR) uygulaması mevcutsa, yerine bu uygulama çalıştırılır. Boru, kılavuz kaynak dosyasından, önişlemci dizgesinden ve isteğe bağlı olarak \fB-T\fR veya \fB-E\fR seçeneğinde belirtilen aygıttan geçer.
+.sp
+.SH "SEÇENEKLER"
+Komut satırında, \fBMANOPT\fR’ta veya her ikisinde birden belirtilen değiştirgesiz seçenekler zararlı değildir. Değiştirge gerektiren seçenekler için, her yeniden belirtim önceki değiştirge değerini geçersiz kılar.
+.sp
+.SS "Genel Seçenekler"
+.TP 4
+\fB-C\fR, \fB--config-file\fR=\fIdosya\fR
+Öntanımlı \fI~/.manpath\fR yerine, belirtilen yapılandırma dosyası kullanılır.
+.sp
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Hata ayıklama bilgilerini basar.
+.sp
+.TP 4
+\fB-D\fR, \fB--debug\fR
+Bu seçenek normalde ilk seçenek olarak verilir ve \fBman\fR davranışını öntanımlı değerine sıfırlar. \fBMANOPT\fR ortam değişkenine atanmış olabilecek seçenekleri sıfırlamak için kullanılır. \fB-D\fR’yi izleyen herhangi bir seçenek, her zamanki etkisine sahip olacaktır.
+.sp
+.TP 4
+\fB--warnings\fR[=\fIuyarılar\fR]
+\fBgroff\fR uyarıları etkinleştirilir. Bu, kılavuz sayfalarının kaynak metninde kararlılık denetimleri yapmak için kullanılabilir. \fIuyarılar\fR uyarı isimlerinin virgül ayraçlı listesidir. Belirtilmezse, "mac" öntanımlıdır. Kullanılabilecek uyarı isimlerinin listesi için bkz: \fBinfo ’(groff) Warnings’\fR
+.sp
+.PP
+.sp
+.SS "Ana İşlem Kipleri"
+.TP 4
+\fB-f\fR, \fB--whatis\fR
+\fBwhatis\fR ile aynıdır. Varsa, kılavuz sayfasının kısa açıklamasını gösterir. Ayrıntılar için bkz: \fBwhatis\fR(1).
+.sp
+.TP 4
+\fB-k\fR, \fB--apropos\fR
+\fBapropos\fR ile aynıdır. Kılavuz sayfalarının isim ve kısa açıklamalarında arama yapar. Ayrıntılar için bkz: \fBapropos\fR(1).
+.sp
+.TP 4
+\fB-K\fR, \fB--global-apropos\fR
+Tüm kılavuz sayfalarında metin arar. Bu, zorlanmış bir arama olup muhtemelen biraz zaman alır; aranması gereken sayfa sayısını azaltmak için bir bölüm belirtmek süreyi kısaltabilir. Arama terimleri basit dizgeler (öntanımlı) veya \fB--regex\fR seçeneği kullanılıyorsa düzenli ifadeler olabilir.
+.sp
+Arama yorumlanmış metinde değil, kılavuz sayfalarının kendinde yapılır, bu sebeple dosya içindeki yorum satırları gibi şeyler hatalı sonuçlara yol açabilir. Aramanın yorumlanmış metin üzerinde yapılması daha uzun sürerdi.
+.sp
+.TP 4
+\fB-l\fR, \fB--local-file\fR
+"Yerel" kipi etkinleştirir. Sistemdeki kılavuz sayfalarında arama yapmak yerine yerel kılavuz dosyalarını biçimler ve görüntüler. Belirtilen her kılavuz sayfası, doğru biçimde bir nroff kaynak dosyası olarak yorumlanacaktır. cat dosyası üretilmez. Değiştirgelerden biri ’-’ ise, girdi standart girdiden alınır. Bu seçenek kullanılmadığında ve \fBman\fR gerekli sayfayı bulamazsa, hata iletisini görüntülemeden önce, adı bir dosya adı olarak kullanarak ve tam bir eşleşme arayarak bu seçenek sağlanmış gibi davranmaya çalışır.
+.sp
+.TP 4
+\fB-w\fR, \fB--where\fR, \fB--path\fR, \fB--location\fR
+Aslında man sayfalarını görüntülemez, sadece biçemlenecek veya görüntülenecek kaynak dosyaların bulunduğu yerleri bildirir. \fB-a\fR seçeneğiyle kullanılmışsa, arama koşullarına uyan tüm kaynak dosyaların konumları görüntülenir.
+.sp
+.TP 4
+\fB-W\fR, \fB--where-cat\fR, \fB--location-cat\fR
+Aslında kılavuz sayfalarını görüntülemez, sadece görüntülenecek önceden biçimlenmiş cat dosyalarının bulunduğu yerleri bildirir. \fB-a\fR seçeneğiyle kullanılmışsa, arama koşullarına uyan tüm önceden biçimlenmiş cat dosyalarının konumları görüntülenir.
+.sp
+\fB-w\fR ve \fB-W\fR birlikte belirtilmişse, kaynak ve cat dosyaları aralarına boşluk konularak birlikte gösterilir. Bu seçeneklere \fB-a\fR seçeneği de katılmışsa, eşleşen tüm olası dosya konumları görüntülenir.
+.sp
+.TP 4
+\fB-c\fR, \fB--catman\fR
+Bu seçenek genel kullanım için değildir. Sadece \fBcatman\fR tarafından kullanılmalıdır.
+.sp
+.TP 4
+\fB-R\fR, \fB--recode\fR[=\fIkodlama\fR]
+Kılavuz sayfasını olağan yolla biçimlendirmek yerine, kaynak dosyayı belirtilen kodlamaya dönüştürüp çıktılar. Kaynak dosyanın kodlaması zaten biliniyorsa, doğrudan \fBmanconv\fR(1) uygulaması da kullanılabilir. Ancak bu seçenek, kılavuz sayfası dizinlerine benzer bir yapıya önceden kurulmuş olmaları koşuluyla, her birinin kodlamasını açıkça belirtmek zorunda kalmadan birkaç kılavuz sayfasını tek bir kodlamaya dönüştürmenize olanak tanır.
+.sp
+Bunun yerine, çok sayıda dosyayı dönüştürecek şekilde tasarlandığından çok daha hızlı olan \fBman-recode\fR(1) uygulamasının kullanımı tercih edilebilir.
+.sp
+.PP
+.sp
+.SS "Kılavuz Sayfalarında Arama"
+.TP 4
+\fB-L\fR, \fB--locale\fR=\fIyerel\fR
+\fBman\fR normalde mevcut yerel ayarını, muhtemelen \fBLC_MESSAGES\fR ve \fBLANG\fR dahil olmak üzere çeşitli ortam değişkenlerini sorgulayan \fBsetlocale\fR(3) C işlevine yapılan bir çağrıyla belirler. Bu seçenek, belirlenen değeri geçici olarak geçersiz kılmak amacıyla, \fBman\fR’a doğrudan bir yerel ayar dizgesi sağlamak içindir. Sayfa araması gerçekten başlayana kadar bunun etkili olmayacağını unutmayın. Yardım iletisi gibi çıktılar her zaman başlangıçta belirlenen yerel ayara göre görüntülenir.
+.sp
+.TP 4
+\fB-m\fR, \fB--systems\fR=\fIsistem\fR[,...]
+Sisteminiz, başka bir işletim sisteminin kılavuz sayfalarına erişimi mümkün kılıyorsa, bu seçenekle onlara erişilebilir. DiğerİS’in kılavuz sayfalarında arama yapmak için \fB-m DiğerİS\fR seçeneği kullanılabilir.
+.sp
+İşletim sistemi isimleri virgüllerle ayrılmış olarak belirtilebilir. Aramaya kendi işletim sisteminizi de katmak isterseniz, listeye onu da ekleyebilirsiniz. Bu seçenek \fBSYSTEM\fR ortam değişkenini geçeriz kılar.
+.sp
+.TP 4
+\fB-M\fR, \fB--manpath\fR=\fIyol\fR
+Başka bir arama yolu belirtmek için kullanılır. \fBman\fR öntanımlı olarak, aranacak yolu saptamak için \fBmanpath\fR(5) tarafından üretilen kodu kullanır. Bu seçenek \fB-m\fR seçeneğini ve \fBMANPATH\fR ortam değişkenini geçersiz kılar.
+.sp
+Bu seçeneğe belirtilen yol, \fBmandb\fR(8) kılavuz sayfasının "Kılavuz Sayfası Sistemi" başlığı altında açıklanan, kılavuz sayfası bölümlerine uygun olarak yapılandırılmış dizin yapısını içeren ana dizinin yolu olmalıdır. Bu yapının dışında kalan kılavuz sayfalarını görüntülemek için \fB-l\fR seçeneği kullanılır.
+.sp
+.TP 4
+\fB-S\fR, \fB-s\fR, \fB--sections\fR=\fIliste\fR
+Aranacak kılavuz bölümleri arama sırasıyla ’:’ veya virgül ayraçlı bir liste olarak belirtilir. Bu seçenek \fBMANSECT\fR ortam değişkenini geçersiz kılar. \fB-s\fR seçeneği System V ile uyumluluk için vardır.)
+.sp
+.TP 4
+\fB-e\fR, \fB--extension\fR=\fIuzantı\fR
+Bazı sistemler, Tcl paketine eşlik edenler gibi büyük kılavuz sayfalası paketlerini ana kılavuz sayfası yapısına dahil eder. \fBexit\fR(3) gibi aynı ada sahip iki kılavuz sayfasına sahip olma sorununu aşmak için, Tcl sayfalarının tümü genellikle l. bölüme atanırdı. Bu talihsiz bir durum olduğu için artık sayfaları doğru bölüme yerleştirmek ve onlara belirli bir "uzantı" atamak mümkün: \fBexit\fR(3tcl). \fBman\fR normal çalışma altında, \fBexit\fR(3tcl) yerine \fBexit\fR(3) sayfasını görüntüler. Bu durumu aşmak ve istediğiniz sayfanın hangi bölümde olduğunu bilmek zorunda kalmamak için, \fBman\fR’a sayfanın hangi pakete ait olması gerektiğini gösteren bir uzantı dizgesi vermek artık mümkün. Yukarıdaki örneği kullanarak, \fBman\fR’a \fB-e tcl\fR seçeneğinin sağlanması, aramayı \fB*tcl\fR uzantısına sahip sayfalarla sınırlayacaktır.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-case\fR
+Kılavuz sayfaları aranırken harf büyüklüğü önemsenmez. Bu öntanımlıdır.
+.sp
+.TP 4
+\fB-I\fR, \fB--match-case\fR
+Kılavuz sayfaları aranırken harf büyüklüğü önemsenir.
+.sp
+.TP 4
+\fB--regex\fR
+\fBapropos\fR(1) ile olduğu gibi, \fIsayfa\fR değiştirgesi bir düzenli ifade olarak ele alınır ve sayfa adları veya kısa açıklamaların herhangi bir bölümüyle eşleşen tüm sayfaları görüntüler. Bir düzenli ifade aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
+.sp
+.TP 4
+\fB--wildcard\fR
+\fBapropos\fR(1) \fB--wildcard\fR’da olduğu gibi, kabuk tarzı joker karakterler kullanarak her \fIsayfa\fR değiştirgesi ile eşleşen sayfa adlarını veya kısa açıklamalarını içeren tüm sayfaları görüntüler. \fIsayfa\fR değiştirgesi, ad veya kısa açıklamanın tamamıyla veya açıklamadaki sözcük sınırlarıyla eşleşmelidir. Bir joker karakter aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
+.sp
+.TP 4
+\fB--names-only\fR
+\fB--regex\fR veya \fB--wildcard\fR seçeneği ile birlikte kullanılmazsa seçenek etkisizdir. Aksi takdirde, \fBwhatis\fR(1)’in yaptığı gibi, sadece sayfa adları eşleştirilmeye çalışılır, kısa açıklamalar değil.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Öntanımlı olarak, bulduğu en uygun kılavuz sayfasını görüntüledikten sonra \fBman\fR çıkar. Bu seçeneğin kullanılması, \fBman\fR’ı arama ifadesi ile eşleşen adlara sahip tüm kılavuz sayfalarını görüntülemeye zorlar.
+.sp
+.TP 4
+\fB-u\fR, \fB--update\fR
+Bu seçenek, \fBman\fR’in kurulu kılavuz sayfaları veritabanı önbelleklerini güncellemesine neden olur. Bu sadece nadir durumlarda gereklidir ve normalde bunun yerine \fBmandb\fR(8) çalıştırmak daha iyidir.
+.sp
+.TP 4
+\fB--no-subpages\fR
+Öntanımlı olarak, \fBman\fR komut satırında verilen kılavuz sayfa adı çiftlerini tire veya alt çizgi içeren tek bir kılavuz sayfa adına eşdeğer olarak yorumlamaya çalışır. Bu, bir dizi alt komutu uygulayan ortak uygulama modelini destekler ve alt komutların her birini çağırmak için kullanılacak olana benzer bir sözdizimi kullanılarak erişilen kılavuz sayfalarını görüntüler. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+$ man -aw git diff
+/usr/share/man/man1/git-diff.1.gz
+.fi
+.sp
+.RE
+.RE
+.IP
+Bu davranışı iptal etmek için, \fB--no-subpages\fR seçeneği kullanılır:
+.sp
+.RS 4
+.RS 4
+.nf
+$ man -aw --no-subpages git diff
+/usr/share/man/man1/git.1.gz
+/usr/share/man/man3/Git.3pm.gz
+/usr/share/man/man1/diff.1.gz
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.PP
+.sp
+.SS "Biçemli Çıktının Denetimi"
+.TP 4
+\fB-P\fR, \fB--pager\fR=\fIsayfalayıcı\fR
+Kullanılacak sayfalayıcı uygulamasını belirtmek için kullanılır. Öntanımlı olarak \fBPAGER\fR kullanılır, tanımsızsa veya çalıştırılamıyorsa \fBcat\fR kullanılır. Bu seçenek MANPAGER ortam değişkenini umursamaz. Komutun kullanılmasından sonra \fBPAGER\fR değişkeni tekrar devreye girer. \fB-f\fR veya \fB-k\fR seçeneği ile birlikte kullanılmaz.
+.sp
+Değer, basit bir komut adı veya değiştirgeleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için değiştirge olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
+.sp
+.TP 4
+\fB-r\fR, \fB--prompt\fR=\fIistem\fR
+Sayfalayıcı olarak \fBless\fR’in son sürümlerinden biri kullanılıyorsa, \fBman\fR komut istemini ve bazı önemli seçeneklerini ayarlamaya çalışır. Öntanımlı komut istemi şuna benzer:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBManual page\fR \fIisim\fR(\fIbölüm\fR) \fBline\fR \fIx\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Burada \fIisim\fR kılavuz sayfasının ismi, \fIbölüm\fR sayfanın bulunduğu bölümü ve \fIx\fR geçerli satır numarasıdır. Buna \fBLESS\fR ortam değişkeni kullanılarak ulaşılır.
+.sp
+\fB-r\fR seçeneğinin bir dizge ile belirtilmesi bu öntanımlı istemi geçersiz kılar. Dizge, geçerli kılavuz sayfasının adına ve "(" ve ")" ile çevrelenen bölüm adına genişletilecek olan \fB$MAN_PN\fR metnini içerebilir. Öntanımlı dizgeyi üreten dizge şöyle ifade edilebilir:
+.sp
+.RS 4
+.RS 4
+.nf
+\fB\\ Manual\\ page\\ \\$MAN_PN\\ ?ltline\\ %lt?L/%L.:
+byte\\ %bB?s/%s..?\\ (END):?pB\\ %pB\\\\%..
+(press h for help or q to quit)\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Yukarıdaki dizge okunabilirliği sağlamak için üç satıra bölünmüştür. Anlamlandırması için \fBless\fR(1) kılavuz sayfasına bakılabilir. Komut istemi dizgesi önce kabuk tarafından yorumlanır. Dizge içindeki tüm çift ve tek tırnaklar ile ters eğik çizgiler öncelenmelidir. Komut istemi dizgesi, ilgili \fBless\fR seçeneklerini izleyen öncelenmiş bir $ ile bitebilir. \fBman\fR dizgede öntanımlı olarak \fB-ix8\fR seçeneklerini kullanır.
+.sp
+komut satırında bunların hiçbiri sağlanmadıysa, aşağıda açıklanan \fBMANLESS\fR ortam değişkeni, öntanımlı komut istemi dizgesini ayarlamak için kullanılabilir.
+.sp
+.TP 4
+\fB-7\fR, \fB--ascii\fR
+7 bitlik bir uçbirimde veya uçbirim öykünücüsünde saf \fBascii\fR(7) kılavuz sayfasını görüntülemek için GNU \fBnroff\fR’u \fBlatin1\fR(7) aygıt açıklaması ile kullanırken bazı karakterler doğru görüntülenmeyebilir. Bu seçenek, saf \fIascii\fR kılavuz sayfalarının \fIlatin1\fR aygıtıyla \fIascii\fR olarak görüntülenmesini sağlar. Herhangi bir \fIlatin1\fR metnini dönüştürmeyecektir. Aşağıdaki tablo gerçekleştirilen dönüşümleri göstermektedir; bazı bölümleri yalnızca GNU \fBnroff\fR’un \fBlatin1\fR(7) aygıtı kullanılırken düzgün görüntülenebilir.
+.sp
+.RS 4
+.RS 0
+.nf
+Açıklama            Sekizlik  latin1   ascii
+---------------------------------------------
+tire imi               255      -        -
+bilye (orta nokta)     267      o        o
+tek tırnak             264      ’        ’
+çarpma imi             327      x        x
+.fi
+.sp
+.RE
+.RE
+.IP
+\fIlatin1\fR sütunu doğru görüntüleniyorsa, uçbirim \fIlatin1\fR karakterleri için ayarlanmış olabilir ve bu seçenek gerekli değildir. \fILatin1\fR ve \fIascii\fR sütunları aynıysa, ya sayfayı bu seçeneği kullanarak okuyorsunuzdur ya da \fBman\fR sayfayı \fIlatin1\fR aygıt açıklamasını kullanarak biçimlendirmemiş demektir. \fIlatin1\fR sütunu eksik veya bozuksa, kılavuz sayfalarını bu seçenekle görüntülemeniz gerekebilir.
+.sp
+Bu seçenek \fB-t, -H, -T, -Z\fR seçenekleri kullanılırken yok sayılır ve GNU olmayan \fBnroff\fR için kullanışsız olabilir.
+.sp
+.TP 4
+\fB-E\fR, \fB--encoding\fR=\fIkodlama\fR
+Çıktıyı öntanımlı olandan farklı bir karakter kodlaması için oluşturur. Geriye dönük uyumluluk için, kodlama \fBascii\fR, \fBlatin1\fR veya \fButf8\fR gibi bir \fBnroff\fR aygıtı olabileceği gibi \fBUTF-8\fR gibi gerçek bir karakter kodlaması da olabilir.
+.sp
+.TP 4
+\fB--no-hyphenation\fR, \fB--nh\fR
+Normalde, \fBnroff\fR, sözcükleri aşırı boşluk bırakmadan bir satıra yerleştirmek için gerekirse, tire içermeyen sözcüklerde bile satır sonlarında metni otomatik olarak tireler. Bu seçenek otomatik tirelemeyi devre dışı bırakır, bu nedenle sözcükler yalnızca zaten tire içeriyorsa tirelenir.
+.sp
+Bir kılavuz sayfası yazıyorsanız ve \fBnroff\fR’un bir sözcüğü uygun olmayan bir noktada tirelememesini sağlamak istiyorsanız, bu seçeneği kullanmayın, bunun yerine \fBnroff\fR belgelerine bakın; örneğin, tirelenebileceğini noktayı belirtmek için bir sözcüğün içine "\\%" koyabilir veya tirelenmesini önlemek için sözcüğün başına "\\%" koyabilirsiniz.
+.sp
+.TP 4
+\fB--no-justification\fR, \fB--nj\fR
+Normalde, \fBnroff\fR metni otomatik olarak hem sağ ve hem de sol kenar boşluğuna yaslar. Bu seçenek, bu şekilde yaslamayı devre dışı bırakır ve metin yalnızca sol kenar boşluğuna yaslanır.
+.sp
+Bir kılavuz sayfası yazıyorsanız ve \fBnroff\fR’un belirli paragrafları yaymasını önlemek istiyorsanız, bu seçeneği kullanmayın, bunun yerine \fBnroff\fR belgelerine bakın; örneğin, hizalama ve yastıklamayı geçici olarak devre dışı bırakmak için "\fB.na\fR", "\fB.nf\fR", "\fB.fi\fR" ve "\fB.ad\fR" makrolarını kullanabilirsiniz.
+.sp
+.TP 4
+\fB-p\fR, \fB--preprocessor\fR=\fIdizge\fR
+\fBnroff\fR veya \fBtroff\fR/\fBgroff\fR’tan önce çalıştırılacak önişlemcilerin sırasını belirtmek için kullanılır. Tüm kurulumlarda önişlemcilerin tamamı bulunmaz. Önişlemcilerden bazıları ve bunları belirtmek için kullanılan harfler şunlardır: \fBeqn (e), grap (g), pic (p), tbl (t), vgrind (v), refer (r)\fR. Bu seçenek, \fBMANROFFSEQ\fR ortam değişkenini geçersiz kılar. \fBzsoelim\fR her zaman ilk önişlemci olarak çalıştırılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--troff\fR
+Kılavuz sayfasını biçimlendirip standart çıktıya göndermek için \fBgroff -mandoc\fR kullanılmasını sağlar. Bu seçenek \fB-H\fR, \fB-T\fR veya \fB-Z\fR ile birlikte gerekli değildir.
+.sp
+.TP 4
+\fB-T\fR, \fB--troff-device\fR=\fIaygıt\fR
+Bu seçenek groff (veya muhtemelen troff’un) çıktısını öntanımlı olandan farklı bir aygıta uygun olacak şekilde değiştirmek için kullanılır. \fB-t\fR seçeneğinin de uygulanmasını sağlar. Groff-1.17’den sağlanan örnekler \fBdvi, latin1, ps, utf8, X75\fR ve \fBX100\fR’ü içerir.
+.sp
+.TP 4
+\fB-H\fR, \fB--html\fR[=\fItarayıcı\fR]
+Bu seçenek \fBgroff\fR’un HTML çıktı üretmesine neden olur ve bu çıktıyı bir tarayıcıda görüntüler. Tarayıcı seçimi, sağlanmışsa isteğe bağlı \fItarayıcı\fR değiştirgesi, \fBBROWSER\fR ortam değişkeni veya (genellikle \fBlynx\fR) tarafından tanımsız yapılmışsa derleme sırasında atanan öntanımlı ile belirlenir. Bu seçenek \fB-t\fR seçeneğinin de uygulanmasını sağlar ve yalnızca GNU \fBtroff\fR ile çalışır.
+.sp
+.TP 4
+\fB-X\fR, \fB--gxditview\fR[=\fIdpi\fR]
+Bu seçenek \fBgroff\fR çıktısını \fBgxditview\fR uygulamasını kullanarak bir pencerede görüntüler. \fIdpi\fR (inç başına nokta) 75, 75-12, 100 veya 100-12 olabilir, öntanımlı olarak 75’tir; -12’li seçenekler, 12 puntoluk temel yazı tipini kullanır. Bu seçenek, sırasıyla X75, X75-12, X100 veya X100-12 aygıtlı \fB-T\fR seçeneğinin de uygulanmasını sağlar.
+.sp
+.TP 4
+\fB-Z\fR, \fB--ditroff\fR
+\fBgroff\fR, \fBtroff\fR’u çalıştıracak ve ardından seçilen aygıta uygun çıktı üretmek için uygun bir son işlemci kullanacaktır. \fBgroff -mandoc\fR sonucu \fBgroff\fR ise, bu seçenek \fBgroff\fR’a aktarılır ve bir son işlemci kullanımını engeller. Bu seçenek \fB-t\fR seçeneğinin de uygulanmasını sağlar
+.sp
+.PP
+.sp
+.SS "Genel Yardım"
+.TP 4
+\fB-?\fR, \fB--help\fR
+Yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB--usage\fR
+Kısa kullanım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+.sp
+.sp
+.SH "ÇIKIŞ DURUMU"
+.TP 4
+\fB0\fR
+Başarılı
+.sp
+.TP 4
+\fB1\fR
+Kullanım, sözdizimi, yapılandırma dosyası hatası
+.sp
+.TP 4
+\fB2\fR
+İşlemsel hata
+.sp
+.TP 4
+\fB3\fR
+Çocuk süreç sfırdan farklı durumla döndü.
+.sp
+.TP 4
+\fB16\fR
+En az bir sayfa, dosya veya sözcük yok ya da eşleşmiyor.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBMANPATH\fR
+Tanımlıysa, değeri kılavuz sayfalarının aranacağı yol olarak kullanılır.
+.sp
+.TP 4
+\fBMANROFFOPT\fR
+Tanımlıysa, değeri sayfa biçemleyicinin (\fBnroff\fR, \fBtroff\fR veya \fBgroff\fR) komut satırına eklenir.
+.sp
+.TP 4
+\fBMANROFFSEQ\fR
+Tanımlıysa, değeri, \fBnroff\fR, \fBtroff\fR veya \fBgroff\fR çalıştırılmadan önce çalıştırılacak önişlemcileri belirlemek için kullanılır. Öntanımlı önişlemci listesi sisteme göre değişir.
+.sp
+.TP 4
+\fBMANSECT\fR
+Tanımlıysa, değeri, kılavuz sayfalarının aranacağı bölümleri sırasıyla içeren ’:’ ayraçlı bir listedir. \fI/etc/manpath.config\fR dosyasının \fBSECTION\fR yönergesindeki değer veya bu değişkende tanımlanmamışsa öntanımlı değer kullanılır: "1 n l 8 3 2 3posix 3pm 3perl 3am 5 4 9 6 7".
+.sp
+.TP 4
+\fBMANPAGER\fR, \fBPAGER\fR
+\fBMANPAGER\fR veya \fBPAGER\fR tanımlıysa (tercihan \fBMANPAGER\fR kullanılır), değeri, kılavuz sayfasını görüntülemek için kullanılan uygulamanın adı olarak kullanılır. Öntanımlı olarak, \fBpager\fR(1) kullanılır, \fBpager\fR bulunamazsa veya çalıştırılamazsa son çare olarak \fBcat\fR kullanılır.
+.sp
+Değer, basit bir komut adı veya değiştirgeleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için değiştirge olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
+.sp
+.TP 4
+\fBMANLESS\fR
+Tanımlıysa değeri, \fB-r\fR seçeneği kullanılarak aktarılmış gibi, \fBless\fR sayfalayıcı için öntanımı komut istemi dizgesi olarak kullanılır (böylece \fB$MAN_PN\fR metninin tüm oluşumları aynı şekilde genişletilir). Örneğin, komut istemi dizgesini koşulsuz olarak "komut istemi dizgem" olarak ayarlamak istiyorsanız, \fBMANLESS\fR’e ’\fB-Ps\fR \fIkomut istemi dizgem\fR’ değerini atayın. \fB-r\fR seçeneğinin kullanılması bu ortam değişkenini geçersiz kılar.
+.sp
+.TP 4
+\fBBROWSER\fR
+Tanımlıysa değeri, \fBman --html\fR ile bir tarayıcı başlatmayı denemek için kullanılan, iki nokta üst üste ayraçlı tarayıcı komutları listesidir. Her komutta, \fB%s\fR, groff’tan gelen HTML çıktısını içeren dosya adıyla; \fB%%\fR, tek bir yüzde işareti (\fB%\fR) ile; ve \fB%c\fR, iki nokta üst üste (\fB:\fR) ile değiştirilir.
+.sp
+.TP 4
+\fBSYSTEM\fR
+Tanımlıysa, etkisi, değeri \fB-m\fR seçeneğine değiştirge olarak belirtildiğinde elde edilen etki gibidir.
+.sp
+.TP 4
+\fBMANOPT\fR
+Tanımlıysa değeri, \fBman\fR’ın komut satırına benzer biçemde olması beklenir ve \fBman\fR’ın komut satırından önce çözümlenir. Diğer tüm insana özgü ortam değişkenleri komut satırı seçenekleri olarak ifade edilebildiğinden ve dolayısıyla \fBMANOPT\fR’a dahil edilmeye aday olduklarından, bunları geçersiz hale getirmesi beklenir. Ek bilgi: Bir seçeneğin değiştirgesinin parçası olarak yorumlanabilecek tüm boşluklardan kaçınılmalıdır.
+.sp
+.TP 4
+\fBMANWIDTH\fR
+Tanımlıysa, bu değişkenin değeri kılavuz sayfasının ne genişlikte görüntüleneceğini belirtmek için kullanılır. Tanımlı değilse sayfa tam ekran genişliğinde (varsa \fBioctl\fR(3) ve \fBCOLUMNS\fR değerini kullanarak veya hiçbiri mevcut değilse 80 karakter genişlikte) görüntülenir. Cat sayfaları yalnızca, öntanımlı biçemleme kullanılabildiğinde, yani uçbirim satır uzunluğu 66 ile 80 karakter arasında olduğunda kaydedilir.
+.sp
+.TP 4
+\fBMAN_KEEP_FORMATTING\fR
+Normalde, çıktı bir uçbirime (bir dosyaya veya boruya) yönlendirilmediğinde, sonucu özel araçlar olmadan okumayı kolaylaştırmak için biçimlendirme karakterleri atılır. Ancak \fBMAN_KEEP_FORMATTING\fR ortam değişkenine boş olmayan herhangi bir değer atanırsa, bu biçimlendirme karakterleri korunur. Bu, biçimlendirme karakterlerini yorumlayabilen man etrafındaki sarmalayıcılar için yararlı olabilir.
+.sp
+.TP 4
+\fBMAN_KEEP_STDERR\fR
+Normalde, çıktı bir uçbirime (genellikle bir sayfalayıcıya) yönlendirilirken, sayfalayıcı ekranı ile etkileşimden kaçınmak için kılavuz sayfalarının biçimlendirilmiş sürümlerini üretmekte kullanılan komuttan gelen hata çıktıları iptal edilir. \fBgroff\fR gibi uygulamalar, genellikle kılavuz sayfasıyla birlikte görüntülendiğinde hoş olmayan ve genellikle kafa karıştırıcı olan zayıf hizalama gibi baskı sorunları hakkında nispeten küçük hata iletileri üretir. Ancak, bazı kullanıcılar yine de onları görmek ister, bu nedenle \fBMAN_KEEP_STDERR\fR ortam değişkenine boş olmayan herhangi bir değer atanırsa, bu hata iletileri görüntülenebilir.
+.sp
+.TP 4
+\fBLANG\fR, \fBLC_MESSAGES\fR
+Sisteme ve gerçeklenime bağlı olarak, geçerli ileti yereli için \fBLANG\fR, \fBLC_MESSAGES\fR ortam değişkenlerinden biri veya her ikisi de sorgulanır. man, iletileri o yerel ayara göre (varsa) görüntüler. Kesin ayrıntılar için \fBsetlocale\fR(3) sayfasına bakılabilir.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.IP "\fI/etc/manpath.config\fR" 4
+man-db yapılandırma dosyası.
+.IP "\fI/usr/share/man\fR" 4
+Özgün ve yerel kılavuz sayfası dizinleri
+.sp
+.SH "İLGİLİ BELGELER"
+\fBapropos\fR(1), \fBgroff\fR(1), \fBless\fR(1),\fBmanpath\fR(1), \fBnroff\fR(1), \fBtroff\fR(1), \fBwhatis\fR(1), \fBzsoelim\fR(1), \fBmanpath\fR(5), \fBman\fR(7), \fBcatman\fR(8), \fBmandb\fR(8).
+.sp
+Bazı paketlerin belgeleri \fBinfo\fR(1), htmtl gibi başka biçemlerde mevcut olabilir.
+.sp
+.SH "TARİHÇE"
+1990, 1991 – İlk olarak John W. Eaton tarafından yazıldı.
+.sp
+23 Aralık 1992: Willem Kasdorp tarafından sağlanan yamalar Rik Faith tarafından uygulandı.
+.sp
+30 Nisan 1994 – 23 Şubat 2000: Bir kaç gönüllünün yardımıyla Wilf. (G.Wilford) paketin bakımı ve geliştirilmesi ile ilgilendi.
+.sp
+30 Ekim 1996 – 30 Mart 2001: Fabrizio Polacco, Debian projesi için topluluğun da yardımıyla paketin bakımı ve geliştirilmesi ile ilgilendi.
+.sp
+31 mart 2001 – Günümüz: man-db paketinin bakımı ve geliştirilmesi ile artık Colin Watson ilgileniyor.
+.sp
+.SH "GERİBİLDİRİM"
+https://gitlab.com/cjwatson/man-db/-/issues
+.br
+https://savannah.nongnu.org/bugs/?group=man-db
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,185 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * e2image.c --- Program which writes an image file backing up
+ *               critical metadata for the filesystem.
+ *
+ * Copyright 2000, 2001 by Theodore Ts’o.
+ *
+ * This file may be redistributed under the terms of the GNU Public License.
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "E2IMAGE" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+e2image - ext2/ext3/ext4 dosya sisteminin hassas meta verilerini dosyaya kaydeder
+.sp
+.SH KULLANIM
+.IP \fBe2image\fR 8
+[\fB-r\fR|\fB-Q\fR [\fB-af\fR]] [ \fB-b\fR \fIsuperblok\fR ] [ \fB-B\fR \fIblokboyu\fR ] [ \fB-cnps\fR ] [ \fB-o\fR \fIkaynak_konum\fR ] [ \fB-O\fR \fIhedef_konum\fR ] \fIaygıt imge-dosyası\fR
+.IP \fBe2image\fR 8
+\fB-I\fR \fIaygıt imge-dosyası\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBe2image\fR, \fIaygıt\fRta bulunan hassas ext2, ext3 veya ext4 dosya sistemi meta verilerini belirtilen \fIimge-dosyası\fRna kaydeder. \fIimge-dosyası\fR \fB-i\fR seçeneği ile birlikte \fBdumpe2fs\fR(8) ve \fBdebugfs\fR(8) komutlarına aktarılarak incelenebilir. \fIimge-dosyası\fR, feci şekilde bozulmuş dosya sistemlerini kurtarmak için bir uzmana yardımcı olabilir.
+.sp
+Bir sistemdeki tüm dosya sistemleri için imge dosyaları oluşturmak ve bölüm düzenini (\fBfdisk -l\fR komutu ile) düzenli aralıklarla (önyükleme sırasında ve/veya haftada bir vb.) kaydetmek çok iyi bir fikirdir. Dosya sisteminin ciddi şekilde zarar görmesi durumunda bu verilere erişilebilir olmasını sağlamak için, \fIimge-dosyası\fR verilerini içerdiği dosya sisteminde değil, başka dosya sistemlerinde (örn. bir USB diskte) saklanmalıdır.
+.sp
+Disk alanından tasarruf etmek için \fBe2image\fR, \fIimge-dosyası\fRnı seyrek bir dosya olarak veya QCOW2 biçiminde oluşturur. Bu nedenle, seyrek \fIimge-dosyası\fRnın başka bir konuma kopyalanması gerekiyorsa, önce sıkıştırılmalı ya da \fB--sparse=always\fR seçeneği kullanılarak \fBcp\fR(1)’in GNU sürümü ile kopyalanmalıdır. Bu, seyrek olmayan QCOW2 imgesi için geçerli değildir.
+.sp
+Bir ext2 \fIimge-dosyası\fRnın boyutu, öncelikle dosya sisteminin boyutuna ve kullanımda olan düğüm sayısına bağlıdır. 1,2 milyon düğümden 200.000 düğümün kullanıldığı 10 Gigabaytlık bir dosya sistemi için, \fIimge-dosyası\fR yaklaşık 35 Megabayt olacaktır; 550.000 düğümden 15.000 düğümün kullanıldığı 4 Gigabaytlık bir dosya sistemi, 3 Megabaytlık bir \fIimge-dosyası\fRyla sonuçlanacaktır. \fIimge-dosyası\fRları oldukça sıkıştırılabilir olma eğilimindedir; diskte 32 Megabayt yer kaplayan bir \fIimge-dosyası\fR genellikle 3 veya 4 Megabayt’a kadar sıkıştırılır.
+.sp
+\fIimge-dosyası\fR \fB-\fR ise, \fBe2image\fR çıktısı standart çıktıya gönderilir, böylece çıktı \fBgzip\fR(1) gibi bir komuta aktarılabilir. (Normal bir \fIimge-dosyası\fR veya QCOW2 imgesi oluşturma işlemi dosyaya rasgele erişim gerektirdiğinden ve boru kullanılarak yapılamadığından, bunun şu anda yalnızca \fB-r\fR seçeneği kullanılarak ham \fIimge-dosyası\fR oluşturulurken desteklendiği unutulmamalıdır.)
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR
+\fIimge-dosyası\fRna dosya verilerini de dahil eder. Normalde dosyaya, dosya verileri değil, yalnızca dosya sistemi meta verileri dahil edilir. Bu seçenek, tüm dosya sistemini yedeklemek için kullanılmaya uygun bir dosya üretecektir. Bu seçeneğin yalnızca ham (\fB-r\fR) veya QCOW2 (\fB-Q\fR) biçimleriyle çalıştığı unutulmamalıdır. \fB-r\fR seçeneğiyle bağlantılı olarak, bir dosya sisteminin tümünü ve yalnızca kullanılan bloklarını başka bir aygıt/imge dosyasına kopyalamak mümkündür.
+.sp
+.TP 4
+\fB-b\fR \fIsuperblok\fR
+İmgeyi, bozuk birincil süper bloklu bölümdeki \fIsuperblok\fR numaralı dosya sistemi bloğunda bulunan ikincil süper bloğu kullanarak alır. Bölüm, bozuk birincil süper bloğu da içererek olduğu gibi kopyalanır.
+.sp
+.TP 4
+\fB-B\fR \fIblokboyu\fR
+Bayt olarak dosya sistemindeki blok boyu. Normalde \fBe2image\fR, uygun blok boyunu bulmak için çeşitli farklı boylarda süper bloğu arar. Bu arama bazı durumlarda yanıltıcı olabilir. Bu seçenek, \fBe2fsck\fR(8)’yı yalnızca belirli blok boylarında olabilen süper bloğu bulmaya zorlar. Süper blok bulunamazsa, \fBe2image\fR ölümcül hatayla sonlanır.
+.sp
+.TP 4
+\fB-c\fR
+Kaynak aygıttan kopyalanacak her bloğu \fIimge-dosyası\fRndaki karşılık gelen blokla karşılaştırır. Her ikisi de aynıysa, yazma işlemi atlanır. Dosya sistemi katı hal diske (solid state disk - SSD) klonlanıyorsa (aygıtta yazma aşınmasını azaltmak için gereksiz yazmalardan kaçınmanın gerektiği durumlarda) kullanışlıdır.
+.sp
+.TP 4
+\fB-f\fR
+\fB-r\fR ve \fB-Q\fR seçeneklerini kullanarak \fIimge-dosyası\fRnı kaydederken kaynak dosya sistemi için salt okunur gereksinimi geçersiz kılınır. Normalde, kaynak dosya sistemi kullanımdaysa, ortaya çıkan \fIimge-dosyası\fR büyük olasılıkla kullanışlı olmayacaktır. Kaynak dosya sisteminin sürekli kullanıldığı bazı durumlarda, hiç yoktan iyidir.
+.sp
+.TP 4
+\fB-I\fR
+Acil durumlarda \fIimge-dosyası\fRnda saklanan meta verileri aygıta geri yüklemek için kullanır.
+.sp
+.RS 4
+.TP 4
+\fBUyarı:\fR
+\fB-I\fR seçeneği, yalnızca diğer olasılıklar başarısız olduğunda son çare olarak kullanılmalıdır. \fIimge-dosyası\fR oluşturulduktan sonra dosya sistemi değiştirilirse, veriler de kaybolur. Genel olarak, daha sonra başka kurtarma olasılıkları denenebilecekse, herşeyden önce dosya sisteminin tam bir yedeği alınmalıdır.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-n\fR
+Tüm yazma işlemleri atlanır ve ekrana yalnızca blok numaraları basılır.
+.sp
+.TP 4
+\fB-o\fR \fIkaynak_konum\fR
+Okunacak imgenin kaynak aygıtın başlangıcından itibaren bayt cinsinden başlangıç konumunu belirler. Ayrıntılar için bkz: \fBKONUMLAR\fR
+.sp
+.TP 4
+\fB-O\fR \fIhedef_konum\fR
+Yazılacak imgenin \fIimge-dosyası\fRnın başlangıcından itibaren bayt cinsinden başlangıç konumunu belirler. Ayrıntılar için bkz: \fBKONUMLAR\fR
+.sp
+.TP 4
+\fB-p\fR
+\fIimge-dosyası\fR oluşturulurken ilerlemeyi gösterir.
+.sp
+.TP 4
+\fB-Q\fR
+Normal bir imge dosyası yerine, sanal makine imgeleri ve \fI.qcow\fR imge biçimini kullanabilen diğer araçlar tarafından kullanıma uygun QCOW2 biçimli \fIimge-dosyası\fR oluşturur. Ayrıntılar için bkz: \fBQCOW2 İMGE DOSYALARI\fR
+.sp
+.TP 4
+\fB-r\fR
+Normal bir imge dosyası yerine, ham \fIimge-dosyası\fR oluşturur. Ayrıntılar için bkz: \fBHAM İMGE DOSYALARI\fR
+.sp
+.TP 4
+\fB-s\fR
+Dosya sisteminin içeriği hakkındaki bilgilerin açığa çıkmasını önlemek için dizin girdilerini karıştırıp, yazılam \fIimge-dosyası\fRndaki dizin bloklarının kullanılmayan kısımlarını sıfırlar. Ancak bu, aş indisli dizinlerle ilgili sorunların incelenmesini de engeller.
+.sp
+.PP
+.sp
+.SH "HAM İMGE DOSYALARI"
+\fB-r\fR seçeneği, normal bir imge dosyasından iki şekilde farklı olan ham bir imge dosyası oluşturur. İlk olarak, imge dosyası içinde dosya sistemi meta verileri, aygıttaki konumuna göreli bir konuma yerleştirilir, böylece \fBdebugfs\fR(8), \fBdumpe2fs\fR(8), \fBe2fsck\fR(8), \fBlosetup\fR(8), vb. doğrudan ham \fIimge-dosyası\fR üzerinde çalıştırılabilir. Ham imge dosyası, tüketilen disk alanı miktarını en aza indirmek için seyrek dosya olarak oluşturulur. (Bu dosyanın, seyrek dosyaların nasıl oluşturulacağını anlamayan yardımcı uygulamalarla kopyalama, sıkıştırma/açma işlemlerinde dikkatli olun; dosya, dosya sisteminin kendisi kadar büyük olacaktır!) İkinci olarak, ham imge dosyası ayrıca, standart imge dosyasında bulunmayan dolaylı bloklar ve dizin blokları da içerecektir.
+.sp
+İmge dosyaları bazen, e2fsprogs’a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
+.sp
+.RS 4
+.nf
+\fBe2image -r /dev/hda1 - | bzip2 > hda1.e2i.bz2\fR
+.fi
+.sp
+.RE
+Bu, herhangi bir veri bloğu içermeden yalnızca meta verileri gönderir. Ancak, dizin bloklarındaki dosya adları, hata bildiricisinin gizli tutmak isteyebileceği dosya sisteminin içeriği hakkındaki bilgileri yine de açığa çıkarabilir. Bu sorunu gidermek için, \fB-s\fR seçeneği belirtilerek imgedeki dosya adları karıştırılabilir.
+.sp
+\fI/dev/hda1\fR yerine başka bir ham disk imgesi veya daha önce \fBe2image\fR tarafından oluşturulmuş bir QCOW2 imgesi belirtilse bile bunun işe yarayacağı unutulmamalıdır.
+.sp
+.SH "QCOW2 İMGE DOSYALARI"
+\fB-Q\fR seçeneği, normal veya ham imge dosyası yerine bir QCOW2 imge dosyası oluşturacaktır. Bir QCOW2 imgesi, ham imgenin içerdiği tüm bilgileri içerir, ancak ham imgenin aksine seyrek değildir. QCOW2 imgesi, verileri birbirine yakın bir şekilde paketleyen özel bir yapıda depolayarak imge tarafından kullanılan alan miktarını en aza indirir, böylece boyut en aza indirilirken boş alanlar oluşmaz.
+.sp
+İmge dosyaları bazen, e2fsprogs’a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
+.sp
+.RS 4
+.nf
+\fBe2image -Q /dev/hda1 hda1.qcow2\fR
+\fBbzip2 -z hda1.qcow2\fR
+.fi
+.sp
+.RE
+Bu, herhangi bir veri bloğu içermeden yalnızca meta verileri gönderir. Ancak, dizin bloklarındaki dosya adları, hata bildiricisinin gizli tutmak isteyebileceği dosya sisteminin içeriği hakkındaki bilgileri yine de açığa çıkarabilir. Bu sorunu gidermek için, \fB-s\fR seçeneği belirtilerek imgedeki dosya adları karıştırılabilir.
+.sp
+\fBe2image\fR tarafından oluşturulan QCOW2 imgesinin normal bir QCOW2 imgesi olduğu ve örneğin \fBqemu-img\fR(1) gibi QCOW2 yapısını bilen araçlar tarafından işlenebileceği unutulmamalıdır.
+.sp
+QCOW2 imgesi ham imgeye şöyle dönüştürülebilir:
+.sp
+.RS 4
+.nf
+\fBe2image -r hda1.qcow2 hda1.raw\fR
+.fi
+.sp
+.RE
+Bu komut, tüm verileri içeren bir QCOW2 imgesini, bir disk bölümü veya loop aygıtı olarak bağlanabilecek (örn, \fBmount -o loop imge\fR) bir seyrek imge dosyasına yazmak için yararlı olabilir. Bunun, \fBe2image\fR tarafından oluşturulmamış QCOW2 imgeleri ile çalışmayabileceği unutulmamalıdır.
+.sp
+.SH "KONUMLAR"
+Normalde bir dosya sistemi disk bölümünün başlangıcında başlar ve \fBe2image\fR bu disk bölümünde çalıştırılır. İmge dosyalarıyla çalışırken, disk bölümü aygıtını kullanma seçeneğiniz yoktur, bu nedenle doğrudan \fB-o\fR seçeneğiyle dosya sisteminin başladığı konumu belirtebilirsiniz. Benzer şekilde \fB-O\fR seçeneği, dosya sistemini yazmadan önce hedefte ilerlenecek konumu belirler.
+.sp
+Örneğin, 1 MiB’tan başlayan disk bölümünde bulunan ext2 dosya sistemini içeren sabit sürücünün tamamının \fBdd\fR(1) imgesi bir blok aygıtına şöyle klonlanabilir:
+.sp
+.RS 4
+.nf
+\fBe2image -aro 1048576 imge /dev/sda1\fR
+.fi
+.sp
+.RE
+Veya bir dosya sistemi, bir blok aygıtından bir imge dosyasına, disk bölümleme tablosu için 1 MiB’lık yer bırakarak şöyle kopyalanabilir:
+.sp
+.RS 4
+.nf
+\fBe2image -arO 1048576 /dev/sda1 imge\fR
+.fi
+.sp
+.RE
+En az bir konum ve yalnızca bir dosya belirtilirse, yerinde taşıma gerçekleştirilir ve dosya sistemi bir konumdan diğerine güvenle taşınabilir.
+.sp
+.SH "YAZANLAR"
+Theodore Ts’o tarafından yazılmıştır.
+.sp
+.SH "YARARLANIM"
+\fBe2image\fR, e2fsprogs paketinin bir parçasıdır ve http://e2fsprogs.sourceforge.net adresinden elde edilebilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBdumpe2fs\fR(8), \fBdebugfs\fR(8), \fBe2fsck\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,295 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
+ * May be distributed under the GNU General Public License
+ *
+ * Copyright (C) 1993 Theodore Ts’o <tytso@athena.mit.edu>
+ * Copyright (C) 2011 Karel Zak <kzak@redhat.com>
+ *
+ * This program comes with ABSOLUTELY NO WARRANTY.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "DMESG" 8 "Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dmesg - çekirdek halka tamponlarını görüntüler veya denetler
+.sp
+.SH KULLANIM
+.IP \fBdmesg\fR 6
+[\fISEÇENEKLER\fR]
+.IP \fBdmesg\fR 6
+\fB--clear\fR
+.IP \fBdmesg\fR 6
+\fB--read-clear\fR [\fISEÇENEKLER\fR]
+.IP \fBdmesg\fR 6
+\fB--console-level\fR \fIDÜZEY\fR
+.IP \fBdmesg\fR 6
+\fB--console-on\fR
+.IP \fBdmesg\fR 6
+\fB--console-off\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBdmesg\fR, çekirdek halka tamponunu incelemek ve denetlemek için kullanılır.
+.sp
+Öntanımlı olarak, çekirdek halka tamponundaki tüm iletileri gösterir.
+.sp
+.SH "SEÇENEKLER"
+\fB--clear, --read-clear, --console-on, --console-off, --console-level\fR seçenekleri birbirleri ile çeliştiğinden birlikte kullanılamaz.
+.sp
+.TP 4
+\fB-C\fR, \fB--clear\fR
+Halka tamponun içeriğini temizler.
+.sp
+.TP 4
+\fB-c\fR, \fB--read-clear\fR
+Görüntüledikten sonra sonra halka tamponun içeriğini temizler.
+.sp
+.TP 4
+\fB-D\fR, \fB--console-off\fR
+İletilerin konsolda görüntülenmesini devre dışı bırakır.
+.sp
+.TP 4
+\fB-d\fR, \fB--show-delta\fR
+Zaman damgasını ve iletiler arasında harcanan zaman farkını gösterir. \fB--notime\fR ile birlikte kullanıldığında zaman damgasını değil yalnızca zaman farkını gösterilir.
+.sp
+.TP 4
+\fB-E\fR, \fB--console-on\fR
+İletilerin konsolda görüntülenmesini etkin kılar.
+.sp
+.TP 4
+\fB-e\fR, \fB--reltime\fR
+Zaman damgasını ve iletiler arasında harcanan zaman farkını biçemli gösterir. Yerel zamana dönüşüm dakik olmayabilir (bkz: \fB-T\fR seçeneği)
+.sp
+.TP 4
+\fB-F\fR, \fB--file\fR \fIDOSYA\fR
+Syslog iletilerini belirtilen \fIDOSYA\fRdan okur. kmsg biçemi desteklenmez, yalnızca eski syslog biçemi desteklenir.
+.sp
+.TP 4
+\fB-f\fR, \fB--facility\fR \fILİSTE\fR
+Çıktıyı belirtilen (virgülle ayrılmış) oluşumlar \fILİSTE\fRsiyle sınırlar. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+\fBdmesg --facility=daemon\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+yalnızca sistem artalan süreçlerindeki iletileri gösterir. Desteklenen oluşumların listesi için \fB--help\fR çıktısına bakılmalıdır.
+.sp
+.TP 4
+\fB-H\fR, \fB--human\fR
+Biçemli çıktı etkin olur. Ayrıca bkz: \fB--color\fR, \fB--reltime\fR ve \fB--nopager\fR.
+.sp
+.TP 4
+\fB-J\fR, \fB--json\fR
+JSON çıktı biçemi kullanılır. Zaman yalnızca "saniye.mikrosaniye" biçeminde gösterilir, günlük öncelik düzeyi öntanımlı olarak ayrıştırılmaz (oluşum ve önceliğin ayrıştırlması için bkz: \fB--decode\fR), çıktı ve zaman biçemini denetleyen seçenekler sessizce yok sayılır.
+.sp
+.TP 4
+\fB-k\fR, \fB--kernel\fR
+Çekirdek iletilerini gösterir.
+.sp
+.TP 4
+\fB-L\fR, \fB--color\fR[=\fIKOŞUL\fR]
+Çıktıyı renklendirir. İstemlik \fIKOŞUL\fR \fBauto\fR, \fBnever\fR veya \fBalways\fR olabilir. \fIKOŞUL\fR belirtilmezse \fBauto\fR öntanımlıdır. Renklendirme devre dışı bırakılabilir; yerleşik öntanımlılar için \fB--help\fR çıktısına bakılmalıdır. Ayrıca bkz: \fBRENKLER\fR bölümü.
+.sp
+.TP 4
+\fB-l\fR, \fB--level\fR \fILİSTE\fR
+Çıktıyı belirtilen (virgülle ayrılmış) düzeyler \fILİSTE\fRsiyle sınırlar. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+\fBdmesg --level=err,warn\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+yalnızca hata ve uyarı iletilerini gösterir. Desteklenen düzeylerin listesi için \fB--help\fR çıktısına bakılmalıdır.
+.sp
+.TP 4
+\fB-n\fR, \fB--console-level\fR \fIDÜZEY\fR
+Konsola gönderilecek iletilerin düzeyini ayarlar. \fIDÜZEY\fR düzeyin kısaltması veya düzey numarası olabilir. Desteklenen düzeylerin listesi için \fB--help\fR çıktısına bakılmalıdır.
+.sp
+Örneğin; \fB-n 1\fR veya \fB-n emerg\fR bütün iletilerin, panik iletileri hariç, konsola basılması önler. Bütün düzeylerdeki iletiler \fI/proc/kmsg\fR’ye yazılmaya devam eder, böylece \fBsyslogd\fR(8) bütün çekirdek iletilerinin nerede görüntüleneceğini belirlemek için kullanılabilir. \fB–n\fR seçeneği kullanılmış ise, \fBdmesg\fR, çekirdek halka tamponunu basmaz veya temizlemez.
+.sp
+.TP 4
+\fB--noescape\fR
+Yazdırılamayan ve güvenli olmayabilecek karakterler (örneğin, bozuk çok baytlı diziler, uçbirim denetim karakterleri vb.), güvenlik nedeniyle öntanımlı olarak \fB\\x\fR\fINN\fR biçeminde öncelenir (\fINN\fR onaltılıktır). Bu seçenek, bu özelliği tamamen devre dışı bırakır. Örneğin \fB--raw\fR ile birlikte hata ayıklama amacıyla kullanılabilir. Dikkatli olunmalı ve öntanımlı olarak kullanılmamalıdır.
+.sp
+.TP 4
+\fB-P\fR, \fB--nopager\fR
+Sayfalayıcıya borulama yapılmaz. Sayfalayıcı \fB--human\fR çıktısı için öntanımlı olarak etkindir.
+.sp
+.TP 4
+\fB-p\fR, \fB--force-prefix\fR
+Çok satırlı iletilerde her satıra oluşum, düzey veya zaman damgası bilgisi ekler.
+.sp
+.TP 4
+\fB-r\fR, \fB--raw\fR
+Ham ileti tamponunu basar, yani günlük düzeyi öneklerini ayıklanmaz, ancak yazdırılamayan tüm karakterler yine de öncelenir (ayrıca bkz. \fB--noescape\fR).
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Gerçek ham biçim, \fBdmesg\fR’in çekirdek iletilerini nasıl okuduğuna bağlıdır. \fI/dev/kmsg\fR aygıtı, \fBsyslog\fR(2)’den farklı bir biçim kullanır. Geriye dönük uyumluluk için \fBdmesg\fR, verileri her zaman \fBsyslog\fR(2) biçiminde döndürür. \fI/dev/kmsg\fR’den gerçek ham verileri okumak mümkündür. Örnek: ’\fBdd if=/dev/kmsg iflag=nonblock\fR’
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-S\fR, \fB--syslog\fR
+Çekirdek iletilerini okumak için \fBdmesg\fR’yi \fBsyslog\fR(2) kullanmaya zorlar. Linux 3.5.0 sürümünden beri öntanımlı olarak \fBsyslog\fR(2) yerine \fI/dev/kmsg\fR kullanılmaktadır.
+.sp
+.TP 4
+\fB-s\fR, \fB--buffer-size\fR \fISAYI\fR
+Çekirdek halka tamponu sorgulamak için \fISAYI\fR baytlık tampon kullanır. Öntanımlı olarak bu değer 16392 dir. (Çekirdek syslog tampon boyutu en başta 4096 idi, 1.3.54 den sonra 8192 oldu, 2.1.113 çekirdek sürümünden sonra 16384). Şayet çekirdek tamponu öntanımlı değerden daha büyük bir değere ayarlanırsa, tamponun tamamını görmek için bu seçenek kullanılabilir.
+.sp
+.TP 4
+\fB-T\fR, \fB--ctime\fR
+Zaman damgasını biçemli gösterir.
+.sp
+\fIZaman damgasının çok dakik olmayacağına dikkat edilmelidir!\fR Günlükler için kullanılan \fBtime\fR özkaynağı, sistem uyutulup uyandırıldıktan sonra güncellenmiyor. Zaman damgaları, önyükleme zamanı ve monotonik sayaçlar arasındaki geçerli farka göre ayarlanır, bu yalnızca son uyandırmadan sonra yazılan iletiler için çalışır.
+.sp
+.TP 4
+\fB--since\fR \fIZAMAN\fR
+Belirtilen \fIZAMAN\fRdan sonraki kayıtları gösterir. Zamanı mutlak veya göreli (’1 hour ago’ gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
+.sp
+.TP 4
+\fB--until\fR \fIZAMAN\fR
+Belirtilen \fIZAMAN\fRa kadar olan kayıtları gösterir. Zamanı mutlak veya göreli (’1 hour ago’ gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
+.sp
+.TP 4
+\fB-t\fR, \fB--notime\fR
+Çekirdeğin zaman damgalarını basmaz.
+.sp
+.TP 4
+\fB--time-format\fR \fIBİÇEM\fR
+Zaman damgasını belirtilen \fIBİÇEM\fRde basar: \fBctime, reltime, delta\fR veya \fBiso\fR. İlk üçü zaman biçemlemeye özgü seçeneklerin adlarıdır. \fBiso\fR biçemi ISO-8601 biçeminin \fBdmesg\fR gerçeklenimidir. Bu biçimin amacı, iki sistem ve diğer herhangi bir ayrıştırma arasındaki zaman damgalarının karşılaştırmasını kolaylaştırmaktır. \fBiso\fR biçemi: YYYY-AA-GG<T>SS:DD:ss,µs<UTC farkı>.
+.sp
+ISO-8601 biçemi de sistem zaman damgası sorunundan muzdariptir: sistem uyutulup uyandırılınca çekirdek zaman damgası güncellenmez.
+.sp
+.TP 4
+\fB-u\fR, \fB--userspace\fR
+Kullanıcı uzayı iletileri gösterilir.
+.sp
+.TP 4
+\fB-w\fR, \fB--follow\fR
+Yeni iletiler için bekler. Bu seçenek Linux 3.5.0 itibariyle geçerlidir.
+.sp
+.TP 4
+\fB-W\fR, \fB--follow-new\fR
+Yeni iletileri bekler ve yalnızca yeni iletileri basar.
+.sp
+.TP 4
+\fB-x\fR, \fB--decode\fR
+Oluşum ve öncelik düzeyini okunabilir öneklere ayrıştırır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "RENKLER"
+Çıktı renklendirmesi \fBterminal-colors.d\fR(5) işlevselliği kullanılarak gerçeklenmiştir. Örtük renklendirme boş bir dosya ile devre dışı bırakılabilir. Yalnızca \fBdmesg\fR için:
+.sp
+.RS 4
+.nf
+/etc/terminal-colors.d/dmesg.disable
+.fi
+.sp
+.RE
+Tüm araçlar için:
+.sp
+.RS 4
+.nf
+/etc/terminal-colors.d/disable
+.fi
+.sp
+.RE
+Kullanıcıya özgü \fI$XDG_CONFIG_HOME/terminal-colors.d\fR veya \fI$HOME/.config/terminal-colors.d\fR ile sistem öntanımlıları geçersiz kılınabilir.
+.sp
+.TP 4
+\fBBilgi:\fR
+Çıktı renklendirmesi öntanımlı olarak etkin olduğundan \fIterminal-colors.d\fR dizinlerinin varlığı gerekli değildir.
+.sp
+.PP
+\fBdmesg\fR tarafından desteklenen mantıksal renkler:
+.sp
+.TP 4
+\fBsubsys\fR
+Alt sistem ileti öneki ("ACPI:" gibi).
+.sp
+.TP 4
+\fBtime\fR
+İleti zaman damgası.
+.sp
+.TP 4
+\fBtimebreak\fR
+\fB--reltime\fR veya \fB--human\fR çıktısında kısa oluşturma zamanı olarak ileti zaman damgası.
+.sp
+.TP 4
+\fBalert\fR
+Alarm günlüğü önceliğiyle ileti metni.
+.sp
+.TP 4
+\fBcrit\fR
+Önemli günlük önceliğiyle ileti metni.
+.sp
+.TP 4
+\fBerr\fR
+Hata günlüğü önceliğiyle ileti metni.
+.sp
+.TP 4
+\fBwarn\fR
+Uyarı günlüğü önceliğiyle ileti metni.
+.sp
+.TP 4
+\fBsegfault\fR
+Parçalama arızası bildiren ileti metni.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBdmesg\fR, izni reddedildi hatasını bildirerek başarısız olabilir. Bu genellikle \fBdmesg_restrict\fR çekirdek ayarından kaynaklanır, daha fazla ayrıntı için bkz: \fBsyslog\fR(2)
+.sp
+.SH "YAZAN"
+Theodore Ts’o ve Karel Zak tarafından yazılmıştır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBterminal-colors.d\fR(5), \fBsyslogd\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBcal\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

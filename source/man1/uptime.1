@@ -1,0 +1,93 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * uptime.c - display system uptime
+ * Copyright (C) 2012 Craig Small <csmall-procps@enc.com.au>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "UPTIME" 1 "Eylül 2021" "procps-ng 3.3.16" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+uptime - sistemin ne kadar zamandır çalıştığını söyler
+.sp
+.SH KULLANIM
+.IP \fBuptime\fR 7
+[\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBuptime\fR tek bir satır halinde şu bilgiyi verir: o anki saat, sistemin ne kadar süredir çalışmakta olduğu, sistemde oturum açmış kaç kullanıcı bulunduğu ve 1, 5 ve 15 dakika önceki sistem yük ortalamaları.
+.sp
+Bu bilgi, \fBw\fR(1) tarafından gösterilen başlık satırındaki bilgi ile aynıdır.
+.sp
+Sistem yük ortalamaları çalıştırılabilir veya kesinti kabul etmeyen durumdaki süreçlerle ilgilidir. Çalıştırılabilir durumdaki bir süreç ya işlemciyi kullanıyordur ya da işlemciyi kullanmayı bekliyordur. Kesinti kabul etmeyen bir süreç ise örneğin disk gibi aygıta G/Ç erişimi için beklemekte olan bir süreçtir. Ortalamalar üç zaman aralığında alınır. Yük ortalamaları bir sistemdeki işlemci sayısına göre normalleştirilmez, yani, birim yük ortalaması tek işlemcili bir sistemin birim zamandaki yükü olup, 4 işlemcili bir sistemde bu zamanın %75’i boşta geçer.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-p\fR, \fB--pretty\fR
+Çalışma süresini güzel biçimde gösterir
+.sp
+.TP 4
+\fB-s\fR, \fB--since\fR
+\fIyyyy-aa-gg ss:dd:SS\fR biçeminde sistemin ne zamandan beri etkin olduğunu gösterir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım iletisini gösterir ve çıkar
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/var/run/utmp\fR
+O an oturum açmış olanlarla ilgili bilgiler
+.sp
+.TP 4
+\fI/proc\fR
+Süreçlerin bilgileri
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Larry Greenfield ve Michael K. Johnson tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimi için lütfen <procps (at) freelists.org> adresini kullanın.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBps\fR(1), \fBtop\fR(1), \fButmp\fR(5), \fBw\fR(1)
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

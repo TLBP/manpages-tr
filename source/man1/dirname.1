@@ -1,0 +1,77 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "DIRNAME" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dirname - dosya yolunun sonundan dizin olmayan kısmı ayırır
+.sp
+.SH KULLANIM
+.IP \fBdirname\fR 8
+[\fISEÇENEK\fR] \fIDOSYA\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIİSİM\fR, sonundaki \fI/dosyaismi\fR parçası silinerek çıktılanır. Eğer \fIİSİM\fR hiç / içermiyorsa içinde bulunulan dizin anlamında . (nokta) çıktılanır.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero\fR
+Çıktılanan satırlar satır sonu karakteri ile değil NUL (\\0) ile sonlandırılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+.TP 4
+\fBdirname /usr/bin/sort\fR
+"\fI/usr/bin\fR" çıktılanır.
+.sp
+.TP 4
+\fBdirname dir1/str dir2/str\fR
+"\fIdir1\fR" ve ardından "\fIdir2\fR" çıktılanır.
+.sp
+.TP 4
+\fBdirname stdio.h\fR
+"." çıktılanır.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+David MacKenzie ve Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBbasename\fR(1), \fBreadlink\fR(1)
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/dirname>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) dirname invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

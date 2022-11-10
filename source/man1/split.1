@@ -1,0 +1,145 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SPLIT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+split - bir dosyayı parçalara ayırır
+.sp
+.SH KULLANIM
+.IP \fBsplit\fR 6
+[\fISEÇENEK\fR]... [\fIDOSYA\fR [\fIÖNEK\fR]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIDOSYA\fRyı eşit büyüklükte (öntanımlı: 1000 satır) parçalara bölüp \fIÖNEK\fRaa, \fIÖNEK\fRab, ... isimli dosyalara koyar. \fIÖNEK\fR belirtilmediğinde parça isimleri ’\fBx\fR’ ile başlar.
+.sp
+\fIDOSYA\fR belirtilmediğinde veya - olduğunda standart girdi okunur.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-a\fR, \fB--suffix-length=\fR\fISAYI\fR
+\fISAYI\fR uzunlukta sonek kullanır (öntanımlı: 2)
+.sp
+.TP 4
+\fB--additional-suffix=\fR\fISONEK\fR
+Dosya isimlerine belirtilen \fISONEK\fRi ekler.
+.sp
+.TP 4
+\fB-b\fR, \fB--bytes=\fR\fISAYI\fR
+Her çıktı dosyasına \fISAYI\fR bayt koyar.
+.sp
+.TP 4
+\fB-C\fR, \fB--line-bytes=\fR\fISAYI\fR
+Her çıktı dosyasına en fazla \fISAYI\fR baytlık satırlar koyar.
+.sp
+.TP 4
+\fB-d\fR
+Alfabetik sonekler yerine 0 ile başlayan sayısal sonekler kullanır.
+.sp
+.TP 4
+\fB--numeric-suffixes\fR[=\fISAYI\fR]
+Alfabetik sonekler yerine \fISAYI\fR (öntanımlı: 0) ile başlayan sayısal sonekler kullanır.
+.sp
+.TP 4
+\fB-x\fR
+Alfabetik sonekler 0 ile başlayan onaltılık sonekler kullanır.
+.sp
+.TP 4
+\fB--hex-suffixes\fR[=\fISAYI\fR]
+Alfabetik sonekler yerine \fISAYI\fR (öntanımlı: 0) ile başlayan onaltılık sonekler kullanır.
+.sp
+.TP 4
+\fB--filter\fR[=\fIKOMUT\fR]
+Kabuk \fIKOMUT\fRuna yazar; dosya ismi: \fI$FILE\fR
+.sp
+.TP 4
+\fB-l\fR, \fB--lines=\fR\fISAYI\fR
+Her çıktı dosyasına en fazla \fISAYI\fR satır koyar.
+.sp
+.TP 4
+\fB-n\fR, \fB--number=\fR\fILOKMA\fR
+Çıktı dosyası \fILOKMA\fRları üretir. Açıklama için aşağıya bakınız.
+.sp
+.TP 4
+\fB-t\fR, \fB--separator=\fR\fIAYRAÇ\fR
+Kayıt ayracı olarak satır sonu karakteri yerine \fIAYRAÇ\fR kullanılır; ’\\0’ (sıfır) boş karakteri ifade eder.
+.sp
+.TP 4
+\fB-u\fR, \fB--unbuffered\fR
+Girdiyi çıktıya ’-n r/...’ ile anında kopyalar.
+.sp
+.TP 4
+\fB--verbose\fR
+Her çıktı dosyasından önce standart hataya bir tanı iletisi basar.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+\fISAYI\fR, bir katsayı soneki içerebilir: K,M,G,T,P,E,Z,Y (1024’ün katları için: K, M, ... veya KiB, MiB, ...; 1000’in katları için: KB, MB, ...).
+.sp
+.SS "LOKMA şunlardan biri olabilir:"
+.TP 4
+\fBN\fR
+Girdinin boyutuna bağlı olarak dosyalar \fBN\fR lokmaya ayrılır.
+.sp
+.TP 4
+\fBK/N\fR
+Standart çıktıya \fBN\fR lokmadan \fBK\fR’ıncısı çıktılanır.
+.sp
+.TP 4
+\fBl/N\fR
+Kayıtlara/satırlara bölünmeden dosyalar \fBN\fR lokmaya ayrılır.
+.sp
+.TP 4
+\fBl/K/N\fR
+Kayıtlara/satırlara bölünmeden standart çıktıya \fBN\fR lokmadan \fBK\fR’ıncısı çıktılanır.
+.sp
+.TP 4
+\fBr/N\fR
+Döngüsel dağılım kullanılan \fBl/N\fR gibidir.
+.sp
+.TP 4
+\fBr/K/N\fR
+Döngüsel dağılım kullanılan \fBl/K/N\fR gibidir.
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+Torbjorn Granlund ve Richard M. Stallman tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/split>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) split invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,158 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "PR" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+pr - metin dosyalarını yazıcıda basılacak biçime dönüştürür
+.sp
+.SH KULLANIM
+.IP \fBpr\fR 3
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBpr\fR, yazıcıda çıktılanmak üzere \fIDOSYA\fRyı sütunlara ve sayfalara ayırır.
+.sp
+\fIDOSYA\fR belirtilmezse veya - belirtilirse standart girdi okunur.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler, kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB+\fR\fIİLKSAYFA\fR[:\fISONSAYFA\fR], \fB--pages\fR\fI=İLKSAYFA\fR[:\fISONSAYFA\fR]
+Basım işlemi \fIİLKSAYFA\fR’dan başlar, \fISONSAYFA\fR’da biter.
+.sp
+.TP 4
+\fI-SÜTUN\fR, \fB--columns\fR=\fISÜTUN\fR
+\fISÜTUN\fR sayıda sütun çıktılar ve \fB-a\fR seçeneği belirtilmemişse, sütunları aşağıya doğru basar. Satır sayısını sayfadaki sütun sayısına eşitler.
+.sp
+.TP 4
+\fB-a\fR, \fB--across\fR
+Sütunları aşağıya doğru değil, bir uçtan diğerine doğru basar, \fI-SÜTUN\fR ile birlikte kullanılır.
+.sp
+.TP 4
+\fB-c\fR, \fB--show-control-chars\fR
+Şapkalı (^G) ve ters eğik çizgili sekizlik gösterim kullanılır.
+.sp
+.TP 4
+\fB-d\fR, \fB--double-space\fR
+Çıktıda çift boşluk bırakır.
+.sp
+.TP 4
+\fB-D\fR, \fB--date-format\fR=\fIBİÇEM\fR
+Başlıkta tarih biçemi olarak \fIBİÇEM\fR kullanılır.
+.sp
+.TP 4
+\fB-e\fR, \fB--expand-tabs\fR[=\fIKARAKTER\fR[\fIGENİŞLİK\fR]]
+\fIKARAKTER\fR’leri (sekmeler) \fIGENİŞLİK\fR (8) karakterlik boşluklara genişletir.
+.sp
+.TP 4
+\fB-f\fR, \fB-F\fR, \fB--form-feed\fR
+Sayfaları ayırmak için satır sonu karakteri yerine sayfa ilerletme karakteri kullanılır (\fB-F\fR seçeneği kullanıldığında 3 satırlık sayfa başı, kullanılmadığında ise 5 satırlık sayfa başı ve sayfa sonu ayrılır).
+.sp
+.TP 4
+\fB-h \fR, \fB--header\fR=\fIBAŞLIK\fR
+Sayfa başlığında ortalanmış olarak dosya ismi yerine \fIBAŞLIK\fR kullanılır. \fB-h ""\fR ile boş bir satır basılır, \fB-h""\fR olarak kullanmayın.
+.sp
+.TP 4
+\fB-i\fR, \fB--output-tabs\fR[=\fIKARAKTER\fR[\fIGENİŞLİK\fR]]
+\fIGENİŞLİK\fR (8) karakterlik boşlukları \fIKARAKTER\fR’le (sekme) değiştirir.
+.sp
+.TP 4
+\fB-J\fR, \fB--join-lines\fR
+Uzun satırların \fB-W\fR seçeneği ile kırpılmasını engelleyerek aşağıda devem etmesini sağlar. Sütun hizalaması yapılmaz, ayraçlar \fB--sep-string\fR[=\fIDİZGE\fR] ile belirtilir.
+.sp
+.TP 4
+\fB-l \fR, \fB--length\fR\fI=SAYFA_UZUNLUĞU\fR
+Sayfa uzunluğunu \fISAYFA_UZUNLUĞU\fR satıra (66) ayarlar (öntanımlı satır sayısı, metinler için 56, \fB-F\fR kullanılmışsa 63’dür). \fISAYFA_UZUNLUĞU\fR <= 10 ise \fB-t\fR seçeneği uygulanır.
+.sp
+.TP 4
+\fB-m\fR, \fB--merge\fR
+Bütün dosyaları sütun başına bir dosya olmak üzere satırları kırparak, fakat \fB-J\fR seçeneği belirtilmemişse uzun satırları birleştirerek paralel çıktılar.
+.sp
+.TP 4
+\fB-n\fR, \fB--number-lines\fR[=\fIAYRAÇ\fR[\fIGENİŞLİK\fR]]
+Satırları \fIGENİŞLİK\fR haneli sayılarla (verilmezse 5) numaralandırır. Numaradan sonra \fIAYRAÇ\fR karakteri (verilmezse sekme) kullanılır. Öntanımlı olarak, numaralama \fIDOSYA\fRnın 1. satırından başlar.
+.sp
+.TP 4
+\fB-N\fR, \fB--first-line-number\fR=\fISAYI\fR
+İlk sayfanın 1. satırı \fISAYI\fR ile numaralanarak sayılır (bkz. +\fIİLKSAYFA\fR).
+.sp
+.TP 4
+\fB-o\fR, \fB--indent\fR=\fIGİRİNTİ\fR
+Her satırı \fIGİRİNTİ\fR boşluk içerden basar. \fB-w\fR ya da \fB-W\fR etkilenmez. \fIGİRİNTİ\fR, \fISAYFA_GENİŞLİĞİ\fR’ne eklenir.
+.sp
+.TP 4
+\fB-r\fR, \fB--no-file-warnings\fR
+Dosya açılamadığı durumlarda uyarı vermez.
+.sp
+.TP 4
+\fB-s\fR, \fB--separator\fR[=\fIKARAKTER\fR]
+Sütunlar tek bir karakter ile ayrılır, \fB-w\fR belirtilmedikçe öntanımlı \fIKARAKTER\fR sekme karakteridir, \fB-w\fR belirtilirse karakter kullanılmaz. \fB-w\fR belirtilmedikçe 3 sütunlu seçeneklerin (\fI-SÜTUN\fR|\fB-a\fR \fI-SÜTUN\fR|\fB-m\fR) tümünde \fB-s\fR[\fIKARAKTER\fR] satırların kırpılmamasını sağlar.
+.sp
+.TP 4
+\fB-S\fR, \fB--sep-string\fR[=\fIDİZGE\fR]
+Sütunlar \fIDİZGE\fR ile ayrılır. \fB-S\fR olmadan: \fB-J\fR ile öntanımlı ayraç sekme karakteridir, \fB-J\fR kullanılmazsa boşluk kullanılır (\fB-S" "\fR) ile aynı). Sütun seçenekleri üzerinde bir etkisi yoktur.
+.sp
+.TP 4
+\fB-t\fR, \fB--omit-header\fR
+Sayfa başındaki ve sonundaki alanlar kaldırılır; \fISAYFA_UZUNLUĞU\fR <= 10 ise uygulanır.
+.sp
+.TP 4
+\fB-T\fR, \fB--omit-pagination\fR
+Sayfa başındaki ve sonundaki alanlar kaldırılır, sayfa ilerletme karakteri ile sayfalama uygulanmaz.
+.sp
+.TP 4
+\fB-v\fR, \fB--show-nonprinting\fR
+Ters eğik çizgili sekizlik gösterim kullanılır.
+.sp
+.TP 4
+\fB-w\fR, \fB--width\fR=\fISAYFA_GENİŞLİĞİ\fR
+Sadece çok sütunlu çıktılama için sayfa genişliği \fISAYFA_GENİŞLİĞİ\fR (72) karaktere ayarlanır. \fB-S\fR[\fIKARAKTER\fR] ile kapatılır (72).
+.sp
+.TP 4
+\fB-W\fR, \fB--page-width\fR=\fISAYFA_GENİŞLİĞİ\fR
+Sayfa genişliği daima \fISAYFA_GENİŞLİĞİ\fR (72) karaktere ayarlanır. \fB-J\fR seçeneği verilmezse satırlar kırpılır. \fB-S\fR veya \fB-s\fR ile etkileşime grmez.
+.sp
+.TP 4
+\fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZANLAR"
+Pete TerMaat ve Roland Huebner tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/pr>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) pr invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2003, 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

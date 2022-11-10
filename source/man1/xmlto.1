@@ -1,0 +1,220 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * xmlto - apply an XSL stylesheet to an XML document
+ * Copyright (C) 2001, 2002, 2003  Tim Waugh <twaugh@redhat.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "XMLTO" 1 "Kasım 2011" "xmlto 0.0.25" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+xmlto - bir XSL dönüşüm dosyasını bir XML belgesine uygular
+.sp
+.SH KULLANIM
+.IP \fBxmlto\fR 6
+[\fB-o\fR \fIçıktı_dizini\fR] [\fB-x\fR \fIözel_xsl\fR] [\fB-m\fR \fIxsl_parçası\fR] [\fB-v\fR] [\fB-p\fR \fIardişlem_seçenekleri\fR] [\fB--extensions\fR] [\fB--searchpath\fR \fIdosyayolu\fR] [\fB--skip-validation\fR] [\fB--stringparam\fR \fIisim\fR=\fIdeğer\fR] [\fB--noclean\fR] [\fB--noautosize\fR] [\fB--noextensions\fR] [\fB--profile\fR] [\fB--with-fop\fR] [\fB--with-dblatex\fR] \fIbiçim\fR \fIxml-dosya\fR
+.IP \fBxmlto\fR 6
+{ \fB--help\fR| \fB--version\fR }
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBxmlto\fR’nun amacı, gereken bütün her şeyin kullanılarak, bir XML belgesinin arzu edilen biçime dönüştürülmesini sağlamaktır. Bu iki basamaklı bir işlemdir:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Bir XSL-T işlemcisi kullanılarak uygun bir XSL dönüşüm dosyasının uygulanması.
+.IP 2. 3
+Diğer araçlar ile sonraki işlemlerin gerçekleştirilmesi. Bu ikinci adım zorunlu değildir, kullanılmasa da olur.
+.sp
+.RE
+.PD 0
+Hangi dönüşüm dosyasının kullanılacağına ve gerekli ise işlem sonrası çıktıya neler yapılacağına karar vermek için, \fBxmlto\fR biçim betiklerini kullanır. Bunlar \fBxmlto\fR tarafından dönüşüm sırasında çağrılan basit kabuk betikleridir.
+.sp
+Uygun biçim betikleri, XML dosyasının ve arzu edilen çıktı dosyasının biçimine bağlıdır. \fBxmlto\fR, DocBook XML dosyalarını çeşitli biçimlere çevirmeye yarayan hazır betikler ile birlikte gelir. Kullanmak istediğiniz biçim betiğinin tam adını komut satırından \fIbiçim\fR ile belirterek, istediğiniz betiği kullanabilirsiniz.
+.sp
+İlk olarak, \fBxmlto\fR’ya, \fB–x\fR seçeneği belirtilerek, tam olarak hangi dönüşüm dosyasının kullanılacağı belirtilmemişse, \fIbiçim\fR betiği stylesheet komut satırı seçeneği belirtilerek çağrılır. XSLT_PROCESSOR ortam değişkeni ile, XSL-T dönüşümünü sağlayacak uygulamanın ismi belirtilebilir (örneğin \fBxsltproc\fR). \fIbiçim\fR betiği, standart çıktıya kullanılacak dönüşüm dosyasının adını yazmalı ve başarılı bir şekilde çıkmalıdır. Kullanılacak uygun bir dönüşüm dosyası yok ise sıfırdan farklı bir çıkış değeri döner (örneğin; elimizdeki tek dönüşüm dosyası kullanılacak XSL-T işlemcisi ile çalışmıyorsa). Şayet standart çıktıya hiçbir şey yazılmaz ama betik başarılı bir şekilde çıkar ise, XSL-T dönüşümü gerçekleşmez.
+.sp
+İkinci olarak (bir dönüşüm dosyası kullanılarak bir XSL-T dönüşümü yapıldıktan sonra), \fIbiçim\fR betiği bu kez post-process komut satırı seçeneği belirtilerek çağrılır. \fIbiçim\fR betiği XSL-T uygulanmış çıktıyı arzu edilen biçime sokmak için gereken bütün işlemleri, çıktıyı istenen dizine kopyalamak dahil, gerçekleştirmelidir. İşlem sonrası için, \fIbiçim\fR betiği, sadece işlenen çıktıyı içeren geçici bir dizinde çalışır. İşlenen çıktının ismi, özgün XML dosyasının dosya uzantısı \fI.proc\fR yapılarak elde edilir ve \fBXSLT_PROCESSED\fR değişkeninde saklanır. Özgün XML dosyasının ismi \fBINPUT_FILE\fR değişkenine, çıktıyı içerecek dizin \fBOUTPUT_DIR\fR değişkeniene atanır. Son olarak \fBSEARCHPATH\fR değişkenine iki nokta üst üste imleri ile ayrılmış son çare dizinleri atanır. Bu dizinler girdinin (örneğin resimlerin) bulunduğu yerlerdir. Şayet bu adım başarısız olursa, \fIbiçim\fR betiği sıfırdan farklı bir değer döndürür ve çıkar.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-v\fR
+Ayrıntılı kip (daha fazla ayrıntı için \fB-vv\fR).
+.sp
+.TP 4
+\fB-x\fR \fIözel_xsl\fR
+\fIbiçim\fR betiğinden istemek yerine dönüşüm dosyası \fIözel_xsl\fR dosyasıyla doğrudan belirtilir.
+.sp
+.TP 4
+\fB-m\fR \fIxsl_parçası\fR
+Dönüşüm dosyasında değişiklik yapmak için \fIxsl_parçası\fR kullanılır.
+.sp
+.TP 4
+\fB-o\fR \fIdizin\fR
+Çıktıyı, içinde çalışılan dizin yerine, belirtilen \fIdizin\fRe gönderir.
+.sp
+.TP 4
+\fB-p\fR \fIardişlem_seçenekleri\fR
+Dönüşüm dosyası uygulamasından sonraki işlem evrelerine (örneğin; HTML çıktıdan metin çıktı elde etmek için \fBlinks\fR(1) veya \fBlynx\fR(1)’e veya TeX çıktıdan DVI elde etmek için \fBxmltex\fR(1)’e) bu seçenekleri aktarır. Şayet \fB–p\fR ikinci bir defa daha belirtmişse, seçenekler dönüşüm sonrası uygulanan ikinci aşama uygulamalara gönderilir. Bu sadece \fBxmltex\fR(1) ve dvips üzerinden PostScript çıktı elde edilirken uygulanabilir.
+.sp
+.TP 4
+\fB--extensions\fR
+Kullanılan araç zinciri için dönüşüm genişletmelerini kullanmayı mümkün kılar. (\fBuse.extensions\fR etkinleştirilmelidir. Etkinleştirilen değişkenler Norman Walsh’ın DocBook XSL dönüşüm dosyalarında kullandıklarıdır.
+.sp
+.TP 4
+\fB--searchpath\fR \fIdosyayolu\fR
+Girdi için olanlar da dahil olmak üzere son çare olarak kullanılacak dizinlerin iki nokta üstüste imleri ile ayrılmış listesi.
+.sp
+.TP 4
+\fB--skip-validation\fR
+Normalde uygulanan XML doğrulama işlemini atlar.
+.sp
+.TP 4
+\fB--stringparam\fR \fIisim\fR=\fIdeğer\fR
+XSL-T dönüşümüne değişken atamak için komut satırından \fIisim\fR=\fIdeğer\fR çifti aktarmakta kullanılır.
+.sp
+.TP 4
+\fB--noclean\fR
+Geçici dosyalar silinmez (isimleri gösterilir ve tmp dizininde tutulur). Sorunları incelemek için yararlıdır.
+.sp
+.TP 4
+\fB--noautosize\fR
+Öntanımllı olarak, bazı XSL değişkenleri otomatik algılama tarafından geçersiz kılınır (paperconf (libpaper)- kağıt yapılandırması- kullanımı için \fIpage.width\fR (sayfa.genişliği) ve \fIpage.height\fR (sayfa.yüksekliği), yerel tabanlı (\fBLC_PAPER\fR) seçim için \fIpaper.type\fR (sayfa.türü)). Bu seçenekle, \fBxmlto\fR bu otomatik algılamayı kullanmaz ve kullanıcı öntanımlıları kendisi değiştirebilir (ya öntanımlı \fIparam.xsl\fR değişikliği ya da kullanıcı tanımlı XSL parçası yoluyla).
+.sp
+.TP 4
+\fB--noextensions\fR
+Öntanımlı olarak, \fBxmlto\fR, pasiftex arka ucu için \fIpasiftex.extensions\fR, fop arka ucu için \fIfop.extensions\fR ve \fIfop1.extensions\fR XSL değiştirgesini etkinleştirir. Bu genellikle daha iyi sonuçlar verir. Herhangi bir nedenle bu değiştirgeleri kullanmak istemiyorsanız, bu seçeneği kullanarak bunları devre dışı bırakmanız yeterlidir.
+.sp
+.TP 4
+\fB--profile\fR
+Profil oluşturma dönüşümüyle XML belgesini önişlemden geçirir.
+.sp
+.TP 4
+\fB--with-fop\fR
+Biçimlendirme için fop kullanılır. Bu deneysel bir seçenektir, fop’un belirli bir konumda olması umulur (yapılandırılan sürede algılanır), \fBxmlto\fR betiğinde \fIFOP_PATH\fR elle değiştirilebilir.
+.sp
+.TP 4
+\fB--with-dblatex\fR
+Biçimleme için \fBdblatex\fR(1) kullanılır. Deneysel bir seçenektir. Belirli bir konumda olması umulur (yapılandırılan sürede algılanır), \fBxmlto\fR betiğinde \fIDBLATEX_PATH\fR elle değiştirilebilir.
+.sp
+.TP 4
+\fB--help\fR
+Kısa bir kullanım iletisi görüntüler. Kullanılabilir çıktı biçimlerini ve \fBxmlto\fR seçeneklerini açıklar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini gösterir.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBXSLT_PROCESSOR\fR
+XSL-T dönüşümünü yapacak uygulama komutunun adı (öntanımlı: \fBxsltproc\fR(1).
+.sp
+.TP 4
+\fBTMPDIR\fR
+Geçici XSL-T dönüşüm dosyalarının oluşturulacağı dizin (öntanımlı: \fI/tmp\fR).
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+.TP 4
+0
+Hata yok. Beklenen çıkış kodu budur.
+.sp
+.TP 4
+1
+\fBxmlto\fR yetersiz değiştirge ile çağrıldı.
+.sp
+.TP 4
+2
+\fBmktemp\fR(1) dosya/dizin oluştururken başarısız oldu. \fI/tmp\fR veya \fBTMPDIR\fR yazılabilir olmalıdır.
+.sp
+.TP 4
+3
+\fBxmlto\fR yapılandırılmış konumda çalıştırılabilirleri bulamadı. Gerekli tüm paketlerin kurulu olduğundan ve xmlto betiklerinde dosya yollarının düzgün atandığından emin olunmalıdır.
+.sp
+.TP 4
+10+ (Sıfırdan farklı hata kodlu XML doğrulaması)
+\fBxmlto\fR XML belgeyi doğrulamaya çalıştı, fakat doğrulama başarısız oldu. Daha iyi tanı koymak için, doğrulama çıktısı ve \fBxmllint\fR(1) çıkış kodu sağlanır. Ya XML belge doğrulanabilir duruma getirilmeli ya da \fB--skip-validation\fR seçeneği kullanılmalıdır.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+Bir DocBook XML belgesini PDF’ye çevirmek için:
+.sp
+.RS 4
+.nf
+xmlto pdf belgem.xml
+.fi
+.sp
+.RE
+Bir DocBook XML belgesini HTML’ye çevirmek ve çıktıyı HTML dosyası olarak başka bir dizinde saklamak için:
+.sp
+.RS 4
+.nf
+xmlto -o html-dizini html belgem.xml
+.fi
+.sp
+.RE
+Bir DocBook XML belgesinden tek sayfalık bir HTML dosyası elde etmek için:
+.sp
+.RS 4
+.nf
+xmlto html-nochunks belgem.xml
+.fi
+.sp
+.RE
+Çıktıyı bir XSL parçası kullanarak düzenlemek için:
+.sp
+.RS 4
+.nf
+xmlto -m ulink.xsl pdf belgem.xml
+.fi
+.sp
+.RE
+Hangi dönüşüm dosyasının kullanılacağını tanımlamak için (biçim betiğinin seçtiğini göz ardı etmek için):
+.sp
+.RS 4
+.nf
+xmlto -x dosyam.xsl pdf belgem.xml
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+İlk olarak Tim Waugh tarafından yazılmıştır. 0.0.19 sürümünden beri Ondřej Vašík tarafından sürdürülmektedir.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

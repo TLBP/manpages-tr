@@ -1,0 +1,215 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * cfdisk.c - Display or manipulate a disk partition table.
+ *
+ *     Copyright (C) 2014-2015 Karel Zak (kzak@redhat.com)
+ *     Copyright (C) 1994 Kevin E. Martin (martin@cs.unc.edu)
+ *
+ *     The original cfdisk was inspired by the fdisk program
+ *           by A. V. Le Blanc (leblanc@mcc.ac.uk).
+ *
+ * cfdisk is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "CFDISK" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+cfdisk - disk bölümleme tablosunu gösterir veya değiştirir
+.sp
+.SH KULLANIM
+.IP \fBcfdisk\fR 7
+[\fISEÇENEKLER\fR] [\fIAYGIT\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBcfdisk\fR bir blok aygıtını bölümlemek için kullanılabilen curses tabanlı bir uygulamadır. \fI/dev/sda\fR öntanımlıdır.
+.sp
+.TP 4
+\fBBilgi:\fR
+\fBcfdisk\fR bölümleme işlevselliğini kullanıcı dostu bir arayüzle yalnızca temel düzeyde sağlar. Gelişmiş özelliklere ihtiyaç varsa, \fBfdisk\fR(8) kullanılması önerilir.
+.sp
+.PP
+2.25 sürümünden beri \fBcfdisk\fR MBR (DOS), GPT, SUN ve SGI disk etiketlerini desteklemektedir. SKS (Silindir-Kafa-Sektor) adreslemesi artık kullanılmamaktadır. SKS adreslemesi Linux için hiç önemli olmamıştır ve bu kavram yeni aygıtlar için hiçbir şey ifade etmemektedir.
+.sp
+2.25 sürümünden beri \fBcfdisk\fR ’print’ komutunu da desteklememektedir. Bu işlevsellik \fBpartx\fR(8) ve \fBlsblk\fR(8) tarafından daha ayrıntılı biçimde sunulmaktadır.
+.sp
+Aygıttan eski bölümleme tablosu kaldırılmak istenirse \fBwipefs\fR(8) kullanılması önerilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösteriri ve çıkar.
+.sp
+.TP 4
+\fB-L\fR, \fB--color\fR[=\fIKOŞUL\fR]
+Çıktıyı renklendirir. \fIKOŞUL\fR olarak \fBauto\fR, \fBnever\fR (asla) veya \fBalways\fR (daima) belirtilebilir. \fIKOŞUL\fR belirtilmezse \fBauto\fR belirtildiği varsayılır. Renkler devre dışı bırakılabilir. Sürüme özgü yerleşik öntanımlılar için -\fB--help\fR çıktısına bakılabilir. Ayrıca bkz: \fBRENKLER\fR
+.sp
+.TP 4
+\fB--lock\fR[=\fIKİP\fR]
+Çalıştığı aygıt veya dosya için ayrıcalıklı BSD kilidini kullanır. \fIKİP\fR olarak yes veya 1, no veya 0 ya da nonblock (bloksuz) belirtilebilir. \fIKİP\fR belirtilmezse yes belirtildiği varsayılır. Bu seçenek, \fBLOCK_BLOCK_DEVICE\fR ortam değişkenini geçersiz kılar. Seçenek belirtilmezse kilit kullanılmaz, ancak \fBsystemd-udevd\fR(8) veya diğer araçların işleri karıştırmasını önlemek için seçeneğin kullanılması önerilir.
+.sp
+.TP 4
+\fB-r\fR, \fB--read-only\fR
+Salt okunur kip etkin olur.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero\fR
+Uygulama, bellekte sıfırlanmış bölüm tablosuyla başlatılır. Bu seçenek diskteki bölüm tablosunu sıfırlamaz; bunun yerine, uygulama mevcut bölüm tablosu okunmadan başlatılır. Bu seçenek, sıfırdan veya \fBsfdisk\fR(8) uyumlu bir betikten yeni bir bölüm tablosu oluşturmanıza olanak tanır.
+.sp
+.PP
+.sp
+.SH "KOMUTLAR"
+\fBcfdisk\fR komutları, ilgili tuşa basılarak girilebilir (komuttan sonra Enter tuşuna basmak gerekli değildir). Kullanılabilir komutların listesi:
+.sp
+.TP 4
+\fBb\fR
+Geçerli bölümün önyüklenebilir bayrağını etkinleştirir. Bu, sürücüde hangi birincil bölümden önyükleme yapılacağını belirtmenize olanak tanır. Bu komut, tüm bölüm etiketi türleri için kullanılamayabilir.
+.sp
+.TP 4
+\fBd\fR
+Geçerli disk bölümünü siler. Bu, geçerli bölümü boş alana dönüştürecek ve mevcut bölümü hemen yanındaki boş alanla birleştirecektir. Boş alan olarak veya kullanılamaz olarak işaretlenmiş bir bölüm silinemez.
+.sp
+.TP 4
+\fBh\fR
+Yardım ekranını gösterir.
+.sp
+.TP 4
+\fBn\fR
+Boş alandan yeni bir bölüm oluşturur. Komutu girdikten sonra \fBcfdisk\fR oluşturulmak istenen bölümün boyutunu sorar. Öntanımlı boyut, geçerli konumdaki kullanılabilir boş alanın tamamıdır.
+.sp
+Boyutun ardından birim belirtilebilir: KiB (=1024), MiB (=1024*1024), GiB, TiB, PiB, EiB, ZiB ve YiB gibi ("iB" isteğe bağlıdır, örneğin " K" ile "KiB" aynı anlama gelir).
+.sp
+.TP 4
+\fBq\fR
+Uygulamadan çıkılır. Çıkış sırasında diskte hiçbir değişiklik yapılmaz.
+.sp
+.TP 4
+\fBr\fR
+Geçerli disk bölümünü küçültür veya büyütür. Komutu girdikten sonra \fBcfdisk\fR bölümün yeni boyutunu sorar. Geçerli boyut öntanımlıdır. Boş alan olarak veya kullanılamaz olarak işaretlenmiş bir bölüm yeniden boyutlandırılamaz.
+.sp
+Bir bölümün boyutunu küçültmenin, o bölümdeki verileri yok edebileceği unutulmamalıdır.
+.sp
+.TP 4
+\fBs\fR
+Bölümleri başlangıç sektöründen itibaren küçükten büyüğe doğru sıralar. Bölümleri silerek ve ekleyerek, bölümlerin numaralandırması artık sektör sıralaması ile eşleşmez duruma gelebilir. Bu komut, bölümlerin numaralandırmasını sektör sıralamasına eşler. (Ç.N.: Bazı! sistemler, diğer sistemlerin önyüklenmesini etkilememek için sürüm yükseltmesi sırasında yedekleme bölümlerini diskteki diğer bölümlerden sonra gelecek şekilde numaralandırır. Bu numaralandırma bozululursa herşeyi baştan kurmak gerekebilir - bırakın dağınık kalsın.)
+.sp
+.TP 4
+\fBt\fR
+Bölüm türünü değiştirir. Öntanımlı olarak yeni bölümler Linux bölümü olarak oluşturulur.
+.sp
+.TP 4
+\fBu\fR
+Bellekteki bölümleme tablosunu \fBsfdisk\fR(8) uyumlu bir betik dosyasına boşaltır.
+.sp
+Oluşturulan betik dosyaları \fBcfdisk\fR, \fBfdisk\fR(8) \fBsfdisk\fR(8) ve diğer libfdisk uygulamaları arasında uyumludur. Ayrıntılar için bkz: \fBsfdisk\fR(8)
+.sp
+Aygıtta bölümleme tablosu yoksa veya \fBcfdisk\fR \fB--zero\fR komut satırı seçeneğiyle başlatılırsa \fBcfdisk\fR’e bir sfdisk betiği yüklemek de mümkündür.
+.sp
+.TP 4
+\fBW\fR
+Bölüm tablosunu diske yazar (büyük harf \fBW\fR girilmelidir). Bu, diskteki verileri yok edebileceğinden, "evet/yes" veya "hayır/no" girerek yazmayı onaylamanız veya reddetmeniz gerekir. ’evet’ girerseniz, \fBcfdisk\fR bölüm tablosunu diske yazar ve çekirdeğe diskten bölüm tablosunu yeniden okumasını söyler.
+.sp
+Bölüm tablosu bazı durumlarda çekirdek tarafından yeniden okunmayabilir. Böyle bir durumda, \fBpartprobe\fR(8) veya \fBpartx\fR(8) kullanarak veya sistemi yeniden başlatarak yeni bölümler hakkında çekirdeği bilgilendirmek gerekir.
+.sp
+.TP 4
+\fBx\fR
+Bir bölüm hakkındaki ek bilgiyi değiş/tokuş eder.
+.sp
+.TP 4
+\fIYukarı ok, Aşağı ok\fR
+İmleci önceki veya sonraki bölüme taşır. Bir ekrana sığmayacak kadar çok bölüm varsa, ekranda görüntülenen son (ilk) bölümde aşağı (yukarı) hareket ettirilerek sonraki (önceki) bölüm kümesi görüntülenebilir.
+.sp
+.TP 4
+\fISola ok, Sağa ok\fR
+Önceki veya sonraki menü öğesini seçer. Enter’a basmak, seçili olan öğeyi yürütecektir.
+.sp
+.PP
+Tüm komutlar büyük veya küçük harf olarak girilebilir (W hariç). Bir alt menüdeyken veya bir istemdeyken, ana menüye dönmek için Esc tuşuna basmak gerekir.
+.sp
+.SH "RENKLER"
+Çıktı renklendirmesi, \fBterminal-colors.d\fR(5) işlevselliğiyle gerçekleştirilir. Örtük renklendirme, \fBcfdisk\fR için boş
+.sp
+.RS 4
+.nf
+\fI/etc/terminal-colors.d/cfdisk.disable\fR
+.fi
+.sp
+.RE
+dosyasıyla veya tüm araçlar için boş
+.sp
+.RS 4
+.nf
+\fI/etc/terminal-colors.d/disable\fR
+.fi
+.sp
+.RE
+dosyasıyla devre dışı bırakılabilir. Kullanıcıya özel \fB$XDG_CONFIG_HOME\fR\fI/terminal-colors.d\fR veya \fB$HOME\fR\fI/.config/terminal-colors.d\fR genel ayarı geçersiz kılar.
+.sp
+Çıktı renklendirmesinin öntanımlı olarak etkinleştirilebileceği ve bu durumda \fIterminal-colors.d\fR dizinlerinin var olması gerekmediği unutulmamalıdır.
+.sp
+\fBcfdisk\fR, bir renk şemasını dosyasıyla renklerde özelleştirmeyi desteklemez.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.RS 4
+.nf
+\fBCFDISK_DEBUG\fR=all
+    cfdisk hata ayıklamasını etkinleştirir
+\&
+\fBLIBFDISK_DEBUG\fR=all
+    libfdisk hata ayıklama çıktısını etkinleştirir
+\&
+\fBLIBBLKID_DEBUG\fR=all
+    libblkid hata ayıklama çıktısını etkinleştirir
+\&
+\fBLIBSMARTCOLS_DEBUG\fR=all
+    libsmartcols hata ayıklama çıktısını etkinleştirir
+\&
+\fBLIBSMARTCOLS_DEBUG_PADDING\fR=on
+    görünür dolgu karakterleri kullanılır.
+    LIBSMARTCOLS_DEBUG etkin olmalıdır.
+\&
+\fBLOCK_BLOCK_DEVICE\fR=<kip>
+    ayrıcalıklı BSD kilidi kullanılır. Kip "1" veya "0" olabilir.
+    Ayrıntılar için --lock seçeneğine bakılabilir.
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+Karel Zak tarafından yazılmıştır.
+.sp
+Şimdiki cfdisk gerçeklenimi Kevin E. Martin tarafından yazılan özgün cfdisk’e dayanır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfdisk\fR(8), \fBparted\fR(8), \fBpartprobe\fR(8), \fBpartx\fR(8), \fBsfdisk\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBcfdisk\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,214 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1993, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2000 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2011, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "GROUPADD" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+groupadd - yeni bir grup oluşturur
+.sp
+.SH KULLANIM
+.IP \fBgroupadd\fR 9
+[\fIseçenekler\fR] \fIgrup\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBgroupadd\fR komutu, komut satırından tanımlanan bilgiler ve sistemdeki öntanımlı bilgiler eşliğinde yeni bir grup oluşturur. Yeni grup, gerekli sistem dosyalarına girilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-f\fR, \fB--force\fR
+Bu seçenek, \fBgroupadd\fR komutunun eklemeye çalıştığı grup sistemde zaten var ise, başarılı durum koduyla çıkmasını sağlar. \fB-g\fR seçeneği ile kullanıldığında ve belirtilen \fIgrup-kimliği\fR mevcutsa diğer (eşsiz) grup kimliği seçilir (yani \fB-g\fR kapatılır).
+.sp
+.TP 4
+\fB-g\fR, \fB--gid\fR \fIgrup-kimliği\fR
+Grup kimliğinin sayısal değeri. \fB–o\fR seçeneği belirtilmediği sürece bu numara eşsiz olmalıdır. Negatif bir değer atanamaz. Öntanımlı olarak \fBGID_MIN\fR’den ve diğer bütün tanımlı grup numaralarından daha büyük veya eşit olan en küçük sayı kullanılır.
+.sp
+\fBGID_MAX\fR açıklamasına ve \fB-r\fR seçeneğine de bakılabilir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-K\fR, \fB--key\fR \fIANAHTAR=DEĞER\fR
+\fI/etc/login.defs\fR öntanımlılarını (\fBGID_MIN\fR, \fBGID_MAX\fR ve diğerleri) geçersiz kılar. Birden fazla \fB-K\fR seçeneği belirtilebilir. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+-K GID_MIN=100  -K GID_MAX=499
+.fi
+.sp
+.RE
+.RE
+.IP
+Dikkat: Birden fazla anahtar-değer çifti belirtilmesi (\fB-K GID_MIN=10,GID_MAX=499\fR gibi) henüz çalışmamaktadır.
+.sp
+.TP 4
+\fB-o\fR, \fB--non-unique\fR
+Grup kimliği eşsiz olmayan bir grubu eklemeye izin verir.
+.sp
+.TP 4
+\fB-p\fR, \fB--password\fR \fIPAROLA\fR
+\fBcrypt\fR(3) tarafından döndürülen gibi şifreli parola. Parolanın devre dışı bırakılması öntanımlıdır.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+Süreçleri listeleyen kullanıcılara parola (veya şifreli parola) görünür olacağından bu seçeneğin kullanımı önerilmemektedir.
+.sp
+.RE
+.IP
+\fIPAROLA\fR sistemin parola politikasına uygun olmalıdır.
+.sp
+.TP 4
+\fB-r\fR, \fB--system\fR
+Sistem grubu oluşturur.
+.sp
+Yeni sistem gruplarının sayısal belirteçleri \fBlogin.defs\fR(5) dosyasında tanımlı \fBSYS_GID_MIN-SYS_GID_MAX\fR aralığından seçilir (\fBGID_MIN-GID_MAX\fR aralığından değil!).
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--prefix\fR \fIPREFIX_DİZİNİ\fR
+Değişiklikleri \fIPREFIX_DİZİNİ\fRnde uygular ve \fIPREFIX_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır. Bu seçenek chroot yapmaz ve çapraz derlemeye hazırlık için tasarlanmamıştır. Bazı sınırlamalar: NIS ve LDAP kullanıcı ve grupları doğrulanmaz. PAM kimlik kanıtlaması konak dosyalarını kulllanılır. SELinux desteklenmez.
+.sp
+.TP 4
+\fB-U\fR, \fB--users\fR
+Grup üyeleri olarak eklenecek kullanıcıların listesi.
+.sp
+Öntanımlı davranış \fBlogin.defs\fR(5) dosyasında \fBUSERGROUPS_ENAB\fR değişkeni ile tanımlanır (\fB-g\fR, \fB-N\fR ve \fB-U\fR seçenekleri belirtilmezse.)
+.sp
+.PP
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için \fI/etc/login.defs\fR dosyasında bulunan aşağıdaki değişkenler kullanılabilir:
+.sp
+.TP 4
+\fBGID_MAX\fR (tamsayı), \fBGID_MIN\fR (tamsayı)
+\fBuseradd\fR, \fBgroupadd\fR ve \fBnewusers\fR tarafından normal grupları oluştururken kulanılan grup kimlikleri aralığı.
+.sp
+\fBGID_MIN\fR için 1000, \fBGID_MAX\fR için 60000 öntanımlıdır.
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.TP 4
+\fBSYS_GID_MAX\fR (tamsayı), \fBSYS_GID_MIN\fR (tamsayı)
+\fBuseradd\fR, \fBgroupadd\fR ve \fBnewusers\fR tarafından sistem grupları oluştururken kullanılan grup kimlikleri aralığı.
+.sp
+\fBSYS_GID_MIN\fR için 101, \fBSYS_GID_MAX\fR için \fBGID_MIN\fR-1 öntanımlıdır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fB/etc/group\fR      - grupların hesap bilgileri
+\fB/etc/gshadow\fR    - güvenli grup bilgileri
+\fB/etc/login.defs\fR - yapılandırma dosyası
+.fi
+.sp
+.RE
+.sp
+.SH "YETERSİZLİKLER"
+Grup isimlerinin küçük harfle veya alt çizgi ile başlaması, küçük harfler, rakamlar, alt çizgi ve tire imleri içermesi gerekir. Dolar simgesi ile bitebilir. Bunun düzenli ifade karşılığı: \fB[a-z_][a-z0-9_-]*[$]?\fR
+.sp
+Grup isimleri en fazla 16 karakter uzunlukta olabilir.
+.sp
+NIS veya LDAP grubu eklenebilir. Bunun ilgili sunucu üzerinde yapılması gerekir.
+.sp
+Grup adı NIS veya LDAP gibi harici bir veritabanında mevcutsa, \fBgroupadd\fR grup oluşturma isteğini reddedecektir.
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBgroupadd\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI2\fR
+geçersiz sözdizimi
+.sp
+.TP 4
+\fI3\fR
+seçenek değiştirgesi geçersiz
+.sp
+.TP 4
+\fI4\fR
+grup kimliği zaten kullanılıyor (\fB-o\fR olmaksızın çağrıldığında)
+.sp
+.TP 4
+\fI9\fR
+grup ismi zaten kullanılıyor
+.sp
+.TP 4
+\fI10\fR
+\fI/etc/group\fR dosyası güncellenemiyor
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBgpasswd\fR(1), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBlogin.defs\fR(5), \fBuseradd\fR(8), \fBuserdel\fR(8), \fBusermod\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

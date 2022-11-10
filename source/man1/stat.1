@@ -1,0 +1,169 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "STAT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+stat - bir dosyanın veya dosya sisteminin durumunu gösterir
+.sp
+.SH KULLANIM
+.IP \fBstat\fR 5
+[\fISEÇENEK\fR]... \fIDOSYA\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen dosyanın veya dosya sisteminin durumunu gösterir.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fBUyarı:\fR
+Kullandığınız kabuk burada açıklanandan farklı bir \fBstat\fR komutu içeriyor olabilir. Desteklenen seçenekler için kullanmakta olduğunuz kabuğun belgelerine göz atmanız faydalı olabilir.
+.sp
+.PP
+.TP 4
+\fB-L\fR, \fB--dereference\fR
+Bağları izler
+.sp
+.TP 4
+\fB-f\fR, \fB--file-system\fR
+Dosya durumu yerine dosya sistemi durumunu gösterir.
+.sp
+.TP 4
+\fB--cached=\fR\fIKİP\fR
+Önbellekteki özniteliklerin nasıll kullanılacağını belirler; uzak dosya sistemlerinde yararlıdır. Aşağıdaki \fIKİP\fR açıklamasına da bakınız.
+.sp
+.TP 4
+\fB-c\fR, \fB--format=\fR\fIBİÇİM\fR
+Öntanımlı biçim yerine belirtilen \fIBİÇİM\fRi kullanır; her \fIBİÇİM\fR kullanımından sonra bir satır sonu çıktılar.
+.sp
+.TP 4
+\fB--printf=\fR \fIBİÇİM\fR
+\fB--format\fR gibidir fakat ters eğik çizgi öncelemeli karakterleri yorumlar ve \fIBİÇİM\fRi uyguladıktan sonra zorunlu bir satır sonu karakteri çıktılamaz. Bir satır sonu istiyorsanız \fIBİÇİM\fRe \\n ekleyin.
+.sp
+.TP 4
+\fB-t\fR, \fB--terse\fR
+Bilgiler kısa ve öz gösterilir.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fB--cached=\fR seçeneğinin \fIKİP\fR değiştirgesinde şunllar belirtilebilir: \fBalways\fR, \fBnever\fR veya \fBdefault\fR. \fBalways\fR: Eğer varsa önbellekteki öznitelikleri kullanır. \fBnever\fR: Son özniteliklerle eşzamanlamayı denemez. \fBdefault\fR: İlgili dosya sistemini bırakır.
+.sp
+Dosyalar için geçerli \fIBİÇİM\fR belirtimleri (\fB--filesystem\fR seçeneği olmaksızın):
+.sp
+.RS 4
+.nf
+%A   İnsan tarafından okunabilir biçemde
+       erişim hakları ve dosya türü
+%a   Sekizlik tabanda erişim hakları
+       (’#’ ve ’0’ printf belirtimleridir)
+%B   ’%b’ ile belirtilen her blokun bayt cinsinden boyu
+%b   Tahsis edilmiş blok sayısı (bkz. %B)
+%D   Onaltılık tabanda aygıt numarası (st_dev)
+%d   Onluk tabanda aygıt numarası (st_dev)
+%Hd  Onluk tabanda ana aygıt numarası
+%Ld  Onluk tabanda alt aygıt numarası
+%F   Dosya türü
+%f   Onaltılık tabanda ham kip
+%G   Sahibin grup adı
+%g   Sahibin grup kimliği
+%h   Sabit bağ sayısı
+%i   Düğüm numarası
+%m   Disk bölümü bağlama dizini
+%N   Eğer sembolik bağ ise çözümlenmiş ve
+      tırnak içine alınmış dosya adı
+%n   Dosya adı
+%o   GÇ blok büyüklüğü
+%R   Onaltılık tabanda aygıt numarası (st_rdev)
+%r   Onluk tabanda aygıt numarası (st_rdev)
+%Hr  Onluk tabanda ana (karakter/blok) aygıt numarası
+%Lr  Onluk tabanda alt (karakter/blok) aygıt numarası
+%s   Bayt cinsinden toplam büyüklük
+%T   Onaltılık tabanda alt (karakter/blok) aygıt numarası
+%t   Onaltılık tabanda ana (karakter/blok) aygıt numarası
+%U   Sahibin kullanıcı adı
+%u   Sahibin kullanıcı kimliği
+%W   İnsan tarafından okunabilir biçemde
+       dosya oluşturma zamanı;  Bilinmiyorsa: -
+%w   Başlangıçtan beri saniye cinsinden
+       dosya oluşturma zamanı; Bilinmiyorsa: 0
+%X   Başlangıçtan beri saniye cinsinden
+       son erişim zamanı
+%x   Son erişim zamanı
+%Y   Başlangıçtan beri saniye cinsinden
+       son veri değişikliği zamanı
+%y   Son veri değişikliği zamanı
+%Z   Başlangıçtan beri saniye cinsinden
+      son dosya durum değişikliği zamanı
+%z   Son dosya durum değişikliği zamanı
+.fi
+.sp
+.RE
+Dosya sistemleri için geçerli \fIBİÇİM\fR belirtimleri:
+.sp
+.RS 4
+.nf
+%a   Normal kullanıcının kullanabileceği boş bloklar
+%b   Dosya sistemindeki toplam veri bloku sayısı
+%c   Dosya sistemindeki toplam dosya düğümü sayısı
+%d   Dosya sistemindeki kullanılmamış dosya düğümü sayısı
+%f   Dosya sistemindeki kullanılmamış blok sayısı
+%i   Onaltılık tabanda dosya sistem kimliği
+%l   Azami dosya ismi uzunluğu
+%n   Dosya ismi
+%S   Temel blok boyutu (blok sayısı için)
+%s   Blok boyutu (hızlı aktarım için)
+%T   İnsan okuyabilir şekilde dosya sistemi türü
+%t   Onaltılık tabanda dosya sistemi türü
+.fi
+.sp
+.RE
+.TP 4
+\fB--terse\fR için \fIBİÇİM\fRe eşdeğeri:
+%n %s %b %f %u %g %D %i %h %t %T %X %Y %Z %W %o %C
+.sp
+.TP 4
+\fB--terse --file-system\fR için \fIBİÇİM\fRe eşdeğeri:
+%n %i %l %t %s %S %b %f %a %c %d
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Michael Meskes tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBstat\fR(2)
+.br
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/stat>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) stat invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

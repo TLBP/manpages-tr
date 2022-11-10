@@ -1,0 +1,256 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2000 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2012, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "USERDEL" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+userdel - Bir kullanıcı hesabını ve onunla ilgili dosyaları siler
+.sp
+.SH KULLANIM
+.IP \fBuserdel\fR 8
+[\fIseçenekler\fR] \fIKULLANICI\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBuserdel\fR komutu, \fIKULLANICI\fR ile belirtilen hesabı silerek, sistem hesap dosyalarını değiştirir. Silinmeye çalışan \fIKULLANICI\fR hesabı, sistemde var olan bir hesap olmalıdır. Var olmayan bir hesabı silemezsiniz.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-f\fR, \fB--force\fR
+Bu seçenek, \fBuserdel\fR komutunun silmeye çalıştığı kullanıcı sistemde oturum açmışsa bile, hesabının silinmesini sağlar. Ayrıca, başka bir kullanıcı aynı ev dizinini kullansa veya posta havuzu belirtilen kullanıcıya ait olmasa bile, \fBuserdel\fR’i kullanıcının ev dizinini ve posta havuzunu kaldırmaya zorlar. \fI/etc/login.defs\fR dosyasında \fBUSERGROUPS_ENAB=yes\fR tanımı ve silinen kullanıcıyla aynı ada sahip bir grup varsa, bu grup, hala başka bir kullanıcının birincil grubu olsa bile silinir.
+.sp
+.RS 4
+.TP 4
+\fBDikkat:\fR
+Bu seçenek tehlikelidir ve sisteminizi tutarsız durumda bırakabilir.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-r\fR, \fB--remove\fR
+Kullanıcının ev dizinindeki dosyalar, ev dizininin kendisi ve kullanıcının posta havuzu silinir. Diğer dosya sistemlerinde bulunan dosyalar silinmez. Bu nedenle bu dosyaları bulmak ve onları silmek sistem yöneticisinin görevidir.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--prefix\fR \fIPREFIX_DİZİNİ\fR
+Değişiklikleri \fIPREFIX_DİZİNİ\fRnde uygular ve \fIPREFIX_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır. Bu seçenek chroot yapmaz ve çapraz derlemeye hazırlık için tasarlanmamıştır. Bazı sınırlamalar: NIS ve LDAP kullanıcı ve grupları doğrulanmaz. PAM kimlik kanıtlaması konak dosyalarını kulllanılır. SELinux desteklenmez.
+.sp
+.TP 4
+\fB-Z\fR, \fB--selinux-user\fR
+Kullanıcının oturum açması için tüm SELinux kullanıcı eşlemlerini kaldırır.
+.sp
+.PP
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için kullanılabilecek \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBMAIL_DIR\fR (dizge)
+Posta kuyruğu dizini. İlgili kullanıcı hesabı silindiğinde veya değişikliğe uğradığında posta kutusunu elden geçirmek için bu gereklidir. Tanımsızsa, derleme sırasında atanan öntanımlı değer kullanılır. Eposta kuyruğunun oluşturulup oluşturulmadığı \fI/etc/default/useradd\fR dosyasındaki \fBCREATE_MAIL_SPOOL\fR değişkeni ile belirlenir.
+.sp
+.TP 4
+\fBMAIL_FILE\fR (dizge)
+Kullanıcının eposta kuyruğu dosyalarının konumu ev dizinine göreli tanımlanır.
+.sp
+.PP
+\fBMAIL_DIR\fR ve \fBMAIL_FILE\fR değişkenleri \fBuseradd\fR, \fBusermod\fR ve \fBuserdel\fR tarafından eposta kuyruğunun oluşturulması, taşınması ve silinmesi için kullanılır.
+.sp
+Bunlar ayrıca, \fBMAIL_CHECK_ENAB\fR için \fByes\fR tanımlıysa, \fBMAIL\fR ortam değişkenini tanımlamak için de kullanılır.
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.TP 4
+\fBUSERDEL_CMD\fR (dizge)
+Tanımlanmışsa, bir kullanıcı kaldırılırken bu komut çalıştırılır. Kaldırılacak kullanıcıya ait tüm \fIat/cron/print\fR işlerini vb. kaldırmalıdır (ilk değiştirge olarak aktarılır).
+.sp
+Betiğin dönüş kodu dikkate alınmaz.
+.sp
+Aşağıdaki örnekte, kullanıcının cron’u kaldırılmakta ve yazdırma işleri bitirilmektedir:
+.sp
+.RS 4
+.RS 4
+.nf
+#! /bin/sh
+\&
+# Gerekli değiştirgeye bak
+if [ $# != 1 ]; then
+     echo "Kullanım: $0 kullanıcı"
+     exit 1
+fi
+\&
+# cron işlerini kaldır.
+crontab -r -u $1
+\&
+# at işlerini kaldır.
+# Farklı bir kullanıcı adıyla paylaşılmış olsa bile,
+# aynı kullanıcı kimliğe ait tüm işler kaldırılır
+AT_SPOOL_DIR=/var/spool/cron/atjobs
+find $AT_SPOOL_DIR -name "[^.]*" -type f -user $1 -delete \\;
+\&
+# yazdırma işlerini bitir.
+lprm $1
+\&
+# Bu kadar.
+exit 0
+     
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBUSERGROUPS_ENAB\fR (mantıksal)
+\fBroot\fR olmayan kullanıcılar için, kullanıcı ve grup kimlikleri aynıyken kullanıcı ve grup adı da aynı ise umask grup bitlerinin, sahip bitleri ile aynı olmasını sağlar (örn, 022 -> 002, 077 -> 007).
+.sp
+\fIyes\fR atanırsa, \fBuserdel\fR(8) başka üyesi yoksa kullanıcını grubunu siler ve \fBuseradd\fR(8) kullanıcı ile aynı isimde bir grup oluşturur.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/group\fR
+grup bilgileri
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Shadow parola yapılandırması
+.sp
+.TP 4
+\fI/etc/passwd\fR
+kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+güvenli kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/gshadow\fR
+güvenli grup bilgileri
+.sp
+.TP 4
+\fI/etc/shadow-maint/useradd-pre.d/*\fR, \fI/etc/shadow-maint/useradd-post.d/*\fR
+Kullanıcı eklenirken çalıştırılacak \fBrun-parts\fR(8) dosyaları. \fBACTION\fR ortam değişkene \fBuseradd\fR ve kullanıcı isimli \fBSUBJECT\fR atanır. \fBuseradd-pre.d\fR, herhangi bir kullanıcı eklenmeden önce çalıştırılır. \fBuseradd-post.d\fR, kullanıcı eklendikten sonra çalıştırılır. Bir komut dosyası sıfırdan farklı bir değerle çıkarsa, çalışma sonlandırılır.
+.sp
+.TP 4
+\fI/etc/subgid\fR
+Kullanıcı başına bağımlı grup kimlikler
+.sp
+.TP 4
+\fI/etc/subuid\fR
+Kullanıcı başına bağımlı kullanıcı kimlikler
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBuserdel\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+parola dosyası güncellenemiyor
+.sp
+.TP 4
+\fI2\fR
+geçersiz komut sözdizimi
+.sp
+.TP 4
+\fI6\fR
+böyle bir kullanıcı yok
+.sp
+.TP 4
+\fI8\fR
+kullanıcı oturum açmış durumda
+.sp
+.TP 4
+\fI10\fR
+\fI/etc/group\fR dosyası güncellenemiyor
+.sp
+.TP 4
+\fI12\fR
+ev dizini silinemiyor
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+Kullanıcının çaışan süreçleri varsa, \fBuserdel\fR komutu ile bu hesap kaldırılamaz. Silinmeye çalışılan hesaba ait çalışan bütün süreçler öldürümeli, kullanıcının parolası ve hesabı kilitlenmeli, ancak bundan sonra hesap silinmelidir. \fB-f\fR seçeneği ile hesabın silinmesi zorlanabilir.
+.sp
+Bu kullanıcıya ait hiçbir dosyanın kalmadığından emin olmak için tüm dosya sistemleri el yordamıyla gözden geçirilmelidir.
+.sp
+Bir NIS istemcisindeki NIS öznitelikleri kaldırılamayabilir. Bu işlem, NIS sunucu üzerinde gerçekleştirilmelidir.
+.sp
+\fI/etc/login.defs\fR dosyasında \fBUSERGROUPS_ENAB=yes\fR tanımlanırsa, \fBuserdel\fR kullanıcı ile aynı ada sahip grubu siler. \fIpasswd\fR ve \fIgroup\fR veritabanlarındaki tutarsızlıkları önlemek için \fBuserdel\fR, bu grubun başka bir kullanıcı için birincil grup olarak kullanılmadığını denetleyecek ve aksi takdirde grubu silmeden sadece uyaracaktır. \fB-f\fR seçeneği ile hesabın silinmesi zorlanabilir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBlogin.defs\fR(5), \fBgpasswd\fR(8),\fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBsubgid\fR(5), \fBsubuid\fR(5), \fBuseradd\fR(8), \fBusermod\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

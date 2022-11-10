@@ -1,0 +1,243 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DD" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dd - bir dosyayı dönüştürür ve kopyalar
+.sp
+.SH KULLANIM
+.IP \fBdd\fR 3
+[\fITERİM\fR]...
+.IP \fBdd\fR 3
+[\fISEÇENEK\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Bir dosyayı belirtilen terimlere uygun olarak dönüştürüp biçimleyerek kopyalar.
+.sp
+.SS "TERİMLER"
+.TP 4
+\fBbs=\fR\fISAYI\fR
+Bir kerede \fISAYI\fR bayt okur veya yazar (512 öntanımlıdır). \fBibs=\fR\fIsayı\fR ve \fBobs=\fR\fIsayı\fR’ya zorlar.
+.sp
+.TP 4
+\fBcbs=\fR\fIsayı\fR
+Bir kerede \fISAYI\fR bayt dönüştürür.
+.sp
+.TP 4
+\fBconv=\fR\fIDÖNÜŞÜM\fR
+Dosyaya virgül ayraçlı bir liste olarak verilen sözcüklere göre \fIDÖNÜŞÜM\fRü uygular.
+.sp
+.TP 4
+\fBcount=\fR\fISAYI\fR
+Sadece \fISAYI\fR girdi paketi kopyalar.
+.sp
+.TP 4
+\fBibs=\fR\fISAYI\fR
+Bir kerede \fISAYI\fR bayt okunur (512 öntanımlıdır).
+.sp
+.TP 4
+\fBif=\fR\fIDOSYA\fR
+Standart girdi yerine \fIDOSYA\fR okunur.
+.sp
+.TP 4
+\fBiflags=\fR\fISİMGELER\fR
+Virgül ayraçlı \fISİMGELER\fR listesine göre okuma yapılır.
+.sp
+.TP 4
+\fBobs=\fR\fISAYI\fR
+Bir kerede \fISAYI\fR bayt yazılır (512 öntanımlıdır).
+.sp
+.TP 4
+\fBof=\fR\fIDOSYA\fR
+Standart çıktı yerine \fIDOSYA\fR’ya yazar.
+.sp
+.TP 4
+\fBoflags=\fR\fISİMGELER\fR
+Virgül ayraçlı \fISİMGELER\fR listesine göre yazma yapılır.
+.sp
+.TP 4
+\fBseek=\fR\fISAYI\fR
+Çıktı başlangıcında \fBobs\fR baytlık \fISAYI\fR paket atlanır.
+.sp
+.TP 4
+\fBskip=\fR\fISAYI\fR
+Girdi başlangıcında \fBibs\fR baytlık \fISAYI\fR paket atlanır.
+.sp
+.TP 4
+\fBstatus=\fR\fISEVİYE\fR
+Standart hatada gösterilecek bilgi \fISEVİYE\fRsi: ’\fBnone\fR’ ile hata iletileri hariç herşey engellenir; ’\fBnoxfer\fR’ ile son aktarımın istatistikleri engellenir; ’\fBprogress\fR’ ile aktarım istatistikleri aralıklı olarak gösterilir.
+.sp
+.PP
+\fISAYI\fR’ların ardından sonek olarak şu dizgeler gelebilir (sayılar dizgelerin kaçar baytı ifade ettiğini göstermektedir): c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000, M=1024*1024, xM=M, GB=1000*1000*1000, G=1024*1024*1024 ve T, P, E, Z, Y için de aynısı geçerlidir. Bibaytlık birimler de kullanılabilir: KiB=K, MiB=M, ...
+.sp
+.SS "DÖNÜŞÜM sözcükleri şunlar olabilir:"
+.TP 4
+\fBascii\fR
+EBCDIC’den ASCII’ye dönüşüm.
+.sp
+.TP 4
+\fBebcdic\fR
+ASCII’den EBCDIC’e dönüşüm.
+.sp
+.TP 4
+\fBibm\fR
+ASCII’den öteki EBCDIC’e dönüşüm.
+.sp
+.TP 4
+\fBblock\fR
+Satır sonu ile sonlandırılmış kayıtları boşluklarla \fBcbs\fR bayta tamamlar.
+.sp
+.TP 4
+\fBunblock\fR
+\fBcbs\fR baytlık kayıtların sonundaki boşlukların yerine satır sonu karakteri yerleştirir.
+.sp
+.TP 4
+\fBlcase\fR
+Büyük harfleri küçük harflere dönüştürür.
+.sp
+.TP 4
+\fBucase\fR
+Küçük harfleri büyük harflere dönüştürür.
+.sp
+.TP 4
+\fBsparse\fR
+Tamamı NUL çıktı blokları yazmak yerine ilerlemeye çalışır
+.sp
+.TP 4
+\fBswab\fR
+Her bir girdi bayt çiftini değiş tokuş yapar.
+.sp
+.TP 4
+\fBsync\fR
+Her girdi paketini, NUL (\\0) karakterlerle \fBobs\fR bayta tamamlar; \fBblock\fR veya \fBunblock\fR ile birlikte kullanıldığı zaman, NUL karakterler yerine boşluklar kullanılır.
+.sp
+.TP 4
+\fBexcl\fR
+Çıktı dosyası zaten varsa başarısız olur.
+.sp
+.TP 4
+\fBnocreat\fR
+Çıktı dosyasını oluşturmaz.
+.sp
+.TP 4
+\fBnotrunc\fR
+Çıktı dosyasını kırpmaz.
+.sp
+.TP 4
+\fBnoerror\fR
+Okuma hatalarından sonra devam eder.
+.sp
+.TP 4
+\fBfdatasync\fR
+Bitirmeden önce çıktı dosyası verisini fiziksel olarak yazar.
+.sp
+.TP 4
+\fBfsync\fR
+\fBfdatasync\fR gibi, fakat ayrıca öteveriyi de yazar.
+.sp
+.PP
+.SS "SİMGELER şunlar olabilir:"
+.TP 4
+\fBappend\fR
+Ekleme kipi (sadece çıktı için anlamlı; conv=notrunc önerilir)
+.sp
+.TP 4
+\fBdirect\fR
+Veri için doğrudan G/Ç kullanılır.
+.sp
+.TP 4
+\fBdirectory\fR
+Bir dizin olmadıkça başarısız olur.
+.sp
+.TP 4
+\fBdsync\fR
+Veri için eşzamanlı G/Ç kullanılır.
+.sp
+.TP 4
+\fBsync\fR
+Benzer şekilde, fakat öteveri de dahil olur.
+.sp
+.TP 4
+\fBfullblock\fR
+Girdiden tamamı dolu paketler toplanır (sadece \fBiflag\fR için)
+.sp
+.TP 4
+\fBnonblock\fR
+Veri için engellenmeyen G/Ç kullanılır.
+.sp
+.TP 4
+\fBnoatime\fR
+Dosya erişim zamanı güncellenmez.
+.sp
+.TP 4
+\fBnocache\fR
+Önbellekleme yapılmaması isteği. \fBoflag=sync\fR’e de bakın.
+.sp
+.TP 4
+\fBnoctty\fR
+Dosyadan denetim uçbirimi atanmaz
+.sp
+.TP 4
+\fBnofollow\fR
+Sembolik bağlar izlenmez.
+.sp
+.TP 4
+\fBcount_bytes\fR
+Bayt sayısı \fBcount=\fR\fISAYI\fR olarak ele alınır (sadece \fBiflag\fR için)
+.sp
+.TP 4
+\fBskip_bytes\fR
+Atlanacak bayt sayısı \fBskip=\fR\fISAYI\fR olarak ele alınır (sadece \fBiflag\fR için)
+.sp
+.TP 4
+\fBseek_bytes\fR
+İlerlenecek bayt sayısı \fBseek=\fR\fISAYI\fR olarak ele alınır (sadece \fBoflag\fR için)
+.sp
+.PP
+Çalışan \fBdd\fR sürecine \fBUSR1\fR sinyalinin gönderilmesi G/Ç istatistiklerinin standart hataya basılmasına ve ardından kopyalamanın kaldığı yerden devam etmesine yolaçar.
+.sp
+.SS "SEÇENEK şunlardan biri olabilir:"
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Paul Rubin, David MacKenzie ve Stuart Kemp tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/dd>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) dd invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

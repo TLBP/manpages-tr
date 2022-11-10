@@ -1,0 +1,108 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "TR" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+tr - karakterleri dönüştürür veya siler
+.sp
+.SH KULLANIM
+.IP \fBtr\fR 3
+[\fISEÇENEK\fR]... \fIKÜME1\fR [\fIKÜME2\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Standart girdiden okuduğu karakterleri dönüştürerek, sıkıştırarak ve/veya silerek standart çıktıya yazar.
+.sp
+.TP 4
+\fB-c\fR, \fB-C\fR, \fB--complement\fR
+\fIKÜME1\fR’in tümleyeni kullanılır.
+.sp
+.TP 4
+\fB-d\fR, \fB--delete\fR
+\fIKÜME1\fR’deki karakterleri siler, dönüştürmez.
+.sp
+.TP 4
+\fB-s\fR, \fB--squeeze-repeats\fR
+Aynı karakterden oluşmuş bir sırayı, karakterler \fIKÜME1\fR içinde varsa, siler yerine o karakterden bir tane koyar.
+.sp
+.TP 4
+\fB-t\fR, \fB--truncate-set1\fR
+Önce \fIKÜME1\fR’i, \fIKÜME2\fR’nin boyuna eşit olacak şekilde kısaltır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+\fIKÜME1\fR ve \fIKÜME2\fR karakter dizilimleri olarak belirtilir. Çoğu zaten karakterlerin kendileridir. Yorumlanan dizilimler şunlardır:
+.sp
+.RS 4
+.nf
+\\NNN           sekizlik değeri NNN (1-3 rakam) olan karakter
+\\\\             ters eğik çizgi
+\\a             bip sesi
+\\b             geri silme
+\\f             sayfa ileri
+\\n             satır sonu
+\\r             satır başı
+\\t             yatay sekme
+\\v             düşey sekme
+KAR1-KAR2      artan sırada KAR1’den KAR2’ye kadar
+               tüm karakterler
+[KAR*]         KAR karakterini KUME2’de KUME1 uzunluğu
+               kadar tekrarlar
+[KAR*TEKRAR]   KAR karakterini TEKRAR kere tekrarlar,
+               TEKRAR 0 ile başlıyorsa sekizlik sayıdır
+[:alnum:]      tüm harf ve rakamlar
+[:alpha:]      tüm harfler
+[:blank:]      tüm yatay boşluklar
+[:cntrl:]      tüm denetim karakterleri
+[:digit:]      tüm rakamlar
+[:graph:]      boşluk hariç, tüm yazılabilir karakterler
+[:lower:]      tüm küçük harfler
+[:print:]      boşluk dahil, tüm yazılabilir karakterler
+[:punct:]      tüm noktalama isaretleri
+[:space:]      tüm yatay ve düşey boşluklar
+[:upper:]      tüm büyük harfler
+[:xdigit:]     tüm onaltılık rakamlar
+[=KAR=]        KAR karakterinin eşdeğeri olan tüm karakterler
+.fi
+.sp
+.RE
+Dönüşüm, \fB-d\fR seçeneği kullanılmadığında ve \fIKÜME1\fR ve \fIKÜME2\fR’nin her ikisi de verildiğinde gerçekleşir. \fB-t\fR sadece dönüşüm yaparken kullanılabilir. \fIKÜME2\fR gerektiğinde son karakteri tekrar edilerek \fIKÜME1\fR ile aynı uzunluğa getirilir. \fIKÜME2\fR’deki fazlalık karakterler dikkate alınmaz. Çeviri yapılılırken \fIKÜME2\fR’de kullanılan karakter sınıflarından sadece [:lower:] ve [:upper:] kesin olarak büyükten küçüğe açılır, bu ikisi beraberce sadece büyük harf / küçük harf dönüşümü yapılırken kullanılabilir. \fB-s\fR sadece ne dönüşüm ne de silme yapılıyorsa \fIKÜME1\fR’i kullanır; aksi takdirde dönüşüm veya sıkıştırma bittikten sonra sıkıştırma yapılıyorsa \fIKÜME2\fR’yi kullanır.
+.sp
+.SH "YAZAN"
+Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/tr>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) tr invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

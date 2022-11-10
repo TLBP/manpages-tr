@@ -1,0 +1,199 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "EXPR" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+expr - ifadeleri değerlendirir
+.sp
+.SH KULLANIM
+.IP \fBexpr\fR 5
+\fIİFADE\fR
+.IP \fBexpr\fR 5
+\fISEÇENEK\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+\fIİFADE\fR’nin değerini standart çıktıya basar. Aşağıda \fIİFADE\fR’ler önceliklerine göre gruplanmıştır:
+.sp
+.TP 3
+7. öncelik:
+.RS
+.TP 4
+\fIdğş1\fR | \fIdğş2\fR
+\fIdğş1\fR boş veya 0 ise \fIdğş2\fR, değil ise \fIdğş1\fR
+.sp
+.TP 4
+\fIdğş1\fR & \fIdğş2\fR
+ikisi de 0 veya boş ise \fIdğş2\fR, değil ise \fIdğş1\fR
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+6. öncelik:
+.RS
+.TP 4
+\fIdğş1\fR < \fIdğş2\fR
+\fIdğş1\fR küçüktür \fIdğş2\fR
+.sp
+.TP 4
+\fIdğş1\fR <= \fIdğş2\fR
+\fIdğş1\fR küçük ya da eşittir \fIdğş2\fR
+.sp
+.TP 4
+\fIdğş1\fR = \fIdğş2\fR
+\fIdğş1\fR eşittir \fIdğş2\fR
+.sp
+.TP 4
+\fIdğş1\fR != \fIdğş2\fR
+\fIdğş1\fR farklıdır \fIdğş2\fR
+.sp
+.TP 4
+\fIdğş1\fR >= \fIdğş2\fR
+\fIdğş1\fR büyük ya da eşittir \fIdğş2\fR
+.sp
+.TP 4
+\fIdğş1\fR > \fIdğş2\fR
+\fIdğş1\fR büyüktür \fIdğş2\fR
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+5. öncelik:
+.RS
+.TP 4
+\fIdğş1\fR + \fIdğş2\fR
+aritmetik toplama işlemi
+.sp
+.TP 4
+\fIdğş1\fR - \fIdğş2\fR
+aritmetik çıkarma işlemi
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+4. öncelik:
+.RS
+.TP 4
+\fIdğş1\fR * \fIdğş2\fR
+aritmetik çarpma işlemi
+.sp
+.TP 4
+\fIdğş1\fR / \fIdğş2\fR
+aritmetik bölme işleminde bölümü verir
+.sp
+.TP 4
+\fIdğş1\fR % \fIdğş2\fR
+aritmetik bölme işleminde kalanı verir
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+3. öncelik:
+.RS
+.TP 4
+\fIDİZGE\fR : \fIDÜZENLİ_İFADE\fR
+ilk karakterinden itibaren \fIDİZGE\fR içindeki \fIDÜZENLİ_İFADE\fR ile eşleşen kısım
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+2. öncelik:
+.RS
+.TP 4
+\fBmatch\fR \fIDİZGE\fR \fIDÜZENLİ_İFADE\fR
+\fIDİZGE\fR : \fIDÜZENLİ_İFADE\fR ile aynı.
+.sp
+.TP 4
+\fBsubstr\fR \fIDİZGE KONUM UZUNLUK\fR
+\fIDİZGE\fR’nin \fIKONUM\fR’dan (1’den başlayarak sayılır) başlayan, belirtilen \fIUZUNLUK\fR’taki alt dizgesi.
+.sp
+.TP 4
+\fBindex\fR \fIDİZGE KARAKTERLER\fR
+\fIDİZGE\fR içinde \fIKARAKTERLER\fR’e ilk rastlanan konum, yoksa 0.
+.sp
+.TP 4
+\fBlength\fR \fIDİZGE\fR
+\fIDİZGE\fRnin uzunluğu.
+.sp
+.TP 4
+\fB+\fR \fIANDAÇ\fR
+\fIANDAÇ\fR ’match’ gibi bir anahtar sözcük ya da ’/’ gibi bir işleç bile olsa bir dizge olarak yorumlanır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 3
+1. öncelik:
+.RS
+.TP 4
+( \fIİFADE\fR )
+\fIİFADE\fR’nin değeri
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+Kabukta yorumlanması için öncelenmesi ya da yorumlanmaması için tırnak içine alınması gereken işleçlerden sakının. Karşılaştırmalar her ikisi de sayısal ise sayısal, değilse sözlük sırasına göredir. Örgüsel eşleşmeler \\( ve \\) arasındaki eşleşen dizge ile ya da null ile sonuçlanır; eğer \\( ve \\) kullanılmamışsa eşleşen karakter sayısıyla ya da 0 ile sonuçlanır.
+.sp
+.SS "Çıkış Durumu"
+\fIİFADE\fR ne null ne de 0 ise 0,
+.br
+\fIİFADE\fR null veya 0 ise 1,
+.br
+\fIİFADE\fR sözdizimsel olarak geçersizse 2,
+.br
+bir hata oluşmuşsa 3’tür.
+.sp
+.sp
+.SH "YAZAN"
+Mike Parker, James Youngman ve Paul Eggert tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/expr>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) expr invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

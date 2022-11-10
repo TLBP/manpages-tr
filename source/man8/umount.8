@@ -1,0 +1,231 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1996 Andries Brouwer
+ *
+ * This page is somewhat derived from a page that was
+ * (c) 1980, 1989, 1991 The Regents of the University of California
+ * and had been heavily modified by Rik Faith and myself.
+ * (Probably no BSD text remains.)
+ * Fragments of text were written by Werner Almesberger, Remy Card,
+ * Stephen Tweedie and Eric Youngdale.
+ *
+ * This is free documentation; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * The GNU General Public License’s references to "object code"
+ * and "executables" are to be interpreted as the output of any
+ * document formatting or typesetting system, including
+ * intermediate and printed output.
+ *
+ * This manual is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this manual; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "UMOUNT" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+umount - dosya sistemlerini ayırır
+.sp
+.SH KULLANIM
+.IP \fBumount\fR 7
+\fB-a\fR [\fB-dflnrv\fR] [\fB-t\fR \fIds-türü\fR] [\fB-O\fR \fIseçenek\fR...]
+.IP \fBumount\fR 7
+[\fB-dflnrv\fR] {\fIdizin\fR|\fIaygıt\fR}
+.IP \fBumount\fR 7
+{\fB-h\fR|\fB-V\fR}
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBumount\fR, dosya sistem(ler)ini, bağlı olduğu dosya hiyeraşisinden ayırır. Bir dosya sistemi, bağlandığı dizin adı verilerek belirtilir. Dosya sisteminin üzerinde olduğu özel aygıt isimlerinin belirtilmesi de işe yarayabilir ama bu yöntem oldukça eskidir. Ayrıca, aygıtın birden fazla dizine bağlandığı durumlarda hata oluşacaktır.
+.sp
+"Meşgul" bir dosya sisteminin ayrılamayacağı unutulmamalıdır. Örneğin; açık dosyalar var ise veya bir süreç oradaki bir dizin içinde çalışıyorsa ya da o dizindeki bir takas dosyası kullanımda ise, vb. Örneğin bir süreç libc’yi başlatır ve libc oradaki yerel dosyaları açar böyle bir durumda, süreç \fBumount\fR’u çalıştırabilse bile işlem başarılı olmaz. Bir delice ayırma işlemi bu sorunların üstesinden gelir, ancak başka sorunları da beraberinde getirebilir. Bkz: \fB--lazy\fR seçeneği.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB--all\fR
+\fI/proc/self/mountinfo\fR (veya artık kullanılmayan \fI/etc/mtab\fR) dizininde listelenen dosya sistemlerinden proc, devfs, devpts, sysfs, rpc_pipefs ve nfsd hariç kalanların tamamı sistemden ayrılır. Hariç tutulan dosya sistemleri de ayrılmak istenirse \fB--types\fR seçeneğinde listelenebilir.
+.sp
+.TP 4
+\fB-A\fR, \fB--all-targets\fR
+Belirtilen dosya sisteminin geçerli bağlama isimalanındaki tüm bağlama noktalarını ayırır. Dosya sistemi, bağlama noktasıyla veya aygıt ismi ya da UUID ve benzerleri ile belirtilebilir. \fB--recursive\fR seçeneği ile birlikte kullanıldığında bağlı dosya sistemlerinin altındaki bağlı dosya sistemleri de ardışık olarak sistemden ayrılır. Bu seçenek yalnızca \fI/etc/mtab\fR dosyasının \fI/proc/mounts\fR dosyasına sembolik bağ olabildiği sistemlerde kullanılabilir.
+.sp
+.TP 4
+\fB-c\fR, \fB--no-canonicalize\fR
+Dosya yolunun bileşenlerinde yer alan sembolik bağların ardışık olarak izlenmesi işlemi \fBstat\fR(2) ve \fBreadlink\fR(2) çağrıları ile yapılır ve bu çağrılar bazı durumlarda askıda kalabilir (örneğin NFS sistemlerinde sunucu ortada yoksa). Bu seçenekle bu çağrılar yapılmaz. Bu seçenek yalnızca bağlama noktası eşsiz ve mutlak bir dosya yolu olarak belirtilmişse kullanılmalıdır.
+.sp
+Bu seçenek root olmayan kullanıcıların ayırma işlemlerinde sessizce yok sayılır.
+.sp
+Bu seçenek hakkında ayrıntılı bilgi için \fBmount\fR(8) sayfasına bakılabilir. \fBumount\fR bu seçeneği dışsal ayırma araçlarına (\fB/sbin/umount.\fR\fItür\fR) aktarmaz.
+.sp
+.TP 4
+\fB-d\fR, \fB--detach-loop\fR
+Ayrılan aygıt bir dönüş aygıtı olduğunda, ayırma işlemine ek olarak dönüş aygıtı da serbest bırakılır. Bu seçenek \fBautoclear\fR özelliğinin öntanımlı olarak etkin olduğu durumda \fBmount\fR(8) ile ilklendirilen dönüş aygıtları için gereksizdir.
+.sp
+.TP 4
+\fB--fake\fR
+Gerçek sistem çağrısı veya dışsal ayırma araçlarının çalıştırılması dışında her şeyin yapılmasını sağlar; dosya sisteminin bağlantısını kesiyormuş gibi yapar. \fB-n\fR seçeneğiyle daha önce ayrılmış bir dosya sisteminin (artık kullanılmayan) \fI/etc/mtab\fR dosyasındaki girdilerini silmek için kullanılabilir.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Ayırma işlemini (ulaşılamayan NFS sistemlerinin varlığında) zorlar.
+.sp
+Bu seçeneğin kullanımı durumunda \fBumount\fR sürecinin askıda kalmayacağının hiçbir garantisi yoktur. Ulaşılamayan NFS sistemleri üzerinde uygulanamayacak \fBstat\fR(2) ve \fBreadlink\fR(2) çağrılarından kaçınmak için sembolik bağ içermeyen mutlak dosya yollarının kullanılması şiddetle tavsiye olunur.
+.sp
+.TP 4
+\fB-i\fR, \fB--internal-only\fR
+Dışsal \fB/sbin/umount.\fR\fIds-türü\fR aracı mevcut olsa bile çalıştırılmaz. Bu tür dışsal araçlar sistemde mevcutsa öntanımlı olarak çalıştırılır.
+.sp
+.TP 4
+\fB-l\fR, \fB--lazy\fR
+Tembel ayırma. Dosya sistemi dosya hiyerarşisinden hemen ayrılır ve meşguliyeti biter bitmez bu dosya sistemine yapılan tüm atıflar temizlenir.
+.sp
+Bu seçeneğin ağ dosya sisteminde veya alt bağlantılara sahip yerel dosya sisteminde kullanılması durumunda, her an sistemin yeniden başlatılması beklenebilir. \fBumount -l\fR için önerilen kullanım durumu, normal bir \fBumount\fR’un kapatılmış bir sunucu veya ağ disk bölümü nedeniyle askıda kalacağı erişilemeyen bir ağ paylaşımı nedeniyle kapanma sırasında beklemede kalmasını önlemektir. Paylaşımın yeniden bağlanması mümkün olmayacaktır.
+.sp
+.TP 4
+\fB-n\fR, \fB--namespace\fR \fIisimalanı\fR
+Bağlı dosya sistemlerinin belirtilen \fIisimalanı\fRna göre ayrılmasını sağlar. \fIisimalanı\fR, belirtilen isimalanında çalışan bir sürecin süreç kimliği veya belirtilen isimalanını temsil eden bir dosya olabilir.
+.sp
+\fBumount\fR, \fI/etc/fstab\fR dosyasını okuduğunda, \fI/etc/mtab\fR dosyasına yazdığında (veya \fI/run/mount\fR dosyasına yazdığında) ve \fBumount\fR(2) sistem çağrısında ilgili isimalanına geçer, aksi takdirde özgün isimalanında kalır. Yani, hedef bağlama isimalanının \fBumount\fR(2) çağrısı için gerekli kütüphaneleri veya diğer gereksinimleri içermesi gerekmez.
+.sp
+Daha ayrıntılı bilgi için bkz: \fBmount_namespaces\fR(7)
+.sp
+.TP 4
+\fB-n\fR, \fB--no-mtab\fR
+\fI/etc/mtab\fR dosyasına yazmadan dosya sistemini ayırır.
+.sp
+.TP 4
+\fB-O\fR, \fB--test-opts\fR \fIseçenek\fR...
+Yalnızca, \fI/etc/fstab\fR dosyasında dosya sistemi için belirtilen \fIseçenek\fR varsa dosya sistemini ayırır. Virgüllerle ayırarak birden fazla seçenek belirtilebilir. Seçeneğin eyleminin uygulanması istenmiyorsa seçeneğin önüne "no" dizgesi konulabilir.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+"bağlı değil" ("not mounted") hata iletileri engellenir.
+.sp
+.TP 4
+\fB-R\fR, \fB--recursive\fR
+Belirtilen her dizini özyinelemeli olarak ayırır. Zincirdeki bir ayırma işlemi bir nedenle başarısız olursa, özyineleme her dizin için duracaktır. Bağlantı noktaları arasındaki ilişki \fI/proc/self/mountinfo\fR girdileriyle belirlenir. Dosya sistemi, bağlama noktası yolu ile belirtilmelidir; aygıt adına (veya UUID) göre özyinelemeli ayırma desteklenmez. 2.37 sürümünden bu yana, aynı bağlama noktasında bağlanmış birden fazla dosya sistemi olduğunda bunların tümü ayrılabilmektedir.
+.sp
+.TP 4
+\fB-r\fR, \fB--read-only\fR
+Ayırma başarısız olursa dosya sistemini salt-okunur olarak yeniden bağlamayı dener.
+.sp
+.TP 4
+\fB-t\fR, \fB--types\fR \fIds-türü\fR[,...]
+Eylemlerin yalnızca belirtilen türdeki dosya sistemlerinde gerçekleştirilmesi gerektiğini belirtir. Virgülle ayrılmış bir liste halinde birden fazla tür belirtilebilir. Dosya sistemi türleri listesinin önüne, belirtilen türlerin tümü için herhangi bir işlem yapılmaması gerektiğini belirtmek için "no" eklenebilir. \fBumount\fR’un bağlı dosya sistemleri hakkındaki bilgileri çekirdekten (\fI/proc/mounts\fR) okuduğu ve dosya sistemi adlarının \fI/etc/fstab\fR’da kullanılan dosya sistemi adlarından farklı olabileceği unutulmamalıdır. (örneğin, "nfs4" ve "nfs").
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Ayrıntı kipi.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "AYRICALIKSIZ KULLANICILAR"
+Normalde, yalnızca root kullanıcısı dosya sistemlerini bağlayabilir. Ancak, \fI/etc/fstab\fR dosyasının ilgili satırında \fBuser\fR seçeneği varsa, herhangi bir kullanıcı ilgili dosya sistemini bağlayabilir. Ayrıntılar için bkz: \fBmount\fR(8)
+.sp
+2.34 sürümünden beri, çekirdek bağlama tablosu kullanıcının kimliğini içeriyorsa, umount komutu fuse dosya sistemleri için de ayırma işlemini gerçekleştirmekte kullanılabilir. Bu durumda \fIfstab\fR \fBuser=\fR bağlama seçeneği gerekli değildir.
+.sp
+2.35 sürümünden beri, kullanıcı izinleri dahili libmount güvenlik kurallarına göre yetersiz kaldığında \fBumount\fR komutu çıkmaz ve suid izinlerini düşürüp normal root olmayan kullanıcı olarak devam eder. Bu, root izinlerinin gerekli olmadığı (fuse dosya sistemleri, kullanıcı isimalanları gibi) kullanım durumlarını desteklemek için kullanılabilir.
+.sp
+.SH "DÖNÜŞ AYGITI"
+\fBumount\fR komutu, \fI/etc/mtab\fR dosyasından bağımsız olarak \fBmount\fR(8) komutuyla ilklendirilmiş dönüş aygıtını otomatik olarak ayırır.
+.sp
+Bu durumda, aygıt \fBautoclear\fR özelliği ile ilklendirilir (daha fazla ayrıntı için bkz: \fBlosetup\fR(8)), aksi takdirde \fB--detach-loop\fR seçeneğini veya \fBlosetup -d /dev/loop\fR[\fIN\fR] komutunu kulanmak gerekir. \fBautoclear\fR özelliği Linux 2.6.25’ten beri desteklenmektedir.
+.sp
+.SH "DIŞSAL ARAÇLAR"
+Dışsal ayırma araçları için sözdizimi:
+.sp
+.RS 4
+\fBumount.\fR\fIsonek\fR {\fIdizin\fR|\fIaygıt\fR} [\fB-flnrv\fR] [\fB-N\fR \fIisimalanı\fR] [\fB-t\fR \fItür.alttür\fR]
+.sp
+.RE
+Burada, \fIsonek\fR dosya sistemi türüdür (veya mtab dosyasında \fBuhelper=\fR veya \fBhelper=\fR ile belirtilen değerdir). \fB-t\fR seçeneği alt tür desteği olan dosya sistemleri için kullanılır. Örnek:
+.sp
+.RS 4
+.nf
+\fBumount.fuse -t fuse.sshfs\fR
+.fi
+.sp
+.RE
+\fBuhelper=\fR\fIdeğer\fR imleci (ayrıcalıksız araç), sıradan kullanıcıların \fI/etc/fstab\fR içinde tanımlanmayan (örneğin, \fBudisks\fR(8) ile bağlanmış bir aygıt için) bir bağlama noktasının bağlantısının kesilmesi gerektiğinde \fI/etc/mtab\fR dosyasında görünebilir.
+.sp
+\fI/etc/mtab\fR dosyasındaki \fBhelper=\fR\fIds-türü\fR imleci, tüm ayırma isteklerini kullanıcı kimlikten bağımsız olarak \fB/sbin/umount.\fR\fIds-türü\fR aracına yönlendirir.
+.sp
+\fI/etc/mtab\fR dosyasının şu anda kullanımdan kaldırıldığı ve \fBhelper=\fR ve diğer kullanıcı alanı bağlama seçeneklerinin \fBlibmount\fR tarafından sağlandığı unutulmamalıdır.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBLIBMOUNT_FSTAB\fR=\fIyol\fR
+\fIfstab\fR dosyasının öntanımlı yerini geçersiz kılar (suid için yok sayılır)
+.sp
+.TP 4
+\fBLIBMOUNT_MTAB\fR=\fIyol\fR
+\fImstab\fR dosyasının öntanımlı yerini geçersiz kılar (suid için yok sayılır)
+.sp
+.TP 4
+\fBLIBMOUNT_DEBUG=all\fR
+libmount hata ayıklama çıktısı etkin olur
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/fstab\fR
+bilinen dosya sistemleri tablosu
+.sp
+.TP 4
+\fI/etc/mtab\fR
+bağlı dosya sistemleri tablosu (kullanımdan kalktı, artık \fI/proc/mounts\fR dosyasına sembolik bağ oldu)
+.sp
+.TP 4
+\fI/proc/self/mountinfo\fR
+çekirdek tarafından üretilen bağlı dosya sistemleri tablosu
+.sp
+.PP
+.sp
+.SH "TARİHÇE"
+AT&T UNIX sürüm 6 bir \fBumount\fR komutu içeriyordu.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmount\fR(2), \fBlosetup\fR(8), \fBmount_namespaces\fR(7), \fBmount\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBumount\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

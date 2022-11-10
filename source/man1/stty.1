@@ -1,0 +1,550 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "STTY" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+stty - uçbirim hat ayarlarını basar ve değiştirir
+.sp
+.SH KULLANIM
+.IP \fBstty\fR 5
+[\fB-F\fR \fIAYGIT\fR| \fB--file=\fR\fIAYGIT\fR] [\fIAYARLAR\fR]...
+.IP \fBstty\fR 5
+[\fB-F\fR \fIAYGIT\fR| \fB--file=\fR\fIAYGIT\fR] [\fB-a\fR|\fB--all\fR]
+.IP \fBstty\fR 5
+[\fB-F\fR \fIAYGIT\fR| \fB--file=\fR\fIAYGIT\fR] [\fB-g\fR|\fB--save\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Uçbirim karakteristiklerin basar ve değiştirir.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Tüm ayarları insan-okuyabilir biçimde gösterir.
+.sp
+.TP 4
+\fB-g\fR, \fB--save\fR
+Tüm ayarları stty-okuyabilir biçimde gösterir
+.sp
+.TP 4
+\fB-F\fR, \fB--file=\fR\fIAYGIT\fR
+Standart girdi yerine belirtilen \fIAYGIT\fRı açar ve kullanır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+\fIAYARLAR\fRdan önceki seçimlik ’\fB-\fR’ anlamı ters çevirir. \fB*\fR karakteri POSIX olmayan ayarları gösterir. Hangi ayarların kullanılabileceği sisteme göre değişir.
+.sp
+.SS "Özel karakterler:"
+.TP 4
+\fB* discard\fR \fIKAR\fR
+\fIKAR\fR karakteri çıktının iptalini açar/kapar.
+.sp
+.TP 4
+\fBeof\fR \fIKAR\fR
+\fIKAR\fR dosya sonu karakteri olacak (girdiyi sonlandırır)
+.sp
+.TP 4
+\fBeol\fR \fIKAR\fR
+\fIKAR\fR satır sonu karakteri olacak
+.sp
+.TP 4
+\fB* eol2\fR \fIKAR\fR
+Satır sonu için diğer bir \fIKAR\fR olacaktır
+.sp
+.TP 4
+\fBerase\fR \fIKAR\fR
+\fIKAR\fR yazılan son karakteri silecek
+.sp
+.TP 4
+\fBintr\fR \fIKAR\fR
+\fIKAR\fR bir kesme (\fBSIGINT\fR) sinyali gönderecek
+.sp
+.TP 4
+\fBkill\fR \fIKAR\fR
+\fIKAR\fR bulunulan satırı silecek
+.sp
+.TP 4
+\fB* lnext\fR \fIKAR\fR
+\fIKAR\fR izleyen özel karakterin yorumlanmasını engelleyecek
+.sp
+.TP 4
+\fBquit\fR \fIKAR\fR
+\fIKAR\fR bir çıkış (\fBSIGQUIT\fR) sinyali gönderecek
+.sp
+.TP 4
+\fB* rprnt\fR \fIKAR\fR
+\fIKAR\fR bulunulan satırı yeniden yazacak
+.sp
+.TP 4
+\fBstart\fR \fIKAR\fR
+\fIKAR\fR durdurulduktan sonra çıktıyı yeniden başlatacak
+.sp
+.TP 4
+\fBstop\fR \fIKAR\fR
+\fIKAR\fR çıktıyı durduracak
+.sp
+.TP 4
+\fBsusp\fR \fIKAR\fR
+\fIKAR\fR bir uçbirim dur (\fBSIGSTOP\fR) sinyali gönderecek
+.sp
+.TP 4
+\fB* swtch\fR \fIKAR\fR
+\fIKAR\fR başka bir kabuk katmanına geçecek
+.sp
+.TP 4
+\fB* werase\fR \fIKAR\fR
+\fIKAR\fR yazılan son sözcüğü silecek
+.sp
+.PP
+.sp
+.SS "Özel ayarlar:"
+.TP 4
+\fIN\fR
+girdi/çıktı hızlarını \fIN\fR bit/s olarak ayarlar
+.sp
+.TP 4
+\fB* cols\fR \fIN\fR
+çekirdeğe uçbirimi \fIN\fR sütunluk olarak bildirir
+.sp
+.TP 4
+\fB* columns\fR \fIN\fR
+* cols \fIN\fR ile aynı
+.sp
+.TP 4
+\fB* [-]drain\fR \fIN\fR
+ayarları uygulamadan önce aktarımı bekler (öntanımlı olarak etkindir)
+.sp
+.TP 4
+\fBispeed\fR \fIN\fR
+girdi hızını \fIN\fR olarak ayarlar
+.sp
+.TP 4
+\fB* line\fR \fIN\fR
+hat disiplinini \fIN\fR yapar
+.sp
+.TP 4
+\fBmin\fR \fIN\fR
+-icanon ile okumanın tamamlanması için gereken en az karakter sayısını \fIN\fR yapar
+.sp
+.TP 4
+\fBospeed\fR \fIN\fR
+çıktı hızını \fIN\fR olarak ayarlar
+.sp
+.TP 4
+\fB* rows\fR \fIN\fR
+çekirdeğe uçbirimi \fIN\fR satırlık olarak bildirir
+.sp
+.TP 4
+\fB* size\fR
+çekirdeğe uygun satır ve sütun sayısını gösterir
+.sp
+.TP 4
+\fBspeed\fR
+hat hızını gösterir
+.sp
+.TP 4
+\fBtime\fR \fIN\fR
+\fB-icanon\fR ile okuma zaman aşımını \fIN\fR/10 saniyeye ayarlar
+.sp
+.PP
+.sp
+.SS "Denetim ayarları:"
+.TP 4
+\fB[-]clocal\fR
+modem denetim sinyallerini geçersiz kılar
+.sp
+.TP 4
+\fB[-]cread\fR
+girdi alımına izin verir
+.sp
+.TP 4
+\fB[-]crtscts\fR
+RTS/CTS uzlaşımını etkinleştirir
+.sp
+.TP 4
+\fBcs\fR\fIN\fR
+karakter bit sayısını \fIN\fR (5,6,7 veya 8) olarak ayarlar
+.sp
+.TP 4
+\fB[-]cstopb\fR
+her karakter için iki durma biti kullanılır (’-’ ile bir)
+.sp
+.TP 4
+\fB[-]hup\fR
+son işlem tty’yi kapatıyorsa, kapatMA \fBSIGHUP\fR sinyali gönderilir
+.sp
+.TP 4
+\fB[-]hupcl\fR
+[-]hup ile aynı
+.sp
+.TP 4
+\fB[-]parenb\fR
+çıktı için eşlik biti üretilir, girdi için eşlik biti beklenir
+.sp
+.TP 4
+\fB[-]parodd\fR
+tek eşlik biti kullanılır (’-’ ile çift)
+.sp
+.TP 4
+\fB* [-]cmspar\fR
+"ayrılmaz" (nokta/boşluk) eşlik kullanılır
+.sp
+.PP
+.sp
+.SS "Girdi ayarları:"
+.TP 4
+\fB[-]brkint\fR
+kırma karakterleri kesme sinyali üretir
+.sp
+.TP 4
+\fB[-]icrnl\fR
+satır başı karakterini alt satıra geçiş karakteri olarak yorumlar
+.sp
+.TP 4
+\fB[-]ignbrk\fR
+kırma karakterlerini yoksayar
+.sp
+.TP 4
+\fB[-]igncr\fR
+satır başı karakterlerini yoksayar
+.sp
+.TP 4
+\fB[-]ignpar\fR
+eşlik hataları olan karakterleri yoksayar
+.sp
+.TP 4
+\fB* [-]imaxbel\fR
+girdi tamponu taştığında uyarı sesi üretir
+.sp
+.TP 4
+\fB[-]inlcr\fR
+alt satıra geçme karakterini satır başı karakteri olarak yorumlar
+.sp
+.TP 4
+\fB[-]inpck\fR
+girdi eşlik denetimini etkinleştirir
+.sp
+.TP 4
+\fB[-]istrip\fR
+girdi karakterlerinin yüksek (8.) bitini temizler
+.sp
+.TP 4
+\fB* [-]iutf8\fR
+girdi karakterlerinin UTF-8 kodlu olduğu varsayılır
+.sp
+.TP 4
+\fB* [-]iuclc\fR
+büyük harfleri küçük harf olarak yorumlar
+.sp
+.TP 4
+\fB* [-]ixany\fR
+sadece başla karakteri değil herhangi bir karakter girdiyi başlatır
+.sp
+.TP 4
+\fB[-]ixoff\fR
+başla/dur karakterlerinin gönderimini etkinleştirir
+.sp
+.TP 4
+\fB[-]ixon\fR
+XON/XOFF akış denetimini etkinleştirir
+.sp
+.TP 4
+\fB[-]parmrk\fR
+eşlik hatalarını imler (255-0-karakter sıralamasıyla)
+.sp
+.TP 4
+\fB[-]tandem\fR
+[-]ixoff ile aynı
+.sp
+.PP
+.sp
+.SS "Çıktı ayarları:"
+.TP 4
+\fB* bs\fR\fIN\fR
+geri silme tarzı gecikme, \fIN\fR [0..1] arasında
+.sp
+.TP 4
+\fB* cr\fR\fIN\fR
+satır başı tarzı gecikme, \fIN\fR [0..3] arasında
+.sp
+.TP 4
+\fB* ff\fR\fIN\fR
+sayfa başı tarzı gecikme, \fIN\fR [0..1] arasında
+.sp
+.TP 4
+\fB* nl\fR\fIN\fR
+alt satıra geçiş tarzı gecikme, \fIN\fR [0..1] arasında
+.sp
+.TP 4
+\fB* [-]ocrnl\fR
+satır başını alt satıra geçiş olarak yorumlar
+.sp
+.TP 4
+\fB* [-]ofdel\fR
+0 karakteri yerine dolgu için silme karakterini kullanır
+.sp
+.TP 4
+\fB* [-]ofill\fR
+gecikmeler için zamanlama yapmak yerine dolgu karakterlerini kullanır
+.sp
+.TP 4
+\fB* [-]olcuc\fR
+küçük harfleri büyük harf olarak yorumlar
+.sp
+.TP 4
+\fB* [-]onlcr\fR
+alt satıra geçişi satır başı olarak yorumlar
+.sp
+.TP 4
+\fB* [-]onlret\fR\fIN\fR
+alt satıra geçiş karakteri satır başı yapar
+.sp
+.TP 4
+\fB* [-]onocr\fR
+satır başı karakterini ilk karakter olarak basmaz
+.sp
+.TP 4
+\fB[-]opost\fR
+işlem sonrası çıktı
+.sp
+.TP 4
+\fB* tab\fR\fIN\fR
+yatay sekme tarzı gecikme, \fIN\fR [0..3] arasında
+.sp
+.TP 4
+\fB* tabs\fR
+tab0 ile aynı
+.sp
+.TP 4
+\fB* -tabs\fR
+tab3 ile aynı
+.sp
+.TP 4
+\fB* vt\fR\fIN\fR
+düşey sekme tarzı gecikme, \fIN\fR [0..1] arasında
+.sp
+.PP
+.sp
+.SS "Yerel ayarlar:"
+.TP 4
+\fB[-]crterase\fR
+silme karakterlerini gerisilme-boşluk-gerisilme olarak yansılar
+.sp
+.TP 4
+\fB* crtkill\fR
+satırları echoprt ve echoe ayarlarına uygun olarak siler
+.sp
+.TP 4
+\fB* -crtkill\fR
+satırları echoctl ve echok ayarlarına uygun olarak siler
+.sp
+.TP 4
+\fB* [-]ctlecho\fR
+denetim karakterlerini şapkalı gösterim (’\fB^c\fR’) ile yansılar
+.sp
+.TP 4
+\fB[-]echo\fR
+girdi karakterlerini yansılar
+.sp
+.TP 4
+\fB* [-]echoctl\fR
+[-]ctlecho ile aynı
+.sp
+.TP 4
+\fB[-]echoe\fR
+[-]crterase ile aynı
+.sp
+.TP 4
+\fB[-]echok\fR
+karakteri sildikten sonra bir alt satıra geçiş yansılar
+.sp
+.TP 4
+\fB* [-]echoke\fR
+[-]crtkill ile aynı
+.sp
+.TP 4
+\fB[-]echonl\fR
+diğer karakterler yansılanmamış olsa bile alt satıra geçişi yansılar
+.sp
+.TP 4
+\fB* [-]echoprt\fR
+geriye doğru silinmiş karakterleri ’\fB\\\fR’ ve ’\fB/\fR’ arasında yansılar
+.sp
+.TP 4
+\fB* [-]extproc\fR
+"LINEMODE" etkin olur; yüksek gecikmeli bağlantılarla kullanışlıdır
+.sp
+.TP 4
+\fB* [-]flusho\fR
+çıktı iptal edilir
+.sp
+.TP 4
+\fB[-]icanon\fR
+karakter, satır, sözcük silmeleri ve satır yenileme özel karakterlerini etkinleştirir
+.sp
+.TP 4
+\fB[-]iexten\fR
+POSIX olmayan özel karakterleri etkinleştirir
+.sp
+.TP 4
+\fB[-]isig\fR
+kesme, çıkış ve dondurma özel karakterlerini etkinleştirir
+.sp
+.TP 4
+\fB[-]noflsh\fR
+kesme ve çıkış özel karakterlerinden sonra güncellemeyi geçersiz kılar
+.sp
+.TP 4
+\fB* [-]prterase\fR
+[-]echoprt ile aynı
+.sp
+.TP 4
+\fB* [-]tostop\fR
+uçbirime yazmaya çalışan artalandaki işleri durdurur
+.sp
+.TP 4
+\fB* [-]xcase\fR
+icanon ile, büyük harfleri ’\fB\\\fR’ ile önceleyerek gösterir
+.sp
+.PP
+.sp
+.SS "Birleşik ayarlar:"
+.TP 4
+\fB* [-]LCASE\fR
+[-]lcase ile aynı
+.sp
+.TP 4
+\fBcbreak\fR
+-icanon ile aynı
+.sp
+.TP 4
+\fB-cbreak\fR
+icanon ile aynı
+.sp
+.TP 4
+\fBcooked\fR
+brkint ignpar istrip icrnl ixon opost isig icanon eof eol karakterlerinin öntanımlı değerleri ile aynı
+.sp
+.TP 4
+\fB-cooked\fR
+raw ile aynı
+.sp
+.TP 4
+\fBcrt\fR
+echoe echoctl echoke ile aynı
+.sp
+.TP 4
+\fBdec\fR
+echoe echoctl echoke -ixany intr ^c erase 0177 kill ^u ile aynı
+.sp
+.TP 4
+\fB* [-]decctlq\fR
+[-]ixany ile aynı
+.sp
+.TP 4
+\fBek\fR
+karakter ve satır silme karakterlerinin öntanımlı değerleriyle aynı
+.sp
+.TP 4
+\fBevenp\fR
+parenb -parodd cs7 ile aynı
+.sp
+.TP 4
+\fB-evenp\fR
+-parenb cs8 ile aynı
+.sp
+.TP 4
+\fB* [-]lcase\fR
+xcase iuclc olcuc ile aynı
+.sp
+.TP 4
+\fBlitout\fR
+-parenb -istrip -opost cs8 ile aynı
+.sp
+.TP 4
+\fB-litout\fR
+parenb istrip opost cs7 ile aynı
+.sp
+.TP 4
+\fBnl\fR
+-icrnl -onlcr ile aynı
+.sp
+.TP 4
+\fB-nl\fR
+icrnl -inlcr -igncr onlcr -ocrnl -onlret ile aynı
+.sp
+.TP 4
+\fBoddp\fR
+parenb parodd cs7 ile aynı
+.sp
+.TP 4
+\fB-oddp\fR
+-parenb cs8 ile aynı
+.sp
+.TP 4
+\fB[-]parity\fR
+[-]evenp ile aynı
+.sp
+.TP 4
+\fBpass8\fR
+-parenb -istrip cs8 ile aynı
+.sp
+.TP 4
+\fB-pass8\fR
+parenb istrip cs7 ile aynı
+.sp
+.TP 4
+\fBraw\fR
+-ignbrk -brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl -ixon -ixoff -iuclc -ixany -imaxbel -opost -isig -icanon -xcase min 1 time 0 ile aynı
+.sp
+.TP 4
+\fB-raw\fR
+\fBcooked\fR ile aynı
+.sp
+.TP 4
+\fBsane\fR
+cread -ignbrk brkint -inlcr -igncr icrnl -ixoff -iuclc -ixany imaxbel opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke ve tüm özel karakterlerin öntanımlı değerleriyle aynı
+.sp
+.PP
+Standart girdiye bağlı olan tty hattını yönetir. Değiştirgesiz çalıştırıldığında iletişim hızını, hat disiplinini ve stty sane ayarından farklı ayarları gösterir. Ayarlarda \fIKAR\fR yazıldığı gibi ya da ^c, 0x37, 0177 ya da 127 olarak gösterilmiş bir karakter olabilir. ^- veya undef değerleri bu özel karakteri geçersiz kılar.
+.sp
+.sp
+.SH "YAZAN"
+David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/stty>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) stty invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

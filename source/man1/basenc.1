@@ -1,0 +1,135 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "BASENC" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+basenc - veriyi kodlar veya kodunu çözer ve standart çıktıya basar
+.sp
+.SH KULLANIM
+.IP \fBbasenc\fR 7
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBbasenc\fR, \fIDOSYA\fR veya standart girdiyi kodlar veya kodunu çözer ve standart çıktıya basar.
+.sp
+\fIDOSYA\fR belirtilmezse veya - verilirse standart girdi okunur.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB--base64\fR
+\fBbase64\fR uygulaması ile aynı (RFC4648 bölüm 4).
+.sp
+.TP 4
+\fB--base64url\fR
+dosya ve URL için güvenli \fBbase64\fR (RFC4648 bölüm 5).
+.sp
+.TP 4
+\fB--base32\fR
+\fBbase32\fR uygulaması ile aynı (RFC4648 bölüm 6).
+.sp
+.TP 4
+\fB--base32hex\fR
+genişletilmiş onaltılık tabanda \fBbase32\fR (RFC4648 bölüm 7).
+.sp
+.TP 4
+\fB--base16\fR
+onaltılık tabanda işlem yapar (RFC4648 bölüm 8).
+.sp
+.TP 4
+\fB--base2msbf\fR
+çok kıymetli bayt önde olarak bit dizgesi
+.sp
+.TP 4
+\fB--base2lsbf\fR
+az kıymetli bayt önde olarak bit dizgesi
+.sp
+.TP 4
+\fB-d\fR, \fB--decode\fR
+Verinin kodunu çözer.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-garbage\fR
+Kodu çözerken abecesel olmayan karakterleri yoksayar.
+.sp
+.TP 4
+\fB-w\fR, \fB--wrap\fR=\fISÜTUN\fR
+Kodlanan satırları \fISÜTUN\fR karakterle sınırlar (öntanımlı 76). Satır genişliğini sınırlamayı iptal etmek için 0 kullanınız.
+.sp
+.TP 4
+\fB--z85\fR
+ascii85 benzeri kodlama (ZeroMQ spec:32/Z85); girdi uzunluğu kodlama için 4’ün katları, kod çözme için 5’in katları olmalı.
+.sp
+.TP 4
+\fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+Kod çözme sırasında girdi, resmi kodlama abecesinin baytlarına ek olarak satırsonu karakterleri de içerebilir. Kodlanmış akımı içindeki abecesel olmayan karakterlerden arındırmak için \fB--ignore-garbage\fR seçeneğini kullanınız.
+.sp
+.SH "KODLAMA ÖRNEKLERİ"
+.RS 7
+.nf
+$ printf ’\\376\\117\\202’ | basenc --base64
+/k+C
+\&
+$ printf ’\\376\\117\\202’ | basenc --base64url
+_k-C
+\&
+$ printf ’\\376\\117\\202’ | basenc --base32
+7ZHYE===
+\&
+$ printf ’\\376\\117\\202’ | basenc --base32hex
+VP7O4===
+\&
+$ printf ’\\376\\117\\202’ | basenc --base16
+FE4F82
+\&
+$ printf ’\\376\\117\\202’ | basenc --base2lsbf
+011111111111001001000001
+\&
+$ printf ’\\376\\117\\202’ | basenc --base2msbf
+111111100100111110000010
+\&
+$ printf ’\\376\\117\\202\\000’ | basenc --z85
+@.FaC
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+Simon Josefsson ve Assaf Gordon tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/basenc>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) basenc invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,94 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "REALPATH" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+realpath - çözümlenen yolu basar
+.sp
+.SH KULLANIM
+.IP \fBrealpath\fR 9
+[\fISEÇENEK\fR]... \fIDOSYA\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Çözümlenen mutlak dosya adını basar, fakat tüm bileşenler mevcut olmalıdır.
+.sp
+.TP 4
+\fB-e\fR, \fB--canonicalize-existing\fR
+Verilen yolun bileşenlerinde yer alan her sembolik bağı ardışık olarak takip eder; tüm bileşenler mevcut olmalıdır.
+.sp
+.TP 4
+\fB-m\fR, \fB--canonicalize-missing\fR
+Verilen yolun bileşenlerinde yer alan her sembolik bağı ardışık olarak takip eder; tüm bileşenlerin mevcut olması gerekmez.
+.sp
+.TP 4
+\fB-L\fR, \fB--logical\fR
+’..’ bileşenlerini sembolik bağlardan önce çözümler.
+.sp
+.TP 4
+\fB-P\fR, \fB--physical\fR
+Sembolik bağları rastladıkça çözümler (öntanımlı).
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+Pek çok hata iletisini göstermez.
+.sp
+.TP 4
+\fB--relative-to\fR\fI=DİZİN\fR
+Dosya yolları \fIDİZİN\fRe göre çözümlenerek basılır.
+.sp
+.TP 4
+\fB--relative-base\fR\fI=DİZİN\fR
+\fIDİZİN\fR altında olmayan mutlak yolları basar.
+.sp
+.TP 4
+\fB-s\fR, \fB--strip\fR, \fB--no-symlinks\fR
+Sembolik bağlar izlenmez.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero\fR
+Çıktı satırları satır sonu ile değil boş (\\0) karakterle sonlandırılır.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Dmitry V. Levin tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBreadlink\fR(1), \fBreadlink\fR(2), \fBrealpath\fR(3)
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/realpath>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) realpath invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

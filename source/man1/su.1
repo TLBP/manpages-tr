@@ -1,0 +1,238 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * su(1) for Linux.  Run a shell with substitute user and group IDs.
+ *
+ * Copyright (C) 1992-2006 Free Software Foundation, Inc.
+ * Copyright (C) 2012 SUSE Linux Products GmbH, Nuernberg
+ * Copyright (C) 2016-2017 Karel Zak <kzak@redhat.com>
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.  You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+ * USA.
+ *
+ * Based on an implementation by David MacKenzie <djm@gnu.ai.mit.edu>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SU" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+su - başka bir kullanıcı ve grup kimliği ile bir kabuk çalıştırır
+.sp
+.SH KULLANIM
+.IP \fBsu\fR 3
+[\fIseçenekler\fR] [-] [\fIkullanıcı\fR [\fIdeğiştirge\fR...]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBsu\fR, komutların başka bir \fIkullanıcı\fR ve grup kimliği ile çalıştırılmasını sağlar.
+.sp
+\fIkullanıcı\fR belirtilmeden çağrıldığında, \fBsu\fR öntanımlı olarak etkileşimli bir kabuğu root olarak çalıştırır. \fIkullanıcı\fR belirtildiğinde, ek değiştirgeler sağlanabilir, bu durumda bunlar kabuğa aktarılır.
+.sp
+Geriye dönük uyumluluk için, \fBsu\fR öntanımlı olarak geçerli dizini değiştirmez ve yalnızca \fBHOME\fR ve \fBSHELL\fR ortam değişkenlerini (hedef kullanıcı root değilse \fBUSER\fR ve \fBLOGNAME\fR değişkenlerini de) ayarlar. Karışık ortamlarının neden olduğu yan etkilerden kaçınmak için daima (kısayol \fB-\fR yerine) \fB--login\fR seçeneğinin kullanılması önerilir.
+.sp
+Bu \fBsu\fR sürümü, kimlik doğrulama, hesap ve oturum yönetimi için PAM kullanır. wheel grubu desteği gibi diğer \fBsu\fR uygulamalarında bulunan bazı yapılandırma seçeneklerinin PAM aracılığıyla yapılandırılması gerekir.
+.sp
+\fBsu\fR çoğunlukla ayrıcalıksız kullanıcılar için tasarlanmıştır, ayrıcalıklı kullanıcılar için önerilen çözüm (örneğin, root tarafından yürütülen betikler), kimlik doğrulama gerektirmeyen ve ayrı PAM yapılandırması sağlayan, kullanıcı kimliğine dokunmayan \fBrunuser\fR(1) komutunu kullanmaktır. PAM oturumu hiç gerekli değilse, önerilen çözüm \fBsetpriv\fR(1) komutunu kullanmaktır.
+.sp
+\fBsu\fR’nun her durumda son ortam değişikliğini yapmak için PAM (\fBpam_getenvlist\fR(3)) kullandığı unutulmamalıdır. \fB--login\fR ve \fB--preserve-environment\fR gibi komut satırı seçenekleri, PAM tarafından değiştirilmeden önce ortamı etkiler.
+.sp
+2.38 sürümünden beri \fBsu\fR RLIMIT_NICE, RLIMIT_RTPRIO, RLIMIT_FSIZE, RLIMIT_AS ve RLIMIT_NOFILE süreç özkaynaklarının sınırlarını sıfırlamaktadır.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-c\fR, \fB--command=\fR\fIkomut\fR
+\fIkomut\fR’u kabuğa \fB-c\fR seçeneği ile aktarır.
+.sp
+.TP 4
+\fB-f\fR, \fB--fast\fR
+Kabuğa \fB-f\fR seçeneğini aktarır. Kabuğa bağlı olarak yararlı veya yararsız olabilir.
+.sp
+.TP 4
+\fB-g\fR, \fB--group=\fR\fIgrup\fR
+Birincil grubu belirler. Bu seçeneği yalnızca root kullanabilir.
+.sp
+.TP 4
+\fB-G\fR, \fB--supp-group=\fR\fIgrup\fR
+Tamamlayıcı grubu belirler. Bu seçeneği yalnızca root kullanabilir. \fB--group\fR seçeneği belirtilmemişse, ilk belirtilen tamamlayıcı grup, birincil grup olur.
+.sp
+.TP 4
+\fB-\fR, \fB-l\fR, \fB--login\fR
+Kabuğu gerçeğiyle aynı ortamı kullanarak oturum açma kabuğu olarak başlatır:
+.sp
+.PD 1
+.RS 5
+.IP \(bu 3
+\fB--whitelist-environment\fR ile belirtilen değişkenler ve \fBTERM\fR hariç tüm ortam değişkenlerini temizler
+.IP \(bu 3
+\fBHOME\fR, \fBSHELL\fR, \fBUSER\fR, \fBLOGNAME\fR ve \fBPATH\fR ortam değişkenlerini ilklendirir
+.IP \(bu 3
+Hedef kullanıcının ev dizinine geçer
+.IP \(bu 3
+Kabuğu oturum açma kabuğu yaparken kabuğun argv[0]’ına ’\fB-\fR’ aktarır
+.sp
+.RE
+.IP
+.PD 0
+.sp
+.TP 4
+\fB-m\fR, \fB-p\fR, \fB--preserve-environment\fR
+Ortam değişkenlerini sıfırlamaz. Yani, \fBHOME\fR, \fBSHELL\fR, \fBUSER\fR, \fBLOGNAME\fR ortam değişkenlerini tanımlamaz. \fB--login\fR seçeneği belirtilmişse bu seçenek yok sayılır.
+.sp
+.TP 4
+\fB-P\fR, \fB--pty\fR
+Oturum için sözde uçbirim oluşturur. Kullanıcı uçbirimini özgün oturumla paylaşmayacağından bağımsız uçbirim daha iyi güvenlik sağlar. Bu, TIOCSTI ioctl uçbirim enjeksiyonunu ve uçbirim dosya tanıtıcılarına karşı diğer güvenlik saldırılarını önlemek için kullanılabilir. Oturumun tamamı artalana da taşınabilir (örneğin, \fBsu --pty -\fR \fIkullanıcı\fR \fB-c\fR \fIuygulama\fR \fB&\fR). Sözde uçbirim etkinleştirilirse, \fBsu\fR, oturumlar arasında vekil olarak çalışır (stdin/stdout etkileşimi).
+.sp
+Bu özellik çoğunlukla etkileşimli oturumlar için tasarlanmıştır. Standart girdi bir uçbirim değil, örneğin bir boru ise (örn, \fBecho "date" | su --pty\fR), dağınık çıktıyı önlemek için sözde uçbirimin \fBECHO\fR seçeneği devre dışı bırakılır.
+.sp
+.TP 4
+\fB-s\fR, \fB--shell=\fR\fIkabuk\fR
+Öntanımlı kabuk yerine belirtilen \fIkabuk\fR kabuğunu çalıştırır. Çalıştırılacak kabuk sırasıya aşağıdaki kurallara göre seçilir:
+.sp
+.PD 1
+.RS 5
+.IP 1. 3
+\fB--shell\fR seçeneğinde belirtilen kabuk
+.IP 2. 3
+\fB--preserve-environment\fR belirtilmemişse \fBSHELL\fR ortam değişkeninde belirtilen kabuk
+.IP 3. 3
+Hedef kulllanıcının passwd girdisinde listelenen kabuk
+.IP 4. 3
+\fB/bin/sh\fR
+.sp
+.RE
+.IP
+.PD 0
+Hedef kullanıcının kısıtlı bir kabuğu varsa (örn, \fI/etc/shells\fR içinde listellenmemişse) ve çağıran kullanıcı root değilse \fB--shell\fR seçeneği ve \fBSHELL\fR ortam değişkenleri yok sayılır.
+.sp
+.TP 4
+\fB--session-command=\fR\fIkomut\fR
+\fB-c\fR gibidir, fakat yeni bir oturum başlatmaz (Cesaret kırıcı.)
+.sp
+.TP 4
+\fB-w\fR, \fB--whitelist-environment=\fR\fIliste\fR
+\fB--login\fR için ortamı temizlerken virgül ayraçlı \fIliste\fRde belirtilen ortam değişkenlerini sıfırlamaz. \fIliste\fRdeki \fBHOME\fR, \fBSHELL\fR, \fBUSER\fR, \fBLOGNAME\fR ve \fBPATH\fR ortam değişkenleri görmezden gelinir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "SİNYALLER"
+\fBSIGINT\fR, \fBSIGQUIT\fR ve \fBSIGTERM\fR sinyallerinden birini alınca \fBsu\fR, çocuğunu sonlandırdıktan sonra aldığı sinyalle kendini de sonlandırır. Çocuk süreç \fBSIGTERM\fR sinyali ile sonlandırılır, başarısız bir çabadan sonra 2 saniye beklenip çocuk süreç \fBSIGKILL\fR sinyali ile öldürülür.
+.sp
+.SH "YAPILANDIRMA DOSYALARI"
+\fBsu\fR \fI/etc/default/su\fR ve \fI/etc/login.defs\fR yapılandırma dosyalarını okur. Aşağıdaki yapılandırma yönergeleri \fBsu\fR için geçerlidir:
+.sp
+.TP 4
+\fBFAIL_DELAY\fR (\fItamsayı\fR)
+Kimlik doğrulaması başarısız olduğunda saniye cinsinden gecikme süresi. \fIsayı\fR sıfırdan küçük olmayan bir tamsayı olmalıdır.
+.sp
+.TP 4
+\fBENV_PATH\fR (\fIdizge\fR)
+Sıradan kullanıcı için \fBPATH\fR ortam değişkenini tanımlar. Öntanımlı değer: \fI/usr/local/bin:/bin:/usr/bin\fR
+.sp
+.TP 4
+\fBENV_ROOTPATH\fR (\fIdizge\fR), \fBENV_SUPATH\fR (\fIdizge\fR)
+root için \fBPATH\fR ortam değişkenini tanımlar. \fBENV_SUPATH\fR önceliklidir. Öntanımlı değer: \fI/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin\fR
+.sp
+.TP 4
+\fBALWAYS_SET_PATH\fR (\fImantıksal\fR)
+\fB--login\fR ve \fB--preserve-environment\fR belirtilmez ve değer olarak \fByes\fR atanırsa \fBsu\fR \fBPATH\fR ortam değişkenini ilklendirir.
+.sp
+\fI/bin\fR ve \fI/sbin\fR dizinlerinin \fI/usr\fR altına alındığı sistemlerde \fBPATH\fR ortam değişkeni farklı olabilir. Bu değişken ayrıca, \fB--login\fR komut satırı seçeneğinden ve PAM sistem ayarlarından da etkilenir. (bkz. \fBpam_env\fR(8))
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBsu\fR normalde çalıştırdığı komutun çıkış durumunu döndürür. Komut bir sinyalle öldürülürse \fBsu\fR sinyal numararası artı 128 ile döner.
+.sp
+\fBsu\fR’nun kendisi tarafından üretilen çıkış durumları:
+.sp
+.TP 4
+\fB1\fR
+İstenen komutu çalıştırmadan önce genel hata
+.sp
+.TP 4
+\fB126\fR
+İstenen komut çalıştırılamadı
+.sp
+.TP 4
+\fB127\fR
+İstenen komut yoktu
+.sp
+.PP
+.sp
+.SH "DOSYALAR"
+.TP 4
+\fI/etc/pam.d/su\fR
+Öntanımlı PAM yapılandırma dosyası
+.sp
+.TP 4
+\fI/etc/pam.d/su-l\fR
+\fB--login\fR belirtilmediği durumda PAM yapılandırma dosyası
+.sp
+.TP 4
+\fI/etc/default/su\fR
+Komuta özgü logindef yapılandırma dosyası
+.sp
+.TP 4
+\fI/etc/login.defs\fR
+Küresel logindef yapılandırma dosyası
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+Güvenlik nedeniyle, \fBsu\fR yapılan başarısız oturum açma girişimlerini her zaman \fIbtmp\fR dosyasına kaydeder, ancak \fIlastlog\fR dosyasına hiç yazmaz. Bu çözüm, \fBsu\fR davranışını PAM yapılandırması ile denetlemek için kullanılabilir. Başarısız oturum açma girişimleriyle ilgili uyarı iletisini yazdırmak için \fBpam_lastlog\fR(8) modülünü kullanmak istiyorsanız, \fBpam_lastlog\fR(8), \fIlastlog\fR dosyasını da güncelleyecek şekilde yapılandırılmalıdır. Örneğin:
+.sp
+.RS 4
+.nf
+session required pam_lastlog.so nowtmp
+.fi
+.sp
+.RE
+.sp
+.SH "TARİHÇE"
+Bu \fBsu\fR komutu David MacKenzie’nin gerçeklenimine dayanan coreutils \fBsu\fR komutundan türetilmiştir. Util-linux \fBsu\fR komutu Karel Zak tarafından yeniden düzenlenmiştir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsetpriv\fR(1), \fBlogin.defs\fR(5), \fBshells\fR(5), \fBpam\fR(8), \fBrunuser\fR(1).
+.sp
+.SH "HATA BİLDİRİMİ"
+Yazılım hataları bildirmek için <https://github.com/util-linux/util-linux/issues> adresinde bir başlık açın.
+.sp
+.SH "KULLANILABİLİRLİK"
+\fBsu\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux>
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

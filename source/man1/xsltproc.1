@@ -1,0 +1,280 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (C) 1998-2022 Daniel Veillard.  All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files
+ * (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "XSLTPROC" 1 "17 Ağustos 2022" "libxslt 1.1.36" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+xsltproc - komut satırı xslt işlemcisi
+.sp
+.SH KULLANIM
+.IP \fBxsltproc\fR 9
+[ \fB-V\fR | \fB--version\fR ] [ \fB-v\fR | \fB--verbose\fR ] [{ \fB-o\fR | \fB--output\fR } { \fIDOSYA\fR | \fIDİZİN\fR }] [ \fB--timing\fR | \fB--repeat\fR | \fB--debug\fR | \fB--novalid\fR | \fB--noout\fR | \fB--maxdepth\fR \fIDEĞER\fR | \fB--maxvars\fR \fIDEĞER\fR | \fB--maxparserdepth\fR \fIDEĞER\fR| \fB--huge\fR| \fB--seed-rand\fR \fITOHUM\fR | \fB--html\fR| \fB--encoding\fR \fIKODLAMA\fR | \fB--param\fR \fIİSİM\fR \fIDEĞER\fR| \fB--stringparam\fR \fIİSİM\fR \fIDEĞER\fR | \fB--nonet\fR | \fB--path\fR \fIYOL(LAR)"\fR | \fB--load-trace\fR | \fB--catalogs\fR | \fB--xinclude\fR | \fB--xincludestyle\fR | [ \fB--profile\fR | \fB--norman\fR ]| \fB--dumpextensions\fR | \fB--nowrite\fR | \fB--nomkdir\fR | \fB--writesubtree\fR \fIYOL\fR | \fB--nodtdattr\fR ] [\fIXSL-BETİĞİ\fR] { \fIXML-DOSYA\fR...| - }
+.sp
+.PP
+.sp
+.SH "GİRİŞ"
+\fBxsltproc\fR, XML belgelerine XSLT şablonlarını uygulamak için kullanılan bir komut satırı aracıdır. GNOME projesinin XSLT C kütüphanesi olan \fBlibxslt\fR(3)’nin bir parçasıdır. GNOME projesinin bir parçası olarak geliştirilmesine rağmen, GNOME masaüstü ortamından bağımsız olarak da kullanılabilir.
+.sp
+\fBxsltproc\fR, komut satırından xslt şablonlarını içeren betiğin adı ve bu şablonların uygulanacağı dosya veya dosyaların adı belirtilerek kullanılır.
+.sp
+Şayet bir XML belge içinde xslt betiği ile ilgili bir işlem komutu varsa, komut satırında xslt betiğinin isminin bildirmesi gerekmez. \fBxsltproc\fR, bu betiği bulur ve onu kullanır.
+.sp
+Öntanımlı olarak, çıktı standart çıktıya yazılır. \fB–o\fR veya \fB–-output\fR seçeneğini kullanarak çıktı için bir dosya belirtebilirsiniz.
+.sp
+.SH "SEÇENEKLER"
+\fBxsltproc\fR şu seçenekleri kabul eder (abecesel sıralıdır):
+.sp
+.TP 4
+\fB--catalogs\fR
+Harici girdilerin aranacağı yerler için SGML_CATALOG_FILES içinde tanımlanmış SGML kataloglarını kullanır. Öntanımlı olarak, \fBxsltproc\fR XML_CATALOG_FILES içinde belirtilmiş kataloglara bakar. Şayet bu da belirtilmemiş ise \fI/etc/xml/catalog\fR kullanılır.
+.sp
+.TP 4
+\fB--debug\fR
+Hata ayıklama amacıyla, dönüştürülmüş belgenin XML ağacını çıktılar.
+.sp
+.TP 4
+\fB--dumpextensions\fR
+Kayıtlı tüm eklentileri standart çıktıya listeler.
+.sp
+.TP 4
+\fB--encoding\fR \fIKODLAMA\fR
+Girdi için karakter \fIKODLAMA\fRsı belirtilmesini sağlar.
+.sp
+.TP 4
+\fB--html\fR
+Girdi olarak verilen belge bir HTML dosyasıdır.
+.sp
+.TP 4
+\fB--load-trace\fR
+İşlem sırasında yüklenen tüm belgeleri standart hatada gösterir.
+.sp
+.TP 4
+\fB--maxdepth\fR \fIDEĞER\fR
+\fBlibxslt\fR(3)’nin bir sonsuz döngüye girmesini engellemek üzere şablon yığıtının derinliğini sınırlamakta kullanılır. Öntanımlı değeri 3000’dir.
+.sp
+.TP 4
+\fB--maxvars\fR \fIDEĞER\fR
+Azami değişken sayısı. Öntanımlı değeri 15000’dir.
+.sp
+.TP 4
+\fB--maxparserdepth\fR \fIDEĞER\fR
+Çözümlenecek XML belgenin azami eleman iç içelik derinliği. 256 öntanımlıdır.
+.sp
+.TP 4
+\fB--huge\fR
+XML_PARSE_HUGE çözümleyici seçeneğini ayarlayarak XML çözümleyicinin sabit kodlanmış sınırlarını gevşetir.
+.sp
+.TP 4
+\fB--seed-rand\fR \fITOHUM\fR
+Sözde rastgele sayı üretecini \fITOHUM\fR ile ilklendirir.
+.sp
+.TP 4
+\fB--nodtdattr\fR
+Belge DTD’sindeki öntanımlı öznitelikler uygulanmaz.
+.sp
+.TP 4
+\fB--nomkdir\fR
+Dizinlerin oluşturulması reddedilir.
+.sp
+.TP 4
+\fB--nonet\fR
+DTD’ler, öğeler ve belgeleri almak için İnternet kullanılmaz.
+.sp
+.TP 4
+\fB--noout\fR
+Sonuçlar çıktılanmaz.
+.sp
+.TP 4
+\fB--novalid\fR
+Belge DTD’sinin yüklenmesi adımını atlar.
+.sp
+.TP 4
+\fB--nowrite\fR
+Herhangi bir dosyanın veya özkaynağın yazıllması reddedilir.
+.sp
+.TP 4
+\fB-o\fR, \fB--output\fR \fIDOSYA\fR | \fIDİZİN\fR
+Çıktı \fIDOSYA\fR ile belirtilen dosyaya yazılır. "kümeleme" (chunking) diye bilinen çoğul çıktılar ve kılavuz sayfaları için, dosyalar \fIDİZİN\fR ile belirtilen dizinin altına gönderilir.
+.sp
+.RS 4
+.TP 4
+\fBÖnemli:\fR
+Dizin sistemde mevcut olan bir dizin olmalıdır.
+.sp
+.RE
+.IP
+.RS 4
+.TP 4
+\fBBilgi:\fR
+\fIDİZİN\fR RFC 2396’nın “URI reference computation” bölümündeki açıklamaya uygun olmalıdır. Yani, örneğin \fB-o dizin\fR belki çalışır ama \fB-o dizin/\fR kesin çalışacaktır.
+.sp
+Ç.N. - Dizin belirtilir ve "I/O error : Is a directory" hatası alınırsa, dizinin sonuna örn. ’beni.sil’ eklenerek hatadan kurtulmak mümkündür. ’beni.sil’ dosyalarınızla birlikte belirttiğiniz dizine yazılacaktır. İçinde muhtemelen çıktılanması unutulan veya çıktılanmaması gereken şeyler olacaktır.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB--param\fR \fIİSİM DEĞER\fR
+XSLT şablonuna \fIİSİM DEĞER\fR çifti aktarmakta kullanılır. Böyle en fazla 32 \fIİSİM DEĞER\fR çifti belirtebilirsiniz. Değer bir dizge ise dizge ifadelerinde görülen ek tırnak imlerinden kaçınmak için \fB--stringparam\fR seçeneği kullanılmalıdır. XPath ifadesi mutlaka UTF-8 kodlanmış olmalıdır.
+.sp
+.TP 4
+\fB--path\fR \fI"YOL(LAR)"\fR
+DTD’leri, öğeleri ve belgeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
+.sp
+.TP 4
+\fB--profile\fR, \fB--norman\fR
+XSLT şablonlarının her bir bölümü için harcanan zaman hakkında kısa bir bilgi verir. XSLT şablonlarının başarımını eniyilemek için faydalı olabilir.
+.sp
+.TP 4
+\fB--repeat\fR
+Dönüşümü 20 kere gerçekleştirir. Zaman sınamaları için kullanılır.
+.sp
+.TP 4
+\fB--nomkdir\fR
+Çıktı dizinleri oluşturulmaz.
+.sp
+.TP 4
+\fB--nowrite\fR
+Çıktı herhangi bir dosya veya kaynağa yazılmaz.
+.sp
+.TP 4
+\fB--stringparam\fR \fIİSİM DEĞER\fR
+Değerin bir düğüm tanımlayıcısı değil de bir dizge olduğu durumlarda, XSLT şablonunun \fIİSİM\fR değiştirgesine \fIDEĞER\fR değerini aktarmakta kullanılır. Dizge mutlaka UTF-8 kodlanmış olmalıdır.
+.sp
+.TP 4
+\fB--timing\fR
+XML belgenin ve XSLT şablon dosyasının çözümlenmesi ve belgeye şablonların uygulanması ile sonuçların kaydedilmesi sırasında geçen süreyi görüntüler. Sonuç milisaniye cinsindendir.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+XML belgenin ve XSLT dosyasının işlenmesi sırasında \fBxsltproc\fR tarafından gerçekleştirilen bütün adımlar hakkında ayrıntılı bilgi verilir.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+\fBlibxml\fR(3) ve \fBlibxslt\fR(3)’nin sürüm numaralarını gösterir.
+.sp
+.TP 4
+\fB--writesubtree\fR \fIYOL\fR
+Dosyalar sadece \fIYOL\fR dizinine ve alt dizinlerine yazılır.
+.sp
+.TP 4
+\fB--xinclude\fR
+Belgeyi Xinclude belirtimini kullanarak işler. Xinclude belirtimi hakkkında ayrıntılı bilgi için: http://www.w3.org/TR/xinclude/
+.sp
+.TP 4
+\fB--xincludestyle\fR
+XSLT şablonunu Xinclude belirtimini kullanarak işler.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBSGML_CATALOG_FILES\fR
+SGML kataloğunun davranışı, sorgular kullanıcının kendi katalog listesine yönlendirilerek değiştirilebilir. Bu, katalog listesi \fBSGML_CATALOG_FILES\fR ortam değişkenine atanarak yapılabilir. Boş değer belirtilirse sorgular \fI/etc/sgml/catalog\fR dosyasının içeriğindeki kataloglara yönlendirilir.
+.sp
+.TP 4
+\fBXML_CATALOG_FILES\fR
+XML kataloğunun davranışı, sorgular kullanıcının kendi katalog listesine yönlendirilerek değiştirilebilir. Bu, katalog listesi \fBXML_CATALOG_FILES\fR ortam değişkenine atanarak yapılabilir. Boş değer belirtilirse sorgular \fI/etc/xml/catalog\fR dosyasının içeriğindeki kataloglara yönlendirilir.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBxsltproc\fR çıkış kodları, betiklerden çağrılırken kullanılabilecek bilgileri sağlar.
+.sp
+.TP 4
+0
+Hata yok (normal işlem).
+.sp
+.TP 4
+1
+Hiç değiştirge yok.
+.sp
+.TP 4
+2
+Çok fazla değiştirge var.
+.sp
+.TP 4
+3
+Bilinmeyen seçenek.
+.sp
+.TP 4
+4
+XSL şablonu çözümlenemedi.
+.sp
+.TP 4
+5
+XSL şablonunda hata.
+.sp
+.TP 4
+6
+Belgelerden birinde hata.
+.sp
+.TP 4
+7
+Desteklenmeyen \fBxsl:output\fR yöntemi
+.sp
+.TP 4
+8
+Hem tek hem de çift tırnsk içeren dizge değiştirge.
+.sp
+.TP 4
+9
+Dahili işlem hatası.
+.sp
+.TP 4
+10
+İşlem bir sonlandırma iletisi ile durduruldu.
+.sp
+.TP 4
+11
+Sonuç çıktı dosyasına yazılamadı.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+libxml sanalyöresi: http://www.xmlsoft.org/
+.br
+W3C XSLT belirtimi (Türkçe): http://belgeler.org/recs/xslt/
+.sp
+.SH "YAZAN"
+John Fleck tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

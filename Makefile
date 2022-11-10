@@ -1,5 +1,8 @@
 MANDIR = /usr/share/man/tr
 
+all:
+	./prepare.sh;
+
 # hem paket içinde hem de sistemde varolan dosyaları
 # sistemden silelim ve dosyaları kuralım.
 install: ilc
@@ -11,7 +14,7 @@ install: ilc
 		      		$(MANDIR)/$$dir/"$$file".bz2; \
 		done; fi; \
 		install -d -m 755 $(MANDIR)/"$$dir"; \
-		install -m 644 "$$dir"/* $(MANDIR)/"$$dir"; \
+		cp -a "$$dir"/* $(MANDIR)/"$$dir"; \
 	done; cd -;
 
 # hem paket içinde hem de sistemde varolan dosyaları
@@ -29,4 +32,7 @@ ilc:
 	    echo "Yerel karakter kodlamasi UTF-8 olmak zorunda"; \
 	    exit 1; \
 	fi
+
+clean:
+	rm -dfr ./tr/*
 

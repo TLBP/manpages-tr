@@ -1,0 +1,99 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "CMP" 1 "Ağustos 2021" "GNU diffutils 3.8" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+cmp - iki dosyayı bayt bayt karşılaştırır
+.sp
+.SH KULLANIM
+.IP \fBcmp\fR 4
+[\fISEÇENEK\fR]... \fIDOSYA1\fR [\fIDOSYA2\fR [\fIATLA1\fR [\fIATLA2\fR]]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBcmp\fR iki dosyayı bayt bayt karşılaştırır.
+.sp
+Seçimlik \fIATLA1\fR ve \fIATLA2\fR her dosyanın başlangıcından itibaren atlanacak bayt sayısını belirtmekte kullanılır (öntanımlı olarak sıfırdır).
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-b\fR, \fB--print-bytes\fR
+Farklı baytları) basar.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-initial\fR=\fIATLA\fR
+Her iki dosyadan ilk \fIATLA\fR bayt atlanır.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-initial\fR=\fIATLA1\fR\fI:ATLA2\fR
+\fIDOSYA1\fR’den ilk \fIATLA1\fR bayt ve \fIDOSYA2\fR’den ilk \fIATLA2\fR bayt atlanır.
+.sp
+.TP 4
+\fB-l\fR, \fB--verbose\fR
+Bayt sayısı ve farklı bayt değerleri çıktılanır.
+.sp
+.TP 4
+\fB-n\fR, \fB--bytes\fR=\fISINIR\fR
+En fazla \fISINIR\fR bayt karşılaştırılır.
+.sp
+.TP 4
+\fB-s\fR, \fB--quiet\fR, \fB--silent\fR
+Tüm normal çıktı engellenir.
+.sp
+.TP 4
+\fB--help\fR
+Kullanım bilgisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgisini görüntüler ve çıkar.
+.sp
+.PP
+\fIATLA\fR değerlerine eklenen birimlere uyulur: kB 1000, K 1024, MB 1,000,000, M 1,048,576, GB 1,000,000,000, G 1,073,741,824 ve T, P, E, Z, Y için aynı biçimde devam eder.
+.sp
+Herhangi bir \fIDOSYA\fR yerine ’-’ verilirse ya da belirtilmezse standart girdi okunur. Çıkış durumu girdiler aynı ise 0, farklı ise 1, hata oluşursa 2 olur.
+.sp
+.SH "YAZAN"
+Torbjorn Granlund ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hataları için: <bug-diffutils (at) gnu.org>
+.br
+GNU diffutils sayfası: <https://www.gnu.org/software/diffutils/>
+.br
+GNU yazılımları yardımı için: <https://www.gnu.org/software/gethelp.html>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBdiff\fR(1), \fBdiff3\fR(1), \fBsdiff\fR(1)
+.sp
+\fBcmp\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBcmp\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo cmp\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

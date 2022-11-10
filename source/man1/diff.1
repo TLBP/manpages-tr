@@ -1,0 +1,354 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DIFF" 1 "Ağustos 2021" "GNU diffutils 3.8" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+diff - dosyaları satır satır karşılaştırır
+.sp
+.SH KULLANIM
+.IP \fBdiff\fR 5
+[\fISEÇENEK\fR]... \fIDOSYALAR\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fIDOSYALAR\fRı satır satır karşılaştırır.
+.sp
+Uzun seçeneklerdeki zorunlu değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.SS "Seçenekler"
+.TP 4
+\fB--normal\fR
+Normal diff çıktılar (öntanımlı)
+.sp
+.TP 4
+\fB-q\fR, \fB--brief\fR
+Sadece dosyalar farklı olduğunda çıktı üretir.
+.sp
+.TP 4
+\fB-s\fR, \fB--report-identical-files\fR
+İki dosya aynı ise bunu bildirir.
+.sp
+.TP 4
+\fB-c\fR, \fB-C\fR, \fB--context\fR[=\fISAYI\fR]
+Bağlamın \fISAYI\fR (belirtilmezse 3) satırının gösterildiği bağlamsal çıktı biçimi kullanılır.
+.sp
+.TP 4
+\fB-u\fR, \fB-U\fR, \fB--unified\fR[=\fISAYI\fR]
+Bağlamın \fISAYI\fR (belirtilmezse 3) satırının gösterildiği tekilleştirilmiş çıktı biçimi kullanılır.
+.sp
+.TP 4
+\fB-e\fR, \fB-ed\fR
+Çıktıyı bir \fBed\fR(1) betiği olarak üretir.
+.sp
+.TP 4
+\fB-n\fR, \fB--rcs\fR
+RCS biçimli çıktı üretir.
+.sp
+.TP 4
+\fB-y\fR, \fB--side-by-side\fR
+2 sütunlu çıktı biçemi kullanılır.
+.sp
+.TP 4
+\fB-W\fR, \fB--width\fR[=\fISAYI\fR]
+Çıktı genişliği en fazla \fISAYI\fR (belirtilmezse 130) karakter olur.
+.sp
+.TP 4
+\fB--left-column\fR
+Yanyana çıktılama biçiminde ortak satırlardan sadece soldakini basar.
+.sp
+.TP 4
+\fB--suppress-common-lines\fR
+Yanyana çıktılama biçiminde ortak satırlar çıktılanmaz.
+.sp
+.TP 4
+\fB-p\fR, \fB--show-c-function\fR
+Her değişikliğin hangi C işlevi içinde olduğunu gösterir.
+.sp
+.TP 4
+\fB-F\fR, \fB--show-function-line=\fR\fIİFADE\fR
+\fIİFADE\fR ile eşleşen en son satırı gösterir.
+.sp
+.TP 4
+\fB--label\fR \fIYAFTA\fR
+Dosya ismi ve zaman damgası yerine \fIYAFTA\fR kullanılır (yinelenebilir).
+.sp
+.TP 4
+\fB-t\fR, \fB--expand-tabs\fR
+Çıktılarken sekmeleri boşluklara çevirir.
+.sp
+.TP 4
+\fB-T\fR, \fB--initial-tab\fR
+Her satırın metninden önceki boşlukları sekmelerle değiştirir. Böylece, satırların sekmelerle hizalanarak düzgün görünmesi sağlanır.
+.sp
+.TP 4
+\fB--tabsize\fR[=\fISAYI\fR]
+\fISAYI\fR (belirtilmezse 8) karakterlik sekmeler kullanılır.
+.sp
+.TP 4
+\fB--suppress-blank-empty\fR
+Boş çıktı satırlarından önce sekme ve boşluklar basılmaz.
+.sp
+.TP 4
+\fB-l\fR, \fB--paginate\fR
+Çıktıyı sayfalamak için \fBpr\fR(1) komutundan geçirir.
+.sp
+.TP 4
+\fB-r\fR, \fB--recursive\fR
+Dizinleri karşılaştırırken, bulunan bütün alt dizinlerin içindekileri de karşılaştır.
+.sp
+.TP 4
+\fB--no-dereference\fR
+Sembolik bağlar izlenmez.
+.sp
+.TP 4
+\fB-N\fR, \fB--new-file\fR
+Olmayan dosyayı, içi boş dosya olarak ele alır.
+.sp
+.TP 4
+\fB--unidirectional-new-file\fR
+Olmayan ilk dosyalar, içi boş dosya olarak ele alınır.
+.sp
+.TP 4
+\fB--ignore-file-name-case\fR
+Dosya isimleri karşılaştırılırken harf büyüklüğü önemsenmez.
+.sp
+.TP 4
+\fB--no-ignore-file-name-case\fR
+Dosya isimleri karşılaştırılırken harf büyüklüğü dikkate alınır.
+.sp
+.TP 4
+\fB-x\fR, \fB--exclude=\fR\fIKALIP\fR
+\fIKALIP\fR ile eşleşen dosyaları yoksayar.
+.sp
+.TP 4
+\fB-X\fR, \fB--exclude-from=\fR\fIDOSYA\fR
+\fIDOSYA\fR içindeki kalıplarla ile eşleşen dosyaları yoksayar.
+.sp
+.TP 4
+\fB-S \fR, \fB--starting-file=\fR\fIDOSYA\fR
+Dizinleri karşılaştırırken, \fIDOSYA\fR ile başlar.
+.sp
+.TP 4
+\fB--from-file=\fR\fIDOSYA1\fR
+Tüm terimleri \fIDOSYA1\fR ile karşılaştırır. \fIDOSYA1\fR bir dizin olabilir.
+.sp
+.TP 4
+\fB--to-file=\fR\fIDOSYA2\fR
+\fIDOSYA2\fR’yi tüm terimlerle karşılaştırır. \fIDOSYA2\fR bir dizin olabilir.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-case\fR
+Dosyaların içinde harf büyüklükleri önemsenmez.
+.sp
+.TP 4
+\fB-E\fR, \fB--ignore-tab-expansion\fR
+Sekme genişletmesinden kaynaklanan değişiklikler önemsenmez.
+.sp
+.TP 4
+\fB-Z\fR, \fB--ignore-trailing-space\fR
+Satır sonundaki boşluklar önemsenmez.
+.sp
+.TP 4
+\fB-b\fR, \fB--ignore-space-change\fR
+Boşluk miktarındaki değişiklikler önemsenmez.
+.sp
+.TP 4
+\fB-w\fR, \fB--ignore-all-space\fR
+Boşluklar önemsenmez.
+.sp
+.TP 4
+\fB-B\fR, \fB--ignore-blank-lines\fR
+Boş satırlar dikkate alınmaz.
+.sp
+.TP 4
+\fB-I\fR, \fB--ignore-matching-lines=\fR\fIKALIP\fR
+\fIKALIP\fR ile eşleşen satırlardaki değişiklikler yok sayılır.
+.sp
+.TP 4
+\fB-a\fR, \fB--text\fR
+Bütün dosyalar metin dosyası olarak kabul edilir.
+.sp
+.TP 4
+\fB--strip-trailing-cr\fR
+Girdideki satırbaşı karakterlerini ayıklar.
+.sp
+.TP 4
+\fB-D\fR, \fB--ifdef=\fR\fIİSİM\fR
+’\fB#ifdef İSİM\fR’ farklarıyla birleştirilmiş dosya çıktılar.
+.sp
+.TP 4
+\fB--\fR\fIGTYPE\fR\fB-group-format=\fR\fIGFMT\fR
+\fIGTYPE\fR girdi gruplarını \fIGFMT\fR ile biçemler.
+.sp
+.TP 4
+\fB--line-format=\fR\fILFMT\fR
+Tüm girdi satırlarını \fILFMT\fR ile biçemler.
+.sp
+.TP 4
+\fB--\fR\fILTYPE\fR\fB-line-format=\fR\fILFMT\fR
+\fILTYPE\fR girdi satırlarını \fILFMT\fR ile biçemler.
+.sp
+Bu biçem seçenekleri, \fB-D/--ifdef\fR’i genelleştirerek diff çıktısı üzerinde ayrıntılı denetim sağlar:
+.br
+\fILTYPE\fR ’old’, ’new’, veya ’unchanged’ olabilir.
+.br
+\fIGTYPE\fR ise ’old’, ’new’, ’unchanged’ veya ’changed’ olabilir.
+.sp
+\fIGFMT\fR sadece şunları içerebilir:
+.sp
+.RS
+.TP 4
+\fB%<\fR
+\fIDOSYA1\fRdeki satırlar
+.sp
+.TP 4
+\fB%>\fR
+\fIDOSYA2\fRdeki satırlar
+.sp
+.TP 4
+\fB%=\fR
+\fIDOSYA1\fR ve \fIDOSYA1\fRdeki ortak satırlar
+.sp
+.TP 4
+\fB[-][GNŞLK][.[HSYT]]{doxX}HARF\fR
+HARF için printf tarzı belirtim.
+.br
+HARFler yeni grup için büyük, eski grup için küçük harflidir:
+.sp
+.RS 4
+.RS 4
+.nf
+F   İlk satır numarası
+L   Son satır numarası
+N   L-F+1 satırın numarası
+E   F-1
+M   L+1
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB%(A=B?T:E)\fR
+A eşittir B ise T değilse E
+.sp
+.PP
+.RE
+.IP
+\fILFMT\fR sadece şunları içerebilir:
+.sp
+.RS
+.TP 4
+\fB%L\fR
+Satır içeriği
+.sp
+.TP 4
+\fB%l\fR
+Satır sonu karakteri olmaksızın satır içeriği
+.sp
+.TP 4
+\fB%[-][GNŞLK][.[HSYT]]{doxX}n\fR
+Girdi satır numarası için printf tarzı belirtim.
+.sp
+.PP
+.RE
+.IP
+\fIGFMT\fR ve \fILFMT\fR şunları içerebilir:
+.sp
+.RS
+.TP 4
+\fB%%\fR
+\fB%\fR
+.sp
+.TP 4
+\fB%c’C’\fR
+Tek bir \fIC\fR karakteri
+.sp
+.TP 4
+\fB%c’\\OOO’\fR
+Sekizlik kodu \fIOOO\fR olan karakter
+.sp
+.TP 4
+\fBC\fR
+Karakterin kendisi
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fB-d\fR, \fB--minimal\fR
+En küçük değişikliği bile bulmak için zor yolu dener.
+.sp
+.TP 4
+\fB--horizon-lines=\fR\fISAYI\fR
+Farklılıklardan önceki ortak satırların son \fISAYI\fR satırını ve farklılıklardan sonraki ortak satırların ilk \fISAYI\fR satırını iptal etmez.
+.sp
+.TP 4
+\fB--speed-large-files\fR
+Pek çok küçük değişikliğe sahip büyük dosyaların karşılaştırılmasında işlemini hızlandırmak için buluşsal yöntemler (heuristics) kullanılır.
+.sp
+.TP 4
+\fB--color\fR[=\fIKOŞUL\fR]
+Renkli çıktı üretir. \fIKOŞUL\fR ’never’, ’always’ veya ’auto’ olabilir. Belirtilmezse ’auto’ öntanımlıdır.
+.sp
+.TP 4
+\fB--palette=\fR\fIPALET\fR
+Renkli çıktı etkinse \fIPALET\fR ile belirtilen renkler kullanılır. \fIPALET\fR ’:’ ayraçlı terminfo yetenekleridir.
+.sp
+.TP 4
+\fB--help\fR
+Yardım metnini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+\fIDOSYALAR\fR yerine ’\fIDOSYA1\fR \fIDOSYA2\fR’, ’\fIDİZİN1\fR \fIDİZİN2\fR’, ’\fIDİZİN\fR \fIDOSYA\fR’ veya ’\fIDOSYA\fR \fIDİZİN\fR’ belirtilebilir. \fB--from-file\fR veya \fB--to-file\fR belirtilmişse \fIDOSYA\fR(lar) için hiçbir sınırlama yoktur. \fIDOSYA\fR olarak ’-’ verilmişse standart girdi okunur. Girdiler aynı ise çıkış durumu 0, farklıysa 1, sorun varsa 2’dir.
+.sp
+.sp
+.SH "YAZAN"
+Paul Eggert, Mike Haertel, David Hayes, Richard Stallman ve Len Tower tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hataları için: <bug-diffutils (at) gnu.org>
+.br
+GNU diffutils sayfası: <https://www.gnu.org/software/diffutils/>
+.br
+GNU yazılımları yardımı için: <https://www.gnu.org/software/gethelp.html>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBwdiff\fR(1), \fBcmp\fR(1), \fBdiff3\fR(1), \fBed\fR(1), \fBpatch\fR(1)), \fBpr\fR(1), \fBsdiff\fR(1).
+.sp
+\fBdiff\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBdiff\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo diff\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

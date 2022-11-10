@@ -1,0 +1,1251 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "TAR" 1 "Temmuz 2020" "tar-1.34" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+tar - arşivleme aracı
+.sp
+.SH KULLANIM
+Geleneksel kullanım:
+.sp
+.IP \fBtar\fR 4
+{\fBA\fR|\fBc\fR|\fBd\fR|\fBr\fR|\fBt\fR|\fBu\fR|\fBx\fR} [\fBGnSkUWOmpsMBiajJzZhPlRvwo\fR] [\fIDĞŞ\fR...]
+.sp
+.PP
+Unix tarzı kullanım:
+.sp
+.IP \fBtar\fR 4
+\fB-A\fR [\fISEÇENEKLER\fR] \fIARŞİV\fR \fIARŞİV\fR
+.IP \fBtar\fR 4
+\fB-c\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB-d\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB-t\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIÜYE\fR...]
+.IP \fBtar\fR 4
+\fB-r\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB-u\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB-x\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIÜYE\fR...]
+.sp
+.PP
+GNU tarzı kullanım:
+.sp
+.IP \fBtar\fR 4
+{\fB--catenate\fR|\fB--concatenate\fR} [\fISEÇENEKLER\fR] \fIARŞİV\fR \fIARŞİV\fR
+.IP \fBtar\fR 4
+\fB--create\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+{\fB--diff\fR|\fB--compare\fR} [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB--delete\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIÜYE\fR...]
+.IP \fBtar\fR 4
+\fB--append\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB--list\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIÜYE\fR...]
+.IP \fBtar\fR 4
+\fB--test-label\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIYAFTA\fR...]
+.IP \fBtar\fR 4
+\fB--update\fR [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+\fB--update\fR [\fB-f\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIDOSYA\fR...]
+.IP \fBtar\fR 4
+{\fB--extract\fR|\fB--get\fR} [\fB--file\fR \fIARŞİV\fR] [\fISEÇENEKLER\fR] [\fIÜYE\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+GNU \fBtar\fR, birden fazla dosyayı tek bir dosyada (bir arşiv) depolamak ve bu tür arşivleri işlemek için tasarlanmış bir arşivleme uygulamasıdır. Arşiv, normal bir dosya, yerel veya uzak bir makinede bulunabilen bir aygıt (örneğin, bir teyp sürücüsü, zaten uygulamanın adı, teyp arşivleyici anlamına gelir) olabilir.
+.sp
+.SS "Seçenek biçimleri"
+GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel tarz\fRda, komuttan sonra seçenek harfleri kümesi, ardından, bu seçeneklerin gerektirdiği değiştirgeler gelir. Değiştirgeler, seçenek harfleriyle aynı sırada okunur. Tüm seçenekler işlendikten sonra kalan komut satırı sözcükleri, isteğe bağlı olmayan değiştirgeler olarak değerlendirilir: dosya veya arşiv üye adları.
+.sp
+Örneğin, \fBc\fR seçeneği arşivin oluşturulmasını gerektirir, \fBv\fR seçeneği işlemin ayrıntılılarını ister ve \fBf\fR seçeneği üzerinde çalışılacak arşivin adını belirleyen bir değiştirge alır. Geleneksel tarzda yazılan aşağıdaki komut, \fBtar\fR’a \fI/etc\fR dizinindeki tüm dosyaları \fIetc.tar\fR arşiv dosyasına kaydetmesini söyler, arşivlenen dosyaları ayrıntılı olarak listeler:
+.sp
+.RS 4
+.nf
+\fBtar cfv etc.tar /etc\fR
+.fi
+.sp
+.RE
+\fBUNIX\fR veya \fBkısa seçenek\fR tarzında, diğer komut satırı yardımcı uygulamalarında olduğu gibi, her seçenek harfinin önüne tek bir tire eklenir. Bir seçenek değiştirge alırsa, değiştirge onu ya ayrı bir komut satırı sözcüğü olarak ya da hemen ardından gelen bir seçenek olarak izler. Ancak, seçenek "isteğe bağlı" bir değiştirge alıyorsa, değiştirge, örneğin \fB-g/tmp/snar.db\fR’de olduğu gibi, herhangi bir boşluk bırakmadan seçenek harfinin hemen ardına yazılmalıdır.
+.sp
+Değiştirge almayan seçenekler, tek bir tire işaretinden sonra birlikte kümelenebilir, örn. \fB-vkp\fR. Değiştirge alan seçeneklerin değiştirgeleri (zorunlu veya isteğe bağlı), böyle bir kümenin sonuna eklenebilir, örn. \fB-vkpf a.tar\fR.
+.sp
+Yukarıda kısa seçeneği yalılmış komut şöyle görünebilirdi:
+.sp
+.RS 4
+.nf
+\fBtar -cvf etc.tar /etc\fR
+veya
+\fBtar -c -v -f etc.tar /etc\fR
+.fi
+.sp
+.RE
+\fBGNU\fR veya \fBuzun seçenek\fR tarzında, her seçenek iki tire ile başlar, küçük harfler ve tirelerden oluşan anlamlı bir ada sahiptir. Uzun seçenek kullanıldığında, belirsizlik yaratmamak kaydıyla, ilk harflerine kısaltılabilir. Uzun seçeneklere ilişkin değiştigeler ya seçeneğin hemen ardından ayrı bir komut satırı sözcüğü olarak sağlanır ya da seçenekten arada boşluk olmadan eşittir işaretiyle ayrılır. İsteğe bağlı değiştirgeler her zaman ikinci yöntemi kullanmalıdır.
+.sp
+Örnek komutu bu tarzda yazmanın birkaç yolu:
+.sp
+.RS 4
+.nf
+\fBtar --create --file etc.tar --verbose /etc\fR
+veya (bazı seçenekleri kısaltarak):
+\fBtar --cre --file=etc.tar --verb /etc\fR
+.fi
+.sp
+.RE
+Her üç tarzdaki seçenekler karıştırılabilir, ancak bunu eski seçeneklerle yapmak önerilmez.
+.sp
+.SS "İşlem kipi"
+Aşağıdaki listelenen seçenekler, GNU \fBtar\fR’ın hangi işlemi gerçekleştireceğini belirler. Tam olarak bunlardan biri verilmelidir. İsteğe bağlı olmayan değiştirgelerin anlamı, istenen çalışma kipine bağlıdır.
+.sp
+.TP 4
+\fB-A\fR, \fB--catenate\fR, \fB--concatenate\fR
+Arşivi başka bir arşivin sonuna ekler. Değiştirgeler, eklenecek arşivlerin adları olarak değerlendirilir. Tüm arşivler, eklendikleri arşivle aynı biçemde olmalıdır, aksi takdirde ortaya çıkan arşiv, GNU olmayan \fBtar\fR uygulamaları ile kullanılamayabilir. Ayrıca, birden fazla arşiv verildiğinde, ilki hariç arşivlerdeki diğer üyelere, yalnızca \fB-i\fR (\fB--ignore-zeros\fR) seçeneği kullanıldığında ortaya çıkan arşivden erişilebilir olacağına dikkat edilmelidir.
+.sp
+Sıkıştırılmış arşivler ardarda eklenemez.
+.sp
+.TP 4
+\fB-c\fR, \fB--create\fR
+Yeni bir arşiv oluşturur. Değiştirgeler, arşivlenecek dosyaların adlarını belirler. \fB--no-recursion\fR seçeneği verilmediği sürece dizinler ardışık olarak arşivlenir.
+.sp
+.TP 4
+\fB-d\fR, \fB--diff\fR, \fB--compare\fR
+Arşiv ile dosya sistemi arasındaki farkları bulur. Değiştirgeler isteğe beğlıdır ve karşılaştırılacak arşiv üyelerini belirler. Verilmezse, geçerli çalışma dizinin belirtildiği varsayılır.
+.sp
+.TP 4
+\fB--delete\fR
+Arşivi siler. Değiştirgeler silinecek arşiv üyelerinin isimleridir. En az bir değiştirge verilmelidir.
+.sp
+Bu seçenek sıkıştırıllmış arşivlerde çalışmaz. Kısa seçenek eşdeğeri yoktur.
+.sp
+.TP 4
+\fB-r\fR, \fB--append\fR
+Dosyaları arşivin sonuna ekler. Değiştirgeler \fB-c\fR (\fB--create\fR) seçeneğindeki ile aynı anlama gelir.
+.sp
+.TP 4
+\fB-t\fR, \fB--list\fR
+Arşiv içeriğini listeler. Değiştirgeler isteğe bağlıdır. Belirtilirse listedeki üyelerin isimlerini belirler.
+.sp
+.TP 4
+\fB--test-label\fR
+Arşiv bölüm etiketini sınar ve çıkar. Değiştirgesiz kullanıldığında bölüm etiketini (varsa) gösterir ve çıkar. Bir veya daha fazla komut satırı değiştirgesi belirtilirse, \fBtar\fR bölüm etiketini her değiştirge ile karşılaştırır. Eşleşme bulunursa 0, aksi takdirde 1 ile çıkar. \fB-v\fR (\fB--verbose\fR) seçeneği ile birlikte kullanılmadıkça hiçbir şey çıktılanmaz.
+.sp
+Kısa seçenek eşdeğeri yoktur.
+.sp
+.TP 4
+\fB-u\fR, \fB--update\fR
+Arşivdeki ilgili kopyadan daha yeni olan dosyaları arşive ekler. Değiştirgeler \fB-c\fR ve \fB-r\fR seçenekleriyle aynı anlama sahiptir. Yeni dosyaların eski arşiv kopyalarının yerini almadığına, bunun yerine arşivin sonuna eklendiğine dikkat edilmelidir. Böylece elde edilen arşiv, aynı dosyanın çeşitli sürümlerine karşılık gelen, aynı isimde birkaç üye içerebilir.
+.sp
+.TP 4
+\fB-x\fR, \fB--extract\fR, \fB--get\fR
+Arşivden dosyaları çıkartır. Değiştirgeler isteğe bağlıdır. Belirtilirse çıktılanacak arşiv üyelerinin isimlerini belirler.
+.sp
+.TP 4
+\fB--show-defaults\fR
+Çeşitli \fBtar\fR seçenekleri için öntanımlıları listeler ve çıkar. Değiştirgesiz kullanılır.
+.sp
+.TP 4
+\fB-?\fR, \fB--help\fR
+Kısa seçenek özetini gösterir ve çıkar. Değiştirgesiz kullanılır.
+.sp
+.TP 4
+\fB--usage\fR
+Kullanılabilen seçeneklerin listesini gösterir ve çıkar. Değiştirgesiz kullanılır.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm ve telif hakkı bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.sp
+.SH "SEÇENEKLER"
+.SS "İşlem değiştiriciler"
+.TP 4
+\fB--check-device\fR
+Artımlı arşiv oluştururken aygıt numaralarına bakar (öntanımlıdır)
+.sp
+.TP 4
+\fB-g\fR, \fB--listed-incremental\fR=\fIDOSYA\fR
+Yeni GNU biçimli artımlı yedeklemeleri yönetir. \fIDOSYA\fR, anlık yedeğin adıdır; burada \fBtar\fR, önceki artımlı dökümden bu yana hangi dosyaların değiştiğine karar vermek için kullanılan ek bilgileri depolar ve sonuç olarak yeniden dökümü gerekir. Bir arşiv oluştururken \fIDOSYA\fR mevcut değilse, oluşturulacak ve tüm dosyalar ortaya çıkan arşive eklenecektir (0. düzey döküm). Sıfır olmayan \fIN\fR. düzey artımlı arşiv oluşturmak için, \fIN-1\fR. düzeyde oluşturulan anlık yedeğin kopyası \fIDOSYA\fR olarak kullanılır.
+.sp
+Listeleme veya çıkarma sırasında, \fIDOSYA\fR’nın gerçek içeriği denetlenmez, bu yalnızca sözdizimsel gereksinimler nedeniyle gerekir. Bu bakımdan, yerine \fI/dev/null\fR kullanmak yaygın bir uygulamadır.
+.sp
+.TP 4
+\fB--hole-detection\fR=\fIYÖNTEM\fR
+Seyrek dosyalardaki boşlukları algılamak için \fIYÖNTEM\fR kullanılır. Bu seçenek örtük olarak \fB--sparse\fR seçeneğini uygular. \fIYÖNTEM\fR için geçerli değerler \fBseek\fR ve \fBraw\fR’dır. \fBseek\fR öntanımlı olup, uygulanabilir değilse \fBraw\fR son çaredir.
+.sp
+.TP 4
+\fB-G\fR, \fB--incremental\fR
+Eski GNU biçimli artımlı yedeklemeleri yönetir.
+.sp
+.TP 4
+\fB--ignore-failed-read\fR
+Okunamayan dosyalarda sıfırdan farklı bir değerle çıkmaz
+.sp
+.TP 4
+\fB--level\fR=\fISAYI\fR
+Listeli artımsal arşiv oluşturmak için döküm düzeyini belirler. Şimdilik yalnızca \fB--level=0\fR anlamlıdır: \fBtar\fR’a dökümden önce anlık yedek dosyasını kırpması talimatını verir, böylece 0. düzey döküm zorlanmış olur.
+.sp
+.TP 4
+\fB-n\fR, \fB--seek\fR
+Arşivin aranabilir olduğunu varsayar. Normalde \fBtar\fR, arşivin aranıp aranamayacağını otomatik olarak belirler. Bu seçenek, böyle bir tanımanın başarısız olduğu durumlarda kullanılmak üzere tasarlanmıştır. Yalnızca arşiv okumaya açıksa (örneğin \fB--list\fR veya \fB--extract\fR seçenekleriyle) etkili olur.
+.sp
+.TP 4
+\fB--no-check-device\fR
+Artımlı arşivler oluşturulurken aygıt numaralarına bakılmaz.
+.sp
+.TP 4
+\fB--no-seek\fR
+Arşivin aranabilir olmadığı varsayılır.
+.sp
+.TP 4
+\fB--occurrence\fR\fB[=\fR\fIN\fR\fB]\fR
+Arşivdeki her dosyanın yalnızca \fIN\fR. kopyası üzerinde çalışır. Bu seçenek yalnızca \fB--delete\fR, \fB--diff\fR, \fB--extract\fR veya \fB--list\fR seçeneği ile birlikte ve komut satırından veya \fB-T\fR seçeneği üzerinden bir dosya listesi verildiğinde geçerlidir. \fIN\fR öntanımlı olarak 1’dir.
+.sp
+.TP 4
+\fB--restrict\fR
+Zararlı olabilecek bazı seçeneklerin kullanımını devre dışı bırakır.
+.sp
+.TP 4
+\fB--sparse-version\fR=\fIBÜYÜK\fR[\fI.KÜÇÜK\fR]
+Kullanılacak seyrek biçemin sürümünü belirler (örtük olarak \fB--sparse\fR uygular). Geçerli değiştirge değerleri \fB0.0\fR, \fB0.1\fR ve \fB1.0\fR’dır. Seyrek biçemlerin ayrıntılı açıklaması için komut satırından şu komut girilebilir: \fBinfo tar ’Sparse Formats’\fR.
+.sp
+.TP 4
+\fB--S\fR, \fB--sparse\fR
+Seyrek dosyaları verimli şekilde işler. Dosya sistemindeki bazı dosyalar aslında hiç yazılmamış bölümlere sahip olabilir (çoğunlukla bunlar DBM gibi sistemler tarafından oluşturulan veritabanı dosyalarıdır). Bu seçenek verildiğinde \fBtar\fR, arşivlemeden önce dosyanın seyrek olup olmadığını belirlemeye çalışır ve eğer öyleyse, dosyanın boş kısımlarını boşaltmayarak elde edilen arşivin boyutunu küçültmeye çalışır.
+.sp
+.PP
+.sp
+.SS "Geçersizleştirme denetimi"
+Bu seçenekler, diskteki mevcut bir arşivden bir dosya çıkarılırken \fBtar\fR’ın eylemlerini denetler.
+.sp
+.TP 4
+\fB-k\fR, \fB--keep-old-files\fR
+Çıkarırken mevcut dosyaları değiştirmez.
+.sp
+.TP 4
+\fB--keep-newer-files\fR
+Arşivdeki kopyalarından daha yeni olan dosyalar değiştirilmez.
+.sp
+.TP 4
+\fB--keep-directory-symlink\fR
+Çıkarırken mevcut dizin sembolik bağlarını değiştirmez.
+.sp
+.TP 4
+\fB--no-overwrite-dir\fR
+Mevcut dizinlerin meta verileri korunur.
+.sp
+.TP 4
+\fB--one-top-level\fR[=\fIDİZİN\fR]
+Tüm dosyaları \fIDİZİN\fRe veya değiştirgesiz kullanılıyorsa, arşivin uzantısız dosya adıyla adlandırılan bir alt dizine çıkarır (eksi \fB--auto-compress\fR tarafından tanınan standart sıkıştırma uzantıları).
+.sp
+.TP 4
+\fB--overwrite\fR
+Çıkartırken mevcut dosyaların üzerine yazar.
+.sp
+.TP 4
+\fB--overwrite-dir\fR
+Çıkartırken mevcut dizilerin meta verilerinin üzerine yazar (öntanımlıdır).
+.sp
+.TP 4
+\fB--recursive-unlink\fR
+Çıkartmadan önce dizinde ardışık olarak tüm dosyaları siler.
+.sp
+.TP 4
+\fB--remove-files\fR
+Arşive ekledikten sonra diskteki dosyaları siler.
+.sp
+.TP 4
+\fB--skip-old-files\fR
+Çıkartırken mevcut dosyaları değiştirmez, sessizce atlar.
+.sp
+.TP 4
+\fB-U\fR, \fB--unlink-first\fR
+Üzerine çıkartmadan önce mevcut dosyaları siler.
+.sp
+.TP 4
+\fB-W\fR, \fB--verify\fR
+Yazdıktan sonra arşivi doğrular.
+.sp
+.PP
+.sp
+.SS "Çıktı akımı seçimi"
+.TP 4
+\fB--ignore-command-error\fR
+Alt süreç çıkış kodlarını yok sayar.
+.sp
+.TP 4
+\fB--no-ignore-command-error\fR
+Alt süreçlerin sıfırdan farklı çıkış kodları hata olarak değerlendirilir (öntanımlıdır).
+.sp
+.TP 4
+\fB-O\fR, \fB--to-stdout\fR
+Dosyaları standart çıktıya çıkarır.
+.sp
+.TP 4
+\fB--to-command\fR=\fIKOMUT\fR
+Çıkarılan dosyaları \fIKOMUT\fRa borular. \fIKOMUT\fR, isteğe bağlı olarak komut satırı değiştirgeleri ile birlikte harici uygulamanın dosya yoludur. Uygulama çağrılır ve çıkartılan dosyanın içeriği uygulamanın standart girdisine aktarılır. Ek veriler, aşağıdaki ortam değişkenleri aracılığıyla aktarılabilir:
+.sp
+.RS
+.TP 4
+\fBTAR_FILETYPE\fR
+Dosyanın türü. Aşağıda anlamı açıklanan tek bir harften oluşur:
+.sp
+.RS 4
+.RS 4
+.nf
+f    Normal dosya
+d    Dizin
+l    Sembolik bağ
+h    Sabit bağ
+b    Blok aygıtı
+c    Karakter aygıtı
+.fi
+.sp
+.RE
+.RE
+.IP
+Şimdilik yalnızca normal dosyalar desteklenmektedir.
+.sp
+.TP 4
+\fBTAR_MODE\fR
+Sekizlik sayı olarak dosya kipi.
+.sp
+.TP 4
+\fBTAR_FILENAME\fR
+Dosyanın ismi.
+.sp
+.TP 4
+\fBTAR_REALNAME\fR
+Arşivde saklandığı haliyle dosyanın ismi.
+.sp
+.TP 4
+\fBTAR_UNAME\fR
+Dosya sahibinin kullanıcı adı.
+.sp
+.TP 4
+\fBTAR_GNAME\fR
+Dosya sahibinin grup adı.
+.sp
+.TP 4
+\fBTAR_ATIME\fR
+Son erişim zamanı. Ondalık bir sayı olup C miladından itibaren geçen saniye sayısıdır. Arşiv zamanı nanosaniye seviyesinde saklıyorsa nanosaniyeler ondalık ayracın sağına eklenir.
+.sp
+.TP 4
+\fBTAR_MTIME\fR
+Son değişiklik zamanı.
+.sp
+.TP 4
+\fBTAR_CTIME\fR
+Son durum değişikliği zamanı.
+.sp
+.TP 4
+\fBTAR_SIZE\fR
+Dosyanın boyutu.
+.sp
+.TP 4
+\fBTAR_UID\fR
+Dosya sahibinin kullanıcı kimliği.
+.sp
+.TP 4
+\fBTAR_GID\fR
+Dosya sahibinin grup kimliği.
+.sp
+.PP
+.RE
+.IP
+Ek olarak, aşağıdaki değişkenler \fBtar\fR çalışma kip ve işlenmekte olan arşiv hakkında bilgi içerir:
+.sp
+.RS
+.TP 4
+\fBTAR_VERSION\fR
+GNU \fBtar\fR sürüm numarası.
+.sp
+.TP 4
+\fBTAR_ARCHIVE\fR
+İşlenen \fBtar\fR arşivinin ismi.
+.sp
+.TP 4
+\fBTAR_BLOCKING_FACTOR\fR
+Geçerli engelleme katsayısı, yani bir kayıttaki 512 baytlık blok sayısı.
+.sp
+.TP 4
+\fBTAR_VOLUME\fR
+İşlenen \fBtar\fR arşivinin sıradaki bölüm numarası (çok bölümlü arşivler okunurken atanır).
+.sp
+.TP 4
+\fBTAR_FORMAT\fR
+İşlenen arşivin biçemi. Şunlardan biridir: \fBgnu, oldgnu, posix, ustar, v7\fR.
+.sp
+.TP 4
+\fBTAR_SUBCOMMAND\fR
+Yürütülen \fBtar\fR işlemini açıklayan kısa seçenek (önündeki tire imi ile birlikte)
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.SS "Dosya öznitelik işlemleri"
+.TP 4
+\fB--atime-preserve\fR[=\fIYÖNTEM\fR]
+Dökümlü dosyalar üzerine erişim zamanlarını korur. Ya okuduktan sonra eski haline getirir (\fIYÖNTEM\fR=replace, bu öntanımlıdır) ya da ilk erişimde zamanlara dokunmaz (\fIYÖNTEM\fR=system)
+.sp
+.TP 4
+\fB--delay-directory-restore\fR
+Çıkartılan dizinlerin değişiklik zamanlarının ve izinlerinin atanmasını işlemin sonuna kadar geciktirir. Olağandışı üye sıralaması olan bir arşivden dosya çıkartırken bu seçenek kullanılmalıdır.
+.sp
+.TP 4
+\fB--group\fR=\fIİSİM\fR[\fI:GRUPKİMLİĞİ\fR]
+Eklenen dosyaların grubu \fIİSİM\fR yapılır. \fI:GRUPKİMLİĞİ\fR verilmezse \fIİSİM\fR ya kullanıcı ismi ya da sayısal grup kimliği olabilir. Bu durumda eksik parça (\fI:GRUPKİMLİĞİ\fR veya \fIİSİM\fR) geçerli konağın grup veritabanından elde edilir.
+.sp
+\fB--group-map\fR=\fIDOSYA\fR ile kullanıldığında yalnızca \fIDOSYA\fR içinde sahibinin grubu bulunmayan dosyalar etkilenir.
+.sp
+.TP 4
+\fB--group-map\fR=\fIDOSYA\fR
+Grup dönüşüm eşlemini \fIDOSYA\fRdan okur. Boş satırlar yok sayılır. # imi ile başlayan satırlar satır sonuna kadar yorum olarak ele alınır. \fIDOSYA\fR içindeki boş olmayan her satır tek bir grubun dönüşümünü tanımlar. Boşluklarla sınırlı iki alandan oluşmalıdır:
+.sp
+\fIESKİGRUP YENİGRUP\fR\fB[:\fR\fIYENİ-GRUPKİMLİĞİ\fR\fB]\fR
+.sp
+\fIESKİGRUP\fR ya geçerli bir grup ismi ya da + ile öncelenmiş bir grup kimliği olabilir. \fIYENİ-GRUPKİMLİĞİ\fR sağlanmadıkça \fIYENİGRUP\fR da ya geçerli bir grup ismi ya da + ile öncelenmiş bir grup kimliği olabilir. Aksi takdirde, hem \fIYENİGRUP\fR hem de \fIYENİ-GRUPKİMLİĞİ\fR sistem grup veritabanında bulunmalıdır.
+.sp
+Sonuç olarak, sahip grubu \fIESKİGRUP\fR olan her girdi dosyası arşivde \fIYENİGRUP\fR sahip grubu ve \fIYENİ-GRUPKİMLİĞİ\fR grup kimliği ile saklanır.
+.sp
+.TP 4
+\fB--mode\fR=\fIDEĞİŞİKLİKLER\fR
+Eklenen dosyalar için sembolik kip \fIDEĞİŞİKLİKLER\fRini zorlar.
+.sp
+.TP 4
+\fB--mtime\fR=\fIZAMAN-veya-DOSYA\fR
+Eklenen dosyalara belirtilen değişiklik zamanını atar. \fIZAMAN-veya-DOSYA\fR tamamen keyfi biçemde bir tarih/saat ya da mevcut bir dosyanın ismi olabilir. Dosya adı belirtilmesi durumunda değişiklik zamanı olarak dosyanınki kullanılır.
+.sp
+.TP 4
+\fB-m\fR, \fB--touch\fR
+Dosya değişiklik zamanı çıkarılmaz.
+.sp
+.TP 4
+\fB--no-delay-directory-restore\fR
+\fB--delay-directory-restore\fR seçeneğinden önceki etki devre dışı bırakılır.
+.sp
+.TP 4
+\fB--no-same-owner\fR
+Dosyaların çıkaranın sahipliğinde olduğu varsayılır (normal kullanıcılar için öntanımlıdır).
+.sp
+.TP 4
+\fB--no-same-permissions\fR
+İzinler arşivden çıkartılırken kullanıcının maskesi uygulanır (normal kullanıcılar için öntanımlıdır).
+.sp
+.TP 4
+\fB--numeric-owner\fR
+Daima, kullanıcı/grup isimleri yerine numaraları kullanılır.
+.sp
+.TP 4
+\fB--owner\fR=\fIİSİM\fR[\fI:KULLANICI_KİMLİĞİ\fR]
+Eklenen dosyaların sahibi olarak \fIİSİM\fR zorlanır. \fI:KULLANICI_KİMLİĞİ\fR belirtilmezse \fIİSİM\fR ya kullanıcı ismi ya da sayısal kullanıcı kimliği olabilir. Parçalardan birinin eksikliği durumunda (\fIİSİM\fR veya \fI:KULLANICI_KİMLİĞİ\fR) geçerli konağın kullanıcı veritabanına başvurulur.
+.sp
+\fB--owner-map\fR=\fIDOSYA\fR ile kullanıldığında yalnızca \fIDOSYA\fR içinde sahibi listelenmeyen dosyalar etkilenir.
+.sp
+.TP 4
+\fB--owner-map\fR=\fIDOSYA\fR
+Sahip dönüşüm eşlemini \fIDOSYA\fRdan okur. Boş satırlar yok sayılır. # imi ile başlayan satırlar satır sonuna kadar yorum olarak ele alınır. \fIDOSYA\fR içindeki boş olmayan her satır tek bir kullanıcı kimliğin dönüşümünü tanımlar. Boşluklarla sınırlı iki alandan oluşmalıdır:
+.sp
+\fIESKİKULL YENİKULL\fR\fB[:\fR\fIYENİ_KULL_KİMLİĞİ\fR\fB]\fR
+.sp
+\fIESKİKULL\fR ya geçerli bir kullanıcı ismi ya da + ile öncelenmiş bir kullanıcı kimliği olabilir. \fIYENİ_KULL_KİMLİĞİ\fR sağlanmadıkça \fIYENİKULL\fR da ya geçerli bir kullanıcı ismi ya da + ile öncelenmiş bir kullanıcı kimliği olabilir. Aksi takdirde, hem \fIYENİKULL\fR hem de \fIYENİ_KULL_KİMLİĞİ\fR sistem grup veritabanında bulunmalıdır.
+.sp
+Sonuç olarak, sahibi \fIESKİKULL\fR olan her girdi dosyası arşivde \fIYENİKULL\fR ve \fIYENİ_KULL_KİMLİĞİ\fR sahipliğinde saklanır.
+.sp
+.TP 4
+\fB-p\fR, \fB--preserve-permissions\fR, \fB--same-permissions\fR
+Dosya izinleri (root öntanımlıdır) hakkında bilgi çıkartılır.
+.sp
+.TP 4
+\fB--same-owner\fR
+Dosyaları arşivdeki sahipliğinde çıkartmaya çalışır (root öntanımlıdır).
+.sp
+.TP 4
+\fB-s\fR, \fB--preserve-order\fR, \fB--same-order\fR
+Çıkarılacak adları arşivle eşleşecek şekilde sıralar.
+.sp
+.TP 4
+\fB--sort\fR=\fITÜR\fR
+Bir arşivi çıkartırken dizin girdilerini \fITÜR\fRe göre sıralar. \fITÜR\fR, \fBnone\fR (yok), \fBname\fR (isim) veya \fBinode\fR (dosya düğümü) olabilir.
+.sp
+\fB--sort=none\fR öntanımlı olup arşiv üyeleri işletim sistemi tarafından döndürülen sırada sakanır.
+.sp
+\fB--sort=name\fR kullanımı, oluşturulan arşivdeki üye sıralamasının tek tip ve üretilebilir olmasını sağlar.
+.sp
+\fB--sort=inode\fR kullanımı, arşiv oluştururken yapılan disk aramalarının sayısını azaltır, böylece arşivlemeyi önemli ölçüde hızlandırabilir. Bu sıralama düzeni, yalnızca ilgili sistem gerekli bilgileri sağlıyorsa desteklenir.
+.sp
+.PP
+.sp
+.SS "Gelişkin dosya öznitelikleri"
+.TP 4
+\fB--acls\fR
+POSIX ACL desteği etkin olur.
+.sp
+.TP 4
+\fB--no-acls\fR
+POSIX ACL desteği devre dışı bırakılır.
+.sp
+.TP 4
+\fB--selinux\fR
+SELinux bağlam desteği etkin olur.
+.sp
+.TP 4
+\fB--no-selinux\fR
+SELinux bağlam desteği devre dışı bırakılır.
+.sp
+.TP 4
+\fB--xattrs\fR
+Gelişmiş öznitelikler desteği etkin olur.
+.sp
+.TP 4
+\fB--no-xattrs\fR
+Gelişmiş öznitelikler desteği devre dışı bırakılır.
+.sp
+.TP 4
+\fB--xattrs-exclude\fR=\fIKALIP\fR
+\fBxattr\fR anahtarları için dışlama kalıbını belirler. \fIKALIP\fR POSIX düzenli ifadesi olmalıdır. Örneğin, \fB--xattrs-exclude=’^user.’\fR kullanıcı isim uzayından öznitelikleri dışlar.
+.sp
+.TP 4
+\fB--xattrs-include\fR=\fIKALIP\fR
+\fBxattr\fR anahtarları için içerme kalıbını belirler. \fIKALIP\fR POSIX düzenli ifadesi olmalıdır.
+.sp
+.PP
+.sp
+.SS "Aygıt seçimi ve geçiş"
+.TP 4
+\fB-f\fR, \fB--file\fR=\fIARŞİV\fR
+\fIARŞİV\fR adlı aygıt veya dosya kullanılır. Bu seçenek belirtilmezse \fBtar\fR önce \fBTAPE\fR ortam değişkenini inceler. Değişkene atama yapılmışsa değer arşiv adı olarak kullanılır. Yoksa, \fBtar\fR’ın öntanımlıya derlendiği varsayılır. Öntanımlı değer ya \fB--show-defaults\fR seçeneğinden elde edilir ya da \fBtar --help\fR çıktısının sonundadır.
+.sp
+İçinde iki nokta üst üste bulunan bir arşiv adı, uzak makinedeki bir dosyayı veya aygıtı belirtir. İki nokta üst üste iminden önceki kısım makine adı veya IP adresi olarak, sonraki kısım ise dosya veya aygıt olarak ele alınır. Örnek:
+.sp
+\fB--file=remotehost:/dev/sr0\fR
+.sp
+İsteğe bağlı bir kullanıcı adı, aralarına bir @ işareti koyarak konak adının önüne eklenebilir.
+.sp
+Öntanımı olarak, uzak konağa \fBrsh\fR(1) komutu üzerinden erişilir. Günümüzde bunun yerine \fBssh\fR(1) kullanmak yaygındır. Aşağıdaki komut satırı seçeneği ile bu yapılabilir:
+.sp
+\fB--rsh-command=/usr/bin/ssh\fR
+.sp
+Uzak makinede \fBrmt\fR(8) komutunun kurulu olması gerekir. Dosya yolu \fBtar\fR’ın öntanımlısı ile eşleşmezse \fBtar\fR’a doğru yol \fB--rmt-command\fR seçeneği kullanılarak belirtilebilir.
+.sp
+.TP 4
+\fB--force-local\fR
+İçinde iki nokta üst üste bulunsa bile arşiv dosyası yereldir.
+.sp
+.TP 4
+\fB-F\fR, \fB--info-script\fR=\fIKOMUT\fR, \fB--new-volume-script\fR=\fIKOMUT\fR
+Teybin sonuna ulaşılışılan her seferde \fIKOMUT\fR çalıştırılır (örtük olarak \fB-M\fR uygulanır). Komut değiştirge içerebilir. Başlatıldığında \fBtar\fR’ın ortamına ek olarak aşağıdaki değişkenler miras alınır:
+.sp
+.RS
+.TP 4
+\fBTAR_VERSION\fR
+GNU \fBtar\fR sürüm numarası.
+.sp
+.TP 4
+\fBTAR_ARCHIVE\fR
+İşlenen \fBtar\fR arşivinin ismi.
+.sp
+.TP 4
+\fBTAR_BLOCKING_FACTOR\fR
+Geçerli engelleme katsayısı, yani bir kayıttaki 512 baytlık blok sayısı.
+.sp
+.TP 4
+\fBTAR_VOLUME\fR
+İşlenen \fBtar\fR arşivinin sıradaki bölüm numarası (çok bölümlü arşivler okunurken atanır).
+.sp
+.TP 4
+\fBTAR_FORMAT\fR
+İşlenen arşivin biçemi. Şunlardan biridir: \fBgnu, oldgnu, posix, ustar, v7\fR.
+.sp
+.TP 4
+\fBTAR_SUBCOMMAND\fR
+Yürütülen \fBtar\fR işlemini açıklayan kısa seçenek (önündeki tire imi ile birlikte).
+.sp
+.TP 4
+\fBTAR_FD\fR
+Yeni \fBtar\fR bölüm ismi ile iletişimde kullanılabilen dosya tanıtcısı.
+.sp
+\fBinfo\fR betiği başarısız olursa, \fBtar\fR çıkar; aksi takdirde sonraki bölümü yazmaya başlar.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fB-L\fR, \fB--tape-length\fR=\fIN\fR
+\fIN\fRx1024 bayt yazdıktan sonra teyp değiştirir. \fIN\fR bir boyut soneki içeriyorsa 1024 yerine sonek ile belirtilen boyut çarpanı kullanılır (Bkz: \fBBoyut sonekleri\fR).
+.sp
+Bu seçenek örtük olarak \fB-M\fR uygular.
+.sp
+.TP 4
+\fB-M\fR, \fB--multi-volume\fR
+Çok bölümlü arşivi oluşturur/listeler/çıkarır.
+.sp
+.TP 4
+\fB--rmt-command\fR=\fIKOMUT\fR
+Uzak arşive erişilirken \fBrmt\fR yerine \fIKOMUT\fR kullanılır. Bkz: \fB-f\fR seçeneği.
+.sp
+.TP 4
+\fB--rsh-command\fR=\fIKOMUT\fR
+Uzak arşive erişilirken \fBrsh\fR yerine \fIKOMUT\fR kullanılır. Bkz: \fB-f\fR seçeneği.
+.sp
+.TP 4
+\fB--volno-file\fR=\fIDOSYA\fR
+Bu seçenek \fB--multi-volume\fR ile birlikte kullanıldığında \fBtar\fR, çok bölümlü arşivin hangi bölümünde çalıştığını \fIDOSYA\fR’dan takip edecektir.
+.sp
+.PP
+.sp
+.SS "Aygıt engelleme"
+.TP 4
+\fB-b\fR, \fB--blocking-factor\fR=\fIBLOK_SAYISI\fR
+Kayıt boyutu \fIBLOK_SAYISI\fRx512 bayt olur.
+.sp
+.TP 4
+\fB-B\fR, \fB--read-full-records\fR
+Listeleme veya çıkartma sırasında dosya sonu karakterinden sonraki tamamlanmamış girdi kayıtlarını kabul eder.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-zeros\fR
+Arşivdeki sıfırlı blokları yok sayar. Normalde sıfırlarla dolu iki ardışık 512’lik blok, EOF anlamına gelir ve \fBtar\fR bunlarla karşılaştıktan sonra okumayı durdurur. Bu seçenek ona daha fazla okuma talimatı verir. \fB-A\fR seçeneğiyle oluşturulan arşivleri okurken kullanışlıdır.
+.sp
+.TP 4
+\fB--record-size\fR=\fISAYI\fR
+Kayıt boyutunu belirler. \fISAYI\fR her kayıttaki bayt sayısıdır. 512’nin katları olmalıdır. Örneğin 10 kilobayt için \fB--record-size=10K\fR gibi bir boyut soneki belirtilebilir. Geçerli soneklerin listesi için bkz: \fBBoyut sonekleri\fR
+.sp
+.PP
+.sp
+.SS "Arşiv biçiminin seçimi"
+.TP 4
+\fB-H\fR, \fB--format\fR=\fIBİÇEM\fR
+Arşivi belirtilen \fIBİÇEM\fRde oluşturur. Geçerli biçemler:
+.sp
+.RS
+.TP 4
+\fBgnu\fR
+GNU \fBtar\fR 1.13.x biçemi
+.sp
+.TP 4
+\fBoldgnu\fR
+\fBtar\fR <= 1.12’ye göre GNU biçemi.
+.sp
+.TP 4
+\fBpax\fR, \fBposix\fR
+POSIX 1003.1-2001 (pax) biçemi.
+.sp
+.TP 4
+\fBustar\fR
+POSIX 1003.1-1988 (ustar) biçemi.
+.sp
+.TP 4
+\fBv7\fR
+Eski V7 \fBtar\fR biçemi.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fB--old-archive\fR, \fB--portability\fR
+\fB--format=v7\fR ile aynı.
+.sp
+.TP 4
+\fB--pax-option\fR=\fISÖZCÜK\fR[[:]=\fIDEĞER\fR][,\fISÖZCÜK\fR[[:]=\fIDEĞER\fR]]...
+PAX arşivleri ( \fB-H pax\fR) oluşturulurken \fBpax\fR(1) anahtar sözcüklerini denetler. Bu seçenek, \fBpax\fR(1) uygulamasının \fB-o\fR seçeneğine eşdeğerdir.
+.sp
+.TP 4
+\fB--posix\fR
+\fB--format=posix\fR ile aynı.
+.sp
+.TP 4
+\fB-V\fR, \fB--label\fR=\fIDİZGE\fR
+Bölüm adı \fIDİZGE\fR olan arşivi oluşturur. Listeleme ve çıkarma yaparken \fIDİZGE\fR bölüm adı için küresel bir kalıp olarak kullanıabilir.
+.sp
+.PP
+.sp
+.SS "Sıkıştırma seçenekleri"
+.TP 4
+\fB-a\fR, \fB--auto-compress\fR
+Sıkıştırma uygulamasını saptamak için arşiv soneki kullanılır.
+.sp
+.TP 4
+\fB-I\fR, \fB--use-compress-program\fR=\fIKOMUT\fR
+Veriyi \fIKOMUT\fR üzerinden süzer. Sıkıştırmayı açmak için \fIKOMUT\fRun \fB-d\fR seçeneğini kabul etmesi gerekir. \fIKOMUT\fR komut satırı seçenekleri içerebilir.
+.sp
+.TP 4
+\fB-j\fR, \fB--bzip2\fR
+Arşivi \fBbzip2\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB-J\fR, \fB--xz\fR
+Arşivi \fBxz\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB--lzip\fR
+Arşivi \fBlzip\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB--lzma\fR
+Arşivi \fBlzma\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB--lzop\fR
+Arşivi \fBlzop\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB--no-auto-compress\fR
+Sıkıştırma uygulamasını saptamak için arşiv soneki kullanılmaz.
+.sp
+.TP 4
+\fB-z\fR, \fB--gzip\fR, \fB--gunzip\fR, \fB--ungzip\fR
+Arşivi \fBgzip\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB-Z\fR, \fB--compress\fR, \fB--uncompress\fR
+Arşivi \fBcompress\fR(1) üzerinden süzer.
+.sp
+.TP 4
+\fB--zstd\fR
+Arşivi \fBzstd\fR(1) üzerinden süzer.
+.sp
+.PP
+.sp
+.SS "Yerel dosya seçimi"
+.TP 4
+\fB--add-file\fR=\fIDOSYA\fR
+\fIDOSYA\fRyı arşive ekler (isim tire ile başlıyorsa yararlıdır).
+.sp
+.TP 4
+\fB--backup\fR[=\fIDENETİM\fR]
+Silmeden önce yedeğini alır. \fIDENETİM\fR belirtilmişse yedekleme politikasını denetler. \fIDENETİM\fR için geçerli değerler:
+.sp
+.RS
+.TP 4
+\fBnone\fR, \fBoff\fR
+Asla yedekleme yapmaz.
+.sp
+.TP 4
+\fBt\fR, \fBnumbered\fR
+Numaralı yedekleme yapılır.
+.sp
+.TP 4
+\fBnil\fR, \fBexisting\fR
+Numaralı yedekler varsa numaralı yoksa basit yedekleme yapılır.
+.sp
+.TP 4
+\fBnever\fR, \fBsimple\fR
+Daima basit yedekeme yapılır.
+.sp
+.PP
+.RE
+.IP
+\fIDENETİM\fR belirtilmezse değer \fBVERSION_CONTROL\fR ortam değişkeninden alınır. Ortam değişkeni etkin değilse mevcut olan kullanılır.
+.sp
+.TP 4
+\fB-C\fR, \fB--directory\fR=\fIDİZİN\fR
+Herhangi bir işlem yapmadan önce \fIDİZİN\fRe geçer. Bu seçenek sıralamaya duyarlıdır. Yani, kendisinden sonra gelen tüm seçenekleri etkiler.
+.sp
+.TP 4
+\fB--exclude\fR=\fIKALIP\fR
+\fBglob\fR(3) tarzı joker \fIKALIP\fR ile eşleşen dosyalar dışlanır.
+.sp
+.TP 4
+\fB--exclude-backups\fR
+Yedekler ve kilit dosyaları dışlanır.
+.sp
+.TP 4
+\fB--exclude-caches\fR
+\fICACHEDIR.TAG\fR dosyasını içeren dizinlerin içeriği bu dosya hariç dışlanır.
+.sp
+.TP 4
+\fB--exclude-caches-all\fR
+\fICACHEDIR.TAG\fR dosyasını içeren dizinlerin içeriği bu dosya da dahil dışlanır.
+.sp
+.TP 4
+\fB--exclude-caches-under\fR
+\fICACHEDIR.TAG\fR dosyasını içeren dizinlerin altındaki herşey dışlanır.
+.sp
+.TP 4
+\fB--exclude-ignore\fR=\fIDOSYA\fR
+Bir dizini dökümlemeden önce dizinin \fIDOSYA\fRyı içerip içermediğine bakar. İçeriyorsa, dışlama kalıpları bu dosyadan okunur. Kalıplar yanızca dizinin kendisini etkiler.
+.sp
+.TP 4
+\fB--exclude-ignore-recursive\fR=\fIDOSYA\fR
+Hem dizini hem de alt dizinlerini etkileyen \fIDOSYA\fRdaki kalıpların dışlanması dışında \fB--exclude-ignore\fR ile aynıdır.
+.sp
+.TP 4
+\fB--exclude-tag\fR=\fIDOSYA\fR
+\fIDOSYA\fRyı içeren dizinlerin içeriği \fIDOSYA\fR hariç dışlanır.
+.sp
+.TP 4
+\fB--exclude-tag-all\fR=\fIDOSYA\fR
+\fIDOSYA\fRyı içeren dizinler dışlanır.
+.sp
+.TP 4
+\fB--exclude-tag-under\fR=\fIDOSYA\fR
+\fIDOSYA\fRyı içeren dizinlerin altındaki herşey dışlanır.
+.sp
+.TP 4
+\fB--exclude-vcs\fR
+Sürüm denetim sistemi dizinleri dışlanır.
+.sp
+.TP 4
+\fB--exclude-vcs-ignores\fR
+VCS’ye özgü ignore dosyalarından okunan kalıplarla eşleşen dosyalar dışlanır. Desteklenen dosyalar: \fBcvsignore, .gitignore, .bzrignore, .hgignore\fR.
+.sp
+.TP 4
+\fB-h\fR, \fB--dereference\fR
+Sembolik bağlar izlenir; bunların hedefindeki dosyalar arşivlenir ve dökümlenir.
+.sp
+.TP 4
+\fB--hard-dereference\fR
+Sabit bağlar izlenir; bunların hedefindeki dosyalar arşivlenir ve dökümlenir.
+.sp
+.TP 4
+\fB-K\fR, \fB--starting-file\fR=\fIÜYE\fR
+Arşive belirtilen \fIÜYE\fRden başlanır.
+.sp
+.TP 4
+\fB--newer-mtime\fR=\fITARİH\fR
+\fITARİH\fRten sonra verileri değişen dosyalar üzerinde çalışır. \fITARİH\fR \fB/\fR veya \fB.\fR ile başlıyorsa bir dosya adı olarak alınır ve o dosyanın değişiklik zamanı tarih olarak kullanlılır.
+.sp
+.TP 4
+\fB--no-null\fR
+Önceki bir \fB--null\fR seçeneğinin etkisini devre dışı bırakır.
+.sp
+.TP 4
+\fB--no-recursion\fR
+Alt dizinler ardışık işlenmez.
+.sp
+.TP 4
+\fB--no-unquote\fR
+Girdi dosyasına ve üye isimlerine tırnak yorumlaması uygulamaz.
+.sp
+.TP 4
+\fB--no-verbatim-files-from\fR
+Bir dosya listesinden okunan her satır, komut satırından verilmiş gibi ele alınır. Yani, baştaki ve sondaki boşluklar kaldırılır ve elde edilen dizge bir tire ile başlıyorsa, \fBtar\fR komut satırı seçeneği olarak kabul edilir.
+.sp
+Bu öntanımlı davranıştır. \fB--verbatim-files-from\fR seçeneğinden sonra kullanılan \fB--no-verbatim-files-from\fR seçeneği ile ilkinin etkisi devre dışı bırakılabilir.
+.sp
+Bu seçenek konumsaldır: \fB--verbatim-files-from\fR seçeneğine veya satır sonu karakterine kadar kendisinden sonra gelen tüm \fB--files-from\fR seçeneklerini etkiler.
+.sp
+\fB--no-null\fR seçeneği tarafından örtük olarak uygulanır.
+.sp
+.TP 4
+\fB--null\fR
+Sonraki \fB-T\fR seçeneklerine boş karakter sonlandırmalı adların kelimesi kelimesine okuma talimatı verir (tire ile başlayan adların özel olarak işlenmesini devre dışı bırakır).
+.sp
+Ayrıca, bkz: \fB--verbatim-files-from\fR
+.sp
+.TP 4
+\fB-N\fR, \fB--newer\fR=\fITARİH\fR, \fB--after-date\fR=\fITARİH\fR
+Yalnızca \fITARİH\fR’ten daha yeni dosyalar saklanır. \fITARİH\fR \fB/\fR veya \fB.\fR ile başlıyorsa bir dosya adı olarak alınır ve o dosyanın değişiklik zamanı tarih olarak kullanlılır.
+.sp
+.TP 4
+\fB--one-file-system\fR
+Arşiv oluşturulurken yerel dosya sisteminde kalınır.
+.sp
+.TP 4
+\fB-P\fR, \fB--absolute-names\fR
+Arşiv oluşturulurken dosya isimlerinin başındaki / karakterleri ayıklanmaz.
+.sp
+.TP 4
+\fB--recursion\fR
+Alt dizinler ardışık işlenir (öntanımlı).
+.sp
+.TP 4
+\fB--suffix\fR=\fISONEK\fR
+Sonek kaldırılmadan önce yedek alınır, normal sonek geçersiz kılınır. \fBSIMPLE_BACKUP_SUFFIX\fR ortam değişkeni tarafından geçersiz kılınmadığı sürece sonek olarak \fB~\fR öntanımlıdır.
+.sp
+.TP 4
+\fB-T\fR, \fB--files-from\fR=\fIDOSYA\fR
+Çıkarılacak veya oluşturulacak isimler \fIDOSYA\fRdan alınır.
+.sp
+Aksi belirtilmedikçe, \fIDOSYA\fR satır sonu karakteri ile ayrılmış bir ad listesi (yani her satırda bir ad) içermelidir. Okunan adlar, komut satırı değiştirgeleri olarak ele alınır. Tırnak kaldırma ve sözcük bölme işlemleri uygulanır ve \fB-\fR ile başlayan her dizge, \fBtar\fR komut satırı seçeneği olarak ele alınır.
+.sp
+Bu davranışın istenmediği noktada, \fB--verbatim-files-from\fR seçeneği kullanılarak devre dışı bırakılabilir.
+.sp
+\fB--null\fR seçeneği \fBtar\fR’a \fIDOSYA\fR içindeki adların satır sonu karakteri yerine boş karakterle sonlanacağını belirtir. söyler. Listenin \fBfind\fR(1) komutunun \fB-print0\fR belirteci ile oluşturulması yararlıdır.
+.sp
+.TP 4
+\fB--unquote\fR
+Dosya ve üye isimlerine tırnak yorumlaması uygulanmaz (öntanımlı).
+.sp
+.TP 4
+\fB--verbatim-files-from\fR
+Bir dosya listesinden elde edilen her satır, tire ile başlasa bile dosya adı olarak ele alınır. Dosya listeleri \fB--files-from\fR (\fB-T\fR) seçeneğiyle sağlanır. Öntanımlı davranış, bir tire ile başlayan adları \fBtar\fR seçenekleri olarak ele almaktır. \fB--verbatim-files-from\fR seçeneği bu davranışı devre dışı bırakır.
+.sp
+Bu seçenek, komut satırında kendisinden sonra gelen tüm \fB--files-from\fR seçeneklerini etkiler. Etkisi \fB--no-verbatim-files-from\fR seçeneği ile geri alınır.
+.sp
+Bu seçenek \fB--null\fR seçeneği tarafından örtük olarak uygulanır.
+.sp
+Ayrıca, bkz: \fB--add-file\fR.
+.sp
+.TP 4
+\fB-X\fR, \fB--exclude-from\fR=\fIDOSYA\fR
+\fIDOSYA\fR içindeki kalıplarla eşleşen dosyalar dışlanır.
+.sp
+.PP
+.sp
+.SS "Dosya ismi dönüşümleri"
+.TP 4
+\fB--strip-components\fR=\fISAYI\fR
+Çıkarma sırasında dosya isimlerinin başından \fISAYI\fR bileşen ayıklanır.
+.sp
+.TP 4
+\fB--transform\fR=\fIİFADE\fR, \fB--xform\fR=\fIİFADE\fR
+Dosya adlarını dönüştürmek için \fBsed replace\fR \fIİFADE\fR kullanılır.
+.sp
+.PP
+.sp
+.SS "Dosya ismi eşleştirme seçenekleri"
+Bu seçenekler hem içerme hem de dışlama kalıplarını etkiler:
+.sp
+.TP 4
+\fB--anchored\fR
+Kalıplar dosya isminin başlangıcı ile eşleşir.
+.sp
+.TP 4
+\fB--ignore-case\fR
+Harf büyüklüğü önemsenmez.
+.sp
+.TP 4
+\fB--no-anchored\fR
+Kalıplar, herhangi bir /’den sonrası ile eşleşir (dışlama için öntanımlıdır).
+.sp
+.TP 4
+\fB--no-ignore-case\fR
+Eşleştirmede harf büyüklüğü önemsenir (öntanımlı).
+.sp
+.TP 4
+\fB--no-wildcards\fR
+Dizgeler kendileri ile eşleşir.
+.sp
+.TP 4
+\fB--no-wildcards-match-slash\fR
+Joker karakterler / ile eşleşmez.
+.sp
+.TP 4
+\fB--wildcards\fR
+Joker karakterler kullanılır (dışlama için öntanımlıdır).
+.sp
+.TP 4
+\fB--wildcards-match-slash\fR
+Joker karakterler / ile eşleşir (dışlama için öntanımlıdır).
+.sp
+.PP
+.sp
+.SS "Bilgilendirme çıktısı"
+.TP 4
+\fB--checkpoint\fR[=\fIN\fR]
+Her \fIN\fR kayıtta bir, ilerleme iletileri gösterilir (10 kayıtta bir öntanımlıdır).
+.sp
+.TP 4
+\fB--checkpoint-action\fR=\fIEYLEM\fR
+Her denetim noktasında \fIEYLEM\fR uygulanır.
+.sp
+.TP 4
+\fB--clamp-mtime\fR
+Dosyanın zamanı yalnızca \fB--mtime\fR ile belirtilenden daha yeni ise değiştirilir.
+.sp
+.TP 4
+\fB--full-time\fR
+Dosya zamanını tam çözünürlükle gösterir.
+.sp
+.TP 4
+\fB--index-file\fR=\fIDOSYA\fR
+Ayrıntılı çıktı \fIDOSYA\fR’ya gönderilir.
+.sp
+.TP 4
+\fB-l\fR \fB--check-links\fR
+Tüm bağlar dökümlenmezse bir ileti gösterir.
+.sp
+.TP 4
+\fB--no-quote-chars\fR=\fIDİZGE\fR
+\fIDİZGE\fRdeki karakterler için tırnak yorumlamasını devre dışı bırakır.
+.sp
+.TP 4
+\fB--quote-chars\fR=\fIDİZGE\fR
+\fIDİZGE\fRdeki karakterlere ek olarak tırnak yorumlaması da uygulanır.
+.sp
+.TP 4
+\fB--quoting-style\fR=\fITARZ\fR
+Dosya ve üye adları için tırnak yorumlama \fITARZ\fRını belirler. \fITARZ\fR için geçerli değerler: \fBliteral, shell, shell-always, c, c-maybe, escape, locale, clocale\fR (sırayla: bire bir, kabuk, daima-kabuk, c, c-olabilir, öncelem, yerel, c yereli).
+.sp
+.TP 4
+\fB-R\fR \fB--block-number\fR
+Her iletiyle birlikte arşivdeki blok numarasını gösterir.
+.sp
+.TP 4
+\fB--show-omitted-dirs\fR
+Listelerken veya çıkartırken arama kriteri ile eşleşmeyen her dizini listeler.
+.sp
+.TP 4
+\fB--show-transformed-names\fR, \fB--show-stored-names\fR
+\fB--strip-components\fR ve \fB--transform\fR seçenekleri ile dönüşümden sonra arşiv ve dosya isimlerini gösterir.
+.sp
+.TP 4
+\fB--totals\fR[=\fISİNYAL\fR]
+Arşivi işledikten sonra toplam bayt sayısını gösterir. \fISİNYAL\fR belirtilmişse, toplam bayt sayısını bu sinyal alındığında gösterir. İzin verilen sinyaller: \fBSIGHUP, SIGQUIT, SIGINT, SIGUSR1, SIGUSR2\fR. \fBSIG\fR öneki belirtilmeyebilir.
+.sp
+.TP 4
+\fB--utc\fR
+Dosya değişiklik zamanlarını UTC’ye göre gösterir.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İşlenen dosyalar ayrıntılı olarak listelenir. Bu seçeneğin komut satırındaki her örneği, ayrıntı düzeyini bir artırır. Azami ayrıntı düzeyi 3’tür. Çeşitli ayrıntı düzeylerinin \fBtar\fR çıktısını nasıl etkilediğine ilişkin ayrıntılı bir açıklama için GNU Tar Kılavuzu, 2.5.1 "--verbose Seçeneği" alt bölümüne bakılabilir
+.sp
+.TP 4
+\fB--warning\fR=\fISÖZCÜK\fR
+Anahtar \fISÖZCÜK\fR ile tanımlanan uyarı iletileri etkinleştirilir veya devre dışı bırakılır. Anahtar \fISÖZCÜK\fR \fBno-\fR öneki ile başlıyorsa ve bir şekilde etkinleştirilmişse iletiler engellenir.
+.sp
+Çoklu \fB--warning\fR iletileri birlikte basılır.
+.sp
+Genel \fBtar\fR işlemlerini etkileyen anahtar \fISÖZCÜK\fRler:
+.sp
+.RS
+.TP 4
+\fBall\fR
+Tüm uyarı iletileri etkin olur. Öntanımlıdır.
+.sp
+.TP 4
+\fBnone\fR
+Tüm uyarı iletileri devre dışı bırakılır.
+.sp
+.TP 4
+\fBfilename-with-nuls\fR
+"%s: dosya ismi boş karakter içeriyor"
+.sp
+.TP 4
+\fBalone-zero-block\fR
+"%s konumunda yalnız sıfır bloğu"
+.sp
+.PP
+.RE
+.IP
+\fBtar --create\fR için uygulanabilen anahtar \fISÖZCÜK\fRler:
+.sp
+.RS
+.TP 4
+\fBcachedir\fR
+%s: %s önbellek dizini etiketi içeriyor; %s"
+.sp
+.TP 4
+\fBfile-shrank\fR
+"%s: Dosya %s bayt küçültüldü; sıfırlarla dolduruldu"
+.sp
+.TP 4
+\fBxdev\fR
+"%s: dosya farklı bir dosya sisteminde; dökümlenmedi"
+.sp
+.TP 4
+\fBfile-ignored\fR
+"%s: Bilinmeyen dosya türü; dosya yok sayıldı"
+.br
+"%s: soket yok sayıldı"
+.br
+"%s: kapı yok sayıldı"
+.sp
+.TP 4
+\fBfile-unchanged\fR
+"%s: dsya değişmedi; dökümlenmedi"
+.sp
+.TP 4
+\fBignore-archive\fR
+"%s: dosya bir arşiv; dökümlenmedi"
+.sp
+.TP 4
+\fBfile-removed\fR
+"%s: okurken dosya silindi"
+.sp
+.TP 4
+\fBfile-changed\fR
+"%s: okurken dosya değişti"
+.sp
+.TP 4
+\fBfailed-read\fR
+Okunamayan dosyalar veya dizinler hakkındaki uyarılar engellenir. Bu anahtar sözcük yalnızca \fB--ignore-failed-read\fR seçeneğiyle birlikte kullanıldığında geçerlidir.
+.sp
+.PP
+.RE
+.IP
+\fBtar --extract\fR için uygulanabilen anahtar \fISÖZCÜK\fRler:
+.sp
+.RS
+.TP 4
+\fBexisting-file\fR
+%s: var olan dosya atlanıyor"
+.sp
+.TP 4
+\fBtimestamp\fR
+"%s: inanılmaz derecede eski zaman damgası %s"
+.br
+"%s: zaman damgası %s, %s saniye gelecekte"
+.sp
+.TP 4
+\fBcontiguous-cast\fR
+"Bitişik dosyalar normal dosyalar olarak çıkarılıyor"
+.sp
+.TP 4
+\fBsymlink-cast\fR
+"Sembolik bağlar sabit bağ olarak çıkarılmaya çalışılıyor.
+.sp
+.TP 4
+\fBunknown-cast\fR
+"%s: Bilinmeyen dosya türü ’%c’, normal dosya olarak çıkarıldı"
+.sp
+.TP 4
+\fBignore-newer\fR
+"Mevcut %s daha yeni veya aynı yaşta"
+.sp
+.TP 4
+\fBunknown-keyword\fR
+"Bilinmeyen genişletilmiş başlık anahtar sözcüğü ’%s’ yok sayılıyor"
+.sp
+.TP 4
+\fBdecompress-program\fR
+İkincil sıkıştırmayı açma uygulamalarını çalıştırmaya çalışırken ortaya çıkan başarısızlıkların ayrıntılı açıklamasını denetler. Bu uyarı öntanımlı olarak devre dışıdır (\fB--verbose\fR seçeneği kullanılmadığı sürece).
+.br
+Bu uyarı kullanılırken elde edilebileceklere yaygın bir örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+$ \fBtar --warning=decompress-program -x -f archive.Z\fR
+tar (child): compress çalıştırılamıyor: Böyle bir dosya veya dizin yok.
+tar (child): gzip deneniyor
+.fi
+.sp
+.RE
+.RE
+.IP
+Yani, \fBtar\fR önce arşivi \fBcompress\fR kullanarak açmayı deniyor ve bu başarısız olduğunda \fBgzip\fR’e geçiyor.
+.sp
+.TP 4
+\fBrecord-size\fR
+"Kayıt uzunluğu = %lu blok"
+.sp
+.PP
+.RE
+.IP
+Artımlı çıkarmayı denetleyen anahtar \fISÖZCÜK\fRler:
+.sp
+.RS
+.TP 4
+\fBrename-directory\fR
+%s: Dizin ismi %s iken değiştirilmiş"
+.br
+%s: Dizin ismi değiştirilmiş"
+.sp
+.TP 4
+\fBnew-directory\fR
+"%s: Dizin yenidir"
+.sp
+.TP 4
+\fBxdev\fR
+"%s: dizin farklı bir aygıt üzerinde: silinmiyor"
+.sp
+.TP 4
+\fBbad-dumpdir\fR
+"Bozuk dumpdir: ’X’ hiç kullanılmadı"
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fB-w\fR, \fB--interactive\fR, \fB--confirmation\fR
+Her eylemde doğrulama ister.
+.sp
+.PP
+.sp
+.SS "Uyumluluk seçenekleri"
+.TP 4
+\fB-o\fR
+Oluşturuken \fB--old-archive\fR ile eşdeğerdir. Çıkartırken \fB--no-same-owner\fR ile eşdeğerdir.
+.sp
+.PP
+.sp
+.SS "Boyut sonekleri"
+.RS 4
+.nf
+\fISonek   Birim        Bayt Eşdeğeri\fR
+  b     Blok         BOYUT x 512
+  B     Kilobayt     BOYUT x 1024
+  c     Bayt         BOYUT
+  G     Gigabayt     BOYUT x 1024^3
+  K     Kilobayt     BOYUT x 1024
+  k     Kilobayt     BOYUT x 1024
+  M     Megabayt     BOYUT x 1024^2
+  P     Petabayt     BOYUT x 1024^5
+  T     Terabayt     BOYUT x 1024^4
+  w     Kelime       BOYUT x 2
+.fi
+.sp
+.RE
+.sp
+.sp
+.SH "ÇIKIŞ DEĞERLERİ"
+\fBtar\fR çıkış kodu, istenen işlemin başarılı bir şekilde gerçekleştirip gerçekleştiremediğini ve gerçekleştirilmemişse ne tür bir hata oluştuğunu gösterir.
+.sp
+.TP 4
+\fB0\fR
+Başarılı sonlanma.
+.sp
+.TP 4
+\fB1\fR
+Bazı dosyalar farklıdır. \fBtar\fR \fB--compare\fR (\fB--diff\fR, \fB-d\fR) komut satırı seçeneğiyle çağrıldıysa, bu kod, arşivdeki bazı dosyaların diskteki benzerlerinden farklı olduğu anlamına gelir. \fBtar\fR’a \fB--create\fR, \fB--append\fR veya \fB--update\fR seçeneklerinden biri verilmişse, bu çıkış kodu, bazı dosyaların arşivlenirken değiştirildiği ve dolayısıyla elde edilen arşivin tam kopyayı içermediği anlamına gelir.
+.sp
+.TP 4
+\fB2\fR
+Ölümcül hata. Yani kurtarılamayan bir hata oluşmuştur.
+.sp
+.PP
+\fBtar\fR tarafından çağrılan bir alt süreç sıfırdan farklı bir çıkış koduyla çıktıysa, \fBtar\fR’ın kendisi de bu kodla çıkar. Bu, örneğin bir sıkıştırma seçeneği (örneğin \fB-z\fR) kullanılmış ve harici sıkıştırma uygulaması başarısız olmuşsa ortaya çıkabilir. Başka bir örnek, uzak bir aygıta yedekleme yaparken \fBrmt\fR hatası oluşmasıdır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBbzip2\fR(1), \fBcompress\fR(1), \fBgzip\fR(1), \fBlzma\fR(1), \fBlzop\fR(1), \fBrmt\fR(8), \fBsymlink\fR(7), \fBxz\fR(1), \fBzstd\fR(1).
+.sp
+\fBtar\fR komutu ile ilgili kapsamlı texinfo belgesi doğrudan \fBinfo tar\fR komutu ile veya info kipinde \fBemacs\fR(1) ile okunabilir.
+.sp
+GNU \fBtar\fR belgelerinin çeşitli biçimlerdeki çevrimiçi kopyaları
+.sp
+.RS 4
+http://www.gnu.org/software/tar/manual
+.sp
+.RE
+adresinde bulunabilir.
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını lütfen <bug-tar@gnu.org> adresine bildirin.
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2013-2021 Free Software Foundation, Inc.
+.br
+Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>
+.br
+Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,144 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "LN" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ln - dosyalar arasında bağ oluşturur
+.sp
+.SH KULLANIM
+.IP \fBln\fR 3
+[\fISEÇENEK\fR]... [\fB-T\fR] \fIHEDEF\fR [\fIBAĞ\fR]
+.IP \fBln\fR 3
+[\fISEÇENEK\fR]... \fIHEDEF\fR...
+.IP \fBln\fR 3
+[\fISEÇENEK\fR]... \fIHEDEF\fR... \fIDİZİN\fR
+.IP \fBln\fR 3
+[\fISEÇENEK\fR]... \fB-t\fR \fIDİZİN HEDEF\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+1. biçimde \fIHEDEF\fR’e \fIBAĞ\fR isminde bağ oluşturur. 2. biçimde, içinde bulunduğunuz dizin içinde \fIHEDEF\fR’in ismi ile aynı isimde bağ oluşturulur. Üçüncü ve dördüncü biçimlerde, her \fIHEDEF\fR’in bağı \fIDİZİN\fR içinde oluşturulur. Öntanımlı olarak sabit bağlar oluşturulur, sembolik bağ yapmak için \fB--symbolic\fR seçeneğini kullanmak gerekir. Sabit bağlar oluşturulurken, \fIHEDEF\fR’ler sistemde bulunmak zorundadır.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB--backup\fR=[\fIKOŞUL\fR]
+Mevcut dosyaların her birinin yedeği oluşturulur.
+.sp
+.TP 4
+\fB-b\fR
+\fB--backup\fR seçeneği ile aynıdır fakat herhangi bir değiştirge almaz.
+.sp
+.TP 4
+\fB-d\fR, \fB-F\fR, \fB--directory\fR
+root kullanıcısının dizinlere sabit bağ oluşturmasını sağlar. (Bilgi: sistem sınırlamalarından dolayı root için bile muhtemelen işlem başarısız olacaktır.)
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Hedefte dosya varsa siler.
+.sp
+.TP 4
+\fB-i\fR, \fB--interactive\fR
+Hedefin silinip silinmeyeceğini sorar.
+.sp
+.TP 4
+\fB-L\fR, \fB--logical\fR
+\fIHEDEF\fR sembolik bağ ise bağ kaldırılır.
+.sp
+.TP 4
+\fB-n\fR, \fB--no-dereference\fR
+Bir dizine sembolik bağ olan \fIBAĞ\fR sanki normal bir dosyaymış gibi ele alır.
+.sp
+.TP 4
+\fB-P\fR, \fB--physical\fR
+Sembolik bağı, sabit bağ haline getirir.
+.sp
+.TP 4
+\fB-r\fR, \fB--relative\fR
+\fB-s\fR ile birlikte, bağ konumuna göreli bağ oluşturur.
+.sp
+.TP 4
+\fB-s\fR, \fB--symbolic\fR
+Sabit bağ değil, sembolik bağ oluşturur.
+.sp
+.TP 4
+\fB-S\fR, \fB--suffix\fR\fI=SONEK\fR
+Belirtilen yedekleme \fISONEK\fR’i kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--target-directory\fR\fI=DİZİN\fR
+Altında bağların oluşturulacağı \fIDİZİN\fR.
+.sp
+.TP 4
+\fB-T\fR, \fB--no-target-directory\fR
+\fIBAĞ\fR normal bir dosya gibi ele alınır.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Bağı oluşturmadan önce dosyanın ismini basar.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini gösterir ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+\fB--suffix\fR seçeneği ile veya \fBSIMPLE_BACKUP_SUFFIX\fR ile belirtilmediği sürece, yedekleme soneki ’\fB~\fR’ dir. Sürüm denetim yöntemi \fBVERSION_CONTROL\fR ortam değişkeni ile veya \fB--backup\fR seçeneği ile seçilebilir. Değerler şunlardır:
+.sp
+.TP 4
+none, off
+Asla yedekleme yapmaz (\fB--backup\fR belirtilmiş olsa bile)
+.sp
+.TP 4
+numbered, t
+Numaralı yedekleme yapılır.
+.sp
+.TP 4
+existing, nil
+Numaralandırılmış yedekler varsa, numaralı, aksi durumda basit yedekleme yapar.
+.sp
+.TP 4
+simple, never
+Daima basit yedekleme yapar.
+.sp
+.PP
+\fB-s\fR ile birlikte kullanıldığında \fB-L\fR ve \fB-P\fR yok sayılır. Aksi takdirde, hedef bir sembolik bağ olduğunda belirtilen son seçenek (öntanımlı \fB-P\fR’yi geçersiz kılarak), sonucu belirler.
+.sp
+.SH "YAZAN"
+Mike Parker ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlink\fR(1), \fBsymlink\fR(1)
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/ln>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) ln invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2003, 2006 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

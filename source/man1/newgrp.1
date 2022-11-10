@@ -1,0 +1,100 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994 Julianne Frances Haugh
+ * Copyright 2000 - 2007 Thomas Kłoczko
+ * Copyright 2007 - 2022 Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "NEWGRP" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+newgrp - yeni gruba oturum açar
+.sp
+.SH KULLANIM
+.IP \fBnewgrp\fR 7
+[-] [\fIgrup\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBnewgrp\fR komutu, oturum açma sırasında mevcut grup kimliğini değiştirmek için kullanılır. İsteğe bağlı - seçeneği verilirse, kullanıcının ortamı, kullanıcı oturum açmış gibi yeniden başlatılır, aksi takdirde mevcut çalışma dizini de dahil olmak üzere mevcut ortam değişmeden kalır.
+.sp
+\fBnewgrp\fR geçerli gerçek grup kimliğini belirtilen \fIgrup\fRa veya grup adı verilmezse \fI/etc/passwd\fR içinde listelenen öntanımlı gruba değiştirir. \fBnewgrp\fR ayrıca \fIgrup\fRu kullanıcının gruplarına da eklemeye çalışır. Kullanıcı root değilse, grup üyesi değilse, parolası yok (kullanıcının \fI/etc/shadow\fR gölgeli parola dosyasında bir girdisi var ama \fI/etc/passwd\fR dosyasında yoksa) ama grup üyesiyse ve grubun parolası varsa, kullanıcıdan parola istenir. Grup parolası boşsa ve kullanıcı gruba üye değilse kullanıcının erişimi reddedilir.
+.sp
+\fI/etc/gshadow\fR dosyasında bu grup için bir girdi varsa, üye listesi ve grup parolası bu dosyadan alınır, aksi takdirde \fI/etc/group\fR dosyasındaki girdiden alınır.
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştiren \fI/etc/login.defs\fR yapılandırma değişkenleri:
+.sp
+.TP 4
+\fBSYSLOG_SG_ENAB\fR (mantıksal)
+\fBsg\fR etkinliğinin "syslog" günlüğünü etkinleştirir.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/passwd\fR
+Kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+Güvenli kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/group\fR
+Grup hesabı bilgileri.
+.sp
+.TP 4
+\fI/etc/gshadow\fR
+Güvenli grup hesabı bilgileri.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBid\fR(1), \fBlogin\fR(1), \fBsu\fR(1), \fBsg\fR(1), \fBgpasswd\fR(1), \fBgroup\fR(5), \fBgshadow\fR(5).
+.sp
+.SH "YAZAN"
+Julianne Frances Haugh, Thomas Kłoczko ve Nicolas François tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,74 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Bzgrep wrapped for bzip2,
+ * adapted from zgrep by Philippe Troin <phil@fifi.org> for Debian GNU/Linux.
+ *
+ * zgrep notice:
+ * zgrep -- a wrapper around a grep program that decompresses files as needed
+ * Adapted from a version sent by Charles Levert <charles@comm.polymtl.ca>
+ *
+ * Copyright (C) 1998, 2002, 2006-2007, 2009-2021 Free Software Foundation, Inc.
+ * Copyright (C) 1993 Jean-loup Gailly
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "BZGREP" 1 "Temmuz 2019" "bzip2 1.0.8" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+bzgrep - belirtilen düzenli ifade için bzip2 sıkıştırmalı dosyalarda grep ile arama yapar
+.br
+bzegrep - belirtilen düzenli ifade için bzip2 sıkıştırmalı dosyalarda egrep ile arama yapar
+.br
+bzfgrep - belirtilen düzenli ifade için bzip2 sıkıştırmalı dosyalarda fgrep ile arama yapar
+.sp
+.SH KULLANIM
+.IP \fBbzgrep\fR 7
+[ \fIgrep_seçenekleri\fR ] [ \fB-e\fR ] \fIşablon\fR \fIdosya\fR ...
+.IP \fBbzegrep\fR 8
+[ \fIegrep_seçenekleri\fR ] [ \fB-e\fR ] \fIşablon\fR \fIdosya\fR...
+.IP \fBbzfgrep\fR 8
+[ \fIfgrep_seçenekleri\fR ] [ \fB-e\fR ] \fIşablon\fR \fIdosya\fR ...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBbzgrep\fR, \fBbzip2\fR ile sıkıştırılmış dosyalar üzerinde \fBgrep\fR çalıştırmak için kullanılır. \fBgrep\fR için geçerli olan bütün seçenekler burada da geçerlidir. \fIdosya\fR belirtilmemişse, standart girdi gerekli ise açıldıktan sonra \fBgrep\fR’e gönderilir. Eğer \fIdosya\fR verilmişse, bu dosyalar gerekli ise açılır ve \fBgrep\fR’e gönderilir.
+.sp
+Şayet \fBbzgrep\fR, \fBbzegrep\fR veya \fBbzfgrep\fR şeklinde çağrılır ise, \fBgrep\fR yerine \fBegrep\fR veya \fBfgrep\fR kullanılır. Eğer \fBGREP\fR ortam değişkeni ayarlanmışsa, \fBbzgrep\fR bu değişkeni \fBgrep\fR komutu olarak kullanır. Örneğin:
+.sp
+.RS 4
+.nf
+\fBsh\fR için:  GREP=fgrep  bzgrep \fIşablon dosyalar\fR
+\fBcsh\fR için: (setenv GREP fgrep; bzgrep \fIşablon dosyalar\fR)
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+Charles Levert tarafından yazılmıştır. Debian GNU/Linux için Philippe Troin tarafından \fBbzip2\fR paketine uyarlanmıştır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBbzdiff\fR(1), \fBbzmore\fR(1), \fBbzmore\fR(1), \fBbzip2\fR(1), \fBgrep\fR(1), \fBgrep\fR(1), \fBgrep\fR(1).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

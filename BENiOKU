@@ -1,14 +1,15 @@
-manpages-tr-2.0.2 hakkında (292 dosya)
+manpages-tr-2.0.3 hakkında (xxx dosya)
 
 Paket içeriği XML belgelerden üretilmiştir.
 Paketi oluşturan kaynak belgeler ve betikler
-https://github.com/TLBP/source/tree/main/source/manpages
+https://github.com/TLBP
 adresinden temin edilebilir.
 
 Paketi kurmak için
-    # make install
+    $ make
+    $ sudo make install
 Paket içeriğini sistemden silmek için
-    # make uninstall
+    $ sudo make uninstall
 
 Paket kurulum uygulamaları ile kurulan paketlerin içerdiği güncel olmayan
 veya tam çevrilmemiş türkçe kılavuz sayfalarından dolayı sorun yaşamamak 
@@ -37,7 +38,7 @@ https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine
 tıklayıp yeni bir konu açarak isteğinizi belirtebilirsiniz.
 
 
-18 Ekim 2022
+9 Kasım 2022
 Nilgün Belma Bugüner
 http://github.com/nilgun
 

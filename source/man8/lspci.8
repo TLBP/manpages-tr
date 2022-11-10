@@ -1,0 +1,311 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ *      The PCI Utilities -- List All PCI Devices
+ *
+ *      Copyright (c) 1997--2020 Martin Mares <mj@ucw.cz>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "LSPCI" 8 "Ocak 2021" "pciutils-3.8.0" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+lspci - bütün PCI aygıtlarını listeler
+.sp
+.SH KULLANIM
+.IP \fBlspci\fR 6
+[\fISEÇENEKLER\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBlspci\fR komutu, sistemdeki bütün PCI veri yolları ve onlara bağlı aygıtlar hakkında bilgi veren bir araçtır.
+.sp
+Ön tanımlı olarak, aygıtların kısa bir listesini gösterir. Daha ayrıntılı bir çıktı veya diğer uygulamalar tarafından ayrıştırılması amaçlanan çıktılar için aşağıda açıklanan seçenekler kullanılır.
+.sp
+Hatalar, PCI aygıt sürücülerinde veya \fBlspci\fR’nin kendisinde bildirilecekse, lütfen "\fBlspci -vvx\fR" veya daha iyisi "\fBlspci -vvxxx\fR" çıktısı eklenebilir (bkz: \fBYETERSİZLİKLER\fR).
+.sp
+Çıktının bazı kısımları, özellikle oldukça ayrıntılı kiplerde, muhtemelen yalnızca deneyimli PCI yazılımcıları tarafından anlaşılabilir. Alanların tam tanımları için PCI belirtimlerine veya \fIheader.h\fR ve \fI/usr/include/linux/pci.h\fR dosyalarına bakılabilir.
+.sp
+PCI yapılandırma alanının bazı bölümlerine erişim, birçok işletim sisteminde root ayrıcalıkları gerektirir, bu nedenle \fBlspci\fR’nin normal kullanıcıların inceleyebileceği özellikleri sınırlıdır. Ancak, \fBlspci\fR, mevcut olduğu kadarını görüntülemek ve diğer tüm bilgileri <erişim reddedildi> metni ile işaretlemek için elinden gelenin en iyisini yapmaya çalışır.
+.sp
+.SH "SEÇENEKLER"
+.SS "Temel görüntüleme seçenekleri"
+.TP 4
+\fB-m\fR
+PCI aygıt verilerini makinenin okuyabileceği biçimde geriye uyumlu olarak dökümler. Ayrıntılar için aşağıya bakınız.
+.sp
+.TP 4
+\fB-mm\fR
+PCI aygıt verilerini makinenin okuyabileceği biçimde betiklerle kolayca ayrıştırılabileck biçimde dökümler. Ayrıntılar için aşağıya bakınız.
+.sp
+.TP 4
+\fB-t\fR
+Bütün veri yolları, köprüler, aygıtlar ve bunlar arasındaki bağlantıları içeren ağaç yapılı bir şema görüntüler.
+.sp
+.PP
+.sp
+.SS "Görüntüleme seçenekleri"
+.TP 4
+\fB-v\fR
+Bütün aygıtlar hakkında oldukça ayrıntılı bilgi verilmesini sağlar.
+.sp
+.TP 4
+\fB-vv\fR
+Çıktı çok ayrıntılı olur ve daha fazla ayrıntı gösterir. Bu seviye, yararlı olduğu düşünülen her şeyi içerir.
+.sp
+.TP 4
+\fB-vvv\fR
+Çıktı daha da ayrıntılı olur ve hiç ilginç görünmese bile ayrıştırılabilen her şey görüntülenir (örneğin, tanımlanmamış bellek bölgeleri).
+.sp
+.TP 4
+\fB-k\fR
+Her aygıtı işleyen çekirdek sürücülerini ve ayrıca o aygıtı yönetebilen çekirdek modüllerini gösterir. Normal çıktılama kipinde \fB-v\fR belirtildiğinde ön tanımlı olarak etkin olur. (Şimdilik yalnızca 2.6 ve üstü Linux çekirdeklerinde çalışmaktadır.)
+.sp
+.TP 4
+\fB-x\fR
+Yapılandırma alanının standart bölümünün onaltılık dökümünü gösterir (CardBus köprüleri için ilk 64 bayt veya 128 bayt).
+.sp
+.TP 4
+\fB-xxx\fR
+Tüm PCI yapılandırma alanının onaltılık dökümünü gösterir. Yapılandırma alanının bazı bölümlerini sıradan bir kullanıcı okumaya çalışırsa birkaç PCI aygıtının çökmesi nedeniyle yalnızca root için kullanılabilir (bu davranış muhtemelen PCI standardını ihlal etmez, ancak en azından çok aptalcadır). Ancak, bu tür aygıtlar nadirdir, bu yüzden fazla endişelenmeye gerek yoktur.
+.sp
+.TP 4
+\fB-xxxx\fR
+PCI-X 2.0 ve PCI Express veri yollarında bulunan genişletilmiş (4096 bayt) PCI yapılandırma alanının onaltılık dökümünü gösterir.
+.sp
+.TP 4
+\fB-b\fR
+Veri yoluna özgü gösterim. Tüm IRQ numaralarını ve adreslerini, çekirdek tarafından görüldüğü gibi değil, PCI veri yolundaki kartlar tarafından görüldüğü gibi gösterir.
+.sp
+.TP 4
+\fB-D\fR
+Daima PCI etki alanı numaralarını gösterir. Ön tanımlı olarak, \fBlspci\fR bunları yalnızca etki alanı 0 olan makinelerde gösterir
+.sp
+.TP 4
+\fB-P\fR
+PCI aygıtlarını veri yolu numarasına göre değil, her köprüden geçen yola göre tanımlar.
+.sp
+.TP 4
+\fB-PP\fR
+Veri yolu numarasının yanı sıra aygıt numarasını da göstererek, PCI aygıtlarını her köprüden geçen yola göre tanımlar.
+.sp
+.PP
+.sp
+.SS "Kimliklerden adları çözümleme seçenekleri"
+.TP 4
+\fB-n\fR
+PCI satıcı ve aygıt kodlarını PCI kimlikleri listesinde aramak yerine numara olarak gösterir.
+.sp
+.TP 4
+\fB-nn\fR
+PCI satıcı ve aygıt kodlarını numara ve ad olarak gösterir.
+.sp
+.TP 4
+\fB-q\fR
+Yerel \fIpci.ids\fR dosyasında bir aygıt bulunamazsa, merkezi PCI kimlikleri veritabanını sorgulamak için DNS’yi kullanır. DNS sorgusu başarılı olursa, sonuç \fI~/.pciids-cache\fR içinde önbelleğe alınır ve \fB-q\fR belirtilmese bile sonraki çalıştırmalarda tanınır. Veritabanı sunucularının aşırı yüklenmesini önlemek için bu seçeneğin yalnızca otomatikleştirilmiş betiklerin içinde kullanılması gerekir.
+.sp
+.TP 4
+\fB-qq\fR
+\fB-q\fR gibidir, farklı olarak yerel önbellek sıfırlanır.
+.sp
+.TP 4
+\fB-Q\fR
+Yerel olarak tanınan girdiler için bile merkezi veritabanını sorgular. Gösterilen girdinin yanlış olma olasılığı varsa bu seçenek kullanılmalıdır.
+.sp
+.PP
+.sp
+.SS "Aygıt seçimi"
+.TP 4
+\fB-s\fR [[[[\fIETKİ_ALANI\fR]:]\fIVERİ_YOLU\fR]:][\fIAYGIT\fR][.[\fIİŞLEV\fR]]
+Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0’dan ffff’ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0’ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0’ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
+.sp
+.TP 4
+\fB-d\fR [\fISATICI\fR]:[\fIAYGIT\fR][:\fISINIF\fR[:\fIARAYÜZ\fR]]
+Yalnızca belirtilen satıcı, aygıt, sınıf kimliği ve yazılım geliştirme arayüzüne sahip aygıtları gösterir. Kimlikler onaltılık olarak verilir ve belirtilmeyebilir veya her ikisi de "herhangi bir değer" anlamına gelen "\fB*\fR" olarak verilebilir. Sınıf kimliği, "herhangi bir rakam" anlamına gelen "\fBx\fR" karakterlerini içerebilir.
+.sp
+.PP
+.sp
+.SS "Diğer seçenekler"
+.TP 4
+\fB-i\fR \fIDOSYA\fR
+\fI/usr/share/misc/pci.ids\fR yerine PCI kimlik listesi olarak belirtilen \fIDOSYA\fR kullanılır.
+.sp
+.TP 4
+\fB-p\fR \fIDOSYA\fR
+Çekirdek modülleri tarafından işlenen PCI kimliklerinin eşlemi olarak belirtilen \fIDOSYA\fR kullanılır. \fBlspci\fR ön tanımlı olarak \fI/lib/modules/kernel_version/modules.pcimap\fR dosyasını kullanır. Yalnızca yeterince yeni modül araçlarına sahip Linux sistemleri için geçerlidir.
+.sp
+.TP 4
+\fB-M\fR
+Yanlış yapılandırılmış köprüler vb. arkasındakiler de dahil olmak üzere tüm PCI aygıtlarında kapsamlı bir tarama gerçekleştiren veri yolu eşleme kipini devreye sokar. Bu seçenek yalnızca, genellikle root ayrıcalıkları gerektiren doğrudan donanım erişim kipinde anlamlı sonuçlar verir. Ön tanımlı olarak, veri yolu eşleyicisi etki alanını tarar. Farklı bir etki alanı seçmek için \fB-s\fR seçeneği kullanılabilir.
+.sp
+.TP 4
+\fB--version\fR
+\fBlspci\fR sürümünü gösterir. Bu seçenek tek başına kullanılmalıdır.
+.sp
+.PP
+.sp
+.SS "PCI erişim seçenekleri"
+PCI araçları, PCI aygıtları ile haberleşmek için PCI kütüphanesini kullanır (Bkz: \fBpcilib\fR(7)). Davranışı etkilemek için aşağıdaki seçenekler kullanılabilir:
+.sp
+.TP 4
+\fB-A\fR \fIYÖNTEM\fR
+Kütüphanede, PCI donanımına erişmek için çeşitli yöntemler bulunmaktadır. Ön tanımlı olarak, kullanılabilir ilk erişim yöntemini kullanır, ancak bu seçenekle, bu davranış geçersiz kılınabilir. Kullanılabilir yöntemlerin listesi ve açıklamaları için \fB-A help\fR çıktısından yaralanılabilir.
+.sp
+.TP 4
+\fB-O\fR \fIİSİM=DEĞER\fR
+Kitaplığın davranışı, birkaç değişkenle denetlenir. Bu seçenekle, herhangi bir değişkenin değeri ayarlanabilir. Bilinen değişken isimlerinin listesi ve bunların ön tanımlı değerleri için \fB-O help\fR çıktısından yaralanılabilir.
+.sp
+.TP 4
+\fB-H1\fR
+Intel yapılandırma mekanizması 1 üzerinden doğrudan donanım erişimi kullanılır. \fB-A intel-conf1\fR seçeneği için bir kısayoldur.
+.sp
+.TP 4
+\fB-H2\fR
+Intel yapılandırma mekanizması 2 üzerinden doğrudan donanım erişimi kullanılır. \fB-A intel-conf2\fR seçeneği için bir kısayoldur.
+.sp
+.TP 4
+\fB-F\fR \fIDOSYA\fR
+Gerçek donanıma erişmek yerine, aygıtların listesini ve yapılandırma kayıtlarının değerlerini daha önceki bir \fBlspci –x\fR komutu tarafından üretilmiş dosyadan okur. Bu veri kullanıcı tarafından sağlanan hata raporlarının incelenmesinde çok yararlıdır, çünkü donanım yapılandırması, kullanıcıyı daha fazla döküm istekleriyle rahatsız etmeden istenen şekilde görüntülenebilir.
+.sp
+.TP 4
+\fB-G\fR
+Kütüphanenin hata ayıklama seviyesini artırır (bütün sistemlerde).
+.sp
+.PP
+.sp
+.sp
+.SH "MAKİNE TARAFINDAN OKUNABİLEN ÇIKTI"
+\fBlspci\fR çıktısının otomatik olarak işlenmesi düşünülüyorsa, bu bölümde açıklanan makine tarafından okunabilen çıktı biçimlerinden (\fB-m\fR, \fB-vm\fR, \fB-vmm\fR) biri kullanılabilir. Diğer tüm biçemlerin \fBlspci\fR sürümleri arasında değişikliğe uğrama olasılığı vardır.
+.sp
+Tüm sayılar daima onaltılık tabanda basılır. Adlar yerine sayısal kimliklerle çalışılmak istenirse \fB-n\fR seçeneği eklenebilir.
+.sp
+.SS "Basit biçem (-m)"
+Basit biçemde, her aygıt, bir kabuk betiğine geçmeye uygun değiştirgelerden oluşan tek bir satırda tanımlanır, yani, boşluklarla ayrılmış değerler, gerekirse tırnak içine alınır veya öncelenir. Değiştirgelerden bazıları konumsaldır: yuva, sınıf, satıcı adı, aygıt adı, alt sistem satıcı adı ve alt sistem adı (aygıtın alt sistemi yoksa son ikisi boştur); kalan değiştirgeler aşağıdakiler gibi birer seçenektir:
+.sp
+.TP 4
+\fB-r\fR\fISAYI\fR
+Düzeltme sürümü.
+.sp
+.TP 4
+\fB-p\fR\fIARAYÜZ\fR
+Yazılım geliştirme arayüzü.
+.sp
+.PP
+Konumsal değiştirge ve seçeneklerin göreli sırası tanımlanmamıştır. Gelecekteki sürümlerde yeni seçenekler eklenebilir, ancak daima seçenekten herhangi bir boşlukla ayrılmayan tek bir değiştirgeleri olacaktır, bu nedenle tanınmazlarsa kolayca göz ardı edilebilir.
+.sp
+.SS "Ayrıntılı kip (-vmm)"
+Ayrıntılı çıktı, boş satırlarla ayrılmış bir dizi kayıttır. Her kayıt, her satırda tek bir "\fIETİKET DEĞER\fR" çifti içeren bir dizi satırla tek bir aygıtı tanımlar. \fIETİKET\fR ve \fIDEĞER\fR, tek bir sekme karakteriyle ayrılır. Ne kayıtlar ne de bir kayıt içindeki satırlar belirli bir sıradadır. Etiketler büyük/küçük harfe duyarlıdır.
+.sp
+Aşağıdaki etiketler tanımlıdır:
+.sp
+.TP 4
+\fBSlot\fR
+Aygıtın bulunduğu yuvanın adı ([\fIETKİ_ALANI\fR:]\fIVERİ_YOLU:AYGIT.İŞLEV\fR). Bu, daima her kaydın ilk etiketidir.
+.sp
+.TP 4
+\fBClass\fR
+Sınıf adı.
+.sp
+.TP 4
+\fBVendor\fR
+Satıcı adı.
+.sp
+.TP 4
+\fBDevice\fR
+Aygıt adı.
+.sp
+.TP 4
+\fBSVendor\fR
+Alt sistem satıcısının adı (seçimlik).
+.sp
+.TP 4
+\fBSDevice\fR
+Alt sistem adı (seçimlik).
+.sp
+.TP 4
+\fBPhySlot\fR
+Aygıtın bulunduğu fiziksel yuva (seçimlik, yalnız Linux için).
+.sp
+.TP 4
+\fBRev\fR
+Düzeltme sürümü (seçimlik)
+.sp
+.TP 4
+\fBProgIf\fR
+Yazılım geliştirme arayüzü (seçimlik).
+.sp
+.TP 4
+\fBDriver\fR
+Aygıtın çekirdekteki sürücüsü (seçimlik, yalnız Linux için).
+.sp
+.TP 4
+\fBModule\fR
+Aygıtı yönetme yeteneği olduğunu bildiren çekirdek modülü (seçimlik, yalnız Linux için).
+.sp
+.TP 4
+\fBNUMANode\fR
+Aygıtın bağlı olduğu NUMA düğümü (seçimlik, yalnız Linux için).
+.sp
+.TP 4
+\fBIOMMUGroup\fR
+Aygıtın parçası olduğu IOMMU grubu (seçimlik, yalnız Linux için).
+.sp
+.PP
+Gelecekteki sürümlerde yeni etiketler eklenebilir, bu nedenle tanınmayan etiketlerin sessizce görmezden gelinmesi gerekir.
+.sp
+.SS "Geriye uyumlu ayrıntılı kip (-vm)"
+Bu kipte, \fBlspci\fR eski sürümleriyle mükemmel bir şekilde uyumlu olmaya çalışır. Normal ayrıntılı biçemle hemen hemen aynıdır, ancak \fBDevice\fR etiketi hem kart yuvası hem de aygıt adı için kullanılır, bu nedenle tek bir kayıtta iki kez görünür. Bu biçemin yeni kodlarda kullanımından kaçınılmalıdır.
+.sp
+.sp
+.SH "İLGİLİ DOSYALAR"
+.SS "/usr/share/misc/pci.ids"
+Bilinen bütün PCI kimliklerinin listesi (satıcılar, aygıtlar, sınıflar ve altsınıflar). https://pci-ids.ucw.cz/ adresinde sürdürülmektedir. En son sürümü indirmek için \fBupdate-pciids\fR aracı kullanılabilir.
+.sp
+.SS "/usr/share/misc/pci.ids.gz"
+\fBlspci\fR sıkıştırma desteği ile derlenmişse, bu dosya \fIpci.ids\fR’den önce denenir.
+.sp
+.SS "~/.pciids-cache"
+DNS sorgu kipinde bulunan tüm kimlikler bu dosyada önbelleğe alınır.
+.sp
+.sp
+.SH "YETERSİZLİKLER"
+Bazen, \fBlspci\fR, yapılandırma kayıtlarının kodunu tamamen çözemez. Bu genellikle yazarlar için yeterli belge bulunmadığında olur. Bu gibi durumlarda, söylenecek daha fazla şey olabileceğini belirtmek için en azından <?> işaretini basar. Ayrıntıları biliyorsanız, yamalar elbette memnuniyetle karşılanacaktır.
+.sp
+Genişletilmiş yapılandırma alanına erişim şu anda yalnızca \fIlinux_sysfs\fR tarafından desteklenmektedir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBsetpci\fR(8), \fBpci.ids\fR(5), \fBupdate-pciids\fR(8), \fBpcilib\fR(7).
+.sp
+.SH "YAZAN"
+Linux PCI Araçlarının bakımı Martin Mares tarafından yürütülmektedir.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

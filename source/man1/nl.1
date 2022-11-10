@@ -1,0 +1,138 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "NL" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+nl - dosya satırlarını numaralar
+.sp
+.SH KULLANIM
+.IP \fBnl\fR 3
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Satır başlarına satır numarası koyarak her \fIDOSYA\fRyı standart çıktıya yazdırır.
+.sp
+\fIDOSYA\fR adı verilmemişse veya - olarak verilmişse, standart girdiden okur.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-b\fR, \fB--body-numbering=\fR\fITARZ\fR
+Satırlar numaralanırken \fITARZ\fR kullanılır.
+.sp
+.TP 4
+\fB-d\fR, \fB--section-delimiter=\fR\fIkk\fR
+Mantıksal sayfaları ayırırken \fIkk\fR kullanılır.
+.sp
+.TP 4
+\fB-f\fR, \fB--footer-numbering=\fR\fITARZ\fR
+Dipnot satırları numaralanırken \fITARZ\fR kullanılır.
+.sp
+.TP 4
+\fB-h\fR, \fB--header-numbering=\fR\fITARZ\fR
+Başlık satırları numaralanırken \fITARZ\fR kullanılır.
+.sp
+.TP 4
+\fB-i\fR, \fB--line-increment=\fR\fISAYI\fR
+Satır numarası artış miktarı.
+.sp
+.TP 4
+\fB-l\fR, \fB--join-blank-lines=\fR\fISAYI\fR
+\fISAYI\fR boş satırlık gruplar bir satır sayılır.
+.sp
+.TP 4
+\fB-n\fR, \fB--number-format=\fR\fIBİÇEM\fR
+Satır numaralarını \fIBİÇEM\fR’e göre yazar.
+.sp
+.TP 4
+\fB-p\fR, \fB--no-renumber\fR
+Bölümlerde satır numaralarını baştan başlatmaz.
+.sp
+.TP 4
+\fB-s\fR, \fB--number-separator=\fR\fIDİZGE\fR
+Satır numarasının ardına \fIDİZGE\fR ekler (mümkünse).
+.sp
+.TP 4
+\fB-v\fR, \fB--starting-line-number=\fR\fISAYI\fR
+Her bölümün ilk satır numarası.
+.sp
+.TP 4
+\fB-w\fR, \fB--number-width=\fR\fISAYI\fR
+Satır numarası genişliğini \fISAYI\fR yapar.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+Aksi belirtilmedikçe öntanımlı olarak kullanılan seçenekler: \fB-bt -d\fR’\\:’ \fB-fn -hn -i1 -l1 -n\fR’rn’ \fB-s\fR<TAB> \fB-v1 -w6\fR
+.sp
+\fIKK\fR, mantıksal sayfaları ayırmak için kullanılan iki ayraç karakteridir. İkinci karakter verilmemişse : kabul edilir. GNU eklentisi olarak iki karakterden fazla karakter belirtmek mümkün kılınmıştır, ayrıca bölüm eşleşmesini iptal etmek için boş dizge de belirtilebilir (\fB-d\fR’ ’).
+.sp
+.SS "TARZ şunlardan biri olmalıdır:"
+.TP 4
+a
+bütün satırları numaralandırır
+.sp
+.TP 4
+t
+sadece boş olmayan satırları numaralandırır
+.sp
+.TP 4
+p\fIİFADE\fR
+sadece \fIİFADE\fR düzenli ifadesi ile eşleşen satırları numaralandırır
+.sp
+.PP
+.sp
+.SS "BİÇEM şunlardan biri olmalıdır:"
+.TP 4
+ln
+sola dayalı yazdırır, numaraların başlarına sıfır koymaz
+.sp
+.TP 4
+rn
+sağa dayalı yazdırır, numaraların başlarına sıfır koymaz
+.sp
+.TP 4
+rz
+sağa dayalı yazdırır, numaraların başlarına sıfır koyar
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+Scott Bartram ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/nl>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) nl invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,112 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1997,        Guy Maor
+ * Copyright 1999 - 2000, Marek Michałkiewicz
+ * Copyright 2002 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2013, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.TH "VIPW" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+vipw - parola, veya gölge-parola dosyasını düzenler
+.br
+vigr - grup veya gölge-grup dosyasını düzenler
+.sp
+.SH KULLANIM
+.IP \fBvipw\fR 5
+[\fIseçenekler\fR]
+.IP \fBvigr\fR 5
+[\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBvipw\fR ve \fBvigr\fR komutu, sırasıyla \fI/etc/passwd\fR ve \fI/etc/group\fR dosyalarını düzenler. -s seçeneğiyle bu dosyaların, sırasıyla \fI/etc/shadow\fR ve \fI/etc/gshadow\fR gölge sürümlerini düzenler. Komutlar, dosya bozulmasını önlemek için uygun kilitleri ayarlar. Bir düzenleyici aranırken, önce \fBVISUAL\fR ortam değişkeni, ardından \fBEDITOR\fR ortam değişkeni ve son olarak da öntanımlı düzenleyici olarak \fBvi\fR(1) denenecektir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-g\fR, \fB--group\fR
+\fI/etc/group\fR veritabanını düzenler.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-p\fR, \fB--passwd\fR
+\fI/etc/passwd\fR veritabanını düzenler.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-s\fR, \fB--shadow\fR
+Parola ve grup dosyalarının \fI/etc/shadow\fR ve \fI/etc/gshadow\fR gölge sürümlerini düzenler.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/etc/group\fR
+grup bilgileri
+.sp
+.TP 4
+\fI/etc/passwd\fR
+kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/shadow\fR
+güvenli kullanıcı hesabı bilgileri
+.sp
+.TP 4
+\fI/etc/gshadow\fR
+güvenli grup bilgileri
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBvi\fR(1), \fBgroup\fR(5), \fBgshadow\fR(5), \fBpasswd\fR(5), \fBshadow\fR(5).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

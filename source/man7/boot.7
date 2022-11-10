@@ -1,0 +1,117 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Written by Oron Peled <oron (at) actcom.co.il>.
+ * May be distributed subject to the GPL.
+ *
+ * I tried to be as much generic in the description as possible:
+ *   - General boot sequence is applicable to almost any
+ *     OS/Machine (DOS/PC, Linux/PC, Solaris/SPARC, CMS/S390)
+ *   - kernel and init(8) is applicable to almost any Unix/Linux
+ *   - boot scripts are applicable to SYSV-R4 based Unix/Linux
+ *
+ *  Modified 2004-11-03 patch from Martin Schulze (joey@infodrom.org)
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "BOOT" 7 "Mart 2015" "Linux man-pages 5.10" ">Linux Yazılımcısının Kılavuzu"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+boot - Genel olarak açılış işlemleri
+.sp
+.SH "AÇIKLAMA"
+Açılış işlemleri sistemden sisteme değişiklik gösterirse de genellikle beş adımda incelenebilir:
+.br
+1. donanımsal açılış
+.br
+2. önyükleme
+.br
+3. çekirdeğin yüklenmesi
+.br
+4. init ve inittab
+.br
+5. açılış betikleri
+.sp
+.SS "Donanım açılışı"
+Makinayı açıldıktan veya yeniden başlatıldıktan sonra denetim salt okunur bellekte bulunan (genellikle bu bir PROM’dur) bir yazılıma devredilir. PC’lerde bu yazılım genellikle \fBBIOS\fR (bayos okunur) olarak bilinir.
+.sp
+Bu yazılım makina üzerinde bir temel sınama yaptıktan sonra gerekli değiştirgeleri okumak için oynak olmayan (non-volatile) belleğe erişir. Bu bellek PC’lerde pille beslenen bir CMOS bellektir ve \fBCMOS\fR (simos okunur) adıyla bilinir. PC dünyası dışında ise genellikle \fBNVRAM\fR (Non-Volatile RAM) olarak bilinir.
+.sp
+NVRAM üzerinde saklanan değiştirgeler sistemden sisteme değişiklik gösterir, fakat en azından donanım açılış yazılımı, açılışın yapılacağı aygıtı ya da algılanması gereken olası açılış aygıtlarını bilmek zorundadır.
+.sp
+Donanım açılış adımı ile açılış aygıtına erişildikten sonra, işletim sistemini yükleyecek olan önyükleyici yazılımı yüklenir. Bu yazılım açılış aygıtının belli bir yerinde bulunur ve denetim bu yazılıma aktarılır.
+.sp
+.TP 4
+\fBBilgi:\fR
+Burada ağdan açılış adımlarını açıklamayacağız. Bu konu ile ilgileniyorsanız arama sözcükleriniz şunlar olabilir: DHCP, TFTP, PXE, Etherboot.
+.sp
+.PP
+.sp
+.SS "Önyükleyici"
+Önyükleyicinin asıl görevi disk üzerinde çekirdeğin yerini belirlemek, onu yükleyip çalıştırmaktır. Çoğu önyükleyici başka çekirdeklerin belirtilmesine (son derlediğiniz çekirdek çalışmazsa öncekinin yüklenmesini sağlayabilirsiniz) ve bu çekirdeklere isteğe bağlı değiştirgelerin aktarılmasına imkan veren etkileşimli bir arayüze sahiptir.
+.sp
+PC’lerde önyükleyici açılış aygıtının ilk sektöründe bulunur. Bu sektör Asıl Önyükleme Kaydı (\fBMBR\fR - Master Boot Record) olarak bilinir.
+.sp
+Çoğu sistemde bazı kısıtlamalardan dolayı bu önyükleyici çok sınırlanır. PC dışındaki sistemlerde bile boyut ve önyükleyicinin karmaşıklığıyla ilgili sınırlamalar vardır. Fakat PC’lerde MBR’ın boyutu (512 bayttır ve disk bölümleme tablosu da buradadır) önyükleyicinin bu alana deyim yerindeyse tıkıştırılmasını gerektirir.
+.sp
+Diğer yandan, çoğu işletim sistemi birincil önyükleyicinin ardından disk bölümünün belli bir yerinde bulunan ikincil bir önyükleyiciyi çalıştırır.
+.sp
+Linux işletim sisteminin önyükleyicisi normalde \fBlilo\fR(8) ya da \fBgrub\fR(8)’dır. Her ikisi de ya ikincil yükleyiciyle ya da bir parçası MBR içinde diğer parçası kök disk bölümünde bulunan iki parçalı bir önyükleyici olarak kurulur.
+.sp
+.SS "Çekirdeğin Yüklenmesi"
+Çekirdek yüklendiğinde aygıtları (sürücüleri üzerinden) ilklendirir, takas alanını etkinleştirir (günümüz çekirdeklerinde \fBkswapd\fR olarak bilinen bir çekirdek sürecidir) ve kök dosya sistemini (/) bağlar.
+.sp
+Çekirdeğe bu etkinliklerle ilgili olarak bazı değiştirgeler aktarılabilir (örneğin kök dosya sistemi olarak başka bir disk bölümünü belirtebilirsiniz). Bu tür Linux değiştirgeleri ile ilgili daha ayrıntılı bilgi için \fBbootparam\fR(7) kılavuzuna bakınız.
+.sp
+Bundan sonra çekirdek sadece, süreç kimliği 1 olan ilk süreci (kullanıcı tarafı) çalıştırır. Çekirdek kendisine verilmiş değiştirgelerden işine yaramayanları aktararak \fI/sbin/init\fR yazılımını çalıştırır.
+.sp
+.SS "init ve inittab"
+\fBinit\fR çalışmaya başladığında ilk olarak \fI/etc/inittab\fR dosyasında bulunan yönergeleri okur. Bu dosya farklı çalışma seviyeleri ile bu çalışma seviyelerinde çalıştırılacak komutlara ilişkin bilgiler içerir.
+.sp
+Bu, sistem yöneticisine belli hizmetlerin ilişkilendirilebildiği farklı çalışma seviyeleri ile (örn: \fBS\fR tek kullanıcılı kiptir, ağ hizmetleri için \fB2\fR gibi) kolayca yönetilebilen bir yapı sunar. Sistem yöneticisi çalışma seviyesini \fBinit\fR(8) ile değiştirebilir ve o anki çalışma seviyesini \fBrunlevel\fR(8) ile sorgulayabilir.
+.sp
+Hizmetlerin başlatılması ve durdurulması bu dosyayı düzenleyerek yapılmaz. \fI/etc/inittab\fR içindeki veriler, belirli çalışma seviyelerinde çalıştırılacak ya da durdurulacak hizmetlerin betiklerinin bulunduğu yere denetimi aktarmakta kullanılır.
+.sp
+.SS "Açılış betikleri"
+.TP 4
+\fBBilgi:\fR
+Aşağıdaki açıklamalar sadece SYSV-R4 temelli sistemlere uygulanır. Bunlar ticari Unix’ler ile bazı Linux dağıtımlarıdır. Bazı sistemler (Slackware Linux, FreeBSD, OpenBSD) açılış betiklerinin düzenlenmesinde biraz daha farklı yapılar kullanır.
+.sp
+.PP
+Yönetilen her hizmet (posta sunucusu, nfs sunucusu, cron, vs.) için belirli bir dizinde (çoğu Linux sürümünde \fI/etc/init.d\fR dizinidir) bulunan tek bir betik vardır. Bu betiklerin her biri tek bir değiştirge kabul eder. Bunlar genel olarak üzerinde anlaşma sağlanmış belirli sözcüklerdir. Örneğin ’start’ sözcüğü hizmetin başlatılmasını, ’stop’ ise durdurulmasını sağlarken ’restart’ ile hizmet önce durdurulur ardından başlatılır, ’status’ ile hizmetin durmu hakkında bilgi alınır. Betikler değiştirgesiz çalıştırıldığında kullanılabilecek değiştirgelerin listesini gösterir.
+.sp
+.SS "Çalışma seviyelerine özel dizinler"
+Hizmetlerin belirli çalışma seviyelerinde çalıştırılması, durdurulması ve çalıştırılma sıralarının belirlenmesi için özel dizinler vardır. Bunlar normalde \fB/etc/rc[0-6S].d\fR dizinleridir. Bu dizinlerin her birinde \fI/etc/init.d\fR dizininde bulunan betiklere sembolik bağlar bulunur.
+.sp
+Bir birincil betik (genellikle \fI/etc/rc\fR) \fBinittab\fR(5) betiğinden çağrılır ve bu betik çalışma seviyesi dizinlerindeki sembolik bağlar üzerinden hizmet betiklerini çalıştırır. Betiklerin sembolik bağ isimlerinden ’S’ ile başlayanlar ’start’ değiştirgesi ile (hizmeti başlatmak için), ’K’ ile başlayanlar ise ’stop’ değiştirgesi ile (hizmeti durdurmak için) çalıştırılır.
+.sp
+Aynı çalışma seviyesinde betiklerin hangi sırada çalıştırılacaklarını belirlemek için sembolik bağ isimleri sıra numaraları içerir. Bu numaradan sonra da çalıştırılacak hizmetin ismi gelir. Örneğin, \fI/etc/rc2.d/S80sendmail\fR ile sendmail 2. çalışma seviyesinde başlatılır. Ancak bu, \fI/etc/rc2.d/S12syslog\fR’dan sonra ve \fI/etc/rc2.d/S90xfs\fR’den önce çalıştırılır.
+.sp
+Çalışma seviyeleri ve açılış sırası bu bağlar sayesinde kolayca yönetilebilir. Bir çok Linux dağıtımı bu işlemi daha da kolaylaştıran araçlarla gelir (örn, \fBchkconfig\fR(8).
+.sp
+.SS "Sistemin açılışta yapılandırılması"
+Artalanda başlatılan süreçler genellikle isteğe bağlı bazı değiştirgeler ve komut satırı seçenekleri kabul ederler. Sistem yöneticilerinin bu değiştirgeleri betiklere dokunmadan daha kolay düzenleyebilmeleri için süreçlerin kendilerine ait yapılandırma dosyaları vardır. Bunların yerleri dağıtımlara göre değişir. Örneğin eski Red Hat sistemlerinde bu dosyalar \fI/etc/sysconfig\fR dizininde bulunurdu.
+.sp
+Eski Unix’lerde bunlar komut satırı seçenekleri iken günümüz Linux sistemlerinde (ve HPUX’de) bu dosyalar kabuk değişkenlerini içerir. \fI/etc/init.d\fR dizininde bulunan betikler bu değişkenlerin değerlerini kullanır.
+.sp
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fI/etc/init.d/\fR, \fI/etc/rc[S0-6].d/\fR, \fI/etc/sysconfig/\fR
+.sp
+.SH "İLGİLİ BELGELER"
+\fBinit\fR(1), \fBsystemd\fR(1), \fBinittab\fR(5), \fBbootparam\fR(7), \fBbootup\fR(7), \fBrunlevel\fR(8), \fBshutdown\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2003, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

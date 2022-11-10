@@ -1,0 +1,205 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * This man-page is Copyright (C) 1997 John S. Kallal
+ *
+ * Permission is granted to make and distribute verbatim copies of this
+ * manual provided the copyright notice and this permission notice are
+ * preserved on all copies.
+ *
+ * Permission is granted to copy and distribute modified versions of this
+ * manual under the conditions for verbatim copying, provided that the
+ * entire resulting derived work is distributed under the terms of a
+ * permission notice identical to this one
+ *
+ * Since the Linux kernel and libraries are constantly changing, this
+ * manual page may be incorrect or out-of-date.  The author(s) assume no
+ * responsibility for errors or omissions, or for damages resulting from
+ * the use of the information contained herein.  The author(s) may not
+ * have taken the same level of care in the production of this manual,
+ * which is licensed free of charge, as they might when working
+ * professionally.
+ *
+ * Formatted or processed versions of this manual, if unaccompanied by
+ * the source, must acknowledge the copyright and author(s) of this work.
+ *
+ * If the you wish to distribute versions of this work under other
+ * conditions than the above, please contact the author(s) at the following
+ * for permission:
+ *
+ *  John S. Kallal -
+ *     email: <kallal@voicenet.com>
+ *     mail: 518 Kerfoot Farm RD, Wilmington, DE 19803-2444, USA
+ *     phone: (302)654-5478
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "INITRD" 4 "Mart 2019" "Linux man-pages 5.10" ">Özel Dosyalar"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+initrd - önyükleyici ilklendirmeli RAM disk
+.sp
+.SH "YAPILANDIRMA"
+\fI/dev/initrd\fR aygıtı salt-okunur olup büyük aygıt numarası 1, küçük aygıt numarası 250’dir. \fI/dev/initrd\fR genellikle 0400 izinleriyle (sadece root için okuma izni) root:disk sahipliğinde bir dosyadır. Linux sisteminde \fI/dev/initrd\fR aygıtı yoksa şu komutlarla oluşturulabilir:
+.sp
+.RS 4
+.nf
+mknod -m 400 /dev/initrd b 1 250
+chown root:disk /dev/initrd
+.fi
+.sp
+.RE
+Ayrıca, \fI/dev/initrd\fR aygıtının kullanılabilmesi için Linux çekirdeği hem "RAM disk" ve hem de "Initial RAM disk" desteğini gömülü olarak içermelidir (yani çekirdek \fBCONFIG_BLK_DEV_RAM=y\fR ve \fBCONFIG_BLK_DEV_INITRD=y\fR seçenekleri ile derlenmiş olmalıdır). \fI/dev/initrd\fR aygıtı kullanılırken RAM disk sürücüsü modül olarak yüklenemez.
+.sp
+.SH "AÇIKLAMA"
+\fI/dev/initrd\fR özel dosyası salt-okunur blok aygıtıdır. \fI/dev/initrd\fR aygıtı çekirdek başlatılmadan önce ön yükleyici tarafından ilklendirilen (yüklenen) bir RAM disktir. Çekirdek iki dönemden oluşan açılış süreci için \fI/dev/initrd\fR blok aygıtının içeriğini kullanabilir.
+.sp
+Açılış işleminin ilk döneminde çekirdek çalışır ve \fI/dev/initrd\fR (önyükleyici tarafından ilklendirilmiş RAM disk) içeriğinden başlangıç kök dosya sistemini bağlar. İkinci dönemde ise bu başlangıç kök dosya sisteminin içeriğinden ek sürücüler veya diğer modüller yüklenir. Ek modüller yüklendikten sonra yeni bir kök dosya sistemi (yani, normal kök dosya sistemi) farklı bir aygıttan bağlanır.
+.sp
+.SS "Açılış işlemi"
+\fIinitrd\fR ile açılış sırasında sistem şöyle yüklenir:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Önyükleyici çekirdeği ve \fI/dev/initrd\fR’nin içeriğini belleğe yükler.
+.IP 2. 3
+Çekirdek çalışmaya başlayınca, çekirdek \fI/dev/initrd\fR aygıtının sıkıştırmasını çözüp içeriğini \fI/dev/ram0\fR aygıtına kopyaladıktan sonra \fI/dev/initrd\fR tarafından kullanılan belleği serbest bırakır.
+.IP 3. 3
+Çekirdek, başlangıç kök dosya sistemi olarak \fI/dev/ram0\fR’ı oku-yaz erişimiyle bağlar.
+.IP 4. 3
+İstenen normal kök dosya sistemi zaten başlangıç kök dosya sistemi ise (yani \fI/dev/ram0\fR) çekirdek son açılış adımına atlar.
+.IP 5. 3
+Başlangıç kök dosya sisteminde \fB/linuxrc\fR çalıştırılabilir dosyası varsa, \fB/linuxrc\fR 0 kullanıcı kimliği ile çalıştırılır. (\fB/linuxrc\fR dosyası çalıştırılabilirlik iznine sahip olmalıdır. \fB/linuxrc\fR dosyası betik veya geçerli, çalıştırılabilir bir dosya olabilir.)
+.IP 6. 3
+\fB/linuxrc\fR çalıştırılmazsa ya da \fB/linuxrc\fR sonlandığı zaman normal kök dosya sistemi bağlanır. (Başlangıç kök dosya sistemine bağlanmış dosya sistemleriyle \fB/linuxrc\fR çıkış yaparsa çekirdeğin davranışı \fIBELİRSİZDİR\fR. (Çekirdeğin geçerli davranışı için \fBEK BİLGİ\fR bölümüne bakınız.)
+.IP 7. 3
+Normal kök dosya sisteminde \fI/initrd\fR dizini varsa, \fI/dev/ram0\fR, \fI/\fR dizininden \fI/initrd\fR dizinine taşınır. Aksi takdirde, \fI/initrd\fR dizini yoksa, \fI/dev/ram0\fR sistemden ayrılır. (\fI/dev/ram0\fR, \fI/\fR dizininden \fI/initrd\fR dizinine taşındığı zaman sistemden ayrılmaz ve böylece \fI/dev/ram0\fR üzerinde çalışmakta olan süreçler çalışmaya devam edebilir.) Normal kök dosya sisteminde \fI/initrd\fR dizini yoksa ve \fB/linuxrc\fR sonlandığı zaman \fI/dev/ram0\fR üzerinde hala çalışan süreçler varsa çekirdeğin davranışı \fIBELİRSİZDİR\fR. (Çekirdeğin geçerli davranışı için \fBEK BİLGİ\fR bölümüne bakınız.)
+.IP 8. 3
+Normal kök dosya sistemi üzerinde olağan açılış işlemi (yani \fB/sbin/init\fR çağrısı) uygulanır.
+.sp
+.RE
+.PD 0
+.sp
+.SS "Seçenekler"
+Aşağıdaki önyükleyici seçenekleri \fBinitrd\fR ile kullanıldığı zaman çekirdeğin açılış işlemi etkilenir:
+.sp
+.TP 4
+\fBinitrd\fR=\fIdosya-ismi\fR
+\fI/dev/initrd\fR’nin içeriği olarak yüklenecek dosyayı belirtmek içindir. \fBLOADLIN\fR için bu bir komut satırı seçeneğidir. \fBLILO\fR için bunu \fI/etc/lilo.conf\fR dosyasında kullanabilirsiniz. Bu seçenekle belirtilen dosya ismi genellikle gzipli dosya sistemi imgesidir.
+.sp
+.TP 4
+\fBnoinitrd\fR
+Bu önyükleme seçeneği iki dönemli açılış işlemini iptal eder. Çekirdek, \fI/dev/initrd\fR ilklendirilmemiş gibi olağan açılışı gerçekleştirir. Bu seçenekle, önyükleyici tarafından belleğe yüklenen \fI/dev/initrd\fR’nin içeriği korunur. Bu seçenek \fI/dev/initrd\fR’nin içeriğinin herhangi bir veri olmasına izin verir, dosya sistemi imgesi olması gerekmez. Bu durumda \fI/dev/initrd\fR aygıtı salt okunurdur ve sistem açıldıktan sonra da salt okunur olarak kalabilir.
+.sp
+.TP 4
+\fBroot\fR=\fIaygıt-ismi\fR
+Normal kök dosya sistemi olarak kullanılacak aygıtı belirler. \fBLOADLIN\fR için bu bir komut satırı seçeneğidir. \fBLILO\fR için bunu \fI/etc/lilo.conf\fR dosyasında kullanabilirsiniz. Bu seçenekle belirtilecek aygıt, kök dosya sistemi olarak elverişli ve bağlanabilir bir aygıt olmalıdır.
+.sp
+.PP
+.sp
+.SS "Normal kök dosya sistemine geçiş"
+Öntanımlı olarak, normal kök dosya sistemi için, çekirdeğin ayarları (\fBrdev\fR ile çekirdek dosyasında yapılan ayarlar ya da çekirdek dosyası içinde derlenmiş ayarlar) ya da önyükleyici seçenekleri ile yapılan ayarlar kullanılır. Bir NFS üzerinden bağlı normal kök dosya sistemi için, \fBnfs_root_name\fR ve \fBnfs_root_addrs\fR önyükleyici seçenekleri NFS ayarları olarak kullanılır. Bir NFS üzerinden bağlı normal kök dosya sistemi ile ilgili daha fazla bilgi edinmek için çekirdek belgeleri arasında bulunan \fIDocumentation/filesystems/nfs/nfsroot.txt\fR (Linux 2.6.33 öncesinde \fIDocumentation/filesystems/nfsroot.txt\fR) dosyasına bakılabilir. Kök dosya sistemi ayarları ile ilgili daha fazla bilgi edinmek için bkz: \fBLILO\fR ve \fBLOADLIN\fR belgeleri.
+.sp
+Ayrıca normal kök dosya sistemine geçiş \fB/linuxrc\fR çalıştırılabiliri ile de mümkündür. Bunun için \fI/proc\fR bağlanmış olmalıdır. \fI/proc\fR bağlandıktan sonra \fB/linuxrc\fR, \fI/proc/sys/kernel/real-root-dev\fR, \fI/proc/sys/kernel/nfs-root-name\fR ve \fI/proc/sys/kernel/nfs-root-addrs\fR proc dosyalarına yazarak normal kök aygıtını değiştirir. Bir fiziksel kök aygıtı, \fB/linuxrc\fR tarafından yeni kök dosya sisteminin aygıt numarası \fI/proc/sys/kernel/real-root-dev\fR içine yazılarak değiştirilir. Bir NFS kök dosya sistemi ise, \fB/linuxrc\fR tarafından yeni kök dosya sisteminin NFS ayarları \fI/proc/sys/kernel/nfs-root-name\fR ve \fI/proc/sys/kernel/nfs-root-addrs\fR dosyalarına yazıldıktan sonra \fI/proc/sys/kernel/real-root-dev\fR dosyasına 0xff (sanal NFS aygıt numarası) yazılarak değiştirilir. Örneğin aşağıdaki kabuk komutu normal kök aygıtını \fI/dev/hdb1\fR olarak değiştirecektir:
+.sp
+.RS 4
+.nf
+echo 0x365 >/proc/sys/kernel/real-root-dev
+.fi
+.sp
+.RE
+Bir NFS örneği olarak, IP numarası 193.8.232.7 ve ismi ’idefix’ olan bir sistem için 193.8.232.7 IP numarasıyla bir yerel ağlı NFS sunucusu üzerindeki \fI/var/nfsroot\fR NFS dizinini normal kök dosya sistemi olarak değiştirecek kabuk komutu:
+.sp
+.RS 4
+.nf
+echo /var/nfsroot >/proc/sys/kernel/nfs-root-name
+echo 193.8.232.2:193.8.232.7::255.255.255.0:idefix \\
+  > /proc/sys/kernel/nfs-root-addrs
+echo 255 >/proc/sys/kernel/real-root-dev
+.fi
+.sp
+.RE
+.sp
+.SS "Kullanım"
+\fIinitrd\fR’nin esas oluşturulma sebebi sistem kurulumunda modüler çekirdek yapılandırmasını mümkün kılmaktı.
+.sp
+Olası bir sistem kurulum senaryosu şöyle olabilir:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Önyükleyici uygulaması disketten ya da başka bir ortamdan mümkün en küçük çekirdekle (yani sadece \fI/dev/ram\fR, \fI/dev/initrd\fR ve ext2 dosya sistemi desteğiyle) başlar ve başlangıç dosya sisteminin gzipli sürümü ile \fI/dev/initrd\fR’yi yükler. Bu kullanıcıya sorularak, sondalanarak veya ikisini de kullanarak yapılabilir.
+.IP 2. 3
+\fB/linuxrc\fR çalıştırılabiliri normal kök dosya sistemini (1) ve dağıtım ortamını (2) (CD-ROM, ağ, teyp, vs.) bağlamak için gerekenleri (aygıt türü, aygıt sürücüsü, dosya sistemi gibi) saptar.
+.IP 3. 3
+\fB/linuxrc\fR çalıştırılabiliri ilk dosya sisteminden gerekli çekirdek modüllerini yükler.
+.IP 4. 3
+\fB/linuxrc\fR çalıştırılabiliri kök dosya sistemini oluşturur ve içini doldurarak kullanıma hazırlar (Bu adımda normal kök dosya sistemi henüz eksiksiz bir sistem değildir).
+.IP 5. 3
+\fB/linuxrc\fR çalıştırılabiliri \fI/proc/sys/kernel/real-root-dev\fR dosyasına gerekli değeri yazar ve \fI/proc\fR sistemden ayrılır, normal kök dosya sistemi ve diğer dosya sistemleri bağlı kalır ve \fB/linuxrc\fR çalışmasını sonlandırır.
+.IP 6. 3
+Bundan sonra çekirdek normal kök dosya sistemini bağlar.
+.IP 7. 3
+Artık normal kök dosya sistemi kullanıma hazırdır, yani önyükleyici kurulabilir.
+.IP 8. 3
+Sistemi açmak için kullanılacak modüllerle birlikte bir dosya sistemini \fI/dev/initrd\fR’ye yükleyecek önyükleyici yapılandırılır (Yani, \fI/dev/ram0\fR aygıtında değişiklik yapılabilir, sonra sistemden ayrılıp son olarak \fI/dev/ram0\fR içindeki imge bir dosyaya yazılabilir).
+.IP 9. 3
+Sistem artık açılabilir hale gelmiştir ve ek kurulum işlemlerine devam edilebilir.
+.sp
+.RE
+.PD 0
+Yukarıdaki senaryoda \fI/dev/initrd\fR’ye düşen anahtar rol, çekirdeği yeniden derlemeden, büyük bir çekirdek kullanmak zorunda kalmadan hatta bir başlangıç çekirdeği seçilmesi bile gerekmeden normal sistem işlemleri sırasında kullanılan yapılandırma verilerinin yeniden kullanılabilirliğini sağlamaktır.
+.sp
+Bir ikinci senaryo da tek bir yönetim ağında farklı donanım yapılandırmalı sistemler üzerinde çalışan Linux kurulumları içindir. Böyle durumlarda, küçük bir çekirdek ailesi (ideal olarak bir çekirdek) kullanılması ve yapılandırmaya ilişkin sisteme özel yapılandırmaların mümkün olduğu kadar küçük tutulması istenebilir. Bu durumda, ihtiyaç duyulan tüm modülleri içeren bir dosya oluşturulur. Bundan sonra sadece \fB/linuxrc\fR dosyası veya \fB/linuxrc\fR tarafından çalıştırılan bir dosya farklı olabilirdi.
+.sp
+Bir üçüncü senaryo kurtarma diskleri için daha elverişlidir. Kök dosya sisteminin disk bölümünün yeri gibi bilgiler önyükleme sırasında gerekli olmadığından bunun için, \fI/dev/initrd\fR’de yüklü sistem olası sağlamlık sınamasından sonra otomatik algılama ya da kullanıcıya sorma kullanabilir.
+.sp
+Son ama en çok kullanılan senaryo CD-ROM’dan kolay kurulum için \fBinitrd\fR kullanan CD-ROM’lu Linux dağıtımlarının kullandığı senaryodur. Dağıtım, herhangi bir disket kullanmadan \fI/dev/initrd\fR’yi doğrudan yüklemek için LOADLIN’i kullanabilir. Dağıtım ayrıca, bir açılış disketinden LILO kullanıp, \fI/dev/initrd\fR üzerinden CD-ROM’daki daha büyük bir ram disk’i yükleyebilir.
+.sp
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fI/dev/initrd\fR
+.br
+\fI/dev/ram0\fR
+.br
+\fI/linuxrc\fR
+.br
+\fI/initrd\fR
+.sp
+.SH "EK BİLGİ"
+.PD 1
+.RS 1
+.IP 1. 3
+\fI/dev/ram0\fR, \fI/\fR dizininden \fI/initrd\fR dizinine taşınırken bağlı kalan dosya sistemleri kullanılmakta olan çekirdekle erişilebilir olmaya devam eder. Buna rağmen \fB/proc/mounts\fR girdileri güncellenmez.
+.IP 2. 3
+\fI/initrd\fR dizini yoksa, kullanılmakta olan çekirdekle, \fI/dev/ram0\fR hala bir süreç tarafından kullanılıyorsa ya da üzerinde bağlı bir dosya sistemi varsa, \fI/dev/ram0\fR sistemden tamamen ayrılmaz. \fI/dev/ram0\fR sistemden tamamen ayrılamamışsa bellekte kalacaktır.
+.IP 3. 3
+\fI/dev/initrd\fR kullanıcıları yukarıda belirtilen davranışa bağımlı olmamalıdır. Bu davranış çekirdeğin gelecekteki sürümlerinde değişebilir.
+.sp
+.RE
+.PD 0
+.sp
+.SH "İLGİLİ BELGELER"
+\fBchown\fR(1), \fBmknod\fR(1), \fBram\fR(4), \fBfreeramdisk\fR(8), \fBrdev\fR(8)
+.sp
+Çekirdek paketinin 4.10 sürümü öncesinde \fIDocumentation/initrd.txt\fR, sonrasında \fIDocumentation/admin-guide/initrd.rst\fR dosyası, LILO belgeleri, LOADLIN belgeleri, SYSLINUX belgeleri.
+.sp
+.SH "YAZAN"
+\fIinitrd\fR aygıtının çekirdek kodu Werner Almesberger ve Hans Lermen tarafından yazılmıştır. \fIinitrd\fR kodu Linux çekirdeğinin geliştirme sürümlerinden 1.3.73 sürümünde çekirdek kaynak koduna dahil edilmiştir.
+.sp
+.SH "ÇEVİREN"
+© 2003, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

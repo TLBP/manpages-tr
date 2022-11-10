@@ -1,0 +1,109 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "TAIL" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+tail - dosyaların son kısmını basar
+.sp
+.SH KULLANIM
+.IP \fBtail\fR 5
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Belirtilen her \fIDOSYA\fRnın son 10 satırını standart çıktıya yazar.
+.sp
+\fIDOSYA\fR belirtilmediğinde veya - olduğunda standart girdiden okur.
+.sp
+Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+.sp
+.TP 4
+\fB-c\fR, \fB--bytes\fR=[+]\fISAYI\fR
+Son \fISAYI\fR baytı gösterir. Her dosyanın \fISAYI\fR baytından sonrasını çıktılamak için \fB-c\fR \fI+SAYI\fR kullanılanılabilir.
+.sp
+.TP 4
+\fB-f\fR, \fB--follow\fR[={name|descriptor}]
+Dosyayı sürekli izler, yeni satırlar eklendikçe onları da çıktıya yazar. \fB--follow=name\fR ile dosya ismini kullanarak izler, \fB--follow=descriptor\fR ile dosya açıldığında sistemin döndürdüğü dosya tanıtıcısını kullanarak izler. Değiştirge seçenekleri belirtilmediğinde ’descriptor’ kullanıldığı varsayılır.
+.sp
+.TP 4
+\fB-F\fR
+\fB--follow=name --retry\fR ile aynı.
+.sp
+.TP 4
+\fB-n\fR, \fB--lines=\fR=[+]\fISAYI\fR
+Son 10 satır yerine son \fISAYI\fR satırı gösterir. Her dosyanın \fISAYI\fR satırından sonrasını çıktılamak için \fB-n\fR \fI+SAYI\fR kullanılanılabilir.
+.sp
+.TP 4
+\fB--max-unchanged-stats=\fR\fISAYI\fR
+\fB--follow=name\fR seçeneği ile kullanıldığında \fIDOSYA\fRda bir değişiklik gözlemlememişse silinmediğinden veya isminin değiştirilmediğinden (döndürülen günlük dosyalarının olağan durumudur) emin olmak için \fIDOSYA\fRyı \fISAYI\fR (5 öntanımlıdır) kere yeniden açar.
+.sp
+.TP 4
+\fB--pid=\fR\fIPID\fR
+\fB-f\fR ile birlikte kullanılır. Süreç numarası \fIPID\fR olan süreç öldükten sonra çıkar.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR, \fB--silent\fR
+Dosya isimlerini gösteren başlıkları yazmaz.
+.sp
+.TP 4
+\fB--retry\fR
+Belirtilen \fIDOSYA\fR erişilmez hale geldiğinde dosya tekrar erişilebilir olana kadar dosyayı açmayı dener.
+.sp
+.TP 4
+\fB-s\fR, \fB--sleep-interval=\fR\fISÜRE\fR
+\fB-f\fR ile kullanıldığı zaman dosyaya birşey yazılıp yazılmadığına \fISÜRE\fR saniyede bir (öntanımlı 1.0) bakar. \fB--pid=\fR\fIPID\fR ile birlikte kullanıldığında aynı işlemi \fIPID\fR kimlikli sürece uygular.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Dosya isimlerini gösteren başlıkları daima yazar.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-z\fR, \fB--zero-terminated\fR
+Satırları satır sonu karakteri ile değil 0. karakter ile sonlandırır
+.sp
+.PP
+\fISAYI\fRnın (bayt veya satır sayısı) ilk karakteri ’\fB+\fR’ ise, \fISAYI\fRncı satır veya bayttan itibaren dosyanın içeriğini yazar, aksi halde dosyadaki son \fISAYI\fR girdiyi yazar. \fIsayı\fR, çarpım soneki alabilir: b = 512, KB = 1000, K = 1024, MB = 1000*1000, M = 1024*1024 ve G, T, P, E, Z, Y için de benzer şekilde gider. Ayrıca, ikil birimlerde belirtilebilir: KiB=K, MiB=M, vb.
+.sp
+\fB--follow\fR (\fB-f\fR) seçeneğinde \fB=name\fR belirtilmedikçe, \fBtail\fR dosya tanıtıcısını kullanarak dosyayı izler. Böylelikle dosyanın ismi değişse bile dosyayı izlemeye devam eder. Bazı durumlarda belli bir dosya adını izlemek istiyor olabilirsiniz, o zaman \fB--follow=name\fR seçeneğini kullanın (örneğin ’\fBtail --follow=name deneme\fR’ dediğinizde, \fIdeneme\fR dosyası arada silinse, sonra yerine başka bir \fIdeneme\fR dosyası oluşsa bile bütün bunlar olurken ’\fIdeneme\fR’ dosyasının içinde olanları göstermeye devam eder).
+.sp
+.SH "YAZAN"
+Paul Rubin, David MacKenzie, Ian Lance Taylor ve Jim Meyering tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBhead\fR(1)
+.sp
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/tail>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) tail invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

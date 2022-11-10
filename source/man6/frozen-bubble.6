@@ -1,0 +1,192 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "FROZEN-BUBBLE" 6 "Haziran 2008" "frozen-bubble 2.2.0" "Oyunlar"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+frozen-bubble - atari tarzı, çabuk tepki vermeye dayalı bir oyun
+.sp
+.SH KULLANIM
+.IP \fBfrozen-bubble\fR 14
+[\fISEÇENEK\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBfrozen-bubble\fR, atari tarzı, çabuk tepki vermeye dayalı olan oyunun özgür yazılım gerçeklenimidir. Oyun, temelde, rastgele seçilen balonları tahtaya doğru fırlatmaya dayanır. Atışın sonunda, aynı renkte en az üç adet balon kümelenirse, bunlar düşer. Düşen kümeye yapışmış durumdaki balonlar da düşer. Tek oyunculu kipte, amaç tahta üzerindeki bütün balonları en kısa süre içinde düşürmektir. İki oyunculu kipte, rakibin sizden önce ölmesini beklemek/sağlamak zorundasınız.
+.sp
+.SH "DENETİM"
+Öntanımlı denetim mekanizması klavye aracılığıyladır, ancak sistem tarafından destekleniyorsa bir oyun çubuğu veya oyun tableti ile oynayabilirsiniz (donmuş balonun oyun çubuğunuzu algıladığından emin olmak için \fB-ji\fR komut satırı seçeneğini kullanın). Nişanı sağa, sola hareket ettirmek, ortalamak ve ateş etmek için bir tuşa veya bir kumanda kolu yönü veya düğmesine ihtiyaç vardır.
+.sp
+.SH "TEK OYUNCULU"
+Tek oyunculu kipte, yeni başlayanlar için en iyi eğitim, giderek artan bir zorlukla 100 seviyeyi geçmenize izin veren \fBPlay Default Levelset\fR (Öntanımlı Seviyeleri Oynat)’ı seçmektir. Bir sonraki seviyeye geçmek için her seviyedeki tüm baloncukları patlatın.
+.sp
+Çok oyunculu için antrenman yapmak isterseniz, 2 oyunculu veya ağ kipi koşullarını yeniden üreten \fBMultiplayer Training\fR (Çok Oyunculu Eğitimi) seçin; tek fark, oluşturulan kötü amaçlı baloncukların puanınızdan sayılması ve 2 dakikada alabileceğiniz en yüksek puanı almanız gerektiğidir.
+.sp
+.SH "2 OYUNCULU"
+2 oyunculu kipte, aynı bilgisayarda bir arkadaşınıza (veya aslında bir düşmana) karşı oynayabilirsiniz. Tahta rastgele baloncuklarla doldurulur ve amaç büyük kümeler oluşturarak rakibe kötü amaçlı baloncuklar göndermektir.
+.sp
+.SH "AĞ OYUNU"
+Bilgisayarınızda ağ bağlantısı varsa, yerel ağınızdaki diğer oyunculara karşı (5 oyuncuya kadar) oyun oynamak için \fBLAN GAME\fR’i (yerel ağ oyunu) seçebilirsiniz. Frozen-Bubble yerel ağda UDP yayını olan bir oyun sunucusu arar, bulursa ona bağlanır veya bulamazsa yeni bir oyun sunucusu başlatır.
+.sp
+Bilgisayarınız İnternet’e bağlıysa, Dünyadaki (veya ötesinde?) diğerlerine karşı oynamak için \fBNET GAME\fR’i seçebilirsiniz. Frozen-Bubble ana sunucudan sunucu listesini alacak ve mevcut sunucular arasında seçim yapmanızı önerecektir. Bir sunucunun önündeki bayrak, oyun başlamadan önce başkalarıyla sohbet etmek için tercih edilen dili gösterir. Ping, sunucuyla konuşurken gidiş-dönüş süresidir, mümkünse düşük bir ping seçin.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB--help\fR
+Komut satırı seçeneklerinin özetini gösterir.
+.sp
+.TP 4
+\fB--fullscreen\fR
+Oyunu tam ekran kipinde başlatır.
+.sp
+.TP 4
+\fB--no-fullscreen\fR
+Oyunu tam ekran kipinde başlatmaz.
+.sp
+.TP 4
+\fB--nosound\fR
+Müzik ve ses gösterilerini kapatır.
+.sp
+.TP 4
+\fB--nomusic\fR
+Sadece müziği kapatır, ses gösterileri açık kalır.
+.sp
+.TP 4
+\fB--nosfx\fR
+Sadece ses gösterilerini kapatır, müzik açık kalır.
+.sp
+.TP 4
+\fB--playlist\fR \fIdizin\fR
+Belirtilen \fIdizin\fR içindeki bütün dosyaları müzik dosyası olarak kullanır ve bu dosyaları çalar.
+.sp
+.TP 4
+\fB--playlist\fR \fIdosya\fR
+Belirtilen \fIdosya\fR içinde listelenmiş dosyaları müzik dosyası olarak kullanır ve bu dosyaları çalar.
+.sp
+.TP 4
+\fB--slow_machine\fR
+Eğer \fBfrozen-bubble\fR makinanızda oldukça yavaş çalışıyorsa, bu seçeneği kullanın (bazı canlandırmalar kapatılır).
+.sp
+.TP 4
+\fB--very_slow_machine\fR
+Şayet üstteki seçenek yeterli gelmedi ise, bunu kullanın (kapatılabilecek herşey kapatılır).
+.sp
+.TP 4
+\fB--solo\fR
+Rastgele seviyede, tek oyunculu kipte oyunu başlatır.
+.sp
+.TP 4
+\fB--direct\fR
+İki oyunculu kipte oyunu başlatır (menü görüntülenmez).
+.sp
+.TP 4
+\fB--gameserver\fR \fIsunucu\fR[:\fIport\fR]
+Doğrudan \fIsunucu\fR’ya bağlanarak ağ oyununu başlatır (\fIport\fR belirtilmezse öntanımlı port kullanılır.)
+.sp
+.TP 4
+\fB--chain_reaction\fR
+Zincirleme tepkiyi etkinleştirir.
+.sp
+.TP 4
+\fB--level\fR \fIseviye\fR
+\fIseviye\fR ile belirtilen seviyeden oyunu başlatır.
+.sp
+.TP 4
+\fB--colour-blind\fR
+Renk körleri için, özel renkler kullanır.
+.sp
+.TP 4
+\fB--no-time-limit\fR
+Fırlatma için zaman sınırlamasını kaldırır (örn, çocuk kipi).
+.sp
+.TP 4
+\fB--playermalus\fR \fIsayı\fR
+\fIsayı\fR ile belirtilen kötü amaçlı balonu sol oyuncuya ekler (negatif olabilir - ağ oyununda çalışmaz).
+.sp
+.TP 4
+\fB--mp-training-difficulty\fR \fIsayı\fR
+Çok oyunculu kipte tek oyunculu eğitiminde kötü amaçlı baloncuklar alma ortalama süresini ayarlar (öntanımlı 30 - ortalama olarak her 30 saniyede bir, ne kadar düşükse o kadar zor)
+.sp
+.TP 4
+\fB--joysticks-info\fR
+Başlangıçta algılanan oyun çubukları hakkında bilgi basar (Frozen-Bubble oyun çubuklarınızı/tabletlerinizi görmüyorsa, \fBjoydev\fR modülünü \fBmodprobe joydev\fR ile root olarak yükleyip yeniden deneyin).
+.sp
+.TP 4
+\fB--no-echo\fR
+Ses etkinken, tuşa her basışta daktilo sesi çıkarmayı (sinir bozucu olabilir) iptal eder.
+.sp
+.TP 4
+\fB--my-nick\fR \fIisim\fR
+Ağ oyunları için, kullanıcı adı yerine bu \fIisim\fR kullanılır (en fazla 10 karakter, ASCII abecesayısal artı tire ve alt_çizgi).
+.br
+Bilgi: Bir sunucuya bağlanıldığında, kullanıcı adınızı ayarlamak için \fB/nick\fR komutu da kullanılabilir olur.
+.sp
+.TP 4
+\fB--private\fR
+Ağ oyunu için bir sunucuya bağlandıktan sonra, diğer oyunculara göndermek üzere coğrafi konumunuzu almak için http://hostip.info/ kullanılmaz.
+.sp
+.TP 4
+\fB--record\fR \fIdizin\fR
+Kayıt dizinini belirtir (normalde kayıtlar ev dizini altındaki ’\fI.frozen-bubble/records\fR’ dizinine kaydedilir).
+.sp
+.TP 4
+\fB--auto-record\fR
+Uygulanabilir tüm oyunları otomatik olarak kaydeder (normalde, oyun sırasında Print Screen tuşuna basılarak kayıt tetiklenebilir).
+.sp
+.TP 4
+\fB--comment\fR ’\fI...\fR’
+Tek tırnaklar arasına alınan yorum kayıtlara eklenir (ASCII’den başka bir şey içermemelidir), daha sonra kayıt oynatılırken konsolda gösterilir.
+.sp
+.TP 4
+\fB--replay\fR \fIdosya|url\fR
+Belirtilen dosyadaki kaydı oynatır.
+.sp
+.TP 4
+\fB--save-frames\fR \fIdizin\fR
+Tüm (oyun) karelerinin kaydedileceği dizin; oyun yavaşladığı için sadece \fB--replay\fR ile kullanılabilir.
+.br
+Uyarı: Saniyede 900 KB’lık 50 kare kaydedildiği için çıktı çok büyüktür (örn, 43 MB/s); örneğin, çerçevelerden bir video oluşturmak için şöyle bir komut verilebilir:
+.sp
+.RS 4
+.RS 0
+.nf
+mencoder mf:///tmp/fbframes/frame* -mf fps=50 -o /tmp/output.avi -ovc lavc -lavcopts vcodec=mpeg4
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Bu kılavuz sayfası ilk olarak Josselin Mouette tarafından yazılmış olup Guillaume Cottenceau tarafından sürdürülmektedir.
+.br
+Oyunun sayfası: http://www.frozen-bubble.org/
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfrozen-bubble-editor\fR(6)
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2000-2008 The Frozen-Bubble Team
+.br
+Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "ÇEVİREN"
+© 2003 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,96 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * kmod-modinfo - query kernel module information using libkmod.
+ *
+ * Copyright (C) 2011-2013  ProFUSION embedded systems
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "MODINFO" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+modinfo - bir çekirdek modülü ile ilgili bilgileri görüntüler
+.sp
+.SH KULLANIM
+.IP \fBmodinfo\fR 8
+[\fB-0\fR] [\fB-F\fR \fIalan\fR] [\fB-k\fR \fIçekirdek\fR] [\fImodüladı\fR|\fIdosyaadı\fR...]
+.IP \fBmodinfo\fR 8
+\fB-V\fR
+.IP \fBmodinfo\fR 8
+\fB-h\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBmodinfo\fR, komut satırında verilen Linux Çekirdeği modüllerinden bilgi alır. \fImodüladı\fR bir dosya adı değilse, çekirdek modülleri yüklenirken \fBmodprobe\fR(8) tarafından da yapıldığı gibi \fI/lib/modules/version\fR dizini aranır.
+.sp
+\fBmodinfo\fR öntanımlı olarak modülün her özniteliğini kolayca okunabilmesi için \fIalan\fR : \fIdeğer\fR biçiminde listeler. Dosya adı da aynı şekilde listelenir (gerçekten bir öznitelik olmamasına rağmen).
+.sp
+\fBmodinfo\fR’nun bu sürümü, herhangi bir Linux Çekirdek mimarisinin modüllerini anlayabilir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-F\fR, \fB--field\fR \fIalan\fR
+Her satıra bir tane olmak üzere yalnızca belirtilen \fIalan\fR değerini basar. Betik dosyaları için kullanışlıdır. \fIalan\fR adları büyük/küçük harfe duyarsızdır. Çok kullanılan alanlar (her modülde olmayabilir): \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR, \fBdepends\fR, \fBalias\fR. Genellikle birden fazla \fBparm\fR, \fBalias\fR ve \fBdepends\fR alanı vardır. Özel alan \fBfilename\fR’in değeri, modülün dosya adıdır.
+.sp
+.TP 4
+\fB-b\fR, \fB--basedir\fR \fIdizin\fR
+Modüller için kök dizin; / öntanımlıdır.
+.sp
+.TP 4
+\fB-k\fR \fIçekirdek\fR
+Çalışandan başka bir \fIçekirdek\fR hakkında bilgi verir. Bu, özellikle yeni yüklenen (ancak henüz çalışmayan) bir çekirdek modülü kümesinden bilgi alması gereken dağıtımlar için kullanışlıdır. Örneğin, önyüklemeden önce bir \fBinitrd/initramfs\fR imgesi oluşturmak için yeni bir çekirdekte hangi modüllerin hangi donanım yazılımlarına (firmware) ihtiyaç duyduğu bulunmak isteniyor olabilir.
+.sp
+.TP 4
+\fB-0\fR, \fB--null\fR
+Alan değerlerini ayırmak için satır sonu yerine ASCII \\0 karakteri kullanılır. Betikler için kullanışlıdır, çünkü teorik olarak alanın içinde satır sonu karakteri olabilir.
+.sp
+.TP 4
+\fB-a\fR, \fB--author\fR\p \fB-d\fR, \fB--description\fR\p \fB-l\fR, \fB--license\fR\p \fB-p\fR, \fB--parameters\fR\p \fB-n\fR, \fB--filename\fR
+\fB--field\fR \fIalan\fRları \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR ve \fBfilename\fR için kısayol seçenekler. Eski modutils modinfo’dan geçişi kolaylaştırır.
+.sp
+.PP
+.sp
+.SH "TELİF HAKKI"
+Belgenin telif hakkı © 2003 Rusty Russell, IBM Corporation.
+.sp
+.SH "YAZAN"
+Belgenin yazımı Jon Masters ve Lucas De Marchi tarafından sürdürülmektedir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmodprobe\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

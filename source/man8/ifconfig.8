@@ -1,0 +1,193 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
+ * https://sourceforge.net/p/net-tools/code/ci/master/tree/
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "IFCONFIG" 8 "Ocak 2021" "net-tools 2.10" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ifconfig - ağ arayüzlerini yapılandırır
+.sp
+.SH KULLANIM
+.IP \fBifconfig\fR 9
+[\fB-v\fR] [\fB-a\fR] [\fB-s\fR] [\fIarayüz\fR]
+.IP \fBifconfig\fR 9
+[\fB-v\fR] \fIarayüz\fR \fIadres_ailesi\fR \fIseçenekler\fR| \fIadres\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBifconfig\fR, çekirdek içinde bulunan ağ arayüzlerini yapılandırmakta kullanılır. Gerekli olan arayüzleri açılış esnasında ayarlamak için kullanılır. Bu işlem sonrasında sadece sistemi yeniden yapılandırmak gerekirse ya da hata ayıklamak için kullanılabilir.
+.sp
+Herhangi bir değiştirge belirtilmemişse, \fBifconfig\fR o an için geçerli olan arayüzlerin durumu hakkında bilgi verir. Tek bir \fIarayüz\fR belirtilirse, sadece bu arayüz hakkında bilgiler alınabilir. Şayet sadece \fB–a\fR seçeneği belirtilmiş ise, sistemde bulunan bütün arayüzler hakkında bilgi görüntülenir. Bu arayüzlerin etkin olup olmaması önemli değildir. Diğer durumlarda arayüzleri yapılandırmak için kullanılır.
+.sp
+.SS "Adres Aileleri"
+\fIarayüz\fRden sonraki ilk değiştirge desteklenen adres ailelerinden biri ise, bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: \fBinet\fR (TCP/IP, öntanımlıdır), \fBinet6\fR (IPv6), \fBax25\fR (AMPR paket radyo), \fBddp\fR (Appletalk Phase 2), \fBipx\fR (Novell IPX) ve \fBnetrom\fR (AMPR paket radyo). IPv4 noktalı onluk tabanda gösterimin parçaları olarak sağlanan tüm sayılar, ISO C standardında belirtildiği gibi onluk, sekizlik veya onaltılık tabanda olabilir (yani, baştaki 0x veya 0X sayının onaltılık tabanda olduğunu, baştaki ’0’ ise sekizlik tabanda olduğunu gösterir; aksi takdirde, sayı onluk tabanda yorumlanır). Onaltılık ve sekizlik sayıların kullanımı RFC uyumlu değildir ve bu nedenle kullanımı önerilmez.
+.sp
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fBio_adres\fR \fIadres\fR
+Aygıtın I/O uzayındaki başlangıç adresini ayarlar.
+.sp
+.TP 4
+\fB-a\fR
+Kullanılabilecek tüm arayüzleri bağlı olmasalar bile gösterir.
+.sp
+.TP 4
+\fB-b\fR
+(\fBnetstat -i\fR gibi) kısa bir liste gösterir.
+.sp
+.TP 4
+\fB-V\fR
+Bazı hata durumlarında çıktı daha ayrıntılı olur.
+.sp
+.TP 4
+\fIarayüz\fR
+Arayüzün adı. Bu genellikle bir sürücü adı ve bir birim numarasından oluşur, örneğin ilk Ethernet arabirimi için genelde \fBeth0\fR’dır. Çekirdek takma adlı arabirimleri destekliyorsa, bunlar \fBeth0\fR’ın ilk takma adı için \fBeth0:0\fR gibi bir sözdizimi ile belirtilebilir. Bir arabirime birden fazla adres atamak için bunlar kullanılabilir. Bir takma adlı arabirimi silmek için \fBifconfig eth0:0 down\fR komutu kullanılabilir.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+İlk (birincil) arabirimi silerseniz, aynı \fIadres/ağ_maskesi\fR çiftini kullanan tüm takma adlar silinir.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fBup\fR
+Bu seçenek arayüzün ağa bağlanmasını sağlar. Arayüze bir adres atanmış ise, bu seçenek dolaylı olarak tanımlanmış olur. Bir takma adlı arabirimi kullanırken takma adın sonun bir \fB-\fR ekleyerek bu davranışı bastırabilirsiniz (ör. \fBeth0:0-\fR). Çekirdek IPv4 \fB0.0.0.0\fR adresini diğer ad arayüzlerini dolaylı olarak silmek için kullanacağından IPv4 \fB0.0.0.0\fR adresi kullanılırken de bu davranış bastırılır.
+.sp
+.TP 4
+\fBdown\fR
+Belirtilen \fIarayüz\fRün ağ bağlantısının kesilmesine sebep olur.
+.sp
+.TP 4
+[-]\fBarp\fR
+Belirtilen \fIarayüz\fRde ARP protokolünün kullanılması/kullanılmamasını sağlar.
+.sp
+.TP 4
+[-]\fBpromisc\fR
+Belirtilen \fIarayüz\fRün ayrım gözetmeme (promiscuous) kipi etkin kılınır/iptal edilir. Bu seçenek etkin duruma getirilirse, belirtilen \fIarayüz\fR, ağ üzerindeki bütün paketleri toplar.
+.sp
+.TP 4
+[-]\fBallmulti\fR
+Çoğa gönderim (all-multicast) kipi etkin kılınır/iptal edilir. Bu seçenek etkin duruma getirilirse, belirtilen \fIarayüz\fR, ağ üzerindeki bütün çoğa gönderilmiş paketleri toplar.
+.sp
+.TP 4
+\fBmtu\fR \fIN\fR
+\fIarayüz\fRün azami aktarım boyutunu (MTU) belirler.
+.sp
+.TP 4
+\fBdstaddr\fR \fIadres\fR
+Noktadan-noktaya bağlantı için (PPP bağlantısı gibi) uzak IP adresini belirler. Bu seçeneğin kullanımı artık önerilmemektedir. Yerine \fBpointtopoint\fR seçeneği kullanılmalıdır.
+.sp
+.TP 4
+\fBnetmask\fR \fIadres\fR
+Belirtilen \fIarayüz\fR için IP ağ maskesini belirler. Öntanımlı olarak bu değer, A, B veya C sınıfı ağ maskelerinden biridir (\fIarayüz\fR IP adresinden türetilir), fakat herhangi bir değer de kullanılabilir.
+.sp
+.TP 4
+\fBadd\fR \fIadres/önek_uzunluğu\fR
+Belirtilen \fIarayüz\fRe IPv6 adresi ekler.
+.sp
+.TP 4
+\fBdel\fR \fIadres/önek_uzunluğu\fR
+Belirtilen \fIarayüz\fRden IPv6 adresini kaldırır.
+.sp
+.TP 4
+\fBtunnel\fR \fI::aa.bb.cc.dd\fR
+Belirtilen hedefi tünelleyerek yeni bir SIT (IPv4 içinde IPv6) aygıtı oluşturur. (Temel amacı, yalıtılmış IPv6 ağlarını IPv4 üzerinden birbirine bağlamaktır.)
+.sp
+.TP 4
+\fBirq\fR \fIadres\fR
+Aygıt tarafından kullanılan donanım kesmesini tanımlar. Her aygıt kendi IRQ ayarını özdevinimli değiştiremez.
+.sp
+.TP 4
+\fBio_adres\fR \fIadres\fR
+Aygıtın G/Ç uzayındaki başlangıç adresini belirler.
+.sp
+.TP 4
+\fBmem_start\fR \fIadres\fR
+Aygıt tarafından kullanılan paylaşımlı belleğin başlangıç adresini belirler. Çok az aygıt için bu seçeneğe ihtiyaç vardır.
+.sp
+.TP 4
+\fBmedia\fR \fItür\fR
+Aygıt tarafından kullanılan ortam türünü ya da fiziksel portu belirler. Bütün aygıtlar bu değerleri değiştiremez ve bunu yapabilen aygıtlar da destekledikleri değerler açısından çeşitlilik gösterirler. Genel \fItür\fR değerleri şunlardır: \fB10base2\fR (ince Ethernet), \fB10baseT\fR (ikili-bükülü 10Mbps Ethernet), \fBAUI\fR (harici aktarımcı) ve benzerleri. \fItür\fR olarak \fBauto\fR değeri belirtilerek aygıtın ortamı kendinin algılaması sağlanabilir. Bunu bütün aygıtların yapamayacağı unutulmamalıdır.
+.sp
+.TP 4
+[-]\fBbroadcast\fR [\fIadres\fR]
+\fIadres\fR belirtilmişse, bu arayüz için protokol yayın adresini belirler, belirtilmezse bu arayüz için \fBIFF_BROADCAST\fR bayrağı tanımlı/tanımsız olur.
+.sp
+.TP 4
+[-]\fBpointopoint \fR [\fIadres\fR]
+Noktadan-noktaya kipini etkinleştirilir. Bu sayede kimsenin dinleyemeyeceği, iki nokta arası doğrudan bağlantı kurulmuş olur. \fIadres\fR de belirtilmişse, tıpkı \fBdstaddr\fR seçeneği ile yapıldığı gibi bağlantının diğer ucu için protokol adresini belirler, aksi takdirde bu arayüz için \fBIFF_POINTOPOINT\fR bayrağı tanımlı/tanımsız olur.
+.sp
+.TP 4
+\fBhw\fR \fIsınıf adres\fR
+Aygıt sürücüsü işlemi destekliyorsa, belirtilen \fIarayüz\fRün donanım adresini belirler. Bu seçenekte donanımın \fIsınıf\fR ismi ve \fIadres\fRinin basılabilir ASCII eşdeğeri belirtilmek zorundadır. Desteklenen donanım sınıfları şunlardır: \fBether\fR (Ethernet), \fBax25\fR (AMPR AX.25), \fBARCnet\fR ve \fBnetrom\fR (AMPR NET/ROM).
+.sp
+.TP 4
+\fBmulticast\fR
+Belirtilen \fIarayüz\fR için çoğa gönderim bayrağı etkin duruma getirilir. Normalde, aygıtlar bu bayrağı kendileri doğru bir şekilde atayabildiğinden seçeneği kullanmak gerekli değildir.
+.sp
+.TP 4
+\fIadres\fR
+Belirtilen \fIarayüz\fRe atanacak IP adresi.
+.sp
+.TP 4
+\fBtxqueuelen\fR \fIuzunluk\fR
+Aygıtın iletim kuyruğunun uzunluğunu ayarlar. Yüksek iletim zamanlı (modem hatları, ISDN) yavaş aygıtlar için bu değeri küçük tutmak, telnet gibi çok fazla etkileşimli ağ trafiği yaratan protokollerin hızlı ve hacimli aktarımlarından kaçınmak için faydalıdır.
+.sp
+.TP 4
+\fBname\fR \fIyeni_ad\fR
+Belirtilen \fIarayüz\fRün adını \fIyeni_ad\fR olarak değiştirir. Önce \fIarayüz\fRün ağ bağlantısı kesilmelidir.
+.sp
+.PP
+.sp
+.SH "EK BİLGİLER"
+2.2 çekideğinden beri takma adlı arayüzler için ayrıntılı arayüz istatistikleri artık bulunmamaktadır. Özgün adres için basılan istatistikler, aynı aygıtın bütün takma adlı arayüz adresleri ile paylaşılır. Her adres için ayrı ayrı istatistik elde edilmek istenirse, \fBiptables\fR(8) kullanarak her bir adres için ayrı hesap kuralları belirlenmelidir.
+.sp
+Net-tools 1.60-4 sürümünden beri \fBifconfig\fR, bayt sayaçları ve insan tarafından okunabilen sayaçlar için IEC 60027-2 birimlerini kullanmaktadır. Yani, 1 KiB 2^10 bayttır. Sayıların bir ondalık basamak aşağı yuvarlandığı unutulmamalıdır (0,1 PiB için 112.589.990.684.262 baytlık kayıp oldukça büyük bir hata olabilir).
+.sp
+Donanım kesmesi sorunu olan Ethernet aygıtı sürücüleri \fBEAGAIN\fR (\fBSIOCSIIFLAGS\fR: Özkaynak geçici olarak kullanılamıyor) hatasıyla başarısız olur. Bu konuda daha ayrıntılı bilgi http://www.scyld.com/expert/irq-conflict.html adresinde bulunabilir.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fI/proc/net/dev\fR
+\fI/proc/net/if_inet6\fR
+.fi
+.sp
+.RE
+.sp
+.SH "HATA AYIKLAMA"
+\fBifconfig\fR, donanım adreslerini 8 bayt ile sınırlayan tam adres bilgisini almak için ioctl erişim yöntemini kullanır. Infiniband donanım adresi 20 bayt olduğundan, yalnızca ilk 8 bayt doğru şekilde görüntülenir. Donanım adresi de dahil olmak üzere bağlantı katmanı bilgilerini görüntülemek için \fBiproute2\fR paketindeki \fBip-link\fR(8) komutu kullanılmalıdır.
+.sp
+Appletalk DDP ve IPX adresleri görüntüleneceği zaman, bu komut ile değişiklik yapılamamaktadır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBroute\fR(8), \fBnetstat\fR(8), \fBarp\fR(8), \fBrarp\fR(8), \fBiptables\fR(8), \fBifup\fR(8), \fBinterfaces\fR(5).
+.br
+http://physics.nist.gov/cuu/Units/binary.html - Bibaytlar
+.sp
+.SH "YAZANLAR"
+Fred N. van Kempen, Alan Cox, Phil Blundell, Andi Kleen ve Bernd Eckenfels tarafından yazılmıştır.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

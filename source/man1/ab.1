@@ -1,0 +1,273 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "AB" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ab - Apache HTTP sunucusu başarım ölçme aracı
+.sp
+.SH KULLANIM
+.IP \fBab\fR 3
+[\fB-diklqrSVw\fR] [\fB-A\fR \fIyetkili-kullanıcı\fR:\fIparola\fR] [\fB-b\fR \fItampon-boyu\fR] [\fB-B\fR \fIyerel-adres\fR] [\fB-c\fR \fIbağlantı-sayısı\fR] [\fB-C\fR \fIçerez-ismi\fR=\fIdeğer\fR] [\fB-e\fR \fIcsv-dosyası\fR] [\fB-E\fR \fIistemci-sertifikası-dosyası\fR] [\fB-f\fR \fIprotokol\fR] [\fB-g\fR \fIgnuplot-dosyası\fR] [\fB-H\fR \fIözel-başlık\fR] [\fB-m\fR \fIHTTP-yöntemi\fR] [\fB-n\fR \fIistek-sayısı\fR] [\fB-p\fR \fIPOST-dosyası\fR] [\fB-P\fR \fIvekil-yetkilisi\fR:\fIparola\fR] [\fB-s\fR \fIzamanaşımı\fR] [\fB-t\fR \fIsaniye\fR] [\fB-T\fR \fIiçerik-türü\fR] [\fB-u\fR \fIPUT-dosyası\fR] [\fB-v\fR \fIayrıntı-düzeyi\fR] [\fB-x\fR \fI<table>-öznitelikleri\fR] [\fB-X\fR \fIvekil\fR[\fI:port\fR]] [\fB-y\fR \fI<tr>-öznitelikleri\fR] [\fB-z\fR \fI<td>-öznitelikleri\fR] [\fB-Z\fR \fIşifre-kümesi\fR] [http[s]://]\fIkonakadı\fR[\fI:port\fR]\fI/dizin\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBab\fR Apache Hiper Metin Aktarım Protokolü (HTTP) sunucunuzun başarımını ölçmek amacıyla kullanabileceğiniz bir kıyaslama aracıdır. Mevcut Apache kurulumunuzun görevini nasıl yerine getirdiği hakkında bir izlenim edinmeniz için tasarlanmıştır. Özellikle, Apache kurulumunuzun saniyede kaç isteği sunma yeteneğinde olduğunu gösterir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-A\fR \fIyetkili-kullanıcı\fR:\fIparola\fR
+Sunucuya TEMEL Kimlik Doğrulamada kullanılmak üzere kanıt sağlar. Kullanıcı adı ile parola arasına sadece \fB:\fR konur ve sunucunun buna ihtiyacı olup olmadığına bakılmaksızın (yani, bir "401 kimlik doğrulaması gerekli" yanıtı beklenmeden) bağlantı üzerinden base64 kodlu olarak sunucuya gönderilir.
+.sp
+.TP 4
+\fB-b\fR \fItampon-boyu\fR
+TCP gönderme/alma tamponlarının bayt cinsinden uzunluğu.
+.sp
+.TP 4
+\fB-B\fR \fIyerel-adres\fR
+Uzak bağlantılar yaparken dinlenecek adres.
+.sp
+.TP 4
+\fB-c\fR \fIbağlantı-sayısı\fR
+Aynı anda işleme sokulacak bağlantı sayısı. Aynı anda bir bağlantı öntanımlıdır.
+.sp
+.TP 4
+\fB-C\fR \fIçerez-ismi\fR=\fIdeğer\fR
+İsteğe bir \fBCookie:\fR satırı ekler. Değiştirge olarak genellikle bir \fIisim=değer\fR çifti kullanılır. Bu çiftler birden fazla olabilir.
+.sp
+.TP 4
+\fB-d\fR
+"percentage served within XX [ms] table" iletisi gösterilmez. (Geriye uyumluluk için vardır).
+.sp
+.TP 4
+\fB-e\fR \fIcsv-dosyası\fR
+Sunulan isteğin birim zamanda (milisaniye) ne kadarının (yüzde cinsinden) sunulduğunu gösteren virgül ayraçlı değerler (CSV) dosyası. Sonuçlar ’bobin haline’ getirilmiş olduğundan doğal olarak ’gnuplot’ dosyasından daha yararlıdır.
+.sp
+.TP 4
+\fB-E\fR \fIistemci-sertifikası-dosyası\fR
+Bir SSL sitesine bağlanırken, sunucu ile kimlik doğrulaması için PEM biçeminde sağlanan sertifika kullanılır. Dosyanın sırayla istemci sertifikasını, ara sertifikaları ve özel anahtarı içermesi beklenir. 2.4.36 ve sonrasında kullanılabilir.
+.sp
+.TP 4
+\fB-f\fR \fIprotokol\fR
+SSL/TLS protokolü belirtilir (SSL2, SSL3, TLS1, TLS1.1, TLS1.2 veya ALL). TLS1.1 ve TLS1.2 desteği 2.4.4 ve sonraki sürümler içindir.
+.sp
+.TP 4
+\fB-g\fR \fIgnuplot-dosyası\fR
+Ölçülen değerler bir ’gnuplot’ veya TSV (sekme ayraçlı değerler) dosyasına yazılır. Bu dosya, Gnuplot, IDL, Mathematica, Igor hatta Excel tarafından veri dosyası olarak kabul edilir. Veri sütunlarının başlıkları dosyanın ilk satırında bulunur.
+.sp
+.TP 4
+\fB-h\fR
+Kullanım bilgisi gösterir.
+.sp
+.TP 4
+\fB-H\fR \fIözel-başlık\fR
+İsteğe fazladan başlık ekler. \fIözel-başlık\fR, aralarında iki nokta imi bulunan bir isim-değer çifti olarak belirtilir. Örnek: \fB"Accept-Encoding: zip/zop;8bit"\fR
+.sp
+.TP 4
+\fB-i\fR
+\fBGET\fR istekleri yerine \fBHEAD\fR istekleri yapılır.
+.sp
+.TP 4
+\fB-k\fR
+HTTP KeepAlive (kalıcı bağlantı) özelliğini etkinleştirir, yani tek bir oturum içinde çok sayıda isteğe hizmet sunulabilir. Özellik öntanımlı olarak kapalıdır.
+.sp
+.TP 4
+\fB-l\fR
+Yanıtların uzunluğu sabit değilse hataları raporlamaz. Dinamik sayfalarda kullanışlı olabilir. 2.4.7 ve sonraki sürümler içindir.
+.sp
+.TP 4
+\fB-m\fR \fIHTTP-yöntemi\fR
+İstekler için özel HTTP yöntemi belirtilir. 2.4.10 ve sonraki sürümler içindir.
+.sp
+.TP 4
+\fB-n\fR \fIistek-sayısı\fR
+Kıyaslama oturumu sırasında sunucuya uygulanacak istek sayısı. Öntanımlı olarak hiçbir başarım ölçütü sağlamayan tek bir istek yapılır.
+.sp
+.TP 4
+\fB-p\fR \fIPOST-dosyası\fR
+POST isteği ile ilgili verileri içeren dosya. Ayrıca \fB-T\fR seçeneğini de belirtmeyi unutmayın.
+.sp
+.TP 4
+\fB-P\fR \fIvekil-yetkilisi\fR:\fIparola\fR
+Vekil sunucuya TEMEL Kimlik Doğrulamasında kullanılacak kanıtları sağlar. Kullanıcı adı ile parola arasına sadece \fB:\fR konur ve vekilin buna ihtiyacı olup olmadığına bakılmaksızın (yani, bir "407 vekilde kimlik doğrulaması gerekiyor" yanıtı beklenmeden) bağlantı üzerinden base64 kodlu olarak sunucuya gönderilir.
+.sp
+.TP 4
+\fB-q\fR
+İstek sayısı 150’den fazla olduğunda, \fBab\fR her 100 veya %10 istekte bir, standart hataya bir işlenen istek sayacı çıktılar. \fB-q\fR seçeneği bu çıktının üretilmemesini sağlar.
+.sp
+.TP 4
+\fB-r\fR
+Soket hata alsa bile program çıkmaz.
+.sp
+.TP 4
+\fB-s\fR \fIzamanaşımı\fR
+Soket zaman aşımına uğramadan önce beklenecek azami saniye sayısı. 30 saniye öntanımlı süredir. 2.4.4 ve sonraki sürümler içindir.
+.sp
+.TP 4
+\fB-S\fR
+Ortalama ve ortanca değerler arasında bir veya iki standart sapmadan fazlası varsa ne ortalama değer ne standart sapma değeri ne de uyarı/hata iletileri gösterilir. Öntanımlı olarak, asgari/ortalama/azami değerler gösterilir. (Geriye uyumluluk).
+.sp
+.TP 4
+\fB-t\fR \fIsaniye\fR
+Ölçümleme işleminin ne kadar süreyle uygulanacağı belirtilir. Dahili olarak \fB-n 50000\fR seçeneği uygulanır. Bunu belli bir süreye göre kıyaslama yapmak amacıyla kullanabilirsiniz. Öntanımlı olarak bir süre kısıtlaması yoktur.
+.sp
+.TP 4
+\fB-T\fR \fIiçerik-türü\fR
+POST/PUT verisi için kullanılacak içerik türü belirtilir. Örnek: \fBapplication/x-www-form-urlencoded\fR. Öntanımlı değer: \fBtext/plain\fR.
+.sp
+.TP 4
+\fB-u\fR \fIPUT-dosyası\fR
+PUT verisini içeren dosya. Ayrıca, \fB-T\fR seçeneğini de belirtmeyi unutmayın.
+.sp
+.TP 4
+\fB-v\fR \fIayrıntı-düzeyi\fR
+Çıktının ayrıntı düzeyi belirtilir. \fB4\fR ve üstü ile başlıklar hakkında bilgi, \fB3\fR ve üstü ile yanıt kodları (404, 200, vb.), \fB2\fR ve üstü ile ise uyarı ve bilgi iletileri gösterilir.
+.sp
+.TP 4
+\fB-V\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-w\fR
+Sonuçları HTML tabloları olarak basar. Öntanımlı tablo, beyaz artalanlı ve iki sütunludur.
+.sp
+.TP 4
+\fB-x\fR \fI<table>-öznitelikleri\fR
+\fB<table>\fR etiketinde kullanılacak öznitelikler belirtilir. Belirtilen öznitelikler etiket içine \fB<table \fIburaya\fR >\fR biçeminde yerleştirilir.
+.sp
+.TP 4
+\fB-X\fR \fIvekil\fR[:\fIport\fR]
+İstekler için bir vekil sunucu kullanılır.
+.sp
+.TP 4
+\fB-y\fR \fI<tr>-öznitelikleri\fR
+\fB<tr>\fR etiketinde kullanılacak öznitelikler belirtilir.
+.sp
+.TP 4
+\fB-z\fR \fI<td>-öznitelikleri\fR
+\fB<td>\fR etiketinde kullanılacak öznitelikler belirtilir.
+.sp
+.TP 4
+\fB-Z\fR \fIşifre-kümesi\fR
+SSL/TLS şifre kümesi belirtilir (\fBopenssl\fR(1) şifrelerine bakınız).
+.sp
+.PP
+.sp
+.SH "ÇIKTI"
+Aşağıda \fBab\fR tarafından döndürülen değerler açıklanmıştır:
+.sp
+.TP 4
+Server Software
+İlk başarılı yanıtın, varsa, \fIserver\fR HTTP başlığında döndürülen değer. Bu başlıktaki başlangıçtan 32 ondalık değerli karaktere (genellikle boşluk veya CR/LF karakteri) kadar tüm karakterleri içerir.
+.sp
+.TP 4
+Server Hostname
+Komut satırında belirtilen DNS veya IP adresi.
+.sp
+.TP 4
+Server Port
+\fBab\fR’nin bağlandığı port. Komut satırında port belirtilmemişse, öntanımlı olarak http için 80, https için 443’tür.
+.sp
+.TP 4
+SSL/TLS Protocol
+İstemci le sunucu arasında uzlaşılmış protokol değerleri. Bu sadece SSL kullanılıyorsa çıktılanır.
+.sp
+.TP 4
+Document Path
+Komut satırı dizgesinden çözümlenen isteğin URI’si.
+.sp
+.TP 4
+Document Length
+Başarıyla döndürülen ilk belgenin bayt cinsinden uzunluğu. Eğer belge uzunluğu sınama sırasında değişirse yanıt bir hata içerecektir.
+.sp
+.TP 4
+Concurrency Level
+Sınama sırasında kullanılan eşzamanlı istemcilerin sayısı.
+.sp
+.TP 4
+Time taken for tests
+İlk soket bağlantısının alındığı andan son yanıtın alındığı ana kadar geçen süre.
+.sp
+.TP 4
+Complete requests
+Alınan başarılı yanıtların sayısı.
+.sp
+.TP 4
+Failed requests
+Başarısızlık olarak addedilen isteklerin sayısı. Sayı sıfırdan büyükse, diğer satırda, bağlanma, okuma, yanlış içerik uzunluğu, istisnalar gibi sebeplerle başarısız olmuş istekler gösterilir.
+.sp
+.TP 4
+Write errors
+Başarısız yazma hatalarının (kırık boru) sayısı.
+.sp
+.TP 4
+Non-2xx responses
+200 serisi yanıt kodları ile açıklanamayan yanıtların sayısı. Tüm yanıtlar 200 olursa bu alan çıktılanmaz.
+.sp
+.TP 4
+Keep-Alive requests
+Keep-Alive isteklerinde sonuçlanan bağlantı sayısı.
+.sp
+.TP 4
+Total body sent
+Sınamanın parçası olarak veri gönderimi yapılandırılmışsa, bu sınama sırasında gönderilen toplam bayt sayısıdır. Sınama sırasında gövde gönderilmiyorsa bu alan çıktılanmaz.
+.sp
+.TP 4
+Total transferred
+Sunucudan alınan toplam bayt sayısı. Bu sayı aslında hattan gönderilen bayt sayısıdır.
+.sp
+.TP 4
+HTML transferred
+Sunucudan alınan belge baytlarının sayısı. Bu sayı HTTP başlıklarının bayt sayısını içermez.
+.sp
+.TP 4
+Requests per second
+Saniyedeki istek sayısı. İstek sayısının toplam süreye oranıdır.
+.sp
+.TP 4
+Time per request
+İstek başına harcanan süre. İlk değer \fBeşzamanlılık * süre * 1000 / biten\fR formülüyle hesaplanırken ikincisi için \fBsüre * 1000 / biten\fR formülü kullanılır.
+.sp
+.TP 4
+Transfer rate
+\fBokunantoplam / 1024 / süre\fR formülüyle hesaplanan aktarım hızı.
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+Statik bildirimli sabit uzunlukta çeşitli tamponlar vardır. Sunucudan gelen yanıt başlıkları ve diğer harici girdiler, komut satırı değiştirgeleri ile birlikte basitçe çözümlenir, bu size can sıkıcı gelebilir.
+.sp
+HTTP/1.x protokolünü tamamen gerçeklemez; sadece yanıtların ’belli başlı’ bazı biçimlerini kabul eder. Aksi takdirde, \fBstrstr\fR(3) işlevinin yoğun kullanımı nedeniyle sunucu yerine \fBab\fR’nin başarımını ölçerdiniz.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

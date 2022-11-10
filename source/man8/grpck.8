@@ -1,0 +1,173 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1991 - 1994, Julianne Frances Haugh
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2001,        Michał Moskal
+ * Copyright 2001 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2011, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "GRPCK" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+grpck - grup dosyalarının tutarlılığını doğrular
+.sp
+.SH KULLANIM
+.IP \fBgrpck\fR 6
+[\fIseçenekler\fR] [\fIgroup\fR [ \fIshadow\fR ]]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBgrpck\fR grup bilgilerinin tutarlılığını doğrular. \fI/etc/group\fR ve \fI/etc/gshadow\fR dosyalarındaki girdilerin geçerli bilgi içerip içermediğini ve uygun biçemde olup olmadığını denetler. Kullanıcıdan, hatalı biçimlendirilmiş veya hataları düzeltilemeyen girdileri silmesi istenir.
+.sp
+Her girdinin aşağıdakilere sahip olduğunu doğrulamak için denetim yapılır:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+doğru sayıda alan
+.IP \(bu 3
+eşsiz ve geçerli grup ismi
+.IP \(bu 3
+geçerli grup belirteci (yalnızca \fI/etc/group\fR için)
+.IP \(bu 3
+geçerli yönetici ve üye listesi
+.IP \(bu 3
+\fI/etc/group\fR içindeki sırayla \fI/etc/gshadow\fR dosyasında girdinin karşılığı
+.sp
+.RE
+.PD 0
+Doğru sayıda alan ve benzersiz grup adı için yapılan denetimler ölümcüldür. Bir girdide yanlış sayıda alan varsa, kullanıcıdan tüm satırı silmesi istenir. Kullanıcı olumlu yanıt vermezse, diğer tüm denetimler atlanır. Yinelenen grup adına sahip bir girdinin silinmesi istenir, ancak kalan denetimler yine de yapılır. Diğer tüm hatalar uyarıdır ve kullanıcının hatayı düzeltmek için \fBgroupmod\fR(8) komutunu çalıştırması önerilir.
+.sp
+\fI/etc/group\fR ve \fI/etc/gshadow\fR dosyaları üzerinde işlem yapan komutlar, bozuk veya yinelenen girdileri değiştiremez. Böyle durumlarda \fBgrpck\fR rahatsız edici girdileri kaldırmak için kullanılmalıdır.
+.sp
+.SH "SEÇENEKLER"
+\fBgrpck\fR öntanımlı olarak, \fI/etc/group\fR ve \fI/etc/gshadow\fR dosyaları üzerinde işlem yapar. \fIgroup\fR ve \fIshadow\fR değiştirgeleri ile bunların yerine başka dosyalar belirtilebilir.
+.sp
+\fB-r\fR ve \fB-s\fR seçenekleri birlikte kullanılamaz.
+.sp
+Bu komuta verilebilecek seçenekler şunlardır:
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-r\fR, \fB--read-only\fR
+\fBgrpck\fR komutunu salt okunur kipte çalıştırır. Bu, değişikliklerle ilgili tüm soruların kullanıcı müdahalesi olmadan "no/hayır" olarak yanıtlanmasına neden olur.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-s\fR, \fB--sort\fR
+\fI/etc/group\fR ve \fI/etc/gshadow\fR dosyalarındaki girdileri grup kimliklerine göre sıralar.
+.sp
+.TP 4
+\fB-S\fR, \fB--silence-warnings\fR
+Tartışmalı uyarıları, özellikle \fI/etc/group\fR ve \fI/etc/gshadow\fR’da listelenen grup üyeleri arasındaki tutarsızlıklar hakkındaki uyarıları kaldırır.
+.sp
+.PP
+.sp
+.SH "YAPILANDIRMA"
+Bu aracın davranışını değiştirmek için \fI/etc/login.defs\fR dosyasında bulunan aşağıdaki değişkenler kullanılabilir:
+.sp
+.TP 4
+\fBMAX_MEMBERS_PER_GROUP\fR (tamsayı)
+Grup girdisi başına azami üye sayısı. Bu değere ulaşıldığında, \fI/etc/group\fR içinde (aynı ad, aynı parola ve aynı grup kimliği ile) yeni bir grup girdisi (satır) başlatılır
+.sp
+Öntanımlı değer 0 olup, grup üyelerinin sayısı için bir azami sınır olmadığı anlamına gelir.
+.sp
+Bu özellik (grup bölme) grup dosyasındaki satır uzunluğunu sınırlamayı sağlar. NIS grupları için satırların 1024 karakterden uzun olmamasından emin olunmasını sağlamak için yararlıdır.
+.sp
+Bir sınır belirtmek gerekliyse, 25 iyidir.
+.sp
+Grup bölme (bu seçenek) tüm araçlarda desteklenmeyebilir (Shadow araçlarında bile). Gerçekten ihtiyaç duyulmadıkça bu seçenek kullanılmamalıdır.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.RS 4
+.nf
+\fB/etc/group\fR   - grupların hesap bilgileri
+\fB/etc/gshadow\fR - güvenli grup bilgileri
+\fB/etc/passwd\fR  - Kullanıcı hesap bilgileri
+.fi
+.sp
+.RE
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBgrpck\fR komutu şu değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+geçersiz komut sözdizimi
+.sp
+.TP 4
+\fI2\fR
+bir veya daha fazla grup girdisi geçersiz
+.sp
+.TP 4
+\fI3\fR
+grup dosyaları açılamıyor
+.sp
+.TP 4
+\fI4\fR
+grup dosyaları kilitlenemiyor
+.sp
+.TP 4
+\fI5\fR
+grup dosyaları güncellenemiyor
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBgroup\fR(5), \fBgroupmod\fR(8), \fBgshadow\fR(5), \fBpasswd\fR(5), \fBlogin.defs\fR(5), \fBpwck\fR(8), \fBshadow\fR(5).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

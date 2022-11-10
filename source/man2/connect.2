@@ -1,0 +1,205 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1993 Rickard E. Faith (faith@cs.unc.edu)
+ * Portions extracted from /usr/include/sys/socket.h, which does not have
+ * any authorship information in it.  It is probably available under the GPL.
+ *
+ * %%%LICENSE_START(VERBATIM)
+ * Permission is granted to make and distribute verbatim copies of this
+ * manual provided the copyright notice and this permission notice are
+ * preserved on all copies.
+ *
+ * Permission is granted to copy and distribute modified versions of this
+ * manual under the conditions for verbatim copying, provided that the
+ * entire resulting derived work is distributed under the terms of a
+ * permission notice identical to this one.
+ *
+ * Since the Linux kernel and libraries are constantly changing, this
+ * manual page may be incorrect or out-of-date.  The author(s) assume no
+ * responsibility for errors or omissions, or for damages resulting from
+ * the use of the information contained herein.  The author(s) may not
+ * have taken the same level of care in the production of this manual,
+ * which is licensed free of charge, as they might when working
+ * professionally.
+ *
+ * Formatted or processed versions of this manual, if unaccompanied by
+ * the source, must acknowledge the copyright and authors of this work.
+ * %%%LICENSE_END
+ *
+ * Other portions are from the 6.9 (Berkeley) 3/10/91 man page:
+ *
+ * Copyright (c) 1983 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * %%%LICENSE_START(BSD_4_CLAUSE_UCB)
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *     This product includes software developed by the University of
+ *     California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * %%%LICENSE_END
+ *
+ * Modified 1997-01-31 by Eric S. Raymond <esr@thyrsus.com>
+ * Modified 1998, 1999 by Andi Kleen
+ * Modified 2004-06-23 by Michael Kerrisk <mtk.manpages@gmail.com>
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "CONNECT" 2 "11 Nisan 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+connect - soket üzerinde bağlantı oluşturur
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <sys/types.h>\fR          /* NOTLAR’a bakın */
+\fB#include <sys/socket.h>\fR
+.fi
+.sp
+.IP "int \fBconnect\fR" 12
+(int \fIsockfd\fR, 
+const struct sockaddr *\fIaddr\fR, 
+socklen_t \fIaddrlen\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBconnect\fR() sistem çağrısı, \fIsockfd\fR ile belirtilen soketi \fIaddr\fR ile belirtilen adrese bağlar. \fIaddrlen\fR değiştirgesi \fIaddr\fR boyutunu belirler. \fIaddr\fR içindeki adresin biçimi, \fIsockfd\fR soketinin adres uzayı tarafından belirlenir; daha ayrıntılılı bilgi için \fBsocket\fR(2) sayfasına bakılabilir.
+.sp
+Eğer soket \fIsockfd\fR \fBSOCK_DGRAM\fR türünden ise, \fIaddr\fR, verilerin gönderildiği ve alındığı öntanımlı adres olur. Eğer soket \fBSOCK_STREAM\fR veya \fBSOCK_SEQPACKET\fR türünden ise, sistem çağrısı, \fIaddr\fR ile ilişkilendirilen soketle bağlantı kurmaya çalışır.
+.sp
+Bazı protokol soketleri (örneğin UNIX alanı akım soketleri) sadece bir kere başarıyla \fBconnect\fR() yapabilir.
+.sp
+Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki veri soketleri) bağlantılarını değiştirmek için \fBconnect\fR()’i çok kez kullanabilir.
+.sp
+Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki TCP ve veri soketleri) \fIsockaddr\fR’in \fIsa_family\fR üyesi \fBAF_UNSPEC\fR olarak ayarlanmış bir adrese bağlanarak ilişkiyi çözebilir; sonrasında, soket bir başka adrese bağlanabilir. (\fBAF_UNSPEC\fR Linux’da, çekirdek 2.2’den itibaren desteklenmektedir.)
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Bağlantı veya ilişkilendirme bşarılı ise sıfır döner. Hata durumunda \fB-1\fR dönder ve hata \fIerrno\fR değişkenine atanır.
+.sp
+.SH "HATALAR"
+Aşağıdaki hatalar genel soketler içindir. Diğer alanların özelinde başka hata kodları olabilir.
+.sp
+.TP 4
+\fBEACCES\fR
+Dosya yoluna göre tanınan UNIX alan soketleri için: soket dosyası için yazma izni veya dosya yolundaki bir dizin için arama izni reddedilmiş. (Ayrıca \fBpath_resolution\fR(7) sayfasına bakın.)
+.sp
+.TP 4
+\fBEACCES\fR, \fBEPERM\fR
+Kullanıcı, soket için yayın bayrağını etkinleştirmeden yayın adresine bağlanmaya çalışmış ya da yerel güvenlik duvarı kuralı yüzünden bağlantı isteği başarılı olmamış.
+.sp
+SElinux protokolü bağlantıyı reddederse de \fBEACCES\fR dönebilir (örneğin, HTTP vekilinin sadece HTTP sunucularıyla birleştirilmiş portlara bağlanabileceğine dair bir protokol varsa, ve vekil başka bir porta bağlanmaya çalıştıysa).
+.sp
+.TP 4
+\fBEADDRINUSE\fR
+Yerel adres kullanımda.
+.sp
+.TP 4
+\fBEADDRNOTAVAIL\fR
+(İnternet alanı soketleri için) \fIsockfd\fR ile belirtilen soket, önceden bir adres ile ilişkilendirilmemiş ve soketi geçici bir portla ilişkilendirmeye çalışırken geçici port aralığındaki tüm portların kullanımda olduğu anlaşılmış. \fBip\fR(7) sayfasındaki \fI/proc/sys/net/ipv4/ip_local_port_range\fR ile ilgili açıklamaya bakınız.
+.sp
+.TP 4
+\fBEAFNOSUPPORT\fR
+Belirtilen adresin \fIsa_family\fR alanındaki adres ailesi doğru değil.
+.sp
+.TP 4
+\fBEAGAIN\fR
+Engellemesiz UNIX alan soketler için, soket engellemesiz ve bağlantı hemen tamamlanamıyor. Diğer soket aileleri için, yönledirme önbelleğinde yeterli girdi yok.
+.sp
+.TP 4
+\fBEALREADY\fR
+Soket engellemesiz ve bir önceki bağlantı girişimi tamamlanamamış.
+.sp
+.TP 4
+\fBEBADF\fR
+Belirtilen \fIsockfd\fR uygun bir açık dosya tanıtıcısı değil.
+.sp
+.TP 4
+\fBECONNREFUSED\fR
+Aktarım soketi üzerinde \fBconnect\fR(), dinleme yapmayan bir adrese yapılmış.
+.sp
+.TP 4
+\fBEFAULT\fR
+Soket adres yapısı, kullanıcı adres uzayının dışında.
+.sp
+.TP 4
+\fBEINPROGRESS\fR
+Soket engellemesiz ve bağlantı hemen tamamlanamıyor. (Başarısız UNIX alan soketleri bunun yerine \fBEAGAIN\fR ile döner.) \fBselect\fR(2) veya \fBpoll\fR(2) ile soketi yazmak için seçerek bağlantıyı tamamlamak mümkündür. \fBselect\fR(2) yazılabilirliği gösterdikten sonra, \fBgetsockopt\fR(2) kullanarak \fBSOL_SOCKET\fR seviyesinde \fBSO_ERROR\fR ayarını okuyup \fBconnect\fR()’in başarılı olduğu (\fBSO_ERROR\fR sıfır olur) veya olmadığı (\fBSO_ERROR\fR burada listelenen bir hata kodu olur ve hatanın sebebini açıklar) belirlenir.
+.sp
+.TP 4
+\fBEINTR\fR
+Sistem çağrısı bir sinyal ile kesilmiş; \fBsignal\fR(7) sayfasına bakın.
+.sp
+.TP 4
+\fBEISCONN\fR
+Soket zaten bağlı.
+.sp
+.TP 4
+\fBENETUNREACH\fR
+Ağa ulaşılamıyor.
+.sp
+.TP 4
+\fBENOTSOCK\fR
+Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+.sp
+.TP 4
+\fBEPROTOTYPE\fR
+Soket türü istenilen iletişim protokolünü desteklemiyor. Bu hata, örneğin UNIX alan veri soketini aktarım soketine bağlamaya çalışıldığında oluşabilir.
+.sp
+.TP 4
+\fBETIMEDOUT\fR
+Bağlama girişimi sırasında zaman aşımı. Sunucu yeni bağlantıları kabul edemeyecek kadar yoğun olabilir. Sunucuda eşzamanlı çerezler etkinleştirildiğinde IP soketleri için zaman aşımı çok uzun olabilir.
+.sp
+.PP
+.sp
+.SH "UYUMLULUK"
+POSIX.1-2001, POSIX.1-2008, SVr4, 4.4BSD (\fBconnect\fR() ilk defa 4.2BSD ile ortaya çıktı).
+.sp
+.SH "NOTLAR"
+POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+.sp
+\fIsocklen_t\fR’nin arka planı için \fBaccept\fR(2) sayfasına bakın.
+.sp
+Eğer \fBconnect\fR() başarılı olmazsa, soketin durumu belirtilmemiş olarak kabul edilir. Taşınabilir uygulamalar tekrar bağlanmak için soketi kapatmalı ve yeni bir tane oluşturmalıdır.
+.sp
+.SH "ÖRNEKLER"
+\fBconnect\fR()’in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBaccept\fR(2), \fBbind\fR(2), \fBgetsockname\fR(2), \fBlisten\fR(2), \fBsocket\fR(2), \fBpath_resolution\fR(7), \fBselinux\fR(8)
+.sp
+.SH "ÇEVİREN"
+© 2022 Fatih Koçer
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

@@ -1,0 +1,152 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "AUTOHEADER" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+autoheader - configure betiği için bir şablon başlığı oluşturur
+.sp
+.SH KULLANIM
+.IP \fBautoheader\fR 11
+[\fISEÇENEK\fR]... [\fIŞABLON-DOSYA\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Kullanılacak ’\fIconfigure\fR’ betiği için C ’#define’ ifadelerinden oluşan bir şablon dosyası oluşturur. Bunu gerçekleştirmek için, \fIşablon-dosya\fR, varsa ’\fIconfigure.ac\fR’, yoksa ’\fIconfigure.in\fR’ taranır.
+.sp
+.SS "İşlem kipleri:"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+İşlemi ayrıntılı raporlar.
+.sp
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Geçici dosyalar kaldırılmaz.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Tüm dosyalar eski sürüm kabul edilir.
+.sp
+.TP 4
+\fB-W\fR, \fB--warnings\fR=\fISINIF\fR
+\fISINIF\fR [sözdizimi] girdisi ile belirtilen sınıfa ait uyarıları gösterir.
+.sp
+.PP
+.sp
+.SS "Uyarı SINIFları şunlardır:"
+.TP 4
+’cross’
+çapraz derleme sorunları
+.sp
+.TP 4
+’gnu’
+GNU kodlama standartları (gnu ve gnits kipleri öntanımlıdır)
+.sp
+.TP 4
+’obsolete’
+atıl duruma gelmiş oluşumlar veya yapılar
+.sp
+.TP 4
+’override’
+kullanıcı tarafından yeniden tanımlanmış Automake kuralları ve değişkenleri
+.sp
+.TP 4
+’portability’
+taşınabilirlik sorunları
+.sp
+.TP 4
+’portability-recursive’
+iç içe Make değişkenleri (\fB-Wportability\fR ile öntanımlı)
+.sp
+.TP 4
+’extra-portability’
+belirsiz araçlarla ilgili ek taşınabilirlik sorunları
+.sp
+.TP 4
+’syntax’
+sözdizimsel olarak belirsiz yapılar (öntanımlı)
+.sp
+.TP 4
+’unsupported’
+desteklenmeyen veya tamamlanmamış özellikler (öntanımlı)
+.sp
+.TP 4
+’all’
+bütün uyarılar
+.sp
+.TP 4
+’no-\fISINIF\fR’
+\fISINIF\fRa ilişkin tüm uyarıları kapatır.
+.sp
+.TP 4
+’none’
+bütün uyarıları kapatır
+.sp
+.TP 4
+’error’
+uyarılar hata sayılır
+.sp
+.PP
+.sp
+.SS "Kütüphane dizinleri:"
+.TP 4
+\fB-B\fR, \fB--prepend-include\fR=\fIDiZiN\fR
+Belirtilen \fIDiZiN\fR arama yolunun önüne eklenir.
+.sp
+.TP 4
+\fB-I\fR, \fB--include\fR=\fIDiZiN\fR
+Belirtilen \fIDiZiN\fR arama yolunun sonuna eklenir.
+.sp
+.PP
+.sp
+.sp
+.SH "YAZAN"
+Roland McGrath ve Akim Demaille tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <bug-autoconf (at) gnu.org> adresine bildirin.
+.br
+GNU Autoconf sayfası: <http://www.gnu.org/software/autoconf/>
+.br
+GNU yazılımları genel kullanım yardımı: <http://www.gnu.org/gethelp/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+/Autoconf: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>, <http://gnu.org/licenses/exceptions.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBautoconf\fR(1), \fBautomake\fR(1), \fBautoreconf\fR(1), \fBautoupdate\fR(1), \fBautoscan\fR(1), \fBconfig.guess\fR(1), \fBconfig.sub\fR(1), \fBifnames\fR(1), \fBlibtool\fR(1).
+.sp
+\fBautoheader\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBautoheader\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo autoheader\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2004 Can Kavaklıoğlu
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

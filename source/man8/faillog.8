@@ -1,0 +1,131 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 1989 - 1993, Julianne Frances Haugh0
+ * Copyright 1996 - 2000, Marek Michałkiewicz
+ * Copyright 2002 - 2006, Tomasz Kłoczko
+ * Copyright 2007 - 2011, Nicolas François
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "FAILLOG" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+faillog - faillog kayıtlarını gösterir veya başarısız oturum açma sayısını sınırlar
+.sp
+.SH KULLANIM
+.IP \fBfaillog\fR 8
+[\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBfaillog\fR, başarısızlık günlüğü veritabanının (\fI/var/log/faillog\fR) içeriğini görüntüler. Ayrıca başarısızlık sayaçlarını ve sınırlarını da ayarlayabilir. \fBfaillog\fR değiştirgesiz çalıştırıldığında, yalnızca oturum açmada başarısız olan kullanıcıların \fIfaillog\fR kayıtlarını görüntüler.
+.sp
+.SH "SEÇENEKLER"
+Bu komuta verilebilecek seçenekler şunlardır:
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Faillog veritabanında bir girdisi olan tüm kullanıcılar için \fIfaillog\fR kayıtlarını görüntüler (veya üzerinde işlem yapar).
+.sp
+Kullanıcı kimlikleri aralığı \fB-u\fR seçeneği ile belirlenebilir.
+.sp
+Görüntüleme kipinde, bu hala mevcut kullanıcılarla sınırlıdır, ancak boş olsalar bile faillog girdileri görüntülenir.
+.sp
+\fB-l\fR, \fB-m\fR, \fB-r\fR, \fB-t\fR seçenekleri ile kullanıcı oturum açmamış olsa bile kullanıcı kayıtları değiştirilir. Bu, silinen kullanıcıların kayıtlarını sıfırlamak veya bir dizi kullanıcı için politikayı önceden belirlemek için kullanışlıdır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-l\fR, \fB--lock-secs\fR \fISÜRE\fR
+Başarısız oturum açma girişiminden sonra hesabı \fISÜRE\fR saniye kilitler.
+.sp
+Bu seçenek için \fI/var/log/faillog\fR’a yazma izni gerekir.
+.sp
+.TP 4
+\fB-m\fR, \fB--maximum\fR \fISAYI\fR
+Hesap devre dışı bırakıldıktan sonra azami başarısız oturum açma \fISAYI\fRsını belirler.
+.sp
+0 belirtilirse, başarısız oturum açma sayısı sınırlanmaz.
+.sp
+Sisteme yönelik bir hizmet reddi saldırısını önlemek için root kullanıcısı için başarısız oturum açma \fISAYI\fRsı daima 0 olmalıdır.
+.sp
+Bu seçenek için \fI/var/log/faillog\fR’a yazma izni gerekir.
+.sp
+.TP 4
+\fB-r\fR, \fB--reset\fR
+Başarısız oturum açma sayacını sıfırlar.
+.sp
+Bu seçenek için \fI/var/log/faillog\fR’a yazma izni gerekir.
+.sp
+.TP 4
+\fB-R\fR, \fB--root\fR \fICHROOT_DİZİNİ\fR
+Değişiklikleri \fICHROOT_DİZİNİ\fRnde uygular ve \fICHROOT_DİZİNİ\fRndeki yapılandırma dosyaları kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--time\fR \fISÜRE\fR
+\fISÜRE\fR günden daha yeni faillog kayıtları gösterilir.
+.sp
+.TP 4
+\fB-u\fR, \fB--user\fR \fIKULLANICI|ARALIK\fR
+Başarısızlık günlüğü sayaçları ve sınırlarından (\fB-l\fR, \fB-m\fR veya \fB-r\fR seçeneğiyle kullanılıyorsa) başka, kayıtları yalnızca belirtilen \fIKULLANICI\fR(lar) için görüntüler.
+.sp
+Seçeneğe bir \fIKULLANICI\fR adı, sayısal bir \fIKULLANICI\fR kimliği veya kullanıcı kimlikleri için bir \fIARALIK\fR belirtilebilir. \fIARALIK\fR olarak kullanıcı kimliklerinin asgari ve azami değerleri (\fIUID_MIN-UID_MAX\fR), yalnızca asgari değeri (\fIUID_MIN-\fR) veya yalnızca azami değeri (\fI-UID_MAX\fR) belirtilebilir.
+.sp
+.PP
+.sp
+.SH "YETERSİZLİKLER"
+\fBfaillog\fR, yalnızca son başarısızlıktan bu yana oturum açmada başarılı olamayan kullanıcıları görüntüler. Son başarısızlığından bu yana başarılı oturum açmış bir kullanıcıyı görüntülemek için kullanıcıyı \fB-u\fR seçeneği ile, tüm kullanıcıları görüntülemek için \fB-a\fR seçeneğini belirtmek gerekir.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI/var/log/faillog\fR
+Oturum açma başarısızlıklarını günlükleme dosyası
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlogin\fR(1), \fBfaillog\fR(5).
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

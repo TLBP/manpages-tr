@@ -1,0 +1,748 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Author: Tatu Ylonen <ylo@cs.hut.fi>
+ * Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
+ *                    All rights reserved
+ *
+ * As far as I am concerned, the code I have written for this software
+ * can be used freely for any purpose.  Any derived versions of this
+ * software must be clearly marked as such, and if the derived work is
+ * incompatible with the protocol description in the RFC file, it must be
+ * called by a name other than "ssh" or "Secure Shell".
+ *
+ * Copyright (c) 1999,2000 Markus Friedl.  All rights reserved.
+ * Copyright (c) 1999 Aaron Campbell.  All rights reserved.
+ * Copyright (c) 1999 Theo de Raadt.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ’’AS IS’’ AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+ * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+ * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "SSH" 1 "23 Şubat 2022" "openssh 9.0p1" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ssh - OpenSSH uzak oturum açma istemcisi
+.sp
+.SH KULLANIM
+.IP \fBssh\fR 4
+[\fB-46AaCfGgKkMNnqsTtVvXxYy\fR] [\fB-B\fR \fIbağlantı_arabirimi\fR] [\fB-b\fR \fIbağlantı_adresi\fR] [\fB-c\fR \fIalgoritma\fR] [\fB-D\fR [\fIbağlantı_adresi\fR:]\fIport\fR] [\fB-E\fR \fIgünlük_dosyası\fR] [\fB-e\fR \fIönceleme_krk\fR] [\fB-F\fR \fIyapılandırma_dosyası\fR] [\fB-I\fR \fIpkcs11\fR] [\fB-i\fR \fIkimlik_dosyası\fR] [\fB-J\fR \fIhoplama_konağı\fR] [\fB-L\fR \fIadres\fR] [\fB-l\fR \fIkullanıcı\fR] [\fB-m\fR \fImac_belirtimi\fR] [\fB-O\fR \fIdenetim_komutu\fR] [\fB-o\fR \fIseçenek\fR] [\fB-p\fR \fIport\fR] [\fB-Q\fR \fIsorgu_seçeneği\fR] [ \fB-R\fR \fIadres\fR] [\fB-S\fR \fIdenetim_yolu\fR] [\fB-W\fR \fIkonak:port\fR] [\fB-w\fR \fIyerel_tünel\fR[:\fIuzak_tünel\fR]] \fIhedef\fR [\fIkomut\fR [\fIdeğiştirge\fR]...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBssh\fR (SSH istemci) uzaktaki bir makinada komut çalıştırmak için uzaktaki makinada kullanıcı oturumu açmayı sağlayan bir uygulamadır. \fBssh\fR güvenli olmayan bir ağ üzerindeki güvenilir olmayan iki sistemin şifreli dolayısı ile güvenli iletişim kurmalarını sağlar. X11 bağlantıları, çeşitli TCP/IP bağlantı portları ve UNIX alan soketleri de güvenli kanal üzerinden iletilebilir.
+.sp
+\fBssh\fR, belirtilen \fIhedef\fR’e oturum açar. Hedef [\fIkullanıcı\fR]@\fIkonak\fR biçeminde belirtilebileceği gibi \fBssh://\fR[\fIkullanıcı\fR]@\fIkonak\fR[:\fIport\fR] biçeminde bir sarmalayıcı ile de belirtilebilir.
+.sp
+Şayet kullanıcı bir \fIkomut\fR belirtmiş ise, komut oturum kabuğu yerine uzak konakta çalıştırılır. \fIkomut\fR olarak tam komut satırı belirtilebileceği gibi ek \fIdeğiştirge\fR’ler de belirtilebilir. Çalıştırılmak üzere komut sunucuya gönderilmeden önce belirtilen \fIdeğiştirge\fR’ler boşluklarla ayrılarak komuta eklenir.
+.sp
+.SS "Seçenekler"
+.TP 4
+\fB-4\fR
+\fBssh\fR’yı sadece IPv4 adreslerini kullanmaya zorlar.
+.sp
+.TP 4
+\fB-6\fR
+\fBssh\fR’yı sadece IPv6 adreslerini kullanmaya zorlar.
+.sp
+.TP 4
+\fB-A\fR
+Kimlik denetimi ajanı (örn, \fBssh-agent\fR(1)) bağlantı yönlendirmesini etkinleştirir. Bu ayrıca yapılandırma dosyasında da her konak için ayrı ayrı belirtilebilir.
+.sp
+Bu seçenek etkinleştirilirken dikkat edilmelidir. Uzak konaktaki (ajanın Unix-alan soketi için) dosya izinlerini atlayabilen kullanıcılar iletilen bağlantılar sayesinde yerel ajana erişebilir. Saldırgan, ajandan anahtarları alamaz ancak ajanda yüklü olan kimlikleri kullanarak kimlik denetimini geçmeyi başarabilir. Atlama konağı kullanmak (bkz: \fB-J\fR seçeneği) daha güvenli bir seçenek olabilir.
+.sp
+.TP 4
+\fB-a\fR
+Kimlik denetimi ajanı bağlantı yönlendirmesini iptal eder.
+.sp
+.TP 4
+\fB-B\fR \fIbağlantı_arabirimi\fR
+Hedef konağa bağlanmaya çalışmadan önce \fIbağlantı_arabirimi\fRnin adresine bağlanır. Sadece çok adresli sistemlerde yararlıdır.
+.sp
+.TP 4
+\fB-b\fR \fIbağlantı_adresi\fR
+Bağlantının kaynak adresi olarak yerel makinedeki \fIbağlantı_adresi\fR kullanılır. Sadece çok adresli sistemlerde yararlıdır.
+.sp
+.TP 4
+\fB-C\fR
+Bütün verilerin (stdin, stdout, stderr, X11, TCP ve UNIX etki alanı bağlantı verileri dahil) sıkıştırılmasını sağlar. Sıkıştırma algoritması \fBgzip\fR(1)’in kullandığı ile aynıdır. Modem hatları ve diğer yavaş bağlantılar için sıkıştırma kullanılmalıdır, ancak hızlı ağlar için bu sadece yavaşlamaya neden olacaktır. Öntanımlı değer yapılandırma dosyalarında her konak için ayrı ayrı belirtilebilir. \fBCompression\fR [Sıkıştırma] seçeneğine bakınız.
+.sp
+.TP 4
+\fB-c\fR \fIalgoritma\fR
+Oturumu şifrelemekte kullanılacak algoritmayı belirler. Şifreleme algoritmaları öncelik sırasıyla virgüllerle ayrılarak belirtilebilir. \fBssh_config\fR(5) kılavuz sayfasında \fBCiphers\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-D\fR [\fIbağlantı_adresi\fR:]\fIport\fR
+Yerel "dinamik" uygulama seviyesi port yönlendirmesi belirtir. Yerel tarafta \fIport\fRu dinlemek üzere bir soket ayrılır, seçimlik olarak \fIbağlantı_adresi\fR belirtilebilir. Bu port ile ne zaman bir bağlantı kurulsa, bağlantı güvenli kanal üzerinden iletilir ve uzak sistemde nereye bağlanılacağı uygulama protokolü kullanılarak belirlenir. Şu anda SOCKS4 ve SOCKS5 protokolleri desteklenmektedir. \fBssh\fR bir SOCKS sunucusu olarak davranır. Sadece yetkili kullanıcı (root) ayrıcalıklı portları yönlendirebilir. Dinamik port yönlendirmeleri yapılandırma dosyasında da belirtilebilir.
+.sp
+IPv6 adresleri, adres köşeli ayraç içine alınarak belirtilebilir. Yalnızca sistem yöneticisi (root) ayrıcalıklı portları yönlendirebilir. Öntanımlı olarak, yerel portlar \fBGatewayPorts\fR yönergesine göre bağlanır. Ancak, bağlantıyı belirli bir adrese bağlamak için doğrudan \fIbağlantı_adresi\fR kullanılabilir. \fIbağlantı_adresi\fR olarak "localhost" dinlenen \fIport\fRa yalnızca yerel kullanım için bağlanılacağını belirtirken, boş bir adres veya "*" \fIport\fRun tüm arabirimlerden erişilebilir olması gerektiğini belirtir.
+.sp
+.TP 4
+\fB-E\fR \fIgünlük_dosyası\fR
+Hatalar standart hata yerine \fIgünlük_dosyası\fRna eklenir.
+.sp
+.TP 4
+\fB-e\fR \fIönceleme_karakteri\fR
+pty’li bir oturum için önceleme karakterini tanımlar (öntanımlı: ’\fB~\fR’). Önceleme karakteri sadece bir satırının başında ise tanınır. Önceleme karakterinden sonraki nokta (’\fB.\fR’) bağlantıyı sonlandırır, Ctrl-Z bağlantıyı askıya alır, ’\fB~\fR’ ise önceleme karakterini bir kez gönderir. \fIönceleme_karakteri\fR olarak "none" belirtilirse öncelemler iptal edilir ve oturum tamamen şeffaf olur.
+.sp
+.TP 4
+\fB-F\fR \fIyapılandırma_dosyası\fR
+Kullanıcının kendine özgü yapılandırma dosyasını belirtmek içindir. Komut satırında bir \fIyapılandırma_dosyası\fR verilirse, sistemin yapılandırma dosyası (\fI/etc/ssh/ssh_config\fR) görmezden gelinir. \fI$HOME/.ssh/config\fR dosyası kullanıcının öntanımlı yapılandırma dosyasıdır. \fIyapılandırma_dosyası\fR olarak "none" belirtilirse hiçbir yapılandırma dosyası okunmaz.
+.sp
+.TP 4
+\fB-f\fR
+Komut yürütülmeden hemen önce \fBssh\fR’nın artalanda çalışmasını sağlar. Bu \fBssh\fR’nın kullanıcı ya da anahtar parolası sorması gerektiği ancak kullanıcının bu işlemin artalanda yapılmasını istediği durumlarda yararlıdır. Bu seçenek \fB-n\fR seçeneğinin de uygulanmasını sağlar. X11 uygulamalarını uzak konakta çalıştırırken komutun şöyle çağrılması tavsiye edilir: \fBssh -f host xterm\fR.
+.sp
+\fBExitOnForwardFailure\fR yapılandırma yönergesine “yes” atanırsa, \fB-f\fR ile başlatılmış bir istemci kendini artalana yerleştirmeden önce tüm uzak port yönlendirmelerinin başarıyla kurulmasını bekleyecektir. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBForkAfterAuthentication\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-G\fR
+\fBhost\fR ve \fBmatch\fR bloklarını değerlendirdikten sonra yapılandırmayı basıp çıkmasını sağlar.
+.sp
+.TP 4
+\fB-g\fR
+Uzak konakların yönlendirilen yerel portlara bağlanmasına izin verir. Çoğullanmış bir bağlantıda kullanılırsa, bu seçeneğin ana süreçte belirtilmesi gerekir.
+.sp
+.TP 4
+\fB-I\fR \fIpkcs11\fR
+\fBssh\fR’nın kullanıcı kimlik kanıtlaması için anahtarlar sağlayan bir PKCS#11 belirteci ile iletişim kurmak için kullanacağı PKCS#11 paylaşımlı kütüphanesini belirler.
+.sp
+.TP 4
+\fB-i\fR \fIkimlik_dosyası\fR
+Genel anahtarlı kimlik doğrulaması için okunacak olan gizli anahtar dosyasını belirtmekte kullanılır. Gizli anahtar dosyası yerel olarak mevcut olmadığında \fBssh-agent\fR(5)’e yüklenene karşılık gelen gizli anahtarı kullanmak için bir ortak anahtar dosyası da belirtilebilir. \fI~/.ssh/id_rsa, ~/.ssh/id_ecdsa, ~/.ssh/id_ecdsa_sk, ~/.ssh/id_ed25519, ~/.ssh/id_ed25519_sk\fR ve \fI~/.ssh/id_dsa\fR öntanımlıdır. Kimlik dosyaları, yapılandırma dosyasında her konak için ayrı ayrı belirtilebilir. Birden çok \fB-i\fR seçeneği belirtmek (ve yapılandırma dosyalarında birden çok kimlik belirtmek) mümkündür. Yapılandırma dosyalarında ilgili yönerge yoksa, kimlik dosyası adlarına \fI-cert.pub\fR eklenerek elde edilen dosya adıyla sertifika bilgileri yüklenmeye çalışılır.
+.sp
+.TP 4
+\fB-J\fR \fIhoplama_konağı\fR
+Önce hedef tarafından belirlenen \fIhoplama_konağı\fRna bir ssh bağlantısı yapıp oradan bir TCP yönlendirmesiyle asıl hedefe bağlantı kurulur. Virgüllerle ayrılmış birden fazla \fIhoplama_konağı\fR belirtilebilir. Seçenek \fBProxyJump\fR yapılandırma yönergesi için kısayoldur. Komut satırında belirtilen yapılandırma yönergeleri, genelde belirtilen \fIhoplama_konağı\fRna değil, hedef konağa uygulanır. \fIhoplama_konağı\fR için yapılandırmayı belirlemek için \fI~/.ssh/config\fR kullanılmalıdır.
+.sp
+.TP 4
+\fB-K\fR
+GSSAPI kimlik bilgilerinden GSSAPI tabanlı kimlik kanıtlamasını ve sunucuya yönlendirilmesini (aktarılmasını) etkinleştirir.
+.sp
+.TP 4
+\fB-k\fR
+GSSAPI kimlik bilgilerinin sunucuya yönlendirilmesini (aktarılmasını) iptal eder.
+.sp
+.TP 4
+\fB-L\fR [\fIbağlantı_adresi\fR:]\fIyerel_port\fR:\fIuzak_konak\fR:\fIuzak_port\fR\p \fB-L\fR [\fIbağlantı_adresi\fR:]\fIyerel_port\fR:\fIuzak_soket\fR\p \fB-L\fR \fIyerel_soket\fR:\fIuzak_konak\fR:\fIuzak_port\fR\p \fB-L\fR \fIyerel_soket\fR:\fIuzak_soket\fR
+Yerel (istemci) konakta, belirtilen TCP \fIyerel_port\fRuna veya Unix \fIyerel_soket\fRine yapılan bağlantıların, belirtilen \fIuzak_konak\fRtaki \fIuzak_port\fRa veya Unix \fIuzak_soket\fRine iletileceğini belirtir. Bu, isteğe bağlı olarak belirtilen \fIbağlantı_adresi\fR’ne bağlı yerel tarafta bir TCP \fIyerel_port\fRu veya bir Unix soketini dinlemek için bir \fIyerel_soket\fR tahsis edilerek çalışır. \fIyerel_port\fR veya \fIyerel_soket\fRten her bağlantı isteğinde, bağlantı güvenli kanal üzerinden iletilir ve \fIuzak_konak\fRtaki \fIuzak_port\fRa veya Unix \fIuzak_soket\fRine bağlantı yapılır.
+.sp
+Port yönlendirmeleri ayrıca, yapılandırma dosyasında da belirtilebilir. Yalnızca sistem yöneticisi (root) ayrıcalıklı portları yönlendirebilir. IPv6 adresleri, adres köşeli ayraç içine alınarak belirtilebilir.
+.sp
+Öntanımlı olarak, yerel portlar \fBGatewayPorts\fR yönergesine göre bağlanır. Ancak, bağlantıyı belirli bir adrese bağlamak için doğrudan \fIbağlantı_adresi\fR kullanılabilir. \fIbağlantı_adresi\fR olarak "localhost" dinlenen \fIport\fRa yalnızca yerel kullanım için bağlanılacağını belirtirken, boş bir adres veya "*" \fIport\fRun tüm arabirimlerden erişilebilir olması gerektiğini belirtir.
+.sp
+.TP 4
+\fB-l\fR \fIkullanıcı\fR
+Uzak konakta oturum açmak için kullanılacak \fIkullanıcı\fR adını belirler. Ayrıca, yapılandırma dosyasında da her bir konak için ayrı ayrı belirtilebilir.
+.sp
+.TP 4
+\fB-M\fR
+Bağlantı paylaşımı için \fBssh\fR istemcisini "master" (ana) kipe geçirir. "master" kipi etkin kılmak için birden fazla \fB-M\fRseçeneği belirtilebilirse de çoğullama durumunu değiştiren her işlemden önce (örneğin yeni bir oturum açma) \fBssh-askpass\fR(1) ile onay gerekir. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBControlMaster\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-m\fR \fImac_belirtimi\fR
+Tercih sırasına göre virgüllerle ayrılmış MAC (message authentication code - ileti kimlik kanıtlama kodu) algoritmaları belirtilebilir. Daha fazla bilgi için \fBMACs\fR anahtar sözcüğüne bakınız.
+.sp
+.TP 4
+\fB-N\fR
+Uzak komut çalıştırılmaz. Bu sadece port yönlendirme için yararlıdır. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBSessionType\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-n\fR
+\fI/dev/null\fR’u standart girdiye yöneltir (yani standart girdinin okunması engellenir). \fBssh\fR artalanda çalışıyorsa bu seçenek kullanılmak zorundadır. Uzak sistemde X11 programları çalıştırılırken bu seçenek çok kullanılır. Örneğin, \fBssh -n shadows.cs.hut.fi emacs &\fR komutu \fIshadows.cs.hut.fi\fR konağında \fBemacs\fR uygulamasını başlatacak ve X11 bağlantısı otomatik olarak şifreli kanal üzerinden iletilecektir. \fBssh\fR artalana yerleştirilecektir. (Ancak \fBssh\fR’nın kullanıcı ya da anahtar parolası gerektirmesi durumunda bu çalışmayacaktır; ayrıca \fB-f\fR seçeneğine de bakınız.) Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBStdinNull\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-O\fR \fIdenetim_komutu\fR
+Etkin bağlantı çoğullama ana sürecine komut gönderir. \fB-O\fR seçeneği belirtildiğinde, \fIdenetim_komutu\fR yorumlanır ve ana sürece iletilir. Geçerli komutlar şunlardır: "\fBcheck\fR" (ana sürecin çalışıp çalışmadığına bak), “\fBforward\fR” (komut çalıştırmadan önce yönlendirme isteği yap), "\fBcancel\fR" (yönlendirmeleri iptal et), "\fBexit\fR" (ana sürecin çıkmasını iste) ve "\fBstop\fR" (ana süreçten artık çoğullama isteği kabul etmemesini iste).
+.sp
+.TP 4
+\fB-o\fR \fIseçenek\fR
+Yapılandırma dosyasındaki biçime uygun \fIseçenek\fRleri belirtmek için kullanılabilir. Kendisine özel komut satırı seçeneği olmayan yapılandırma seçeneklerini belirtmek için kullanılabilir. Aşağıda sıralanan seçeneklere ait tüm ayrıntılar ve alabilecekleri olası değerler için \fBssh_config\fR(5) kılavuz sayfasına bakınız.
+.sp
+.RS 4
+.RS 3
+.nf
+AddKeysToAgent (Anahtarları Ajana Ekle)
+AddressFamily (Adres Ailesi)
+BatchMode (Toplu İş Kipi)
+BindAddress (Bağlantı Adresi)
+CanonicalDomains (Kurallı Alan Adları)
+CanonicalizeFallbackLocal
+CanonicalizeHostname
+CanonicalizeMaxDots
+CanonicalizePermittedCNAMEs
+CASignatureAlgorithms
+CertificateFile
+CheckHostIP (Konak IP Denetimi)
+Ciphers (Şifreler)
+ClearAllForwardings (Bütün İletimleri Temizle)
+Compression (Sıkıştırma)
+ConnectionAttempts (Bağlantı Denemeleri)
+ConnectionTimeout (Bağlantı Zaman Aşımı)
+ControlMaster
+ControlPath
+ControlPersist
+DynamicForward (Özdevimli İletim)
+EscapeChar (Önceleme Karakteri)
+ExitOnForwardFailure
+FingerprintHash
+ForkAfterAuthentication
+ForwardAgent (İletim Ajanı)
+ForwardX11 (X11 İletimi)
+ForwardX11Timeout
+ForwardX11Trusted (Güvenilir X11 İletimi)
+GatewayPorts (Ağ Geçidi Portları)
+GlobalKnownHostsFile (Genel Bilinen Konaklar Dosyası)
+GSSAPIAuthentication (GSSAPI Kimlik Denetimi)
+GSSAPIDelegateCredentials (GSSAPI Yetkilendirme Tanıtımları)
+HashKnownHosts
+Host (Konak)
+HostbasedAcceptedAlgorithms
+HostbasedAuthentication (Konak Tabanlı Kimlik Denetimi)
+HostKeyAlgorithms (Konak Anahtarı Algoritmaları)
+HostKeyAlias (Konak Anahtarı Takma Adları)
+HostName (Konak Adı)
+IdentitiesOnly
+IdentityAgent
+IdentityFile (Kimlik Dosyası)
+IPQoS (IPv4 hizmet türü/DSCP sınıfı)
+KbdInteractiveAuthentication (Klavyeyle Kimlik Kanıtlama)
+KbdInteractiveDevices (Klavye Etkileşimli Aygıtlar)
+KexAlgorithms (Anahtar Değiş/Tokuş Algoritmaları)
+KnownHostsCommand (Konak Anahtarlarını Listeleme Komutu)
+LocalCommand (Yerel Komut)
+LocalForward (Yerel Yönlendirme)
+LogLevel (Günlükleme Düzeyi)
+LogVerbose (Günlükleme Ayrıntısı)
+MACs (İleti Kimlik Denetimi Kodları)
+Match (Eşleş)
+NoHostAuthenticationForLocalhost
+NumberOfPasswordPrompts (Parola İsteme Adedi)
+PasswordAuthentication (Parolalı Kimlik Denetimi)
+PermitLocalCommand (Yerel Komuta İzin)
+PermitRemoteOpen (Uzak Port Yönlendirme İzni)
+PKCS11Provider (PKCS11 Sağlayıcı)
+Port
+PreferredAuthentications (Tercihli Kimlik Denetimleri)
+ProxyCommand (Vekil Komutu)
+ProxyJump (Atlama Vekili)
+ProxyUseFdpass (Dosya Tanıtıcısı Döndüren Vekil Komutu)
+PubkeyAcceptedAlgorithms (Genel Anahtar İmza Algoritmaları)
+PubkeyAuthentication (Genel Anahtarlı Kimlik Denetimi)
+RekeyLimit (Uzlaşım Öncesi Sınır)
+RemoteCommand (Uzak Komut)
+RemoteForward (Uzak Yönlendirme)
+RequestTTY (İstek Uçbirimi)
+RevokedHostKeys (Yürürlükten Kalkan Konak Anahtarları)
+SendEnv (Ortamı Gönder)
+ServerAliveInterval (Sunucu Canlılık Aralığı)
+ServerAliveCountMax (Canlı Sunucu En Çok İleti Sayısı)
+SessionType (Oturum Türü)
+SetEnv (Ortamı Tanımla)
+StdinNull
+StreamLocalBindMask
+StreamLocalBindUnlink
+StrictHostKeyChecking (Mutlak Konak Anahtarı Denetimi)
+TCPKeepAlive (TCP Canlı Tutma)
+Tunnel (Tünel)
+TunnelDevice (Tünel Aygıtı)
+UpdateHostKeys (Konak Anahtarlarını Güncelle)
+User (Kullanıcı)
+UserKnownHostsFile (Kullanıcının Bilinen Konakları Dosyası)
+VerifyHostKeyDNS
+VisualHostKey (Konak Anahtarını Göster)
+XAuthLocation (XAuth’un Tam Yolu)
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB-p\fR \fIport\fR
+Uzak konaktaki bağlantı portu. Yapılandırma dosyasında her konak için ayrı ayrı belirtilebilir.
+.sp
+.TP 4
+\fB-Q\fR \fIsorgu_seçeneği\fR
+Aşağıdaki özelliklerden biri tarafından desteklenen algoritmalar için sorgulama yapar: \fIcipher\fR (desteklenen simetrik şifreler), \fIcipher-auth\fR (kimliği doğrulanmış şifrelemeyi destekleyen, desteklenen simetrik şifreler), \fIhelp\fR (\fB-Q\fR seçeneği ile kullanım için desteklenen sorgu terimleri), \fImac\fR (desteklenen ileti bütünleme kodları), \fIkex\fR (anahtar değiş/tokuş algoritmaları), \fIkey\fR (anahtar türleri), \fIkey-cert\fR (sertifika anahtarı türleri), \fIkey-plain\fR (sertifikasız anahtar türleri), \fIkey-sig\fR (tüm anahtar türleri ve imza algoritmaları), \fIprotocol-version\fR (desteklenen SSH protokolü sürümleri) ve \fIsig\fR (desteklenen imza algoritmaları). Bunların yanında, \fBssh_config\fR(5) veya \fBsshd_config\fR(5)’teki bir algoritma listesi alan herhangi bir anahtar sözcük, ilgili sorgu_seçeneği için bir takma ad olarak kullanılabilir.
+.sp
+.TP 4
+\fB-q\fR
+Sessiz kip. Bütün uyarı ve tanı iletilerinin gizlenmesini sağlar.
+.sp
+.TP 4
+\fB-R\fR [\fIbağlantı_adresi\fR:]\fIuzak_port\fR:\fIyerel_konak\fR:\fIyerel_port\fR\p \fB-R\fR [\fIbağlantı_adresi\fR:]\fIuzak_port\fR:\fIyerel_soket\fR\p \fB-R\fR \fIuzak_soket\fR:\fIyerel_konak\fR:\fIyerel_port\fR\p \fB-R\fR \fIuzak_soket\fR:\fIyerel_soket\fR\p \fB-R\fR [\fIbağlantı_adresi\fR:]\fIuzak_port\fR
+Belirtilen uzak TCP portu veya Unix soketi bağlantısının yerel konağa yönlendirilmesi için kullanılır.
+.sp
+Bu, uzak taraftaki bir Unix soketini dinlemek için bir TCP \fIuzak_port\fRu veya bir Unix \fIuzak_soket\fRi tahsis edilerek sağlanır. Bu porta veya Unix soketine her bağlantı yapılışında, bağlantı güvenli kanal üzerinden iletilir ve \fIyerel_konak\fR ve \fIyerel_port\fR veya \fIyerel_soket\fR ile belirtilen açık bir hedefe bağlantı kurulur, ancak açık bir hedef yoksa \fBssh\fR bir SOCKS 4/5 vekili olarak davranacak ve bağlantıları uzak SOCKS istemcisi tarafından istenen hedeflere yönlendirecektir.
+.sp
+Port yönlendirmeleri ayrıca, yapılandırma dosyasında da belirtilebilir. Ayrıcalıklı portlar yalnızca uzak konakta root olarak oturum açılmışsa yönlendirebilir. IPv6 adresleri, adres köşeli ayraç içine alınarak belirtilebilir.
+.sp
+Öntanımlı olarak, TCP dinleme soketleri sunucu üzerinde yalnızca geridönüş (loopback) aygıtına bağlanır. Ancak, bağlantıyı belirli bir adrese bağlamak için doğrudan \fIbağlantı_adresi\fR kullanılabilir. \fIbağlantı_adresi\fR olarak boş bir adres veya "*" belirtilmesi \fIuzak_soket\fRin tüm arabirimlerden erişilebilir olması gerektiğini belirtir. \fIbağlantı_adresi\fR belirtilmesi sadece sunucunun \fBGatewayPorts\fR yönergesi etkinse başarılı olur (Bkz: \fBssh_config\fR(5)).
+.sp
+\fIuzak_port\fR değiştirgesi seçenekte ’0’ olarak belirtilmişse, sunucuda dinleme portu dinamik olarak tahsis edilir ve çalışma anında istemciye bildirilir. \fB-O forward\fR ile birlikte kullanılmışsa tahsis edilen port standart çıktıya da basılır.
+.sp
+.TP 4
+\fB-S\fR \fIdenetim_yolu\fR
+Bağlantı paylaşımı için bir denetim soketinin konumu belirtilir. Bağlantı paylaşımını devre dışı bırakmak için “\fInone\fR” dizgesi belirtilmelidir. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBControlPath\fR ve \fBControlMaster\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-s\fR
+Uzak konakta bir altsistemi çağırmak amacıyla kullanılabilir. Altsistemler, diğer uygulamaların (örn. sftp) güvenle taşınmasını sağlayan SSH protokolünün bir özelliğidir. Altsistem uzak komut olarak belirtilir. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBSessionType\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-T\fR
+Sözde-uçbirim tahsisini iptal eder.
+.sp
+.TP 4
+\fB-t\fR
+Sözde-uçbirim tahsisini zorlar. Bu uzak konakta ekran tabanlı uygulamaların çalıştırılmasında kullanılabilir. Örnek olarak menü hizmetlerinin gerçekleştirilmesinde bu çok yararlı olabilir. Çok sayıda \fB-t\fR seçeneği \fBssh\fR’nın yerel tty’si olmasa bile bir tty ayrılmasını sağlar.
+.sp
+.TP 4
+\fB-V\fR
+Sürüm numarasını gösterir ve çıkar.
+.sp
+.TP 4
+\fB-v\fR
+Ayrıntı kipi. \fBssh\fR’nın çalışması esnasındaki hata ayıklama iletilerinin gösterilmesini sağlar. Bağlantı, kimlik denetimi ve yapılandırma sorunlarındaki hataları ayıklamada bu seçenek çok faydalıdır. Çok sayıda \fB-v\fR seçeneği ayrıntı seviyesini artırır. En fazla üç tane olabilir.
+.sp
+.TP 4
+\fB-W\fR \fIkonak:port\fR
+İstemcideki standart giriş ve çıkışın güvenli kanal üzerinden belirtilen \fIkonak\fRın belirtilen \fIport\fRuna yönlendirilmesini sağlar. Örtük olarak \fB-N\fR, \fB-T\fR, \fBExitOnForwardFailure\fR ve \fBClearAllForwardings\fR uygulanır, ancak bunlar yapılandırma dosyasında veya \fB-o\fR komut satırı seçenekleri kullanılarak geçersiz kılınabilir.
+.sp
+.TP 4
+\fB-w\fR \fIyerel_tünel\fR[:\fIuzak_tünel\fR]
+İstemci (\fIyerel_tünel\fR) ve sunucu (\fIuzak_tünel\fR) arasında belirtilen \fBTunnelDevice\fR aygıtlarıyla tünel aygıtı yönlendirmesi sağlar.
+.sp
+Kullanılacak bir sonraki uygun tünel aygıtı sayısal kimliği veya “any” anahtar kelimesi ile belirtilebilir. \fIuzak_tünel\fR belirtilmezse, öntanımlı "any" (herhangi biri) değeri kullanılır. Ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBTunnel\fR ve \fBTunnelDevice\fR yönergesinin açıklamasına bakınız.
+.sp
+\fBTunnel\fR yönergesi atanmazsa öntanımlı tünel kipi “point-to-point” (uçtan-uca) değeri kullanılır. Farklı bir \fBTunnel\fR yönlendirme kipi kullanılacaksa, \fB-w\fR seçeneğinden önce belirtilmelidir.
+.sp
+.TP 4
+\fB-X\fR
+X11 yönlendirmesini etkinleştirir. Bu her konak için ayrı ayrı yapılandırma dosyasında belirtilebilir.
+.sp
+Bu seçenek etkinleştirilirken dikkat edilmelidir. Uzak sistemdeki dosya izinlerini atlayabilen kullanıcılar (kullanıcının X yetkilendirme veritabanı için) yönlendirilen bağlantılar sayesinde yerel X11 ekranına erişebilir. Saldırgan, tuş vuruşlarını izlenmek gibi etkinliklerde bulunabilir.
+.sp
+Bu sebeple, X11 yönlendirmesi, öntanımlı olarak, X11 GÜVENLİK eklentisinin sınırlamalarına tabidir. Ayrıntılı bilgi için \fB-Y\fR seçeneğine ve \fBssh_config\fR(5) kılavuz sayfasında \fBForwardX11Trusted\fR yönergesinin açıklamasına bakınız.
+.sp
+.TP 4
+\fB-x\fR
+X11 yönlendirmesini iptal eder.
+.sp
+.TP 4
+\fB-Y\fR
+Güvenilir X11 yönlendirmesini etkinleştirir. Güvenilir X11 yönlendirmeleri, X11 GÜVENLİK eklentisinin denetimlerine tabi değildir.
+.sp
+.TP 4
+\fB-y\fR
+Günlük bilgisi \fBsyslog\fR(3) sistem modülü kullanılarak gönderilir. Öntanımlı olarak bu bilgi standart hataya gönderilmektedir.
+.sp
+.PP
+\fBssh\fR bunlara ek olarak her kullanıcının yapılandırma dosyasından ve sistem yapılandırma dosyasından yapılandırma verilerini alabilir. Dosya biçemi ve yapılandırma seçenekleri \fBssh_config\fR(5) kılavuz sayfasında açıklanmıştır.
+.sp
+.sp
+.SH "KİMLİK DOĞRULAMA"
+OpenSSH SSH istemcisi SSH 2 protokolünü destekler.
+.sp
+Kimlik doğrulama için kullanılabilen yöntemler şunlardır: GSSAPI tabanlı kimlik doğrulama, konak tabanlı kimlik doğrulama, genel anahtarlı kimlik doğrulama, klavye etkileşimli kimlik doğrulama ve parolalı kimlik doğrulama. Kimlik doğrulama yöntemleri yukarıda belirtilen sırayla denenir, ancak öntanımlı sırayı değiştirmek için \fBPreferredAuthentications\fR kullanılabilir.
+.sp
+Konak tabanlı kimlik doğrulama şu şekilde çalışır: Kullanıcının oturum açtığı makine uzak makinede \fI/etc/hosts.equiv\fR veya \fI/etc/shosts.equiv\fR içinde listeleniyorsa, kullanıcı root değilse ve kullanıcı adları her iki tarafta da aynıysa veya kullanıcının uzak makinedeki ev dizininde \fI~/.rhosts\fR veya \fI~/.shosts\fR dosyaları varsa ve istemci makinenin adı ile o makinedeki kullanıcının adını içeren bir satır içeriyorsa, kullanıcının oturum açabileceği varsayılır. Ek olarak, sunucu, oturum açmaya izin verebilmek için istemcinin konak anahtarını doğrulayabilmelidir (aşağıdaki \fI/etc/ssh/ssh_known_hosts\fR ve \fI~/.ssh/known_hosts\fR açıklamasına bakın). Bu kimlik doğrulama yöntemi, IP sahtekarlığı, DNS sahtekarlığı ve yönlendirme sahtekarlığı ile ilgili güvenlik açıklarını kapatır. [Yöneticiye: \fI/etc/hosts.equiv\fR, \fI~/.rhosts\fR ve genel olarak \fBrlogin/rsh\fR protokolü doğal olarak güvensizdir ve güvenlik isteniyorsa devre dışı bırakılmalıdır.]
+.sp
+Genel anahtarlı kimlik doğrulaması şu şekilde çalışır: Şema, şifreleme ve şifre çözmenin ayrı anahtarlar kullanılarak yapıldığı şifreleme sistemlerini kullanan genel anahtarlı şifrelemeye dayanır ve şifreleme anahtarından şifre çözme anahtarının türetilmesi mümkün değildir. Buradaki fikir, her kullanıcının kimlik doğrulama amacıyla bir genel/gizli anahtar çifti oluşturmasıdır. Sunucu genel anahtarı bilir, gizli anahtarı ise yalnızca kullanıcı bilir. \fBssh\fR, DSA, ECDSA, Ed25519 veya RSA algoritmalarından birini kullanarak genel anahtarlı kimlik doğrulama protokolünü otomatik olarak uygular.
+.sp
+\fI~/.ssh/authorized_keys\fR dosyası, oturum açmaya izin verilen genel anahtarları listeler. Kullanıcı oturum açtığında, \fBssh\fR sunucuya kimlik doğrulaması için hangi anahtar çiftini kullanmak istediğini söyler. İstemci özel anahtara erişimi olduğunu kanıtlar ve sunucu da ilgili genel anahtarın hesabı kabul etmeye yetkili olup olmadığına bakar.
+.sp
+Sunucu, farklı bir yöntemle kimlik doğrulamayı tamamlandıktan sonra, genel anahtarlı kimlik doğrulamasının başarılı olmasını engelleyen hataları istemciye bildirebilir. Bunlar, günlükleme seviyesini hata ayıklamaya veya daha yükseğe çıkararak (örneğin \fB-v\fR seçeneğini kullanarak) görüntülenebilir.
+.sp
+Kullanıcı anahtar çiftini \fBssh-keygen\fR(1) çalıştırarak oluşturur. Uygulama gizli anahtarı kullanıcının ev dizininde \fI~/.ssh/id_dsa\fR (DSA), \fI~/.ssh/id_ecdsa\fR (ECDSA), \fI~/.ssh/id_ecdsa_sk\fR (kimlik doğrulayıcı tarafından barındırılan ECDSA), \fI~/.ssh/id_ed25519\fR (Ed25519), \fI~/.ssh/id_ed25519_sk\fR (kimlik doğrulayıcı tarafından barındırılan Ed25519) veya \fI~/.ssh/id_rsa\fR (RSA) dosyasında, genel anahtarı ise \fI~/.ssh/id_dsa.pub\fR (DSA), \fI~/.ssh/id_ecdsa.pub\fR (ECDSA), \fI~/.ssh/id_ecdsa_sk.pub\fR (kimlik doğrulayıcı tarafından barındırılan ECDSA), \fI~/.ssh/id_ed25519.pub\fR (Ed25519), \fI~/.ssh/id_ed25519_sk.pub\fR (kimlik doğrulayıcı tarafından barındırılan Ed25519) veya \fI~/.ssh/id_rsa.pub\fR (RSA) dosyasında saklar. Bundan sonra kullanıcı genel anahtarını uzak makinedeki ev dizininde \fI~/.ssh/authorized_keys\fR dosyasına kopyalamalıdır. \fIauthorized_keys\fR dosyası geleneksel \fI~/.rhosts\fR dosyasına karşılıktır ve satırlar çok uzun olabilse de her satırda bir anahtar içerir. Bunları yaptıktan sonra, kullanıcı parola belirtmeksizin oturum açabilir.
+.sp
+Genel anahtarlı kimlik doğrulamasının sertifika doğrulamalı bir çeşidi mevcuttur: Bir dizi genel/gizli anahtar yerine imzalı sertifikalar kullanılır. Bunun getirisi, birçok genel/gizli anahtar yerine tek bir güvenilir sertifika yetkilisinin kullanılabilmesidir. Daha fazla bilgi için \fBssh-keygen\fR(1) sayfasında SERTİFİKALAR bölümüne bakın.
+.sp
+Genel anahtarlı veya sertifikalı kimlik doğrulamasını kullanmanın en uygun yolu, bir kimlik doğrulama aracısı kullanmaktır. Daha fazla bilgi için \fBssh-agent\fR(1) ve (istenirse) \fBssh_config\fR(5) içindeki \fBAddKeysToAgent\fR yönergesine bakın.
+.sp
+Klavye etkileşimli kimlik doğrulama şu şekilde çalışır: Sunucu, isteğe bağlı bir "meydan okuma" metni gönderir ve muhtemelen birden çok kez yanıt ister. Klavye etkileşimli kimlik doğrulama örnekleri arasında BSD Kimlik Doğrulaması (bkz. \fBlogin.conf\fR(5) ve PAM (OpenBSD dışında bazı sistemlerde) bulunur.
+.sp
+Son olarak, diğer kimlik doğrulama yöntemleri başarısız olursa, \fBssh\fR kullanıcıdan parola ister. Parola, doğrulanması için uzak konağa gönderilir; ancak, tüm iletişimler şifreli olduğundan, ağda dinleyen biri tarafından bu parola görülemez.
+.sp
+\fBssh\fR kullanılmış olan bütün konakları içeren veritabanını otomatik olarak oluşturur ve denetler. Konak anahtarları kullanıcının ev dizinindeki \fI~/.ssh/known_hosts\fR dosyasında tutulur. Buna ek olarak bilinen konaklar için otomatik olarak \fI/etc/ssh/ssh_known_hosts\fR dosyasına da başvurulur. Yeni konaklar otomatik olarak kullacının dosyasına eklenir. Şayet bir konağın kimlik bilgileri değişirse, \fBssh\fR bu konuda uyarır ve truva atlarının kullanıcının parolasını çalmasını engellemek için parolalı kimlik denetimini iptal eder. Bu mekanizmanın diğer bir amacı şifrelemeyi es geçebilen araya girme saldırılarına engel olmaktır. \fBStrictHostKeyChecking\fR seçeneği anahtarı bilinmeyen ya da değişmiş olan konaklarda oturum açmayı engellemek için kullanılabilir.
+.sp
+Kullanıcının kimliği sunucu tarafından kabul edildiğinde, sunucu ya verilen komutu etkileşimli olmayan bir oturumda yürütür ya da herhangi bir komut belirtilmemişse makinede oturum açar ve kullanıcıya etkileşimli bir oturum olarak normal bir kabuk verir. Uzak komut veya kabuk ile olan tüm iletişim otomatik olarak şifrelenir.
+.sp
+Etkileşimli bir oturum istenirse, \fBssh\fR öntanımlı olarak, etkileşimli oturumlar için istemcide de varsa, yalnızca bir sözde uçbirim (pty) ister. \fB-T\fR ve \fB-t\fR seçenekleri bu davranışı geçersiz kılmak için kullanılabilir.
+.sp
+Sözde uçbirim tahsis edilmişse kullanıcı aşağıda bahsedilen önceleme karakterlerini kullanabilir.
+.sp
+Sözde uçbirim tahsis edilmemişse, oturum şeffaftır ve ikil verileri güvenilir bir şekilde aktarmak için kullanılabilir. Çoğu sistemde, önceleme karakterini "none" olarak ayarlamak, bir tty kullanılsa bile oturumu şeffaf hale getirir.
+.sp
+Uzak makinedeki komut veya kabuk çıkış yaptığında oturum sonlandırılır ve tüm X11 ve TCP bağlantıları kapatılır.
+.sp
+.SH "ÖNCELEME KARAKTERLERİ"
+Sözde uçbirim istenmesi durumunda \fBssh\fR birçok işlevi bir önceleme karakteri aracılığı ile destekler.
+.sp
+Tek bir yaklaşık işareti (tilde) \fB~~\fR şeklinde ya da yaklaşık işareti ile öncelenmiş aşağıda belirtilenler dışında bir karakterle gönderilebilir. Önceleme karakterinin önceleme karakteri olarak yorumlanabilmesi için karakterden hemen sonra bir satır sonu karakteri gelmelidir. Önceleme karakteri yapılandırma dosyasındaki \fBEscapeChar\fR yapılandırma seçeneği ile ya da komut satırında \fB-e\fR seçeneği ile değiştirilebilir.
+.sp
+Desteklenen öncelemler (öntanımlının ’\fB~\fR’ olduğu varsayımıyla) şunlardır:
+.sp
+.TP 4
+\fB~.\fR
+Bağlantıyı kes.
+.sp
+.TP 4
+\fB~^Z\fR
+\fBssh\fR’ı artalanda çalıştır.
+.sp
+.TP 4
+\fB~#\fR
+Yönlendirilen bağlantıları listele.
+.sp
+.TP 4
+\fB~&\fR
+Oturumdan çıkış sırasında, yönlendirilen bağlantının ya da X11 oturumlarının sonlandırılmasını beklerken \fBssh\fR’ı artalanda çalıştır.
+.sp
+.TP 4
+\fB~?\fR
+Önceleme karakterlerinin listesini göster.
+.sp
+.TP 4
+\fB~B\fR
+Uzak sisteme sonlandırma iletisi gönder (uzak sistem destekliyorsa).
+.sp
+.TP 4
+\fB~C\fR
+Komut satırı aç. Şimdilik \fB-L\fR, \fB-R\fR ve \fB-D\fR seçeneklerini kullanarak port yönlendirmesi eklemeyi sağlar (yukarı bkz.) Ayrıca, yerel konak için \fB-KL\fR[\fIbağlantı_adresi:\fR]\fIport\fR ile, uzak konak için \fB-KR\fR[\fIbağlantı_adresi:\fR]\fIport\fR ile ve dinamik port yönlendirmeleri için \fB-KD\fR[\fIbağlantı_adresi:\fR]\fIport\fR ile mevcut port yönlendirmelerinin iptal edilmesini sağlar. \fBssh_config\fR(5)’te \fBPermitLocalCommand\fR seçeneği etkinleştirilmişse, \fB!\fR\fIkomut\fR ile kullanıcının yerel bir komutu yürütmesine izin verir. \fB-h\fR seçeneği ile temel yardım sağlanmıştır.
+.sp
+.TP 4
+\fB~R\fR
+Bağlantı anahtarlarının yenilenmesini iste (uzak sistemin de desteklemesi durumunda).
+.sp
+.TP 4
+\fB~V\fR
+Hatalar standart hataya yazılırken ayrıntı düzeyini (LogLevel) azalt.
+.sp
+.TP 4
+\fB~v\fR
+Hatalar standart hataya yazılırken ayrıntı düzeyini (LogLevel) arttır.
+.sp
+.PP
+.sp
+.SH "TCP YÖNLENDİRMESİ"
+Güvenli bir kanal üzerinden rastgele TCP bağlantılarının yönlendirilmesi, komut satırında veya bir yapılandırma dosyasında belirtilebilir. TCP yönlendirilmenin olası uygulamalarından biri, bir posta sunucusuna güvenli bir bağlantıyken bir diğeri güvenlik duvarlarından geçiştir.
+.sp
+Aşağıda, bağlandığı IRC sunucusu şifreli iletişimi doğrudan desteklemese de, bir IRC istemcisi ile iletişimin şifrelenmesi örneklenmiştir. Kullanıcı, bağlantıyı yönlendirmek için kullanılacak portları belirterek \fBssh\fR ile uzak konağa bağlanmaktadır. Bundan sonra uygulama yerel olarak başlatıldığında \fBssh\fR bağlantıyı şifreler ve uzak sunucuya yöneltir.
+.sp
+Aşağıdaki örnekte, 6667 numaralı standart IRC portu kullanılarak istemcideki IRC oturumu "server.example.com" adresindeki IRC sunucusuna tünellenmekte ve "#users" odasına "pinky" takma adıyla katılım sağlanmaktadır:
+.sp
+.RS 4
+.nf
+$ ssh -f -L 6667:localhost:6667 server.example.com sleep 10
+$ irc -c ’#users’ pinky IRC/127.0.0.1
+.fi
+.sp
+.RE
+\fB-f\fR seçeneği ile \fBssh\fR artalana alınmakta, “\fBsleep 10\fR” uzak komutu ile tünel, kullanacak uygulamanın başlatılması için (örnekte 10 saniye) geciktirilmektedir. Belirtilen sürede bir bağlantı gerçekleşmezse \fBssh\fR çıkacaktır.
+.sp
+.SH "X11 YÖNLENDİRMESİ"
+\fBForwardX11\fR yönergesine "yes" atanmışsa (yukarıdaki \fB-X\fR, \fB-x\fR ve \fB-Y\fR seçeneklerinin açıklamasına bakın) ve kullanıcı X11 kullanıyorsa (\fBDISPLAY\fR ortam değişkeni etkindir), X11 ekranına bağlantı, kabuktan (veya komuttan) başlatılan herhangi bir X11 uygulamasında olduğu gibi, yerel makineden uzak X sunucusuna yapılacak bağlantı üzerinden ve şifreli kanaldan geçerek otomatik olarak uzak tarafa iletilir. Kullanıcı, \fBDISPLAY\fR değişkenini elle ayarlamamalıdır. X11 bağlantılarının yönlendirilmesi, yapılandırma dosyalarında veya komut satırından yapılandırılabilir.
+.sp
+\fBssh\fR tarafından belirlenen \fBDISPLAY\fR değeri sunucu makineyi, ancak sıfırdan büyük bir değerle gösterir. Bu normaldir ve \fBssh\fR bağlantıları şifreli kanal üzerinden iletmek için sunucu makinesinde bir "vekil" X sunucusu oluşturduğu için bu böyledir.
+.sp
+\fBssh\fR ayrıca sunucu makinesinde \fIXauthority\fR verilerini otomatik olarak atayacaktır. Bu amaçla rastgele bir yetkilendirme çerezi oluşturacak, bunu sunucuda \fIXauthority\fR’de saklayacak ve yönlendirilen her bağlantının bu çerezi taşıdığını doğrulayıp bağlantı açıldığında bunu gerçek çerez ile değiştirecektir. Gerçek kimlik doğrulama çerezi hiçbir zaman sunucu makinesine gönderilmez (hiçbir çerez açıkça gönderilmez).
+.sp
+\fBForwardAgent\fR yönergesine "yes" atanmışsa (yukarıdaki \fB-A\fR ve \fB-a\fR seçeneklerinin açıklamasına bakın) ve kullanıcı bir kimlik doğrulama aracısı kullanıyorsa, aracıya olan bağlantı otomatik olarak uzak tarafa yönlendirilir.
+.sp
+.SH "KONAK ANAHTARLARININ DOĞRULANMASI"
+Bir sunucuya ilk kez bağlanırken, kullanıcıya sunucunun genel anahtarının parmak izi sunulur (\fBStrictHostKeyChecking\fR seçeneği devre dışı bırakılmamışsa). Parmak izleri \fBssh-keygen\fR(1) kullanılarak belirlenebilir:
+.sp
+.RS 4
+.nf
+$ ssh-keygen -l -f /etc/ssh/ssh_host_rsa_key
+.fi
+.sp
+.RE
+Parmak izi zaten biliniyorsa, eşleştirilebilir, anahtar kabul veya red edilebilir. Sunucu için yalnızca eski sürüm (MD5) parmak izleri mevcutsa, parmak izi algoritmasını eşleşecek şekilde sürüm düşürmek için \fBssh-keygen\fR(1) \fB-E\fR seçeneği kullanılabilir.
+.sp
+Yalnızca parmak izi dizilerine bakarak konak anahtarlarını karşılaştırmanın zorluğu nedeniyle, konak anahtarlarını aş görseli oluşturarak görsel olarak karşılaştırma desteği de vardır. \fBVisualHostKey\fR yönergesine "yes" atayarak, oturumun kendisi etkileşimli olsun veya olmasın, bir sunucuya her girişte küçük bir ASCII görsel görüntülenir. Kullanıcı, sürekli kullandığı sunucunun ürettiği kalıbı öğrenerek, tamamen farklı bir kalıp görüntülendiğinde konak anahtarının değiştiğini kolayca anlayabilir. Bununla birlikte, bu modeller kesin olmadığından, hatırlanan modele benzeyen bir model, yalnızca konak anahtarının aynı olma olasılığını sağlar, garantili kanıt değildir.
+.sp
+Bilinen tüm konaklar için parmak izlerinin listesini aş görselleriyle birlikte almak için aşağıdaki komut satırı kullanılabilir:
+.sp
+.RS 4
+.nf
+$ ssh-keygen -lv -f ~/.ssh/known_hosts
+.fi
+.sp
+.RE
+Parmak izi bilinmiyorsa, başka bir doğrulama yöntemi kullanılabilir: "DNS doğrulamalı SSH parmak izleri". Alan adı kayıtlarına SSHFP adlı bir kaynak kaydı (RR) eklenerek bağlanan istemci bilinen parmak izini sunulan anahtarınkiyle karşılaştırabilir.
+.sp
+Bu örnekte istemci “host.example.com” sunucusuna bağlanmaktadır. Önce host.example.com alan adı kayıtlarına SSHFP kaynak kayıtlarını eklemek gerekir:
+.sp
+.RS 4
+.nf
+$ ssh-keygen -r host.example.com.
+.fi
+.sp
+.RE
+Bu komutun çıktı satırları alan adı kayıtlarına eklenecektir. DNS sunucusunun parmak izi sorgularını yanıtlayıp yanıtlamadığını anlamak için:
+.sp
+.RS 4
+.nf
+$ dig -t SSHFP host.example.com
+.fi
+.sp
+.RE
+komutu kullanılabilir. Artık istemci bağlantı kurabilir:
+.sp
+.RS 4
+.nf
+$ ssh -o "VerifyHostKeyDNS ask" host.example.com
+[...]
+Matching host key fingerprint found in DNS.
+Are you sure you want to continue connecting (yes/no)?
+  [Konak anahtarı parmak izi DNS’deki ile eşleşti.]
+  [Bağlanmak istiyor musunuz (evet/hayır)?]
+.fi
+.sp
+.RE
+Daha ayrıntılı bilgi için \fBssh_config\fR(5) kılavuz sayfasında \fBVerifyHostKeyDNS\fR yönergesinin açıklamasına bakılabilir.
+.sp
+.SH "SSH TÜNELLERİ"
+\fBssh\fR, iki ağın güvenli bir şekilde birleştirilmesini sağlayan \fBtun\fR(4) sözde ağ aygıtını kullanarak Özel Sanal Ağ (VPN) tünelleme desteği vermektedir. \fBssh_config\fR(5) yapılandırma yönergesi \fBPermitTunnel\fR ile sunucunun bunu destekleyip desteklemeyeceği ve hangi düzeyde (katman 2 veya 3 trafik) destekleyeceği belirlenebilir.
+.sp
+Aşağıdaki örnek yapılandırma ile SSH sunucusu, istemci ağı 10.0.50.0/24 ile uzak ağ 10.0.99.0/24 arasında, uzak ağa giden 192.168.1.15 ağ geçidi kullanarak, 10.1.1.1’den 10.1.1.2’ye noktadan noktaya bağlantı kurmaktadır.
+.sp
+İstemci üzerinde:
+.sp
+.RS 4
+.nf
+# ssh -f -w 0:1 192.168.1.15 true
+# ifconfig tun0 10.1.1.1 10.1.1.2 netmask 255.255.255.252
+# route add 10.0.99.0/24 10.1.1.2
+.fi
+.sp
+.RE
+Sunucu üzerinde:
+.sp
+.RS 4
+.nf
+# ifconfig tun1 10.1.1.2 10.1.1.1 netmask 255.255.255.252
+# route add 10.0.50.0/24 10.1.1.1
+.fi
+.sp
+.RE
+İstemci erişimi, \fI/root/.ssh/authorized_keys\fR dosyası (aşağıya bakın) ve \fBPermitRootLogin\fR sunucu yönergesi aracılığıyla daha hassas bir şekilde ayarlanabilir. \fBPermitRootLogin\fR yönergesine “forced-commands-only” [yalnızca zorunlu komutlar] değeri atanmışsa, aşağıdaki girdi \fBtun\fR(4) aygıtı 1’deki "ali" kullanıcısı ile \fBtun\fR(4) aygıtı 2’deki "veli" kullanıcısı arasında bağlantılara izin verir:
+.sp
+.RS 4
+.nf
+tunnel="1",command="sh /etc/netstart tun1" ssh-rsa ... ali
+tunnel="2",command="sh /etc/netstart tun2" ssh-rsa ... veli
+.fi
+.sp
+.RE
+SSH tabanlı kurulumun getirdiği ek yük oldukça makul olduğundan, kablosuz VPN’ler gibi geçici kurulumlar için daha uygun olabilir. Daha kalıcı ve daha iyi VPN’ler, \fBipsecctl\fR(8) ve \fBisakmpd\fR(8) gibi araçlarla sağlanabilir.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBssh\fR normalde aşağıdaki ortam değişkenlerine atama yapar:
+.sp
+.TP 4
+\fBDISPLAY\fR
+\fBDISPLAY\fR değişkeni X11 sunucusunun konumunu gösterir. \fBssh\fR bu değişkene otomatik olarak "konak:n" biçiminde değer atar. Burada konak kabuğun çalıştığı sistemi işaret ederken n de n ≥ 1 koşulunu sağlayan tamsayıya karşılık gelir. \fBssh\fR bu özel değeri X11 bağlantılarını güvenli kanal üzerinden iletmede kullanır. Kullanıcı \fBDISPLAY\fR değişkenini doğrudan kendisi ayarlamamalıdır, çünkü bu X11 bağlantılarını güvensiz hale getirir (ve ayrıca kullanıcının gerekli olan yetkilendirme çerezlerini elle kopyalamasını da gerektirir).
+.sp
+.TP 4
+\fBHOME\fR
+Kullanıcının ev dizininin yolu bu değişkene atanır.
+.sp
+.TP 4
+\fBLOGNAME\fR
+\fBUSER\fR değişkeni ile aynıdır; bu değişkeni kullanan sistemlerle uyumluluk için tanımlanır.
+.sp
+.TP 4
+\fBMAIL\fR
+Kullanıcının posta kutusunun yolu bu değişkene atanır.
+.sp
+.TP 4
+\fBPATH\fR
+\fBssh\fR derlenirken belirtilen öntanımlı \fBPATH\fR’a ayarlanır.
+.sp
+.TP 4
+\fBSSH_ASKPASS\fR
+Şayet \fBssh\fR bir anahtar parolası gerektiriyorsa, bunu mevcut uçbirimden okur (eğer uçbirimden çalıştırılıyorsa). Diğer taraftan \fBssh\fR bir uçbirimden çalıştırılmıyor fakat \fBDISPLAY\fR ve \fBSSH_ASKPASS\fR değişkenleri ayarlanmış iseler, \fBssh\fR, \fBSSH_ASKPASS\fR tarafından belirtilen uygulamayı çalıştırır ve anahtar parolasını okumak için bir X11 penceresi açar. Bu özellikle \fBssh\fR bir \fB.Xsession\fR ya da ilgili betik tarafından çağırılıyorsa yararlıdır. (Burada dikkat edilmesi gereken konu, bu yöntemin çalışması için bazı sistemlerde girdilerin \fI/dev/null\fR’dan yönlendirilmesi gerektiğidir.)
+.sp
+.TP 4
+\fBSSH_ASKPASS_REQUIRE\fR
+Parola sorma uygulamasının kullanımı üzerinde daha fazla denetim sağlar. Bu değişkene \fB“never”\fR atanırsa \fBssh\fR asla bu uygulamayı kullanmaya çalışmaz. Eğer \fB“prefer”\fR atanmışsa, \fBssh\fR parola isterken TTY yerine bu uygulamayı kullanmayı tercih edecektir. Son olarak, değişkene \fB"force"\fR atanmışsa, \fBDISPLAY\fR ortam değişkeninin tanımlı olup olmadığına bakılmaksızın tüm parola girişleri için bu uygulama kullanılacaktır.
+.sp
+.TP 4
+\fBSSH_AUTH_SOCK\fR
+Ajanla iletişimde kullanılacak Unix-alan soketinin yolunu belirtir.
+.sp
+.TP 4
+\fBSSH_CONNECTION\fR
+Bağlantının kurulduğu istemci ve sunucuyu belirtir. Değişken boşluk ile birbirinden ayrılmış 4 değerden oluşur: istemci ip-adresi, istemci portu, sunucu ip-adresi ve sunucu portu.
+.sp
+.TP 4
+\fBSSH_ORIGINAL_COMMAND\fR
+Zorunlu bir komutun çalıştırılması durumunda özgün komut satırını içerir. Bu özgün değiştirgeleri çıkartmakta kullanılabilir.
+.sp
+.TP 4
+\fBSSH_TTY\fR
+Yürürlükteki kabuk ya da komutla ilişkili olan tty’nin adı (aygıt yolu) bu değişkene atanır. Yürürlükteki oturum tty’ye sahip değilse, bu değişkene bir atama yapılmaz.
+.sp
+.TP 4
+\fBSSH_TUNNEL\fR
+İsteğe bağlı olarak, istemci tarafından tünel iletme istendiğinde atanan arabirim adlarını içerecek şekilde \fBsshd\fR(8) tarafından tanımlanır.
+.sp
+.TP 4
+\fBSSH_USER_AUTH\fR
+İsteğe bağlı olarak \fBsshd\fR(8) tarafından tanımlanan bu değişken, kullanılan tüm genel anahtarlar da dahil olmak üzere, oturum kurulduğunda başarıyla kullanılan kimlik doğrulama yöntemlerini listeleyen bir dosyanın yolunu içerebilir.
+.sp
+.TP 4
+\fBTZ\fR
+Zaman Dilimi değişkeni; şayet artalan süreci başlatıldığında tanımlanmışsa geçerli zaman dilimi bu değişkene atanmıştır (Yani, artalan süreci yeni bağlantılara bu değeri aktarır).
+.sp
+.TP 4
+\fBUSER\fR
+Oturum açan kullanıcının adı bu değişkene atanır.
+.sp
+.PP
+Ayrıca \fBssh\fR, \fI$HOME/.ssh/environment\fR dosyasını okur ve eğer bu dosya mevcut ise ve de kullanıcılar değişkenlerini değiştirme hakkına sahip iseler "DEĞİŞKEN=değer" biçimindeki satırları ortama ekler. Daha fazla bilgi için, \fBsshd_config\fR(5)’deki \fBPermitUserEnvironment\fR (Kullanıcı Ortamına İzin Ver) seçeneğine bakınız.
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI$HOME/.rhosts\fR
+Bu dosya konak tabanlı kimlik kanıtlama için kullanılır (yukarı bkz.). Bazı makinalarda bu dosyanın erişim haklarının herkes tarafından okunacak şekilde düzenlenmiş olması gerekmektedir (şayet kullanıcının ana dizini NFS bölümünde ise; çünkü \fBsshd\fR(8) bu dosyayı root olarak okur). Ayrıca bu dosyanın sahibi kullanıcı olmalı ve hiçbir kimsenin bu dosyaya yazma hakkı bulunmamalıdır. Birçok makina için tavsiye edilen erişim yetkileri, kullanıcı için okuma/yazma hakkı ve diğerleri için ise erişimin olmamasıdır.
+.sp
+.TP 4
+\fI$HOME/.shosts\fR
+Aynı \fI.rhosts\fR’un kullanıldığı şekilde kullanılır, ancak \fBrlogin/rsh\fR ile oturum açmaya izin vermeden konak tabanlı kimlik doğrulaması sağlar.
+.sp
+.TP 4
+\fI$HOME/.ssh/\fR
+Bu dizin, kullanıcıya özel tüm yapılandırma ve kimlik doğrulama bilgileri için öntanımlı konumdur. Bu dizinin tüm içeriğini gizli tutmak için genel bir gereklilik yoktur, ancak önerilen izinler kullanıcı için okuma/yazma/yürütme olup ve başkaları tarafından erişilememelidir.
+.sp
+.TP 4
+\fI$HOME/.ssh/authorized_keys\fR
+Ev dizini sahibinin oturum açması için kullanılan genel anahtarları (DSA, ECDSA, Ed25519, RSA) listeler. Dosya biçemi \fBsshd\fR(8) kılavuz sayfasında açıklanmaktadır. Bu hassas bir dosya değildir, ancak tavsiye edilen izinler: Kullanıcı için okuma/yazma izni ve diğer kullanıcılar için ise erişim izni olmamasıdır.
+.sp
+.TP 4
+\fI$HOME/.ssh/config\fR
+Kullanıcıya özel yapılandırma dosyası. Dosyanın biçemi ve yapılandırma seçenekleri \fBssh_config\fR(5)’de açıklanmaktadır. Kötüye kullanım olasılığı nedeniyle, bu dosyanın katı izinlere sahip olması gerekir: Kullanıcı için okuma/yazma izni ve başkaları için yazma yasağı.
+.sp
+.TP 4
+\fI$HOME/.ssh/environment\fR
+Ortam değişkenlerinin ek tanımlarını içerir. Yukarıda \fBORTAM DEĞİŞKENLERİ\fR bölümüne bakınız.
+.sp
+.TP 4
+\fI$HOME/.ssh/id_dsa\fR\p \fI$HOME/.ssh/id_ecdsa\fR\p \fI$HOME/.ssh/id_ecdsa_sk\fR\p \fI$HOME/.ssh/id_ed25519\fR\p \fI$HOME/.ssh/id_ed25519_sk\fR\p \fI$HOME/.ssh/id_rsa\fR
+Kimlik kanıtlamasında kullanılan gizli anahtarı içerir. Bunlar hassas dosyalardır ve kullanıcı okuyabilmeli ama başka hiç kimse erişememelidir (okuma/yazma/yürütme). Başkaları tarafından okunabilien bir gizli anahtarı \fBssh\fR basitçe yoksayar. AES-128 kullanarak bu dosyanın hassas bölümünü şifrelemek için kullanılacak anahtarı üretirken bir anahtar parolası belirtmek mümkündür.
+.sp
+.TP 4
+\fI$HOME/.ssh/id_dsa.pub\fR\p \fI$HOME/.ssh/id_ecdsa.pub\fR\p \fI$HOME/.ssh/id_ecdsa_sk.pub\fR\p \fI$HOME/.ssh/id_ed25519.pub\fR\p \fI$HOME/.ssh/id_ed25519_sk.pub\fR\p \fI$HOME/.ssh/id_rsa.pub\fR
+Kimlik kanıtlamasında kullanılan genel anahtarı içerir. Bunlar hassas dosyalar değildir ve herkes okuyabilirse de bu gerekli değildir.
+.sp
+.TP 4
+\fI$HOME/.ssh/known_hosts\fR
+Kullanıcının oturum açtığı, \fI/etc/ssh/ssh_known_hosts\fR dosyasında kayıtlı olmayan bütün konakların anahtarlarını içerir. Dosya biçemi hakkında ayrıntılı bilgi için \fBsshd\fR(8) kılavuz sayfasına bakınız.
+.sp
+.TP 4
+\fI$HOME/.ssh/rc\fR
+Bu dosyadaki komutlar kullanıcı oturum açtığında kullanıcının kabuğu (ya da komut) çalıştırılmadan hemen önce \fBssh\fR tarafından çalıştırılır. Daha ayrıntılı bilgi için \fBsshd\fR(8) kılavuz sayfasına bakınız.
+.sp
+.TP 4
+\fI/etc/hosts.equiv\fR
+Bu dosya konağa dayalı kimlik kanıtlaması içindir (yukarıya bakınız). Sadece sistem yöneticisi (root) tarafından yazılabilir olmalıdır.
+.sp
+.TP 4
+\fI/etc/shosts.equiv\fR
+Aynı \fI/etc/hosts.equiv\fR gibi işlem görür. Konağa dayalı kimlik kanıtlamasıyla erişimin sağlandığı ancak \fBrsh\fR/\fBrlogin\fR’in kullanılmaması gerektiği durumlarda faydalıdır.
+.sp
+.TP 4
+\fI/etc/ssh/ssh_config\fR
+Sistem yapılandırma dosyası. Dosyanın biçemi ve yapılandırma seçenekleri \fBssh_config\fR(5)’de açıklanmaktadır.
+.sp
+.TP 4
+\fI/etc/ssh/ssh_host_key\fR\p \fI/etc/ssh/ssh_host_dsa_key\fR\p \fI/etc/ssh/ssh_host_ecdsa_key\fR\p \fI/etc/ssh/ssh_host_ed25519_key\fR\p \fI/etc/ssh/ssh_host_rsa_key\fR
+Bu dosyalar konağın gizli anahtarlarını içerir ve konağa dayalı kimlik kanıtlamasında kullanılır.
+.sp
+.TP 4
+\fI/etc/ssh/ssh_known_hosts\fR
+Bilinen konakların anahtarlarını listeleyen sistem dosyası. Bu dosya sistem yöneticisi tarafından hazırlanmalı ve erişilen bütün konakların genel konak anahtarları dosyaya eklenmelidir. Dosya izinleri herkes tarafından okunabilecek şekilde ayarlanmalıdır. Dosya biçemi hakkında ayrıntılı bilgi için \fBsshd\fR(8) kılavuz sayfasına bakınız.
+.sp
+.TP 4
+\fI/etc/ssh/sshrc\fR
+Bu dosyadaki komutlar kullanıcı oturum açtığında kullanıcının kabuğu (ya da komut) çalıştırılmadan hemen önce \fBssh\fR tarafından çalıştırılır. Daha ayrıntılı bilgi için \fBsshd\fR(8) kılavuz sayfasına bakınız.
+.sp
+.PP
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBssh\fR uzak komutun çıkış durumu ile ya da hata olmuş ise 255 ile sonlanır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBscp\fR(1), \fBsftp\fR(1), \fBssh-add\fR(1), \fBssh-agent\fR(1), \fBssh-keygen\fR(1), \fBssh-keyscan\fR(1), \fBtun\fR(4), \fBssh_config\fR(5), \fBssh-keysign\fR(8), \fBsshd\fR(8).
+.sp
+.SH "STANDARTLAR"
+S. Lehtinen ve C. Lonvick, Atanmış Güvenli Kabuk (SSH) Protokol Numaraları
+.sp
+T. Ylonen ve C. Lonvick, Güvenli Kabuk (SSH) Protokol Mimarisi, RFC 4251, Ocak 2006.
+.sp
+T. Ylonen ve C. Lonvick, Güvenli Kabuk (SSH) Kimlik Kanıtlama Protokolü, RFC 4252, Ocak 2006.
+.sp
+T. Ylonen ve C. Lonvick, Güvenli Kabuk (SSH) Aktarım Katmanı Protokolü, RFC 4253, Ocak 2006.
+.sp
+T. Ylonen ve C. Lonvick, Güvenli Kabuk (SSH) Bağlantı Protokolü, RFC 4254, Ocak 2006.
+.sp
+J. Schlyter ve W. Griffin, Güvenli Kabuk (SSH) Anahtar parmak İzlerini Güvenilir olarak Yayınlamak için DNS Kullanımı, RFC 4255, Ocak 2006.
+.sp
+F. Cusack ve M. Forssen, Güvenli Kabuk (SSH) Protokolü için Genel İleti Değişimi Kimlik Doğrulaması, RFC 4256, Ocak 2006.
+.sp
+J. Galbraith ve P. Remaker, Güvenli Kabuk (SSH) Oturumu Kanal Kesme Eklentisi, RFC 4335, Ocak 2006.
+.sp
+M. Bellare, T. Kohno ve C. Namprempre, Güvenli Kabuk (SSH) Aktarım Katmanı Şifreleme Kipleri, RFC 4344, Ocak 2006.
+.sp
+B. Harris, Güvenli Kabuk (SSH) Aktarım Katmanı Protokolü için Geliştirilmiş Arcfour Kipleri, RFC 4345, Ocak 2006.
+.sp
+M. Friedl, N. Provos ve W. Simpson, Güvenli Kabuk (SSH) Aktarım Katmanı Protokolü için Diffie-Hellman Grup Değişimi, RFC 4419, Mart 2006.
+.sp
+J. Galbraith ve R. Thayer, Güvenli Kabuk (SSH) Genel Anahtar Dosyası Biçemi, RFC 4716, Kasım 2006.
+.sp
+D. Stebila ve J. Green, Güvenli Kabuk Aktarım Katmanının Eliptik Eğri Algoritması ile Bütünlenmesi, RFC 5656, Aralık 2009.
+.sp
+A. Perrig ve D. Song, Aş Görselleştirme: Gerçek Dünya Güvenliğini Geliştirmek İçin Yeni Bir Teknik, 1999, Uluslararası Kriptografik Teknikler ve E-Ticaret Çalıştayı (CrypTEC ’99).
+.sp
+.SH "YAZARLAR"
+OpenSSH, Tatu Ylonen’in özgün ve özgür ssh 1.2.12 sürümünün bir türevidir. Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo de Raadt ve Dug Song birçok yazılım hatasını ortadan kaldırmışlar, yeni özellikler eklemişler ve OpenSSH’ı oluşturmuşlardır. Markus Friedl SSH protokolünün 1.5 ve 2.0 sürümü desteği için katkıda bulunmuştur.
+.sp
+.SH "ÇEVİREN"
+© 2004 Emin İslam Tatlı
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

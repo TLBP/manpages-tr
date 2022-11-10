@@ -1,0 +1,173 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * kmod-modprobe - manage linux kernel modules using libkmod.
+ *
+ * Copyright (C) 2011-2013  ProFUSION embedded systems
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "MODPROBE" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+modprobe - Linux çekirdeğine modül ekler/kaldırır
+.sp
+.SH KULLANIM
+.IP \fBmodprobe\fR 9
+[\fB-v\fR] [\fB-V\fR] [\fB-C\fR \fIdosya\fR] [\fB-n\fR] [\fB-i\fR] [\fB-q\fR] [\fB-b\fR] [\fImodüladı\fR] [\fIalan\fR...]
+.IP \fBmodprobe\fR 9
+[-r] [\fB-v\fR] [\fB-n\fR] [\fB-i\fR] [\fImodüladı\fR...]
+.IP \fBmodprobe\fR 9
+[\fB-c\fR]
+.IP \fBmodprobe\fR 9
+[\fB--dump-modversions\fR] [\fIdosya\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBmodprobe\fR, Linux çekirdeğine akıllıca bir modül ekler veya bir modül çıkarır: kolaylık olması açısından, modül adlarında \fB_\fR ve \fB-\fR arasında bir fark olmadığı unutmamalıdır (otomatik alt çizgi dönüştürme gerçekleştirilir). \fBmodprobe\fR, \fI/etc/modprobe.d\fR dizinindeki isteğe bağlı yapılandırma dosyaları dışında tüm modüller ve diğer dosyalar için \fI/lib/modules/\fR\fB’uname -r’\fR modül dizininde arama yapar (bkz. \fBmodprobe.d\fR(5)). \fBmodprobe\fR ayrıca çekirdek komut satırında \fImodül\fR.\fIseçenek\fR biçiminde belirtilen modül seçeneklerini ve \fBmodprobe.blacklist=\fR\fImodül\fR biçimindeki kara listeleri kullanır.
+.sp
+Bu araç tarafından desteklenmeyen 2.4 serisi Linux çekirdeklerinin aksine, \fBmodprobe\fR’un bu sürümünün modülüne hiçbir şey yapmadığı unutulmamalıdır: sembolleri çözme ve değiştirgeleri anlama işi çekirdek içinde yapılır. Bu nedenle modül hatasına bazen bir çekirdek iletisi eşlik eder: bkz. \fBdmesg\fR(8).
+.sp
+\fBmodprobe\fR, \fBmodprobe\fR ile birlikte gelen ilgili \fBdepmod\fR(8) yardımcı uygulaması tarafından oluşturulan güncel \fImodule.dep.bin\fR dosyasının var olduğunu varsayar. Bu dosya, her modülün (varsa) ihtiyaç duyduğu diğer modülleri listeler ve \fBmodprobe\fR, bağımlılıkları otomatik olarak eklemek veya kaldırmak için bunu kullanır.
+.sp
+Modül adından sonra herhangi bir değiştirge verilirse, bunlar çekirdeğe aktarılır (yapılandırma dosyasında listelenen seçeneklere ek olarak).
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB--all\fR
+Tüm modül isimlerini komut satırına yerleştirir.
+.sp
+.TP 4
+\fB-b\fR, \fB--use-blacklist\fR
+Bu seçenek \fBmodprobe\fR’un yapılandırma dosyalarındaki (eğer varsa) kara liste komutlarını modül adlarına da uygulamasına neden olur. Genellikle \fBudev\fR(7) tarafından kullanılır.
+.sp
+.TP 4
+\fB-C\fR, \fB--config\fR \fIdosya\fR
+Öntanımlı yapılandırma dizinini \fI/etc/modprobe.d\fR geçersiz kılar.
+.sp
+Bu seçenek \fBinstall\fR ve \fBremove\fR komutları üzerinden \fBMODPROBE_OPTIONS\fR ortam değişkenindeki diğer \fBmodprobe\fR komutlarına aktarılır.
+.sp
+.TP 4
+\fB-c\fR, \fB--showconfig\fR
+Yapılandırma dizinindeki etkin yapılandırmayı dökümleyip çıkar.
+.sp
+.TP 4
+\fB--dump-modversions\fR
+Bir modülün gerektirdiği modül sürümü oluşturma bilgilerinin bir listesini basar. Bu seçenek, dağıtımlar tarafından, modül sürümü oluşturma bağımlılıklarını kullanarak bir Linux çekirdek modülünü paketlemek için yaygın olarak kullanılır.
+.sp
+.TP 4
+\fB-d\fR, \fB--dirname\fR \fIdizin\fR
+Modüller için kök dizin; / öntanımlıdır.
+.sp
+.TP 4
+\fB--first-time\fR
+Normalde \fBmodprobe\fR, var olan bir modülü eklemesi veya var olmayan bir modülü kaldırması istendiğinde başarılı olur (ve hiçbir şey yapmaz). Bu, basit betikler için idealdir; ancak, daha karmaşık betikler genellikle \fBmodprobe\fR’un gerçekten bir şey yapıp yapmadığını bilmek ister: bu seçenek, \fBmodprobe\fR’un gerçekten hiçbir şey yapmaması durumunda başarısız olmasını sağlar.
+.sp
+.TP 4
+\fB--force-vermagic\fR
+Her modül, çekirdek ve derleyici sürümleri gibi önemli bilgileri içeren küçük bir dizge içerir. Bir modül yüklenemezse ve çekirdek "sürüm sihrinin" eşleşmediğinden şikayet ederse, modülü kaldırmak için bu seçeneği kullanabilirsiniz. Doğal olarak, bu denetim güvenliğiniz için vardır, bu nedenle ne yaptığınızı bilmiyorsanız bu seçeneği kullanmak tehlikelidir.
+.sp
+Bu, eklenen tüm modüller için uygulanır: hem komut satırındaki modül (veya takma ad) hem de bağlı olduğu modüller.
+.sp
+.TP 4
+\fB--force-modversion\fR
+Modüller \fBCONFIG_MODVERSIONS\fR listesi ile derlendiğinde, modül tarafından kullanılan (veya sağlanan) her arayüzün sürüm ayrıntılarını içeren bir bölüm oluşturulur. Bir modül yüklenemezse ve çekirdek, modülün bazı arayüz sürümlerinin uyuşmadığından şikayetçi olursa, sürüm bilgisini tamamen kaldırmak için bu seçenek kullanılabilir. Doğal olarak, bu denetim güvenliğiniz için oradadır, bu nedenle ne yaptığınızı bilmiyorsanız bu seçeneği kullanmak tehlikelidir.
+.sp
+Bu, eklenen tüm modüller için uygulanır: hem komut satırındaki modül (veya takma ad) hem de bağlı olduğu modüller.
+.sp
+.TP 4
+\fB-f\fR, \fB--force\fR
+Modülün yüklenmesini engelleyebilecek herhangi bir sürüm oluşturma bilgisini çıkarmaya çalışır: \fB--force-vermagic\fR ve \fB--force-modversion\fR kullanmakla aynıdır. Doğal olarak, bu denetimler güvenliğiniz için vardır, bu nedenle ne yaptığınızı bilmiyorsanız bu seçeneği kullanmak tehlikelidir.
+.sp
+Bu, eklenen tüm modüller için uygulanır: hem komut satırındaki modül (veya takma ad) hem de bağlı olduğu modüller.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-install\fR, \fB--ignore-remove\fR
+Bu seçenek, \fBmodprobe\fR’un komut satırında belirtilen modül için yapılandırma dosyasındaki (varsa) yükleme ve kaldırma komutlarını yok saymasına neden olur (bağımlı modüller hala yapılandırma dosyasında kendileri için ayarlanmış komutlara tabidir). Bu seçenek kullanıldığında hem yükleme hem de kaldırma komutları, isteğin \fB--ignore-install\fR veya \fB--ignore-remove\fR komutlarından yalnızca biri veya diğeriyle (ikisiyle birden değil) daha özel olarak yapılıp yapılmadığına bakılmaksızın anında yoksayılır. Bkz: \fBmodprobe.d\fR(5)
+.sp
+.TP 4
+\fB-n\fR, \fB--dry-run\fR, \fB--show\fR
+Bu seçenek, modülleri gerçekten eklemek veya silmek (veya \fBinstall\fR ve \fBremove\fR komutlarını çalıştırmak) dışında her şeyi yapar. \fB-v\fR ile birlikte, hata ayıklama sorunları için kullanışlıdır. Tarihsel nedenlerle \fB--dry-run\fR ve \fB--show\fR aslında aynı anlama gelir ve birbirinin yerine kullanılabilir.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+Bu seçenekle \fBmodprobe\fR’un bulamadığı bir modülü kaldırmaya veya eklemeye çalışırsanız (ve bir takma ad veya \fBinstall\fR/\fBremove\fR komutu değilse) bir hata iletisi çıktılanmaz. Ancak yine de sıfırdan farklı bir çıkış durumuyla çıkar. Çekirdek bunu \fBrequest_module\fR kullanılarak var olabilecek modülleri fırsatçı bir şekilde araştırmak için kullanır.
+.sp
+.TP 4
+\fB-R\fR, \fB--resolve-alias\fR
+Bir takma adla eşleşen tüm modül adlarını çıktılar. Modül takma adı sorunlarının hatalarını ayıklamak için yararlı olabilir.
+.sp
+.TP 4
+\fB-r\fR, \fB--remove\fR
+Bu seçenek, \fBmodprobe\fR’un modülü eklemek yerine kaldırılmasına neden olur. \fBmodprobe\fR kullanılmayan bağımlı modülleri de kaldırmaya çalışacaktır. Eklemeden farklı olarak, komut satırında birden fazla modül belirtilebilir (modülleri kaldırırkem modül değiştirgelerinin belirtilmesi mantıklı değildir).
+.sp
+Modülleri kaldırmak için genellikle bir neden yoktur, ancak bazı hatalı modüller bunu gerektirir. Dağıtım çekirdeğiniz, modüllerin kaldırılmasını destekleyecek şekilde derlenmemiş olabilir.
+.sp
+.TP 4
+\fB-S\fR, \fB--set-version\fR \fIsürüm\fR
+Modüllerin bulunacağı yeri belirleyen çekirdek sürümüne karar vermek için \fBuname\fR(2) kullanmak yerine belirtilen çekirdek \fIsürüm\fRü kullanılır.
+.sp
+.TP 4
+\fB--show-depends\fR
+Modülün kendisi de dahil olmak üzere bir modülün (veya takma adın) bağımlılıklarını listeler. Bu, her satırı "insmod" ile başlayan modül dosyası adlarından oluşan bir liste (muhtemelen boş) üretir ve genelde dağıtımlar tarafından initrd/initramfs imgelerini oluşturulurken hangi modüllerin dahil edileceğini belirlemek için kullanılır. Uygulanan yükleme komutları, "install" ön ekiyle gösterilir. Kurulum komutlarının hiçbiri çalıştırılmaz. \fBmodinfo\fR(8)’nun bir modülün bağımlılıklarını modülün kendisinden çıkarmak için kullanılabileceği, ancak takma adlar veya kurulum komutları hakkında hiçbir şey bilmediği unutulmamalıdır.
+.sp
+.TP 4
+\fB-s\fR, \fB--syslog\fR
+Bu seçenek, herhangi bir hata iletisinin standart hata yerine (\fBLOG_NOTICE\fR düzeyine sahip \fBLOG_DAEMON\fR olarak) syslog mekanizmasına gönderilmesine neden olur. Bu, standart hata kullanılamadığı durumda da otomatik olarak etkinleştirilir.
+.sp
+Bu seçenek \fBinstall\fR ve \fBremove\fR komutları üzerinden \fBMODPROBE_OPTIONS\fR ortam değişkenindeki diğer \fBmodprobe\fR komutlarına aktarılır.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Uygulama her yaptığı işlemi gösterir. Normalde \fBmodprobe\fR yanlış giden bir şeylerin iletilerini gösterir.
+.sp
+Bu seçenek \fBinstall\fR ve \fBremove\fR komutları üzerinden \fBMODPROBE_OPTIONS\fR ortam değişkenindeki diğer \fBmodprobe\fR komutlarına aktarılır.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBMODPROBE_OPTIONS\fR ortam değişkeni, \fBmodprobe\fR’a değiştirge aktarmak için de kullanılabilir.
+.sp
+.SH "TELİF HAKKI"
+Belgenin telif hakkı © 2003 Rusty Russell, IBM Corporation.
+.sp
+.SH "YAZAN"
+Belgenin yazımı Jon Masters ve Lucas De Marchi tarafından sürdürülmektedir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmodprobe.d\fR(5), \fBinsmod\fR(8), \fBrmmod\fR(8), \fBlsmod\fR(8), \fBmodinfo\fR(8), \fBdepmod\fR(8).
+.sp
+.SH "ÇEVİREN"
+© 2004 Can Kavaklıoğlu
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

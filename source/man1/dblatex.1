@@ -1,0 +1,252 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.TH "DBLATEX" 1 "Mart 2015" "dblatex3-0.3.12" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dblatex - DocBook’tan LaTeX, DVI, PostScript ve PDF’e dönüşüm aracı
+.sp
+.SH KULLANIM
+.IP \fBdblatex\fR 8
+[\fISEÇENEK\fR] {\fIDOSYA\fR | -}
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBdblatex\fR, SGML/XML DocBook belgeleri ilk işlem olarak saf LaTeX’e çevirerek DVI, PostScript veya PDF’ye dönüştüren bir uygulamadır. MathML 2.0 imlenimi de desteklenmektedir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-b\fR, \fB--backend\fR=\fIARKAUÇ\fR
+Kullanılacak \fIARKAUÇ\fR sürücü: \fIpdftex\fR (öntanımlıdır), \fIdvips\fR, \fIxetex\fR.
+.sp
+.TP 4
+\fB-B\fR, \fB--no-batch\fR
+TeX çıktının tamamı basılır.
+.sp
+.TP 4
+\fB-c\fR, \fB-S\fR, \fB--config\fR=\fIDOSYA\fR
+Yapılandırma \fIDOSYA\fRsı; kullanılacak tüm seçenekleri ve uygulanacak özelleştirmeleri içerir.
+.sp
+.TP 4
+\fB-d\fR, \fB--debug\fR
+Hata ayıklama kipi. \fBdblatex\fR’in çalıştığı geçici dizin silinmez.
+.sp
+.TP 4
+\fB-D\fR, \fB--dump\fR
+Bir hata oluştuğunda hata ayıklama amacıyla hata yığıtını dökümler.
+.sp
+.TP 4
+\fB-e\fR, \fB--indexstyle\fR=\fIDOSYA\fR
+Öntanımlı belge dizini biçemi yerine \fBmakeindex\fR(1)’e iletilecek biçem \fIDOSYA\fRsı.
+.sp
+.TP 4
+\fB-f\fR, \fB--fig-format\fR=\fIBİÇEM\fR
+Girdi olarak görüntü \fIBİÇEM\fRi: \fIfig\fR, \fIeps\fR. Görüntü biçemi dosya uzantısından anlaşılamazsa kullanılır.
+.sp
+.TP 4
+\fB-F\fR, \fB--input-format\fR=\fIBİÇEM\fR
+Girdi olarak dosya biçemi: \fIsgml\fR, \fIxml\fR (öntanımlıdır).
+.sp
+.TP 4
+\fB-i\fR, \fB--texinputs\fR=\fIYOL\fR
+\fBTEXINPUTS\fR’a eklenecek \fIYOL\fRlar.
+.sp
+.TP 4
+\fB-I\fR, \fB--fig-path\fR=\fIYOL\fR
+Görüntü dosyalarının aranacağı \fIYOL\fRlar.
+.sp
+.TP 4
+\fB-l\fR, \fB--bst-path\fR=\fIYOL\fR
+BibTeX biçimlerinin aranacağı \fIYOL\fRlar.
+.sp
+.TP 4
+\fB-L\fR, \fB--bib-path\fR=\fIYOL\fR
+BibTeX veritabanlarının aranacağı \fIYOL\fRlar.
+.sp
+.TP 4
+\fB-m\fR, \fB--xslt\fR=\fIKOMUT\fR
+Kullanılacak XSLT aracı: \fBxsltproc\fR(1) (öntanımlıdır), \fB4xslt\fR, \fBsaxon\fR.
+.sp
+.TP 4
+\fB-o\fR, \fB--output\fR=\fIDOSYA\fR
+Çıktı \fIDOSYA\fRsı. Belirtilmezse çıktı biçeminin dosya uzantısı ile girdi dosyasının ismi kullanılır. Bir \fBset\fR içindeki çok sayıda \fBbook\fR çıktılanacaksa bu seçenek yok sayılır ve yerine \fB-O\fR seçeneği uygulanır.
+.sp
+.TP 4
+\fB-O\fR, \fB--output\fR=\fIDİZİN\fR
+\fBset\fR içindeki \fBbook\fR’ların çıktılanacağı \fIDİZİN\fR. Belirtilmezse çalışma dizini kullanılır. Tek bir belge çıktılanacaksa bu seçenek yok sayılır ve yerine \fB-o\fR seçeneği uygulanır.
+.sp
+.TP 4
+\fB-p\fR, \fB--xsl-user\fR=\fIDOSYA\fR
+Kullanılacak kullanıcı XSL şablon \fIDOSYA\fRsı. Çok sayıda şablon dosyası belirtilebilir, ancak sırası önemlidir. Her şablon dosyası kendinden öncekilere göre öncelikli olur.
+.sp
+.TP 4
+\fB-P\fR, \fB--param\fR=\fIİSİM=DEĞER\fR
+Belirtilen çift XSLT aracına komut satırı XSL değiştirgesi olarak aktarılır.
+.sp
+.TP 4
+\fB-q\fR, \fB--quiet\fR
+Çıktı daha az ayrıntılı olur. Yanızca TeX çıktı iletileri ve hata iletileri gösterilir.
+.sp
+.TP 4
+\fB-r\fR, \fB--texpost\fR=[\fBplugin:\fR]\fIBETİK\fR
+TeX derlemesinin son turundan önce çağrılacak \fIBETİK\fR. Betiğin kullanım amacı son turdan önce derlenen dosyalardan birinde veya TeX dosyasında değişiklik yapmaktır. \fIBETİK\fR bir python eklentisi olabilir; bu durumda \fIBETİK\fR, \fBplugin:\fR öneki ile kullanılmalıdır.
+.sp
+.TP 4
+\fB-s\fR, \fB--texstyle\fR=\fISTY\fR
+Uygulanacak LaTeX şablonu. Bir paket ismi olabileceği gibi paketin tam dosya yolu da olabilir. Paket ismi belirtilirse, yol bileşenini ve \fI.sty\fR uzantısını içermemelidir. Tersine, tam dosya yolu, paket ismini \fI.sty\fR uzantısıyla içermelidir.
+.sp
+.TP 4
+\fB-t\fR, \fB--type\fR=\fIBİÇEM\fR
+Çıktı \fIBİÇEM\fRi. Kullanılabilenler: \fItex\fR, \fIdvi\fR, \fIps\fR, \fIpdf\fR (öntanımlıdır).
+.sp
+.TP 4
+\fB--dvi\fR
+DVI çıktı. \fB-tdvi\fR seçeneği ile aynı.
+.sp
+.TP 4
+\fB--pdf\fR
+PDF çıktı. \fB-tpdf\fR seçeneği ile aynı.
+.sp
+.TP 4
+\fB--ps\fR
+PS çıktı. \fB-tps\fR seçeneği ile aynı.
+.sp
+.TP 4
+\fB-T\fR, \fB--style\fR=\fIBİÇEM\fR
+Çıktı biçemi. Önceden tanımlananlar: \fIdb2latex\fR, \fIsimple\fR, \fInative\fR (öntanımlıdır).
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--verbose\fR
+Çalışan komutları gösteren ayrıntı kipi.
+.sp
+.TP 4
+\fB-x\fR, \fB--xslt-opts\fR=\fIXSLT-SEÇENEKLERİ\fR
+XSLT aracına aktarılacak değiştirgeler.
+.sp
+.TP 4
+\fB-X\fR, \fB--no-external\fR
+Harici metin dosyası desteğini devre dışı bırakır. Bu destek, \fBtextdata\fR veya \fBimagedata\fR tarafından başvurulan harici dosyalardaki \fBcallout\fR’lar için gereklidir, ancak belge bu tür \fBcallout\fR’lar içermiyorsa devre dışı bırakılabilir. Bu desteği devre dışı bırakmak, büyük belgelerin işlenmesini hızlandırabilir.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+.TP 4
+\fI$HOME/.dblatex/\fR
+Kullanıcının yapılandırma dizini.
+.sp
+.TP 4
+\fI/etc/dblatex/\fR
+Sistem genelinde yapılandırma dizini.
+.sp
+.PP
+Önceden tanımlanmış çıktı tarzları, kurulu paket dizininde bulunur.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBDBLATEX_CONFIG_FILES\fR
+Bazı \fBdblatex\fR yapılandırma dosyalarını içeren ek yapılandırma dizinleri.
+.sp
+.PP
+.sp
+.SH "ÖRNEKLER"
+\fImyfile.xml\fR dosyasından \fImyfile.pdf\fR dosyasının üretilmesi:
+.sp
+.RS 4
+.nf
+dblatex myfile.xml
+.fi
+.sp
+.RE
+XSL değiştirgelerinin komut satırından aktarımı:
+.sp
+.RS 4
+.nf
+dblatex -P latex.babel.language=de myfile.xml
+.fi
+.sp
+.RE
+Kendi XSL şablonumuzun kullanılması:
+.sp
+.RS 4
+.nf
+dblatex -p myconfig.xsl myfile.xml
+.fi
+.sp
+.RE
+\fBdblatex\fR çıktı biçeminin kullanımı:
+.sp
+.RS 4
+.nf
+dblatex -T db2latex myfile.xml
+.fi
+.sp
+.RE
+Kendi LaTeX şablonumuzun kullanılması:
+.sp
+.RS 4
+.nf
+dblatex -s mystyle myfile.xml
+dblatex -s /path/to/mystyle.sty myfile.xml
+.fi
+.sp
+.RE
+XSLT aracına ek değiştirgelerin aktarımı:
+.sp
+.RS 4
+.nf
+dblatex -x "--path /path/to/load/entity" myfile.xml
+.fi
+.sp
+.RE
+\fBdblatex\fR ve profil:
+.sp
+.RS 4
+.nf
+xsltproc --param profile.attribute "’output’" \\
+         --param profile.value "’pdf’" \\
+         /path/to/profiling/profile.xsl \\
+         myfile.xml | dblatex -o myfile.pdf -
+.fi
+.sp
+.RE
+Çok sayıda \fBbook\fR içeren \fBset\fR derlemek:
+.sp
+.RS 4
+.nf
+dblatex -O /path/to/chunk/dir -Pset.book.num=all myfile.xml
+.fi
+.sp
+.RE
+.sp
+.SH "YAZAN"
+Benoit Guillon ve Andreas Hoenen tarafından yazılmıştır.
+.sp
+.SH "TELİF HAKKI"
+Telih Hakkı © 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015 Andreas Hoenen
+.sp
+Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

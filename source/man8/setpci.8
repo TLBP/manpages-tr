@@ -1,0 +1,181 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ *      The PCI Utilities -- List All PCI Devices
+ *
+ *      Copyright (c) 1997--2020 Martin Mares <mj@ucw.cz>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.TH "SETPCI" 8 "Ocak 2021" "pciutils-3.8.0" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+setpci - PCI aygıtlarını yapılandırır
+.sp
+.SH KULLANIM
+.IP \fBsetpci\fR 7
+[\fISEÇENEKLER\fR] \fIAYGITLAR İŞLEMLER\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBsetpci\fR, PCI aygıtlarını yapılandırmak ve sorgulamak için kullanılan bir araçtır.
+.sp
+Bütün sayılar onaltılık tabanda girilir.
+.sp
+Bazı işletim sistemlerinde yapılandırma alanının standart başlığının okumaları hariç, hemen hemen tüm işlemler için root ayrıcalıkları gerektirir. Erişim haklarıyla ilgili ayrıntılar için bkz: \fBlspci\fR(8)
+.sp
+.SH "SEÇENEKLER"
+.SS "Genel seçenekler"
+.TP 4
+\fB-v\fR
+Sonuçlar daha ayrıntılı olur ve yapılandırma alanı erişimleri hakkında ayrıntılı bilgi gösterilir.
+.sp
+.TP 4
+\fB-f\fR
+Şayet yapılacak bir işlem yoksa (mesela bir pci kart belirtilememişse) \fBsetpci\fR aracının bir çıktı vermemesini sağlar. Bu seçenek genellikle dağıtımların yapılandırma betikleri tarafından, sorgudaki pci kartın makinede olup olmadığının ya da düzgün çalışıp çalışmadığının tespiti için kullanılır.
+.sp
+.TP 4
+\fB-D\fR
+’Gösteri kipi’ -- Yapılanırma yazmaçlarına hiçbir şey yazmaz. Komutu \fBsetpci -vD\fR şeklinde kullanarak oldukça karmaşık olan komut diziminin sonucu gerçekte komut uygulanmadan görülebilir.
+.sp
+.TP 4
+\fB-r\fR
+Her işlem belirli bir aygıtı seçerse veri yolu taramasını önler (\fB-s\fR seçiciyi belirli etki alanı, veri yolu, yuva ve işlevle kullanır). Bu daha hızlıdır, ancak aygıt yoksa, boş bir aygıt kümesini eşleştirmek yerine başarısız olur.
+.sp
+.TP 4
+\fB--version\fR
+\fBsetpci\fR aracının sürüm bilgilerini gösterir. Bu seçenek tek başına kullanılmalıdır.
+.sp
+.TP 4
+\fB--dumpregs\fR
+Tüm PCI yazmaçlarının ve yeteneklerinin listesini gösterir. Bu seçenek tek başına kullanılmalıdır.
+.sp
+.PP
+.sp
+.SS "PCI erişim seçenekleri"
+PCI araçları, PCI aygıtları ile haberleşmek için PCI kütüphanesini kullanır (Bkz: \fBpcilib\fR(7)). Davranışı etkilemek için aşağıdaki seçenekler kullanılabilir:
+.sp
+.TP 4
+\fB-A\fR \fIYÖNTEM\fR
+Kütüphanede, PCI donanımına erişmek için çeşitli yöntemler bulunmaktadır. Ön tanımlı olarak, kullanılabilir ilk erişim yöntemini kullanır, ancak bu seçenekle, bu davranış geçersiz kılınaabilir. Kullanılabilir yöntemlerin listesi ve açıklamaları için \fB-A help\fR çıktısından yaralanılabilir.
+.sp
+.TP 4
+\fB-O\fR \fIİSİM=DEĞER\fR
+Kitaplığın davranışı, birkaç değişkenle denetlenir. Bu seçenekle, herhangi bir değişkenin değeri ayarlanabilir. Bilinen değişken isimlerinin listesi ve bunların ön tanımlı değerleri için \fB-O help\fR çıktısından yaralanılabilir.
+.sp
+.TP 4
+\fB-H1\fR
+Intel yapılandırma mekanizması 1 üzerinden doğrudan donanım erişimi kullanılır. \fB-A intel-conf1\fR seçeneği için bir kısayoldur.
+.sp
+.TP 4
+\fB-H2\fR
+Intel yapılandırma mekanizması 2 üzerinden doğrudan donanım erişimi kullanılır. \fB-A intel-conf2\fR seçeneği için bir kısayoldur.
+.sp
+.TP 4
+\fB-G\fR
+Kütüphanenin hata ayıklama seviyesini artırır.
+.sp
+.PP
+.sp
+.SS "Aygıt seçimi"
+.TP 4
+\fB-s\fR [[[[\fIETKİ_ALANI\fR]:]\fIVERİ_YOLU\fR]:][\fIAYGIT\fR][.[\fIİŞLEV\fR]]
+Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0’dan ffff’ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0’ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0’ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
+.sp
+.TP 4
+\fB-d\fR [\fISATICI\fR]:[\fIAYGIT\fR][:\fISINIF\fR[:\fIARAYÜZ\fR]]
+Yalnızca belirtilen satıcı, aygıt, sınıf kimliği ve yazılım geliştirme arayüzüne sahip aygıtları gösterir. Kimlikler onaltılık olarak verilir ve belirtilmeyebilir veya her ikisi de "herhangi bir değer" anlamına gelen "\fB*\fR" olarak verilebilir. Sınıf kimliği, "herhangi bir rakam" anlamına gelen "\fBx\fR" karakterlerini içerebilir.
+.sp
+.PP
+\fB-s\fR ve \fB-d\fR birlikte kullanılırsa, yalnızca her iki seçime de uyan aygıtlar seçilir. Aynı türde birden fazla seçenek belirtildiğinde, en sağdaki diğerlerini geçersiz kılar.
+.sp
+.sp
+.SH "İŞLEMLER"
+İki çeşit işlem vardır: okumak ve yazmak. Bir yazmacı okumak için adını belirtmeniz yeterlidir. Yazma işlemleri \fIisim=değer,değer...\fR biçimindedir; burada her \fIdeğer\fR ya bir onaltılık sayıdır ya da hem veri hem de maskenin onaltılık sayılar olduğu \fIveri:maske\fR türünde bir ifadedir. İkinci durumda, yalnızca \fImaske\fRdeki ikil bitlere karşılık gelen bitler değiştirilir (teknik olarak bu bir okuma-değiştirme-yazma işlemidir).
+.sp
+Bir yazmacı tanımlamanın birkaç yolu vardır:
+.sp
+.PD 1
+.RS 1
+.IP \(bu 3
+Onaltılık tabanda adresi belirtilir.
+.IP \(bu 3
+Adı belirtilir. \fBsetpci\fR, standart yapılandırma başlıklarındaki tüm yazmaçların isimlerini bilir. Tam listeyi almak için \fBsetpci --dumpregs\fR kullanılabilir. Bu yazmaçların kesin anlamı için PCI veri yolu özelliklerine veya kısa bir taslak için \fIheader.h\fR veya \fI/usr/include/pci/pci.h\fR dosyasına bakılabilir.
+.IP \(bu 3
+Yazmaç bir PCI yeteneğinin parçasıysa, ilk yazmacının adresini almak için yeteneğin adı belirtilebilir. \fB--dumpregs\fR çıktısında ’CAP_’ veya ’ECAP_’ ile başlayan adlara bakılabilir.
+.IP \(bu 3
+Yeteneğin adı \fBsetpci\fR tarafından bilinmiyorsa, buna CAP\fInum\fR veya ECAP\fInum\fR biçiminde numarasıyla başvurulabilir; burada \fInum\fR, yeteneğin onaltılık tabanda sayısal tanıtıcısıdır.
+.IP \(bu 3
+Adrese bir \fIkonum\fR (onaltılık sayı) eklemek için önceki biçimlerin her birinin ardından \fI+konum\fR gelebilir. Bu özellik, bir yetenek içindeki yazmaçların adreslenmesi veya standart yazmaçların parçalarını değiştirmek için faydalı olabilir.
+.IP \(bu 3
+Kaç bayt (1, 2 veya 4) aktarılacağını seçmek için bir genişlik belirteci olarak \fB.B\fR, \fB.W\fR veya \fB.L\fR eklenebilir. Bir yazmaçtan ismiyle bahsediliyorsa ve yazmacın genişliği iyi biliniyorsa genişlik atlanabilir.
+.IP \(bu 3
+Son olarak, birden çok yetenek varsa, \fB@\fR\fInumara\fR kullanılarak hangisinin hedefleneceği belirtilebilir. Sıralama 0’dan başlar.
+.sp
+.RE
+.PD 0
+Tüm yazmaç adları ve genişlik belirteçleri büyük/küçük harfe duyarsızdır.
+.sp
+.SH "ÖRNEKLER"
+.TP 4
+\fBCOMMAND\fR
+16 bitlik komut yazmacı için sorgu.
+.sp
+.TP 4
+\fB4.w\fR
+Aynı yazmacın sayısal adresi.
+.sp
+.TP 4
+\fBCOMMAND.l\fR
+Komut yazmacının konumundan başlayan 32 bitlik bir kelime ister; yani komut ve durum yazmaçlarını birlikte ister.
+.sp
+.TP 4
+\fBVENDOR_ID+1.b\fR
+Satıcı kimliği yazmacının önemli baytını belirtir (PCI önemsiz baytı önce alır).
+.sp
+.TP 4
+\fBCAP_PM+2.w\fR
+Güç yönetimi yeteneğinin ikinci kelimesine karşılık gelir.
+.sp
+.TP 4
+\fBECAP108.l\fR
+ID 0x108 ile genişletilmiş yeteneğin ilk 32 bitlik kelimesini ister.
+.sp
+.PP
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlspci\fR(8), \fBpcilib\fR(7).
+.sp
+.SH "YAZAN"
+Linux PCI Araçlarının bakımı Martin Mares tarafından yürütülmektedir.
+.sp
+.SH "ÇEVİREN"
+© 2004 Ekin Yurdakurban
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

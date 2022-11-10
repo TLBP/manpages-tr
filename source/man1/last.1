@@ -1,0 +1,182 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "LAST" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+last - oturum açmış/kapatmış kullanıcıları listeler
+.br
+lastb - hatalı oturum açmış/kapatmış kullanıcıları listeler
+.sp
+.SH KULLANIM
+.IP \fBlast\fR 5
+[\fIseçenekler\fR] [\fIkullanıcı ...\fR] [\fItty ...\fR]
+.IP \fBlastb\fR 6
+[\fIseçenekler\fR] [\fIkullanıcı ...\fR] [\fItty ...\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBlast\fR \fI/var/log/wtmp\fR dosyasında (veya \fB-f\fR seçeneğiyle belirtilen dosyada) geriye doğru arama yapar ve bu dosya oluşturulduğundan beri oturum açan (ve oturumu kapatan) tüm kullanıcıların bir listesini görüntüler. Bir veya daha fazla \fIkullanıcı\fR adı ve/veya \fItty\fR verilebilir, bu durumda \fBlast\fR sadece bunlarla eşleşen girdileri gösterecektir. \fItty\fR’lerin isimleri kısaltılabilir, bu nedenle \fBlast 0\fR ile \fBlast tty0\fR aynıdır.
+.sp
+\fBSIGINT\fR sinyali (genellikle kesme tuşu Ctrl-C tarafından oluşturulur) veya \fBSIGQUIT\fR sinyali yakalandığında, \fBlast\fR dosyada ne kadar arama yapıldığını gösterir; \fBSIGINT\fR sinyali ile \fBlast\fR sonlanır.
+.sp
+Sözde kullanıcı \fBreboot\fR’un, sistemi yeniden her başlatışı günlüğe kaydedilir. Bu nedenle, \fBlast reboot\fR, günlük dosyası oluşturulduğundan beri tüm yeniden başlatmaların kaydını gösterecektir.
+.sp
+\fBlastb\fR ile \fBlast\fR aynıdır, ancak öntanımlı olarak tüm hatalı oturum açma girişimlerini içeren \fI/var/log/btmp\fR dosyasındaki kayıtları gösterir.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-a\fR, \fB--hostlast\fR
+Son sütundaki konak adını gösterir. \fB--dns\fR seçeneği ile birlikte kullanıldığında yararlıdır.
+.sp
+.TP 4
+\fB-d\fR, \fB--dns\fR
+Uzaktan açılan oturumlarda, Linux sadece uzak konağın adını değil, aynı zamanda IP adresini de saklar. Bu seçenek konak adını gösterir
+.sp
+.TP 4
+\fB-f\fR, \fB--file\fR \fIdosya\fR
+\fI/var/log/wtmp\fR yerine belirtilen \fIdosya\fR kullanılır. \fB--file\fR seçeneği defalarca kullanılabilir ve belirtilen tüm dosyalar işleme alınır.
+.sp
+.TP 4
+\fB-F\fR, \fB--fulltimes\fR
+Tüm oturum açma ve kapatma tarih ve saatlerini gösterir.
+.sp
+.TP 4
+\fB-i\fR, \fB--ip\fR
+\fB--dns\fR gibidir, farklı olarak konağın ismi yerine IP adresini gösterir.
+.sp
+.TP 4
+\fI-sayı\fR \fB-n\fR, \fB--limit\fR \fIsayı\fR
+Kaç satır gösterileceğini belirtmek için kullanılır.
+.sp
+.TP 4
+\fB-p\fR, \fB--present\fR \fIzaman\fR
+Belirtilen \fIzaman\fRda kaydedilmiş kullanıcıları gösterir. Aynı \fIzaman\fR için \fB--since\fR ve \fB--until\fR seçeneklerinin birlikte kullanımına eşdeğerdir.
+.sp
+.TP 4
+\fB-R\fR, \fB--nohostname\fR
+Konak adını içeren alanı göstermez.
+.sp
+.TP 4
+\fB-s\fR, \fB--since\fR \fIzaman\fR
+Belirtilen \fIzaman\fRdan beri açılan/kapatılan oturumları gösterir. Kimin hangi zamanda oturum açıp kapattığını saptamak için yararlıdır. Bu seçenek çoğunlukla \fB--until\fR seçeneğiyle birlikte kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--until\fR \fIzaman\fR
+Belirtilen \fIzaman\fRa kadar açılan/kapatılan oturumları gösterir.
+.sp
+.TP 4
+\fB--time-format\fR \fIbiçem\fR
+Çıktı zaman damgası biçemini \fBnotime\fR, \fBshort\fR, \fBfull\fR veya \fBiso\fR olarak tanımlar. \fBnotime\fR biçemi hiçbir zaman damgası yazdırmaz, \fBshort\fR öntanımlıdır ve \fBfull\fR biçemi \fB--fulltimes\fR seçeneğiyle aynıdır. \fBiso\fR biçemi, zaman damgasını ISO-8601 biçiminde görüntüler. \fBiso\fR biçemi, çıktılar sistem dışında incelenirken tercih edilmesini sağlayan saat dilimi bilgilerini de içerir.
+.sp
+.TP 4
+\fB-w\fR, \fB--fullnames\fR
+Çıktıda tam kullanıcı adlarını ve tam alan adlarını gösterir.
+.sp
+.TP 4
+\fB-x\fR, \fB--system\fR
+Sistem kapanma girdilerini ve çalışma seviyesi değişikliklerini gösterir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fB--version\fR
+Sürüm bilgisini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "ZAMAN BİÇEMLERİ"
+\fIzaman\fR değiştirgeli seçenekler sadece aşağıdaki zaman biçemlerini kabul edebilmektedir:
+.sp
+.TP 4
+\fIYYYYMMDDhhmmss\fR
+.sp
+.TP 4
+\fIYYYY-MM-DD hh:mm:ss\fR
+yıl-ay-gün saat:dakika:saniye
+.sp
+.TP 4
+\fIYYYY-MM-DD hh:mm\fR
+yıl-ay-gün saat:dakika, saniye hanesi 00 olur
+.sp
+.TP 4
+\fIYYYY-MM-DD\fR
+yıl-ay-gün: saat 00:00:00 olur
+.sp
+.TP 4
+\fIhh:mm:ss\fR
+gün, bugün olur
+.sp
+.TP 4
+\fIhh:mm\fR
+gün, bugün; saniye 00 olur
+.sp
+.TP 4
+now
+Şu an.
+.sp
+.TP 4
+yesterday
+dün: saat 00:00:00 olur
+.sp
+.TP 4
+today
+bugün: saat 00:00:00 olur
+.sp
+.TP 4
+tomorrow
+yarın: saat 00:00:00 olur
+.sp
+.TP 4
++5min
++5 dakika
+.sp
+.TP 4
+-5days
+-5 gün
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fI/var/log/wtmp\fR, \fI/var/log/btmp\fR
+.sp
+.SH "EK BİLGİ"
+\fIwtmp\fR ve \fIbtmp\fR dosyaları sistemde bulunmayabilir. Sistem, yalnızca mevcut dosyalara bilgi kaydeder. Bu, yerel bir yapılandırma sorunudur. Dosyaların kullanılmasını istiyorsanız, basit bir \fBtouch\fR(1)) komutuyla bunlar oluşturulabilir (örneğin, \fBtouch /var/log/wtmp\fR).
+.sp
+Boş girdi geçerli bir wtmp girdisidir. Bu, boş bir dosya veya sıfırlarla dolu bir dosyanın hata olarak yorumlanmadığı anlamına gelir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBlogin\fR(1), \fBwtmp\fR(5), \fBinit\fR(8), \fBshutdown\fR(8).
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için: <https://github.com/util-linux/util-linux/issues>
+.sp
+.SH "YAZAN"
+Miquel van Smoorenburg tarafından yazılmıştır.
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 1998-2004 Miquel van Smoorenburg. Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "KULLANILABİLİRLİK"
+\fBlast\fR komutu util-linux paketinin bir parçası olup Linux Çekirdeği Arşivinden indirilebilir:
+.br
+<https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

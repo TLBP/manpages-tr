@@ -1,0 +1,286 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1983, 1991 The Regents of the University of California.
+ * All rights reserved.
+ *
+ * %%%LICENSE_START(BSD_4_CLAUSE_UCB)
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ * This product includes software developed by the University of
+ * California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * %%%LICENSE_END
+ *
+ * Modified 1993-07-24 by Rik Faith <faith@cs.unc.edu>
+ * Modified 1996-10-22 by Eric S. Raymond <esr@thyrsus.com>
+ * Modified Oct 1998 by Andi Kleen
+ * Modified Oct 2003 by aeb
+ * Modified 2004-07-01 by mtk
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "SEND" 2 "1 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+send - bağlantılı soket üzerinden ileti yollar
+.br
+sendto - bağlantısız soket üzerinden ileti yollar
+.br
+sendmsg - soket üzerinden bir dizi ileti yollar
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include <sys/types.h>\fR
+\fB#include <sys/socket.h>\fR
+.fi
+.sp
+.IP "ssize_t \fBsend\fR" 13
+(int \fIsockfd\fR, 
+const void *\fIbuf\fR, 
+size_t \fIlen\fR, 
+int \fIflags\fR);
+.sp
+.IP "ssize_t \fBsendto\fR" 15
+(int \fIsockfd\fR, 
+const void *\fIbuf\fR, 
+size_t \fIlen\fR, 
+int \fIflags\fR, 
+const struct sockaddr \fIdest_addr\fR, 
+socklen_t \fIaddrlen\fR);
+.sp
+.IP "ssize_t \fBsendmsg\fR" 16
+(int \fIsockfd\fR, 
+const struct msghdr *\fImsg\fR, 
+int \fIflags\fR);
+.sp
+.SH "AÇIKLAMA"
+\fBsend\fR(), \fBsendto\fR() ve \fBsendmsg\fR() sistem çağrıları bir başka sokete ileti aktarmakta kullanılır.
+.sp
+\fBsend\fR() çağrısı soket sadece \fIconnected\fR (bağlantılı) durumda ise kullanılabilir (böylece amaçlanan alıcı biliniyor olur). \fBsend\fR() ve \fBwrite\fR(2) arasındaki tek fark \fIflags\fR değiştirgesinin varlığıdır. Sıfır değeri atanmış \fIflags\fR değiştirgesi kullanan \fBsend\fR() ile \fBwrite\fR(2) eşdeğerdir. Ayrıca aşağıdaki
+.sp
+.RS 4
+.nf
+send(sockfd, buf, len, flags);
+.fi
+.sp
+.RE
+çağrısı
+.sp
+.RS 4
+.nf
+sendto(sockfd, buf, len, flags, NULL, 0);
+.fi
+.sp
+.RE
+çağrısına eşdeğerdir. \fIsockfd\fR değiştirgesi, gönderen soketin dosya tanıtıcısıdır.
+.sp
+Eğer \fBsendto\fR() bağlantılı bir soket (\fBSOCK_STREAM\fR, \fBSOCK_SEQPACKET\fR) ile kullanılırsa, \fIdest_addr\fR ve \fIaddrlen\fR değiştirgeleri görmezden gelinir (eğer bunlar NULL ve 0 değilse \fBEISCONN\fR hatası dönebilir) ve eğer soket bağlanmadıysa \fBENOTCONN\fR hatası döner. Bağlantısız soketle kullanımda, \fIdest_addr\fR hedefin adresini, \fIaddrlen\fR ise hedef adresin boyutunu belirler. \fBsendmsg\fR() için hedef adres \fImsg.msg_name\fR ile belirtilir ve \fImsg.msg_namelen\fR boyutunu belirler.
+.sp
+\fBsend\fR() ve \fBsendto\fR() için, ileti \fIbuf\fR tamponu içinde tutulur ve \fIlen\fR uzunluktadır. \fBsendmsg\fR() için, ileti \fImsg.msg_iov\fR dizisindeki öğelerle gösterilir. \fBsendmsg\fR() çağrısı yardımcı verinin de yollanmasını sağlar (denetim bilgisi de denir).
+.sp
+Eğer ileti ilgili protokol için bütün olarak gönderilemeyecek kadar uzunsa, \fBEMGSIZE\fR hatası döner ve ileti gönderilmez.
+.sp
+\fBsend\fR() işlevinde teslimatın yapılmadığını gösteren hiçbir belirti yoktur. Yerel olarak hatalar \fB-1\fR dönüş değeri ile saptanır.
+.sp
+İleti soketin gönderim tamponuna sığmadığında, \fBsend\fR() eğer soket engellemesiz G/Ç kipine alınmadıysa engellenir. Engellemesiz kip başarısız olduğunda \fBEAGAIN\fR veya \fBEWOULDBLOCK\fR döner. \fBselect\fR(2) çağrısı daha fazla veri gönderme olasılığını saptamak için kullanılabilir.
+.sp
+.SS "flags değerleri"
+\fIflags\fR değiştirgesinin değeri ya sıfırdır ya da aşağıdaki sabitlerin bit düzeyinde veyalanmasıyla elde edilir.
+.sp
+.TP 4
+\fBMSG_CONFIRM\fR (Linux 2.3.15 ve sonrası)
+Bağlantı katmanına yönlendirme sürecinin durumunu bildir: Karşı taraftan başarılı bir yanıt aldın. Eğer bağlantı katmanı bunu alamazsa komşusunu düzenli olarak uyarır (örneğin, tek noktaya ARP ile). Sadece \fBSOCK_DGRAM\fR ve \fBSOCK_RAW\fR soketleri için geçerli olup şimdilik sadece IPv4 ve IPv6 için gerçeklenmiştir. Ayrıntılar için \fBarp\fR(7) sayfasına bakın.
+.sp
+.TP 4
+\fBMSG_DONTROUTE\fR
+Paketi yollamak için geçit kullanma, doğrudan bağlı ağdaki konaklara gönder. Bu genellikle teşhis ve yönlendirme uygulamaları tarafından kullanılır. Bu sadece yönlendirme yapan protokoller için tanımlanmıştır; paket soketleri için değil.
+.sp
+.TP 4
+\fBMSG_DONTWAIT\fR (Linux 2.2 ve sonrası)
+Engellemesiz işlemi etkinleştirir; eğer işlem engellenirse, \fBEAGAIN\fR veya \fBEWOULDBLOCK\fR döner. \fBO_NONBLOCK\fR seçeneği tanımlanmış (\fBfcntl\fR(2) üzerinden \fBF_SETFL\fR işlemi ile) gibi davranır, fakat \fBMSG_DONTWAIT\fR çağrıya özel olmasıyla fark oluşturur. \fBO_NONBLOCK\fR seçeneği ise açık dosya tanıtıcısı içindir (\fBopen\fR(2) sayfasına bakın), çağrı sürecindeki tüm evreleri ve aynı zamanda aynı açık dosyanın dosya tanıtıcılarına sahip diğer süreçleri de etkiler.
+.sp
+.TP 4
+\fBMSG_EOR\fR (Linux 2.2 ve sonrası)
+Bir kaydı sonlandırır (bu kavram \fBSOCK_SEQPACKET\fR türündeki soketlerdeki gibi destekleniyorsa).
+.sp
+.TP 4
+\fBMSG_MORE\fR (Linux 2.4.4 ve sonrası)
+Çağrıcının hala yollayacağı veri var. Bu seçenek \fBTCP_CORK\fR soket seçeneğine ait etkiyi TCP soketleri ile elde etmek için kullanılır (\fBtcp\fR(7) sayfasına bakın). Bu seçeneğin farkı çağrıya özel olmasıdır.
+.sp
+Linux 2.6’dan itibaren, bu seçenek UDP soketleri için de desteklenmektedir. Çekirdeğe, sadece bu seçenek belirtilmeksizin yapılan bir çağrı ile aktarım yapılan tek bir verikatarına gönderilecek tüm veriyi bu seçenek kullanılarak yapılan çağrılarla gönderilecek şekilde paketlemesini söyler. (Ayrıca \fBudp\fR(7)’de açıklanan \fBUDP_CORK\fR soket seçeneğine de bakın.)
+.sp
+.TP 4
+\fBMSG_NOSIGNAL\fR (Linux 2.2 ve sonrası)
+Eğer akım odaklı soket karşıdan bağlantıyı kapattıysa \fBSIGPIPE\fR sinyali üretme. \fBEPIPE\fR hatası yine de döner. \fBSIGPIPE\fR sinyalini görmezden gelmek için \fBsigaction\fR(2) kullanımına benzer bir davranış sağlar, fakat \fBMSG_NOSIGNAL\fR çağrıya özeldir, \fBSIG_PIPE\fR sinyalinin görmezden gelinmesi sürecin tüm evrelerini etkileyen bir süreç özelliğinin atanmasına sebep olur.
+.sp
+.TP 4
+\fBMSG_OOB\fR
+Veriyi bantdışı (Out Of Band) veriyi destekleyen soketlere gönderir (örneğin \fBSOCK_STREAM\fR türü); kullanılan protokol bantdışı veriyi desteklemelidir.
+.sp
+.PP
+.sp
+.SS "sendmsg()"
+\fBsendmsg\fR() ile kullanılan \fImsghdr\fR yapısının tanımı:
+.sp
+.RS 4
+.nf
+struct msghdr {
+     void         *msg_name;       /* isteğe bağlı adres */
+     socklen_t     msg_namelen;    /* adresin boyutu */
+     struct iovec *msg_iov;        /* dağıtma/toplama dizisi */
+     size_t        msg_iovlen;     /* msg_iov içindeki öğe sayısı */
+     void         *msg_control;    /* yardımcı veri, aşağıya bakınız */
+     size_t        msg_controllen; /* yardımcı veri tampon boyutu */
+     int           msg_flags;      /* seçenekler (kullanılmıyor) */
+ };
+ 
+.fi
+.sp
+.RE
+\fImsg_name\fR alanı bağlantısız bir soket üzerinde verikatarı için hedef adresini belirtmekte kullanılır. Adresi içeren tampona göstericidir; \fImsg_namelen\fR alanına adresin boyutu atanmalıdır. Bağlantılı bir soket için, bu alanlar sırasıyla NULL ve 0 olarak belirtilmelidir.
+.sp
+\fImsg_iov\fR ve \fImsg_iovlen\fR alanları \fBwritev\fR(2) çağrısındaki gibi dağıtma-toplama konumlarını belirtir.
+.sp
+\fImsg_control\fR ve \fImsg_controllen\fR kullanılarak denetim bilgisi (yardımcı bilgi) gönderilebilir. Çekirdeğin soket başına işleyebileceği denetim tamponunun azami boyutu \fI/proc/sys/net/core/optmem_max\fR içindeki değerle sınırlanmıştır; \fBsocket\fR(7) sayfasına bakın. Yardımcı verilerin çeşitli soketlerde kullanımına ilişkin ayrıntılılı bilgi edinmek için \fBunix\fR(7) ve \fBip\fR(7) sayfasına bakın.
+.sp
+\fImsg_flags\fR alanı görmezden gelinir.
+.sp
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Başarı durumunda bu çağrılar gönderilen baytların sayısını döndürür. Hata durumunda, \fB-1\fR döner ve hata \fIerrno\fR değişkenine atanır.
+.sp
+.SH "HATALAR"
+Soket katmanı tarafından üretilen bazı standart hatalar vardır. Ayrıca, kullanılan protokol modülleri tarafından üretilen ve döndürülen hatalar da olabilir; bilgi için bunlarla ilgili kılavuz sayfalarına bakın.
+.sp
+.TP 4
+\fBEACCES\fR
+(Dosya yoluna göre tanınan UNIX alan soketleri için) Hedef soket dosyası için yazma izni veya dosya yolundaki bir dizin için arama izni reddedilmiş. (Ayrıca \fBpath_resolution\fR(7) sayfasına da bakın.)
+.sp
+(UDP soketleri için) Ağ/yayın adresine veri yollanmak için girişimde bulunulmuş ancak adres tek nokta için.
+.sp
+.TP 4
+\fBEAGAIN\fR veya \fBEWOULDBLOCK\fR
+Soket engellemesiz olarak işaretlenmiş ama talep edilen işlem soketi engelleyecek. POSIX.1-2001 her iki hatanın da döndürülmesine izin verir ve bu sabitlerin aynı değerde olmasını gerektirmez, bu bakımdan taşınabilir uygulamalar her iki seçeneği de sınamalıdır.
+.sp
+.TP 4
+\fBEAGAIN\fR
+(İnternet alanı verikatarı soketleri için) \fIsockfd\fR ile belirtilen soket, önceden bir adres ile ilişkilendirilmemiş ve soketi geçici bir portla ilişkilendirmeye çalışırken geçici port aralığındaki tüm portların kullanımda olduğu anlaşılmış. \fBip\fR(7) sayfasındaki \fI/proc/sys/net/ipv4/ip_local_port_range\fR ile ilgili açıklamaya bakınız.
+.sp
+.TP 4
+\fBEALREADY\fR
+Başka bir Hızlı Açma işlemde.
+.sp
+.TP 4
+\fBEBADF\fR
+Belirtilen \fIsockfd\fR geçerli bir açık dosya tanıtıcısı değil.
+.sp
+.TP 4
+\fBECONNRESET\fR
+Bağlantı karşıdan sıfırlandı.
+.sp
+.TP 4
+\fBEDESTADDRREQ\fR
+Soket bağlantılı kipte değil ve karşı adres atanmamış.
+.sp
+.TP 4
+\fBEFAULT\fR
+Bir değiştirge için belirtilen kullanıcı adres uzayı geçersiz.
+.sp
+.TP 4
+\fBEINTR\fR
+Veri gönderilmeden önce bir sinyal alınmış; \fBsignal\fR(7) sayfasına bakın.
+.sp
+.TP 4
+\fBEINVAL\fR
+Belirtilen değiştirge geçersiz.
+.sp
+.TP 4
+\fBEISCONN\fR
+Bağlantılı kipteki soket zaten bağlı ancak bir alıcı belirtilmiş. (Ya bu hata döner ya da belirtilen alıcı dikkate alınmaz.)
+.sp
+.TP 4
+\fBEMSGSIZE\fR
+Soket türü iletinin bütün olarak gönderilmesini gerektiriyor ancak iletinin boyutu bunu imkansız kılıyor.
+.sp
+.TP 4
+\fBENOBUFS\fR
+Ağ arabiriminin çıktı kuyruğu dolu. Bu, genellikle arabirimin göndermeyi durdurduğunu gösterir, ancak geçici bir tıkanıklıktan ötürü de olabilir. (Normalde bu durum Linux’ta olmaz. Aygıtın kuyruğu taşarsa paketler sessizce düşürülür.)
+.sp
+.TP 4
+\fBENOMEM\fR
+Yeterli bellek yok.
+.sp
+.TP 4
+\fBENOTCONN\fR
+Soket bağlantısız ve bir hedef belirtilmemiş.
+.sp
+.TP 4
+\fBENOTSOCK\fR
+Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+.sp
+.TP 4
+\fBEOPNOTSUPP\fR
+\fIflags\fR değiştirgesindeki bazı bitler soket türüyle uyumsuz.
+.sp
+.TP 4
+\fBEPIPE\fR
+Bağlantı yönelimli sokette yerel uç kapatılmış. Bu durumda, \fBMSG_NOSIGNAL\fR atanmamışsa işlem ayrıca \fBSIGPIPE\fR sinyalini de alır.
+.sp
+.PP
+.sp
+.SH "UYUMLULUK"
+4.4BSD, SVr4, POSIX.1-2001. Bu arayüzler ilk defa 4.2BSD ile ortaya çıktı.
+.sp
+POSIX.1-2001 sadece \fBMSG_OOB\fR ve \fBMSG_EOR\fR seçeneklerini açıklar. POSIX.1-2008 \fBMSG_NOSIGNAL\fR’e bir belirtim ekler. \fBMSG_CONFIRM\fR seçeneği ise Linux eklentisidir.
+.sp
+.SH "EK BİLGİ"
+POSIX.1-2001’e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünden, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
+.sp
+Tek çağrıda çok sayıda verikatarı iletmek için kullanılan Linux’a özgü sistem çağrısı hakkında bilgi edinmek için \fBsendmmsg\fR(2) sayfasına bakın.
+.sp
+.SH "HATALAR"
+Linux, \fBENOTCONN\fR yerine \fBEPIPE\fR döndürebilir.
+.sp
+.SH "ÖRNEKLER"
+\fBsendto\fR() kullanım örneği \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBfcntl\fR(2), \fBgetsockopt\fR(2), \fBrecv\fR(2), \fBselect\fR(2), \fBsendfile\fR(2), \fBsendmmsg\fR(2), \fBshutdown\fR(2), \fBsocket\fR(2), \fBwrite\fR(2), \fBcmsg\fR(3), \fBip\fR(7), \fBipv6\fR(7), \fBsocket\fR(7), \fBtcp\fR(7), \fBudp\fR(7), \fBunix\fR(7)
+.sp
+.SH "ÇEVİREN"
+© 2022 Fatih Koçer
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

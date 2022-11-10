@@ -1,0 +1,68 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "IFNAMES" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ifnames - C dosyalarından önişlemci komutlarını çıkarır
+.sp
+.SH KULLANIM
+.IP \fBifnames\fR 8
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+C kaynak \fIDOSYA\fRlarının hepsini (veya \fIDOSYA\fR belirtilmemişse standart girdiyi) tarar ve standart çıktıya, bu dosyalarda bulunan ’#if’, ’#elif’, ’#ifdef’ veya ’#ifndef’ yönergelerindeki tüm tanımlayıcıları sırayla listeler. Her tanımlayıcı ayrı bir satıra basılır ve o tanımlayıcıyı içeren dosyalar da boşluk ile ayrılmış şekilde yanına listelenir.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Bu yardım metnini basar ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini basar ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+David J. MacKenzie ve Paul Eggert tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+Lütfen, böcekleri ve hataları <bug-autoconf (at) gnu.org> adresine bildirin.
+.br
+GNU Autoconf sayfası: <http://www.gnu.org/software/autoconf/>
+.br
+GNU yazılımları genel kullanım yardımı: <http://www.gnu.org/gethelp/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+/Autoconf: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html>, <http://gnu.org/licenses/exceptions.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBautoconf\fR(1), \fBautoheader\fR(1), \fBautomake\fR(1), \fBautoreconf\fR(1), \fBautoscan\fR(1), \fBautoupdate\fR(1), \fBconfig.guess\fR(1), \fBconfig.sub\fR(1), \fBlibtool\fR(1).
+.sp
+\fBifnames\fR komutu ile ilgili kapsamlı bir kılavuz Texinfo olarak mevcuttur. \fBinfo\fR ve \fBifnames\fR yazılımları düzgün bir şekilde sisteminizde mevcutsa,
+.sp
+.RS 4
+\fBinfo ifnames\fR
+.sp
+.RE
+komutu ile bu kılavuzu görüntüleyebilirsiniz.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

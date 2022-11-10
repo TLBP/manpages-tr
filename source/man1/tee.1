@@ -1,0 +1,94 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.TH "TEE" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+tee - standart girdiyi dosyaya ve standart çıktıya kopyalar
+.sp
+.SH KULLANIM
+.IP \fBtee\fR 4
+[\fISEÇENEK\fR]... [\fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Standart girdiyi verilen \fIDOSYA\fRlara ve ayrıca standart çıktıya kopyalar.
+.sp
+.TP 4
+\fB-a\fR, \fB--append\fR
+\fIDOSYA\fRların üzerine yazmaz sonuna ekler.
+.sp
+.TP 4
+\fB-i\fR, \fB--ignore-interrupts\fR
+Kesme sinyallerini yok sayar.
+.sp
+.TP 4
+\fB-p\fR
+Borulara yazmadığı durumda hataları yakalar.
+.sp
+.TP 4
+\fB--output-error\fR[=\fIKİP\fR]
+\fIKİP\fR yazma hatalarında çıktının davranışını belirler:
+.sp
+.RS
+.TP 4
+\fBwarn\fR
+Her türlü çıktıyı yazarken hataları teşhis eder.
+.sp
+.TP 4
+\fBwarn-nopipe\fR
+Borular hariç çıktıyı yazarken hataları teşhis eder.
+.sp
+.TP 4
+\fBexit\fR
+Her türlü çıktıyı yazarken hata olursa çıkar.
+.sp
+.TP 4
+\fBexit-nopipe\fR
+Borular hariç çıktıyı yazarken hata olursa çıkar.
+.sp
+.PP
+.RE
+.IP
+\fB-p\fR seçeneği için \fBwarn-nopipe\fR öntanımlı \fIKİP\fRtir. \fB--output-error\fR için bir \fIKİP\fR belirtilmediği durumda bir boruya yazarken hata oluşursa hemen çıkar, diğer durumlarda ise oluşan hatayı teşhis eder.
+.sp
+.TP 4
+\fB--help\fR
+Yardım iletisini görüntüler ve çıkar.
+.sp
+.TP 4
+\fB--version\fR
+Sürüm bilgilerini görüntüler ve çıkar.
+.sp
+.PP
+.sp
+.SH "YAZAN"
+Mike Parker, Richard M. Stallman ve David MacKenzie tarafından yazılmıştır.
+.sp
+.SH "GERİBİLDİRİM"
+GNU coreutils sayfası: <http://www.gnu.org/software/coreutils/>
+.sp
+.SH "TELİF HAKKI"
+Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.sp
+.SH "İLGİLİ BELGELER"
+GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/tee>
+.br
+Veya sisteminizde: \fBinfo ’(coreutils) tee invocation’\fR
+.sp
+.SH "ÇEVİREN"
+© 2006, 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

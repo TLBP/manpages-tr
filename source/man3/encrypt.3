@@ -1,0 +1,230 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright 2000 Nicolás Lichtmaier <nick@debian.org>
+ * Created 2000-07-22 00:52-0300
+ *
+ * %%%LICENSE_START(GPLv2+_DOC_FULL)
+ * This is free documentation; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * The GNU General Public License’s references to "object code"
+ * and "executables" are to be interpreted as the output of any
+ * document formatting or typesetting system, including
+ * intermediate and printed output.
+ *
+ * This manual is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this manual; if not, see
+ * <http://www.gnu.org/licenses/>.
+ * %%%LICENSE_END
+ *
+ * Modified 2002-07-23 19:21:35 CEST 2002 Walter Harms
+ * <walter.harms@informatik.uni-oldenburg.de>
+ *
+ * Modified 2003-04-04, aeb
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.TH "ENCRYPT" 3 "1 Kasım 2020" "Linux man-pages 5.10" "Kütüphane İşlevleri"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+encrypt - 64 bitlik iletileri şifreler
+.br
+setkey - encrypt() için anahtarı belirler
+.br
+encrypt_r - 64 bitlik iletileri şifreler (evresel)
+.br
+setkey_r - encrypt_r() için anahtarı belirler (evresel)
+.sp
+.SH BİLDİRİM
+.nf
+\fB#include _XOPEN_SOURCE\fR    /* Bkz: \fBfeature_test_macros\fR(7) */
+\fB#include <unistd.h>\fR
+.fi
+.sp
+.IP "void \fBencrypt\fR" 13
+(char \fIblock\fR[64], 
+int \fIedflag\fR);
+.sp
+.PP
+.nf
+\fB#include _XOPEN_SOURCE\fR    /* Bkz: \fBfeature_test_macros\fR(7) */
+\fB#include <stdlib.h>\fR
+.fi
+.sp
+.IP "void \fBsetkey\fR" 12
+(const char *\fIkey\fR);
+.sp
+.PP
+.nf
+\fB#include _GNU_SOURCE\fR    /* Bkz: \fBfeature_test_macros\fR(7) */
+\fB#include <crypt.h>\fR
+.fi
+.sp
+.IP "void \fBsetkey_r\fR" 14
+(const char *\fIkey\fR, 
+struct crypt_data *\fIdata\fR);
+.sp
+.IP "void \fBencrypt_r\fR" 15
+(char *\fIblock\fR, 
+int \fIedflag\fR, 
+struct crypt_data *\fIdata\fR);
+.sp
+.PP
+Bunların herbiri \fB-lcrypt\fR ile ilintileme gerektirir.
+.sp
+.SH "AÇIKLAMA"
+.TP 4
+\fBUyarı:\fR
+Artık güvenli kabul edilmeyen DES blok şifresini kullandıkları için \fBcrypt\fR(), \fBcrypt_r\fR(), \fBsetkey\fR() ve \fBsetkey_r\fR() glibc-2.28’de kaldırıldı. Uygulamaların \fBlibcrypt\fR gibi daha güncel bir şifreleme kütüphanesine geçmesi gerekir.
+.sp
+.PP
+Bu işlevler 64 bitlik iletileri şifreler ve şifresini çözer. \fBsetkey\fR() işlevi \fBencrypt\fR() işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan \fIkey\fR değiştirgesi 64 baytlık bir dizidir ve her baytın değeri 1 ya da 0’dır. \fIkey\fR[n] dizisinin \fBn=8*i-1\fR indisli elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
+.sp
+\fBencrypt\fR() işlevi aktarılan tamponda değişiklik yapar, \fIedflag\fR değiştirgesine 0 aktarılırsa \fIblock\fR içeriğini şifreler, 1 aktarılırsa şifresini çözer. \fIkey\fR gibi \fIblock\fR değiştirgesi de şifrelenmiş değerin bit gösterimini içerir. Sonuç aynı tampon içinde döner.
+.sp
+Bu iki işlev evresel değildir, yani anahtar verisi statik bellek bölgesinde saklanır. \fBsetkey_r\fR() ve \fBencrypt_r\fR() işlevleri evreseldir ve anahtar verisini saklamak için \fIcrypt_data\fR veri yapısını kullanır:
+.sp
+.RS 4
+.nf
+struct crypt_data {
+   char keysched[16 * 8];
+   char sb0[32768];
+   char sb1[32768];
+   char sb2[32768];
+   char sb3[32768];
+   char crypt_3_buf[14];
+   char current_salt[2];
+   long int current_saltbits;
+   int  direction;
+   int  initialized;
+};
+.fi
+.sp
+.RE
+\fBsetkey_r\fR() çağrısından önce \fIdata->initialized\fR alanına 0 atanır.
+.sp
+.SH "DÖNÜŞ DEĞERİ"
+Bu işlevler herhangi bir değer döndürmez.
+.sp
+.SH "HATALAR"
+Yukarıdaki işlevler çağrılmadan önce \fIerrno\fR değişkeni sıfırlanır. Başarı durumunda değeri değişmez.
+.sp
+.TP 4
+\fBENOSYS\fR
+İşlev kütüphanede bulunmamaktadır (Örneğin, ABD’nin ihracat sınırlamalarından dolayı).
+.sp
+.PP
+.sp
+.SH "ÖZNİTELİKLER"
+Bu bölümde kulllanılan terimlerin açıklamaları \fBattributes\fR(7) sayfasında bulunabilir.
+.sp
+.TS
+tab(:) allbox;
+l1 1l1 1l.
+\fBİşlev\fR :\fBÖznitelik\fR :\fBDeğer\fR
+T{
+\fBencrypt\fR, \fBsetkey\fR
+T}:T{
+Evre Güvenliği
+T}:T{
+ÇEG-hayır yarış:crypt
+T}
+T{
+\fBencrypt_r\fR, \fBsetkey_r\fR
+T}:T{
+Evre Güvenliği
+T}:T{
+ÇEG-evet
+T}
+.TE
+.sp
+.sp
+.SH "UYUMLULUK"
+\fBencrypt\fR(), \fBsetkey\fR(): POSIX.1-2001, POSIX.1-2008, SUS, SVr4.
+.sp
+\fBencrypt_r\fR() ve \fBsetkey_r\fR() işlevi GNU eklentisidir.
+.sp
+.SH "EK BİLGİ"
+Glibc’deki yararlanım: Bkz. \fBcrypt\fR(3)
+.sp
+Glibc’deki özellikler: Gibc-2.2’de bu işlevler DES algoritmasını kullanmaktadır.
+.sp
+.SH "ÖRNEKLER"
+.RS 4
+.nf
+#define _XOPEN_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <crypt.h>
+\&
+int
+main(void)
+{
+    char key[64];
+    char orig[9] = "eggplant";
+    char buf[64];
+    char txt[9];
+\&
+    for (int i = 0; i < 64; i++) {
+        key[i] = rand() & 1;
+    }
+\&
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            buf[i * 8 + j] = orig[i] >> j & 1;
+        }
+        setkey(key);
+    }
+    printf("Şifrelenmeden önce: %s\\n", orig);
+\&
+    encrypt(buf, 0);
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0, txt[i] = ’\\0’; j < 8; j++) {
+            txt[i] |= buf[i * 8 + j] << j;
+        }
+        txt[8] = ’\\0’;
+    }
+    printf("Şifrelemeden sonra:  %s\\n", txt);
+\&
+    encrypt(buf, 1);
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0, txt[i] = ’\\0’; j < 8; j++) {
+            txt[i] |= buf[i * 8 + j] << j;
+        }
+        txt[8] = ’\\0’;
+    }
+    printf("Şifre çözüldükten sonra:  %s\\n", txt);
+    exit(EXIT_SUCCESS);
+}
+.fi
+.sp
+.RE
+.sp
+.SH "İLGİLİ BELGELER"
+\fBcbc_crypt\fR(3), \fBcrypt\fR(3), \fBecb_crypt\fR(3)
+.sp
+.SH "ÇEVİREN"
+© 2004 Emin İslam Tatlı
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

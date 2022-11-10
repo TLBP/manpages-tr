@@ -1,0 +1,72 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+..
+.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.TH "HTDIGEST" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+htdigest - Özet türü kimlik doğrulama dosyalarını yönetir
+.sp
+.SH KULLANIM
+.IP \fBhtdigest\fR 9
+[ \fB-c\fR ] \fIparola-dosyası\fR \fIbölge\fR \fIkullanıcı\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBhtdigest\fR, HTTP kullanıcılarının digest türü kimlik doğrulaması için kullanıcı isimlerinin ve parolalarının saklanmasında kullanılacak düz metin dosyalarını oluşturmak ve güncellemek için kullanılır. Apache HTTP sunucusunun mevcut özkaynaklarının kullanımı sadece \fBhtdigest\fR tarafından oluşturulan dosyalarda listelenmiş kullanıcılara tahsis edilebilir.
+.sp
+Bu kılavuz sayfası sadece komut satırı değiştirgelerini listeler. Kullanıcı kimlik doğrulamasını \fBhttpd\fR(8)’de yapılandırmak için gerekli yönergelerle ilgili ayrıntılar için Apache dağıtımının bir parçası olan ve http://httpd.apache.org/docs/2.4/ adresinde bulunan Apache HTTP Sunucusu Belgelerine bakınız.
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-c\fR
+\fIparola-dosyası\fR oluşturur. Dosya mevcutsa, dosya silinip yeniden yazılır.
+.sp
+.TP 4
+\fIparola-dosyası\fR
+Kullanıcı ismi, parola ve bölge bilgilerini içeren dosyanın ismi. \fB-c\fR seçeneği verilmişse ve dosya mevcut değilse oluşturulur, dosya mevcutsa silinip yeniden oluşturulur.
+.sp
+.TP 4
+\fIbölge\fR
+Kullanıcının mensup olduğu bölge ismi. Daha fazla bilgi için: http://tools.ietf.org/html/rfc2617#section-3.2.1
+.sp
+.TP 4
+\fIkullanıcı\fR
+\fIparola-dosyası\fR’nda oluşturulacak veya güncellenecek kullanıcı ismi. \fIkullanıcı\fR bu dosyada mevcut değilse yeni bir girdi eklenir. Girdi mevcutsa parolası değiştirilir.
+.sp
+.PP
+.sp
+.SH "GÜVENLİK DEĞERLENDİRMELERİ"
+Bu uygulama bir setuid çalıştırılabiliri olarak güvenilir olmadığından \fIsetuid yapılmamalıdır\fR.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp
