@@ -21,7 +21,7 @@
  * along with this library; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
 .TH "WATCH" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,7 +43,7 @@ watch - tam ekran çıktı gösteren bir uygulamayı aralıklı çalıştırır
 .SH "SEÇENEKLER"
 .TP 4
 \fB-d\fR, \fB--differences\fR\fB[=permanent]\fR
-Ardışık güncellemeler arasındaki farkları vurgular. İsteğe bağlı \fBpermanent\fR değiştirgesi belirtilirse, \fBwatch\fR ilk yinelemeden itibaren tüm değişiklikleri gösterir.
+Ardışık güncellemeler arasındaki farkları vurgular. İsteğe bağlı \fBpermanent\fR bağımsız değişkeni belirtilirse, \fBwatch\fR ilk yinelemeden itibaren tüm değişiklikleri gösterir.
 .sp
 .TP 4
 \fB-n\fR, \fB--interval\fR \fIARALIK\fR
@@ -140,7 +140,7 @@ Güncelleme aralığı, \fB--interval\fR komut satırı seçeneğinin izlediği 
 .PP
 .sp
 .SH "EK BİLGİ"
-POSIX seçenek işlemleri kullanılır (örneğin, seçenek işlemleri seçenek olmayan ilk değiştirgede durdurulur). Yani, \fIkomut\fRtan sonraki seçenekler \fBwatch\fR tarafından yorumlanmaz.
+POSIX seçenek işlemleri kullanılır (örneğin, seçenek işlemleri seçenek olmayan ilk bağımsız değişkende durdurulur). Yani, \fIkomut\fRtan sonraki seçenekler \fBwatch\fR tarafından yorumlanmaz.
 .sp
 .SH "YETERSİZLİKLER"
 Uçbirim yeniden boyutlandırıldığında, ekran bir sonraki zamanlanmış güncellemeye kadar doğru şekilde yeniden boyanmaz. Tüm \fB--differences\fR vurgulamaları da güncelleme sırasında kaybolur.

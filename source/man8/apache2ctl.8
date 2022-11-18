@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:31+03:00
 .TH "APACHE2CTL" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -33,12 +33,12 @@ apache2ctl - Apache HTTP Sunucusu Denetim Arayüzü
 apachectl - Apache HTTP Sunucusu Denetim Arayüzü
 .sp
 .SH KULLANIM
-Önalanda çalıştığında \fBhttpd\fR çalıştırılabilirinin bütün komut satırı değiştirgelerini kabul edebilir.
+Önalanda çalıştığında \fBhttpd\fR çalıştırılabilirinin bütün komut satırı bağımsız değişkenlerini kabul edebilir.
 .sp
 .IP \fBapache2ctl\fR 11
-[ \fIhttpd-değiştirgeleri\fR ]
+[ \fIhttpd-bağımsız değişkenleri\fR ]
 .IP \fBapachectl\fR 10
-[ \fIhttpd-değiştirgeleri\fR ]
+[ \fIhttpd-bağımsız değişkenleri\fR ]
 .sp
 .PP
 SysV başlatma betiği kipinde ise, aşağıda tanımlanan basit, tek sözcüklük komutları kabul eder.
@@ -55,7 +55,7 @@ SysV başlatma betiği kipinde ise, aşağıda tanımlanan basit, tek sözcükl�
 .sp
 \fBapachectl\fR iki kipte işleyebilir. İlkinde, \fBhttpd\fR komutu için basit bir önyüz gibi davranarak, gerekli ortam değişkenlerini atar ve belirtilen komut satırı seçenekleriyle \fBhttpd\fR sürecini başlatır. İkinci kipte ise, \fBapachectl\fR bir SysV başlatma betiği olarak \fBstart\fR, \fBrestart\fR, \fBstop\fR gibi tek sözcüklük basit komutlar alır ve bunları uygun sinyallere dönüştürerek \fBhttpd\fR’ye gönderir.
 .sp
-Eğer Apache kurulumunuzda standart dışı dosya yolları kullanmışsanız, \fBhttpd\fR için uygun yolları atamak için \fBapachectl\fR betiğini elden geçirmelisiniz. Bu arada gerek gördüğünüz \fBhttpd\fR komut satırı değiştirgelerini de belirtebilirsiniz. Ayrıntılar için betik içindeki açıklamalara bakınız.
+Eğer Apache kurulumunuzda standart dışı dosya yolları kullanmışsanız, \fBhttpd\fR için uygun yolları atamak için \fBapachectl\fR betiğini elden geçirmelisiniz. Bu arada gerek gördüğünüz \fBhttpd\fR komut satırı bağımsız değişkenlerini de belirtebilirsiniz. Ayrıntılar için betik içindeki açıklamalara bakınız.
 .sp
 \fBapachectl\fR betiği başarı durumunda 0 çıkış değeri ile döner. Bir hata durumunda ise sıfırdan farklı bir değerle döner. Daha fazla bilgi için betik içindeki açıklamalara bakınız.
 .sp

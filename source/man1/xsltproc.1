@@ -26,7 +26,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
 .TH "XSLTPROC" 1 "17 Ağustos 2022" "libxslt 1.1.36" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -169,7 +169,7 @@ Dönüşümü 20 kere gerçekleştirir. Zaman sınamaları için kullanılır.
 .sp
 .TP 4
 \fB--stringparam\fR \fIİSİM DEĞER\fR
-Değerin bir düğüm tanımlayıcısı değil de bir dizge olduğu durumlarda, XSLT şablonunun \fIİSİM\fR değiştirgesine \fIDEĞER\fR değerini aktarmakta kullanılır. Dizge mutlaka UTF-8 kodlanmış olmalıdır.
+Değerin bir düğüm tanımlayıcısı değil de bir dizge olduğu durumlarda, XSLT şablonunun \fIİSİM\fR bağımsız değişkenine \fIDEĞER\fR değerini aktarmakta kullanılır. Dizge mutlaka UTF-8 kodlanmış olmalıdır.
 .sp
 .TP 4
 \fB--timing\fR
@@ -217,11 +217,11 @@ Hata yok (normal işlem).
 .sp
 .TP 4
 1
-Hiç değiştirge yok.
+Hiç bağımsız değişken yok.
 .sp
 .TP 4
 2
-Çok fazla değiştirge var.
+Çok fazla bağımsız değişken var.
 .sp
 .TP 4
 3
@@ -245,7 +245,7 @@ Desteklenmeyen \fBxsl:output\fR yöntemi
 .sp
 .TP 4
 8
-Hem tek hem de çift tırnsk içeren dizge değiştirge.
+Hem tek hem de çift tırnak içeren dizge bağımsız değişken.
 .sp
 .TP 4
 9

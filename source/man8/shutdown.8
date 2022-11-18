@@ -7,7 +7,7 @@
  * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
  * https://github.com/systemd/systemd
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:53+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:33+03:00
 .TH "SHUTDOWN" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -26,7 +26,7 @@ shutdown - sistemi durdurur, makineyi kapatır veya yeniden başlatır
 .SH "AÇIKLAMA"
 \fBshutdown\fR, sistemi durdurmak, makineyi kapatmak veya yeniden başlatmak için kullanılabilir.
 .sp
-İlk değiştirge bir \fIZAMAN\fR dizgesi olabilir (genellikle "now" (şimdi) olur). Ardından, isteğe bağlı olarak, oturum açan tüm kullanıcılara sistem kapanmadan önce gönderilecek bir \fBwall\fR(1) \fIİLETİ\fRsi gelebilir.
+İlk bağımsız değişken bir \fIZAMAN\fR dizgesi olabilir (genellikle "now" (şimdi) olur). Ardından, isteğe bağlı olarak, oturum açan tüm kullanıcılara sistem kapanmadan önce gönderilecek bir \fBwall\fR(1) \fIİLETİ\fRsi gelebilir.
 .sp
 \fIZAMAN\fR dizgesi, kapanma zamanını belirten, 24 saatlik gösterimle saat/dakika belirtimi için "ss:dd" biçiminde olabilir. Bunu yerine, şu andan itibaren belirtilen dakika sayısına atıfta bulunan "+m" sözdizimi de kullanılabilir. "now" ve "+0" aynıdır, yani kapanmayı "hemen" tetiklemek içindir. \fIZAMAN\fR belirtilmezse, "+1" öntanımlıdır.
 .sp

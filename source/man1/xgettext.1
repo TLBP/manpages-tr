@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
 .TH "XGETTEXT" 1 "4 Temmuz 2020" "GNU gettext-tools 20200704" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,7 +23,7 @@ xgettext - gettext dizgelerini kaynak dosyasından seçer
 .SH "AÇIKLAMA"
 Belirtilen \fIGİRDİ-DOSYA\fRlarından dönüştürülebilecek dizgeleri çekip alır.
 .sp
-Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur. Aynı şey isteğe bağlı değiştirgelerde de geçerlidir.
+Uzun seçenekler için zorunlu olan bağımsız değişkenler kısa seçenekler için de zorunludur. Aynı şey isteğe bağlı bağımsız değişkenlerde de geçerlidir.
 .sp
 .SS "Girdi dosyasının yeri:"
 .TP 4
@@ -185,19 +185,19 @@ Tanımlanmış anahtar sözcük \fIBELİRTİM\fRlerini devre dışı bırakmak i
 .PD 1
 .RS 5
 .IP \(bu 3
-\fIBELİRTİM\fR bir C tanımlayıcı kimliğiyse, \fBxgettext\fR, işlev veya makro kimliğine yapılan her çağrının ilk değiştirgesinde dizgeleri arar.
+\fIBELİRTİM\fR bir C tanımlayıcı kimliğiyse, \fBxgettext\fR, işlev veya makro kimliğine yapılan her çağrının ilk bağımsız değişkeninde dizgeleri arar.
 .IP \(bu 3
-\fIBELİRTİM\fR \fIid:argnum\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum\fRuncu değiştirgesinde dizgeleri arar.
+\fIBELİRTİM\fR \fIid:argnum\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum\fRuncu bağımsız değişkeninde dizgeleri arar.
 .IP \(bu 3
-\fIBELİRTİM\fR \fIid:argnum1,argnum2\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum1\fRinci ve \fIargnum2\fRinci değiştirgesinde dizgeleri arar ve onları aynı iletinin tekil/çoğul karşılıklarını elde etmek için kullanır.
+\fIBELİRTİM\fR \fIid:argnum1,argnum2\fR biçemindeyse, \fBxgettext\fR çağrının \fIargnum1\fRinci ve \fIargnum2\fRinci bağımsız değişkeninde dizgeleri arar ve onları aynı iletinin tekil/çoğul karşılıklarını elde etmek için kullanır.
 .IP \(bu 3
-\fIBELİRTİM\fR \fIid:contextargnumc,argnum\fR veya \fIid:argnum,contextargnumc\fR biçemindeyse, \fBxgettext\fR \fIcontextargnum\fRuncu değiştirgedeki dizgeyi bağlam belirteci olarak ele alır.
+\fIBELİRTİM\fR \fIid:contextargnumc,argnum\fR veya \fIid:argnum,contextargnumc\fR biçemindeyse, \fBxgettext\fR \fIcontextargnum\fRuncu bağımsız değişkendeki dizgeyi bağlam belirteci olarak ele alır.
 .IP \(bu 3
-GNOME için özel kullanım desteği olarak, \fIBELİRTİM id:argnumg\fR biçemindeyse \fBxgettext\fR GNOME glib ‘"\fBmsgctxt|msgid\fR"’ sözdizimini kullanarak \fIargnum\fRuncu değiştirgeyi bağlamlı bir dizge olarak ele alır.
+GNOME için özel kullanım desteği olarak, \fIBELİRTİM id:argnumg\fR biçemindeyse \fBxgettext\fR GNOME glib ‘"\fBmsgctxt|msgid\fR"’ sözdizimini kullanarak \fIargnum\fRuncu bağımsız değişkenyi bağlamlı bir dizge olarak ele alır.
 .IP \(bu 3
-\fIBELİRTİM ’id:…,totalnumargst’\fR biçemindeyse \fBxgettext\fR yalnızca, asıl değiştirge sayısı \fItotalnumargs\fR’a eşitse bu değiştirge belirtimini tanır. Bu, C++’da aşırı yüklenmiş işlev çağrılarının belirsizliğini gidermek için kullanışlıdır.
+\fIBELİRTİM ’id:…,totalnumargst’\fR biçemindeyse \fBxgettext\fR yalnızca, asıl bağımsız değişken sayısı \fItotalnumargs\fR’a eşitse bu bağımsız değişken belirtimini tanır. Bu, C++’da aşırı yüklenmiş işlev çağrılarının belirsizliğini gidermek için kullanışlıdır.
 .IP \(bu 3
-\fIBELİRTİM ’id:argnum...,"xcomment"’\fR biçemindeyse \fBxgettext\fR iletiyi belirtilen değiştirge dizgesinden çıkarırken, çıkarılan \fIxcomment\fR yorumunu iletiye ekler. Normal bir kabuk komut satırı aracılığıyla kullanıldığında, \fIxcomment\fR etrafındaki çift tırnakların öncelenmesi gerektiği unutulmamalıdır.
+\fIBELİRTİM ’id:argnum...,"xcomment"’\fR biçemindeyse \fBxgettext\fR iletiyi belirtilen bağımsız değişken dizgesinden çıkarırken, çıkarılan \fIxcomment\fR yorumunu iletiye ekler. Normal bir kabuk komut satırı aracılığıyla kullanıldığında, \fIxcomment\fR etrafındaki çift tırnakların öncelenmesi gerektiği unutulmamalıdır.
 .sp
 .RE
 .IP
@@ -253,11 +253,11 @@ Desktop için: \fBName\fR, \fBGenericName\fR, \fBComment\fR, \fBKeywords\fR
 .sp
 .TP 4
 \fB--flag=\fR\fISÖZCÜK:NUM:BAYRAK\fR
-\fISÖZCÜK\fR işlevinin \fINUM\fRuncu değiştirgesinin bir parçası olarak ortaya çıkan dizgeler için ek \fIBAYRAK\fRları belirtir. Olası bayraklar, muhtemelen ’\fBpass-\fR’ ön ekli ve ’\fBno-c-format\fR’ gibi olumsuzlamaları olan ’\fBc-format\fR’ gibi, olası biçem dizgesi göstergeleridir.
+\fISÖZCÜK\fR işlevinin \fINUM\fRuncu bağımsız değişkeninin bir parçası olarak ortaya çıkan dizgeler için ek \fIBAYRAK\fRları belirtir. Olası bayraklar, muhtemelen ’\fBpass-\fR’ ön ekli ve ’\fBno-c-format\fR’ gibi olumsuzlamaları olan ’\fBc-format\fR’ gibi, olası biçem dizgesi göstergeleridir.
 .sp
-\fB--flag=function:arg:lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, belirtilen \fBfunction\fR işlevinin \fBarg\fRıncı değiştirgesi olarak bir biçem dizgisi beklemesidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format__ (__printf__, arg, ...)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, GNU libc’deki \fBerror\fR(3) işlevini kullanırsanız, davranışını \fB--flag=error:3:c-format\fR aracılığıyla belirtebilirsiniz. Bu belirtimin etkisi, \fBxgettext\fR’in işlevin \fBarg\fRıncı değiştirgesi olarak ortaya çıkan tüm \fBgettext\fR(3) çağrılarını biçem dizgeleri olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: \fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+\fB--flag=function:arg:lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, belirtilen \fBfunction\fR işlevinin \fBarg\fRıncı bağımsız değişkeni olarak bir biçem dizgisi beklemesidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format__ (__printf__, arg, ...)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, GNU libc’deki \fBerror\fR(3) işlevini kullanırsanız, davranışını \fB--flag=error:3:c-format\fR aracılığıyla belirtebilirsiniz. Bu belirtimin etkisi, \fBxgettext\fR’in işlevin \fBarg\fRıncı bağımsız değişkeni olarak ortaya çıkan tüm \fBgettext\fR(3) çağrılarını biçem dizgeleri olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: \fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
 .sp
-\fB--flag=function:arg:pass-lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, \fBfunction\fR çağrısı, bir \fBformat\fR dizgesi vermesi gereken konumda iken gerçekleşirse, \fBarg\fRıncı değiştirgenin de ilave olarak aynı türde bir \fBformat\fR dizgesi vermesi gerektiğidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:pass-c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format_arg__ (arg)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, \fBgettext\fR(3) işlevi için ’\fB_\fR’ kısayolu kullanılırsa, seçenek olarak \fB--flag=_:1:pass-c-format\fR kullanmak gerekir. Bu belirtimin etkisi, \fBxgettext\fR’in \fB_("string")\fR çağrısı için biçem dizgesi gereksinimini ilk değiştirge olan \fBstring\fR’e yöneltmesi ve böylece onu bir biçem dizgesi olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: "\fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+\fB--flag=function:arg:pass-lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, \fBfunction\fR çağrısı, bir \fBformat\fR dizgesi vermesi gereken konumda iken gerçekleşirse, \fBarg\fRıncı bağımsız değişkenin de ilave olarak aynı türde bir \fBformat\fR dizgesi vermesi gerektiğidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:pass-c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format_arg__ (arg)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, \fBgettext\fR(3) işlevi için ’\fB_\fR’ kısayolu kullanılırsa, seçenek olarak \fB--flag=_:1:pass-c-format\fR kullanmak gerekir. Bu belirtimin etkisi, \fBxgettext\fR’in \fB_("string")\fR çağrısı için biçem dizgesi gereksinimini ilk bağımsız değişken olan \fBstring\fR’e yöneltmesi ve böylece onu bir biçem dizgesi olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: "\fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
 .sp
 Bu seçeneğin etkili olduğu diller: C, C++, ObjectiveC, Shell, Python, Lisp, EmacsLisp, librep, Scheme, Java, C#, awk, YCP, Tcl, Perl, PHP, GCC-source, Lua, JavaScript, Vala.
 .sp

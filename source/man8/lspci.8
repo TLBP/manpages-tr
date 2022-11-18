@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:32+03:00
 .TH "LSPCI" 8 "Ocak 2021" "pciutils-3.8.0" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -201,7 +201,7 @@ Kütüphanenin hata ayıklama seviyesini artırır (bütün sistemlerde).
 Tüm sayılar daima onaltılık tabanda basılır. Adlar yerine sayısal kimliklerle çalışılmak istenirse \fB-n\fR seçeneği eklenebilir.
 .sp
 .SS "Basit biçem (-m)"
-Basit biçemde, her aygıt, bir kabuk betiğine geçmeye uygun değiştirgelerden oluşan tek bir satırda tanımlanır, yani, boşluklarla ayrılmış değerler, gerekirse tırnak içine alınır veya öncelenir. Değiştirgelerden bazıları konumsaldır: yuva, sınıf, satıcı adı, aygıt adı, alt sistem satıcı adı ve alt sistem adı (aygıtın alt sistemi yoksa son ikisi boştur); kalan değiştirgeler aşağıdakiler gibi birer seçenektir:
+Basit biçemde, her aygıt, bir kabuk betiğine geçmeye uygun bağımsız değişkenlerden oluşan tek bir satırda tanımlanır, yani, boşluklarla ayrılmış değerler, gerekirse tırnak içine alınır veya öncelenir. Bağımsız değişkenlerden bazıları konumsaldır: yuva, sınıf, satıcı adı, aygıt adı, alt sistem satıcı adı ve alt sistem adı (aygıtın alt sistemi yoksa son ikisi boştur); kalan bağımsız değişkenler aşağıdakiler gibi birer seçenektir:
 .sp
 .TP 4
 \fB-r\fR\fISAYI\fR
@@ -212,7 +212,7 @@ Düzeltme sürümü.
 Yazılım geliştirme arayüzü.
 .sp
 .PP
-Konumsal değiştirge ve seçeneklerin göreli sırası tanımlanmamıştır. Gelecekteki sürümlerde yeni seçenekler eklenebilir, ancak daima seçenekten herhangi bir boşlukla ayrılmayan tek bir değiştirgeleri olacaktır, bu nedenle tanınmazlarsa kolayca göz ardı edilebilir.
+Konumsal bağımsız değişken ve seçeneklerin göreli sırası tanımlanmamıştır. Gelecekteki sürümlerde yeni seçenekler eklenebilir, ancak daima seçenekten herhangi bir boşlukla ayrılmayan tek bir bağımsız değişkenleri olacaktır, bu nedenle tanınmazlarsa kolayca göz ardı edilebilir.
 .sp
 .SS "Ayrıntılı kip (-vmm)"
 Ayrıntılı çıktı, boş satırlarla ayrılmış bir dizi kayıttır. Her kayıt, her satırda tek bir "\fIETİKET DEĞER\fR" çifti içeren bir dizi satırla tek bir aygıtı tanımlar. \fIETİKET\fR ve \fIDEĞER\fR, tek bir sekme karakteriyle ayrılır. Ne kayıtlar ne de bir kayıt içindeki satırlar belirli bir sıradadır. Etiketler büyük/küçük harfe duyarlıdır.

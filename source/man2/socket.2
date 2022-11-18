@@ -46,7 +46,7 @@
  * Modified 2002-07-17 by Michael Kerrisk <mtk.manpages@gmail.com>
  * Modified 2004-06-17 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:31+03:00
 .TH "SOCKET" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -70,7 +70,7 @@ int \fIprotocol\fR);
 .SH "AÇIKLAMA"
 \fBsocket\fR() iletişim için uç nokta oluşturur ve bu ucu ifade eden bir dosya tanıtıcısı döndürür. Başarılı bir çağrı ile dönen dosya tanıtıcısı, süreç için açık olmayan en küçük numaralı dosya tanıtıcısı olur.
 .sp
-\fIdomain\fR değiştirgesinde belirtilen adres ailesi iletişim alanını, adres ve protokol ailesini belirler. Bu aileler \fI<sys/socket.h>\fR içerisinde tanımlanmıştır. Adres ailesi sabitlerinin isimleri \fBAF\fR, protokol ailesi sabitlerinin isimleri ise \fBPF\fR ile başlar ve bunlar eşdeğerdir. Linux çekirdeği tarafından tanınan aileler:
+\fIdomain\fR bağımsız değişkeninde belirtilen adres ailesi iletişim alanını, adres ve protokol ailesini belirler. Bu aileler \fI<sys/socket.h>\fR içerisinde tanımlanmıştır. Adres ailesi sabitlerinin isimleri \fBAF\fR, protokol ailesi sabitlerinin isimleri ise \fBPF\fR ile başlar ve bunlar eşdeğerdir. Linux çekirdeği tarafından tanınan aileler:
 .sp
 .TS
 tab(:) allbox;
@@ -240,7 +240,7 @@ T}
 .sp
 Yukarıdaki adres aileleri ve diğer adres aileleri için ayrıntılı bilgiler \fBaddress_families\fR(7) sayfasında bulunabilir.
 .sp
-\fBsocket\fR() çağrısının \fItype\fR değiştirgesi iletişim türünü belirler. Tanımlı türler:
+\fBsocket\fR() çağrısının \fItype\fR bağımsız değişkeni iletişim türünü belirler. Tanımlı türler:
 .sp
 .TP 4
 \fBSOCK_STREAM\fR
@@ -269,7 +269,7 @@ Eskidir ve yeni programlarda kullanılmamalıdır; \fBpacket\fR(7) sayfasına ba
 .PP
 Bazı soket türleri tüm protokol aileleri tarafından uygulanmayabilir.
 .sp
-Linux 2.6.27’den itibaren, \fItype\fR değiştirgesi ikinci bir işleve sahiptir: soket türünü belirtmeye ek olarak \fBsocket\fR()’in davranışını değiştirmek için aşağıdaki değerler bit düzeyinde VEYA’lanabilir:
+Linux 2.6.27’den itibaren, \fItype\fR bağımsız değişkeni ikinci bir işleve sahiptir: soket türünü belirtmeye ek olarak \fBsocket\fR()’in davranışını değiştirmek için aşağıdaki değerler bit düzeyinde VEYA’lanabilir:
 .sp
 .TP 4
 \fBSOCK_NONBLOCK\fR
@@ -280,7 +280,7 @@ Linux 2.6.27’den itibaren, \fItype\fR değiştirgesi ikinci bir işleve sahipt
 Yürütmeyi kapat (Close On Exec) (\fBFD_CLOEXEC\fR) bayrağını yeni dosya tanıtıcısına ayarla. Bunun neden faydalı olabileceği \fBopen\fR(2) sayfasındaki \fBO_CLOEXEC\fR bayrağının açıklamasında bulunabilir.
 .sp
 .PP
-\fIprotocol\fR değiştirgesinde, soket ile kullanılacak protokol belirtilir. Normalde, belirli bir protokol ailesindeki belirli bir soket türünü desteklemek için yalnızca tek bir protokol vardır, bu nedenle \fIprotocol\fR 0 olarak belirtilebilir. Ancak soket türünü destekleyen birden fazla protokolün var olması da mümkündür, bu durumda bir protokolün belirtilmesi gereklidir. Kullanılacak protokol numarası iletişimin gerçekleşeceği "iletişim alanına" özeldir; \fBprotocols\fR(5) sayfasına bakın. Protokol adlarının protokol numaraları ile nasıl eşleneceği \fBgetprotoent\fR(3) sayfasında açıklanmıştır.
+\fIprotocol\fR bağımsız değişkeninde, soket ile kullanılacak protokol belirtilir. Normalde, belirli bir protokol ailesindeki belirli bir soket türünü desteklemek için yalnızca tek bir protokol vardır, bu nedenle \fIprotocol\fR 0 olarak belirtilebilir. Ancak soket türünü destekleyen birden fazla protokolün var olması da mümkündür, bu durumda bir protokolün belirtilmesi gereklidir. Kullanılacak protokol numarası iletişimin gerçekleşeceği "iletişim alanına" özeldir; \fBprotocols\fR(5) sayfasına bakın. Protokol adlarının protokol numaraları ile nasıl eşleneceği \fBgetprotoent\fR(3) sayfasında açıklanmıştır.
 .sp
 \fBSOCK_STREAM\fR türündeki soketler tam çift yönlü bayt akımlarıdır. Kayıt sınırlarını korumazlar. Bir akım soketi, veri iletmeden veya almadan önce bağlanmış durumda olmalıdır. Bir başka sokete bağlantı oluşturmak için \fBconnect\fR(2) çağrısı kullanılır. Bağlandıktan sonra, veri, \fBread\fR(2) ve \fBwrite\fR(2) çağrılarıyla veya \fBsend\fR(2) ve \fBrecv\fR(2) çağrılarının bazı türevleriyle taşınabilir. Oturum tamamlandığında \fBclose\fR(2) çağrılabilir. Bant dışı (Out Of Band) veri \fBsend\fR(2) sayfasında açıklandığı gibi iletilebilir veya \fBrecv\fR(2) sayfasında açıklandığı gibi alınabilir.
 .sp
@@ -314,7 +314,7 @@ Protokol bilinmiyor veya protokol ailesi mevcut değil.
 .sp
 .TP 4
 \fBEINVAL\fR
-\fItype\fR değiştirgesinde belirtilen türler geçersiz.
+\fItype\fR bağımsız değişkeninde belirtilen türler geçersiz.
 .sp
 .TP 4
 \fBEMFILE\fR

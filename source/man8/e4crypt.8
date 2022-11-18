@@ -16,7 +16,7 @@
  * This is free and unencumbered software released into the public domain.
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:32+03:00
 .TH "E4CRYPT" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -46,9 +46,9 @@ e4crypt - ext4 dosya sistemini şifreleme aracı
 \fBe4crypt\fR \fBadd_key\fR [ \fB-S\fR \fItuz\fR ] [ \fB-k\fR \fIanahtarlık\fR ] [\fB-v\fR] [\fB-q\fR] [ \fB-p\fR \fIdolgu\fR ] [ \fIdizin\fR... ]
 Kullanıcıya anahtar parolası istemi açar ve onu belirtilen \fIanahtarlık\fRa yerleştirir. \fIanahtarlık\fR belirtilmemişse, \fBe4crypt\fR varsa oturum anahtarlığını, yoksa kullanıcının oturum anahtarlığını kullanır.
 .sp
-\fItuz\fR değiştirgesi, önekine bağlı olarak farklı şekillerde yorumlanır. İlk iki karakter "s:" ise dizgenin kalanı metin dizgesi olarak yorumlanır ve tuz değeri olarak kullanılır. İlk iki karakter "0x" ise dizgenin kalanı onaltılık sayı olarak yorumlanır ve tuz değeri olarak kullanılır. İlk iki karakter "f:" ise dizgenin kalanı dosya ismi olarak yorumlanır ve içeriği tuz değeri olarak kullanılır. Dizge "/" karakteri ile başlıyorsa dizge dosya yolu olarak yorumlanır ve dosya içeriği tuz olarak kullanılır. Son olarak dizge geçerli bir UUID olarak çözümleniyorsa, UUID değer tuz olarak kullanılır.
+\fItuz\fR bağımsız değişkeni, önekine bağlı olarak farklı şekillerde yorumlanır. İlk iki karakter "s:" ise dizgenin kalanı metin dizgesi olarak yorumlanır ve tuz değeri olarak kullanılır. İlk iki karakter "0x" ise dizgenin kalanı onaltılık sayı olarak yorumlanır ve tuz değeri olarak kullanılır. İlk iki karakter "f:" ise dizgenin kalanı dosya ismi olarak yorumlanır ve içeriği tuz değeri olarak kullanılır. Dizge "/" karakteri ile başlıyorsa dizge dosya yolu olarak yorumlanır ve dosya içeriği tuz olarak kullanılır. Son olarak dizge geçerli bir UUID olarak çözümleniyorsa, UUID değer tuz olarak kullanılır.
 .sp
-\fIanahtarlık\fR değiştirgesi anahtarların eklendiği anahtar zincirini belirler.
+\fIanahtarlık\fR bağımsız değişkeni anahtarların eklendiği anahtar zincirini belirler.
 .sp
 \fIdolgu\fR değeri şaşırtma amacıyla dizin adlarına eklenecek dolgu baytlarının sayısını belirtir. Geçerli değerler: 4, 8, 16, 32.
 .sp

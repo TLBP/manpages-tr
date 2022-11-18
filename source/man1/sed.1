@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
 .TH "SED" 1 "Ocak 2020" "sed-4.8" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -100,7 +100,7 @@ GNU \fBsed\fR herhangi bir çıktının gerçekten değişip değişmediğine ba
 .sp
 \fISONEK\fR belirtilmemişse yedekleme yapılmaksızın özgün dosyanın üzerine yazılır.
 .sp
-\fB-i\fR seçeneği isteğe bağlı değiştirge aldığından ardından başka bir kısa seçenek gelmemelidir:
+\fB-i\fR seçeneği isteğe bağlı bağımsız değişken aldığından ardından başka bir kısa seçenek gelmemelidir:
 .sp
 .RS 4
 .RS 4
@@ -174,9 +174,9 @@ Hem girdiyi hem de çıktıyı mümkün olan en düşük düzeyde tamponlar. (Bu
 Girdiyi, her satırı, satır sonu yerine boş karakter (ASCII ’NUL’ karakteri) ile sonlandırılmış bir satır kümesi olarak ele alır. Bu seçenek, rastgele dosya adlarını işlemek için "\fBsort -z\fR" ve "\fBfind -print0\fR" gibi komutlarla kullanılabilir.
 .sp
 .PP
-Komut satırında \fB-e\fR, \fB-f\fR, \fB--expression\fR veya \fB--file\fR seçeneği verilmezse, komut satırındaki seçenek olmayan ilk değiştirge yürütülecek betik dosyası olarak alınır.
+Komut satırında \fB-e\fR, \fB-f\fR, \fB--expression\fR veya \fB--file\fR seçeneği verilmezse, komut satırındaki seçenek olmayan ilk bağımsız değişken yürütülecek betik dosyası olarak alınır.
 .sp
-Yukarıdakilerin işlenmesinden sonra herhangi bir komut satırı değiştirgesi kalırsa, bu değiştirgeler işlenecek girdi dosyalarının adları olarak yorumlanır. ’-’ dosya adı, standart girdi akımını ifade eder. Hiçbir dosya adı belirtilmemişse standart girdi okunur.
+Yukarıdakilerin işlenmesinden sonra herhangi bir komut satırı bağımsız değişkeni kalırsa, bu bağımsız değişkenler işlenecek girdi dosyalarının adları olarak yorumlanır. ’-’ dosya adı, standart girdi akımını ifade eder. Hiçbir dosya adı belirtilmemişse standart girdi okunur.
 .sp
 .SH "KOMUTLAR"
 GNU \fBsed\fR aşağıdaki komutları destekler. Bazıları standart POSIX komutlarıdır, diğerleri ise GNU eklentisidir.
@@ -277,7 +277,7 @@ Kalıp alanını çıktılar.
 .sp
 .TP 4
 \fBq\fR [\fIÇIKIŞ-KODU\fR]
-Otomatik çıktılama devre dışı bırakılmazsa, geçerli kalıp alanının çıktılanmasının gerekliliği dışında, daha fazla girdi işlemeden \fBsed\fR betikten hemen çıkar. \fIÇIKIŞ-KODU\fR değiştirgesi bir GNU eklentisidir.
+Otomatik çıktılama devre dışı bırakılmazsa, geçerli kalıp alanının çıktılanmasının gerekliliği dışında, daha fazla girdi işlemeden \fBsed\fR betikten hemen çıkar. \fIÇIKIŞ-KODU\fR bağımsız değişkeni bir GNU eklentisidir.
 .sp
 .TP 4
 \fBQ\fR [\fIÇIKIŞ-KODU\fR]

@@ -48,7 +48,7 @@
  * Modified 1998 by Andi Kleen
  * Modified 11 May 2001 by Sam Varshavchik <mrsam@courier-mta.com>
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:31+03:00
 .TH "LISTEN" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -71,9 +71,9 @@ int \fIbacklog\fR);
 .SH "AÇIKLAMA"
 \fBlisten\fR \fIsockfd\fR ile gösterilen soketi edilgen soket olarak imler ve \fBaccept\fR(2) ile gelen bağlantı isteklerini kabul edecek sokete dönüştürür.
 .sp
-\fIsockfd\fR değiştirgesi \fBSOCK_STREAM\fR veya \fBSOCK_SEQPACKET\fR türünde bir soketin dosya tanıtıcısıdır.
+\fIsockfd\fR bağımsız değişkeni \fBSOCK_STREAM\fR veya \fBSOCK_SEQPACKET\fR türünde bir soketin dosya tanıtıcısıdır.
 .sp
-\fIbacklog\fR değiştirgesi \fIsockfd\fR kuyruğunun büyüyebileceği azami uzunluğu tanımlar. Eğer kuyruk tam dolu olduğunda bir bağlantı isteği gelirse, istemci \fBECONNREFUSED\fR hatası alabilir veya kullanılan protokol yeniden aktarımı destekliyorsa, bağlantı isteği görmezden gelinir, böylece tekrar gelen bağlantı isteği kabul edilir.
+\fIbacklog\fR bağımsız değişkeni \fIsockfd\fR kuyruğunun büyüyebileceği azami uzunluğu tanımlar. Eğer kuyruk tam dolu olduğunda bir bağlantı isteği gelirse, istemci \fBECONNREFUSED\fR hatası alabilir veya kullanılan protokol yeniden aktarımı destekliyorsa, bağlantı isteği görmezden gelinir, böylece tekrar gelen bağlantı isteği kabul edilir.
 .sp
 .SH "DÖNÜŞ DEĞERİ"
 Başarı durumunda sıfır döner. Hata oluşursa \fB-1\fR döner ve hata \fIerrno\fR değişkenine atanır.
@@ -122,7 +122,7 @@ Gelen bağlantılar \fBaccept\fR(2) ile kabul edilir.
 .PD 0
 POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyası gerekir ve taşınabilir uygulamalar için dahil edilmesi akıllıca olacaktır.
 .sp
-\fIbacklog\fR değiştirgesinin TCP soketleri üzerindeki etkisi Linux 2.2 ile beraber değişti. Artık, tamamlanmamış bağlantı isteklerinin kuyruk uzunluğunu belirlemek yerine, kabul edilmeyi bekleyen kurulmuş soketlerin kuyruk uzunluğunu belirlemektedir. Tamamlanmamış soketler için azami kuyruk uzunluğu \fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR kullanılarak tanımlanabilir. Eşzamanlı çerezler (syncookies) etkinleştirildiğinde, mantıksal olarak azami uzunluk yoktur ve bu ayar yok sayılır. Daha fazla bilgi için \fBtcp\fR(7) sayfasına bakınız.
+\fIbacklog\fR bağımsız değişkeninin TCP soketleri üzerindeki etkisi Linux 2.2 ile beraber değişti. Artık, tamamlanmamış bağlantı isteklerinin kuyruk uzunluğunu belirlemek yerine, kabul edilmeyi bekleyen kurulmuş soketlerin kuyruk uzunluğunu belirlemektedir. Tamamlanmamış soketler için azami kuyruk uzunluğu \fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR kullanılarak tanımlanabilir. Eşzamanlı çerezler (syncookies) etkinleştirildiğinde, mantıksal olarak azami uzunluk yoktur ve bu ayar yok sayılır. Daha fazla bilgi için \fBtcp\fR(7) sayfasına bakınız.
 .sp
 \fIbacklog\fR değeri, eğer \fI/proc/sys/net/core/somaxonn\fR’dan daha büyükse, bu değere düşürülür. Linux 5.4’ten bu yana bu dosyanın öntanımlı değeri 4096’dır; eski çekirdeklerde öntanımlı değer 128 idi. 2.4.15’ten önceki çekirdeklerde \fBSOMAXCONN\fR’a 128 değeriyle sabitlenmişti.
 .sp

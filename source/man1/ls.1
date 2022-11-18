@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:29+03:00
 .TH "LS" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,7 +23,7 @@ ls - dizin içeriğini listeler
 .SH "AÇIKLAMA"
 (Öntanımlı olarak içinde bulunulan dizindeki) \fIDOSYA\fR’larla ilgili bilgileri görüntüler. Ne \fB-cftuvSUX\fR seçeneklerinden biri ne de \fB--sort\fR verilmişse, abecesel sıraya göre listeleme yapar.
 .sp
-Uzun seçenekler için zorunlu olan değiştirgeler kısa seçenekler için de zorunludur.
+Uzun seçenekler için zorunlu olan bağımsız değişkenler kısa seçenekler için de zorunludur.
 .sp
 .TP 4
 \fB-a\fR, \fB--all\fR
@@ -268,7 +268,7 @@ Sürüm bilgilerini gösterir ve çıkar.
 .PP
 \fIBOYUT\fR şu dizge ya da eşdeğeri olan tamsayılardan biri ile belirtilebilir: kB 1000, K 1024, MB 1000*1000, M 1024*1024 ve benzer şekilde G, T, P, E, Z, Y. Bibaytlık birimler de belirtilebilir (KiB=K, MiB=M, ... gibi)
 .sp
-Öntanımlı olarak, dosyaların türlerini ayırdetmek için renkler kullanılmaz. Bu, \fB--color\fR=none kullanımına eşdeğerdir. \fB--color\fR seçeneğinin değiştirgesiz kullanımı \fB--color\fR=always anlamına gelir. Renkli kodlama sadece \fB--color\fR=auto ile ve standart çıktı bir uçbirime (tty) bağlı ise yapılır. Renkler \fBLS_COLORS\fR ortam değişkeninden alınır; \fBdircolors\fR(1) komutu ile kolayca \fBLS_COLORS\fR ortam değişkenine atanabilir.
+Öntanımlı olarak, dosyaların türlerini ayırdetmek için renkler kullanılmaz. Bu, \fB--color\fR=none kullanımına eşdeğerdir. \fB--color\fR seçeneğinin bağımsız değişkensiz kullanımı \fB--color\fR=always anlamına gelir. Renkli kodlama sadece \fB--color\fR=auto ile ve standart çıktı bir uçbirime (tty) bağlı ise yapılır. Renkler \fBLS_COLORS\fR ortam değişkeninden alınır; \fBdircolors\fR(1) komutu ile kolayca \fBLS_COLORS\fR ortam değişkenine atanabilir.
 .sp
 .SS "Çıkış Durumu:"
 .TP 3
@@ -281,7 +281,7 @@ Küçük sorunlarda (alt dizine erişememek gibi)
 .sp
 .TP 3
 2
-Ciddi sorunlarda (komut satırı değiştirgesinin okunamaması gibi)
+Ciddi sorunlarda (komut satırı bağımsız değişkeninin okunamaması gibi)
 .sp
 .PP
 .sp

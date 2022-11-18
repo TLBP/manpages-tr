@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:28+03:00
 .TH "GZIP" 1 "26 Şubat 2021" "gzip 1.11" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -224,7 +224,7 @@ gzip -cd dosya.gz | wc -c
 Çok üyeli tek bir arşiv oluşturmak ve daha sonra bunların birbirinden bağımsız olarak açılabilmesini istiyorsanız, \fBtar\fR(1) veya \fBzip\fR(1) gibi bir arşivleyici kullanın. GNU \fBtar\fR yazılımı \fBgzip\fR’i başlatmak için \fB-z\fR seçeneğine sahiptir. \fBgzip\fR, \fBtar\fR uygulamasına tamamlayıcı olarak geliştirilmiştir, onun yerini alacak bir uygulama değildir.
 .sp
 .SH "ORTAM DEĞİŞKENLERİ"
-\fBGZIP\fR ortam değişkeni, \fBgzip\fR uygulaması için öntanımlı birkaç değer içerir. Bu değerler önce yorumlanır ve daha sonra komut satırından belirtilen değiştirgelerle değiştirilebilir. Bu özellik, komut dosyalarını kullanırken sorunlara neden olabileceğinden, yalnızca çok fazla zarar vermeme olasılığı olan seçenekler için desteklenir ve kullanılırsa gzip uyarır. Bu özellik, gzip’in gelecekteki bir sürümünde kaldırılacaktır.
+\fBGZIP\fR ortam değişkeni, \fBgzip\fR uygulaması için öntanımlı birkaç değer içerir. Bu değerler önce yorumlanır ve daha sonra komut satırından belirtilen bağımsız değişkenlerle değiştirilebilir. Bu özellik, komut dosyalarını kullanırken sorunlara neden olabileceğinden, yalnızca çok fazla zarar vermeme olasılığı olan seçenekler için desteklenir ve kullanılırsa gzip uyarır. Bu özellik, gzip’in gelecekteki bir sürümünde kaldırılacaktır.
 .sp
 Bunun yerine bir takma ad veya betik kullanabilirsiniz. Örneğin, \fBgzip\fR \fI/usr/bin\fR dizinindeyse \fBPATH\fR’inizin başına \fI$HOME/bin\fR ekleyebilir ve aşağıdakileri içeren bir \fB$HOME/bin/gzip\fR betiği oluşturabilirsiniz:
 .sp

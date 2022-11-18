@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:28+03:00
 .TH "CHOWN" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,7 +23,7 @@ chown - dosyanın sahibini ve grubunu değiştirir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Bu kılavuz, \fBchown\fR komutunun GNU sürümünü anlatmaktadır. \fBchown\fR, belirtilen her dosya için kullanıcı ve/veya grup sahipliğini, seçenek olmayan ilk değiştirgeye göre değiştirir. Sadece bir kullanıcı adı veya sayısal kullanıcı kimliği belirtilmişse, kullanıcı belirtilen dosyaların sahibi olur ve dosya grubu değişmez. Şayet kullanıcı isminden sonra boşluksuz iki nokta üst üste imi ile ayrılmış grup ismi (veya sayısal grup kimliği) varsa, grubun sahipliği de değişir. Buradaki önemli nokta, kullanıcı ismi ve grup ismi arasında boşluk olmaması gerektiğidir. Kullanıcı isminden sonra iki nokta üst üste imi var fakat grup ismi yok ise; kullancı dosyanın sahibi olur ve dosya grubu, kullanıcının birincil grubu olarak değiştirilir. İki nokta üst üste ve grup adı belirtilmiş ama kullanıcı adı belirtilmemişse, sadece dosya grubu değiştirilir. Bu durumda; \fBchown\fR, \fBchgrp\fR’un yaptığını yapar. Sadece iki nokta üst üste imi varsa veya \fISAHİP\fR:\fIGRUP\fR terimi hiç verilmemişse dosya sahipliğinde bir değişiklik yapılmaz.
+Bu kılavuz, \fBchown\fR komutunun GNU sürümünü anlatmaktadır. \fBchown\fR, belirtilen her dosya için kullanıcı ve/veya grup sahipliğini, seçenek olmayan ilk bağımsız değişkene göre değiştirir. Sadece bir kullanıcı adı veya sayısal kullanıcı kimliği belirtilmişse, kullanıcı belirtilen dosyaların sahibi olur ve dosya grubu değişmez. Şayet kullanıcı isminden sonra boşluksuz iki nokta üst üste imi ile ayrılmış grup ismi (veya sayısal grup kimliği) varsa, grubun sahipliği de değişir. Buradaki önemli nokta, kullanıcı ismi ve grup ismi arasında boşluk olmaması gerektiğidir. Kullanıcı isminden sonra iki nokta üst üste imi var fakat grup ismi yok ise; kullancı dosyanın sahibi olur ve dosya grubu, kullanıcının birincil grubu olarak değiştirilir. İki nokta üst üste ve grup adı belirtilmiş ama kullanıcı adı belirtilmemişse, sadece dosya grubu değiştirilir. Bu durumda; \fBchown\fR, \fBchgrp\fR’un yaptığını yapar. Sadece iki nokta üst üste imi varsa veya \fISAHİP\fR:\fIGRUP\fR terimi hiç verilmemişse dosya sahipliğinde bir değişiklik yapılmaz.
 .sp
 .SH "SEÇENEKLER"
 Her \fIDOSYA\fR’nın sahip ve/veya grubunu \fISAHİP\fR ve/veya \fIGRUP\fR olarak değiştirir. \fB--reference\fR seçeneği ile \fIDOSYA\fR’nın sahip ve grubu \fIÖRNEK-DOSYA\fR’nınkilerle aynı yapılır.

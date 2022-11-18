@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, visit the http://fsf.org website.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:29+03:00
 .TH "RSYNC" 1 "15 Nisan 2022" "rsync 3.2.4" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -128,7 +128,7 @@ Kurulum işlemleri için \fIREADME.md\fR dosyasına bakınız.
 .sp
 Kurduktan sonra, bir uzak kabuk üzerinden erişelebilen (veya \fBrsync\fR artalan kipi protokolü kullanarak erişilebilen) her makinede \fBrsync\fR kullanılabilir. Uzak dosya aktarımları için, günümüzde \fBrsync\fR iletişiminde \fBssh\fR kullanmasına rağmen öntanımlı olarak kullanacağı uzak kabuk \fBrsh\fR veya \fBremsh\fR gibi bir kabuk olarak da ayarlanabilir.
 .sp
-Bundan başka, istediğiniz uzak kabuk uygulamasını \fB-e\fR komut satırı seçeneğinin değiştirgesi olarak veya \fBRSYNC_RSH\fR ortam değişkenine atayarak da belirtebilirsiniz.
+Bundan başka, istediğiniz uzak kabuk uygulamasını \fB-e\fR komut satırı seçeneğinin bağımsız değişkeni olarak veya \fBRSYNC_RSH\fR ortam değişkenine atayarak da belirtebilirsiniz.
 .sp
 Yalnız, \fBrsync\fR’in hem yerel hem de uzak makine üzerinde kurulu olması gerektiğini unutmayın.
 .sp
@@ -208,7 +208,7 @@ rsync -aiv konak:’basit bir dosya.pdf’ /hedef/
 .fi
 .sp
 .RE
-\fBrsync\fR’in oldukça eski sürümlerinde, tek bir konak değiştirgesine izin verilirdi, dolayısıyla diğer tarafın değiştirgeleri boşluklara göre ayıklaması gerekirdi. \fB--old-args\fR seçeneği belirtilerek eski tarz değiştirge ayıklaması hala kullanabilmektedir:
+\fBrsync\fR’in oldukça eski sürümlerinde, tek bir konak bağımsız değişkenine izin verilirdi, dolayısıyla diğer tarafın bağımsız değişkenleri boşluklara göre ayıklaması gerekirdi. \fB--old-args\fR seçeneği belirtilerek eski tarz bağımsız değişken ayıklaması hala kullanabilmektedir:
 .sp
 .RS 4
 .nf
@@ -543,7 +543,7 @@ Burada \fBrsync\fR’de kullanılabilen seçeneklerin bir özetine yer verilmiş
 .RE
 .sp
 .SH "AÇIKLAMALARIYLA SEÇENEKLER"
-\fBrsync\fR hem kısa (tek tire artı harf) hem de uzun seçenekleri (çift-tire artı sözcük) kabul eder. Aynı amaca yönelik birden fazla seçenek varsa aralarına virgül konarak listelenmiştir. Bir seçenek değiştirge alıyorsa ve sadece uzun seçenekte belirtilmişse, değiştirgenin kısa seçenekte için de kullanılması zorunludur. Bazı seçenekler ise sadece uzun seçeneklerden oluşur, kısaları yoktur. ’=’ işareti içeren seçeneklerde ’=’ isteğe bağlıdır; ’=’ yerine boşluk kullanılabilir. Değiştirgeleri kabuk yorumlamasından korumak için önceleyerek belirtmek gerekebilir. Bir dosya yolundaki yaklaşık imi (~) kabuk tarafından ev dizininiz olarak yorumlanır, bu nedenle \fB--option=~/foo\fR kullanımında yaklaşık iminin kabuk tarafından ev dizininiz olarak yorumlanabilmesi için ’=’ işareti yerine boşluk kullanılmalıdır.
+\fBrsync\fR hem kısa (tek tire artı harf) hem de uzun seçenekleri (çift-tire artı sözcük) kabul eder. Aynı amaca yönelik birden fazla seçenek varsa aralarına virgül konarak listelenmiştir. Bir seçenek bağımsız değişken alıyorsa ve sadece uzun seçenekte belirtilmişse, bağımsız değişkenin kısa seçenekte için de kullanılması zorunludur. Bazı seçenekler ise sadece uzun seçeneklerden oluşur, kısaları yoktur. ’=’ işareti içeren seçeneklerde ’=’ isteğe bağlıdır; ’=’ yerine boşluk kullanılabilir. Bağımsız değişkenleri kabuk yorumlamasından korumak için önceleyerek belirtmek gerekebilir. Bir dosya yolundaki yaklaşık imi (~) kabuk tarafından ev dizininiz olarak yorumlanır, bu nedenle \fB--option=~/foo\fR kullanımında yaklaşık iminin kabuk tarafından ev dizininiz olarak yorumlanabilmesi için ’=’ işareti yerine boşluk kullanılmalıdır.
 .sp
 .TP 4
 \fB--help\fR
@@ -795,7 +795,7 @@ rsync -avR --rsync-path="cd /foo; rsync" uzak:bar/baz.c /tmp/
 \fB--no-implied-dirs\fR
 Bu seçenek, \fB--relative\fR seçeneğinin öntanımlı davranışını etkiler. Belirtildiğinde kaynak taraftaki örtük dizinlerin öznitelikleri aktarıma dahil edilmez. Bu, hedef sistemdeki karşılık gelen yol elemanlarının varsa değişmeden bırakıldığı ve eksik örtük dizinlerin öntanımlı özniteliklerle oluşturulduğu anlamına gelir. Böylece, bu örtük yol elemanlarının alıcı taraftaki bir dizine sembolik bağ olması gibi büyük farklılıklara bile izin verilir.
 .sp
-Örneğin, bir komut satırı değiştirgesi veya bir gönderici dosya girdisi ile \fBrsync\fR’in "\fIyol/foo/dosya\fR" dosyasını aktarması istenirse \fB--relative\fR seçeneği de kullanılmışsa buradaki "\fIyol\fR" ve "\fIyol/foo\fR" örtük dizinlerdir. "\fIyol/foo\fR", hedef sistemdeki ""\fIbar\fR"a bir sembolik bağ ise, alıcı \fBrsync\fR normalde "\fIyol/foo\fR"yu siler, onu bir dizin olarak yeniden oluşturur ve dosyayı yeni dizine yerleştirir. \fB--no-implied-dirs\fR seçeneği ile, alıcı \fBrsync\fR, mevcut yol elemanlarını kullanarak "\fIyol/foo/dosya\fR"yı günceller; bu, "\fIyol/bar\fR" dosyasının oluşturulmasının sona erdiği anlamına gelir. Bu bağ korumasını gerçekleştirmenin bir başka yolu da \fB--keep-dirlinks\fR seçeneğini kullanmaktır (bu, aktarımın geri kalanındaki dizin sembolik bağlarını da etkiler).
+Örneğin, bir komut satırı bağımsız değişkeni veya bir gönderici dosya girdisi ile \fBrsync\fR’in "\fIyol/foo/dosya\fR" dosyasını aktarması istenirse \fB--relative\fR seçeneği de kullanılmışsa buradaki "\fIyol\fR" ve "\fIyol/foo\fR" örtük dizinlerdir. "\fIyol/foo\fR", hedef sistemdeki ""\fIbar\fR"a bir sembolik bağ ise, alıcı \fBrsync\fR normalde "\fIyol/foo\fR"yu siler, onu bir dizin olarak yeniden oluşturur ve dosyayı yeni dizine yerleştirir. \fB--no-implied-dirs\fR seçeneği ile, alıcı \fBrsync\fR, mevcut yol elemanlarını kullanarak "\fIyol/foo/dosya\fR"yı günceller; bu, "\fIyol/bar\fR" dosyasının oluşturulmasının sona erdiği anlamına gelir. Bu bağ korumasını gerçekleştirmenin bir başka yolu da \fB--keep-dirlinks\fR seçeneğini kullanmaktır (bu, aktarımın geri kalanındaki dizin sembolik bağlarını da etkiler).
 .sp
 3.0.0’dan eski bir \fBrsync\fR’den dosya kopyalarken, gönderen tarafta bir sembolik bağ varsa ve örtük dizinlerin normal dizinler gibi aktarılması isteniyorsa bu seçeneğin kullanılması gerekebilir.
 .sp
@@ -906,7 +906,7 @@ Ayrıca, geriye uyumluluğa yardımcı bir seçenek de vardır: \fB--old-dirs\fR
 .sp
 .TP 4
 \fB--mkpath\fR
-Değiştirgede belirtilen ancak hedefte bulunmayan yol bileşenini oluşturur. Bu, \fBrsync\fRin hedefte çok seviyeli dizinler oluşturmasına ve gerekirse adını değiştirerek tek bir dosyayı bu yola yerleştirilmesine olanak tanır. Tek bir değiştirge ile kopyalama yaparken hedef yolun tamamının bir dizin olarak ele alınmasını (\fBrsync\fR’in hedefte yol bileşeni zaten varmış gibi davranmasını) istiyorsanız, sona bir eğik çizgi yerleştirmeniz gerekir.
+Bağımsız değişkende belirtilen ancak hedefte bulunmayan yol bileşenini oluşturur. Bu, \fBrsync\fRin hedefte çok seviyeli dizinler oluşturmasına ve gerekirse adını değiştirerek tek bir dosyayı bu yola yerleştirilmesine olanak tanır. Tek bir bağımsız değişken ile kopyalama yaparken hedef yolun tamamının bir dizin olarak ele alınmasını (\fBrsync\fR’in hedefte yol bileşeni zaten varmış gibi davranmasını) istiyorsanız, sona bir eğik çizgi yerleştirmeniz gerekir.
 .sp
 Aşağıdaki örnekte, \fIfoo\fR dosyasından \fIalt/dizin\fR dizininde \fIbar\fR dosyası oluşturulmakta, "\fIalt\fR" ve "\fIalt/dizin\fR" dizinleri hedefte yoksa oluşturulmaktadır:
 .sp
@@ -977,7 +977,7 @@ Bu seçenek, aktarımın yalnızca bir tarafını etkiler ve \fBrsync\fR’e, se
 .sp
 Örneğin bir \fBrsync\fR artalan sürecinin yapılandırma dosyasındaki veya \fBrrsync\fR(1) (sınırlı \fBrsync\fR) betiğine aktarılan bir seçenek üzerinden \fBrsync\fR sunucu tarafında bu seçeneği genellikle istemcinin bilgisi dışında etkinleştirir. İstemci tarafında belirtildiğinde, geçersiz sembolik bağlara sahip olan/ihtiyaç duyan istemci tarafıysa seçenek normal olarak belirtilmelidir; geçersiz sembolik bağlara sahip olduğunda/ihtiyaç duyduğunda sunucuya seçenek vermek için \fB-M\fR \fB--munge-links\fR kullanılmalıdır. Yerel bir aktarımda, istemcinin gönderici olduğuna dikkat edin, bu nedenle seçeneğin belirtilmesi sembolik bağları doğrudan geçerli kılarken, uzak seçenek olarak belirtildiğine sembolik bağları geçersiz kılar.
 .sp
-Bu seçeneğin \fB--remote-option\fR aracılığıyla bir artalan sürecine gönderildiğinde hiçbir etkisi yoktur, çünkü artalan süreci geçersiz sembolik bağlar isteyip istemediğini "\fBmunge symlinks\fR" değiştirgesi aracılığıyla yapılandırır.
+Bu seçeneğin \fB--remote-option\fR aracılığıyla bir artalan sürecine gönderildiğinde hiçbir etkisi yoktur, çünkü artalan süreci geçersiz sembolik bağlar isteyip istemediğini "\fBmunge symlinks\fR" bağımsız değişkeni aracılığıyla yapılandırır.
 .sp
 Sembolik bağ değeri, aktarıma girdikten sonra geçerli/geçersiz duruma getirilir, bu nedenle, sembolik bağları sembolik olmayanlara dönüştüren herhangi bir seçenek, alıcının yaptığı bir seçim olan \fB--safe-links\fR dışında, geçerli/geçersiz kılma işleminden önce gerçekleşir, bu nedenle, karar geçerli/geçersiz kılma değerine dayandırılır. Bu, bir alıcıda geçersiz kılma etkinleştirilmişse, \fB--safe-links\fR kullanmanın tüm sembolik bağların yok sayılmasına neden olacağı anlamına gelir (çünkü hepsi mutlaktır).
 .sp
@@ -991,7 +991,7 @@ Bu seçenek olmadan, gönderen taraf bir dizini dizin sembolik bağıyla değiş
 .sp
 Alıcı taraf için benzer bir seçenek \fB--keep-dirlinks\fR seçeneğidir.
 .sp
-\fB--copy-dirlinks\fR, kaynaktaki dizin sembolik bağlarının tamamına uygulanır. Yalnızca belli birkaç sembolik bağın izlenmesi isteniyorsa, yolların doğru eşleşmesi için \fB--relative\fR seçeneğini kullanarak bunları eğik çizgi sonlandırmalı kaynak değiştirgeleri olarak belirtmektir. Örnek:
+\fB--copy-dirlinks\fR, kaynaktaki dizin sembolik bağlarının tamamına uygulanır. Yalnızca belli birkaç sembolik bağın izlenmesi isteniyorsa, yolların doğru eşleşmesi için \fB--relative\fR seçeneğini kullanarak bunları eğik çizgi sonlandırmalı kaynak bağımsız değişkenleri olarak belirtmektir. Örnek:
 .sp
 .RS 4
 .RS 4
@@ -1002,7 +1002,7 @@ rsync -r --relative kaynak/./ kaynak/./devam/ hedef/
 .RE
 .RE
 .IP
-Bunun çalışmasının nedeni, \fBrsync\fR’in kaynak değiştirgede belirtildiği gibi \fBlstat\fR(2) çağrısı yapması ve sondaki eğik çizginin lstat() işlevinin sembolik bağı izlemesini sağlamasıyla dosya listesinde "\fIkaynak/./\fR” taraması sırasında bulunan sembolik bağı geçersiz kılan bir dizine yol açmasıdır.
+Bunun çalışmasının nedeni, \fBrsync\fR’in kaynak bağımsız değişkende belirtildiği gibi \fBlstat\fR(2) çağrısı yapması ve sondaki eğik çizginin lstat() işlevinin sembolik bağı izlemesini sağlamasıyla dosya listesinde "\fIkaynak/./\fR” taraması sırasında bulunan sembolik bağı geçersiz kılan bir dizine yol açmasıdır.
 .sp
 Daha ayrıntılı bilgi için bkz: \fBSEMBOLİK BAĞLAR\fR
 .sp
@@ -1290,7 +1290,7 @@ Yerel kopya için, bu seçenek hem kaynağı hem de hedefi etkiler. Yerel kopyan
 .sp
 Bu seçenek hem \fB--super\fR hem de \fB--no-super\fR seçeneğini geçersiz kılar.
 .sp
-Artalan sürecinin \fBrsyncd.conf\fR(5) dosyasındaki "\fBfake süper\fR" modül değiştirgesinin açıklamasına da bakılabilir.
+Artalan sürecinin \fBrsyncd.conf\fR(5) dosyasındaki "\fBfake süper\fR" modül bağımsız değişkeninin açıklamasına da bakılabilir.
 .sp
 .TP 4
 \fB-S\fR, \fB--sparse\fR
@@ -1431,11 +1431,11 @@ Alıcı tarafta olup, gönderici tarafta olmayan dosyaların alıcı tarafta sil
 .sp
 .TP 4
 \fB--ignore-missing-args\fR
-\fBrsync\fR, açıkça (örneğin, komut satırı değiştirgeleri veya \fB--files-from\fR girdileri ile) istenen kaynak dosyaları ilk kez işlerken, dosyanın bulunamaması normalde bir hatadır. Bu seçenek bu hatayı baskılar ve dosyayı aktarmaya çalışmaz. Bir dosyanın başlangıçta mevcut olduğu ve daha sonra artık orada olmadığı tespit edilmişse, sonraki kaybolan dosyalarla ilgili hatalar bundan etkilenmez.
+\fBrsync\fR, açıkça (örneğin, komut satırı bağımsız değişkenleri veya \fB--files-from\fR girdileri ile) istenen kaynak dosyaları ilk kez işlerken, dosyanın bulunamaması normalde bir hatadır. Bu seçenek bu hatayı baskılar ve dosyayı aktarmaya çalışmaz. Bir dosyanın başlangıçta mevcut olduğu ve daha sonra artık orada olmadığı tespit edilmişse, sonraki kaybolan dosyalarla ilgili hatalar bundan etkilenmez.
 .sp
 .TP 4
 \fB--delete-missing-args\fR
-Bu seçenek \fB--ignore-missing-args\fR seçeneğinin (örtük) davranışını bir adım öteye taşır: her eksik değiştirge, alıcı taraftaki (varsa) karşılık gelen hedef dosya için silme isteği haline gelir. Hedef dosya boş olmayan bir dizinse, yalnızca \fB--force\fR veya \fB--delete\fR etkinse başarıyla silinir. Bunun dışında, bu seçenek diğer herhangi bir silme işlemi türünden bağımsızdır.
+Bu seçenek \fB--ignore-missing-args\fR seçeneğinin (örtük) davranışını bir adım öteye taşır: her eksik bağımsız değişken, alıcı taraftaki (varsa) karşılık gelen hedef dosya için silme isteği haline gelir. Hedef dosya boş olmayan bir dizinse, yalnızca \fB--force\fR veya \fB--delete\fR etkinse başarıyla silinir. Bunun dışında, bu seçenek diğer herhangi bir silme işlemi türünden bağımsızdır.
 .sp
 Eksik kaynak dosyalar, \fB--list-only\fR çıktısında "\fI*missing\fR" girdisi olarak görünen özel dosya listesi girdileriyle temsil edilir.
 .sp
@@ -1503,11 +1503,11 @@ Delta aktarım algoritmasında sabit bir blok boyunun kullanımına zorlar. Norm
 \fB-e\fR, \fB--rsh\fR=\fIKOMUT\fR
 Bu seçenek yerel ve uzak \fBrsync\fR kopyaların arasında iletişim için başka bir uzak kabuk uygulaması belirleyebilmeyi sağlar. Genelde, \fBrsync\fR öntanımlı olarak \fBssh\fR(1) kullanacak şekilde yapılandırılır, fakat yerel ağda \fBrsh\fR(1) kullanımı da tercih edilebilir.
 .sp
-Bu seçenek [kullanıcı@]konak::modül/yol değiştirgesi ile birlikte kullanılırsa, uzak makinedeki \fBrsync\fR sunucusunu çalıştırmak için belirtilen uzak kabuk \fIKOMUT\fR’u kullanılacak ve aktarım için uzak makinede çalışan \fBrsync\fR sunucusunun soket bağlantısı değil, uzak kabuk bağlantısı kullanılacaktır. Ayrıca, bkz: \fBRSYNC ARTALAN SÜRECİNE UZAK KABUKTAN BAĞLANMAK\fR
+Bu seçenek [kullanıcı@]konak::modül/yol bağımsız değişkeni ile birlikte kullanılırsa, uzak makinedeki \fBrsync\fR sunucusunu çalıştırmak için belirtilen uzak kabuk \fIKOMUT\fR’u kullanılacak ve aktarım için uzak makinede çalışan \fBrsync\fR sunucusunun soket bağlantısı değil, uzak kabuk bağlantısı kullanılacaktır. Ayrıca, bkz: \fBRSYNC ARTALAN SÜRECİNE UZAK KABUKTAN BAĞLANMAK\fR
 .sp
 \fBrsync\fR 3.2.0 ve sonrasında, uzak kabuk bağlantısı aracılığıyla artalan sürecine bağlanılırsa \fBRSYNC_PORT\fR ortam değişkeni etkinleştirilir. Öntanımlı artalan süreci portu kullanılacaksa değişkene 0 atanır. Ya da \fIrsync://URL\fR ile veya \fB--port\fR seçeneği ile belirtilen \fBrsync\fR portunun değeri atanır. Bu, betiğin öntanımlı olmayan bir port istenip istenmediğini ayırt etmesine ve \fBssl\fR veya \fBstunnel\fR yardımcı betiğinin öntanımlı porta veya başka bir porta bağlanmasını sağlar.
 .sp
-\fIKOMUT\fR’un \fBrsync\fR’e tek bir değiştirge olarak sunulması koşuluyla, \fIKOMUT\fR içinde komut satırı değiştirgeleri kullanımına izin verilir. Komutu ve değiştirgeleri birbirinden ayırmak için boşluk (sekme veya diğer boşluk karakterlerini değil) kullanılmalıdır. Bir değiştirgedeki boşlukları korumak için ise tek ve/veya çift tırnak kullanılabilir (ancak ters eğik çizgileri değil). Tek tırnaklı bir dizge içinde çifte tek tırnak kullanımının tek tırnakla sonuçlandığı, çift tırnak için de benzerinin geçerli olduğunu unutulmamalıdır (ayrıca, kabuğun ve \fBrsync\fR’in hangi tırnakları çözümlediğinin de bilinmesi gerekir). Bazı örnekler:
+\fIKOMUT\fR’un \fBrsync\fR’e tek bir bağımsız değişken olarak sunulması koşuluyla, \fIKOMUT\fR içinde komut satırı bağımsız değişkenleri kullanımına izin verilir. Komutu ve bağımsız değişkenleri birbirinden ayırmak için boşluk (sekme veya diğer boşluk karakterlerini değil) kullanılmalıdır. Bir bağımsız değişkendeki boşlukları korumak için ise tek ve/veya çift tırnak kullanılabilir (ancak ters eğik çizgileri değil). Tek tırnaklı bir dizge içinde çifte tek tırnak kullanımının tek tırnakla sonuçlandığı, çift tırnak için de benzerinin geçerli olduğunu unutulmamalıdır (ayrıca, kabuğun ve \fBrsync\fR’in hangi tırnakları çözümlediğinin de bilinmesi gerekir). Bazı örnekler:
 .sp
 .RS 4
 .RS 4
@@ -1567,7 +1567,7 @@ rsync -av -x -M --no-x kaynak/ hedef/
 .IP
 Bu kullanılırken dikkatli olunmalıdır, çünkü rsync’in soket üzerinden hangi verilerin bekleneceği konusunda farklı bir fikre sahip olmasına neden olacak ve anlaşılmaz bir nedenle başarısız kılacak bir seçeneği açıp kapamak mümkündür.
 .sp
-Aktarmak istediğiniz her uzak seçenek için ayrı bir \fB-M\fR seçeneği kullanmanız gerektiğini unutmayın. Daha eski rsync sürümlerinde, uzak seçenek değiştirgesi içinde herhangi bir boşluğun varlığı, onun ayrı ayrı uzak değiştirgelere bölünmesine neden olabilir, ancak günümüz rsync’inde bu durum \fB--old-args\fR kullanımını gerektirir.
+Aktarmak istediğiniz her uzak seçenek için ayrı bir \fB-M\fR seçeneği kullanmanız gerektiğini unutmayın. Daha eski rsync sürümlerinde, uzak seçenek bağımsız değişkeni içinde herhangi bir boşluğun varlığı, onun ayrı ayrı uzak bağımsız değişkenlere bölünmesine neden olabilir, ancak günümüz rsync’inde bu durum \fB--old-args\fR kullanımını gerektirir.
 .sp
 Yerel aktarım açısından, "yerel" taraf gönderici, "uzak" taraf alıcıdır.
 .sp
@@ -1591,7 +1591,7 @@ Bu seçenek \fB--filter\fR kurallarıyla birlikte belirtilirse, \fB-C\fR seçene
 \fB-f\fR, \fB--filter=\fR\fIKURAL\fR
 Bu seçenek aktarılacak dosyalar listesinden belli dosyaların seçilerek dışlanması için kurallar eklemenizi mümkün kılar. Bu seçenek alt dizinlerin ardışık aktarıldığı aktarımlarda kullanıldığında çok yararlıdır.
 .sp
-Dışlanacak dosyaların listesini oluşturmak içim komut satırında çok sayıda \fB--filter\fR seçeneği belirtebilirsiniz. \fIKURAL\fR boşluk karakterleri içeriyorsa, kabuğun kuralı tek bir terim olarak aktarabilmesi için tırnak içine alınması gerekir. Kılavuzun devamında belirtildiği gibi, kuralı değiştirgeleriyle ilişkilendirmek için boşluk yerine alt çizgi konulabilir.
+Dışlanacak dosyaların listesini oluşturmak içim komut satırında çok sayıda \fB--filter\fR seçeneği belirtebilirsiniz. \fIKURAL\fR boşluk karakterleri içeriyorsa, kabuğun kuralı tek bir terim olarak aktarabilmesi için tırnak içine alınması gerekir. Kılavuzun devamında belirtildiği gibi, kuralı bağımsız değişkenleriyle ilişkilendirmek için boşluk yerine alt çizgi konulabilir.
 .sp
 Bu seçenek hakkında daha ayrıntılı bilgi için bkz: \fBSÜZME KURALLARI\fR
 .sp
@@ -1707,9 +1707,9 @@ Bu seçenek \fBrsync\fR’e, bir dosyadan okunan dosya isimlerinin sonlandırıl
 .sp
 .TP 4
 \fB--old-args\fR
-\fBrsync\fR’e uzak taraftaki değiştirge değerlerini istenmeyen sözcük ayrıştırmasından veya diğer yanlış yorumlamalardan korumaya çalışmayı bırakmasını söyler.
+\fBrsync\fR’e uzak taraftaki bağımsız değişken değerlerini istenmeyen sözcük ayrıştırmasından veya diğer yanlış yorumlamalardan korumaya çalışmayı bırakmasını söyler.
 .sp
-Günümüz \fBrsync\fR’inde öntanımlı olan, uzak kabuğa gönderilen değiştirgelerde kabuğun özel karakterlerinin (boşluklar dahil) ters eğik çizgi ile öncelenmesidir. \fB*, ?, [, ]\fR joker karakterleri , \fB--usermap\fR gibi seçenek değiştirgelerinde öncelenirken dosya adı değiştirgelerinde öncelenmez (birden çok dosya adına genişlemeleri sağlanır).
+Günümüz \fBrsync\fR’inde öntanımlı olan, uzak kabuğa gönderilen bağımsız değişkenlerde kabuğun özel karakterlerinin (boşluklar dahil) ters eğik çizgi ile öncelenmesidir. \fB*, ?, [, ]\fR joker karakterleri , \fB--usermap\fR gibi seçenek bağımsız değişkenlerinde öncelenirken dosya adı bağımsız değişkenlerinde öncelenmez (birden çok dosya adına genişlemeleri sağlanır).
 .sp
 Dosya adlarında eski tarz sözcük ayrıştırması bir betikle yapılıyorsa, bu seçenek bir kez belirtilir. Uzak kabukta ters eğik çizgi öncelemesi sorunluysa, iki kez belirtilir.
 .sp
@@ -1721,9 +1721,9 @@ Bu seçenek \fB--protect-args\fR seçeneğiyle birlikte kullanılamaz.
 \fB-s\fR, \fB--protect-args\fR
 Bu seçenek, tüm dosya adlarını ve çoğu seçeneği \fBrsync\fR’e uzak kabukta yorumlamamak üzere gönderir. Joker karakterler, uzak konakta kabuk yerine \fBrsync\fR tarafından genişletilir.
 .sp
-Bu, 3.2.4’te eklenen, değiştirgelerin yeni tarz ters eğik çizgi öncelemesine benzer, ancak bazı ek özellikler de desteklenir ve işlem, uzak kabuktaki ters eğik çizgi öncelemesine bırakılmaz.
+Bu, 3.2.4’te eklenen, bağımsız değişkenlerin yeni tarz ters eğik çizgi öncelemesine benzer, ancak bazı ek özellikler de desteklenir ve işlem, uzak kabuktaki ters eğik çizgi öncelemesine bırakılmaz.
 .sp
-Bu seçenek \fB--iconv\fR ile birlikte kullanıldığında, uzak taraftaki ilgili değiştirgelerin karaktar kümesi yerelinkinden uzağınkine dönüştürülür. Bu dönüşüm joker karakterler genişletilmeden önce yapılır. Ayrıca bkz: \fB--files-from\fR.
+Bu seçenek \fB--iconv\fR ile birlikte kullanıldığında, uzak taraftaki ilgili bağımsız değişkenlerin karaktar kümesi yerelinkinden uzağınkine dönüştürülür. Bu dönüşüm joker karakterler genişletilmeden önce yapılır. Ayrıca bkz: \fB--files-from\fR.
 .sp
 Bu seçenek yerine \fBRSYNC_PROTECT_ARGS\fR ortam değişkeni de kullanılabilir. Sıfırdan farklı bir değer atanırsa işlem öntanımlı olarak etkin olur, aksi takdirde öntanımlı olarak etkin olmaz. Ortam değişkeninin değeri, komut satırından belirtilen olumlu veya olumsuz seçenekler tarafından geçersiz kılınabilir (\fB--no-s\fR ve \fB--no-protect-args\fR olumsuz seçeneklerdir). Bu ortam değişkeni ayrıca sıfırdan farklı bir değerle atanmış \fBRSYNC_OLD_ARGS\fR ortam değişkeni tarafından da geçersiz kılınabilir.
 .sp
@@ -2150,7 +2150,7 @@ Olası diğer bir çıktı daha vardır: Dosyalar silinirken silinen her öğe i
 .sp
 .TP 4
 \fB--out-format\fR=\fIBİÇEM\fR
-Bu, \fBrsync\fR istemcisinin kullanıcıya her güncellemede tam olarak ne çıktılayacağının tam olarak belirlenmesini sağlar. \fIBİÇEM\fR, yüzde (%) imi ile başlayan tek karakterlik öncelemler içeren bir metin dizgesidir. \fB--info=name\fR veya \fB-v\fR belirtilirse "\fB%n%L\fR" biçemi öntanımlıdır (yalnızca dosyanın adını ve öğenin bir bağ olup olmadığını çıktılar). Olası biçemleme karakterlerinin tam listesi için, \fBrsyncd.conf\fR(5) kılavuz sayfasındaki \fBlog format\fR değiştirgesinin açıklamasına bakılabilir.
+Bu, \fBrsync\fR istemcisinin kullanıcıya her güncellemede tam olarak ne çıktılayacağının tam olarak belirlenmesini sağlar. \fIBİÇEM\fR, yüzde (%) imi ile başlayan tek karakterlik öncelemler içeren bir metin dizgesidir. \fB--info=name\fR veya \fB-v\fR belirtilirse "\fB%n%L\fR" biçemi öntanımlıdır (yalnızca dosyanın adını ve öğenin bir bağ olup olmadığını çıktılar). Olası biçemleme karakterlerinin tam listesi için, \fBrsyncd.conf\fR(5) kılavuz sayfasındaki \fBlog format\fR bağımsız değişkeninin açıklamasına bakılabilir.
 .sp
 Bu seçeneğinin belirtilmesi, önemli bir şekilde güncellenen (aktarılan bir dosya, yeniden oluşturulmuş bir sembolik bağ/aygıt veya dokunulan bir dizin) her dosya veya dizinden vb. bahsedecek olan \fB--info=name\fR seçeneğinin örtük olarak uygulanmasını sağlar. Ek olarak, değişiklikleri ayrıntılı gösterme öncelemi (\fB%i\fR) dizgeye dahil edilirse (\fB--itemize-changes\fR seçeneği kullanılmış gibi), herhangi bir şekilde değiştirilen öğe adları da günlüğe eklenir (alıcı tarafın sürümü en az 2.6.4 olduğu takdirde). \fB%i\fR çıktısının açıklaması için bkz: \fB--itemize-changes\fR
 .sp
@@ -2170,7 +2170,7 @@ Ayrıca bkz: Artalan sürecinin \fB--log-file\fR seçeneği.
 .sp
 .TP 4
 \fB--log-file-format\fR=\fIBİÇEM\fR
-\fB--log-file\fR seçeneğiyle belirtilen dosyaya güncelleme başına günlük kaydı olarak neler konulacağının belirtilebilmesini sağlar. Bu seçeneğin etkili olabilmesi için \fB--log-file\fR seçeneğinin de ayrıca belirtilmesi gerekir. Boş bir dizge belirtirseniz, günlük dosyasında güncellenen dosyalarla ilgili kayıtlar olmaz. Olası biçemleme karakterlerinin tam listesi için, \fBrsyncd.conf\fR(5) kılavuz sayfasındaki \fBlog format\fR değiştirgesinin açıklamasına bakılabilir.
+\fB--log-file\fR seçeneğiyle belirtilen dosyaya güncelleme başına günlük kaydı olarak neler konulacağının belirtilebilmesini sağlar. Bu seçeneğin etkili olabilmesi için \fB--log-file\fR seçeneğinin de ayrıca belirtilmesi gerekir. Boş bir dizge belirtirseniz, günlük dosyasında güncellenen dosyalarla ilgili kayıtlar olmaz. Olası biçemleme karakterlerinin tam listesi için, \fBrsyncd.conf\fR(5) kılavuz sayfasındaki \fBlog format\fR bağımsız değişkeninin açıklamasına bakılabilir.
 .sp
 \fB--log-file\fR belirtildiği durumda bu seçenekle \fIBİÇEM\fR olarak "\fB%i %n%L\fR" belirtilmedikçe öntanımlı biçem kullanılır.
 .sp
@@ -2431,7 +2431,7 @@ Birden fazla kaynak belirtebilmek için. Dikkat: Hedefin de eklenmesi gerekir.
 .RS 4
 .TP 4
 \fBDikkat:\fR
-Joker karakterli bir kaynak değiştirgesinin kabuk tarafından birden çok değiştirgeye genişletildiği unutulmamalıdır, bu nedenle bu seçeneği kullanmadan böyle bir değiştirgeyle listeleme asla güvenli değildir. Örnek:
+Joker karakterli bir kaynak bağımsız değişkeninin kabuk tarafından birden çok bağımsız değişkene genişletildiği unutulmamalıdır, bu nedenle bu seçeneği kullanmadan böyle bir bağımsız değişkenle listeleme asla güvenli değildir. Örnek:
 .sp
 .RS 4
 .RS 4
@@ -2566,7 +2566,7 @@ Ayrıca bkz: İstemci \fB--bwlimit\fR seçeneği.
 .sp
 .TP 4
 \fB-M\fR, \fB--dparam\fR=\fIDEĞİŞTİRGELER\fR
-Bu seçenek, rsync artalan süreci kipinde başlatılırken bir artalan süreci yapılandırma değiştirgesi tanımlamak için kullanılabilir. İlk modülün tanımından önce değiştirgenin global ayarların sonuna eklenmesine eşdeğerdir. İstenirse değiştirge adları boşluksuz olarak belirtilebilir. Örnek:
+Bu seçenek, rsync artalan süreci kipinde başlatılırken bir artalan süreci yapılandırma bağımsız değişkeni tanımlamak için kullanılabilir. İlk modülün tanımından önce bağımsız değişkenin global ayarların sonuna eklenmesine eşdeğerdir. İstenirse bağımsız değişken adları boşluksuz olarak belirtilebilir. Örnek:
 .sp
 .RS 4
 .RS 4
@@ -2654,7 +2654,7 @@ Süzme kuralları hangi dosyaların aktarılacağını (içerileceğini - includ
 6. show       S   aktarımdan gizlenmeyen dosyalar için kalıp belirtir.
 7. protect    P   silinmekten korunan dosyalar için kalıp belirtir.
 8. risk       R   silinmekten korunmayan dosyalar için kalıp belirtir.
-9. clear      !   geçerli içerme/dışlama listesini temizler (değiştirge almaz)
+9. clear      !   geçerli içerme/dışlama listesini temizler (bağımsız değişken almaz)
 .fi
 .sp
 .RE
@@ -2758,7 +2758,7 @@ Dışlama/içerme eşleştirme örnekleri:
 .IP \(bu 3
 \fB!\fR değiştircisi, içerme/dışlama kuralının kalıp eşleşmediği takdirde etkili olmasını sağlar. Örneğin, "\fB-! */\fR" dışlama kuralı dizin olmayan herşeyi dışlar.
 .IP \(bu 3
-\fBC\fR değiştircisi, tüm küresel CVS-dışlama kurallarının "\fB-C\fR" yerine dışlananlar olarak eklenmesi gerektiğini belirtmek için kullanılır. Hiçbir değiştirge kabul etmez.
+\fBC\fR değiştircisi, tüm küresel CVS-dışlama kurallarının "\fB-C\fR" yerine dışlananlar olarak eklenmesi gerektiğini belirtmek için kullanılır. Hiçbir bağımsız değişken kabul etmez.
 .IP \(bu 3
 \fBs\fR değiştircisi, kuralın gönderen taraf için geçerli olduğunu belirtmek için kullanılır. Gönderen tarafı etkileyen bir kural dosyaların aktarılmasını engeller. Öntanımlı kuralların gönderen taraf kuralları haline gelmesini sağlayan \fB--delete-excluded\fR belirtilmediği sürece öntanımlı kurallar her iki tarafı da etkiler. Gönderen taraf içerme/dışlama kurallarını belirtmenin başka bir yolu \fBhide\fR (\fBH\fR) ve \fBshow\fR (\fBS\fR) kurallarını kullanmaktır.
 .IP \(bu 3

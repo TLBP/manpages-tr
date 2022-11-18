@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:28+03:00
 .TH "AB" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -58,7 +58,7 @@ Aynı anda işleme sokulacak bağlantı sayısı. Aynı anda bir bağlantı önt
 .sp
 .TP 4
 \fB-C\fR \fIçerez-ismi\fR=\fIdeğer\fR
-İsteğe bir \fBCookie:\fR satırı ekler. Değiştirge olarak genellikle bir \fIisim=değer\fR çifti kullanılır. Bu çiftler birden fazla olabilir.
+İsteğe bir \fBCookie:\fR satırı ekler. Bağımsız değişken olarak genellikle bir \fIisim=değer\fR çifti kullanılır. Bu çiftler birden fazla olabilir.
 .sp
 .TP 4
 \fB-d\fR
@@ -260,7 +260,7 @@ Transfer rate
 .PP
 .sp
 .SH "YETERSİZLİKLER"
-Statik bildirimli sabit uzunlukta çeşitli tamponlar vardır. Sunucudan gelen yanıt başlıkları ve diğer harici girdiler, komut satırı değiştirgeleri ile birlikte basitçe çözümlenir, bu size can sıkıcı gelebilir.
+Statik bildirimli sabit uzunlukta çeşitli tamponlar vardır. Sunucudan gelen yanıt başlıkları ve diğer harici girdiler, komut satırı bağımsız değişkenleri ile birlikte basitçe çözümlenir, bu size can sıkıcı gelebilir.
 .sp
 HTTP/1.x protokolünü tamamen gerçeklemez; sadece yanıtların ’belli başlı’ bazı biçimlerini kabul eder. Aksi takdirde, \fBstrstr\fR(3) işlevinin yoğun kullanımı nedeniyle sunucu yerine \fBab\fR’nin başarımını ölçerdiniz.
 .sp

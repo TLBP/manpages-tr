@@ -13,7 +13,7 @@
  * The complete text of the license is available in the
  * http://www.gnu.org/licenses/licenses.html
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:31+03:00
 .TH "BLKID" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -52,7 +52,7 @@ Blok aygıtları hakkında bilgi almak için \fBlsblk\fR(8) komutunun veya dosya
 Güvenlik nedenleriyle \fBblkid\fR, sondalama sonucu çelişkili olan (çakışan birden çok dosya sistemi algılanırsa) tüm aygıtları sessizce yok sayar . Düşük seviyeli sondalama kipi (\fB-p\fR), bu durumda daha fazla bilgi ve ek çıkış durumu sağlar. Ayrıntılı bir liste elde etmek ve eski şeyleri (sihirli dizgeleri) aygıttan silmek için \fBwipefs\fR(8) kullanılması önerilir.
 .sp
 .SH "SEÇENEKLER"
-\fIBOYUT\fR ve \fIKONUM\fR değiştirgeleri, KiB (=1024), MiB (=1024*1024) ve GiB, TiB, PiB, EiB, ZiB ve YiB veya KB (=1000), MB (=1000*1000), GB, TB, PB, EB, ZB ve YB gibi çarpımsal son ekler alabilir ("iB" isteğe bağlıdır, örneğin, "K" ile "KiB" aynı anlama gelir).
+\fIBOYUT\fR ve \fIKONUM\fR bağımsız değişkenleri, KiB (=1024), MiB (=1024*1024) ve GiB, TiB, PiB, EiB, ZiB ve YiB veya KB (=1000), MB (=1000*1000), GB, TB, PB, EB, ZB ve YB gibi çarpımsal son ekler alabilir ("iB" isteğe bağlıdır, örneğin, "K" ile "KiB" aynı anlama gelir).
 .sp
 .TP 4
 \fB-c\fR, \fB--cache-file\fR \fIDOSYA\fR
@@ -84,7 +84,7 @@ Bilinen tüm dosya sistemlerini ve RAID’leri listeler ve çıkar.
 .sp
 .TP 4
 \fB-l\fR, \fB--list-one\fR
-\fB--match-token\fR seçeneğiyle belirtilen arama değiştirgeleriyle eşleşen yalnızca bir aygıt aranır. Belirtilen arama değiştirgeleriyle eşleşen birden fazla aygıt varsa, en yüksek önceliğe sahip aygıt ve/veya belirtilen önceliğe sahip ilk aygıt döndürülür (bkz: \fBudev\fR açıklaması). Azalan öncelik sırasına göre aygıt türleri şunlardır: Aygıt Eşleyici, EVMS, LVM, MD ve son olarak normal blok aygıtları. Bu seçenek belirtilmezse, \fBblkid\fR arama değiştirgeleriyle eşleşen tüm aygıtları listeler.
+\fB--match-token\fR seçeneğiyle belirtilen arama bağımsız değişkenleriyle eşleşen yalnızca bir aygıt aranır. Belirtilen arama bağımsız değişkenleriyle eşleşen birden fazla aygıt varsa, en yüksek önceliğe sahip aygıt ve/veya belirtilen önceliğe sahip ilk aygıt döndürülür (bkz: \fBudev\fR açıklaması). Azalan öncelik sırasına göre aygıt türleri şunlardır: Aygıt Eşleyici, EVMS, LVM, MD ve son olarak normal blok aygıtları. Bu seçenek belirtilmezse, \fBblkid\fR arama bağımsız değişkenleriyle eşleşen tüm aygıtları listeler.
 .sp
 Bu seçenek, \fB--match-token\fR LABEL veya UUID belirteçleri ile kullanıldığında \fBblkid\fR’yi \fBudev\fR kullanmaya zorlar. Amaç, aynı etiketin birden fazla aygıt için kullanıldığı sistemlerde diğer araçlarla (\fBmount\fR(8) gibi) tutarlı çıktılar sağlamaktır.
 .sp

@@ -41,7 +41,7 @@
  *
  *     @(#)cal.1       8.1 (Berkeley) 6/6/93
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:28+03:00
 .TH "CAL" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -60,7 +60,7 @@ cal - bir takvim görüntüler
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBcal\fR basit bir takvim görüntülemek için kullanılır. Şayet herhangi bir değiştirge belirtilmemişse, geçerli ay görüntülenir.
+\fBcal\fR basit bir takvim görüntülemek için kullanılır. Şayet herhangi bir bağımsız değişken belirtilmemişse, geçerli ay görüntülenir.
 .sp
 \fIay\fR geçerli yerele uygun olarak bir sayı (1-12), ay ismi veya kısa ay ismi olarak belirtilebilir.
 .sp
@@ -147,7 +147,7 @@ Takvimde hafta numaralarını gösterir (US veya ISO-8601). Ayrıntılar için \
 .sp
 .TP 4
 \fB--color\fR[=\fInezaman\fR]
-Çıktıyı renklendirir. Seçimlik \fInezaman\fR değiştirgesinde \fBauto\fR, \fBnever\fR ya da \fBalways\fR belirtilebilir. Belirtilmezse \fBauto\fR öntanımlıdır. Renklendirme iptal edilebilir. Geçerli kurulumun öntanımlısını görmek için \fB--help\fR çıktısına bakın. Ayrıca \fBRENKLER\fR böümüne de bakın.
+Çıktıyı renklendirir. Seçimlik \fInezaman\fR bağımsız değişkeninde \fBauto\fR, \fBnever\fR ya da \fBalways\fR belirtilebilir. Belirtilmezse \fBauto\fR öntanımlıdır. Renklendirme iptal edilebilir. Geçerli kurulumun öntanımlısını görmek için \fB--help\fR çıktısına bakın. Ayrıca \fBRENKLER\fR böümüne de bakın.
 .sp
 .TP 4
 \fB-h\fR, \fB--help\fR
@@ -161,11 +161,11 @@ Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .SH "DEĞİŞTİRGELER"
 .TP 4
-\fBSadece sayı içeren tek değiştirge\fR (’\fBcal 2020\fR’ gibi)
+\fBSadece sayı içeren tek bağımsız değişken\fR (’\fBcal 2020\fR’ gibi)
 Gösterilecek yıl belirtilir. Ancak, yılın eksiksiz belirtilmesi gerekir. \fBcal 89\fR 1989 takvimini göstermeyecektir.
 .sp
 .TP 4
-\fBSadece dizge içeren tek değiştirge\fR (’\fBcal tomorrow\fR’, ’\fBcal Temmuz\fR’ gibi)
+\fBSadece dizge içeren tek bağımsız değişken\fR (’\fBcal tomorrow\fR’, ’\fBcal Temmuz\fR’ gibi)
 Geçerli yerele uygun \fIay_adı\fR, kısa ay adı veya \fIzaman_damgası\fR belirtilir.
 .sp
 \fIzaman_damgası\fR için özel sözcükler kabul edilmektedir. "now" içinde bulunulan an,"today" bugün, "yesterday" dün, "tomorrow" yarın anlamında belirtilebilir.
@@ -173,12 +173,12 @@ Geçerli yerele uygun \fIay_adı\fR, kısa ay adı veya \fIzaman_damgası\fR bel
 Göreli tarih belirtimleri de kabul edilir, bu durumda "+" geçerli saat artı belirtilen zaman aralığına göre değerlendirilir. Buna uygun olarak, ön eki "-" olan bir zaman aralığı, geçerli zamandan belirtilen zaman aralığının çıkarılmasıyla hesaplanır, örneğin ’+2days’. Zaman aralığının önüne "+" veya "-" koymak yerine, sonuna bir boşluk ve "left" veya "ago" kelimesi de eklenebilir (örneğin ’1 week ago’).
 .sp
 .TP 4
-\fBİki değiştirge\fR (’\fBcal 11 2020\fR’ gibi)
+\fBİki bağımsız değişken\fR (’\fBcal 11 2020\fR’ gibi)
 Ay (1 - 12) ve yıl belirtilir.
 .sp
 .TP 4
-\fBÜç değiştirge\fR (’\fBcal 25 11 2020\fR’ gibi)
-Gün (1-31), ay ve yıl belirtilir ve takvim bir uçbirimde görüntülenirse gün vurgulanır. Herhangi bir değiştirge belirtilmezse, içinde bulunulan ayın takvimi görüntülenir.
+\fBÜç bağımsız değişken\fR (’\fBcal 25 11 2020\fR’ gibi)
+Gün (1-31), ay ve yıl belirtilir ve takvim bir uçbirimde görüntülenirse gün vurgulanır. Herhangi bir bağımsız değişken belirtilmezse, içinde bulunulan ayın takvimi görüntülenir.
 .sp
 .PP
 .sp

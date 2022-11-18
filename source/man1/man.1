@@ -16,7 +16,7 @@
  *
  * Sat Oct 29 13:09:31 GMT 1994  Wilf. (G.Wilford@ee.surrey.ac.uk)
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:49+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:29+03:00
 .TH "MAN" 1 "Mart 2022" "mandb 2.10.2" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,7 +43,7 @@ man - sistem kılavuz sayfaları için arayüz
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBman\fR kılavuz sayfalarını biçimler ve görüntüler. Belirtilen her \fIsayfa\fR normalde bir uygulamanın, komutun veya işlevin adıdır. Belirtilen bu değiştirgelerin her biriyle ilişkili kılavuz sayfası bulunur ve görüntülenir. Bir \fIbölüm\fR belirtilmişse \fBman\fR yalnızca o kılavuz bölümüne bakacaktır. Öntanımlı eylem, önceden tanımlanmış bir sırayı izleyerek (bkz. \fBÖNTANIMLILAR\fR) mevcut tüm bölümlerde arama yapmak ve birkaç \fIbölüm\fRde olsa bile yalnızca bulunan ilk \fIsayfa\fRyı göstermektir.
+\fBman\fR kılavuz sayfalarını biçimler ve görüntüler. Belirtilen her \fIsayfa\fR normalde bir uygulamanın, komutun veya işlevin adıdır. Belirtilen bu bağımsız değişkenlerin her biriyle ilişkili kılavuz sayfası bulunur ve görüntülenir. Bir \fIbölüm\fR belirtilmişse \fBman\fR yalnızca o kılavuz bölümüne bakacaktır. Öntanımlı eylem, önceden tanımlanmış bir sırayı izleyerek (bkz. \fBÖNTANIMLILAR\fR) mevcut tüm bölümlerde arama yapmak ve birkaç \fIbölüm\fRde olsa bile yalnızca bulunan ilk \fIsayfa\fRyı göstermektir.
 .sp
 Aşağıdaki tabloda, kılavuzun bölüm numaraları ve içerdikleri sayfa türleri gösterilmiştir.
 .sp
@@ -70,10 +70,10 @@ Geleneksel bölüm adları: \fBİSİM, SÖZDİZİMİ, KULLANIM, AÇIKLAMA, SEÇE
 .RS 0
 .nf
 \fBkalın yazı\fR       gösterildiği gibi yazılır
-\fIeğik yazı\fR        yerine uygun değiştirge konur
+\fIeğik yazı\fR        yerine uygun bağımsız değişken konur
 [\fB-abc\fR]           [ ] içindeki herşey seçimliktir
 \fB-a\fR|\fB-b\fR            aralarında | bulunanlar birlikte kullanılamaz
-\fIdeğiştirge\fR ...   değiştirge yinelenebilir
+\fIbağımsız değişken\fR ...   bağımsız değişken yinelenebilir
 [\fIifade\fR] ...      [ ] içindeki herşey yinelenebilir
 .fi
 .sp
@@ -120,7 +120,7 @@ Düzenli ifade olarak \fIprintf\fR sözcüğü için kılavuz sayfası isimleri 
 .SH "GİRİŞ"
 Kullanıcıya mümkün olduğunca fazla esneklik sağlamak için \fBman\fR birçok seçenek içerir. Arama yolu, bölüm sırası, çıktı işlemcisi ve aşağıda ayrıntıları verilen diğer davranış ve işlemlerde değişiklikler yapılabilir.
 .sp
-Çeşitli ortam değişkenleri tanımlandıkları takdirde, \fBman\fR’ın çalışmasını belirlemek için sorgulanır. \fB$MANOPT\fR "catch-all" değişkenine, bir seçeneğin değiştirgesinin parçası olarak kullanılan boşlukların ters eğik çizgi ile öncelenmesi gerekliliği dışında, komut satırı biçiminde herhangi bir dizgeyi atamak mümkündür. \fBman\fR, kendi komut satırını çözümlemeden önce $MANOPT’u çözümler. Bir değiştirge gerektiren seçenekler, komut satırındakiler tarafından geçersiz kılınacaktır. $MANOPT’a atanan tüm seçenekleri sıfırlamak için, ilk komut satırı seçeneği olarak \fB-D\fR belirtilebilir. Bu, \fBman\fR’ın $MANOPT’ta belirtilen seçenekleri "unutmasını" sağlar, ancak yine de geçerli olmaları gerekir.
+Çeşitli ortam değişkenleri tanımlandıkları takdirde, \fBman\fR’ın çalışmasını belirlemek için sorgulanır. \fB$MANOPT\fR "catch-all" değişkenine, bir seçeneğin bağımsız değişkensinin parçası olarak kullanılan boşlukların ters eğik çizgi ile öncelenmesi gerekliliği dışında, komut satırı biçiminde herhangi bir dizgeyi atamak mümkündür. \fBman\fR, kendi komut satırını çözümlemeden önce $MANOPT’u çözümler. Bir bağımsız değişken gerektiren seçenekler, komut satırındakiler tarafından geçersiz kılınacaktır. $MANOPT’a atanan tüm seçenekleri sıfırlamak için, ilk komut satırı seçeneği olarak \fB-D\fR belirtilebilir. Bu, \fBman\fR’ın $MANOPT’ta belirtilen seçenekleri "unutmasını" sağlar, ancak yine de geçerli olmaları gerekir.
 .sp
 Kılavuz sayfaları normalde \fI/usr/share/man\fR gibi bir dizin altında \fBnroff\fR(1) biçeminde saklanır. Bazı kurulumlarda, başarımı artırmak için önceden biçimlendirilmiş \fBcat\fR(1) sayfaları da olabilir. Bu dosyaların nerede saklandığına ilişkin ayrıntılar için bkz: \fBmanpath\fR(5)
 .sp
@@ -158,7 +158,7 @@ Yukarıdaki yöntemlerden hiçbiri herhangi bir süzme bilgisi sağlamıyorsa, �
 Süzme bilgilerinden ve birincil biçimlendiriciden (\fBnroff\fR veya \fB-t\fR ile \fBtroff\fR veya \fBgroff\fR) bir biçimlendirme borusu oluşturulur ve yürütülür. Veya, man ağacı kökünde \fImandb_nfmt\fR (veya \fB-t\fR ile \fImandb_tfmt\fR) uygulaması mevcutsa, yerine bu uygulama çalıştırılır. Boru, kılavuz kaynak dosyasından, önişlemci dizgesinden ve isteğe bağlı olarak \fB-T\fR veya \fB-E\fR seçeneğinde belirtilen aygıttan geçer.
 .sp
 .SH "SEÇENEKLER"
-Komut satırında, \fBMANOPT\fR’ta veya her ikisinde birden belirtilen değiştirgesiz seçenekler zararlı değildir. Değiştirge gerektiren seçenekler için, her yeniden belirtim önceki değiştirge değerini geçersiz kılar.
+Komut satırında, \fBMANOPT\fR’ta veya her ikisinde birden belirtilen bağımsız değişkensiz seçenekler zararlı değildir. Bağımsız değişken gerektiren seçenekler için, her yeniden belirtim önceki bağımsız değişken değerini geçersiz kılar.
 .sp
 .SS "Genel Seçenekler"
 .TP 4
@@ -196,7 +196,7 @@ Arama yorumlanmış metinde değil, kılavuz sayfalarının kendinde yapılır, 
 .sp
 .TP 4
 \fB-l\fR, \fB--local-file\fR
-"Yerel" kipi etkinleştirir. Sistemdeki kılavuz sayfalarında arama yapmak yerine yerel kılavuz dosyalarını biçimler ve görüntüler. Belirtilen her kılavuz sayfası, doğru biçimde bir nroff kaynak dosyası olarak yorumlanacaktır. cat dosyası üretilmez. Değiştirgelerden biri ’-’ ise, girdi standart girdiden alınır. Bu seçenek kullanılmadığında ve \fBman\fR gerekli sayfayı bulamazsa, hata iletisini görüntülemeden önce, adı bir dosya adı olarak kullanarak ve tam bir eşleşme arayarak bu seçenek sağlanmış gibi davranmaya çalışır.
+"Yerel" kipi etkinleştirir. Sistemdeki kılavuz sayfalarında arama yapmak yerine yerel kılavuz dosyalarını biçimler ve görüntüler. Belirtilen her kılavuz sayfası, doğru biçimde bir nroff kaynak dosyası olarak yorumlanacaktır. cat dosyası üretilmez. Bağımsız değişkenlerden biri ’-’ ise, girdi standart girdiden alınır. Bu seçenek kullanılmadığında ve \fBman\fR gerekli sayfayı bulamazsa, hata iletisini görüntülemeden önce, adı bir dosya adı olarak kullanarak ve tam bir eşleşme arayarak bu seçenek sağlanmış gibi davranmaya çalışır.
 .sp
 .TP 4
 \fB-w\fR, \fB--where\fR, \fB--path\fR, \fB--location\fR
@@ -255,11 +255,11 @@ Kılavuz sayfaları aranırken harf büyüklüğü önemsenir.
 .sp
 .TP 4
 \fB--regex\fR
-\fBapropos\fR(1) ile olduğu gibi, \fIsayfa\fR değiştirgesi bir düzenli ifade olarak ele alınır ve sayfa adları veya kısa açıklamaların herhangi bir bölümüyle eşleşen tüm sayfaları görüntüler. Bir düzenli ifade aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
+\fBapropos\fR(1) ile olduğu gibi, \fIsayfa\fR bağımsız değişkeni bir düzenli ifade olarak ele alınır ve sayfa adları veya kısa açıklamaların herhangi bir bölümüyle eşleşen tüm sayfaları görüntüler. Bir düzenli ifade aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
 .sp
 .TP 4
 \fB--wildcard\fR
-\fBapropos\fR(1) \fB--wildcard\fR’da olduğu gibi, kabuk tarzı joker karakterler kullanarak her \fIsayfa\fR değiştirgesi ile eşleşen sayfa adlarını veya kısa açıklamalarını içeren tüm sayfaları görüntüler. \fIsayfa\fR değiştirgesi, ad veya kısa açıklamanın tamamıyla veya açıklamadaki sözcük sınırlarıyla eşleşmelidir. Bir joker karakter aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
+\fBapropos\fR(1) \fB--wildcard\fR’da olduğu gibi, kabuk tarzı joker karakterler kullanarak her \fIsayfa\fR bağımsız değişkeni ile eşleşen sayfa adlarını veya kısa açıklamalarını içeren tüm sayfaları görüntüler. \fIsayfa\fR bağımsız değişkeni, ad veya kısa açıklamanın tamamıyla veya açıklamadaki sözcük sınırlarıyla eşleşmelidir. Bir joker karakter aranırken genellikle "en iyi" eşleşen sayfayı seçmenin akla yatkın bir yolu olmadığından, bu seçenekle birlikte \fB-a\fR seçeneği de uygulanır.
 .sp
 .TP 4
 \fB--names-only\fR
@@ -309,7 +309,7 @@ $ man -aw --no-subpages git diff
 \fB-P\fR, \fB--pager\fR=\fIsayfalayıcı\fR
 Kullanılacak sayfalayıcı uygulamasını belirtmek için kullanılır. Öntanımlı olarak \fBPAGER\fR kullanılır, tanımsızsa veya çalıştırılamıyorsa \fBcat\fR kullanılır. Bu seçenek MANPAGER ortam değişkenini umursamaz. Komutun kullanılmasından sonra \fBPAGER\fR değişkeni tekrar devreye girer. \fB-f\fR veya \fB-k\fR seçeneği ile birlikte kullanılmaz.
 .sp
-Değer, basit bir komut adı veya değiştirgeleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için değiştirge olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
+Değer, basit bir komut adı veya bağımsız değişkenleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için bağımsız değişken olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
 .sp
 .TP 4
 \fB-r\fR, \fB--prompt\fR=\fIistem\fR
@@ -395,7 +395,7 @@ Bu seçenek groff (veya muhtemelen troff’un) çıktısını öntanımlı oland
 .sp
 .TP 4
 \fB-H\fR, \fB--html\fR[=\fItarayıcı\fR]
-Bu seçenek \fBgroff\fR’un HTML çıktı üretmesine neden olur ve bu çıktıyı bir tarayıcıda görüntüler. Tarayıcı seçimi, sağlanmışsa isteğe bağlı \fItarayıcı\fR değiştirgesi, \fBBROWSER\fR ortam değişkeni veya (genellikle \fBlynx\fR) tarafından tanımsız yapılmışsa derleme sırasında atanan öntanımlı ile belirlenir. Bu seçenek \fB-t\fR seçeneğinin de uygulanmasını sağlar ve yalnızca GNU \fBtroff\fR ile çalışır.
+Bu seçenek \fBgroff\fR’un HTML çıktı üretmesine neden olur ve bu çıktıyı bir tarayıcıda görüntüler. Tarayıcı seçimi, sağlanmışsa isteğe bağlı \fItarayıcı\fR bağımsız değişkeni, \fBBROWSER\fR ortam değişkeni veya (genellikle \fBlynx\fR) tarafından tanımsız yapılmışsa derleme sırasında atanan öntanımlı ile belirlenir. Bu seçenek \fB-t\fR seçeneğinin de uygulanmasını sağlar ve yalnızca GNU \fBtroff\fR ile çalışır.
 .sp
 .TP 4
 \fB-X\fR, \fB--gxditview\fR[=\fIdpi\fR]
@@ -467,7 +467,7 @@ Tanımlıysa, değeri, kılavuz sayfalarının aranacağı bölümleri sırasıy
 \fBMANPAGER\fR, \fBPAGER\fR
 \fBMANPAGER\fR veya \fBPAGER\fR tanımlıysa (tercihan \fBMANPAGER\fR kullanılır), değeri, kılavuz sayfasını görüntülemek için kullanılan uygulamanın adı olarak kullanılır. Öntanımlı olarak, \fBpager\fR(1) kullanılır, \fBpager\fR bulunamazsa veya çalıştırılamazsa son çare olarak \fBcat\fR kullanılır.
 .sp
-Değer, basit bir komut adı veya değiştirgeleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için değiştirge olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
+Değer, basit bir komut adı veya bağımsız değişkenleri içeren bir komut olabilir ve kabuk öncelemeleri (ters eğik çizgi, tek tırnak veya çift tırnak) içerebilir. Birden çok komutu bağlamak için boruları kullanamaz; buna ihtiyacınız varsa, dosyayı görüntülemek için bağımsız değişken olarak veya standart girdiden alabilen bir sarmalayıcı komut dosyası kullanın.
 .sp
 .TP 4
 \fBMANLESS\fR
@@ -479,11 +479,11 @@ Tanımlıysa değeri, \fBman --html\fR ile bir tarayıcı başlatmayı denemek i
 .sp
 .TP 4
 \fBSYSTEM\fR
-Tanımlıysa, etkisi, değeri \fB-m\fR seçeneğine değiştirge olarak belirtildiğinde elde edilen etki gibidir.
+Tanımlıysa, etkisi, değeri \fB-m\fR seçeneğine bağımsız değişken olarak belirtildiğinde elde edilen etki gibidir.
 .sp
 .TP 4
 \fBMANOPT\fR
-Tanımlıysa değeri, \fBman\fR’ın komut satırına benzer biçemde olması beklenir ve \fBman\fR’ın komut satırından önce çözümlenir. Diğer tüm insana özgü ortam değişkenleri komut satırı seçenekleri olarak ifade edilebildiğinden ve dolayısıyla \fBMANOPT\fR’a dahil edilmeye aday olduklarından, bunları geçersiz hale getirmesi beklenir. Ek bilgi: Bir seçeneğin değiştirgesinin parçası olarak yorumlanabilecek tüm boşluklardan kaçınılmalıdır.
+Tanımlıysa değeri, \fBman\fR’ın komut satırına benzer biçemde olması beklenir ve \fBman\fR’ın komut satırından önce çözümlenir. Diğer tüm insana özgü ortam değişkenleri komut satırı seçenekleri olarak ifade edilebildiğinden ve dolayısıyla \fBMANOPT\fR’a dahil edilmeye aday olduklarından, bunları geçersiz hale getirmesi beklenir. Ek bilgi: Bir seçeneğin bağımsız değişkeninin parçası olarak yorumlanabilecek tüm boşluklardan kaçınılmalıdır.
 .sp
 .TP 4
 \fBMANWIDTH\fR

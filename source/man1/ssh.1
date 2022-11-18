@@ -39,7 +39,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:50+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
 .TH "SSH" 1 "23 Şubat 2022" "openssh 9.0p1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -51,7 +51,7 @@ ssh - OpenSSH uzak oturum açma istemcisi
 .sp
 .SH KULLANIM
 .IP \fBssh\fR 4
-[\fB-46AaCfGgKkMNnqsTtVvXxYy\fR] [\fB-B\fR \fIbağlantı_arabirimi\fR] [\fB-b\fR \fIbağlantı_adresi\fR] [\fB-c\fR \fIalgoritma\fR] [\fB-D\fR [\fIbağlantı_adresi\fR:]\fIport\fR] [\fB-E\fR \fIgünlük_dosyası\fR] [\fB-e\fR \fIönceleme_krk\fR] [\fB-F\fR \fIyapılandırma_dosyası\fR] [\fB-I\fR \fIpkcs11\fR] [\fB-i\fR \fIkimlik_dosyası\fR] [\fB-J\fR \fIhoplama_konağı\fR] [\fB-L\fR \fIadres\fR] [\fB-l\fR \fIkullanıcı\fR] [\fB-m\fR \fImac_belirtimi\fR] [\fB-O\fR \fIdenetim_komutu\fR] [\fB-o\fR \fIseçenek\fR] [\fB-p\fR \fIport\fR] [\fB-Q\fR \fIsorgu_seçeneği\fR] [ \fB-R\fR \fIadres\fR] [\fB-S\fR \fIdenetim_yolu\fR] [\fB-W\fR \fIkonak:port\fR] [\fB-w\fR \fIyerel_tünel\fR[:\fIuzak_tünel\fR]] \fIhedef\fR [\fIkomut\fR [\fIdeğiştirge\fR]...]
+[\fB-46AaCfGgKkMNnqsTtVvXxYy\fR] [\fB-B\fR \fIbağlantı_arabirimi\fR] [\fB-b\fR \fIbağlantı_adresi\fR] [\fB-c\fR \fIalgoritma\fR] [\fB-D\fR [\fIbağlantı_adresi\fR:]\fIport\fR] [\fB-E\fR \fIgünlük_dosyası\fR] [\fB-e\fR \fIönceleme_krk\fR] [\fB-F\fR \fIyapılandırma_dosyası\fR] [\fB-I\fR \fIpkcs11\fR] [\fB-i\fR \fIkimlik_dosyası\fR] [\fB-J\fR \fIhoplama_konağı\fR] [\fB-L\fR \fIadres\fR] [\fB-l\fR \fIkullanıcı\fR] [\fB-m\fR \fImac_belirtimi\fR] [\fB-O\fR \fIdenetim_komutu\fR] [\fB-o\fR \fIseçenek\fR] [\fB-p\fR \fIport\fR] [\fB-Q\fR \fIsorgu_seçeneği\fR] [ \fB-R\fR \fIadres\fR] [\fB-S\fR \fIdenetim_yolu\fR] [\fB-W\fR \fIkonak:port\fR] [\fB-w\fR \fIyerel_tünel\fR[:\fIuzak_tünel\fR]] \fIhedef\fR [\fIkomut\fR [\fIbağımsız değişken\fR]...]
 .sp
 .PP
 .sp
@@ -60,7 +60,7 @@ ssh - OpenSSH uzak oturum açma istemcisi
 .sp
 \fBssh\fR, belirtilen \fIhedef\fR’e oturum açar. Hedef [\fIkullanıcı\fR]@\fIkonak\fR biçeminde belirtilebileceği gibi \fBssh://\fR[\fIkullanıcı\fR]@\fIkonak\fR[:\fIport\fR] biçeminde bir sarmalayıcı ile de belirtilebilir.
 .sp
-Şayet kullanıcı bir \fIkomut\fR belirtmiş ise, komut oturum kabuğu yerine uzak konakta çalıştırılır. \fIkomut\fR olarak tam komut satırı belirtilebileceği gibi ek \fIdeğiştirge\fR’ler de belirtilebilir. Çalıştırılmak üzere komut sunucuya gönderilmeden önce belirtilen \fIdeğiştirge\fR’ler boşluklarla ayrılarak komuta eklenir.
+Şayet kullanıcı bir \fIkomut\fR belirtmiş ise, komut oturum kabuğu yerine uzak konakta çalıştırılır. \fIkomut\fR olarak tam komut satırı belirtilebileceği gibi ek \fIbağımsız değişken\fR’ler de belirtilebilir. Çalıştırılmak üzere komut sunucuya gönderilmeden önce belirtilen \fIbağımsız değişken\fR’ler boşluklarla ayrılarak komuta eklenir.
 .sp
 .SS "Seçenekler"
 .TP 4
@@ -306,7 +306,7 @@ Port yönlendirmeleri ayrıca, yapılandırma dosyasında da belirtilebilir. Ayr
 .sp
 Öntanımlı olarak, TCP dinleme soketleri sunucu üzerinde yalnızca geridönüş (loopback) aygıtına bağlanır. Ancak, bağlantıyı belirli bir adrese bağlamak için doğrudan \fIbağlantı_adresi\fR kullanılabilir. \fIbağlantı_adresi\fR olarak boş bir adres veya "*" belirtilmesi \fIuzak_soket\fRin tüm arabirimlerden erişilebilir olması gerektiğini belirtir. \fIbağlantı_adresi\fR belirtilmesi sadece sunucunun \fBGatewayPorts\fR yönergesi etkinse başarılı olur (Bkz: \fBssh_config\fR(5)).
 .sp
-\fIuzak_port\fR değiştirgesi seçenekte ’0’ olarak belirtilmişse, sunucuda dinleme portu dinamik olarak tahsis edilir ve çalışma anında istemciye bildirilir. \fB-O forward\fR ile birlikte kullanılmışsa tahsis edilen port standart çıktıya da basılır.
+\fIuzak_port\fR bağımsız değişkeni seçenekte ’0’ olarak belirtilmişse, sunucuda dinleme portu dinamik olarak tahsis edilir ve çalışma anında istemciye bildirilir. \fB-O forward\fR ile birlikte kullanılmışsa tahsis edilen port standart çıktıya da basılır.
 .sp
 .TP 4
 \fB-S\fR \fIdenetim_yolu\fR
@@ -607,7 +607,7 @@ Bağlantının kurulduğu istemci ve sunucuyu belirtir. Değişken boşluk ile b
 .sp
 .TP 4
 \fBSSH_ORIGINAL_COMMAND\fR
-Zorunlu bir komutun çalıştırılması durumunda özgün komut satırını içerir. Bu özgün değiştirgeleri çıkartmakta kullanılabilir.
+Zorunlu bir komutun çalıştırılması durumunda özgün komut satırını içerir. Bu özgün bağımsız değişkenleri çıkartmakta kullanılabilir.
 .sp
 .TP 4
 \fBSSH_TTY\fR

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:48+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:28+03:00
 .TH "DBLATEX" 1 "Mart 2015" "dblatex3-0.3.12" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -94,7 +94,7 @@ Kullanılacak kullanıcı XSL şablon \fIDOSYA\fRsı. Çok sayıda şablon dosya
 .sp
 .TP 4
 \fB-P\fR, \fB--param\fR=\fIİSİM=DEĞER\fR
-Belirtilen çift XSLT aracına komut satırı XSL değiştirgesi olarak aktarılır.
+Belirtilen çift XSLT aracına komut satırı XSL bağımsız değişkeni olarak aktarılır.
 .sp
 .TP 4
 \fB-q\fR, \fB--quiet\fR
@@ -138,7 +138,7 @@ Sürüm bilgilerini görüntüler ve çıkar.
 .sp
 .TP 4
 \fB-x\fR, \fB--xslt-opts\fR=\fIXSLT-SEÇENEKLERİ\fR
-XSLT aracına aktarılacak değiştirgeler.
+XSLT aracına aktarılacak bağımsız değişkenler.
 .sp
 .TP 4
 \fB-X\fR, \fB--no-external\fR
@@ -174,7 +174,7 @@ dblatex myfile.xml
 .fi
 .sp
 .RE
-XSL değiştirgelerinin komut satırından aktarımı:
+XSL bağımsız değişkenlerinin komut satırından aktarımı:
 .sp
 .RS 4
 .nf
@@ -207,7 +207,7 @@ dblatex -s /path/to/mystyle.sty myfile.xml
 .fi
 .sp
 .RE
-XSLT aracına ek değiştirgelerin aktarımı:
+XSLT aracına ek bağımsız değişkenlerin aktarımı:
 .sp
 .RS 4
 .nf

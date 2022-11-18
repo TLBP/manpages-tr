@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:51+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:31+03:00
 .TH "APACHE2" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -34,16 +34,16 @@ httpd - Apache Hiper Metin Aktarım Protokolü Sunucusu
 .sp
 .SH KULLANIM
 .IP \fBapache2\fR 8
-[ \fB-d\fR \fIsunucu-kök-dizini\fR ] [ \fB-f\fR \fIyapılandırma-dosyası\fR ] [ \fB-C\fR \fIyönerge\fR ] [ \fB-c\fR \fIyönerge\fR ] [ \fB-D\fR \fIdeğiştirge\fR ] [ \fB-e\fR \fIseviye\fR ] [ \fB-E\fR \fIdosya\fR ] [ \fB-k\fR \fBstart\fR | \fBrestart\fR | \fBgraceful\fR | \fBstop\fR | \fBgraceful-stop\fR ] [ \fB-h\fR ] [ \fB-l\fR ] [ \fB-L\fR ] [ \fB-S\fR ] [ \fB-t\fR ] [ \fB-v\fR ] [ \fB-V\fR ] [ \fB-X\fR ] [ \fB-M\fR ] [ \fB-T\fR ]
+[ \fB-d\fR \fIsunucu-kök-dizini\fR ] [ \fB-f\fR \fIyapılandırma-dosyası\fR ] [ \fB-C\fR \fIyönerge\fR ] [ \fB-c\fR \fIyönerge\fR ] [ \fB-D\fR \fIbağımsız değişken\fR ] [ \fB-e\fR \fIseviye\fR ] [ \fB-E\fR \fIdosya\fR ] [ \fB-k\fR \fBstart\fR | \fBrestart\fR | \fBgraceful\fR | \fBstop\fR | \fBgraceful-stop\fR ] [ \fB-h\fR ] [ \fB-l\fR ] [ \fB-L\fR ] [ \fB-S\fR ] [ \fB-t\fR ] [ \fB-v\fR ] [ \fB-V\fR ] [ \fB-X\fR ] [ \fB-M\fR ] [ \fB-T\fR ]
 .IP \fBhttpd\fR 6
-[ \fB-d\fR \fIsunucu-kök-dizini\fR ] [ \fB-f\fR \fIyapılandırma-dosyası\fR ] [ \fB-C\fR \fIyönerge\fR ] [ \fB-c\fR \fIyönerge\fR ] [ \fB-D\fR \fIdeğiştirge\fR ] [ \fB-e\fR \fIseviye\fR ] [ \fB-E\fR \fIdosya\fR ] [ \fB-k\fR \fBstart\fR | \fBrestart\fR | \fBgraceful\fR | \fBstop\fR | \fBgraceful-stop\fR ] [ \fB-h\fR ] [ \fB-l\fR ] [ \fB-L\fR ] [ \fB-S\fR ] [ \fB-t\fR ] [ \fB-v\fR ] [ \fB-V\fR ] [ \fB-X\fR ] [ \fB-M\fR ] [ \fB-T\fR ]
+[ \fB-d\fR \fIsunucu-kök-dizini\fR ] [ \fB-f\fR \fIyapılandırma-dosyası\fR ] [ \fB-C\fR \fIyönerge\fR ] [ \fB-c\fR \fIyönerge\fR ] [ \fB-D\fR \fIbağımsız değişken\fR ] [ \fB-e\fR \fIseviye\fR ] [ \fB-E\fR \fIdosya\fR ] [ \fB-k\fR \fBstart\fR | \fBrestart\fR | \fBgraceful\fR | \fBstop\fR | \fBgraceful-stop\fR ] [ \fB-h\fR ] [ \fB-l\fR ] [ \fB-L\fR ] [ \fB-S\fR ] [ \fB-t\fR ] [ \fB-v\fR ] [ \fB-V\fR ] [ \fB-X\fR ] [ \fB-M\fR ] [ \fB-T\fR ]
 .sp
 .PP
 .sp
 .SH "AÇIKLAMA"
 \fBapache2\fR, Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusudur. Tek başına çalışan bir artalan süreci olarak tasarlanmıştır. Bu tarz kullanıldığında istekleri işleme sokmak için çocuk süreçlerden ve evrelerden oluşan bir havuz oluşturur.
 .sp
-Genelde, \fBapache2\fR’nin doğrudan çalıştırılmaması gerekir. Ya \fBapache2ctl\fR ya da \fB/etc/init.d/apache2\fR aracılığıyla çalıştırılmalıdır. \fBapache2\fR’ye keyfi değiştirge aktarılmak istenirse \fBapache2ctl\fR kullanılabilir. Ortam değişkenleri Debian yapılandırmasında \fI/etc/apache2/envvars\fR dosyasında tanımlanmaktadır.
+Genelde, \fBapache2\fR’nin doğrudan çalıştırılmaması gerekir. Ya \fBapache2ctl\fR ya da \fB/etc/init.d/apache2\fR aracılığıyla çalıştırılmalıdır. \fBapache2\fR’ye keyfi bağımsız değişken aktarılmak istenirse \fBapache2ctl\fR kullanılabilir. Ortam değişkenleri Debian yapılandırmasında \fI/etc/apache2/envvars\fR dosyasında tanımlanmaktadır.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -67,8 +67,8 @@ Yapılandırma \fIyönerge\fR’sini yapılandırma dosyalarını okumadan önce
 Yapılandırma \fIyönerge\fR’sini yapılandırma dosyalarını okuduktan sonra işleme sokar.
 .sp
 .TP 4
-\fB-D\fR \fIdeğiştirge\fR
-Sunucu başlatılırken veya yeniden başlatılırken komutları şarta bağlı olarak işleme sokmak veya atlamak için yapılandırma dosyalarında kullanılan \fBIfDefine\fR bölümlerinde kullanılmak üzere bir yapılandırma \fIdeğiştirge\fR’si tanımlar. Ayrıca, \fB-DNO_DETACH\fR (ana sürecin çatallanmasını engellemek için), \fB-DFOREGROUND\fR (ana sürecin \fBsetsid\fR(3) ve benzerlerinden çağrılmasını engellemek için) gibi daha az bilinen bazı başlatma değiştirgelerini atamakta da kullanılabilir.
+\fB-D\fR \fIbağımsız değişken\fR
+Sunucu başlatılırken veya yeniden başlatılırken komutları şarta bağlı olarak işleme sokmak veya atlamak için yapılandırma dosyalarında kullanılan \fBIfDefine\fR bölümlerinde kullanılmak üzere bir yapılandırma \fIbağımsız değişken\fR’si tanımlar. Ayrıca, \fB-DNO_DETACH\fR (ana sürecin çatallanmasını engellemek için), \fB-DFOREGROUND\fR (ana sürecin \fBsetsid\fR(3) ve benzerlerinden çağrılmasını engellemek için) gibi daha az bilinen bazı başlatma bağımsız değişkenlerini atamakta da kullanılabilir.
 .sp
 .TP 4
 \fB-e\fR \fIseviye\fR

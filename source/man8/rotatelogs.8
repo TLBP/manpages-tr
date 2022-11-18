@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2022-11-10T14:08:52+03:00
+.\" Derlenme zamanı: 2022-11-18T11:59:33+03:00
 .TH "ROTATELOGS" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -52,7 +52,7 @@ Bağ ismi mutlak bir yol içermiyorsa, \fBrotatelogs\fR’un çalışma dizinine
 .sp
 .TP 4
 \fB-p\fR \fIuygulama\fR
-Belirtildiği takdirde, \fBrotatelogs\fR yeni bir günlük dosyasının her açılışında belirtilen uygulamayı çalıştırır. Yeni açılan dosyanın ismi uygulamaya ilk değiştirge olarak aktarılır. Bu işlem bir döndürme sonrası yapılırsa eski günlük dosyası ikinci değiştirge olarak aktarılır. \fBrotatelogs\fR işlemini sürdürmek için belirtilen uygulamanın sonlanmasını beklemez, dolayısıyla sonlanma soucunda döndürülen hata kodunu günlüğe kaydetmez. Çalıştırılan uygulama \fBrotatelogs\fR ile aynı \fIstdin\fR, \fIstdout\fR ve \fIstderr\fR’i kullanır ve ortamı da miras alır.
+Belirtildiği takdirde, \fBrotatelogs\fR yeni bir günlük dosyasının her açılışında belirtilen uygulamayı çalıştırır. Yeni açılan dosyanın ismi uygulamaya ilk bağımsız değişken olarak aktarılır. Bu işlem bir döndürme sonrası yapılırsa eski günlük dosyası ikinci bağımsız değişken olarak aktarılır. \fBrotatelogs\fR işlemini sürdürmek için belirtilen uygulamanın sonlanmasını beklemez, dolayısıyla sonlanma soucunda döndürülen hata kodunu günlüğe kaydetmez. Çalıştırılan uygulama \fBrotatelogs\fR ile aynı \fIstdin\fR, \fIstdout\fR ve \fIstderr\fR’i kullanır ve ortamı da miras alır.
 .sp
 .TP 4
 \fB-f\fR
