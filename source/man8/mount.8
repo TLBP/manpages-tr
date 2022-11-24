@@ -1,0 +1,2055 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1996 Andries Brouwer
+ *
+ * This page is somewhat derived from a page that was
+ * (c) 1980, 1989, 1991 The Regents of the University of California
+ * and had been heavily modified by Rik Faith and myself.
+ * (Probably no BSD text remains.)
+ * Fragments of text were written by Werner Almesberger, Remy Card,
+ * Stephen Tweedie and Eric Youngdale.
+ *
+ * This is free documentation; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * The GNU General Public License’s references to "object code"
+ * and "executables" are to be interpreted as the output of any
+ * document formatting or typesetting system, including
+ * intermediate and printed output.
+ *
+ * This manual is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this manual; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+ * USA.
+ *
+ * 960705, aeb: version for mount-2.7g
+ * 970114, aeb: xiafs and ext are dead; romfs is new
+ * 970623, aeb: -F option
+ * 970914, reg: -s option
+ * 981111, K.Garloff: /etc/filesystems
+ * 990111, aeb: documented /sbin/mount.smbfs
+ * 990730, Yann Droneaud <lch@multimania.com>: updated page
+ * 991214, Elrond <Elrond (at) Wunder-Nett.org>: added some docs on devpts
+ * 010725, Nikita Danilov <NikitaDanilov (at) Yahoo.COM>: reiserfs options
+ *
+..
+.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.TH "MOUNT" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+mount - dosya sistemi bağlar
+.sp
+.SH KULLANIM
+.IP \fBmount\fR 6
+[\fB-h\fR|\fB-V\fR]
+.IP \fBmount\fR 6
+[\fB-l\fR] [\fB-t\fR \fIds-türü\fR]
+.IP \fBmount\fR 6
+\fB-a\fR [\fB-fFnrsvw\fR] [\fB-t\fR \fIds-türü\fR] [\fB-O\fR \fIseçenek-listesi\fR]
+.IP \fBmount\fR 6
+[\fB-fFnrsvw\fR] [\fB-o\fR \fIseçenekler\fR] {\fIaygıt\fR|\fIbağlama-noktası\fR}
+.IP \fBmount\fR 6
+[\fB-fFnrsvw\fR] [\fB-t\fR \fIds-türü\fR] [\fB-o\fR \fIseçenekler\fR] \fIaygıt\fR \fIbağlama-noktası\fR
+.IP \fBmount\fR 6
+{\fB--bind\fR|\fB--rbind\fR|\fB--move\fR} \fIeski-bağlama-noktası yeni--bağlama-noktası\fR
+.IP \fBmount\fR 6
+\fB--make-\fR[\fBshared\fR|\fBslave\fR|\fBprivate\fR|\fBunbindable\fR|\fBrshared\fR|\fBrslave\fR|\fBrprivate\fR|\fBrunbindable\fR] \fIbağlama-noktası\fR
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+Bir Unix sisteminde erişilebilen bütün dosyalar, \fB/\fR dizinini kök kabul eden büyük bir ağaca benzeyen hiyerarşik bir yapı içerisinde düzenlenir. Bu dosyalar, çeşitli aygıtlara yayılabilir. \fBmount\fR komutu, çeşitli aygıtlarda bulunan dosya sistemlerini, bu ağaç yapısına ekler. Bunun tam karşıtı olan \fBumount\fR(8) ise eklenmiş dosya sistemini bu yapıdan ayırır. Dosya sistemi, verilerin aygıtta nasıl depolandığını veya ağ veya diğer hizmetler tarafından sanal olarak nasıl sağlanacağını denetim altında tutmak için kullanılır.
+.sp
+\fBmount\fR komutunun standart kullanımı:
+.sp
+.RS 4
+.nf
+\fBmount -t \fR\fItür aygıt dizin\fR
+.fi
+.sp
+.RE
+Bu komut, çekirdeğe, \fIaygıt\fR üzerinde bulunan, \fItür\fR türündeki dosya sistemini \fIdizin\fRe bağlamasını söyler. \fB-t\fR \fItür\fR seçeneğini belirtmek isteğe bağlıdır. \fBmount\fR komutu genelde dosya sistemi türünü kendi saptayabilir. Bir dosya sistemini bağlayabilmek için normalde root yetkileri gerekir. Bu konuda ayrıntılı bilgi için bkz: \fBDosya sistemlerini bağlayan root olmayabilir\fR. Şayet varsa, \fIdizin\fRdeki içerik, sahiplik ve kipler görünmez olur. Dosya sistemi bu dizine bağlı olduğu sürece bu eski içeriğe ulaşmak mümkün olmaz. \fIdizin\fR, bağlanan \fIaygıt\fRtaki dosya sisteminin kökünü içerir ve \fIdizin\fR artık bir \fIbağlama-noktası\fR olur. \fBmount\fR bazı kullanımlarda sıradan bir dizin değil bir bağlama noktası bekler. \fIbağlama-noktası\fR belirten seçeneklerde buna dikkat edilmelidir.
+.sp
+Örneğin, yalnızca aygıt veya dizin belirtilirse:
+.sp
+.RS 4
+.nf
+\fBmount\fR /\fIdizin\fR
+.fi
+.sp
+.RE
+\fBmount\fR \fI/etc/fstab\fR dosyasında bir bağlama noktası arar (ve bulamazsa bir aygıt arar). Belirtilen bağımsız değişkenin yorumlanmasındaki belirsizliklerden kaçınmak için \fB--target\fR veya \fB--source\fR seçenekleri kullanılabilir. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount --target\fR /\fIhedef-dizin\fR
+.fi
+.sp
+.RE
+Aynı dosya sistemi birden fazla kez bağlanabilir ve bazı durumlarda (örneğin, ağ dosya sistemleri) aynı dosya sistemi aynı bağlama noktasına birden çok kez bağlanabilir. \fBmount\fR komutu, bu davranışı denetlemek için herhangi bir ilke uygulamaz. Tüm davranışlar genellikle dosya sistemi sürücüsüne özeldir ve çekirdek tarafından denetlenir. Bunun istisnası \fB--all\fR seçeneği olup böyle bir durumda zaten bağlı olan dosya sistemleri yok sayılır (daha fazla ayrıntı için aşağıdaki \fB--all\fR seçeneğine bakılabilir).
+.sp
+.SS "Bağlı dosya sistemlerinin listelenmesi"
+\fBmount\fR komutu hiçbir seçenek ve bağımsız değişken belirtmeden kullanıldığında bağlı dosya sistemlerinin tamamını listeler. Listeleme kipi yalnızca geriye uyumluluk için vardır.
+.sp
+Daha sağlam ve özelleştirilebilir çıktılar için özellikle betiklerde \fBfindmnt\fR(8) kullanılabilir. Bağlantı noktası adında bulunan denetim karakterlerinin ’?’ ile değiştirildiği unutulmamalıdır.
+.sp
+Aşağıdaki komut \fIds-türü\fR türündeki dosya sistemlerinden bağlı olanların tamamını listeler:
+.sp
+.RS 4
+.nf
+\fBmount\fR [\fB-l\fR] [\fB-t\fR \fIds-türü\fR]
+.fi
+.sp
+.RE
+\fB-l\fR seçeneği ile etiketler de listeye eklenebilir. Bu konu aşağıda bölümde daha ayrıntılı açıklanmıştır.
+.sp
+.SS "Aygıt ve dosya sisteminin belirtilmesi"
+Çoğu aygıt, \fI/dev/sda1\fR gibi bir blok aygıtının dosya adıyla belirtilir, ancak başka olasılıklar da vardır. Örneğin, bir NFS aygıtının bağlanması durumunda, aygıt \fIexample.org:/dizin\fR gibi görünebilir.
+.sp
+Disk bölümlerinin aygıt adları kararsızdır; donanımın yeniden yapılandırılması ve bir aygıtın eklenmesi veya çıkarılması, adlarda değişikliklere neden olabilir. UUID veya LABEL gibi dosya sistemi veya bölüm belirteçlerinin kullanılmasının şiddetle tavsiye edilme nedeni budur. Şu anda desteklenen bölüm belirteçleri (etiketler):
+.sp
+.TP 4
+LABEL=\fIetiket\fR
+İnsancıl dosya sistemi belirteci. Bkz: \fB-L\fR seçeneği.
+.sp
+.TP 4
+UUID=\fIuuid\fR
+Evrensel olarak eşsiz dosya sistemi kimliği. \fIuuid\fR tire imleri ile ayrılmış onaltılık sayılardan oluşur. Bkz: \fB-U\fR seçeneği.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+\fBmount\fR, \fIuuid\fR değerini dizge olarak kullanır. Komut satırında veya \fBfstab\fR(5) dosyasında belirtilenler de dizge olarak kullanır ve dahili olarak ikil gösterime dönüştürülmez. \fIuuid\fR’nin içerdiği onaltılık rakamlardaki harfler küçük harf olmalıdır.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+PARTLABEL=\fIetiket\fR
+İnsancıl disk bölümü etiketi. Bu etiket dosya sistemi ile ilgili değildir, bu bakımdan \fBmkfs\fR(8) veya \fBmkswap\fR(8) tarafından değiştirilmez. Bu etiketler, örneğin GPT (GUID Partition Tables- Küresel olarak eşsiz kimlikli disk bölümü tabloları) için desteklenmektedir.
+.sp
+.TP 4
+PARTUUID=\fIuuid\fR
+Evrensel olarak eşsiz disk bölümü kimliği. Bu kimlik dosya sistemi ile ilgili değildir, bu bakımdan \fBmkfs\fR(8) veya \fBmkswap\fR(8) tarafından değiştirilmez. Bu kimlikler, örneğin GPT (GUID Partition Tables- Küresel olarak eşsiz kimlikli disk bölümü tabloları) için desteklenmektedir.
+.sp
+.TP 4
+ID=\fIkimlik\fR
+\fBudevd\fR tarafından oluşturulan donanımsal blok aygıtı kimliği. Bu kimlik genellikle WWN’ye (eşsiz depolama kimliğine) dayanır ve donanım üreticisine özgü bir kimliktir. Sisteminizde kullanılabilecek kimlikler için \fBls /dev/disk/by-id\fR veya varsa daha iyisi \fBsystemd-mount --list\fR komutunun çıktısına bakılabilir. Gereken kesinliği sağlamadığından, \fBudev\fR(7)’e, udev kurallarına ve donanıma bağlı olduğundan, bu kimlik türü genel kullanım için önerilmez.
+.sp
+.PP
+\fBlsblk --fs\fR komutunun çıktısında FSTYPE, LABEL, UUID gibi başlıklar altında mevcut blok aygıtlarındaki dosya sistemleri liste halinde görülebilir. \fBblkid -p\fR \fIaygıt\fR komutu, belirtilen aygıttaki dosya sistemi hakkında ayrıntılı bilgi sağlar.
+.sp
+Özellikle aygıtı taşır, paylaşır veya kopyalarsanız, UUID ve LABEL’lerin gerçekten benzersiz olduğunun garantisi olmadığı unutulmamalıdır. UUID’lerin gerçekten benzersiz olduğunu doğrulamak için \fBlsblk -o +UUID,PARTUUID\fR komutu kullanılabilir.
+.sp
+Önerilen yöntem, \fI/etc/fstab\fR dosyasında \fI/dev/disk/by-{label,uuid,id,partuuid,partlabel}\fR udev sembolik bağları yerine etiketleri (örn, UUID=\fIuuid\fR) kullanmaktır. Etiketler daha okunaklı, sağlam ve taşınabilirdir. \fBmount\fR dahili olarak \fBudev\fR(7) sembolik bağlarını kullanır, bu nedenle \fI/etc/fstab\fR içindeki sembolik bağların etiketlere göre hiçbir üstünlüğü yoktur. Daha fazla ayrıntı için bkz: \fBlibblkid\fR(3).
+.sp
+\fBproc\fR(5) dosya sistemi özel bir aygıtla ilişkili değildir ve sisteme bağlarken, bir aygıt belirtimi yerine isteğe bağlı bir anahtar sözcük (örneğin, proc) kullanılabilir. (Herhangi bir başka seçim daha az şanslı değildir: \fBmount\fR’tan alınan ’none zaten bağlı’ - veya ’hiçbiri zaten bağlı değil’ - hata iletisi kafa karıştırıcı olabilir.)
+.sp
+.SS "/etc/fstab, /etc/mtab ve /proc/mounts dosyaları"
+\fI/etc/fstab\fR dosyası (bkz. \fBfstab\fR(5)), hangi seçenekleri kullanarak hangi aygıtların genellikle nereye bağlanacağını açıklayan satırlar içerebilir. \fBfstab\fR(5) dosyasının öntanımlı konumu \fB--fstab\fR \fIyol\fR komut satırı seçeneğiyle geçersiz kılınabilir (aşağıda daha fazla ayrıntı bulunabilir).
+.sp
+.RS 4
+.nf
+\fBmount\fR \fB-a\fR [\fB-t\fR \fIds-türü\fR] [\fB-O\fR \fIseçenek-listesi\fR]
+.fi
+.sp
+.RE
+komut satırı, (genellikle bir başlatma betiğinde verilir), \fIfstab\fR dosyasında belirtilen (uygun türde ve/veya uygun seçenekleri olan veya olmayan) tüm dosya sistemlerinin \fBnoauto\fR anahtar sözcüğünü içerenler hariç, belirtildiği gibi bağlanmasını sağlar. \fB-F\fR seçeneğinin eklenmesi, birden fazla dosya sisteminin aynı anda bağlanması için \fBmount\fR çatalı oluşturacaktır.
+.sp
+\fIfstab\fR veya \fImtab\fR’da belirtilen bir dosya sistemi bağlanırken, komut satırında sadece aygıtın veya sadece bağlama dizininin belirtilmesi yeterlidir.
+.sp
+\fBmount\fR ve \fBumount\fR(8), geleneksel olarak \fI/etc/mtab\fR dosyasında sisteme bağlanmış dosya sistemlerinin bir listesini tutar. Klasik \fI/etc/mtab\fR desteği, derleme sırasında öntanımlı olarak tamamen devre dışı bırakılmıştır, çünkü mevcut Linux sistemlerinde \fI/etc/mtab\fR dosyasını \fI/proc/mounts\fR dosyasına sembolik bağ yapmak daha iyidir. Kullanıcı alanında tutulan normal \fImtab\fR dosyası, isim alanları, kapsayıcılar ve diğer gelişmiş Linux özellikleriyle güvenilir bir şekilde çalışamaz. Klasik \fImtab\fR desteği etkinse, dosyanın yanı sıra sembolik bağı da kullanmak mümkündür.
+.sp
+\fBmount\fR komutu bağımsız değişkensiz çalıştırıldığında bağlı dosya sistemlerini listeler.
+.sp
+\fI/etc/fstab\fR dosyasındaki "bağlama seçenekleri"ni geçersiz kılmak için \fB-o\fR "komut satırı seçeneği" kullanılmalıdır:
+.sp
+.RS 4
+.nf
+\fBmount\fR \fIaygıt\fR|\fIdizin\fR \fB-o\fR \fIseçenekler\fR
+.fi
+.sp
+.RE
+Böylece. komut satırındaki bağlama seçenekleri, \fI/etc/fstab\fR dosyasındaki bağlama seçenekleri listesine eklenir. Bu öntanımlı davranış \fB--options-mode\fR komut satırı seçeneği kullanılarak değiştirilebilir. Genel davranış, çelişkili seçenekler olduğunda belirtilen son seçeneğin etkili olmasıdır.
+.sp
+\fBmount\fR komutuna aygıt (veya LABEL, UUID, ID, PARTUUID, PARTLABEL etiketlerinden biri) ve bağlama dizini birlikte bağımsız değişken olarak belirtilmişse \fI/etc/fstab\fR dosyası okunmaz. Örnekte, \fBfoo\fR aygıtı \fB/dizin\fR altına bağlanmaktadır:
+.sp
+.RS 4
+.nf
+\fBmount /dev/foo /dizin\fR
+.fi
+.sp
+.RE
+Bu öntanımlı davranış, yapılandırmanın daima \fIfstab\fRdan okunması için \fB--options-mode\fR komut satırı seçeneği kullanılarak değiştirilebilir. Root olmayan kullanıcılar için \fBmount\fR her zaman \fIfstab\fR yapılandırmasını okur.
+.sp
+.SS "Dosya sistemlerini bağlayan root olmayabilir"
+Normalde, dosya sistemlerini yalnızca root kullanıcısı bağlayabilir. Ancak, dosya sisteminin \fIfstab\fR satırı \fBuser\fR seçeneğini içeriyorsa, o dosya sistemini herkes bağlayabilir. Örneğin,
+.sp
+.RS 4
+.nf
+\fB/dev/cdrom /media iso9660 ro,user,noauto,unhide\fR
+.fi
+.sp
+.RE
+\fIfstab\fR satırı ile her kullanıcı sürücüye yerleştirilmiş bir CDROM’un üzerindeki \fBiso9660\fR dosya sistemini
+.sp
+.RS 4
+.nf
+\fBmount /media\fR
+.fi
+.sp
+.RE
+komutuyla bağlayabilir. \fBmount\fR’un root olmayan kullanıcılar hakkında çok katı olduğunu ve komut satırında belirtilen tüm yolların \fIfstab\fR ayrıştırılmadan veya bir yardımcı araç çalıştırılmadan önce doğrulandığı unutulmamalıdır. Dosya sistemini belirtmek için geçerli bir bağlama dizini kullanılması şiddetle önerilir, aksi takdirde bağlama başarısız olabilir. Örneğin, komut satırında NFS veya CIFS kaynağı kullanmak kötü bir fikirdir.
+.sp
+util-linux 2.35’ten beri, libmount’un iç güvenlik kurallarına göre kullanıcı izinleri yetersiz olduğunda \fBmount\fR hata verip çıkmaz. Bunun yerine, suid izinlerini düşürür ve çalışmasını normal root olmayan kullanıcı olarak sürdürür. Bu davranış, root izinlerinin gerekli olmadığı kullanım durumlarını destekler (örneğin, \fBfuse\fR(8) dosya sistemleri, kullanıcı isim alanları, vb.).
+.sp
+Daha fazla ayrıntı için bkz. \fBfstab\fR(5). Bağlı bir dosya sistemini yalnızca bağlayan kullanıcı ayırabilir. Bütün kullanıcıların bağlantıyı ayırabilmesi isteniyorsa, \fIfstab\fR satırında \fBuser\fR yerine \fBusers\fR seçeneğinin kullanılması gerekir. \fBowner\fR (sahibi) seçeneği, \fBuser\fR seçeneğine benzemekle birlikte kullanıcının özel dosyanın sahibi olmasını gerektirir. Örneğin, bir oturum açma betiği, konsol kullanıcısını \fI/dev/fd\fR aygıtının sahibi yapıyorsa bu yararlı olabilir. \fBgroup\fR seçeneği, kullanıcının özel dosya grubunun üyesi olması gerekliliği dışında \fBuser\fR seçeneğinin benzeridir.
+.sp
+.SS "Başka bir yere tekrar bağlamak"
+Dosya hiyerarşisinin bir bölümü şuna benzer bir komutla başka bir yere tekrar bağlanabilir:
+.sp
+.RS 4
+.nf
+\fBmount --bind\fR \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
+.fi
+.sp
+.RE
+Bunu \fBfstab\fR(5) dosyasında da şöyle bir girdi ile yapmak mümkündür:
+.sp
+.RS 4
+.nf
+/\fIeski-bağlama-noktası\fR /\fIyeni-bağlama-noktası\fR \fBnone bind\fR
+.fi
+.sp
+.RE
+Bu işlemle aynı içerik iki yerden erişilebilir olur.
+.sp
+\fBbind\fR seçeneğiyle çekirdek VFS’sinde herhangi bir ikinci sınıf veya özel düğüm oluşturulmadığını anlamak önemlidir. Bu, bir dosya sistemini eklemenin diğer bir yoludur. Dosya sisteminin başka bir yere bağlandığına dair hiçbir yerde saklanan bir bilgi yoktur. \fIeski-bağlama-noktası\fR ve \fIyeni-bağlama-noktası\fR bağımsızdır ve \fIeski-bağlama-noktası\fR yenisini etkilemeden ayrılabilir.
+.sp
+Ayrıca, bu seçenekle tek bir dosya (tek bir dosyanın üzerine) yeniden bağlanabilir. Bir dosya sistemini başka bir yere tekrar bağlamak suretiyle, sıradan bir dizinden bir bağlantı noktası oluşturulabilir. Örneğin,
+.sp
+.RS 4
+.nf
+\fBmount --bind foo foo\fR
+.fi
+.sp
+.RE
+komutu yalnızca dosya sisteminin kendisini bağlar, onun altında bağlı olanları değil. Altında bağlı olanlarla birlikte (ardışık olarak; recursive bind) dosya sisteminin bütünü başka bir yere şöyle bağlanabilir:
+.sp
+.RS 4
+.nf
+\fBmount --rbind\fR \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
+.fi
+.sp
+.RE
+Çekirdek tarafından sağlanan bağlama seçeneklerinden eski bağlama noktasında geçerli olanlar yeni bağlama noktasında korunur. Kullanıcı alanına ait bağlama seçenekleri ise (\fB_netdev\fR gibi) korunmaz, bunların komut satırından açıkça belirtilmesi gerekir.
+.sp
+util-linux 2.27’den beri \fBmount\fR bağlama seçeneklerinin \fB--bind\fR ile aktarılarak değiştirilmesine izin verilmektedir. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount -o bind,ro foo foo\fR
+.fi
+.sp
+.RE
+Bu özellik çekirdek tarafından desteklenmez; ek bir \fBmount\fR(2) yeniden bağlama sistem çağrısı ile kullanıcı alanında gerçeklenir. Çözüm atomik değildir.
+.sp
+Salt-okunur-yeniden-bağlamanın çekirdek tarafından desteklenen (klasik) yolu, "remount,bind" işlemini kullanmaktır. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount --bind\fR \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
+\&
+\fBmount -o remount,bind,ro\fR \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
+.fi
+.sp
+.RE
+Salt-okunur-yeniden-bağlama-işlemi, salt okunur bir bağlama noktası (VFS girdisi) oluşturur, ancak eski bağlama noktasından özgün dosya sistemi süper bloğu hala yazılabilir durumdadır, yani \fIeski-bağlama-noktası\fR yazılabilir, \fIyeni-bağlama-noktası\fR salt-okunur olur.
+.sp
+\fBnosuid\fR, \fBnodev\fR, \fBnoexec\fR, \fBnoatime\fR, \fBnodiratime\fR, \fBrelatime\fR ve \fBnosymfollow\fR VFS girdi seçeneklerini de "\fBremount\fR,\fBbind\fR" işlemi ile değiştirmek mümkündür. Diğer seçenekler (örneğin dosya sistemine özgü seçenekler) sessizce yok sayılır. Bağlama seçeneklerini dosya sistemini ardışık-başka-yere-yeniden-bağlama (\fBrbind\fR) yoluyla ardışık değiştirmek (örneğin, \fB-o rbind,ro\fR- ile) imkansızdır.
+.sp
+util-linux 2.31’den beri, \fBmount\fR yeniden bağlama işleminde (komut satırında \fB-o remount\fR belirtilmişse) \fI/etc/fstab\fR dosyasındaki \fBbind\fR seçeneğini yok sayar. Bu, komut satırından \fB-o remount\fR ile yeniden bağlamada bağlama seçeneklerini tam olarak denetim altında tutmak için gereklidir. Önceki sürümlerde \fI/etc/fstab\fR dosyasındaki \fBbind\fR seçeneği her zaman uygulanırdı ve \fI/etc/fstab\fR dosyasındaki \fBbind\fR seçenekleri ile etkileşmeden bağlama seçeneklerini komut satırında yeniden tanımlamak imkansızdı. Bu bağlama davranışı, \fI/etc/fstab\fR dosyasında "\fBremount\fR,\fBbind\fR" ile belirtilen durumları kapsamaz.
+.sp
+.SS "Başka yere taşımak"
+Bağlı bir ağaç başka bir yere (atomik olarak) şuna benzer bir komutla taşınabilir:
+.sp
+.RS 4
+.nf
+\fBmount --move\fR \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
+.fi
+.sp
+.RE
+Böylece, \fIeski-bağlama-noktası\fR altında görünen içerik artık \fIyeni-bağlama-noktası\fR altında erişilebilir olur. Dosyaların fiziksel konumlarında değişiklik olmaz. \fIeski-bağlama-noktası\fR ile belirtilen dizin geçerli bir bağlama noktası olmalıdır (herhangi bir dizin değil).
+.sp
+Ayrıca, paylaşımlı bir bağlantının taşınması da geçersizdir ve desteklenmemektedir. Geçerli yayılım seçeneklerini görmek için \fBfindmnt -o TARGET,PROPAGATION\fR komutu kullanılabilir.
+.sp
+.SS "Alt ağacın paylaşılması (yayılım)"
+Linux 2.6.15’ten beri, bir bağlantıyı ve onun alt bağlantılarını paylaşımlı (shared), özel (private), köle (slave) veya kopyalanamaz (unbindable) olarak işaretlemek mümkündür. Paylaşımlı bağlantı, bir bağlantının yansılarını oluşturma yeteneği sağlar. Böylece bir bağlantıda bir yansının alt bağlantıları ayrıldığında bu değişiklik diğer yansılara da yansıtılır. Köle bağlantı değişiklikleri yalnızca efendisinden alır, tersi olmaz. Özel bağlantı hiçbir yansı, köle, efendi almaz veya vermez. Kopyalanamayan bağlantı, başka yere tekrar bağlanamaz. Ayrıntılar, çekirdek kaynak ağacındaki \fIDocumentation/filesystems/sharedsubtree.txt\fR dosyasında belgelenmiştir; ayrıca bkz. \fBmount-namespaces\fR(7).
+.sp
+Desteklenen işlemler:
+.sp
+.RS 4
+.nf
+\fBmount --make-shared\fR \fIbağlama-noktası\fR
+\fBmount --make-slave\fR \fIbağlama-noktası\fR
+\fBmount --make-private\fR \fIbağlama-noktası\fR
+\fBmount --make-unbindable\fR \fIbağlama-noktası\fR
+.fi
+.sp
+.RE
+Aşağıdaki komutlarla, belirtilen \fIbağlama-noktası\fR altındaki tüm bağlamaların türü ardışık olarak değiştirilebilir:
+.sp
+.RS 4
+.nf
+\fBmount --make-rshared\fR \fIbağlama-noktası\fR
+\fBmount --make-rslave\fR \fIbağlama-noktası\fR
+\fBmount --make-rprivate\fR \fIbağlama-noktası\fR
+\fBmount --make-runbindable\fR \fIbağlama-noktası\fR
+.fi
+.sp
+.RE
+\fBmount\fR bir \fB--make-*\fR seçeneği belirtildiğinde \fBfstab\fR(5) dosyasını okumaz. Gerekli bilgi komut satırında belirtilmelidir. Yayılım seçeneklerini (\fBprivate, slave, share, unbindable, rprivate, rslave, rshared, runbindable\fR) \fBfstab\fR(5) dosyasında bağlama seçenekleri olarak belirtmek de mümkündür.
+.sp
+Linux çekirdeğinin tek bir \fBmount\fR(2) sistem çağrısı ile birden çok yayılım seçeneğinin değiştirilmesine izin vermediği ve yayılım seçeneklerinin diğer bağlama seçenekleri ve işlemleriyle birlikte kullanılamayacağı unutulmamalıdır.
+.sp
+util-linux 2.23’ten beri \fBmount\fR komutu, bir \fBmount\fR(2) sistem çağrısı ile daha fazla yayılım (topoloji) değişikliği yapmak ve bunu üstelik, diğer bağlama işlemleriyle birlikte yapmak için de kullanılabilir. Yayılım seçenekleri, önceki bağlama işlemleri başarılı olduğunda ek \fBmount\fR(2) sistem çağrıları ile teker teker uygulanır. Bu kullanım durumunun atomik olmadığı unutulmamalıdır. Örneğin,
+.sp
+.RS 4
+.nf
+mount --make-private --make-unbindable /dev/sda1 /foo
+.fi
+.sp
+.RE
+komutu ile aşağıdaki komutlar aynı işlemi gerçekleştirir:
+.sp
+.RS 4
+.nf
+mount /dev/sda1 /foo
+mount --make-private /foo
+mount --make-unbindable /foo
+.fi
+.sp
+.RE
+.sp
+.sp
+.SH "KOMUT SATIRI SEÇENEKLERİ"
+\fBmount\fR komutu, önce varsa \fBfstab\fR(5) dosyasındaki dosya sistemi bağlama seçeneklerini, ardından varsa \fB-o\fR komut satırı seçeneğinde belirtilen bağlama seçeneklerini elde edip bunları uyguladıktan sonra son olarak varsa \fB-r\fR veya \fB-w\fR komut satırı seçeneğini uygular.
+.sp
+\fBmount\fR komutu \fB/sbin/mount.\fR\fIds-türü\fR dışsal bağlama araçlarına komut satırı seçeneklerinin tamamını aktarmaz. \fBmount\fR ile dışsal bağlama araçları arasındaki arayüz aşağıdaki \fBYARDIMCI BAĞLAMA ARAÇLARI\fR bölümünde açıklanmıştır.
+.sp
+\fBmount\fR komutu için kullanılabilen komut satırı seçenekleri:
+.sp
+.TP 4
+\fB-a\fR, \fB--all\fR
+Komut satırında (varsa) \fIds-türü\fR belirtilen dosya sistemlerinden, belirtilmemişse tüm dosya sistemlerinden \fBfstab\fR(5) dosyasında belirtilenleri (\fBnoauto\fR anahtar sözcüğünü içerenler hariç) bağlar. Dosya sistemleri, \fBfstab\fR(5) dosyasında sıraya göre bağlanır. \fBmount\fR komutu, önceden bağlanmış dosya sistemlerini algılamak için dosya sistemi kaynağını, hedefini (ve klonlama veya \fBbtrfs\fR(5) için dosya sistemi kök dizinini) karşılaştırır. Zaten bağlı olan dosya sistemlerinin çekirdekteki tablosu, \fBmount --all\fR sırasında önbelleğe alınır. Yani, \fBfstab\fR(5) girdisi olan tüm dosya sistemleri bağlanmış olur.
+.sp
+Doğru işlevsellik \fI/proc\fR’a (zaten bağlı dosya sistemlerini algılamak için) ve \fI/sys\fR’ye (UUID= veya LABEL= gibi dosya sistemi etiketlerini değerlendirmek için) bağlıdır. \fBmount --all\fR çalıştırılmadan önce \fI/proc\fR ve \fI/sys\fR dosya sistemlerinin sisteme bağlanması veya \fI/proc\fR ve \fI/sys\fR’nin \fBfstab\fR(5)’ın ilk satırlarında tutulması şiddetle önerilir.
+.sp
+\fB--all\fR seçeneğini yeniden bağlama işlemlerinde de kullanmak mümkündür. Bu durumda tüm süzgeçler (\fB-t\fR ve \fB-O\fR) zaten bağlı dosya sistemleri tablosuna uygulanır.
+.sp
+Util-linux 2.35 sürümünden itibaren, \fB-o\fR seçeneği kullanılarak \fBfstab\fR(5) dosyasındaki bağlama seçeneklerini değiştirmek mümkündür (ayrıca bkz: \fB--options-mode\fR).
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+\fB--all\fR seçeneğinin \fBfstab\fR(5) sınaması için kullanılması kötü bir uygulamadır. Önerilen çözüm \fBfindmnt --verify\fR komutunun kullanılmasıdır.
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fB-B\fR, \fB--bind\fR
+Bir alt ağacı başka bir yere yeniden bağlar (böylece alt ağacın içeriği iki yerden de erişilebilir olur). Bu seçenek yukarıda \fBBaşka bir yere tekrar bağlamak\fR bölümü altında ayrıntılı açıklanmıştır.
+.sp
+.TP 4
+\fB-c\fR, \fB--no-canonicalize\fR
+Dosya yolunun bileşenlerinde yer alan sembolik bağların ardışık olarak izlenmesi işlemi \fBstat\fR(2) ve \fBreadlink\fR(2) çağrıları ile yapılır ve bu seçenekle bu çağrılar yapılmaz. \fBmount\fR komutu, sembolik bağların ardışık olarak izlenmesi işlemini öntanımlı olarak tüm dosya yollarına uygular. Bu seçenek, zaten sembolik bağ içermeyen mutlak yollar için \fB-f\fR seçeneği ile birlikte kullanılabilir. Bu seçenek, \fBmount -i\fR çağrısı yapan dışsal araçlar için tasarlanmıştır. Normal bağlama işlemleri için bu komut satırı seçeneğinin asla kullanılmaması önerilir.
+.sp
+\fBmount\fR komutunun bu seçeneği \fB/sbin/mount.\fR\fIds-türü\fR dışsal bağlama araçlarına aktarmadığı unutulmamalıdır.
+.sp
+.TP 4
+\fB-F\fR, \fB--fork\fR
+(\fB-a\fR ile birlikte kullanılır.) Her bir aygıt için \fBmount\fR komutunun yeni bir kopyasını çalıştırır. Bu sayede değişik aygıtlar veya NFS sunucular aynı anda bağlanabilir. Bu yöntem hızlı olmasının yanında, NFS zaman aşımlarının da aynı anda kullanılmasını sağlar. Olumsuz tarafı ise, bağlama işlemlerinin bilinmeyen bir sırada yapılacak olmasıdır. Bu nedenle, örneğin, hem \fI/usr\fR hem de \fI/usr/spool\fR sistemleri bağlanmak isteniyorsa, bu seçenek kullanılamaz.
+.sp
+.TP 4
+\fB-f\fR, \fB--fake\fR
+Gerçek sistem çağrısı hariç yapılması gereken herşeyi yapar. Tabir yerindeyse, dosya sisteminin bağlanmasını taklit eder. \fBmount\fR komutunun ne yapmaya çalıştığını izleyebilmek açısından \fB-v\fR seçeneğiyle birlikte kullanıldığında daha yararlıdır. Bu ayrıca, \fB-n\fR seçeneği ile daha önceden bağlanmış aygıtlara yeni girdiler eklemek için de kullanılabilir. \fB-f\fR seçeneği \fI/proc/mounts\fR içinde dosya sistemi için kayıt olup olmadığına bakar ve kayıt zaten mevcutsa başarısız olur (bu denetim, sahte olmayan normal bir bağlama ile çekirdek tarafından yapılır).
+.sp
+.TP 4
+\fB-i\fR, \fB--internal-only\fR
+\fB/sbin/mount.\fR\fIds-türü\fR dışsal bağlama aracı mevcut olsa bile çağrılmaz.
+.sp
+.TP 4
+\fB-L\fR, \fB--label\fR \fIetiket\fR
+\fIetiket\fRi belirtilen bölümü bağlar.
+.sp
+.TP 4
+\fB-l\fR, \fB--show-labels\fR
+\fBmount\fR çıktısına etiketleri ekler. Bunun için, \fBmount\fR komutunun disk aygıtlarını okuma iznine sahip olması gerekir (kullanıcı kimliği root olmalı). Dosya sistemlerine, ext2 veya ext3 için \fBe2label\fR(8) komutunu kullanarak, XFS için \fBxfs_admin\fR(8), reiserfs için ise \fBreiserfstune\fR(8) ile böyle bir etiket atanabilir.
+.sp
+.TP 4
+\fB-M\fR, \fB--move\fR
+Alt ağacı başka bir yere taşır. Bu seçenek yukarıda \fBBaşka yere taşımak\fR bölümü altında ayrıntılı açıklanmıştır.
+.sp
+.TP 4
+\fB-m\fR, \fB--mkdir\fR[=\fIkip\fR]
+Hedef dizin (bağlama noktası) yoksa oluşturulur. "\fB-o X-mount.mkdir\fR[=\fIkip\fR]" için kısa yoldur. Öntanımlı \fIkip\fR 0755’tir. Ayrıntılı bilgi \fBX-mount.mkdir\fR bağlama seçeneğinde bulunabilir.
+.sp
+.TP 4
+\fB-n\fR, \fB--no-mtab\fR
+\fI/etc/mtab\fR dosyasına kaydedilmeden dosya sisteminin bağlanmasını sağlar. Bu seçenek \fI/etc\fR gibi \fBsalt okunur\fR dosya sistemlerinin bağlanmasında faydalı olabilir.
+.sp
+.TP 4
+\fB-N\fR, \fB--namespace\fR \fIisimalanı\fR
+Bağlama işlemi belirtilen bağlama \fIisimalanı\fRnda gerçekleştirilir. \fIisimalanı\fR, ya bu isim alanında çalışan sürecin kimliği ya da alanı temsil eden özel dosyanın ismi olabilir.
+.sp
+\fBmount\fR, \fI/etc/fstab\fR dosyasını okuduğunda, \fI/proc/mounts\fR dosyasına veya \fI/run/mount\fR dizinine yazdığında \fBmount\fR(2) çağrısı yaparak belirtilen \fIisimalanı\fR geçer, aksi takdirde özgün isim alanında kalmaya devam eder. Yani, hedef \fIisimalanı\fRnın \fBmount\fR(2) çağrısı için gereken kütüphaneleri veya diğer gereksinimleri içermesi gerekmez.
+.sp
+Daha ayrıntılı bilgi \fBmount_namespaces\fR(7) kılavuz sayfasında bulunabilir.
+.sp
+.TP 4
+\fB-O\fR, \fB--test-opts\fR \fIseçenekler\fR
+\fB-a\fR seçeneğinin geçerli olduğu dosya sistemleri kümesini sınırlar. Bu bakımdan \fB-t\fR seçeneği gibidir, ancak \fB-a\fR ile birlikte belirtilmezse işe yaramaz. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount -a -O no_netdev\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu, \fI/etc/fstab\fR dosyasındaki dosya sistemlerinden bağlama seçenekleri alanında \fB_netdev\fR seçeneği belirtilenler dışındakileri bağlar.
+.sp
+Her seçeneğin tam olarak eşleşmesinin gerekliliği bakımından \fB-t\fR seçeneğinden farklıdır; bir seçeneğin başına eklenen olumsuzlama eki, diğer seçenekleri etkilemez.
+.sp
+-t ve -O ile belirtilen bağlama seçenekleri birlikte uygulanır; örneğin
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount -a -t ext2 -O  _netdev\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu, sadece ext2 veya sadece \fB_netdev\fR seçenekli dosya sistemlerini değil, tüm ext2 dosya sistemlerini \fB_netdev\fR seçeneğiyle bağlar.
+.sp
+.TP 4
+\fB-o\fR, \fB--options\fR \fIseçenekler\fR
+Belirtilen bağlama \fIseçenekler\fRi uygulanır. Bağlama seçenekleri virgül ayraçlı bir liste olarak belirtilir. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount LABEL=mydisk -o noatime,nodev,nosuid\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Ayrıntılı bilgi \fBDOSYA SİSTEMİNDEN BAĞIMSIZ BAĞLAMA SEÇENEKLERİ\fR ve \fBDOSYA SİSTEMİNE ÖZGÜ BAĞLAMA SEÇENEKLERİ\fR bölümlerinde bulunabilir.
+.sp
+.TP 4
+\fB--options-mode\fR \fIkip\fR
+\fIfstab\fR ve \fImtab\fR dosyalarındaki bağlama seçeneklerinin komut satırındaki bağlama seçenekleriyle nasıl birleştirileceğini belirler. \fIkip\fR olarak \fBignore\fR (yok say), \fBappend\fR (sona ekle), \fBprepend\fR (başa ekle) veya \fBreplace\fR (değiştir) değerlerinden biri belirtilebilir. Örneğin, \fBappend\fR, \fIfstab\fR dosyasındaki bağlama seçeneklerinin komut satırındaki bağlama seçeneklerinin ardına ekleneceği anlamına gelir. \fBprepend\fR öntanımlı olup \fIfstab\fR dosyasındaki bağlama seçenekleri komut satırındaki bağlama seçeneklerinden önce değerlendirilir. Çakışan seçenekler varsa, son seçeneğin kazanacağı unutulmamalıdır.
+.sp
+.TP 4
+\fB--options-source\fR \fIkaynak\fR
+Öntanımlı bağlama seçeneklerinin kaynağı. \fIkaynak\fR \fBfstab\fR, \fBmtab\fR veya \fBdisable\fR değerleri virgül ayraçlı olarak belirtilebilir. \fBdisable\fR diğer ikisini devre dışı bırakır; \fBfstab\fR ve \fBmtab\fR örtük olarak \fB--options-source-force\fR seçeneğini uygular. \fBfstab,mtab\fR öntanımlı değerdir.
+.sp
+.TP 4
+\fB--options-source-force\fR
+\fIaygıt\fR ve \fIbağlama-noktası\fR belirtilse bile bağlama seçenekleri \fIfstab\fR veya \fImtab\fR dosyasından okunur.
+.sp
+.TP 4
+\fB-R\fR, \fB--rbind\fR
+Bir alt ağaç ve olası tüm alt ağaçlar başka bir yere tekrar bağlanabilir (böylece bu içerik her iki yerden de erişilebilir olur). Bu konu yukarıda \fBBaşka bir yere tekrar bağlamak\fR bölümünde açıklanmıştır.
+.sp
+.TP 4
+\fB-r\fR, \fB--read-only\fR
+Dosya sistemini salt okunur bağlar. \fB-o ro\fR ile eşanlamlıdır.
+.sp
+Dosya sistemi türüne, duruma ve çekirdek davranışına bağlı olarak sistemin yine de aygıta yazabileceği unutulmamalıdır. Örneğin, ext3 ve ext4, dosya sistemi kirliyse günlüğü yeniden yürütülür. Bu tür yazma erişimini önlemek için, bir ext3 veya ext4 dosya sistemini \fBro,noload\fR bağlama seçenekleriyle bağlamak veya blok aygıtının kendisini salt okunur kipe ayarlamak gerekebilir, bkz. \fBblockdev\fR(8) komutu.
+.sp
+.TP 4
+\fB-s\fR
+Uyduruk \fBmount\fR seçeneklerinde hata verilip işlemin yarıda kalmasını önler. Bu seçenek sayesinde, dosya sisteminde desteklenmeyen seçenekler gözardı edilir. Bütün dosya sistemleri bu seçeneği desteklemez. Şimdilik yalnızca, \fBmount.nfs\fR(8) için desteklenmektedir.
+.sp
+.TP 4
+\fB--source\fR \fIaygıt\fR
+\fBmount\fR komutu için yalnızca bir bağımsız değişken verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek kaynağın açıkça tanımlanmasını sağlar.
+.sp
+.TP 4
+\fB--target\fR \fIbağlama-noktası\fR
+\fBmount\fR komutu için yalnızca bir bağımsız değişken verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek hedefin açıkça tanımlanmasını sağlar.
+.sp
+.TP 4
+\fB--target-prefix\fR \fIdizin\fR
+Belirtilen dizini tüm bağlama hedeflerinin başına ekler. Bu seçenek \fIfstab\fR’ı takip etmek için kullanılabilir, ancak bağlama işlemleri başka bir yerde yapılır, örneğin:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount --all --target-prefix /chroot -o X-mount.mkdir\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+sistem \fIfstab\fR’ındaki herşeyi \fI/chroot\fR altında bağlar, tüm eksik bağlama noktaları oluşturulur (\fBX-mount.mkdir\fR nedeniyle). Sistem \fIfstab\fR’ı yerine başka bir \fIfstab\fR kullanmak için aşağıdaki \fB--fstab\fR seçeneği kullanılabilir.
+.sp
+.TP 4
+\fB-T\fR, \fB--fstab\fR \fIyol\fR
+Sistem \fIfstab\fR’ı yerine kullanılacak \fIfstab\fR dosyasının \fIyol\fRunu belirler. \fIyol\fR bir dizinse, dizindeki dosyalar \fBstrverscmp\fR(3)’e göre sıralanır; "." ile başlayan dosyalar ve \fI.fstab\fR uzantısı olmayanlar yok sayılır. Seçenek birden fazla belirtilebilir. Bu seçenek çoğunlukla, standart sistem yapılandırmasının ötesinde ek yapılandırmanın belirtildiği \fBinitramfs\fR veya \fBchroot\fR betikleri için tasarlanmıştır.
+.sp
+\fBmount\fR komutu \fB--fstab\fR seçeneğini \fB/sbin/mount.\fR\fIds-türü\fR yardımcılarına aktarmaz, bu da yeni \fIfstab\fR dosyalarının yardımcılar için görünmez olacağı anlamına gelir. Bu normal bağlamalar için sorun değildir, ancak bağlayan root olmayınca, kullanıcı haklarını doğrulamak için her zaman \fIfstab\fR gerekir.
+.sp
+.TP 4
+\fB-t\fR \fIds-türü\fR
+\fIds-türü\fR ile bağlanacak dosya sisteminin türü belirtilir. Desteklenen dosya sistemi türleri çalışan çekirdeğe bağlı olup en bilinenleri şunlardır: \fBext2, ext3, ext4, xfs, btrfs, vfat, sysfs, proc, nfs, cifs\fR. Desteklenen dosya sistemlerinin tam listesi \fI/proc/filesystems\fR ve \fI/lib/modules/$(uname -r)/kernel/fs\fR dosyalarında bulunabilir.
+.sp
+\fBmount\fR ve \fBumount\fR(8) komutları dosya sistemi alt türlerini destekler. Alt tür, bir ’\fI.alttür\fR’ soneki ile tanımlanır. Örnek: ’\fIfuse.sshfs\fR’. Bağlanacak kaynağa bir önek eklemek yerine alt tür gösteriminin kullanılması önerilir (örneğin ’sshfs#example.com’ kullanımdan kaldırılmıştır).
+.sp
+Şayet \fB–t\fR seçeneği belirtilmemişse veya \fBauto\fR türü tanımlı ise, dosya sistemi türü \fBmount\fR tarafından \fBlibblkid\fR(3) kütüphanesi kullanılarak algılanmaya çalışılır. Şayet bu algılamadan bir sonuç elde edilemezse; \fBmount\fR, \fI/etc/filesystems\fR dosyasını okumaya çalışır. Şayet bu dosya da yoksa \fI/proc/filesystems\fR dosyasını arar. “nodev” etiketli olanlar (örn, devpts, proc ve nfs) hariç, burada listelenen bütün dosya sistemleri denenir.\fI/etc/filesystems\fR dosyası bir satırda * ile bitiyorsa mount daha sonra \fI/proc/filesystems\fR dosyasını da okur. Denemeler sırasında tüm dosya sistemi türleri \fBsilent\fR. bağlama seçeneği ile bağlanır.
+.sp
+Kullanıcılar tarafından bağlanan disketler için \fBauto\fR türü faydalı olabilir. Algılama sırasını değiştirmek için, bir \fI/etc/filesystems\fR dosyası oluşturmak (bu sayede vfat’i msdos’tan önce veya ext3’ü ext2’den önce denemek mümkün olur) veya çekirdek modülü olarak bir özdevinimli yükleyici kullanmak faydalı olacaktır.
+.sp
+\fB–t\fR seçeneğinde veya \fI/etc/fstab\fR girdisinde birden fazla dosya sistemi türü, virgül ayraçlı bir liste olarak belirtilebilir. Bağlanması istenmeyen dosya sistemi türlerinin isimlerinden önce \fBno\fR öneki konulabilir. \fI/etc/fstab\fR girdilerinde \fBno\fR öneki etkisisizdir.
+.sp
+\fBno\fR öneki \fB–a\fR seçeneği ile anlamlıdır. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount -a -t nomsdos,nosmbfs\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+komutuyla \fImsdos\fR ve \fIsmbfs\fR türleri hariç bütün dosya sistemleri bağlanacaktır.
+.sp
+Çoğu dosya sistemi türü için, \fBmount\fR komutunun tek yapması gereken basit bir \fBmount\fR(2) sistem çağrısı yapmaktır ve dosya sistemi türü hakkında ayrıntılı bilgi gerekmez. Ancak birkaç tür için (\fBnfs, nfs4, cifs, smbfs, ncpfs\fR gibi) türe özgü kod gerekir. \fBnfs, nfs4, cifs, smbfs\fR ve \fBncpfs\fR dosya sistemlerinin ayrı bir bağlama aracı vardır. Tüm türleri aynı yöntemle ele almayı mümkün kılmak için \fBmount\fR, \fIds-türü\fR belirtilerek çalıştırıldığında varsa \fB/sbin/mount.\fR\fIds-türü\fR yardımcı aracını çalıştırır. smbmount uygulamasının farklı sürümlerinin farklı çağrı kuralları olduğundan, \fB/sbin/mount.smbfs\fR’nin istenen çağrıyı ayarlayan bir kabuk betiği olması gerekebilir.
+.sp
+.TP 4
+\fB-U\fR, \fB--uuid\fR \fIuuid\fR
+\fIuuid\fR ile evrensel tek kimliği belirtilen dosya sistemini bağlar.
+.sp
+.TP 4
+\fB-v\fR, \fB--verbose\fR
+Ayrıntı kipi.
+.sp
+.TP 4
+\fB-w\fR, \fB--rw\fR, \fB--read-write\fR
+Dosya sistemini oku/yaz bağlar. Oku/yaz bağlamak çekirdek öntanımlısıdır. \fBmount\fR için ise yazma korumalı aygıtlarda oku/yaz \fBmount\fR(2) sistem çağrısı başarısız olursa dosya sistemini salt-okunur olarak bağlamayı denemek öntanımlıdır.
+.sp
+\fB-o rw\fR ile eşanlamlıdır.
+.sp
+Komut satırında \fB-w\fR belirtilmesinin \fBmount\fR’u yazmaya karşı korumalı aygıtlarda veya önceden bağlanmış salt-okunur dosya sistemlerinde salt-okunur bağlamayı asla denememesi için zorlayacağı unutulmamalıdır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Yardım metnini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "DOSYA SİSTEMİNDEN BAĞIMSIZ BAĞLAMA SEÇENEKLERİ"
+Bu seçeneklerden bazıları yalnızca \fI/etc/fstab\fR dosyasında göründüklerinde kullanışlıdır.
+.sp
+Bu seçeneklerden bazıları sistem çekirdeğinde öntanımlı olarak etkinleştirilebilir veya devre dışı bırakılabilir. Geçerli yapılandırma \fI/proc/mounts\fR içindeki bağlama seçenekleriyle belirlenir. Dosya sistemlerinin ayrıca dosya sistemine özgü öntanımlı bağlama seçenekleri olduğu unutulmamalıdır (örneğin, ext\fIN\fR dosya sistemleri için \fBtune2fs -l\fR çıktısına bakılabilir).
+.sp
+Aşağıdaki seçenekler, bağlanmakta olan herhangi bir dosya sistemi için geçerlidir (ancak, bazıları her dosya sisteminde dikkate alınmaz - örneğin, \fBsync\fR seçeneği yalnızca ext2, ext3, ext4, fat, vfat, ufs ve xfs için etkilidir):
+.sp
+.TP 4
+\fBasync\fR
+Dosya sistemine tüm G/Ç eşzamansız yapılır. (Ayrıca bkz: \fBsync\fR seçeneği)
+.sp
+.TP 4
+\fBatime\fR
+\fBnoatime\fR özelliği kullanılmaz, yani dosya düğümü erişim zamanı öntanımlı olarak çekirdek tarafından denetlenir. Ayrıca, \fBrelatime\fR ve \fBstrictatime\fR bağlama seçeneklerinin açıklamalarına da bakılabilir.
+.sp
+.TP 4
+\fBnoatime\fR
+Dosya sistemi üzerinde, dosya düğümü erişim zamanı güncellenmez (Örneğin, haber kuyruğuna erişim çabuklaştırılarak haber sunucuları hızlandırılabilir). Tüm dosya düğümü türlerinde çalışır (dizinlerde de), örtük olarak \fBnodiratime\fR seçeneği de uygulanır.
+.sp
+.TP 4
+\fBauto\fR
+\fB-a\fR seçeneği ile bağlanabilir.
+.sp
+.TP 4
+\fBnoauto\fR
+Dosya sistemi \fB-a\fR seçeneği ile bağlanmaz, bu dosya sistemi doğrudan açıkça belirtilerek bağlanabilir.
+.sp
+.TP 4
+\fBcontext=\fR\fIbağlam\fR\p \fBfscontext=\fR\fIbağlam\fR\p \fBdefcontext=\fR\fIbağlam\fR\p \fBrootcontext=\fR\fIbağlam\fR
+\fBcontext=\fR seçeneği, VFAT ile biçimlendirilmiş disket, sabit disk gibi genişletilmiş öznitelikleri desteklemeyen dosya sistemlerini veya SELinux olmayan bir diskten normalde SELinux altında çalışmayan ext3 veya ext4 gibi sistemleri bağlarken kullanışlıdır. Ayrıca, \fBcontext=\fR disket gibi güvenilmez dosya sistemlerinde de kullanılabilir. Ayrıca önceki 2.4.\fIx\fR çekirdek sürümlerinde xattr destekli dosya sistemleriyle uyumluluğa yardımcı olur. xattr destekli dosya sistemlerinde bile, tüm diske tek bir güvenlik bağlamı atanarak her dosyayı etiketlemek zorunda kalmadan zamandan tasarruf edilebilir.
+.sp
+Çıkarılabilir medya için \fBcontext="system_u:object_r:removable_t"\fR seçeneğinin kullanımı yaygındır.
+.sp
+\fBfscontext=\fR seçeneği, xattr desteğinden bağımsız olarak tüm dosya sistemlerinde çalışır. \fBfscontext=\fR seçeneği, belirli bir güvenlik bağlamına kapsayıcı bir dosya sistemi etiketi tanımlar. Bu dosya sistemi etiketi, dosyalardaki tek tek etiketlerden ayrıdır. Bağlama veya dosya oluşturma gibi belirli türdeki izin denetimleri için tüm dosya sistemini temsil eder. Bireysel dosya etiketleri hala dosyaların kendilerindeki xattr’lerden elde edilir. \fBcontext=\fR seçeneği, her dosya için aynı etiketi sağlamanın yanısıra, aslında \fBfscontext=\fR’in sağladığı toplu bağlamı da buna ekler.
+.sp
+\fBdefcontext=\fR seçeneği kullanılarak etiketlenmemiş dosyalar için öntanımlı güvenlik bağlamı tanımlanabilir. Bunun için xattr etiketlerini destekleyen bir dosya sistemi gerekir ve etiketlenmemiş dosyalar için tanımlanmış değeri geçersiz kılar.
+.sp
+\fBrootcontext=\fR seçeneği, bir dosya sisteminin veya kök düğümünün sisteme bağlanmadan önce, kullanıcı alanında görünür hale gelmeden açıkça etiketlenmesine olanak tanır. Bunun durumsuz Linux gibi şeyler için yararlı olduğu görülmüştür.
+.sp
+Çekirdeğin, bağlam seçeneğini içeren herhangi bir yeniden bağlama isteğini, geçerli bağlamdakini değiştirmese bile reddettiği unutulmamalıdır.
+.sp
+.RS 4
+.TP 4
+\fBUyarı:\fR
+\fIbağlam\fR değeri virgül içerebilir, bu durumda değerin uygun şekilde tırnak içine alınması gerekir, aksi takdirde \fBmount\fR virgülü bağlama seçenekleri arasında bir ayırıcı olarak yorumlar. Kabuğun tırnak ayıklaması yaptığı bu nedenle çifte tırnaklama yapılması gerektiği unutulmamalıdır. Örneğin,
+.sp
+.RS 4
+.RS 4
+.nf
+mount -t tmpfs none /mnt -o \\
+’context="system_u:object_r:tmp_t:s0:c127,c456",noexec’
+.fi
+.sp
+.RE
+.RE
+.IP
+Ayrıntılar için, bkz: \fBselinux\fR(8)
+.sp
+.RE
+.IP
+.sp
+.TP 4
+\fBdefaults\fR
+Öntanımlı seçenekler kullanır: \fBrw, suid, dev, exec, auto, nouser, async\fR
+.sp
+Kullanılan sistemdeki tüm öntanımlı bağlama seçeneklerinin çekirdeğe ve dosya sistemi türüne bağlı olduğu unutulmamalıdır. Bu bölümün başlangıcında daha fazla ayrıntı bulunabilir.
+.sp
+.TP 4
+\fBdev\fR
+Dosya sistemi üzerindeki karakter ve özel blok aygıtları yorumlanır.
+.sp
+.TP 4
+\fBnodev\fR
+Dosya sistemi üzerindeki karakter ve özel blok aygıtları yorumlanmaz.
+.sp
+.TP 4
+\fBdiratime\fR
+Bu dosya sistemi üzerinde dizin düğümü erişim zamanları güncellenir. (\fBnoatime\fR belirtilmişse bu seçenek yok sayılır.)
+.sp
+.TP 4
+\fBnodiratime\fR
+Bu dosya sistemi üzerinde dizin düğümü erişim zamanları güncellenmez. (\fBnoatime\fR belirtilmişse örtük olarak bu seçenek de uygulanır.)
+.sp
+.TP 4
+\fBdirsync\fR
+Dosya sistemi içinde tüm dizin güncellemeleri eşzamanlı gerçekleştirilir. Etkilenen sistem çağrıları: \fBcreat\fR(2), \fBlink\fR(2), \fBunlink\fR(2), \fBsymlink\fR(2)), \fBmkdir\fR(2), \fBrmdir\fR(2), \fBmknod\fR(2) ve \fBrename\fR(2).
+.sp
+.TP 4
+\fBexec\fR
+Çalıştırılabilir dosyaların çalıştırılmasına izin verilir.
+.sp
+.TP 4
+\fBnoexec\fR
+Çalıştırılabilir dosyaların çalıştırılmasına izin verilmez. Bu seçenek farklı bir mimariye ait çalıştırılabilir dosyaların bulunduğu bir dosya sistemi için yararlıdır.
+.sp
+.TP 4
+\fBgroup\fR
+Sıradan bir kullanıcının, bu kullanıcının gruplarından biri aygıtın grubuyla eşleşiyorsa dosya sistemini bağlamasına izin verir. Bu seçenek, örtük olarak (seçenek satırında, sonraki \fBgroup\fR,\fBdev\fR,\fBsuid\fR gibi seçeneklerle geçersiz kılınmadıkça) \fBnosuid\fR ve \fBnodev\fR seçeneklerini de uygular.
+.sp
+.TP 4
+\fBiversion\fR
+Dosya düğümünün her güncellenişinde i_version dosya düğümü alanı bir arttırır.
+.sp
+.TP 4
+\fBnoiversion\fR
+i_version dosya düğümü alanı arttırılmaz.
+.sp
+.TP 4
+\fBmand\fR
+Bu dosya sisteminde zorunlu kilitlere izin verilir. Bkz: \fBfcntl\fR(2). Bu seçeneğin Linux üzerinde kullanımı önerilmemektedir.
+.sp
+.TP 4
+\fBnomand\fR
+Bu dosya sisteminde zorunlu kilitlere izin verilmez.
+.sp
+.TP 4
+\fB_netdev\fR
+Dosya sisteminin, ağ erişimi gerektiren bir aygıtta bulunduğunu belirtir (ağ sistemde etkinleştirilene kadar sistemin bu dosya sistemlerini bağlamaya çalışmasını önlemek için kullanılır).
+.sp
+.TP 4
+\fBnofail\fR
+Aygıt yoksa hatalar bildirilmez.
+.sp
+.TP 4
+\fBrelatime\fR
+Dosya düğümü erişim zamanlarını değişiklik zamanına veya değişikliğe göreli günceller. Erişim zamanı, yalnızca önceki erişim zamanı, geçerli değişiklikten veya değişiklik zamanından önceyse güncellenir. (\fBnoatime\fR’a benzer, ancak bir dosyanın son değişiklikten beri okunup okunmadığını bilmesi gereken \fBmutt\fR(1) gibi diğer uygulamaları etkilemez.)
+.sp
+Linux 2.6.30’dan beri, (\fBnoatime\fR belirtilmediyse) çekirdek ön tanımlı olarak bu seçenek tarafından sağlanan davranışı kullanmakta olup geleneksel davranışı elde etmek için \fBstrictatime\fR seçeneğini de gerektirir. Ayrıca Linux 2.6.30’dan beri dosyanın son erişim zamanı 1 günden eskiyse mutlaka güncellenmektedir.
+.sp
+.TP 4
+\fBnorelatime\fR
+\fBrelatime\fR özelliği kullanılmaz. Ayrıca, bkz: \fBstrictatime\fR
+.sp
+.TP 4
+\fBstrictatime\fR
+Tüm erişim zamanı güncellemelerini açıkça istemeye izin verir. Bu, çekirdekte \fBrelatime\fR veya \fBnoatime\fR özelliğinin ön tanımlı olmasını sağlar, ancak yine de kullanıcı alanının bunu geçersiz kılmasına izin verir. Ön tanımlı sistem bağlama seçenekleri hakkında daha fazla ayrıntı için \fI/proc/mounts\fR dosyasına bakılabilir.
+.sp
+.TP 4
+\fBnostrictatime\fR
+Dosya düğümü erişim zamanı güncellemeleri için çekirdeğin ön tanımlı davranışı kullanılır.
+.sp
+.TP 4
+\fBlazytime\fR
+Zamanları (atime, mtime, ctime) yalnızca dosya düğümün bellekteki sürümünde günceller.
+.sp
+Bu bağlama seçeneği, ön tahsisli dosyalara sıklıkla rastgele yazan iş yükleri için dosya düğüm tablosuna yazma işlemlerini önemli ölçüde azaltır.
+.sp
+Disk üzerindeki zaman damgaları yalnızca şu durumlarda güncellenir:
+.sp
+.PD 1
+.RS 5
+.IP \(bu 3
+Dosya zaman damgalarıyla ilgisi olmayan bazı değişiklikler için dosya düğümünün güncellenmesi gerekmiştir.
+.IP \(bu 3
+Bir uygulama \fBfsync\fR(2), \fBsyncfs\fR(2)) veya \fBsync\fR(2) çağrılarını kullanıyordur.
+.IP \(bu 3
+Silinmemiş bir dosya düğümü bellekten çıkarılmıştır,
+.IP \(bu 3
+Dosya düğümünün diske yazılmasından beri 24 saatten fazla zaman geçmiştir.
+.sp
+.RE
+.IP
+.PD 0
+.sp
+.TP 4
+\fBnolazytime\fR
+\fBlazytime\fR özelliği kullanılmaz.
+.sp
+.TP 4
+\fBsuid\fR
+Bu dosya sisteminde uygulama çalıştırılırken dosya yetenekleri veya kullanıcı ve grup belirtme bitleri önemsenir.
+.sp
+.TP 4
+\fBnosuid\fR
+Bu dosya sisteminde uygulama çalıştırılırken dosya yetenekleri veya kullanıcı ve grup belirtme bitleri önemsenmez. Ek olarak, SELinux alan geçişlerinde nnp_nosuid_transition ilke yeteneğinin de etkin olmasını gerektiren nosuid_transition izni de gerekir.
+.sp
+.TP 4
+\fBsilent\fR
+Sessizlik kipi.
+.sp
+.TP 4
+\fBloud\fR
+Sessizlik kipi kapatılır.
+.sp
+.TP 4
+\fBowner\fR
+Kullanıcının aygıtın sahibi olması koşuluyla sıradan bir kullanıcının dosya sistemini bağlamasına izin verir. Bu seçenek örtük olarak \fBnosuid\fR ve \fBnodev\fR seçeneklerini de uygular (seçenek satırında, sonraki \fBowner\fR,\fBdev\fR,\fBsuid\fR gibi seçeneklerle geçersiz kılınmadıkça).
+.sp
+.TP 4
+\fBremount\fR
+Bağlı olan bir dosya sistemini tekrar bağlamaya çalışır. Buna genellikle, bağlama özelliklerinin değiştirilmesi gereken durumlarda başvurulur. Mesela, oku-yaz kipinde bağlanmış bir dosya sistemini salt-okunur yapmak için kullanılabilir. Aygıt ya da bağlantı noktasını değiştirmez.
+.sp
+"\fBremount,bind\fR" işlemlerinin özel bir anlamı vardır. Ayrıntılar yukarıda \fBBaşka bir yere tekrar bağlamak\fR bölümünde açıklanmıştır.
+.sp
+Yeniden bağlama işlevi, \fBmount\fR komutunun \fIfstab\fR’daki seçeneklerle çalıştığı standart yolu izler. Yani, \fIaygıt\fR ve \fIbağlama-noktası\fR birlikte belirtildiğinde \fIfstab\fR (veya \fImtab\fR) okunmaz.
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount -o remount,rw /dev/foo /dir\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Bu çağrıdan sonra tüm eski bağlama seçenekleri geçersiz olur ve \fBmount\fR komutu tarafından dahili olarak gerçeklenen \fBloop=\fR seçeneği dışında \fIfstab\fR (veya \fImtab\fR) dosyasındaki bağlama seçenekleri yok sayılır.
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount -o remount,rw /dir\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+Bu çağrıdan sonra \fBmount\fR, \fIfstab\fR’ı okur ve bu seçenekleri komut satırındaki (\fB-o\fR) bağlama seçenekleriyle birleştirir. \fIfstab\fR’da bağlama noktası bulunamazsa, kaynak belirtilmeyen yeniden bağlamaya izin verilir.
+.sp
+\fBmount\fR, belirtilen süzgeç (\fB-O\fR ve \fB-t\fR) ile eşleşen önceden bağlanmış tüm dosya sistemlerini yeniden bağlamak için \fB--all\fR seçeneğinin kullanılmasına izin verir. Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBmount --all -o remount,ro -t vfat\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+komutu ile evvelce bağlanmış tüm vfat dosya sistemleri salt-okunur olarak yeniden bağlanır. Dosya sistemlerinin her biri \fBmount -o remount,ro /\fR\fIbağlama-noktası\fR kalıbı ile yeniden bağlanır. Yani, \fBmount\fR komutu \fIfstab\fR veya \fImtab\fR’ı okuyup bu seçenekleri komut satırındaki seçeneklerle birleştirir.
+.sp
+.TP 4
+\fBro\fR
+Dosya sistemini salt okunur kipte bağlar.
+.sp
+.TP 4
+\fBrw\fR
+Dosya sistemini oku-yaz kipinde bağlar.
+.sp
+.TP 4
+\fBsync\fR
+Dosya sistemine bütün G/Ç’lar eşzamanlı yapılır. Ömrü yazma sayısıyla sınırlanmış ortamlarda (örneğin bazı flash sürücüleri, SSD gibi) eşzamanlama (tamponsuz, doğrudan diskle çalışma), aygıt ömrünün kısalmasına neden olabilir.
+.sp
+.TP 4
+\fBuser\fR
+Sıradan (root olmayan) kullanıcıların dosya sistemini bağlamasına izin verilir. Sistemi bağlayan kullanıcının adı \fImtab\fR’a (veya \fImtab\fR bulunmayan sistemlerde \fI/run/mount\fR içindeki özel \fIlibmount\fR dosyasına) yazılır, böylece bu kullanıcı dosya sistemini daha sonra ayırabilir. Bu seçenek, \fBnoexec\fR, \fBnosuid\fR ve \fBnodev\fR seçeneklerini örtük olarak uygular (seçenek satırındaki \fBuser\fR, \fBexec\fR, \fBdev\fR, \fBsuid\fR gibi sonraki seçenekler tarafından gözardı edilmedikleri sürece).
+.sp
+.TP 4
+\fBnouser\fR
+Sıradan (root olmayan) kullanıcıların dosya sistemini bağlamasına izin verilmez. Bu seçenek öntanımlıdır; örtük olarak hiçbir seçenek uygulanmaz.
+.sp
+.TP 4
+\fBusers\fR
+Bütün kullanıcılara \fBmount\fR ve \fBumount\fR komutunu kullanma yetkisi verir. Bu seçenek, \fBnoexec\fR, \fBnosuid\fR ve \fBnodev\fR seçeneklerini örtük olarak uygular (seçenek satırındaki \fBusers\fR, \fBexec\fR, \fBdev\fR, \fBsuid\fR gibi sonraki seçenekler tarafından gözardı edilmedikleri sürece).
+.sp
+.TP 4
+\fBX-*\fR
+"\fBX-\fR" ön ekine sahip tüm seçenekler, yorumlar veya uygulamaya özgü kullanıcı seçenekleri olarak yorumlanır. Bu seçenekler kullanıcı alanında (örn., \fImtab\fR dosyası) saklanmaz, \fBmount\fR\fIds-türü\fR bağlama yardımcılarına veya \fBmount\fR(2) sistem çağrısına gönderilmez. Önerilen biçim \fBX-\fR\fIuygulama.seçenek\fR’tir.
+.sp
+.TP 4
+\fBx-*\fR
+\fBX-\fR seçenekleri gibidir, ancak kullanıcı alanında kalıcı olarak saklanır. Bu, seçeneklerin \fBumount\fR(8) veya diğer işlemler için de geçerli olduğu anlamına gelir. Kullanıcı alanında bağlama seçeneklerini gerçeklemenin zor olduğu unutulmamalıdır, çünkü libmount tabanlı araçları kullanmak gereklidir ve seçeneklerin her zaman kullanılabilir kalacağının garantisi yoktur (örneğin, bir bağlantıyı başka yere taşıma işleminden sonra veya paylaşımsız isim alanında).
+.sp
+Util-linux v2.30’dan önce \fBx-*\fR seçeneklerinin libmount tarafından korunmadığı ve kullanıcı alanında saklanmadığı (işlevsellik o zamanlar \fBX-*\fR ile aynıydı), ancak artan kullanım senaryoları nedeniyle (initrd, systemd vb.) işlevselliğin, mevcut \fIfstab\fR yapılandırmalarını herhangi bir değişiklik olmadan kullanılabilir durumda tutmak üzere genişletildiği unutulmamalıdır.
+.sp
+.TP 4
+\fBX-mount.mkdir\fR[=\fIkip\fR]
+Henüz mevcut değilse, bir hedef dizin (bağlama noktası) oluşturmaya izin verir. İsteğe bağlı \fIkip\fR bağımsız değişkeni, sekizli gösterimde \fBmkdir\fR(2) için kullanılan dosya sistemi erişim kipini belirler. Öntanımlı kip 0755’tir. Bu işlevsellik yalnızca root kullanıcılar için veya \fBmount\fR suid izinleri olmadan çalıştırıldığında desteklenir. Seçenek ayrıca \fBx-mount.mkdir\fR olarak da desteklenir, ancak v2.30’dan beri bu gösterimin kullanımı önerilmemektedir. Ayrıca bkz: \fB--mkdir\fR
+.sp
+.TP 4
+\fBX-mount.subdir\fR[=\fIdizin\fR]
+Bağlı olmayan bir dosya sistemini geçici olarak bağlayıp onun bir alt dizinine bağlı bir dosya sistemini başka bir yere kopyalamak için kullanılabilir. Şimdilik, bu özellik, paylaşılmamış bir ad alanındaki geçici bir dosya sistemi kök dizinini bağladıktan sonra, belirtilen alt \fIdizin\fRe son bağlama noktasını kopyalayıp (remount değil bind) dosya sistemi kök dizinini ayırmak şeklinde gerçeklenmektedir. Böyle bir alt dizin bağlaması, birden çok \fBmount\fR(2) sistem çağrısı tarafından gerçeklenmesine rağmen, sistemin geri kalanı için tek bir çağrı olarak görünür. Bu özellik DENEYSELDİR.
+.sp
+.TP 4
+\fBnosymfollow\fR
+Dosya yolları çözümlenirken sembolik bağlar izlenmez. Sembolik bağlar yine de oluşturulabilir ve \fBreadlink\fR(1), \fBreadlink\fR(2), \fBrealpath\fR(1) ve \fBrealpath\fR(3)hala düzgün şekilde çalışır.
+.sp
+.PP
+.sp
+.SH "DOSYA SİSTEMİNE ÖZGÜ BAĞLAMA SEÇENEKLERİ"
+Aşağıdaki seçenekler, sadece belirli dosya sistemlerinde geçerlidir. Bunlar dosya sistemi çeşitlerine göre sıralanmıştır. Mümkün olduğunca, ayrıntılar için önce dosya sistemine özel kılavuz sayfalarına başvurulmalıdır. Bu sayfalardan bazıları aşağıdaki tabloda listelenmiştir.
+.sp
+.TS
+tab(:) allbox;
+l1 1l.
+\fBDosya sistemi\fR :\fBKılavuz Sayfası\fR
+T{
+btrfs
+T}:T{
+\fBbtrfs\fR(5)
+T}
+T{
+cifs
+T}:T{
+\fBmount.cifs\fR(8)
+T}
+T{
+ext2, ext3, ext4
+T}:T{
+\fBext4\fR(5)
+T}
+T{
+fuse
+T}:T{
+\fBfuse\fR(8)
+T}
+T{
+nfs
+T}:T{
+\fBnfs\fR(5)
+T}
+T{
+tmpfs
+T}:T{
+\fBtmpfs\fR(5)
+T}
+T{
+xfs
+T}:T{
+\fBxfs\fR(5)
+T}
+.TE
+.sp
+Yukarıda listelenen bazı sayfaların yalnızca ilgili kullanıcı alanı araçları kurulduktan sonra kullanılabilir olacağı unutulmamalıdır.
+.sp
+Aşağıdaki seçenekler yalnızca belirli dosya sistemleri için geçerlidir. Bunlar dosya sisteminin adına göre abecesel sıralanmıştır. Tüm seçenekler bağlama seçeneği olup yalnızca \fB-o\fR komut satırı seçeneğinde belirtilebilir.
+.sp
+Hangi seçeneklerin destekleneceği biraz da çalışan çekirdeğe bağlıdır. Daha fazla bilgi, çekirdek kaynak paketinin \fIDocumentation/filesystems\fR alt dizinindeki dosya sistemine özgü dosyalarda bulunabilir.
+.sp
+.SS "adfs için bağlama seçenekleri"
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Dosya sistemindeki dosyaların kullanıcı ve grup kimliklerini tanımlar. Öntanımlı olarak uid=gid=0 dır.
+.sp
+.TP 4
+\fBownmask\fR=\fIdeğer\fR ve \fBothmask\fR=\fIdeğer\fR
+Sırası ile \fBadfs\fR için “sahibinin” izinlerini ve “diğerlerinin” izinlerini ayarlar. (öntanımlı olarak: sırası ile 0700 ve 0077 dir). Ayrıca bkz: \fI/usr/src/linux/Documentation/filesystems/adfs.rst\fR
+.sp
+.PP
+.sp
+.SS "affs için bağlama seçenekleri"
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Dosya sistemi kökünün kullanıcı ve grup kimliklerini ayarlar. Öntanımlı olarak uid=gid=0 dır. Fakat \fBuid\fR ve \fBgid\fR seçeneklerine değer belirtilmediği durumlarda, geçerli sürecin değerleri atanır.
+.sp
+.TP 4
+\fBsetuid\fR=\fIdeğer\fR ve \fBsetgid\fR=\fIdeğer\fR
+Bütün dosyaların kullanıcı ve grup kimliklerini ayarlar.
+.sp
+.TP 4
+\fBmode\fR=\fIdeğer\fR
+Asıl değerleri yok sayarak, bütün dosyaların erişim izinlerini \fIdeğer \fR& 0777 olarak değiştirir. Okuma iznine sahip dizinlere arama izni ekler. \fIdeğer\fR sekizlik tabanda belirtilir.
+.sp
+.TP 4
+\fBprotect\fR
+Dosya sistemindeki koruma bitlerinde herhangi bir değişiklik yapılmasına izin vermez.
+.sp
+.TP 4
+\fBusemp\fR
+Dosya sistemi kökünün kullanıcı ve grup kimliklerini, ilk \fBsync\fR veya \fBumount\fR sonrası bağlama noktasının kullanıcı ve grup kimliklerine ayarlar ve sonra da bu seçenek temizlenir. Tuhaf...
+.sp
+.TP 4
+\fBverbose\fR
+Her başarılı bağlama için, ekrana bilgilendirici bir ileti basar.
+.sp
+.TP 4
+\fBprefix\fR=\fIdizge\fR
+Bir bağı izlerken ds birim isminden önce kullanılan önek.
+.sp
+.TP 4
+\fBvolume\fR=\fIdizge\fR
+Bir sembolik bağı izlerken \fB/\fR öncesinde kullanılan önek (en fazla 30 karakterlik).
+.sp
+.TP 4
+\fBreserved\fR=\fIdeğer\fR
+Aygıtın başlangıcındaki kullanılmamış blok sayısı (öntanımlı: 2).
+.sp
+.TP 4
+\fBroot\fR=\fIdeğer\fR
+Kök bloğunun kesin yeri belirtilir.
+.sp
+.TP 4
+\fBbs\fR=\fIdeğer\fR
+Blok boyu belirtilir. Kullanılabilecek değerler: 512, 1024, 2048, 4096.
+.sp
+.TP 4
+\fBgrpquota\fR\p \fBnoquota\fR\p \fBquota\fR\p \fBusrquota\fR
+Bu seçenekler geçerlidir ama yoksayılır (bununla birlikte, bu seçenekler \fI/etc/fstab\fR içinde kullanılırsa kota araçları tepki verebilir).
+.sp
+.PP
+.sp
+.SS "debugfs için bağlama seçenekleri"
+debugfs dosya sistemi, geleneksel olarak \fI/sys/kernel/debug\fR altına bağlanan sözde dosya sistemidir. Çekirdek 3.4 sürümünden beri, debugfs için aşağıdaki seçenekleri desteklemektedir:
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Bağlama noktasının sahip ve grubunu tanımlar.
+.sp
+.TP 4
+\fBmode\fR=\fIkip\fR
+Bağlama noktasının kipini tanımlar.
+.sp
+.PP
+.sp
+.SS "devpts için bağlama seçenekleri"
+devpts dosya sistemi sözde dosya sistemidir, geleneksel olarak \fI/dev/pts\fR altına bağlanır. Bir sözde uçbirim elde edebilmek için, bir süreç \fI/dev/ptmx\fR’i açar; daha sonra bu uçbirimin numarası bu sürece bildirilir ve yardımcı sözde uçbirime \fI/dev/pts/<numara>\fR şeklinde erişilebilir.
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Yeni oluşturulan PTY’lerin kullanıcı ve grup kimliklerini ayarlar. Hiçbir şey belirtilmemişse, bu değerlere, uçbirimi oluşturan sürecin değerleri atanır. Örneğin: Grup kimliği 5 olan bir tty grubu varsa, \fBgid=5\fR ile yeni açılan PTY bu gruba dahil edilir.
+.sp
+.TP 4
+\fBmode\fR=\fIkip\fR
+Yeni oluşturulan PTY’lerin \fIkip\fRini belirler. Öntanımlı \fIkip\fR 0600’dür. \fBmode=620\fR ve \fBgid=5\fR değerleri ile yeni açılan PTYler için “mesg y” öntanımlı olur.
+.sp
+.TP 4
+\fBnewinstance\fR
+devpts dosya sisteminin özel bir örneğini oluşturur, böylece bu yeni örnekte tahsis edilen sözde terminaller, diğer devpts örneklerinde oluşturulanlardan bağımsız olur.
+.sp
+\fBnewinstance\fR seçeneği olmayan tüm devptsler, aynı sözde uçbirim indisleri kümesini paylaşır (yani, eski kipi). \fBnewinstance\fR seçeneği olanların indis kümesi ise, kendilerine özel, diğerlerinden bağımsız olur.
+.sp
+Bu seçenek esas olarak Linux çekirdeğindeki kapsayıcıları desteklemek için kullanılır. 2.6.29 ve üstü Linux çekirdek sürümlerinde gerçeklenmiştir. Ayrıca, bu bağlama seçeneği yalnızca, çekirdek yapılandırmasında \fBCONFIG_DEVPTS_MULTIPLE_INSTANCES\fR etkinleştirildiğinde geçerli olur.
+.sp
+Bu seçeneği etkin şekilde kullanmak için \fI/dev/ptmx\fR, \fIpts/ptmx\fR’e sembolik bir bağ olmalıdır. Daha fazla bilgi, çekirdek kaynak paketinindeki \fIDocumentation/filesystems/devpts.txt\fR dosyasında bulunabilir.
+.sp
+.TP 4
+\fBptmxmode\fR=\fIkip\fR
+devpts dosya sisteminde yeni \fIptmx\fR aygıt düğümünün \fIkip\fRini belirler.
+.sp
+Birden çok devpts örneği desteğiyle, her örneğin (bkz: \fBnewinstance\fR) devpts dosya sisteminin kök dizininde özel bir \fIptmx\fR düğümü bulunur (genel olarak \fI/dev/pts/ptmx\fR).
+.sp
+Çekirdeğin eski sürümleriyle uyumluluk için, yeni \fIptmx\fR düğümünün öntanımlı kipi 0000’dır. Bu seçenek ile \fIptmx\fR düğümü için daha kullanışlı bir \fIkip\fR belirtilebilir. \fBnewinstance\fR seçeneği belirtildiğinde bu seçeneğin de kullanılması şiddetle önerilir.
+.sp
+2.6.29 ve üstü Linux çekirdek sürümlerinde gerçeklenmiştir. Ayrıca, bu seçenek yalnızca, çekirdek yapılandırmasında \fBCONFIG_DEVPTS_MULTIPLE_INSTANCES\fR etkinleştirildiğinde geçerli olur.
+.sp
+.PP
+.sp
+.SS "fat için bağlama seçenekleri"
+.TP 4
+\fBBilgi:\fR
+fat bağımsız bir dosya sistemi değildir ama msdos, umsdos ve vfat dosya sistemlerinin ana parçasıdır.
+.sp
+.PP
+.TP 4
+\fBblocksize=512\fR\p \fBblocksize=1024\fR\p \fBblocksize=2048\fR
+Blok boyunu belirler (öntanımlı: 512). Bu seçenek artık kullanılmıyor.
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Tüm dosyaların kullanıcı ve grup kimliklerini tanımlar. Öntanımlı olarak geçerli sürecin kullanıcı ve grup kimlikleri kullanılır.
+.sp
+.TP 4
+\fBumask\fR=\fImaske\fR
+umask’ı (verilmeyecek izinlerin bit maskesi) belirler. Öntanımlı olarak, o anki sürecin umask’ı kullanılır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBdmask\fR=\fImaske\fR
+umask’ı (verilmeyecek izinlerin bit maskesi) yalnızca dizinler için ayarlar. Öntanımlı olarak, o anki sürecin umask’ı kullanılır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBfmask\fR=\fImaske\fR
+umask’ı (verilmeyecek izinlerin bit maskesi) yalnızca sıradan dosyalar için ayarlar. Öntanımlı olarak, o anki sürecin umask’ı kullanılır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBallow_utime\fR=\fIdeğer\fR
+Değişiklik ve erişim zamanını değiştirme izinlerini belirler.
+.sp
+.RS
+.TP 4
+\fB20\fR
+Geçerli süreç, dosyanın grubundaysa, zaman damgasını değiştirebilir.
+.sp
+.TP 4
+\fB2\fR
+Zaman damgasını herkes değiştirebilir.
+.sp
+.PP
+.RE
+.IP
+umask’ın (verilmeyecek izinlerin bit maskesi) yalnızca dizinler için ayarlanması öntanımlıdır. (Dizin yazılabilir ise \fButime\fR(2) çağrısına da izin verilir. örnek: \fB~dmask & 022\fR)
+.sp
+Normalde \fButime\fR(2), geçerli sürecin dosyanın sahibi mi yoksa yalnızca \fBCAP_FOWNER\fR yeteneğine mi sahip olduğuna bakılır. Ancak FAT dosya sistemlerinde diskte UID/GID yoktur, bu nedenle normal denetim çok esnek değildir ancak bu seçenek ile bu esnetilebilir.
+.sp
+.TP 4
+\fBcheck\fR=\fIdeğer\fR
+Üç farklı seçicilik seviyesi seçilebilir:
+.sp
+.RS
+.TP 4
+\fBr[elaxed]\fR
+Büyük ve küçük harfler aynı kabul edilir ve uzun isimler kısaltılır (örneğin; epeyuzunisim.filanca, epeyuzun.fil olur), isim ve uzantıda ön ve iç boşluklar korunur.
+.sp
+.TP 4
+\fBn[ormal]\fR
+"relaxed" değerine çok benzer ama pek çok özel karakter kabul edilmez (*, ?, <, boşluk, vs.). Bu seçenek öntanımlıdır.
+.sp
+.TP 4
+\fBs[trict]\fR
+"normal" değerine çok benzer ama Linux’ta bazan kullanılan fakat MS-DOS tarafından kabul edilmeyen özel karakterler ve uzun isimler reddedilir (+, =, boşluk, vs.).
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBcodepage\fR=\fIdeğer\fR
+FAT ve VFAT dosya sistemlerinde, kısa isim karakterlerine dönüşüm için kullanılacak kod sayfası belirtilir. Öntanımlı: 437.
+.sp
+.TP 4
+\fBconv\fR=\fIkip\fR
+Bu seçenek artık kullanılmadığından başarısız olabilir veya yok sayılabilir.
+.sp
+.TP 4
+\fBcvf_format\fR=\fImodül\fR
+Sürücü olarak kullanılacak CVF (Compressed Volume File - Sıkıştırılmış Oylum Dosyası) modülü olarak otomatik saptanan modül yerine \fImodül\fR modülünü kullanmaya zorlar. Şayet çekirdek kmod destekli ise bu seçenek, istendiğinde CVF modülü yüklemesini de denetler.
+.sp
+.TP 4
+\fBcvf_option\fR=\fIseçenek\fR
+\fIseçenek\fR CVF modülüne aktarılır. Bu seçenek artık kullanılmıyor.
+.sp
+.TP 4
+\fBdebug\fR
+Hata ayıklama etkinleştirilir. Bir sürüm dizgesi ve bir dosya sistemi bağımsız değişkenleri listesi basılır (bağımsız değişkenlerin tutarsız göründüğü durumlarda da basılır).
+.sp
+.TP 4
+\fBdiscard\fR
+Belirtilirse, bloklar serbest bırakıldığında blok aygıtında yoket/kırp işlemlerinin uygulanmasına neden olur. Bu, SSD’ler ve seyrek/ince olarak sağlanan LUN’lar için kullanışlıdır.
+.sp
+.TP 4
+\fBdos1xfloppy\fR
+Belirtilirse, yedekleme aygıtı boyutuna göre belirlenen bir son çare öntanımlısı olarak BIOS Bağımsız Değişken Bloğu yapılandırması kullanılır. Bu statik bağımsız değişkenler 160 kiB, 180 kiB, 320 kiB ve 360 kiB disketler ve disket imgeleri için DOS 1.x tarafından kabul edilen öntanımlı değerlerle eşleştirilir.
+.sp
+.TP 4
+\fBerrors=panic\fR\p \fBerrors=continue\fR\p \fBerrors=remount-ro\fR
+Önemli hatalar için FAT davranışını belirler: \fBpanic\fR (panikle), \fBcontinue\fR (hiçbir şey yapmadan devam et) veya \fBremount-ro\fR (bölümü salt okunur yeniden bağla - öntanımlıdır).
+.sp
+.TP 4
+\fBfat=12\fR\p \fBfat=16\fR\p \fBfat=32\fR
+12, 16 veya 32 bitlik fat sistemi belirtir. Bu seçeneğin belirtildiği durumlarda otomatik FAT türü saptaması yoksayılır. Kullanırken DİKKATLİ OLUN!
+.sp
+.TP 4
+\fBiocharset\fR=\fIküme\fR
+8 bitlik karakterlerle, 16 bitlik Unicode karakterler arasında dönüşüm işlemi için kullanılacak karakter kümesini belirler. Öntanımlı \fIküme\fR iso8859-1’dir. Uzun dosya isimleri disk üzerinde Unicode biçiminde saklanır.
+.sp
+.TP 4
+\fBnfs=stale_rw\fR\p \fBnfs=nostale_ro\fR
+Yalnızca FAT dosya sistemi NFS üzerinden dışa aktarılmak isteniyorsa etkinleştirilmelidir.
+.sp
+\fBnfs=stale_rw\fR: Bu seçenek, aramaları iyileştirmek için nfs ile ilgili kod tarafından kullanılan dizinlerin dosya düğümlerini tamponlamakta kullanılır . NFS üzerinden tüm dosya işlemleri (okuma/yazma) desteklenir, ancak NFS sunucusundaki bir önbellek tahliyesinin, yapay ESTALE hatalarına neden olma olasılığı vardır.
+.sp
+\fBnfs=nostale_ro\fR: Bu seçenek, dosya düğümü indisini ve dosya tanıtıcısını FAT dizini girdisindeki bir dosyanın disk üzerindeki konumuna dayandırır. Bir dosya, bulunduğu dizinin dosya düğümü tamponundan çıkarıldıktan sonra ESTALE hatasının oluşmamasını sağlar. Ancak bu, yeniden adlandırma, oluşturma ve bağ kaldırma gibi işlemlerin dosya tanıtıcılarının artık farklı bir dosyayı göstermesine ve büyük olasılıkla veri bozulmasına neden olabileceği anlamına gelir. Bunun ortaya çıkmaması için, bu seçenek ek olarak dosya sistemini salt okunur olarak bağlar.
+.sp
+Geriye dönük uyumluluğu korumak için, \fBstale_rw\fR öntanımlı olduğu takdirde \fB-o nfs\fR de kabul edilir.
+.sp
+.TP 4
+\fBtz=UTC\fR
+Bu seçenek, yerel saat (FAT üzerinde Windows tarafından kullanıldığı gibi) ve UTC (Linux’un dahili olarak kullandığı) arasındaki zaman damgalarının dönüştürülmesini devre dışı bırakır. Bu, yerel saatin olumsuzluklarından kaçınmak için UTC’ye ayarlanmış aygıtları (sayısal kameralar gibi) bağlarken özellikle kullanışlıdır.
+.sp
+.TP 4
+\fBtime_offset\fR=\fIfark\fR
+Zaman damgalarının FAT tarafından kullanılan yerel saatten UTC’ye dönüştürülmesi için saat \fIfark\fRını belirler. Yani, Linux tarafından dahili olarak kullanılan UTC’ye dönüştürmek için her zaman damgasından \fIfark\fR dakika çıkarılır. Bu, çekirdekte settimeofday(2) aracılığıyla ayarlanan saat dilimi dosya sistemi tarafından kullanılan saat dilimi olmadığında kullanışlıdır. Yaz saati uygulamalarında bu seçeneğin doğru zaman damgaları sağlamadığı unutulmamalıdır - yaz saatinin uygulandığı saatlere bağlı olarak zaman damgaları bir saat farklı olacaktır.
+.sp
+.TP 4
+\fBquiet\fR
+Sessiz kip etkinleştirilir. Dosyaların sahiplik ve kipleri değiştirilirken başarısızlık halinde hata döndürülmez. DİKKATLİ kullanılmalıdır!
+.sp
+.TP 4
+\fBrodir\fR
+FAT dosya sisteminde, \fBATTR_RO\fR (salt okunur) özniteliği vardır. Windows’ta, dizinler için \fBATTR_RO\fR yok sayılır ve bir seçenek olarak yalnızca uygulamalar tarafından kullanılır (örneğin, dizini özelleştirmek için).
+.sp
+\fBATTR_RO\fR özniteliği, dizinleri bile salt okunur yapmak için kullanılmak istenirse bu seçenek belirtilmelidir.
+.sp
+.TP 4
+\fBshowexec\fR
+Belirtilirse, dosyanın çalıştırma izni bitlerine yalnızca dosya uzantısı \fI.EXE\fR, \fI.COM\fR veya \fI.BAT\fR ise izin verilir. Öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBsys_immutable\fR
+Belirtilirse, FAT dosya sisteminin \fBATTR_SYS\fR özniteliği Linux üzerinde \fBIMMUTABLE\fR seçeneği ile gerçeklenir. Öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBflush\fR
+Belirtilirse, dosya sistemi bellekten diske normalden daha erken boşaltılmaya çalışılır. Öntanımlı olarak etkin değildir.
+.sp
+.TP 4
+\fBusefree\fR
+Belirtilirse, \fBFSINFO\fR’da saklanan "free clusters" ("serbest kümeler") değeri kullanılır. Diski taramadan boş küme sayısını belirlemek için kullanılır. Ancak öntanımlı olarak kullanılmaz, çünkü son Windows sürümlerinde bazı durumlarda doğru şekilde güncellenmemektedir. \fBFSINFO\fR’daki bu değerin doğru olduğundan emin olunması durumunda, bu seçenekle disk taramasını önlenebilir.
+.sp
+.TP 4
+\fBdots\fR\p \fBnodots\fR\p \fBdotsOK=\fR[yes|no]
+Unix veya DOS kurallarını bir FAT dosya sisteminde zorlamak için yanlış yönlendirilmiş çeşitli girişimler.
+.sp
+.PP
+.sp
+.SS "hfs için bağlama seçenekleri"
+.TP 4
+\fBcreator\fR=\fIdeğer\fR, \fBtype\fR=\fIdeğer\fR
+Yeni dosyalar oluşturmak için MacOS bulucu tarafından kullanılan \fBcreator\fR/\fBtype\fR için belirtilen \fIdeğer\fRler tanımlanır. ’????’ öntanımlıdır.
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR, \fBgid\fR=\fIdeğer\fR
+Dosya sistemindeki dosyaların kullanıcı ve grup kimliklerini ayarlar. Öntanımlı olarak o anki sürecin kullanıcı ve grup kimlikleri kullanılır.
+.sp
+.TP 4
+\fBdir_umask\fR=\fIdeğer\fR, \fBfile_umask\fR=\fIdeğer\fR, \fBumask\fR=\fIdeğer\fR
+Tüm dizinler, tüm normal dosyalar veya tüm dosyal ve dizinler için kullanılan umask \fIdeğer\fRini belirler. Geçerli sürecin umask’ı öntanımlıdır.
+.sp
+.TP 4
+\fBsession\fR=\fIdeğer\fR
+Bağlanacak CDROM oturumunu seçmek için kullanılır. Öntanımlı olarak bu karar CDROM sürücüsüne bırakılır. Bu seçenek, CDROM dışında herhangi bir aygıtta başarısız olur.
+.sp
+.TP 4
+\fBpart\fR=\fIN\fR
+Aygıtın \fIN\fRinci disk bölümünü seçer. Yalnızca CDROM’lar için anlamlıdır. Bölüm tablosunu hiç araştırmamak öntanımlıdır.
+.sp
+.TP 4
+\fBquiet\fR
+Geçersiz bağlama seçenekleri sessizce yok sayılır.
+.sp
+.PP
+.sp
+.SS "hpfs için bağlama seçenekleri"
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Dosya sistemindeki dosyaların kullanıcı ve grup kimliklerini ayarlar. Öntanımlı olarak o anki sürecin kullanıcı ve grup kimlikleri kullanılır.
+.sp
+.TP 4
+\fBumask\fR=\fIdeğer\fR
+umask’ı ayarlar (verilmeyecek izinlerin bit maskesi). Öntanımlı olarak, o anki sürecin umask’ı kullanılır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBcase=lower\fR, \fBcase=asis\fR
+Bütün dosya isimlerini ya küçük harfe dönüştürür veya oldukları gibi bırakır. Öntanımlı: \fBcase=lower\fR (küçük harfe dönüştür).
+.sp
+.TP 4
+\fBconv\fR=\fIkip\fR
+Bu seçeneğin kullanımı önerilmemekte olup kullanımı durumunda başarısız olabilir veya yok sayılabilir.
+.sp
+.TP 4
+\fBnocheck\fR
+Tutarlılık denetimleri yapılırken hata verirse, bağlama işlemini yarıda kesmez.
+.sp
+.PP
+.sp
+.SS "iso9660 için bağlama seçenekleri"
+ISO 9660 CD-ROM’larda kullanılan dosya sistemi yapısını açıklayan bir standarttır. Bu dosya sistemi ayrıca bazı DVD’lerde de görülmektedir. Ayrıca bkz: udf dosya sistemi.
+.sp
+Normal bir \fBiso9660\fR dosyası 8.3 şeklinde (tıpkı DOS’daki dosya ismi kısıtlamasında olduğu gibi) ve bütün karakterleri büyük harfli görünür. Dosya sahibi, koruma, bağ sayısı, blok/karakter aygıtları için hazırlık ve benzer şeyler için ayrıca alanlar bulunmaz.
+.sp
+Rock Ridge, iso9660’a bu unixvari özellikleri eklemeye yarayan bir genişletmedir. Basitçe, ek bilgilerin tamamının kaydı için her bir dizin kaydında genişletmeler vardır. Rock Ridge kullanıldığı durumlarda, dosya sistemi normal bir Unix dosya sisteminde farksızdır. Elbette, arada bir fark vardır: CD-ROM salt okunurdur.
+.sp
+.TP 4
+\fBnorock\fR
+Rock Ridge genişletmesinin, kullanmak mümkün olsa bile, kullanılmasını önler. Bkz: Aşağıdaki \fBmap\fR seçeneği
+.sp
+.TP 4
+\fBnojoliet\fR
+Microsoft Joliet genişletmesinin, kullanmak mümkün olsa bile, kullanılmasını önler. Bkz: Aşağıdaki \fBmap\fR seçeneği
+.sp
+.TP 4
+\fBcheck=r[elaxed]\fR\p \fBcheck=s[trict]\fR
+\fBcheck=r[elaxed]\fR seçeneği ile, dosyalar listelenmeden önce dosya ismi küçük harfe dönüştürülür. Bu işlem, sadece \fBnorock\fR ve \fBmap=normal\fR seçenekleri ile birlikte kullanılırsa, bir anlam ifade etmektedir. Öntanımlı olarak \fBcheck=s[trict]\fR kullanılmaktadır.
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR ve \fBgid\fR=\fIdeğer\fR
+Muhtemelen, Rock Ridge genişletmesinde belirtilen bilgileri önemsenmeden dosya sistemindeki bütün dosyaların sahiplik veya grup iyeliklerini belirtilen değerlere çevirir. Öntanımlı olarak \fBuid=0\fR ve \fBgid=0\fR kullanılmaktadır.
+.sp
+.TP 4
+\fBmap=n[ormal]\fR\p \fBmap=o[ff]\fR\p \fBmap=a[corn]\fR
+Rock Ridge olmayan bölümler için, normal isim dönüşümü ile büyük harflar küçük harflere çevrilir, isimlerin sonundaki ‘;1’ler düşer ve ‘;’ler ‘.’ya çevirir. \fBmap=o[ff]\fR seçeneği ile isim dönüşümü yapılmaz. Öntanımlı olarak \fBmap=n[ormal]\fR kullanılır. \fBmap=a[corn]\fR seçeneği, \fBmap=n[ormal]\fR ile aynıdır ama fazladan Acorn genişletmesini de ekler (tabii varsa).
+.sp
+.TP 4
+\fBmode\fR=\fIdeğer\fR
+Rock Ridge olmayan bölümler için, bütün dosyalara belirtilen kipi verir. Herkes için okuma ve çalıştırma izni öntanımlıdır. Sekizlik taban 0 ile başlatılarak gösterilir.
+.sp
+.TP 4
+\fBunhide\fR
+Gizli ve kısıtlı haklara sahip dosyaları da gösterir. (Sıradan dosyalar ve gizli veya kısıtlı dosyalar aynı dosya isimlerine sahipse, bu sıradan dosyaları da erişilmez kılabilir.)
+.sp
+.TP 4
+\fBblock\fR={\fI512\fR|\fI1024\fR|\fI2048\fR}
+Blok boyutlarını belirtilen değere göre ayarlar. \fBblock=1024\fR öntanımlıdır.
+.sp
+.TP 4
+\fBconv=\fR\fIkip\fR
+Bu seçeneğin kullanımı önerilmemekte olup kullanımı durumunda başarısız olabilir veya yok sayılabilir.
+.sp
+.TP 4
+\fBcruft\fR
+Şayet dosya uzunluğunun en kıymetli baytı bozuksa, dosya uzunluğunun en kıymetli bitlerini yok saymak için bu seçenek atanabilir. Bu seçenek ile dosya boyutları 16 MB ile sınırlandırılır.
+.sp
+.TP 4
+\fBsession=\fR\fIx\fR
+Çoklu oturumlu CDlerde oturum seçer.
+.sp
+.TP 4
+\fBsbsector=\fR\fIxxx\fR
+\fIxxx\fR. sektörden başlayan oturumu seçer.
+.sp
+.PP
+Aşağıdaki seçenekler vfat ile aynıdır ve bunları belirtmek yalnızca Microsoft’un Joliet genişletmesi kullanılarak kodlanmış diskleri kullanırken anlamlıdır.
+.sp
+.TP 4
+\fBiocharset\fR[=\fIdeğer\fR]
+CD’deki 16 bitlik Unicode karakterlerin 8 bitlik karakterlere dönüştürülmesinde kullanılacak karakter kümesini belirler. iso8859-1 öntanımlıdır.
+.sp
+.TP 4
+\fButf8\fR
+CD’deki 16 bitlik Unicode karakterleri UTF-8’e dönüştürür.
+.sp
+.PP
+.sp
+.SS "jfs için bağlama seçenekleri"
+.TP 4
+\fBiocharset\fR=\fIdeğer\fR
+Unicode karakterlerin ASCII karakterlere dönüştürülmesinde kullanılacak karakter kümesini belirler. Dönüşüm yapılmaması öntanımlıdır. Çekirdek yapılandırma dosyasında \fBCONFIG_NLS_UTF8\fR seçeneğinin tanımlanmasını gerektirir.
+.sp
+.TP 4
+\fBresize\fR=\fIsayı\fR
+Birimi belirtilen blok \fIsayı\fRsına göre yeniden boyutlandırır. JFS, bir birimi küçültmeyi değil, yalnızca büyütmeyi destekler. Bu seçenek, yalnızca birim oku-yaz olarak yeniden bağlanırken geçerlidir. Seçenek \fIsayı\fR belirtilmeksizin kullanılırsa birim disk bölümünün tam boyuna kadar genişletilir.
+.sp
+.TP 4
+\fBnointegrity\fR
+Günlüğe yazılmaz. Bu seçeneğin birincil kullanım amacı, bir birimi yedekleme ortamından geri yüklerken daha yüksek başarım elde etmektir. Sistem normal kapanmamışsa birimin bütünlüğü garanti edilmez.
+.sp
+.TP 4
+\fBintegrity\fR
+Öntanımlıdır. Meta veri değişiklikleri günlüğe yazılır. Evvelce \fBnointegrity\fR seçeneği ile bağlanmış bir dosya sistemini normal davranışına geri döndürmek için yeniden bağlarken kullanılır.
+.sp
+.TP 4
+\fBerrors\fR={\fBcontinue\fR|\fBremount-ro\fR|\fBpanic\fR}
+Hatalara rastlandığında davranışı belirler: \fBcontinue\fR (dosya sistemini im koy ve devam et), \fBremount-ro\fR (bölümü salt okunur yeniden bağla), \fBpanic\fR (panikle ve sistemi durdur).
+.sp
+.TP 4
+\fBnoquota\fR|\fBquota\fR|\fBusrquota\fR|\fBgrpquota\fR
+Bu seçenekler kabul edilir ancak yok sayılır.
+.sp
+.PP
+.sp
+.SS "msdos için bağlama seçenekleri"
+\fBfat\fR dosya sistemi seçeneklerine bakınız. Şayet msdos dosya sisteminde bir tutarsızlık tespit edilirse, hata raporu verir ve dosya sistemini salt okunur bağlar. Dosya sistemini yazılabilir hale dönüştürmek için tekrar bağlamak gerekir.
+.sp
+.SS "ncpfs için bağlama seçenekleri"
+Tıpkı \fInfs\fR gibi, \fIncpfs\fR uygulaması da \fBmount\fR(2) sistem çağrısına bir ikil değer (\fIstruct ncp_mount_data\fR) bekler. Bu değer \fBncpmount\fR(8) tarafından oluşturulmakta ama \fBmount\fR’un geçerli sürümü (2.12) \fIncpfs\fR hakkında hiçbir şey bilmemektedir.
+.sp
+.SS "ntfs için bağlama seçenekleri"
+.TP 4
+\fBiocharset\fR=\fIisim\fR
+Dosya isimleri döndürülürken kullanılacak karakter kümesidir. VFAT’den farklı olarak, NTFS dönüştürülemeyen karakterleri içeren isimleri gizler. Kullanımı önerilmiyor.
+.sp
+.TP 4
+\fBnls\fR=\fIisim\fR
+\fBiocharset\fR seçeneğinin yeni ismi.
+.sp
+.TP 4
+\fButf8\fR
+Dosya isimlerini dönüştürmek için UTF-8 kullanılır.
+.sp
+.TP 4
+\fBuni_xlate\fR=[0|1|2]
+0 (veya ‘no’ ya da ‘false’) için, bilinmeyen Unicode karakterler için önceleme yapılmaz. 1 (veya ‘yes’ ya da ‘true’) veya 2 için, vfat türünde “:” ile başlayan 4 baytlık öncelem kullanılır. Burada karakter kodlamasının bayt sırası olarak, 2 için küçük sonlu (little-endian), 1 için ise bayt yer değiştirmeli büyük sonlu (byteswapped big-endian) sıralama kullanılır.
+.sp
+.TP 4
+\fBposix\fR=[0|1]
+Şayet etkin ise (posix=1), dosya sistemi büyük/küçük harf ayrımı yapar. Dosyaların 8.3’lük diğer isimleri ise gizlenmek yerine sabit bağlar ile temsil edilir. Bu seçeneğin kullanımı önerilmiyor.
+.sp
+.TP 4
+\fBuid\fR=\fIdeğer\fR, \fBgid\fR=\fIdeğer\fR ve \fBumask\fR=\fIdeğer\fR
+Dosya sistemindeki dosya izinlerini düzenler. Öntanımlı olarak, dosyalar root kullanıcıya aittir ve başkaları tarafından okunamaz.
+.sp
+.PP
+.sp
+.SS "Katmanlı dosya sistemi için bağlama seçenekleri"
+Linux 3.18’den beri, katmanlı sözde dosya sistemi (overlayfs), diğer dosya sistemleri için birlikte bağlama olanağı sağlar.
+.sp
+Bir katmanlı dosya sistemi, iki dosya sistemini üst ve alt dosya sistemi olarak birleştirir. Her iki dosya sisteminin de adı varsa, alt dosya sistemindeki nesne gizliyken veya dizinler söz konusu olduğunda üst nesneyle birleştirilirken üst dosya sistemindeki nesne görünür olur.
+.sp
+Alt dosya sistemi, Linux tarafından desteklenen herhangi bir dosya sistemi olabilir ve yazılabilir olması gerekmez. Alt dosya sistemi başka bir katmanlı dosya sistemi bile olabilir. Üst dosya sistemi normalde yazılabilir olacaktır ve eğer öyleyse, \fBtrusted.*\fR genişletilmiş özniteliklerinin oluşturulmasını desteklemesi ve \fBreaddir\fR(3) yanıtlarında geçerli bir \fBd_type\fR alanı sağlaması gerekir, bu nedenle NFS uygun değildir.
+.sp
+İki salt okunur dosya sisteminden oluşan bir salt okunur katmanlı sistem, herhangi bir dosya sistemi türünü kullanabilir. \fBlowerdir\fR ve \fBupperdir\fR seçenekleri, aşağıdaki gibi kullanılarak \fI/alt\fR ve \fI/ust\fR dizinleri \fI/birlesik\fR dizini altında birleştirilebilir:
+.sp
+.RS 4
+.nf
+mount -t overlay  overlay  \\
+-olowerdir=/alt,upperdir=/ust,workdir=/calisma  /birlesik
+.fi
+.sp
+.RE
+.TP 4
+\fBlowerdir\fR=\fIdizin\fR
+\fBlowerdir\fR yazılabilir olması gerekmeyen dosya sistemidir.
+.sp
+.TP 4
+\fBupperdir\fR=\fIdizin\fR
+\fBupperdir\fR normalde yazılabilir olması gereken dosya sistemidir.
+.sp
+.TP 4
+\fBworkdir\fR=\fIdizin\fR
+\fBworkdir\fR, \fBupperdir\fR dosya sistemi üzerinde boş bir dizin gerektirir.
+.sp
+.TP 4
+\fBuserxattr\fR
+xattr isim alanı olarak "\fBtrusted.overlay.\fR" yerine "\fBuser.overlay.\fR" kullanılır. Katmanlı dosya sisteminin ayrıcalıksız bağlanması için yararlıdır.
+.sp
+.TP 4
+\fBredirect_dir\fR={\fBon\fR|\fBoff\fR|\fBfollow\fR|\fBnofollow\fR}
+\fBredirect_dir\fR özelliği etkin olursa dizin kopyalanır (ama içeriği değil). Ardından katmanlı dosya sisteminin kök dizinindeki özgün konum yoluna "{\fBtrusted\fR|\fBuser\fR}\fB.overlay.redirect\fR" ek özniteliği tanımlanır. Son olarak dizin yeni yerine taşınır
+.sp
+.RS
+.TP 4
+\fBon\fR
+Yönlendirmeler etkinleştirilir.
+.sp
+.TP 4
+\fBoff\fR
+Yönlendirmeler oluşturulmaz ve çekirdek/modül yapılandırmasında "\fBredirect_always_follow\fR" özelliği etkinse yalnızca izlenir.
+.sp
+.TP 4
+\fBfollow\fR
+Yönlendirmeler oluşturulmaz, ancak izlenir.
+.sp
+.TP 4
+\fBnofollow\fR
+Yönlendirmeler oluşturulmaz ve izlenmez (çekirdek/modül yapılandırmasında "\fBredirect_always_follow\fR" özelliği etkinse "\fBredirect_dir\fR=\fBoff\fR" seçeneğine eşdeğerdir).
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBindex\fR={\fBon\fR|\fBoff\fR}
+Dosya düğümü indisi. \fBindex=off\fR durumunda birden fazla sabit bağı olan bir dosya kopyalanırsa, bu bağlar "koparılır". Değişiklikler, aynı dosya düğümüne atıfta bulunan diğer sabit bağ adlarına yansıtılmaz.
+.sp
+.TP 4
+\fBuuid\fR={\fBon\fR|\fBoff\fR}
+Dosya tanıtıcılarındaki temel dosya sisteminin UUID’sini null ile değiştirmek ve UUID denetimlerini etkin şekilde devre dışı bırakmak için kullanılabilir. Bu, diskin kopyalanması ve bu kopyanın UUID’sinin değişmesi durumunda faydalı olabilir. Bu, yalnızca tüm \fBlowerdir\fR/\fBupperdir\fR/\fBworkdir\fR dizinleri aynı dosya sistemindeyse geçerlidir, aksi takdirde normal davranışa dönülür.
+.sp
+.TP 4
+\fBnfs_export\fR={\fBon\fR|\fBoff\fR}
+NFS dışa aktarımını destekleyen bir dosya sisteminde \fBnfs_export\fR=\fBon\fR seçeneği ile katmanlı bir dosya sistemi NFS’ye aktarılabilir.
+.sp
+.RS 4
+.TP 4
+\fBBilgi:\fR
+\fBindex=off,nfs_export=on\fR bağlama seçenekleri oku-yaz bir bağlantı ile çeliştiğinden bir hatayla sonuçlanabilir.
+.sp
+.RE
+.IP
+Bu seçeneğin ayrıntılı açıklaması için bkz: https://www.kernel.org/doc/html/latest/filesystems/overlayfs.html?highlight=overlayfs
+.sp
+.TP 4
+\fBxino\fR={\fBon\fR|\fBoff\fR|\fBauto\fR}
+\fBxino\fR özelliği, gerçek nesne \fBst_ino\fR özelliğindeki benzersiz bir nesne tanıtıcısı ve ilgili \fBfsid\fR dizininden oluşur. \fBxino\fR özelliği, \fBfsid\fR için dosya düğüm indisinin yüksek bitlerini kullanır, çünkü bu dosya sistemleri nadiren bu bitleri kullanır. İlgili düğümün bitlerinin yüksek \fBxino\fR bitlerine taşması durumunda, katmanlı dosya sistemi o düğüm için \fBxino\fR özelliği olmayan davranışa geri dönecektir.
+.sp
+Bu seçeneğin etkisinin ayrıntılı açıklaması için bkz: https://www.kernel.org/doc/html/latest/filesystems/overlayfs.html?highlight=overlayfs
+.sp
+.TP 4
+\fBmetacopy\fR={\fBon\fR|\fBoff\fR}
+Yalnızca meta veri kopyalama özelliği etkinleştirildiğinde ve chown/chmod gibi meta veriye özel bir işlem gerçekleştirildiğinde, overlayfs yalnızca meta verileri kopyalar (tüm dosyanın aksine). Daha sonra dosya YAZ işlemi için açıldığında dosyanın tamamı kopyalanacaktır.
+.sp
+Başka bir deyişle, bu gecikmeli veri kopyalama işlemidir ve verilerin gerçekten değiştirilmesi gerektiğinde veriler kopyalanır.
+.sp
+.TP 4
+\fBvolatile\fR
+Uçucu (volatile) bağlamaların bir çökmeden kurtulma garantisi yoktur. Uçucu bağlamaların, katmanlı dosya sistemine yazılan veriler yalnızca önemli bir çaba sarf etmeden yeniden oluşturulabiliyorsa kullanılması şiddetle önerilir.
+.sp
+\fBvolatile\fR seçeneğiyle bağlamanın getirisi, üst dosya sistemine yapılan tüm eşzamanlama çağrılarının atlanmasıdır.
+.sp
+Yanlış bir güvenlik hissi vermekten kaçınmak için, geçici bağlamaların eşzamanlanması (\fBfsync\fR(2)), VFS’nin geri kalanından biraz farklıdır. Geçici bir bağlama gerçekleştikten sonra \fBupperdir\fR dosya sisteminde herhangi bir geri yazma hatası oluşursa, tüm eşzamanlama işlevleri hata döndürür. Bu durumda, dosya sistemi kurtarılmayacak ve \fBupperdir\fR, son eşzamanlama çağrısından bu yana yeni bir hatayla karşılaşmamış olsa bile, sonraki her eşzamanlama çağrısı bir hata döndürecektir.
+.sp
+Katmanlı dosya sistemi \fBvolatile\fR seçeneği ile bağlandığında "\fI$workdir/work/incompat/volatile\fR" dizini oluşturulur. Bir sonraki bağlama sırasında, bu dizin denetlenir ve bağlama zaten varsa bağlama reddedilir. Bu, kullanıcının \fBupperdir\fR ve \fBworkdir\fR dizinlerini atması ve yeni bir tane oluşturması gerektiğinin güçlü bir göstergesidir. Kullanıcının sistemin çökmediğini ve \fBupperdir\fR içeriğinin bozulmadığını bildiği çok sınırlı durumlarda, uçucu (\fBvolatile\fR) dizin kaldırılabilir.
+.sp
+.PP
+.sp
+.SS "reiserfs için bağlama seçenekleri"
+\fBreiserfs\fR günlükleme yapan bir dosya sistemidir.
+.sp
+.TP 4
+\fBUyarı:\fR
+\fBreiserfs\fR dosya sisteminin geliştiricisi kalmadığından Linux 5.18 sürümünden beri kullanımı önerilmemekte olup muhtemelen 2025’te çekirdek desteği sonlandırılacaktır (Kaynak: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/ ?id=eb103a51640ee32ab01c51e13bf8fca211f25f61).
+.sp
+.PP
+.TP 4
+\fBconv\fR
+3.6 sürümü reiserfs yazılımının, 3.5 sürümü bir reiserfs dosya sistemini bağlamasını ve yeni oluşturulan nesneler için 3.6 biçiminin kullanılmasını sağlar. Bu dosya sistemi artık reiserfs 3.5 sürümü araçlarla uyumlu olmayacaktır.
+.sp
+.TP 4
+\fBhash\fR={\fBrupasov\fR|\fBtea\fR|\fBr5\fR|\fBdetect\fR}
+reiserfs’nin dizinler içindeki dosyaları bulması için kullanılacak aş işlevini seçmek için kullanılır.
+.sp
+.RS
+.TP 4
+\fBrupasov\fR
+Yury Yu. Rupasov tarafından bulunmuş bir aş yöntemi. Oldukça hızlı ve yerel ayarları koruyan bir yöntemdir, sözlüğe bağlı kalarak dosya isimlerini yakın aş değerlerine eşler. Bu seçenek kullanılmamalıdır, oldukça yüksek bir ihtimalle aş karmaşasına yol açabilir.
+.sp
+.TP 4
+\fBtea\fR
+Jeremy Fitzhardinge tarafından gerçeklenen bir Davis-Meyer işlevi. İsimlerde, aş permütasyon bitlerini kullanır. Yüksek rastlantısallığa ve düşük olasılıkla, bir miktar işlemci gücüne mal olacak, aş uyumsuzluklarına sebep olabilir. R5 aş ile \fBEHASHCOLLISION\fR hatalarında uzmanlaşılmışsa bu seçenek kullanılabilir.
+.sp
+.TP 4
+\fBr5\fR
+Rupasov aşının geliştirilmiş bir sürümü. Çok büyük dizinler yoksa ve tuhaf dosya ismi şablonları mevcut değilse kullanılacak en iyi seçenektir. Öntanımlıdır.
+.sp
+.TP 4
+\fBdetect\fR
+Bağlanmış dosya sisteminde kullanılan aş işlevini tespit etmeye ve bu bilgiyi reiserfs süper bloğuna yazmayı sağlar. Bu seçenek sadece, eski türdeki dosya sistemlerinde ve ilk bağlama esnasında faydalı olabilir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBhashed_relocation\fR
+Blok tahsisçileri ayarlar. Bazı durumlarda başarım artışı sağlayabilir.
+.sp
+.TP 4
+\fBno_unhashed_relocation\fR
+Blok tahsisçileri ayarlar. Bazı durumlarda başarım artışı sağlayabilir.
+.sp
+.TP 4
+\fBnoborder\fR
+Yury Yu. Rupasov’un icadı olan sınır tahsisçi algoritmasını iptal eder. Bazı durumlarda başarım artışı sağlayabilir.
+.sp
+.TP 4
+\fBnolog\fR
+Günlüklemeyi (journalling) kapatır. Herhangi bir çökme durumunda hızlı kurtarma seçeneğinden vazgeçme pahasına, bir miktar başarım artışı sağlayabilir. Aslında, bu seçeneğin kullanılması durumunda bile reiserfs günlükleme işlemlerine devam edecektir ve geçerli verileri günlükleme alanına yazacaktır. \fBnolog\fR genişletmesi halen geliştirilmektedir.
+.sp
+.TP 4
+\fBnotail\fR
+Öntanımlı olarak, reiserfs, küçük dosyaları ve dosya artıklarını doğrudan ağaç yapısına kaydeder. Bu \fBlilo\fR(8) gibi bazı uygulamalarda karışıklığa sebep olur. Bu seçenek, dosyaların ağacın içine paketlenmesini iptal eder. (Burada dosya artıkları, bir dosyanın tam bir bloktan artan ancak artan kısmın bir bloğu dolduramayacak kısmıdır.)
+.sp
+.TP 4
+\fBreplayonly\fR
+Günlüklemedeki işlemleri tekrarlar fakat gerçekte dosya sistemini bağlamaz. Temelde \fBreiserfsck\fR tarafından kullanılır.
+.sp
+.TP 4
+\fBresize\fR=\fIsayı\fR
+\fBreiserfs\fR disk bölümünün çevrimiçi genişlemesine izin veren bir tekrar bağlama seçeneğidir. \fBreiserfs\fR’ye, aygıtın \fIsayı\fR bloka sahip olduğu talimatını verir. Bu seçenek, mantıksal birim yönetim sistemi (LVM) kullanan aygıtlar için tasarlanmıştır.
+.sp
+.TP 4
+\fBuser_xattr\fR
+Genişletilmiş kullanıcı öznitelikleri etkinleştirilir. Bkz: \fBchattr\fR(1)
+.sp
+.TP 4
+\fBacl\fR
+POSIX Erişim denetim listeleri etkinleştirilir. Bkz: \fBacl\fR(5)
+.sp
+.TP 4
+\fBbarrier=none\fR|\fBbarrier=flush\fR
+Günlükleme kodunda yazma engellerinin kullanımı \fBbarrier=none\fR ile devre dışı bırakılır, \fBbarrier=flush\fR ile etkinleştirilir (öntanımlıdır). Bu aynı zamanda yazma engellerini destekleyen bir G/Ç yığıtı gerektirir ve reiserfs yazarken bir engelleme hatası alırsa, bir uyarı ile engelleri tekrar devre dışı bırakır. Yazma engelleri, günlüğe yazma işlemlerinin disk üzerinde uygun şekilde sıralanmasını zorlayarak, geçici disk yazma önbelleklerini bazı başarım düşmelerinde güvenli hale getirir. Batarya ile beslenen disklerin varlığında, engelleri devre dışı bırakmak başarımı güvenli bir şekilde artırabilir.
+.sp
+.PP
+.sp
+.SS "ubitfs için bağlama seçenekleri"
+UBIFS, UBI birimlerinin üzerinde çalışan bir flash dosya sistemidir. Erişim zamanının desteklenmediği ve her zaman kapalı olduğu unutulmamalıdır.
+.sp
+Aygıt adı şöyle belirtilebilir:
+.sp
+.TP 4
+\fBubiX_Y\fR
+UBI aygıt numarası X, birim numarası Y
+.sp
+.TP 4
+\fBubiY\fR
+UBI aygıt numarası 0, birim numarası Y
+.sp
+.TP 4
+\fBubiX:AD\fR
+UBI aygıt numarası X, birim adı AD
+.sp
+.TP 4
+\fBubi:AD\fR
+UBI aygıt numarası 0, birim adı AD
+.sp
+.PP
+Ayraç olarak \fB:\fR yerine \fB!\fR imi de kulllanılabilir.
+.sp
+Bağlama seçenekleri:
+.sp
+.TP 4
+\fBbulk_read\fR
+Toplu okuma etkinleştirilir. Dosya sistemini yavaşlattığı için VFS ileri okuması devre dışı bırakılır. Toplu okuma, dahili bir en iyilemedir. Veriler birkaç okuma isteği yerine tek seferde okunursa bazı katı hal diskler daha hızlı okunabilir. Örneğin, OneNAND birden fazla NAND sayfası okuyorsa "yüklerken-oku" işlemi yapabilir.
+.sp
+.TP 4
+\fBno_bulk_read\fR
+Toplu okuma yapılmaz. Öntanımlıdır.
+.sp
+.TP 4
+\fBchk_data_crc\fR
+Verilerin CRC-32 sağlama toplamlarına bakılır. Öntanımlıdır.
+.sp
+.TP 4
+\fBno_chk_data_crc\fR
+Verilerin CRC-32 sağlama toplamlarına bakılmaz. Bu seçenekle, dosya sistemi veri için CRC-32 sağlama toplamına bakmaz, ancak dahili indisleme bilgisi için bakar. Bu seçenek sadece okumayı etkiler, yazmayı değil. Veriler yazılırken CRC-32 her zaman hesaplanır.
+.sp
+.TP 4
+\fBcompr\fR={\fBnone\fR|\fBlzo\fR|\fBzlib\fR}
+Yeni dosyalar yazılırken kullanılacak öntanımlı sıkıştırıcıyı belirler. Bağlama \fBnone\fR seçeneği ile yapılmışsa, sıkıştırılmış dosyaları okumak hala mümkündür.
+.sp
+.PP
+.sp
+.SS "udf için bağlama seçenekleri"
+UDF, Optik Depolama Teknolojisi Derneği olan OSTA tarafından tanımlanan "Evrensel Disk Biçimi" dosya sistemidir ve genellikle DVD-ROM’lar için, sıklıkla UDF/ISO-9660 melezi bir dosya sistemi olarak kullanılır. Bununla birlikte, disk sürücülerinde, flash sürücülerde ve diğer blok aygıtlarında da tek başına mükemmel bir şekilde kullanılabilir. Ayrıca bkz. \fBiso9660\fR
+.sp
+.TP 4
+\fBuid=\fR\fIkullanıcı\fR|forget
+Dosya sistemindeki tüm dosyaların sahibi belirtilen \fIkullanıcı\fR olur. \fBuid=\fR\fIkullanıcı\fR’dan bağımsız olarak (veya genellikle ek olarak) \fBuid=forget\fR belirtilebilir. Bu durumda kullanıcı kimliklerini disk ortamına kaydedilmez. Aslında kaydedilen kullanıcı kimliği, UDF standardında tanımlandığı gibi 32 bitlik taşma kullanıcı kimliği -1’dir. Seçeneğe değer olarak kullanıcının adı, sayısal kullanıcı kimliği veya özel bir kullanım olarak forget sözcüğü belirtilebilir.
+.sp
+.TP 4
+\fBgid=\fR\fIgrup\fR|forget
+Dosya sistemindeki tüm dosyaların sahibi belirtilen \fIgrup\fR olur. \fBgid=\fR\fIgrup\fR’dan bağımsız olarak (veya genellikle ek olarak) \fBgid=forget\fR belirtilebilir. Bu durumda grup kimliklerini disk ortamına kaydedilmez. Aslında kaydedilen grup kimliği, UDF standardında tanımlandığı gibi 32 bitlik taşma grup kimliği -1’dir. Seçeneğe değer olarak grup adı, sayısal grup kimliği veya özel bir kullanım olarak forget sözcüğü belirtilebilir.
+.sp
+.TP 4
+\fBumask=\fR
+umask’ı (verilmeyecek izinlerin bit maskesi) belirler. Öntanımlı olarak, o anki sürecin umask’ı kullanılır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBmode=\fR\fIkip\fR
+Belirtilirse, dosya sisteminden okunan tüm dizin dışı düğümlerin izinlerine \fIkip\fR atanır. Değer sekizlik tabanda verilir.
+.sp
+.TP 4
+\fBdmode=\fR\fIkip\fR
+Belirtilirse, dosya sisteminden okunan tüm dizin düğümlerin izinlerine \fIkip\fR atanır.
+.sp
+.TP 4
+\fBbs=\fR\fIdeğer\fR
+Blok boyunu belirler. 2.6.30 öncesi çekirdek sürümlerinde 2048 öntanımlı değerdi. 2.6.30 sonrası ve 4.11 öncesi çekirdeklerde, 2048 değerinin son çare olarak kullanıldığı mantıksal blok boyu değeriydi. dönüşlü mantıksal aygıt blok boyutuydu. 4.11’den beri, mantıksal aygıt blok boyu ile 4096 arasındaki geçerli blok boyutunun son çare olduğu mantıksal blok boyudur.
+.sp
+Diğer ayrıntılar için \fBmkudffs\fR(8) 2.0+ kılavuz sayfasının UYUMLULUK ve BLOK BOYUTU bölümlerine bakılabilir.
+.sp
+.TP 4
+\fBunhide\fR
+Gizli dosyaları gösterir.
+.sp
+.TP 4
+\fBundelete\fR
+Silinmiş dosyaları listeler.
+.sp
+.TP 4
+\fBadinicb\fR
+Veriyi dosya düğümüne gömer (öntanımlı).
+.sp
+.TP 4
+\fBnoadinicb\fR
+Veriyi dosya düğümüne gömmez.
+.sp
+.TP 4
+\fBshortad\fR
+Kısa UDF adres tanıtıcıları kullanılır (öntanımlı).
+.sp
+.TP 4
+\fBlongad\fR
+Uzun UDF adres tanıtıcıları kullanılır.
+.sp
+.TP 4
+\fBnostrict\fR
+Kesin uyumluluk kaldırılır.
+.sp
+.TP 4
+\fBiocharset\fR
+Yerel karakter kümesi etkin olur. Çekirdeğin \fBCONFIG_UDF_NLS\fR seçeneği ile derlenmesini gerektirir.
+.sp
+.TP 4
+\fButf8\fR
+UTF-8 karakter kümesi etkin olur.
+.sp
+.PP
+.sp
+.SS "Hata ayıklama ve olağanüstü durumda kurtarma için bağlama seçenekleri"
+.TP 4
+\fBnovrs\fR
+Birim Tanıma Sırası yoksayılır ve bağlama yine de denenir.
+.sp
+.TP 4
+\fBsession=\fR
+Çok oturumlu kayıtlı optik ortam için oturum numarasını belirler, sonuncusu öntanımlıdır.
+.sp
+.TP 4
+\fBanchor=\fR
+Standart konum 256 geçersiz kılınır.
+.sp
+.TP 4
+\fBlastblock=\fR
+Dosya sisteminin son bloğunu belirler.
+.sp
+.PP
+.sp
+.SS "Karşılaşılabilecek ve kaldırılması gereken artık kullanılmayan eskimiş bağlama seçenekleri"
+.TP 4
+\fBuid=ignore\fR
+Yok sayılır, yerine \fBuid=\fR\fIkullanıcı\fR kullanılmalıdır.
+.sp
+.TP 4
+\fBgid=ignore\fR
+Yok sayılır, yerine \fBgid=\fR\fIgrup\fR kullanılmalıdır.
+.sp
+.TP 4
+\fBvolume=\fR\p \fBpartition=\fR\p \fBfileset=\fR\p \fBrootdir=\fR
+Gerçeklenmedi. Yok sayılır.
+.sp
+.PP
+.sp
+.SS "ufs için bağlama seçenekleri"
+.TP 4
+\fBufstype\fR=\fIdeğer\fR
+UFS değişik işletim sistemlerinde geniş çapta kullanılan bir dosya sistemidir. Sorun, gerçeklenimler arası farklılıklardadır. Bazı gerçeklenim özellikleri belgelenmemiştir, bu nedenle \fBufs\fR’nin türünü otomatik olarak tanımak çok zordur. Bu yüzden, kullanıcılar bağlama işlemi esnasında \fBufs\fR türünü belirtmek zorundadır. Muhtemel değerler şunlardır:
+.sp
+.RS
+.TP 4
+\fBold\fR
+\fBufs\fR’nin eski biçimi, salt okunurdur ve öntanımlıdır. (\fB-r\fR seçeneğinin belirtilmesi gerekir.)
+.sp
+.TP 4
+\fB44bsd\fR
+BSD benzeri sistemler(NetBSD, FreeBSD, OpenBSD) tarafından oluşturulmuş dosya sistemleri içindir.
+.sp
+.TP 4
+\fBufs2\fR
+Oku-yaz desteğiye FreeBSD 5.x’te kullanılmıştır.
+.sp
+.TP 4
+\fB5xbsd\fR
+\fBufs2\fR ile eşanlamlı.
+.sp
+.TP 4
+\fBsun\fR
+Sparc üzerinde sunOS veya Solaris tarafından oluşturulmuş dosya sistemleri içindir.
+.sp
+.TP 4
+\fBsunx86\fR
+x86 üzerinde Solaris tarafından oluşturulmuş dosya sistemleri içindir.
+.sp
+.TP 4
+\fBhp\fR
+HP-UX tarafından oluşturulmuş dosya sistemleri içindir.
+.sp
+.TP 4
+\fBnextstep\fR
+NeXTStep tarafından (NeXT istasyonları üzerinde) oluşturulmuş dosya sistemleri içindir (şu an salt okunurdur).
+.sp
+.TP 4
+\fBnextstep-cd\fR
+NextStep CDROMlar (block_size == 2048) içindir, salt okunurdur.
+.sp
+.TP 4
+\fBopenstep\fR
+OpenStep tarafından oluşturulmuş dosya sistemleri içindir (şu an salt okunurdur). Aynı dosya sistemi türü macOS tarafından da kullanılır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBonerror\fR=\fIdeğer\fR
+Hata durumundaki davranışı belirler:
+.sp
+.RS
+.TP 4
+\fBpanic\fR
+Bir hata durumunda çekirdek paniğine sebep olur, sistem durdurulur.
+.sp
+.TP 4
+[\fBlock\fR|\fBumount\fR|\fBrepair\fR]
+Bugün için, bu seçenekler bir işe yaramaz; bir hata durumunda sadece bir konsol iletisi basılır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.SS "umsdos için bağlama seçenekleri"
+\fBdotsOK\fR seçeneği kabul edilmez. Bkz: \fBmsdos için bağlama seçenekleri\fR
+.sp
+.SS "usbfs için bağlama seçenekleri"
+.TP 4
+\fBdevuid\fR=\fIdeğer\fR, \fBdevgid\fR=\fIdeğer\fR, \fBdevmode\fR=\fIkip\fR
+Usbfs dosya sistemindeki aygıt dosyalarının sahibini, grubunu ve kipini belirler (uid=gid=0, mode=0644 öntanımlıdır). \fIkip\fR sekizlik tabanda belirtilir.
+.sp
+.TP 4
+\fBbusuid\fR=\fIdeğer\fR, \fBbusgid\fR=\fIdeğer\fR, \fBbusmode\fR=\fIkip\fR
+Usbfs dosya sistemindeki veriyolu dizinlerinin sahibini, grubunu ve kipini belirler (uid=gid=0, mode=0555 öntanımlıdır). \fIkip\fR sekizlik tabanda belirtilir.
+.sp
+.TP 4
+\fBlistuid\fR=\fIdeğer\fR, \fBlistgid\fR=\fIdeğer\fR, \fBlistmode\fR=\fIkip\fR
+Usbfs dosya sistemindeki dosya aygıtlarının sahibini, grubunu ve kipini belirler (uid=gid=0, mode=0444 öntanımlıdır). \fIkip\fR sekizlik tabanda belirtilir.
+.sp
+.PP
+.sp
+.SS "vfat için bağlama seçenekleri"
+Her şeyden önce, \fBfat\fR için bağlama seçenekleri, \fBvfat\fR içinde geçerlidir. \fBdotsOK\fR seçeneği \fBvfat\fR tarafından kabul edilmez. Bunların yanında şu seçenekler de mevcuttur:
+.sp
+.TP 4
+\fBuni_xlate\fR
+Elde edilemeyen Unicode karakterlerini önceleme dizgesine çevirir. Böylece, içinde Unicode karakterler olan dosya isimleriyle yedekleme ve tekrar yükleme şansına sahip olursunuz. Bu seçenek olmaksızın, çevirinin mümkün olmadığı hallerde, bir ‘?’ işareti kullanılır. Önceleme dizgesi ‘:’ dir, çünkü aksi durumda \fBvfat\fR sistemlerde geçersiz olur. Kullanılan önceleme dizgesi, u Unicode karakteri temsil etmek üzere: ’:’, (u & 0x3f), ((u>>6) & 0x3f), (u>>12).
+.sp
+.TP 4
+\fBposix\fR
+Harf büyüklükleri farklı iki aynı isme izin verir. Bu seçenek kullanılmamalıdır.
+.sp
+.TP 4
+\fBnonumtail\fR
+isim~num.uzt ismini denemeden önce sıra numarasız kısa bir isim oluşturmayı dener.
+.sp
+.TP 4
+\fButf8\fR
+UTF-8, konsol tarafından kullanılan dosya sistemleri için güvenli 8 bitlik bir Unicode kodlamasıdır. Bu seçenekle etkinleştirilir, \fButf8=0\fR, \fButf8=no\fR veya \fButf8=false\fR ile devre dışı bırakılır. Şayet \fBuni_xlate\fR kullanılmışsa, \fButf8\fR iptal edilir.
+.sp
+.TP 4
+\fBshortname\fR=\fIkip\fR
+8.3 gösterimine uyan kısa dosya adlarının oluşturulması ve görüntülenmesi için davranışı tanımlar. Bir dosya için uzun bir ad varsa, görüntüleme için her zaman tercih edilen uzun ad olacaktır. Dört kip vardır:
+.sp
+.RS
+.TP 4
+\fBlower\fR
+Kısa ad küçük harfe dönüştürülerek gösterilir; kısa adın tamamı büyük harf olmadığında uzun ad saklanır.
+.sp
+.TP 4
+\fBwin95\fR
+Kısa ad büyük harfe dönüştürülerek gösterilir; kısa adın tamamı büyük harf olmadığında uzun ad saklanır.
+.sp
+.TP 4
+\fBwinnt\fR
+Kısa ad olduğu gibi gösterilir; kısa adın tamamı büyük veya tamamı küçük harf olmadığında uzun ad saklanır.
+.sp
+.TP 4
+\fBmixed\fR
+Kısa ad olduğu gibi gösterilir; kısa adın tamamı büyük harf olmadığında uzun ad saklanır. Linux 2.6.32’den beri bu kip öntanımlıdır.
+.sp
+.PP
+.RE
+.IP
+.sp
+.PP
+.sp
+.sp
+.SH "AYGIT EŞLEMCİ DOĞRULUĞU (DM-VERİTY) DESTEĞİ"
+Aygıt eşleyici doğrulama hedefi, çekirdek şifreleme API’sini kullanan blok aygıtlarının salt okunur şeffaf bütünlük denetimini sağlar. \fBmount\fR komutu, dm-verity aygıtını açabilir ve aygıt dosya sistemini bağlamadan önce bütünlük doğrulamasını yapabilir. \fIlibmount\fR ve \fIlibcryptsetup\fR kütüphanelerini gerektirir (isteğe bağlı olarak \fBdlopen\fR(3) aracılığıyla). \fIlibcryptsetup\fR, önceden bağlanmış bir aygıtının kök aşını çıkartmayı destekliyorsa, eşleşme durumunda mevcut aygıtlar otomatik olarak yeniden kullanılacaktır. dm-verity için bağlama seçenekleri:
+.sp
+.TP 4
+\fBverity.hashdevice\fR=\fIyol\fR
+dm-verity’ye aktarılacak kaynak birim ile ilişkili aş ağacı aygıtının \fIyol\fRunu belirler.
+.sp
+.TP 4
+\fBverity.roothash\fR=\fIaş\fR
+\fBverity.hashdevice\fR kökünün onaltılık tabanda \fIaş\fR değeri. \fBverity.roothashfile\fR ile birlikte kullanılamaz.
+.sp
+.TP 4
+\fBverity.roothashfile\fR=\fIyol\fR
+\fBverity.hashdevice\fR kökünün onaltılık tabanda aşını içeren dosyanın \fIyol\fRunu belirler. \fBverity.roothash\fR ile birlikte kullanılamaz.
+.sp
+.TP 4
+\fBverity.hashoffset\fR=\fIkonum\fR
+Aş ağacı aygıtı, kaynak birime gömülüyse, ağaca ulaşmak için dm-verity tarafından kullanılacak \fIkonum\fRu belirler (0 öntanımlıdır).
+.sp
+.TP 4
+\fBverity.fecdevice\fR=\fIyol\fR
+dm-verity’a aktarılacak kaynak birim ile ilişkili Aktarım öncesi Hata Düzeltme (FEC) aygıtının \fIyol\fRunu belirler. İsteğe bağlıdır. \fBCONFIG_DM_VERITY_FEC\fR seçeneği ile derlenmiş çekirdek gerektirir.
+.sp
+.TP 4
+\fBverity.fecoffset\fR=\fIkonum\fR
+Aktarım öncesi Hata Düzeltme (FEC) aygıtı, kaynak birime gömülüyse, FEC alanına ulaşmak için dm-verity tarafından kullanılacak \fIkonum\fRu belirler (0 öntanımlıdır). İsteğe bağlıdır.
+.sp
+.TP 4
+\fBverity.fecroots\fR=\fIdeğer\fR
+FEC için eşlik baytı sayısı (2 öntanımlıdır). İsteğe bağlıdır.
+.sp
+.TP 4
+\fBverity.roothashsig\fR=\fIyol\fR
+Kök aşının onaltılık tabandaki dizgesinin \fBpkcs7\fR(1ssl) imzasını içeren dosyanın yolunu belirler. Linux çekirdeğinin \fBCONFIG_DM_VERITY_VERIFY_ROOTHASH_SIG\fR seçeneği ile derlenmiş olmasını ve \fIlibcryptsetup\fR kütüphanesinin \fBcrypt_activate_by_signed_key\fR() işlevini gerektirir. Aygıtın yeniden kullanımı için, imzaların ya aygıtın tüm bağlamalarında kullanılmış olması ya da hiçbiri tarafından kullanılmamış olması gerekir. İsteğe bağlıdır. İsteğe bağlıdır.
+.sp
+.TP 4
+\fBverity.oncorruption\fR=ignore|restart|panic
+Çekirdeğe, bozulma algılandığında yok saymasını (ignore), yeniden başlatmasını(restart) veya paniklemesini (panic) söyler. Öntanımlı olarak G/Ç işlemi başarısız olur. Linux 4.1 veya üstü ve libcrypsetup 2.3.4 veya üstü sürüm gerektirir.
+.sp
+.PP
+util-linux paketinin 2.35 sürümünden beri desteklenmektedir. Örneğin,
+.sp
+.RS 4
+.nf
+\fBmksquashfs /etc /tmp/etc.squashfs
+\&
+dd if=/dev/zero of=/tmp/etc.hash bs=1M count=10
+\&
+veritysetup format /tmp/etc.squashfs /tmp/etc.hash
+\&
+openssl smime -sign -in\fR \fIaş\fR \fB-nocerts -inkey private.key \\
+-signer private.crt -noattr -binary -outform der -out /tmp/etc.p7
+\&
+mount -o verity.hashdevice=/tmp/etc.hash,verity.roothash=\fR\fIaş\fR\fB,\\
+verity.roothashsig=/tmp/etc.p7 /tmp/etc.squashfs /mnt\fR
+.fi
+.sp
+.RE
+komutları, \fI/etc\fR dizininin squashfs imgesini oluşturur, aş aygıtını doğrular ve doğrulanmış dosya sistemi imgesini \fI/mnt\fR altına bağlar. Çekirdek, \fBverity.roothashsig\fR kullanıyorsa, kök aşının çekirdek anahtarlığındaki bir anahtar tarafından imzalandığını doğrulayacaktır.
+.sp
+.SH "DÖNÜŞ AYGITI DESTEĞİ"
+Olası bağlama türlerinden biri de dönüş (dev/loop) aygıtları üzerinden yapılandır. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount /tmp/disk.img /mnt -t vfat -o loop=/dev/loop3\fR
+.fi
+.sp
+.RE
+\fI/dev/loop3\fR aygıtını karşılık gelen \fI/tmp/disk.img\fR aygıt imgesini oluşturacak ve daha sonra bu aygıtı \fI/mnt\fR altına bağlayacaktır.
+.sp
+Şayet aygıt dosyası açıkça belirtilmemişse (fakat \fB-o loop\fR seçeneği verilmişse), \fBmount\fR komutu kullanılmayan bir dönüş aygıtı arar ve onu kullanır. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount /tmp/disk.img /mnt -o loop\fR
+.fi
+.sp
+.RE
+Bir dosya sistemi türü belirtilmemişse veya dosya sistemi \fBlibblkid\fR tarafından biliniyorsa, \fBmount\fR komutu normal bir dosyadan otomatik olarak bir dönüş aygıtı oluşturur. Örnek:
+.sp
+.RS 4
+.nf
+\fBmount /tmp/disk.img /mnt
+\&
+mount -t ext4 /tmp/disk.img /mnt\fR
+.fi
+.sp
+.RE
+Bu tür bağlama \fBloop\fR, \fBoffset\fR ve \fBencryption\fR isimleriyle belirtilen üç seçenekle yapılır (sırasıyla aygıt, konum ve şifreleme). Aslında bunlar \fBlosetup\fR(8)’a aktarılan seçeneklerdir. (Bu seçenekler, dosya sistemi türüne özgü olan bağlama seçeneklerine ek olarak kullanılabilir.)
+.sp
+Linux 2.6.25’den beri dönüş aygıtlarının otomatik imhası desteklenmektedir. Yani, \fBmount\fR tarafından tahsis edilen bir dönüş aygıtı artık \fI/etc/mtab\fR’dan bağımsız olarak \fBumount\fR(8) tarafından serbest bırakılabilmektedir.
+.sp
+\fBlosetup -d\fR veya \fBumount -d\fR kullanılarak bir dönüş aygıtı elle de serbest bırakılabilir.
+.sp
+util-linux v2.29’dan beri, belirtilen dosya aynı konum ve boyut sınırına sahip bir dönüş aygıtı için zaten kullanımdaysa, \fBmount\fR yeni bir aygıtı başlatmak yerine dönüş aygıtını yeniden kullanır. Bu, olası bir dosya sistemi bozulmasını önlemek için gereklidir.
+.sp
+.SH "ÇIKIŞ DURUMU"
+\fBmount\fR komutu aşağıdaki bitsel VEYAlanabilir değerlerle çıkar:
+.sp
+.TP 4
+\fI0\fR
+başarılı
+.sp
+.TP 4
+\fI1\fR
+kullanım ve izinler hatalı
+.sp
+.TP 4
+\fI2\fR
+sistem hatası (bellek yetersiz, çatallanamıyor, başka dönüş aygıtı kalmadı)
+.sp
+.TP 4
+\fI4\fR
+dahili yazılım hatası
+.sp
+.TP 4
+\fI8\fR
+kullanıcı kesmesi
+.sp
+.TP 4
+\fI16\fR
+/etc/mtab dosyasına yazma veya kilitleme hatası
+.sp
+.TP 4
+\fI32\fR
+bağlama başarısız
+.sp
+.TP 4
+\fI64\fR
+bağlama kısmen başarılı
+.sp
+.PP
+\fBmount -a\fR komutu 0 (tamamen başarılı), 32 (tamamen başarısız) veya 64 (kısmen başarılı) ile çıkar.
+.sp
+.SH "YARDIMCI BAĞLAMA ARAÇLARI"
+Dışsal bağlama araçları için sözdizimi:
+.sp
+.RS 4
+\fB/sbin/mount.\fR\fIds-türü belirtim dizin\fR [\fB-sfnv\fR] [\fB-N\fR \fIisimuzayı\fR] [\fB-o\fR \fIseçenekler\fR] [\fB-t\fR \fItür.alttür\fR]
+.sp
+.RE
+Burada, \fIds-türü\fR dosya sistemi türü olup \fB-sfnvoN\fR seçenekleri normal \fBmount\fR seçenekleri ile aynıdır. \fB-t\fR seçeneği alt tür desteği olan dosya sistemleri için kullanılır. Örnek:
+.sp
+.RS 4
+.nf
+\fB/sbin/mount.fuse -t fuse.sshfs\fR
+.fi
+.sp
+.RE
+\fBmount\fR komutu, \fBmount.\fR\fIds-türü\fR dışsal araçlarına \fBunbindable, runbindable, private, rprivate, slave, rslave, shared, rshared, auto, noauto, comment, x-*, loop, offset\fR ve \fBsizelimit\fR bağlama seçeneklerini aktarmaz. Diğer tüm seçenekler, \fB-o\fR seçeneğine virgül ayraçlı bir liste olarak belirtilebilir.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBLIBMOUNT_FSTAB\fR=\fIyol\fR
+\fIfstab\fR dosyasının öntanımlı yerini geçersiz kılar (suid için yok sayılır)
+.sp
+.TP 4
+\fBLIBMOUNT_MTAB\fR=\fIyol\fR
+\fImstab\fR dosyasının öntanımlı yerini geçersiz kılar (suid için yok sayılır)
+.sp
+.TP 4
+\fBLIBMOUNT_DEBUG=all\fR
+libmount hata ayıklama çıktısı etkin olur
+.sp
+.TP 4
+\fBLIBBLKID_DEBUG=all\fR
+libblkid hata ayıklama çıktısı etkin olur
+.sp
+.TP 4
+\fBLOOPDEV_DEBUG=all\fR
+Dönüş aygıtı ile ilgili hata ayıklama çıktısı etkin olur
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+Ayrıca, \fB/etc/fstab, /etc/mtab ve /proc/mounts dosyaları\fR bölümüne de bakınız.
+.sp
+.TP 4
+\fI/etc/fstab\fR
+dosya sistemleri tablosu
+.sp
+.TP 4
+\fI/run/mount\fR
+libmount’a özel çalışma dizini
+.sp
+.TP 4
+\fI/etc/mtab\fR
+bağlı dosya sistemleri tablosu veya \fI/proc/mounts\fR dosyasına sembolik bağ
+.sp
+.TP 4
+\fI/etc/mtab~\fR
+kilit dosyası (\fImtab\fR sembolik bağı bulunan sistemlerde kullanılmaz)
+.sp
+.TP 4
+\fI/etc/mtab.tmp\fR
+geçici dosya (\fImtab\fR sembolik bağı bulunan sistemlerde kullanılmaz)
+.sp
+.TP 4
+\fI/etc/filesystems\fR
+denenecek dosya sistemi türlerinin listesi
+.sp
+.PP
+.sp
+.SH "TARİHÇE"
+AT&T UNIX sürüm 5 bir \fBmount\fR komutu içeriyordu.
+.sp
+.SH "YAZILIM HATALARI"
+Bozulmuş bir dosya sisteminin çökmeye sebep olma olasılığı vardır.
+.sp
+Bazı Linux dosya sistemleri \fB-o sync\fR ve \fB-o dirsync\fR desteklemez (ext2, ext3, ext4, fat ve vfat dosya sistemleri \fBsync\fR seçeneği ile bağlandıklarında eşzamanlı güncellemeleri (BSD tarzı) destekler).
+.sp
+\fB-o remount\fR seçeneği \fBmount\fR bağlama seçeneklerini değiştiremeyebilir (örneğin, \fBsb\fR hariç bütün \fBext2fs\fR’e özgü bağlama seçenekleri tekrar bağlama durumunda değiştirilebilir, fakat \fBfat\fR için \fBgid\fR ve \fBumask\fR değiştirilemez.)
+.sp
+Normal \fImtab\fR dosyasına sahip sistemlerde \fI/etc/mtab\fR ve \fI/proc/mounts\fR dosyalarının eşleşmemesi mümkündür. İlk dosya yalnızca \fBmount\fR komut seçeneklerine dayanır, ancak ikinci dosyanın içeriği çekirdeğe ve diğer ayarlara da bağlıdır (örn. bir NFS sunucusu üzerinde bazı durumlarda \fBmount\fR komutu NFS bağlama noktaları hakkında güvenilir olmayan bilgiler bildirebilirken \fI/proc/mounts\fR dosyası genellikle daha güvenilir bilgiler içerir.) Bu, \fImtab\fR dosyasını \fI/proc/mounts\fR dosyasına sembolik bağ yapmak için nedenlerden biridir.
+.sp
+NFS dosya sistemlerinde dosyaların dosya tanıtıcıları (yani \fBfcntl\fR(2) çağrıları ve \fBioctl\fR(2) ailesi) üzerinden denetlenmesi, \fBnoacl\fR bağlama seçeneği kullanılsa bile çekirdekte tutarlılık denetimi olmaması nedeniyle tutarsız sonuçlar verebilir.
+.sp
+Eski çekirdekler kullanılırken, \fBmount\fR komutu blok aygıtı boyutunun istendiği gibi yapılandırıldığını doğrulamıyorsa, \fBloop\fR seçeneği, kullanılan \fBoffset\fR veya \fBsizelimit\fR seçenekleriyle başarısız olabilir. Bu sorun, \fBmount\fR yapılandırılmış dönüş aygıtıyla çağrılmadan önce \fBlosetup\fR(8) komutu elle kullanılarak çözülebilir.
+.sp
+.SH "YAZAN"
+Karel Zak tarafından yazılmıştır.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBmount\fR(2), \fBumount\fR(2), \fBfilesystems\fR(5), \fBfstab\fR(5), \fBnfs\fR(5), \fBxfs\fR(5), \fBmount_namespaces\fR(7), \fBxattr\fR(7), \fBe2label\fR(8), \fBfindmnt\fR(8), \fBlosetup\fR(8), \fBlsblk\fR(8), \fBmke2fs\fR(8), \fBmountd\fR(8), \fBnfsd\fR(8), \fBswapon\fR(8), \fBtune2fs\fR(8), \fBumount\fR(8), \fBxfs_admin\fR(8)
+.sp
+.SH "GERİBİLDİRİM"
+Hata bildirimleri için https://github.com/util-linux/util-linux/issues adresindeki hata izleyici kullanılabilir.
+.sp
+.SH "YARARLANIM"
+\fBmount\fR komutu util-linux paketinin bir parçası olup Linux Çekirdek Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>.
+.sp
+.SH "ÇEVİREN"
+© 2004 Yalçın Kolukısa
+.br
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

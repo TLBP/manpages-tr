@@ -1,0 +1,329 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (C) 1999-2011, 2013-2022 Free Software Foundation, Inc.
+ *
+ * This document is dual-licensed.  You may distribute and/or modify it
+ * under the terms of either of the following licenses:
+ *
+ * * The GNU General Public License, as published by the Free Software
+ *   Foundation, version 3 or (at your option) any later version.  You
+ *   should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see
+ *   <https://www.gnu.org/licenses>.
+ *
+ * * The GNU Free Documentation License, as published by the Free
+ *   Software Foundation, version 1.2 or (at your option) any later
+ *   version, with no Invariant Sections, no Front-Cover Texts, and no
+ *   Back-Cover Texts.  You should have received a copy of the GNU Free
+ *   Documentation License along with this program.  If not, see
+ *   <https://www.gnu.org/licenses>.
+ *
+..
+.\" Derlenme zamanı: 2022-11-24T13:21:27+03:00
+.TH "NANO" 1 "Kasım 2022" "nano 7.0" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+nano - pico’dan esinlenilmiş başka bir düzenleyici
+.SH KULLANIM
+.IP \fBnano\fR 5
+[\fISEÇENEKLER\fR] [[+\fISATIR\fR[,\fISÜTUN\fR]] \fIDOSYA\fR]...
+.IP \fBnano\fR 5
+[\fISEÇENEKLER\fR] [[+[\fBcrCR\fR](/|?)\fIDİZGE\fR] \fIDOSYA\fR]...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBnano\fR küçük ve kullanıcı dostu bir metin düzenleyicisidir. Pico’nun görünüşünde, ancak özgür bir yazılımdır. Birden fazla dosya açma, satır satır kaydırma, geri alma/yineleme, sözdizimi renklendirme, satır numaralandırma ve çok uzun satırları sarmalama gibi Pico’da olmayan özellikleri vardır.
+.sp
+Komut satırında dosya adı verilirken, dosya adının önüne artı imi (\fB+\fR) ile satır numarası eklenerek imleç belirli bir satıra, hatta virgülle eklenerek belirli bir sütuna yerleştirilebilir. (Negatif sayılar dosyanın veya satırın sonundan itibaren sayılır.) Dosya isminden önce, bir dizgenin önüne \fB+/\fR/ veya \fB+?\fR konularak imleç, bu dizgenin ilk veya son oluşumuna yerleştirilebilir. \fB+\fR işaretinden sonra \fBc\fR ve/veya \fBr\fR eklenerek dizge harf büyüklüğüne duyarlı hale getirilebilir ve/veya düzenli ifade olarak yorumlanabilir, \fBc\fR ve \fBr\fR yerine \fBC\fR ve \fBR\fR eklenerek bu arama kipleri devre dışı bırakılabilir. Dizge boşluk içeriyorsa, dizgenin tırnak içine alınması gerekir. Örnek vermek gerekirse: "Foo" kelimesinin ilk geçtiği yerde \fIdosya\fRnın açılması istenirse şöyle yapılabilir:
+.sp
+.RS 4
+.nf
+\fBnano +c/Foo\fR \fIdosya\fR
+.fi
+.sp
+.RE
+Özel bir durum olarak, \fIdosya\fR yerine bir tire (\fB-\fR) verilirse, nano verileri standart girdiden okur.
+.sp
+.SH "METNİ DÜZENLEME"
+Bir dosyaya metin girmek ve içinde dolaşmak kolaydır: Harfleri yazmak ve hareket tuşlarını kullanarak imleci hareket ettirmek yeterlidir. Komutlar Ctrl (\fB^\fR) ve Sol Alt (\fBM-\fR) (Meta tuşu da denir) tuşları kullanılarak girilir. \fB^K\fR, geçerli satırı siler ve onu kesme tamponuna koyar. Ardışık \fB^K\fR’ler, silinen tüm satırları kesme tamponunda bir araya getirecektir. Herhangi bir imleç hareketi veya başka bir komutun yürütülmesinden sonraki \fB^K\fR kesme tamponunun üzerine yazılmasına neden olacaktır. \fB^U\fR, kesme tamponunun içeriğini geçerli imleç konumuna yapıştıracaktır.
+.sp
+Bir metin parçasının daha hassas kesilmesi veya kopyalanması gerektiğinde, başlangıç \fB^6\fR ile işaretlenebilir, imleç sonuna hareket ettirebilir (işaretli metin vurgulanacaktır) ve ardından kesmek için \fB^K\fR veya kesme tamponuna kopyalamak \fBM-6\fR tuşları kullanılabilir. Ayrıca işaretli metin \fB^O\fR ile bir dosyaya kaydedilebilir veya \fB^T^T\fR ile yazım denetimi uygulanabilir.
+.sp
+Bazı uçbirimlerde metin, ok tuşlarını kullanırken Shift tuşunu basılı tutarak da seçilebilir. Ctrl veya Alt tuşunu basılı tutmak da uzunluğu artıracaktır. İmleç hareket ettirilirken Shift tuşu bırakılırsa seçim iptal olur.
+.sp
+Geçerli herhangi bir Unicode karakteri, \fBM-V\fR ve ardından karakterin onaltılık basamakları (altı basamaktan az olduğunda <Space> veya <Enter> ile bitirilir) yazılarak tampona eklenebilir. \fBM-V\fR ve ardından ilgili tuş vuruşu yazılarak bir komut da (\fB^J\fR hariç) eklenebilir.
+.sp
+Ekranın altındaki iki satır bazı önemli komutları gösterir; yerleşik yardım (\fB^G\fR) kullanılabilecek tüm komutları listeler. Öntanımlı tuş vuruşları \fInanorc\fR dosyasından değiştirilebilir - bkz. \fBnanorc\fR(5).
+.sp
+.SH "SEÇENEKLER"
+.TP 4
+\fB-A\fR, \fB--smarthome\fR
+Home tuşunu daha akıllı hale getirir. İmleç bir satırda boşluk olmayan karakterlerin en başında olmamak şartıyla, herhangi bir yerdeyken Home tuşuna basıldığında, imleç satır başlangıca atlar (ileri veya geri giderek). İmleç zaten o konumdaysa, satırın gerçek başlangıcına atlar.
+.sp
+.TP 4
+\fB-B\fR, \fB--backup\fR
+Bir dosyayı kaydederken önceki sürüm dosya adının başına tilde (~) eklenerek yedeklenir.
+.sp
+.TP 4
+\fB-C\fR \fIDİZİN\fR, \fB--backupdir\fR=\fIDİZİN\fR
+\fB-B\fR ile birlikte kullanılmak koşuluyla, tek bir yedek tutmak yerine, yedekleme her sürüme benzersiz bir numara verilerek yapılır ve bu dosyalar belirtilen \fIDİZİN\fRe kaydedilir.
+.sp
+.TP 4
+\fB-D\fR, \fB--boldtext\fR
+Arayüzde renkler tersyüz edilmek yerine kalın karakterler kullanılır. Bu, nanorc dosyasıda \fBtitlecolor, statuscolor, keycolor, functioncolor, numbercolor, selectedcolor\fR tanımlarıyla geçersiz kılınabilir. Bkz. \fBnanorc\fR(5).
+.sp
+.TP 4
+\fB-E\fR, \fB--tabstospaces\fR
+Yazılan her sekmeyi o konumdaki bir sekmenin kaplayacağı sayıda boşluğa dönüştürür.
+.sp
+.TP 4
+\fB-F\fR, \fB--multibuffer\fR
+Her dosya öntanımlı olarak ayrı bir tampona okunur.
+.sp
+.TP 4
+\fB-G\fR, \fB--locking\fR
+Dosyalar düzenlenirken vim tarzı dosya kilitlemesi uygulanır.
+.sp
+.TP 4
+\fB-H\fR, \fB--historylog\fR
+Son yüz arama dizgesi ve değiştirme dizgesi ve çalıştırılan komutlar kaydedilir, böylece sonraki oturumlarda bunlar kolayca yeniden kullanılabilir.
+.sp
+.TP 4
+\fB-I\fR, \fB--ignorercfiles\fR
+Ne kullanıcının ne de sistemin \fInanorc\fR dosyasına bakılır.
+.sp
+.TP 4
+\fB-J\fR \fISAYI\fR, \fB--guidestripe\fR=\fISAYI\fR
+Metnin genişliğini saptamaya yardımcı olmak için belirtilen sütuna dikey bir şerit çizilir. (Şeridin rengi, \fInanorc\fR dosyasındaki \fBstripecolor\fR ile değiştirilebilir.)
+.sp
+.TP 4
+\fB-K\fR, \fB--rawsequences\fR
+Önceleme dizilimlerinin yorumlanması ncurses’ten istenmedez, doğrudan yapılır. (Bazı tuşların düzgün çalışması için bu seçeneğe ihtiyaç varsa, terminfo uçbirim açıklamasının kullanılan uçbirimin gerçek davranışıyla tam olarak eşleşmediği anlamına gelir. Bu, örneğin bir BSD makinesine \fBssh\fR(1) oturumu açtığınızda olabilir.) Bu seçeneğin kullanılması \fBnano\fR’nun fare desteğini devre dışı bırakır.
+.sp
+.TP 4
+\fB-L\fR, \fB--nonewlines\fR
+Satır sonu karakteri ile bitmeyen satırların sonuna satır sonu karakterini otomatik olarak eklemez. (POSIX’e uygun olmayan metin dosyaları kaydedilmesine sebep olur.)
+.sp
+.TP 4
+\fB-M\fR, \fB--trimblanks\fR
+Satır sarmalama ile oluşturulan veya yanlara hizalanan satırlarda satır sonu karakterinden önceki boşluklar ayıklanır.
+.sp
+.TP 4
+\fB-N\fR, \fB--noconvert\fR
+DOS/Mac biçimindeki dosyaların otomatik dönüştürülmesi devre dışı bırakılır.
+.sp
+.TP 4
+\fB-O\fR, \fB--bookstyle\fR
+Yanlara hizalamada, ele alınan satırın başında boşluk varsa, bu boşluk paragraf başlangıcı olarak yorumlanır (otomatik girintileme etkin değilse).
+.sp
+.TP 4
+\fB-P\fR, \fB--positionlog\fR
+Üzerinde çalışılan son 200 dosyanın son imleç konumu saklanır ve bu dosyalardan biri yeniden açıldığında imleç o konuma yerleştirilir.
+.sp
+.TP 4
+\fB-Q\fR \fI"DÜZİFD"\fR, \fB--quotestr\fR=\fI"DÜZİFD"\fR
+Satırın tırnak içine alınan bölümüne uygulanacak düzenli ifadeyi belirler. \fI"DÜZİFD"\fR için \fB"^([ \\t]*([!#%:;>|}]|//))+"\fR dizgesi öntanımlıdır (burada \fB\\t\fR sekme anlamındadır). Bu, e-posta oluştururken alıntılanan metin bloklarını ve kaynak kodu yazarken yorum satırı bloklarını yeniden düzenlemeyi mümkün kılar.
+.sp
+.TP 4
+\fB-R\fR, \fB--restricted\fR
+Kısıtlı kip: Komut satırında belirtilmeyen herhangi bir dosyayı okumaz veya yazmaz. Bunun anlamı: Geçmiş dosyalarını okuma veya yazma; askıya alma; yazım denetimi yapma; bir dosyayı başa veya sona ekleme, dosyayı var olan bir dosyanın üzerine farklı adla kaydetme; dosyaları yedekleme. Kısıtlı kip, \fBnano\fR’yu isminin başına ’r’ ekleyip ("\fBrnano\fR" olarak) çağırarak da etkinleştirilebilir.
+.sp
+.TP 4
+\fB-S\fR, \fB--softwrap\fR
+Ekranın genişliğini aşan satırları birden çok ekran satırı halinde görüntüler. (Bu yumuşak kaydırma, kaba bir şekilde ekranın kenarında kelimeyi keserek değil, \fB--atblanks\fR seçeneğini de belirterek boşluklardan keserek gerçekleştirilebilir.) (Eski kısa seçenek, \fB-$\fR, kullanımdan kaldırılmıştır.)
+.sp
+.TP 4
+\fB-T\fR \fIGENİŞLİK\fR, \fB--tabsize\fR=\fIGENİŞLİK\fR
+Sekme genişliğini \fIGENİŞLİK\fR sütun olarak belirler. Sıfırdan büyük bir değer belirtilmelidir. 8 öntanımlıdır.
+.sp
+.TP 4
+\fB-U\fR, \fB--quickblank\fR
+Durum çubuğu iletileri 20 yerine ilk tuş vuruşunda görünmez olur. \fB-c/\fR (\fB--constantshow\fR) seçeneği bu seçeneği geçersiz kılar. \fB--minibar\fR veya \fB--zero\fR seçeneği de belirtilmişse ileti öntanımlı olan 1.5 saniye yerine 0.8 saniye sonra görünmez olur.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-W\fR, \fB--wordbounds\fR
+Kelime sınırları tespit edilirken noktalama imleri kelimenin parçası olarak kabul edilir.
+.sp
+.TP 4
+\fB-X\fR \fI"KARAKTERLER"\fR, \fB--wordchars\fR=\fI"KARAKTERLER"\fR
+Abecesayısal olanlardan başka, kelimenin parçası olarak kabul edilecek \fI"KARAKTERLER"\fRi belirler. \fB-W\fR (\fB--wordbounds\fR) seçeneğiyle çeliştiğinden komut satırında ikisi de belirtilmişse en sağdaki etkin olur.
+.sp
+.TP 4
+\fB-Y\fR \fIİSİM\fR, \fB--syntax\fR=\fIİSİM\fR
+\fInanorc\fR dosyalarında tanımlananlar arasından, kullanılacak vurgulamanın adını belirler.
+.sp
+.TP 4
+\fB-Z\fR, \fB--zap\fR
+Değiştirilmemiş Geri Al veya Sil’in tek bir karakter yerine işaretli bölgeyi kesme tamponunu etkilemeden silmesine izin verir.
+.sp
+.TP 4
+\fB-a\fR, \fB--atblanks\fR
+Yumuşak satır sarmalama yapılırken satır, tam ekran kenarından değil, en yakın boşluktan kesilir.
+.sp
+.TP 4
+\fB-b\fR, \fB--breaklonglines\fR
+Ekran kenarını aşan satırlara kesin satır sarmalaması uygulanır (Sarmalanan kısım önceki satırın devamı değil, yeni bir satır haline gelir). \fB-w\fR (\fB--nowrap\fR) seçeneğinin zıddı olup komut satırında ikisi de belirtilmişse en sağdaki etkin olur.
+.sp
+.TP 4
+\fB-c\fR, \fB--constantshow\fR
+Durum çubuğunda imleç konumu sürekli olarak gösterilir. \fB-U\fR (\fB--quickblank\fR) seçeneği ile geçersiz kılınır.
+.sp
+.TP 4
+\fB-d\fR, \fB--rebinddelete\fR
+Silme ve geri silme tuşlarının düzgün çalışmasını sağlar. Sistemde bu iki tuş bir diğeri gibi davranıyorsa bu seçenek bunu düzeltmek için kullanılabilir.
+.sp
+.TP 4
+\fB-e\fR, \fB--emptyline\fR
+Başlık çubuğunun altındaki satır kullanılmayıp boş bırakılır.
+.sp
+.TP 4
+\fB-f\fR \fIDOSYA\fR, \fB--rcfile\fR=\fIDOSYA\fR
+Sistem ve kullanıcı \fInanorc\fR dosyaları yerine yalnızca belirtilen \fIDOSYA\fR okunur.
+.sp
+.TP 4
+\fB-g\fR, \fB--showcursor\fR
+İmleci dosya tarayıcısında (vurgulanan öğeye koyarak) ve yardım görüntüleyicide görünür yapar. Kabartma uçbirim kullanıcıları ve görme bozukluğu olan kişiler için kullanışlıdır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Komut satırı seçeneklerinin kısa bir özetini basar ve çıkar.
+.sp
+.TP 4
+\fB-i\fR, \fB--autoindent\fR
+Yeni oluşturulan satırı, önceki satırla (veya önceki satır bir paragrafın başlangıcıysa sonraki satırla) aynı sayıda sekme ve/veya boşlukla otomatik olarak girintiler.
+.sp
+.TP 4
+\fB-j\fR, \fB--jumpyscrolling\fR
+Tampon içeriğini satır satır değil yarım ekranlık parçalar halinde kaydırır.
+.sp
+.TP 4
+\fB-k\fR, \fB--cutfromcursor\fR
+’Metni Kes’ komutu (normalde \fB^K\fR), satırı satır başlangıcından itibaren değil, geçerli imleç konumundan itibaren keser.
+.sp
+.TP 4
+\fB-l\fR, \fB--linenumbers\fR
+Metin alanının solunda (çapalı satırlar için kenar boşluğunda bulunan imin sağında) satır numaralarını gösterir.
+.sp
+.TP 4
+\fB-m\fR, \fB--mouse\fR
+Sistemde varsa fare desteği etkinleştirilir. Etkinleştirildiğinde, imleci yerleştirmek, başlangıcı işaretlemek (çift tıklama ile) ve komutları çalıştırmak için fare tıklamaları kullanılabilir. Fare, X Pencere Sisteminde ve gpm çalışırken konsolda çalışacaktır. Shift tuşu basılıyken sürükleme ile metin hala seçilebilir.
+.sp
+.TP 4
+\fB-n\fR, \fB--noread\fR
+Komut satırında verilen herhangi bir isme yeni bir dosya gibi davranılır. Bu, \fBnano\fR’nun isimli borulara yazabilmesini sağlar: boş bir tamponla başlar ve kullanıcı "dosyayı" kaydettiğinde boruya yazar. Bu şekilde \fBnano\fR, hassas verileri diske yazmak zorunda kalmadan, örneğin \fBgpg\fR(1) ile birlikte bir düzenleyici olarak kullanılabilir.
+.sp
+.TP 4
+\fB-o\fR \fIDİZİN\fR, \fB--operatingdir\fR=\fIDİZİN\fR
+Çalışma \fIDİZİN\fRini belirler. \fBnano\fR’nun \fBchroot\fR(8)’a benzer şeyler yapmasına sebep olur.
+.sp
+.TP 4
+\fB-p\fR, \fB--preserve\fR
+Uçbirim tarafından yakalanmaları için XON ve XOFF dizilerini (\fB^Q\fR ve \fB^S\fR) korur.
+.sp
+.TP 4
+\fB-q\fR, \fB--indicator\fR
+Düzenleme penceresinin sağ tarafında bir "kaydırma çubuğu" görüntüler. Görüntülenen alanının tampondaki konumunu ve tamponun ne kadarını kapladığını gösterir.
+.sp
+.TP 4
+\fB-r\fR \fISAYI\fR, \fB--fill\fR=\fISAYI\fR
+Yanlara hizalama ve otomatik kesin sarmalama için hedef genişliği \fISAYI\fR sütun olarak belirler. Değer sıfır veya sıfırdan küçükse ve ekran yeniden boyutlandırılırsa, "ekran genişliği eksi \fISAYI\fR" sütundan sarmalama yapılır. Böylece ekran yeniden boyutlandırıldığında sarmalama genişliğinin ekran genişliğine göre değişmesi sağlanır. Öntanımlı değer -8’dir.
+.sp
+.TP 4
+\fB-s\fR "\fIUYGULAMA\fR [\fIBĞMSZDEĞİŞKEN\fR ...]", \fB--speller\fR="\fIUYGULAMA\fR [\fIBĞMSZDEĞİŞKEN\fR ...]"
+Yazım denetimi ve düzeltimi yapmak için, \fBhunspell\fR(1) veya \fBspell\fR(1)’i çağıran yerleşik düzelticiyi kullanmak yerine komut satırı ile birlikte belirtilen \fIUYGULAMA\fR kullanılır.
+.sp
+.TP 4
+\fB-t\fR, \fB--saveonexit\fR
+Değişmiş tamponu kullanıcıya sormadan kaydeder (\fB^X\fR ile çıkarken).
+.sp
+.TP 4
+\fB-u\fR, \fB--unix\fR
+Bir dosyayı öntanımlı olarak Unix biçiminde kaydeder. Bu, \fBnano\fR’nun öntanımlı olan bir dosyayı olduğu gibi kaydetme davranışını geçersiz kılar. (Bu seçeneğin \fB--noconvert\fR ile birlikte kullanıldığında hiçbir etkisi olmaz.)
+.sp
+.TP 4
+\fB-v\fR, \fB--view\fR
+Yalnızca dosyayı görüntüler ve düzenlemeye izin vermez: salt okunur kip. Bu kip, \fB--restricted\fR belirtilmediği sürece, kullanıcının diğer dosyaları da görüntüleme için açmasına olanak tanır.
+.sp
+.TP 4
+\fB-w\fR, \fB--nowrap\fR
+Geçerli satırı aşırı uzadığında otomatik olarak sarmalamaz. Bu öntanımlıdır. Bu seçenek \fB-b\fR (\fB--breaklonglines\fR) seçeneğinin zıddı olup komut satırında ikisi de belirtilmişse en sağdaki etkin olur.
+.sp
+.TP 4
+\fB-x\fR, \fB--nohelp\fR
+Ekranın altındaki iki yardım satırı gösterilmez.
+.sp
+.TP 4
+\fB-y\fR, \fB--afterends\fR
+Ctrl+Right ve Ctrl+Delete kelimelerin başında değil sonunda durur.
+.sp
+.TP 4
+\fB-%\fR, \fB--stateflags\fR
+Bazı durum bayraklarını göstermek için ekranın sağ üst köşesi kullanılır: Otomatik girintileme sırasında I, işaretleme açıkken M, kesin sarmalama (uzun satırları kesme) sırasında L, bir makro kaydederken R ve yumuşak sarmalama sırasında S. Tampon değiştirildiğinde, başlık çubuğunun ortasında dosya adından sonra bir yıldız (*) gösterilir.
+.sp
+.TP 4
+\fB-!\fR, \fB--magic\fR
+Ne dosyanın adı ne de ilk satırı bir ipucu vermediğinde, uygun söz dizimini belirlemek için libmagic kullanılmaya çalışılır.
+.sp
+.TP 4
+\fB-_\fR, \fB--minibar\fR
+Başlık çubuğu gizlenir ve bunun yerine ekranın alt kısmında, durum çubuğu alanında geçerli tampon hakkında bilgi gösterilir. Bu minik çubukta solda dosya adı, ardından tampon değiştirilmişse bir yıldız gösterilir. Sağda, geçerli satır ve sütun numarası, imlecin altındaki karakterin kodu (Unicode biçiminde: U+xxxx), \fB--stateflags\fR tarafından gösterilen bayraklar ve imlecin dosyanın içinde kaç satır uzakta olduğunu ifade eden bir yüzde görüntülenir. Bir dosya yüklendiğinde veya kaydedildiğinde ve ayrıca tamponlar arasında geçiş yaparken, dosya adından sonra tampondaki satır sayısı gösterilir. Bu sayı, bir sonraki tuş vuruşunda silinir veya birden fazla tampon açıkken bir [i/n] sayacı ile değiştirilir. Satır artı sütun numaraları ve karakter kodu yalnızca \fB--constantshow\fR kullanıldığında görüntülenir ve \fBM-C\fR ile açılıp kapatılabilir. Durum bayrakları yalnızca \fB--stateflags\fR kullanıldığında görüntülenir.
+.sp
+.TP 4
+\fB-0\fR, \fB--zero\fR
+Arayüzün tüm öğelerini (başlık çubuğu, durum çubuğu ve yardım satırları) gizler ve tampon içeriğini göstermek için uçbirimin tüm satırlarını kullanır. Durum çubuğu yalnızca önemli bir ileti olduğunda görünür ve 1,5 saniye sonra veya sonraki ilk tuşta kaybolur. \fBM-Z\fR ile başlık çubuğu artı durum çubuğu, \fBM-X\fR ile yardım satırları arasında geçiş yapılabilir.
+.sp
+.PP
+.sp
+.SH "TAKASLAMA KOMUTLARI"
+Yukarıdaki seçeneklerin birçoğu \fBnano\fR çalışırken de açılıp kapatılabilir. Örneğin, \fBM-L\fR, uzun satırların kesin sarmalanmasını, \fBM-S\fR yumuşak sarmalanmasını, \fBM-N\fR satırların numaralanmasını, \fBM-M\fR fareyi, \fBM-I\fR otomatik girintilemeyi ve \fBM-X\fR yardım satırlarını açıp kapar. Tam liste \fB^G\fR yardım metninin sonunda bulunabilir.
+.sp
+\fBM-X\fR komutu özeldir: yardım görüntüleyici ve hata ayıklayıcı (linter) hariç tüm menülerde çalışır. Diğer takaslama komutları yalnızca ana menüde çalışır.
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fB--rcfile\fR verildiğinde, seçenekleri, sözdizimlerini ve tuş kısayollarını ayarlamak için yalnızca seçenekle birlikte belirtilen dosya okunur. Bu seçenek olmadan, iki yapılandırma dosyası okunur: Önce sistemin \fInanorc\fR’si (varsa) ve sonra kullanıcının \fInanorc\fR’si (\fI~/.nanorc\fR veya \fI$XDG_CONFIG_HOME/nano/nanorc\fR veya \fI~/.config/ nano/nanorc\fR, önce hangisiyle karşılaşılırsa). Bu dosyaların olası içerikleri hakkında ayrıntılı bilgi için bkz. \fBnanorc\fR(5).
+.sp
+Kullanılabilir sözdizimi renklendirme tanımları \fI/usr/share/nano/\fR ve \fI/usr/share/nano/extra/\fR altında bulunabilir.
+.sp
+.SH "EK BİLGİ"
+\fB-z\fR (\fB--suspendable\fR) seçeneği kaldırıldı. Askıya alma öntanımlı olarak etkindir, \fB^T^Z\fR ile erişilebilir. (\fBnano\fR’yu askıya almak için düz bir \fB^Z\fR atanmak isteniyorsa, \fInanorc\fR dosyasına \fBbind ^Z suspend main\fR satırı eklenebilir.)
+.sp
+Komut satırında veya nanorc dosyalarından birinde uygun bir yazım denetleyici komutu belirtilmemişse, \fBSPELL\fR ortam değişkenine bakılır.
+.sp
+Bazı durumlarda \fBnano\fR, tamponu bir kurtarma dosyasına dökmeye çalışır. Bu, esas olarak \fBnano\fR bir \fBSIGHUP\fR veya \fBSIGTERM\fR sinyali alırsa veya belleği tükenirse gerçekleşir. Tampon, bir adı yoksa \fInano.save\fR adlı dosyaya yazılır ya da geçerli dosya adına "\fI.save\fR" soneki eklenir. Geçerli dizinde bu ada sahip bir kurtarma dosyası zaten varsa, benzersiz kılmak için geçerli dosya adına "\fI.save\fR" artı bir sayı (örn. "\fI.save.1\fR") eklenir. Çoklu tampon kipinde, tüm açık tamponlar ilgili kurtarma dosyalarına yazılır.
+.sp
+.SH "GERİBİLDİRİM"
+Klavye makrolarının kaydedilmesi ve oynatılması, Linux konsolunda (VT) değil, yalnızca bir uçbirim öykünücüsünde doğru şekilde çalışır, çünkü ikincisi öntanımlı olarak değiştirilmiş ve değiştirilmemiş ok tuşları arasında ayrım yapmaz.
+.sp
+Hata bulunması durumunda bildirim adresi: <https://savannah.gnu.org/bugs/?group=nano>.
+.sp
+\fBnano\fR çöktüğünde, değişmiş tamponları "\fI.save\fR" kurtarma dosyalarına kaydeder. Çökme yeniden oluşturulabiliyorsa ve bir geri izleme alınmak istenirse, \fBNANO_NOCATCH\fR ortam değişkeni tanımlanabilir.
+.sp
+.SH "YARARLANIM"
+https://nano-editor.org/
+.sp
+.SH "İLGİLİ BELGELER"
+\fBnanorc\fR(5)
+.br
+\fI/usr/share/doc/nano/\fR (veya sisteminizdeki eşdeğeri)
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp
