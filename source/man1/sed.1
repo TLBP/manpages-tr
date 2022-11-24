@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-18T11:59:30+03:00
+.\" Derlenme zamanı: 2022-11-24T13:21:27+03:00
 .TH "SED" 1 "Ocak 2020" "sed-4.8" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -143,7 +143,7 @@ sed -ni ’s/foo/bar/’ DOSYA
 .sp
 .TP 4
 \fB--posix\fR
-GNU \fBsed\fR, POSIX \fBsed\fR’e göre birkaç eklenti içerir. Taşınabilir betikler yazmayı basitleştirmek için bu seçenek, ek komutlar da dahil olmak üzere bu kılavuzun belgelediği tüm eklentileri devre dışı bırakır. Çoğu sed uyguaması, POSIX tarafından zorunlu kılınan sözdiziminin dışındaki eklentilerin çoğunu kabul eder, ancak bazı eklentiler (Geribidirim bölümünde açıklanan \fBN\fR komutunun davranışı gibi) aslında standardı ihlal eder. Yalnızca standardı ihlal eden eklentiler devre dışı bırakılmak istenirse, \fBPOSIXLY_CORRECT\fR değişkeni boş olmayan bir değere ayarlanabilir.
+GNU \fBsed\fR, POSIX \fBsed\fR’e göre birkaç eklenti içerir. Taşınabilir betikler yazmayı basitleştirmek için bu seçenek, ek komutlar da dahil olmak üzere bu kılavuzun belgelediği tüm eklentileri devre dışı bırakır. Çoğu sed uygulaması, POSIX tarafından zorunlu kılınan sözdiziminin dışındaki eklentilerin çoğunu kabul eder, ancak bazı eklentiler (Geribildirim bölümünde açıklanan \fBN\fR komutunun davranışı gibi) aslında standardı ihlal eder. Yalnızca standardı ihlal eden eklentiler devre dışı bırakılmak istenirse, \fBPOSIXLY_CORRECT\fR değişkeni boş olmayan bir değere ayarlanabilir.
 .sp
 .TP 4
 \fB-b\fR, \fB--binary\fR
@@ -155,7 +155,7 @@ Bu seçenek yalnızca sembolik bağları destekleyen platformlarda kullanılabil
 .sp
 .TP 4
 \fB-E\fR, \fB-r\fR, \fB--regexp-extended\fR
-Temel düzenli ifadeler yerine genişletilmiş düzenli ifadeler kullanılır. Genişletilmiş düzenli ifadeler, \fBegrep\fR(1)’in kabul ettiği ifadelerdir; genellikle daha az ters eğik çizgiye sahip oldukları için bunlar daha okunaklıdır. Tarihsel olarak bu bir GNU eklentisi idi, ancak \fB-E\fR eklentisi artık POSIX standardına eklendiğinden (http://austingroupbugs.net/view.php?id=528) \fB-E\fR seçeneği yalnızca taşınabilirlik için kullanılır oldu. GNU \fBsed\fR yıllarca \fB-E\fR’yi belgelendirilmemiş bir seçenek olarak kabul etti ve *BSD \fBsed\fR’leri de yıllarca \fB-E\fR’yi kabul etti, ancak \fB-E\fR kullanan betikler diğer eski sistemlere taşınamayabilir. Bkz. Genişletilmiş düzenli ifadeler.
+Temel düzenli ifadeler yerine genişletilmiş düzenli ifadeler kullanılır. Genişletilmiş düzenli ifadeler, \fBegrep\fR(1)’in kabul ettiği ifadelerdir; genellikle daha az ters eğik çizgiye sahip oldukları için bunlar daha okunaklıdır. Tarihsel olarak bu bir GNU eklentisi idi, ancak \fB-E\fR eklentisi artık POSIX standardına eklendiğinden (http://austingroupbugs.net/view.php?id=528) \fB-E\fR seçeneği yalnızca taşınabilirlik için kullanılır oldu. GNU \fBsed\fR yıllarca \fB-E\fR’yi belgelendirilmemiş bir seçenek olarak kabul etti ve *BSD \fBsed\fR’leri de yıllarca \fB-E\fR’yi kabul etti, ancak \fB-E\fR kullanan betikler diğer eski sistemlere taşınamayabilir. Bkz. \fBGenişletilmiş Düzenli İfadeler\fR
 .sp
 .TP 4
 \fB-s\fR, \fB--separate\fR
@@ -190,8 +190,8 @@ Satırın ardına \fImetin\fRi ekler.
 Satırın ardına \fImetin\fRi ekler (başka bir sözdizimi).
 .sp
 .TP 4
-\fBb\fR [\fIETİKET\fR]
-Koşulsuz olarak \fIETİKET\fRe dallanır. \fIETİKET\fR belirtilmemişse sonraki döngü başlatılır.
+\fBb\fR [\fIYAFTA\fR]
+Koşulsuz olarak \fIYAFTA\fRya dallanır. \fIYAFTA\fR belirtilmemişse sonraki döngü başlatılır.
 .sp
 .TP 4
 \fBc \\\fR\p \fImetin\fR
@@ -300,7 +300,7 @@ Otomatik çıktılama devre dışı bırakılmazsa, geçerli kalıp alanının �
 Yalnızca son giriş satırının okunmasından veya koşullu dallanmanın alınmasından sonra başarılı bir ikame olmuşsa, \fIYAFTA\fRya atlanır. \fIYAFTA\fR belirtilmezse, bir sonraki döngü başlatılır.
 .sp
 .TP 4
-\fBT\fR \fIlabel\fR
+\fBT\fR \fIYAFTA\fR
 Yalnızca son giriş satırının okunmasından veya koşullu dallanmanın alınmasından sonra başarılı bir ikame yoksa, \fIYAFTA\fRya atlanır. \fIYAFTA\fR belirtilmezse, bir sonraki döngü başlatılır. Bu bir GNU eklentisidir.
 .sp
 .TP 4
@@ -632,6 +632,35 @@ Düzenli ifadenin çok satırlı kipte eşleştirilmesini sağlayan \fBM\fR değ
 .sp
 .SS "Düzenli İfadeler"
 POSIX.2 Temel Düzenli İfadelerinin desteklenmesini gerektirse de başarım sorunları nedeniyle bunlar tamamlanmış değildir. \fB\\n\fR dizilimi bir düzenli ifadede satır sonu karakteri ile eşleşir, \fB\\a\fR, \fB\\t\fR ve benzerleri için benzer eşleşmeler söz konusudur. \fB-E\fR seçeneği temel düzenli ifadeler yerine gelişmiş düzenli ifadelerin kullanılmasını sağlar. Gelişmiş düzenli ifadeler yıllarca GNU \fBsed\fR tarafından desteklenmiş ve artık POSIX’e de dahil edilmiştir.
+.sp
+.SS "Genişletilmiş Düzenli İfadeler"
+Temel ve genişletilmiş düzenli ifadeler arasındaki tek fark, birkaç karakterin davranışındadır: ’?’, ’+’, yaylı ayraçlar ’()’, kaşlı ayraçlar ’{}’ ve ’|’. Temel düzenli ifadelerde, bunların özel karakter olarak davranması için öncelenmesi gerekirken, genişletilmiş düzenli ifadelerde kendileri olarak davranması için öncelenmesi gerekir. ’|’ özeldir, çünkü ’\\|’ bir GNU eklentisi olup standart temel düzenli ifadelerde işlevsel değildir. Örnekler:
+.sp
+.TP 4
+\fBabc?\fR
+Genişletilmiş düzenli ifadelerde \fBabc\\?\fR haline gelir. \fBabc\fR ile eşleşir.
+.sp
+.TP 4
+\fBc\\+\fR
+Genişletilmiş düzenli ifadelerde \fBc+\fR haline gelir. Bir veya daha fazla \fBc\fR ile eşleşir.
+.sp
+.TP 4
+\fBa\\{3,\\}\fR
+Genişletilmiş düzenli ifadelerde \fBa{3,}\fR haline gelir. Üç veya daha fazla \fBa\fR ile eşleşir.
+.sp
+.TP 4
+\fB\\(abc\\)\\{2,3\\}\fR
+Genişletilmiş düzenli ifadelerde \fB(abc){2,3}\fR haline gelir. Ya \fBabcabc\fR ya da \fBabcabcabc\fR ile eşleşir.
+.sp
+.TP 4
+\fB\\(abc*\\)\\1\fR
+Genişletilmiş düzenli ifadelerde \fB(abc*)\\1\fR haline gelir. Geriye atıflar genişletilmiş düzenli ifadelerde de öncelenir.
+.sp
+.TP 4
+\fBa\\|b\fR
+Genişletilmiş düzenli ifadelerde \fBa|b\fR haline gelir. \fBa\fR veya \fBb\fR ile eşleşir.
+.sp
+.PP
 .sp
 .sp
 .SH "ÇIKIŞ DURUMU"
