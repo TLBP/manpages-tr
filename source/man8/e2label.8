@@ -14,7 +14,7 @@
  * This file may be redistributed under the terms of the GNU Public License.
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:12+03:00
 .TH "E2LABEL" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -33,9 +33,9 @@ e2label - ext2/ex3/ext4 dosya sisteminin etiketini değiştirir
 .SH "AÇIKLAMA"
 \fBe2label\fR, \fIaygıt\fR üzerinde bulunan ext2, ext3 veya ext4 dosya sisteminin etiketini görüntüler veya değiştirir.
 .sp
-Şayet isteğe bağlı \fIyeni-etiket\fR bağımsız değişkeni belirtilmemişse, \fBe2label\fR, sadece dosya sisteminin etiketini görüntüler.
+Şayet isteğe bağlı \fIyeni-etiket\fR belirtilmemişse, \fBe2label\fR, sadece dosya sisteminin etiketini görüntüler.
 .sp
-Şayet isteğe bağlı \fIyeni-etiket\fR bağımsız değişkeni belirtilmişse, \fBe2label\fR, dosya sistemi etiketini \fIyeni_etiket\fR olarak değiştirecektir. Ext2 dosya sistemi etiket isimleri en fazla 16 karakter (bayt) uzunluğunda olabilir. Şayet 16 karakterden daha uzun bir etiket atanmışsa, \fBe2label\fR bu etiketi kırpar ve bir uyarı verir.
+Şayet isteğe bağlı \fIyeni-etiket\fR belirtilmişse, \fBe2label\fR, dosya sistemi etiketini \fIyeni_etiket\fR olarak değiştirecektir. Ext2 dosya sistemi etiket isimleri en fazla 16 karakter (bayt) uzunluğunda olabilir. Şayet 16 karakterden daha uzun bir etiket atanmışsa, \fBe2label\fR bu etiketi kırpar ve bir uyarı verir.
 .sp
 Dosya sistemi etiketini, \fBtune2fs\fR(8)’nin \fB–L\fR seçeneği ile de ayarlamak mümkündür.
 .sp

@@ -34,7 +34,7 @@
  *
  * Modified 2003-04-04, aeb
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "ENCRYPT" 3 "1 Kasım 2020" "Linux man-pages 5.10" "Kütüphane İşlevleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -93,9 +93,9 @@ Bunların herbiri \fB-lcrypt\fR ile ilintileme gerektirir.
 Artık güvenli kabul edilmeyen DES blok şifresini kullandıkları için \fBcrypt\fR(), \fBcrypt_r\fR(), \fBsetkey\fR() ve \fBsetkey_r\fR() glibc-2.28’de kaldırıldı. Uygulamaların \fBlibcrypt\fR gibi daha güncel bir şifreleme kütüphanesine geçmesi gerekir.
 .sp
 .PP
-Bu işlevler 64 bitlik iletileri şifreler ve şifresini çözer. \fBsetkey\fR() işlevi \fBencrypt\fR() işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan \fIkey\fR bağımsız değişkeni 64 baytlık bir dizidir ve her baytın değeri 1 ya da 0’dır. \fIkey\fR[n] dizisinin \fBn=8*i-1\fR indisli elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
+Bu işlevler 64 bitlik iletileri şifreler ve şifresini çözer. \fBsetkey\fR() işlevi \fBencrypt\fR() işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan \fIkey\fR değişkeni 64 baytlık bir dizidir ve her baytın değeri 1 ya da 0’dır. \fIkey\fR[n] dizisinin \fBn=8*i-1\fR indisli elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
 .sp
-\fBencrypt\fR() işlevi aktarılan tamponda değişiklik yapar, \fIedflag\fR bağımsız değişkenine 0 aktarılırsa \fIblock\fR içeriğini şifreler, 1 aktarılırsa şifresini çözer. \fIkey\fR gibi \fIblock\fR bağımsız değişkeni de şifrelenmiş değerin bit gösterimini içerir. Sonuç aynı tampon içinde döner.
+\fBencrypt\fR() işlevi aktarılan tamponda değişiklik yapar, \fIedflag\fR değişkenine 0 aktarılırsa \fIblock\fR içeriğini şifreler, 1 aktarılırsa şifresini çözer. \fIkey\fR gibi \fIblock\fR değişkeni de şifrelenmiş değerin bit gösterimini içerir. Sonuç aynı tampon içinde döner.
 .sp
 Bu iki işlev evresel değildir, yani anahtar verisi statik bellek bölgesinde saklanır. \fBsetkey_r\fR() ve \fBencrypt_r\fR() işlevleri evreseldir ve anahtar verisini saklamak için \fIcrypt_data\fR veri yapısını kullanır:
 .sp

@@ -70,7 +70,7 @@
  * Modified 1998, 1999 by Andi Kleen
  * Modified 2004-06-23 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:28+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "CONNECT" 2 "11 Nisan 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -92,7 +92,7 @@ const struct sockaddr *\fIaddr\fR,
 socklen_t \fIaddrlen\fR);
 .sp
 .SH "AÇIKLAMA"
-\fBconnect\fR() sistem çağrısı, \fIsockfd\fR ile belirtilen soketi \fIaddr\fR ile belirtilen adrese bağlar. \fIaddrlen\fR bağımsız değişkeni \fIaddr\fR boyutunu belirler. \fIaddr\fR içindeki adresin biçimi, \fIsockfd\fR soketinin adres uzayı tarafından belirlenir; daha ayrıntılılı bilgi için \fBsocket\fR(2) sayfasına bakılabilir.
+\fBconnect\fR() sistem çağrısı, \fIsockfd\fR ile belirtilen soketi \fIaddr\fR ile belirtilen adrese bağlar. \fIaddrlen\fR ile \fIaddr\fR boyutu belirlenir. \fIaddr\fR içindeki adresin biçimi, \fIsockfd\fR soketinin adres uzayı tarafından belirlenir; daha ayrıntılılı bilgi için \fBsocket\fR(2) sayfasına bakılabilir.
 .sp
 Eğer soket \fIsockfd\fR \fBSOCK_DGRAM\fR türünden ise, \fIaddr\fR, verilerin gönderildiği ve alındığı öntanımlı adres olur. Eğer soket \fBSOCK_STREAM\fR veya \fBSOCK_SEQPACKET\fR türünden ise, sistem çağrısı, \fIaddr\fR ile ilişkilendirilen soketle bağlantı kurmaya çalışır.
 .sp

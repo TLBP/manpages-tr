@@ -20,7 +20,7 @@
  * This manual page in its current form is intended for use on systems
  * based on the GNU C Library with crypt_blowfish patched into libcrypt.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "CRYPT" 3 "7 Temmuz 2014" "crypt_blowfish 1.3" "Kütüphane İşlevleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -102,7 +102,7 @@ const char *\fIinput\fR,
 int \fIsize\fR);
 .sp
 .SH "AÇIKLAMA"
-\fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri, bir tuz ve muhtemelen diğer bağımsız değişkenleri de aktarmak için kullanılan bir dizi desteklenen yöntemden biriyle istendiği şekilde anahtarın kriptografik aş işlevini hesaplar.
+\fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri, bir tuz ve muhtemelen diğer değişkenleri de aktarmak için kullanılan bir dizi desteklenen yöntemden biriyle istendiği şekilde anahtarın kriptografik aş işlevini hesaplar.
 .sp
 \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri \fBcrypt\fR’ten farklı olarak evrelidir. Bu işlevler sonuçlarını ve muhtemelen özel verilerini, bir uygulama tarafından kendilerine belirtilen \fIsize\fR boyutundaki bir \fIdata\fR alanına ve/veya dinamik olarak ayırdıkları belleğe yerleştirir. Bazı aşlama algoritmaları veri alanını, çağrılar arasında hesaplanmış ara değerleri önbelleğe almak için kullanabilir. Bu sebeple, uygulamalar ilk kullanımdan önce veri alanını doğru bir şekilde ilklendirmelidir. \fBcrypt_r\fR yalnızca \fIdata->initialized\fR’in sıfırla ilklendirilmesini gerektirir; \fBcrypt_rn\fR ve \fBcrypt_ra\fR için tüm \fIdata\fR alanının sıfırlarla doldurulması veya \fBcrypt_ra\fR durumunda *\fIdata\fR’nın NULL olması gerekir. Eğer \fBcrypt_ra\fR, talep edilen aşlama algoritmasını NULL *\fIdata\fR veya yeterli olmayan *\fIsize\fR ile çağrırırsa gerekli bellek dinamik olarak \fBrealloc\fR(3) ile ayrılır. Bu sebeple \fBcrypt_ra\fR, *\fIdata\fR NULL olmadığında bir önceki \fBcrypt_ra\fR çağrısıyla veya \fBmalloc\fR(3) ailesinden bir çağrıyla ayrılan bir alana gösterici olmalıdır. \fBcrypt_ra\fR ile ayrılan belleğin \fBfree\fR(3) ile serbest bırakılması gerekir.
 .sp
@@ -290,7 +290,7 @@ Yineleme sayısı
 .fi
 .sp
 .RE
-\fBbcrypt\fR ile, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevlerine aktarılan \fIcount\fR bağımsız değişkeni, asıl yineleme sayısının 2 tabanlı logaritmasıdır.
+\fBbcrypt\fR ile, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevlerine aktarılan \fIcount\fR değişkeni, asıl yineleme sayısının 2 tabanlı logaritmasıdır.
 .sp
 \fBbcrypt\fR aşlamaları, "$2a$" önekini 1997’den beri kullanıyordu. Ancak, 2011 senesinde crypt_blowfish paketinde (1.0.4’e kadar olan sürümler dahil) 8 bitlik parola karakterlerinin işlenmesini etkileyen bir gerçekleme hatası bulundu. Hatayı düzeltmenin yanı sıra, mevcut sistemlere yükseltme yöntemleri sağlamak için iki yeni önek tanıtıldı: hatayı tamamen yeniden tanıtan "$2x$", 7 ve 8 bitlik karakterlerin doğru işlenmesini güvenceleyen "$2y$". OpenBSD 5.5, crypt_blowfish’in "$2y$" önekiyle aynı etkiyi gösteren "$2b$" önekini tanıtmıştır ve mevcut crypt_blowfish’te bunu desteklemektedir. Ne yazık ki, "$2a$" önekinin 8 bitlik parola karakterleri üzerindeki etkisi sisteme özgü olarak kabul edilmelidir. Yeni parola aşlamaları üretilirken, "$2b$" ve "$2y$" önekleri kullanılmalıdır. (Bu tür aşlamaların, bu yeni önekleri desteklemeyen bir sisteme aktarılması gerekirse önceden oluşturulmuş aşlamaların aktarılan kopyalarındaki önek "$2a$" olarak değiştirilebilir.)
 .sp

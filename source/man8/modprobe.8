@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:13+03:00
 .TH "MODPROBE" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -47,11 +47,11 @@ modprobe - Linux çekirdeğine modül ekler/kaldırır
 .SH "AÇIKLAMA"
 \fBmodprobe\fR, Linux çekirdeğine akıllıca bir modül ekler veya bir modül çıkarır: kolaylık olması açısından, modül adlarında \fB_\fR ve \fB-\fR arasında bir fark olmadığı unutmamalıdır (otomatik alt çizgi dönüştürme gerçekleştirilir). \fBmodprobe\fR, \fI/etc/modprobe.d\fR dizinindeki isteğe bağlı yapılandırma dosyaları dışında tüm modüller ve diğer dosyalar için \fI/lib/modules/\fR\fB’uname -r’\fR modül dizininde arama yapar (bkz. \fBmodprobe.d\fR(5)). \fBmodprobe\fR ayrıca çekirdek komut satırında \fImodül\fR.\fIseçenek\fR biçiminde belirtilen modül seçeneklerini ve \fBmodprobe.blacklist=\fR\fImodül\fR biçimindeki kara listeleri kullanır.
 .sp
-Bu araç tarafından desteklenmeyen 2.4 serisi Linux çekirdeklerinin aksine, \fBmodprobe\fR’un bu sürümünün modülüne hiçbir şey yapmadığı unutulmamalıdır: sembolleri çözme ve bağımsız değişkenleri anlama işi çekirdek içinde yapılır. Bu nedenle modül hatasına bazen bir çekirdek iletisi eşlik eder: bkz. \fBdmesg\fR(8).
+Bu araç tarafından desteklenmeyen 2.4 serisi Linux çekirdeklerinin aksine, \fBmodprobe\fR’un bu sürümünün modülüne hiçbir şey yapmadığı unutulmamalıdır: sembolleri çözme ve girdileri anlama işi çekirdek içinde yapılır. Bu nedenle modül hatasına bazen bir çekirdek iletisi eşlik eder: bkz. \fBdmesg\fR(8).
 .sp
 \fBmodprobe\fR, \fBmodprobe\fR ile birlikte gelen ilgili \fBdepmod\fR(8) yardımcı uygulaması tarafından oluşturulan güncel \fImodule.dep.bin\fR dosyasının var olduğunu varsayar. Bu dosya, her modülün (varsa) ihtiyaç duyduğu diğer modülleri listeler ve \fBmodprobe\fR, bağımlılıkları otomatik olarak eklemek veya kaldırmak için bunu kullanır.
 .sp
-Modül adından sonra herhangi bir bağımsız değişken verilirse, bunlar çekirdeğe aktarılır (yapılandırma dosyasında listelenen seçeneklere ek olarak).
+Modül adından sonra herhangi bir girdi verilirse, bunlar çekirdeğe aktarılır (yapılandırma dosyasında listelenen seçeneklere ek olarak).
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -120,7 +120,7 @@ Bir takma adla eşleşen tüm modül adlarını çıktılar. Modül takma adı s
 .sp
 .TP 4
 \fB-r\fR, \fB--remove\fR
-Bu seçenek, \fBmodprobe\fR’un modülü eklemek yerine kaldırılmasına neden olur. \fBmodprobe\fR kullanılmayan bağımlı modülleri de kaldırmaya çalışacaktır. Eklemeden farklı olarak, komut satırında birden fazla modül belirtilebilir (modülleri kaldırırkem modül bağımsız değişkenlerinin belirtilmesi mantıklı değildir).
+Bu seçenek, \fBmodprobe\fR’un modülü eklemek yerine kaldırılmasına neden olur. \fBmodprobe\fR kullanılmayan bağımlı modülleri de kaldırmaya çalışacaktır. Eklemeden farklı olarak, komut satırında birden fazla modül belirtilebilir (modülleri kaldırırken modül girdilerinin belirtilmesi mantıklı değildir).
 .sp
 Modülleri kaldırmak için genellikle bir neden yoktur, ancak bazı hatalı modüller bunu gerektirir. Dağıtım çekirdeğiniz, modüllerin kaldırılmasını destekleyecek şekilde derlenmemiş olabilir.
 .sp
@@ -151,7 +151,7 @@ Bu seçenek \fBinstall\fR ve \fBremove\fR komutları üzerinden \fBMODPROBE_OPTI
 .PP
 .sp
 .SH "ORTAM DEĞİŞKENLERİ"
-\fBMODPROBE_OPTIONS\fR ortam değişkeni, \fBmodprobe\fR’a bağımsız değişken aktarmak için de kullanılabilir.
+\fBMODPROBE_OPTIONS\fR ortam değişkeni, \fBmodprobe\fR’a girdi aktarmak için de kullanılabilir.
 .sp
 .SH "TELİF HAKKI"
 Belgenin telif hakkı © 2003 Rusty Russell, IBM Corporation.

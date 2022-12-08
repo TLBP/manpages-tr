@@ -16,7 +16,7 @@
  *
  * This program is freely distributable.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "AGETTY" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -74,7 +74,7 @@ System V altında "-" belirtilecekse "--" ile öncelenmelidir.
 .sp
 \fIhat_hızları\fR azalan sırada belirtilmelidir, böylece daha düşük hıza geçmek için boş karakter (Ctrl-@) kullanılabilir.
 .sp
-Bu bağımsız değişken isteğe bağlıdır ve sanal uçbirimler için gereksizdir.
+Bu girdi isteğe bağlıdır ve sanal uçbirimler için gereksizdir.
 .sp
 Seri uçbirimler için mevcut hat hızını korumak öntanımlıdır (bkz: \fB--keep-baud\fR) ve başarısızlık durumunda ’9600’ tek hızdır.
 .sp
@@ -93,7 +93,7 @@ Uçbirimin temiz 8 bitlik olduğunu varsayar, bu nedenle eşlik algılamasını 
 .sp
 .TP 4
 \fB-a\fR, \fB--autologin\fR \fIkullanıcı\fR
-Belirtilen \fIkullanıcı\fR için kullanıcı adı ve parola sorulmaksızın otomatik olarak oturum açılır. Bu seçeneğin kullanımı \fBlogin\fR(1) komut satırına \fB-f\fR seçeneğinin \fIkullanıcı\fR bağımsız değişkeniyle eklenmesine sebep olur. Ayrıca, bu seçeneğin davranışında değişiklik yapan \fB--login-options\fR seçeneğine de bakılabilir.
+Belirtilen \fIkullanıcı\fR için kullanıcı adı ve parola sorulmaksızın otomatik olarak oturum açılır. Bu seçeneğin kullanımı \fBlogin\fR(1) komut satırına \fB-f\fR seçeneğinin \fIkullanıcı\fR girdisi ile eklenmesine sebep olur. Ayrıca, bu seçeneğin davranışında değişiklik yapan \fB--login-options\fR seçeneğine de bakılabilir.
 .sp
 \fB--autologin\fR seçeneğinin \fBagetty\fR’nin seri hattı başlatma şeklini etkileyebileceği unutulmamalıdır, çünkü otomatik oturum açmada \fBagetty\fR hattı okumadığından hat ayarlarını iyileştirme şansı yoktur.
 .sp
@@ -145,7 +145,7 @@ Kullanıcı adını ekrana yazmadan önce ekranı temizlemez. Öntanımlı olara
 .sp
 .TP 4
 \fB-L\fR, \fB--local-line\fR[=\fIkip\fR]
-CLOCAL kipini belirler. \fIkip\fR bağımsız değişkeni \fBauto\fR, \fBalways\fR veya \fBnever\fR olabilir. \fIkip\fR belirtilmezse \fBalways\fR öntanımlıdır. \fB--local-line\fR seçeneğinin kendisinin belirtilmediği durumda ise \fBauto\fR öntanımlıdır.
+CLOCAL kipini belirler. \fIkip\fR \fBauto\fR, \fBalways\fR veya \fBnever\fR olabilir. \fIkip\fR belirtilmezse \fBalways\fR öntanımlıdır. \fB--local-line\fR seçeneğinin kendisinin belirtilmediği durumda ise \fBauto\fR öntanımlıdır.
 .sp
 .RS
 .TP 4
@@ -184,7 +184,7 @@ Oturum açma istemini göstermez. BBS gibi sistemlerde standart-dışı oturum a
 .sp
 .TP 4
 \fB-o\fR, \fB--login-options\fR \fIlogin_seçenekleri\fR
-\fBlogin\fR(1)’e aktarılacak seçenek ve bağımsız değişkenler. Kullanıcı adı istemi için \fB\\u\fR belirtilmelidir. Örnek:
+\fBlogin\fR(1)’e aktarılacak seçenekler ve girdiler. Kullanıcı adı istemi için \fB\\u\fR belirtilmelidir. Örnek:
 .sp
 .RS 4
 .RS 4
@@ -310,7 +310,7 @@ Sabit 115200 bps arabirimli bir Hayes modem için (örnek ilklendirme dizgesi mo
 .RE
 .sp
 .SH "GÜVENLİK UYARISI"
-\fB--login-program\fR ve \fB--login-options\fR seçenekleri kullanılırken dikkatli olmak gerekir. Kötü niyetli bir kullanıcının, kullanılan oturum açma uygulamasına aktarılacak gömülü seçeneklerle günlük adları girmeye çalışabileceği unutulmamalıdır. \fBagetty\fR başta bir "-" olup olmadığına bakar ve günlük adının bir bağımsız değişken olarak iletildiğinden emin olur (böylece gömülü boşluklar başka bir bağımsız değişken oluşturmaz), ancak oturum açma uygulamasının komut satırını nasıl ayrıştırdığına bağlı olarak bu yeterli olmayabilir. Kullanılan oturum açma uygulamasının bu şekilde kötüye kullanılamayacağından emin olunmalıdır.
+\fB--login-program\fR ve \fB--login-options\fR seçenekleri kullanılırken dikkatli olmak gerekir. Kötü niyetli bir kullanıcının, kullanılan oturum açma uygulamasına aktarılacak gömülü seçeneklerle günlük adları girmeye çalışabileceği unutulmamalıdır. \fBagetty\fR başta bir "-" olup olmadığına bakar ve günlük adının bir girdi olarak iletildiğinden emin olur (böylece gömülü boşluklar başka bir girdi oluşturmaz), ancak oturum açma uygulamasının komut satırını nasıl ayrıştırdığına bağlı olarak bu yeterli olmayabilir. Kullanılan oturum açma uygulamasının bu şekilde kötüye kullanılamayacağından emin olunmalıdır.
 .sp
 Bazı uygulamalar, komut satırının geri kalanının seçenekler için yorumlanmaması gerektiğini belirtmek için "\fB--\fR" kullanır. Kullanıcı adı için \fB\\u\fR belirtmeden önce "\fB--\fR" iletmek mümkünse bu özellik kullanılmalıdır.
 .sp
@@ -433,14 +433,14 @@ Sorunların bildirildiği aygıt (\fBsyslog\fR(3) kulllanılıyorsa)
 .PP
 .sp
 .SH "HATA AYIKLAMA"
-Hat hızı algılama özelliğini (\fB--extract-baud\fR seçeneği) kullanabilmek için çevirmeli aramanın tamamlanmasından hemen sonra \fBagetty\fR’nin başlatılması gerekir (2400 bps ile konuşan modemlerde 30 ms içinde). Özelliğin aşırı yüklü sistemlerde bile çalışmasını sağlama almak için, \fB--extract-baud\fR seçeneğini daima \fIhat_hızları\fR bağımsız değişkeni birlikte kullanmak gerekir, böylece BREAK işleminin etkinleşmesi sağlanır.
+Hat hızı algılama özelliğini (\fB--extract-baud\fR seçeneği) kullanabilmek için çevirmeli aramanın tamamlanmasından hemen sonra \fBagetty\fR’nin başlatılması gerekir (2400 bps ile konuşan modemlerde 30 ms içinde). Özelliğin aşırı yüklü sistemlerde bile çalışmasını sağlama almak için, \fB--extract-baud\fR seçeneğini daima \fIhat_hızları\fR girdisi birlikte kullanmak gerekir, böylece BREAK işleminin etkinleşmesi sağlanır.
 .sp
 \fI/etc/issue\fR vb. içindeki metin ve oturum açma ismi daima 0 eşlik bitli 7 bitlik karakterler ile çıktılanır.
 .sp
 Hat hızı algılama özelliği (\fB--extract-baud\fR seçeneği) modemin DCD hattını açtıktan sonra durum iletisi çıktılamasını gerektirir.
 .sp
 .SH "TEŞHİS"
-Yapılandırmaya bağlı olarak, tüm teşhisler konsol aygıtına yazılır veya \fBsyslog\fR(3) aracılığıyla raporlanır. \fIaygıt\fR bağımsız değişkeni bir uçbirim aygıtını belirtmiyorsa, geçerli süreç için \fIutmp\fR girdisi yoksa (yalnızca System V), vb. hata iletileri üretilir.
+Yapılandırmaya bağlı olarak, tüm teşhisler konsol aygıtına yazılır veya \fBsyslog\fR(3) aracılığıyla raporlanır. \fIaygıt\fR bir uçbirim aygıtını belirtmiyorsa, geçerli süreç için \fIutmp\fR girdisi yoksa (yalnızca System V), vb. hata iletileri üretilir.
 .sp
 .SH "YAZAN"
 Werner Fink (Suse) ve Karel Zak (Redhat) tarafından yazılmıştır.

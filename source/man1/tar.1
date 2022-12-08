@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:28+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:09+03:00
 .TH "TAR" 1 "Temmuz 2020" "tar-1.34" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -68,9 +68,9 @@ GNU tarzı kullanım:
 GNU \fBtar\fR, birden fazla dosyayı tek bir dosyada (bir arşiv) depolamak ve bu tür arşivleri işlemek için tasarlanmış bir arşivleme uygulamasıdır. Arşiv, normal bir dosya, yerel veya uzak bir makinede bulunabilen bir aygıt (örneğin, bir teyp sürücüsü, zaten uygulamanın adı, teyp arşivleyici anlamına gelir) olabilir.
 .sp
 .SS "Seçenek biçimleri"
-GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel tarz\fRda, komuttan sonra seçenek harfleri kümesi, ardından, bu seçeneklerin gerektirdiği bağımsız değişkenler gelir. Bağımsız değişkenler, seçenek harfleriyle aynı sırada okunur. Tüm seçenekler işlendikten sonra kalan komut satırı sözcükleri, isteğe bağlı olmayan bağımsız değişkenler olarak değerlendirilir: dosya veya arşiv üye adları.
+GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel tarz\fRda, komuttan sonra seçenek harfleri kümesi, ardından, bu seçeneklerin gerektirdiği girdiler gelir. Girdiler, seçenek harfleriyle aynı sırada okunur. Tüm seçenekler işlendikten sonra kalan komut satırı sözcükleri, isteğe bağlı olmayan girdiler olarak değerlendirilir: dosya veya arşiv üye adları.
 .sp
-Örneğin, \fBc\fR seçeneği arşivin oluşturulmasını gerektirir, \fBv\fR seçeneği işlemin ayrıntılılarını ister ve \fBf\fR seçeneği üzerinde çalışılacak arşivin adını belirleyen bir bağımsız değişken alır. Geleneksel tarzda yazılan aşağıdaki komut, \fBtar\fR’a \fI/etc\fR dizinindeki tüm dosyaları \fIetc.tar\fR arşiv dosyasına kaydetmesini söyler, arşivlenen dosyaları ayrıntılı olarak listeler:
+Örneğin, \fBc\fR seçeneği arşivin oluşturulmasını gerektirir, \fBv\fR seçeneği işlemin ayrıntılılarını ister ve \fBf\fR seçeneği üzerinde çalışılacak arşivin adını belirleyen bir girdi alır. Geleneksel tarzda yazılan aşağıdaki komut, \fBtar\fR’a \fI/etc\fR dizinindeki tüm dosyaları \fIetc.tar\fR arşiv dosyasına kaydetmesini söyler, arşivlenen dosyaları ayrıntılı olarak listeler:
 .sp
 .RS 4
 .nf
@@ -78,9 +78,9 @@ GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel
 .fi
 .sp
 .RE
-\fBUNIX\fR veya \fBkısa seçenek\fR tarzında, diğer komut satırı yardımcı uygulamalarında olduğu gibi, her seçenek harfinin önüne tek bir tire eklenir. Bir seçenek bağımsız değişken alırsa, bağımsız değişken onu ya ayrı bir komut satırı sözcüğü olarak ya da hemen ardından gelen bir seçenek olarak izler. Ancak, seçenek "isteğe bağlı" bir bağımsız değişken alıyorsa, bağımsız değişken, örneğin \fB-g/tmp/snar.db\fR’de olduğu gibi, herhangi bir boşluk bırakmadan seçenek harfinin hemen ardına yazılmalıdır.
+\fBUNIX\fR veya \fBkısa seçenek\fR tarzında, diğer komut satırı yardımcı uygulamalarında olduğu gibi, her seçenek harfinin önüne tek bir tire eklenir. Bir seçenek girdi alırsa, girdi onu ya ayrı bir komut satırı sözcüğü olarak ya da hemen ardından gelen bir seçenek olarak izler. Ancak, seçenek "isteğe bağlı" bir girdi alıyorsa, girdi, örneğin \fB-g/tmp/snar.db\fR’de olduğu gibi, herhangi bir boşluk bırakmadan seçenek harfinin hemen ardına yazılmalıdır.
 .sp
-Bağımsız değişken almayan seçenekler, tek bir tire işaretinden sonra birlikte kümelenebilir, örn. \fB-vkp\fR. Bağımsız değişken alan seçeneklerin bağımsız değişkenleri (zorunlu veya isteğe bağlı), böyle bir kümenin sonuna eklenebilir, örn. \fB-vkpf a.tar\fR.
+Girdi almayan seçenekler, tek bir tire işaretinden sonra birlikte kümelenebilir, örn. \fB-vkp\fR. Girdi alan seçeneklerin girdileri (zorunlu veya isteğe bağlı), böyle bir kümenin sonuna eklenebilir, örn. \fB-vkpf a.tar\fR.
 .sp
 Yukarıda kısa seçeneği yalılmış komut şöyle görünebilirdi:
 .sp
@@ -92,7 +92,7 @@ veya
 .fi
 .sp
 .RE
-\fBGNU\fR veya \fBuzun seçenek\fR tarzında, her seçenek iki tire ile başlar, küçük harfler ve tirelerden oluşan anlamlı bir ada sahiptir. Uzun seçenek kullanıldığında, belirsizlik yaratmamak kaydıyla, ilk harflerine kısaltılabilir. Uzun seçeneklere ilişkin değiştigeler ya seçeneğin hemen ardından ayrı bir komut satırı sözcüğü olarak sağlanır ya da seçenekten arada boşluk olmadan eşittir işaretiyle ayrılır. İsteğe bağlı bağımsız değişkenler her zaman ikinci yöntemi kullanmalıdır.
+\fBGNU\fR veya \fBuzun seçenek\fR tarzında, her seçenek iki tire ile başlar, küçük harfler ve tirelerden oluşan anlamlı bir ada sahiptir. Uzun seçenek kullanıldığında, belirsizlik yaratmamak kaydıyla, ilk harflerine kısaltılabilir. Uzun seçeneklere ilişkin değiştigeler ya seçeneğin hemen ardından ayrı bir komut satırı sözcüğü olarak sağlanır ya da seçenekten arada boşluk olmadan eşittir işaretiyle ayrılır. İsteğe bağlı girdiler her zaman ikinci yöntemi kullanmalıdır.
 .sp
 Örnek komutu bu tarzda yazmanın birkaç yolu:
 .sp
@@ -107,61 +107,61 @@ veya (bazı seçenekleri kısaltarak):
 Her üç tarzdaki seçenekler karıştırılabilir, ancak bunu eski seçeneklerle yapmak önerilmez.
 .sp
 .SS "İşlem kipi"
-Aşağıdaki listelenen seçenekler, GNU \fBtar\fR’ın hangi işlemi gerçekleştireceğini belirler. Tam olarak bunlardan biri verilmelidir. İsteğe bağlı olmayan bağımsız değişkenlerin anlamı, istenen çalışma kipine bağlıdır.
+Aşağıdaki listelenen seçenekler, GNU \fBtar\fR’ın hangi işlemi gerçekleştireceğini belirler. Tam olarak bunlardan biri verilmelidir. İsteğe bağlı olmayan girdilerin anlamı, istenen çalışma kipine bağlıdır.
 .sp
 .TP 4
 \fB-A\fR, \fB--catenate\fR, \fB--concatenate\fR
-Arşivi başka bir arşivin sonuna ekler. Bağımsız değişkenler, eklenecek arşivlerin adları olarak değerlendirilir. Tüm arşivler, eklendikleri arşivle aynı biçemde olmalıdır, aksi takdirde ortaya çıkan arşiv, GNU olmayan \fBtar\fR uygulamaları ile kullanılamayabilir. Ayrıca, birden fazla arşiv verildiğinde, ilki hariç arşivlerdeki diğer üyelere, yalnızca \fB-i\fR (\fB--ignore-zeros\fR) seçeneği kullanıldığında ortaya çıkan arşivden erişilebilir olacağına dikkat edilmelidir.
+Arşivi başka bir arşivin sonuna ekler. Girdiler, eklenecek arşivlerin adları olarak değerlendirilir. Tüm arşivler, eklendikleri arşivle aynı biçemde olmalıdır, aksi takdirde ortaya çıkan arşiv, GNU olmayan \fBtar\fR uygulamaları ile kullanılamayabilir. Ayrıca, birden fazla arşiv verildiğinde, ilki hariç arşivlerdeki diğer üyelere, yalnızca \fB-i\fR (\fB--ignore-zeros\fR) seçeneği kullanıldığında ortaya çıkan arşivden erişilebilir olacağına dikkat edilmelidir.
 .sp
 Sıkıştırılmış arşivler ardarda eklenemez.
 .sp
 .TP 4
 \fB-c\fR, \fB--create\fR
-Yeni bir arşiv oluşturur. Bağımsız değişkenler, arşivlenecek dosyaların adlarını belirler. \fB--no-recursion\fR seçeneği verilmediği sürece dizinler ardışık olarak arşivlenir.
+Yeni bir arşiv oluşturur. Girdiler, arşivlenecek dosyaların adlarını belirler. \fB--no-recursion\fR seçeneği verilmediği sürece dizinler ardışık olarak arşivlenir.
 .sp
 .TP 4
 \fB-d\fR, \fB--diff\fR, \fB--compare\fR
-Arşiv ile dosya sistemi arasındaki farkları bulur. Bağımsız değişkenler isteğe beğlıdır ve karşılaştırılacak arşiv üyelerini belirler. Verilmezse, geçerli çalışma dizinin belirtildiği varsayılır.
+Arşiv ile dosya sistemi arasındaki farkları bulur. Girdiler isteğe beğlıdır ve karşılaştırılacak arşiv üyelerini belirler. Verilmezse, geçerli çalışma dizinin belirtildiği varsayılır.
 .sp
 .TP 4
 \fB--delete\fR
-Arşivi siler. Bağımsız değişkenler silinecek arşiv üyelerinin isimleridir. En az bir bağımsız değişken verilmelidir.
+Arşivi siler. Girdiler silinecek arşiv üyelerinin isimleridir. En az bir girdi verilmelidir.
 .sp
 Bu seçenek sıkıştırıllmış arşivlerde çalışmaz. Kısa seçenek eşdeğeri yoktur.
 .sp
 .TP 4
 \fB-r\fR, \fB--append\fR
-Dosyaları arşivin sonuna ekler. Bağımsız değişkenler \fB-c\fR (\fB--create\fR) seçeneğindeki ile aynı anlama gelir.
+Dosyaları arşivin sonuna ekler. Girdiler \fB-c\fR (\fB--create\fR) seçeneğindeki ile aynı anlama gelir.
 .sp
 .TP 4
 \fB-t\fR, \fB--list\fR
-Arşiv içeriğini listeler. Bağımsız değişkenler isteğe bağlıdır. Belirtilirse listedeki üyelerin isimlerini belirler.
+Arşiv içeriğini listeler. Girdiler isteğe bağlıdır. Belirtilirse listedeki üyelerin isimlerini belirler.
 .sp
 .TP 4
 \fB--test-label\fR
-Arşiv bölüm etiketini sınar ve çıkar. Bağımsız değişkensiz kullanıldığında bölüm etiketini (varsa) gösterir ve çıkar. Bir veya daha fazla komut satırı bağımsız değişkeni belirtilirse, \fBtar\fR bölüm etiketini her bağımsız değişken ile karşılaştırır. Eşleşme bulunursa 0, aksi takdirde 1 ile çıkar. \fB-v\fR (\fB--verbose\fR) seçeneği ile birlikte kullanılmadıkça hiçbir şey çıktılanmaz.
+Arşiv bölüm etiketini sınar ve çıkar. Girdisiz kullanıldığında bölüm etiketini (varsa) gösterir ve çıkar. Bir veya daha fazla komut satırı girdisi belirtilirse, \fBtar\fR bölüm etiketini her girdi ile karşılaştırır. Eşleşme bulunursa 0, aksi takdirde 1 ile çıkar. \fB-v\fR (\fB--verbose\fR) seçeneği ile birlikte kullanılmadıkça hiçbir şey çıktılanmaz.
 .sp
 Kısa seçenek eşdeğeri yoktur.
 .sp
 .TP 4
 \fB-u\fR, \fB--update\fR
-Arşivdeki ilgili kopyadan daha yeni olan dosyaları arşive ekler. Bağımsız değişkenler \fB-c\fR ve \fB-r\fR seçenekleriyle aynı anlama sahiptir. Yeni dosyaların eski arşiv kopyalarının yerini almadığına, bunun yerine arşivin sonuna eklendiğine dikkat edilmelidir. Böylece elde edilen arşiv, aynı dosyanın çeşitli sürümlerine karşılık gelen, aynı isimde birkaç üye içerebilir.
+Arşivdeki ilgili kopyadan daha yeni olan dosyaları arşive ekler. Girdiler \fB-c\fR ve \fB-r\fR seçenekleriyle aynı anlama sahiptir. Yeni dosyaların eski arşiv kopyalarının yerini almadığına, bunun yerine arşivin sonuna eklendiğine dikkat edilmelidir. Böylece elde edilen arşiv, aynı dosyanın çeşitli sürümlerine karşılık gelen, aynı isimde birkaç üye içerebilir.
 .sp
 .TP 4
 \fB-x\fR, \fB--extract\fR, \fB--get\fR
-Arşivden dosyaları çıkartır. Bağımsız değişkenler isteğe bağlıdır. Belirtilirse çıktılanacak arşiv üyelerinin isimlerini belirler.
+Arşivden dosyaları çıkartır. Girdiler isteğe bağlıdır. Belirtilirse çıktılanacak arşiv üyelerinin isimlerini belirler.
 .sp
 .TP 4
 \fB--show-defaults\fR
-Çeşitli \fBtar\fR seçenekleri için öntanımlıları listeler ve çıkar. Bağımsız değişkensiz kullanılır.
+Çeşitli \fBtar\fR seçenekleri için öntanımlıları listeler ve çıkar. Girdisiz kullanılır.
 .sp
 .TP 4
 \fB-?\fR, \fB--help\fR
-Kısa seçenek özetini gösterir ve çıkar. Bağımsız değişkensiz kullanılır.
+Kısa seçenek özetini gösterir ve çıkar. Girdisiz kullanılır.
 .sp
 .TP 4
 \fB--usage\fR
-Kullanılabilen seçeneklerin listesini gösterir ve çıkar. Bağımsız değişkensiz kullanılır.
+Kullanılabilen seçeneklerin listesini gösterir ve çıkar. Girdisiz kullanılır.
 .sp
 .TP 4
 \fB--version\fR
@@ -220,7 +220,7 @@ Zararlı olabilecek bazı seçeneklerin kullanımını devre dışı bırakır.
 .sp
 .TP 4
 \fB--sparse-version\fR=\fIBÜYÜK\fR[\fI.KÜÇÜK\fR]
-Kullanılacak seyrek biçemin sürümünü belirler (örtük olarak \fB--sparse\fR uygular). Geçerli bağımsız değişken değerleri \fB0.0\fR, \fB0.1\fR ve \fB1.0\fR’dır. Seyrek biçemlerin ayrıntılı açıklaması için komut satırından şu komut girilebilir: \fBinfo tar ’Sparse Formats’\fR.
+Kullanılacak seyrek biçemin sürümünü belirler (örtük olarak \fB--sparse\fR uygular). Geçerli girdi değerleri \fB0.0\fR, \fB0.1\fR ve \fB1.0\fR’dır. Seyrek biçemlerin ayrıntılı açıklaması için komut satırından şu komut girilebilir: \fBinfo tar ’Sparse Formats’\fR.
 .sp
 .TP 4
 \fB--S\fR, \fB--sparse\fR
@@ -249,7 +249,7 @@ Mevcut dizinlerin meta verileri korunur.
 .sp
 .TP 4
 \fB--one-top-level\fR[=\fIDİZİN\fR]
-Tüm dosyaları \fIDİZİN\fRe veya bağımsız değişkensiz kullanılıyorsa, arşivin uzantısız dosya adıyla adlandırılan bir alt dizine çıkarır (eksi \fB--auto-compress\fR tarafından tanınan standart sıkıştırma uzantıları).
+Tüm dosyaları \fIDİZİN\fRe veya girdisiz kullanılıyorsa, arşivin uzantısız dosya adıyla adlandırılan bir alt dizine çıkarır (eksi \fB--auto-compress\fR tarafından tanınan standart sıkıştırma uzantıları).
 .sp
 .TP 4
 \fB--overwrite\fR
@@ -296,7 +296,7 @@ Dosyaları standart çıktıya çıkarır.
 .sp
 .TP 4
 \fB--to-command\fR=\fIKOMUT\fR
-Çıkarılan dosyaları \fIKOMUT\fRa borular. \fIKOMUT\fR, isteğe bağlı olarak komut satırı bağımsız değişkenleri ile birlikte harici uygulamanın dosya yoludur. Uygulama çağrılır ve çıkartılan dosyanın içeriği uygulamanın standart girdisine aktarılır. Ek veriler, aşağıdaki ortam değişkenleri aracılığıyla aktarılabilir:
+Çıkarılan dosyaları \fIKOMUT\fRa borular. \fIKOMUT\fR, isteğe bağlı olarak komut satırı girdileri ile birlikte harici uygulamanın dosya yoludur. Uygulama çağrılır ve çıkartılan dosyanın içeriği uygulamanın standart girdisine aktarılır. Ek veriler, aşağıdaki ortam değişkenleri aracılığıyla aktarılabilir:
 .sp
 .RS
 .TP 4
@@ -550,7 +550,7 @@ Uzak makinede \fBrmt\fR(8) komutunun kurulu olması gerekir. Dosya yolu \fBtar\f
 .sp
 .TP 4
 \fB-F\fR, \fB--info-script\fR=\fIKOMUT\fR, \fB--new-volume-script\fR=\fIKOMUT\fR
-Teybin sonuna ulaşılışılan her seferde \fIKOMUT\fR çalıştırılır (örtük olarak \fB-M\fR uygulanır). Komut bağımsız değişken içerebilir. Başlatıldığında \fBtar\fR’ın ortamına ek olarak aşağıdaki değişkenler miras alınır:
+Teybin sonuna ulaşılışılan her seferde \fIKOMUT\fR çalıştırılır (örtük olarak \fB-M\fR uygulanır). Komut girdi içerebilir. Başlatıldığında \fBtar\fR’ın ortamına ek olarak aşağıdaki değişkenler miras alınır:
 .sp
 .RS
 .TP 4
@@ -876,7 +876,7 @@ Sonek kaldırılmadan önce yedek alınır, normal sonek geçersiz kılınır. \
 \fB-T\fR, \fB--files-from\fR=\fIDOSYA\fR
 Çıkarılacak veya oluşturulacak isimler \fIDOSYA\fRdan alınır.
 .sp
-Aksi belirtilmedikçe, \fIDOSYA\fR satır sonu karakteri ile ayrılmış bir ad listesi (yani her satırda bir ad) içermelidir. Okunan adlar, komut satırı bağımsız değişkenleri olarak ele alınır. Tırnak kaldırma ve sözcük bölme işlemleri uygulanır ve \fB-\fR ile başlayan her dizge, \fBtar\fR komut satırı seçeneği olarak ele alınır.
+Aksi belirtilmedikçe, \fIDOSYA\fR satır sonu karakteri ile ayrılmış bir ad listesi (yani her satırda bir ad) içermelidir. Okunan adlar, komut satırı girdileri olarak ele alınır. Tırnak kaldırma ve sözcük bölme işlemleri uygulanır ve \fB-\fR ile başlayan her dizge, \fBtar\fR komut satırı seçeneği olarak ele alınır.
 .sp
 Bu davranışın istenmediği noktada, \fB--verbatim-files-from\fR seçeneği kullanılarak devre dışı bırakılabilir.
 .sp

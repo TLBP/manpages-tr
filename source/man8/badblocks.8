@@ -20,7 +20,7 @@
  * This file may be redistributed under the terms of the GNU Public License.
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "BADBLOCKS" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -37,7 +37,7 @@ badblocks - aygıtı bozuk blokları bulmak için tarar
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBbadblocks\fR, bir aygıt (genellikle bir disk bölümü) üzerinde bulunan bozuk blokları aramak için kullanılır. \fIaygıt\fR, \fI/dev/sdc1\fR gibi bir aygıtı gösteren özel bir dosyadır. \fIsonblok\fR ise sınanacak en son bloktur. Belirtilmezse öntanımlı olarak aygıt üzerindeki son blok kullanılır. \fIilkblok\fR sınamanın başlatılacağı ilk bloğu gösteren isteğe bağlı bir bağımsız değişkendir. Bu bağımsız değişken sınamaya diskin ortasından başlayabilme esnekliği sağlar. Eğer belirtilmezse öntanımlı olarak disk üzerindeki ilk blok kullanılır.
+\fBbadblocks\fR, bir aygıt (genellikle bir disk bölümü) üzerinde bulunan bozuk blokları aramak için kullanılır. \fIaygıt\fR, \fI/dev/sdc1\fR gibi bir aygıtı gösteren özel bir dosyadır. \fIsonblok\fR ise sınanacak en son bloktur. Belirtilmezse öntanımlı olarak aygıt üzerindeki son blok kullanılır. \fIilkblok\fR sınamanın başlatılacağı ilk bloğu gösteren isteğe bağlı bir girdidir. Bu girdi sınamaya diskin ortasından başlayabilme esnekliği sağlar. Eğer belirtilmezse öntanımlı olarak disk üzerindeki ilk blok kullanılır.
 .sp
 .TP 4
 \fBÖnemli bilgi\fR

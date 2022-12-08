@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:26+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:07+03:00
 .TH "INSTALL" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -31,7 +31,7 @@ Bu kurulum uygulaması, (genellikle yeni derlenmiş) dosyaları seçtiğiniz hed
 .sp
 İlk üç biçimde \fIKAYNAK\fR \fIHEDEF\fRe veya birden fazla \fIKAYNAK\fR mevcut \fIDİZİN\fRe kopyalanır, aynı zamanda izin kiplerini ve sahip/grup bilgilerini de tanımlar. Dördüncü biçimde, ilgili \fIDİZİN\fR(ler)in bütün bileşenlerini oluşturur.
 .sp
-Uzun seçeneklerdeki bağımsız değişkenler zorunlu olsun olmasın kısa seçeneklerde de geçerlidir.
+Uzun seçeneklerdeki girdiler zorunlu olsun olmasın kısa seçeneklerde de geçerlidir.
 .sp
 .TP 4
 \fB--backup\fR[=\fIYÖNTEM\fR]
@@ -39,7 +39,7 @@ Varolan hedef dosyalarının her birini yedekler.
 .sp
 .TP 4
 \fB-b\fR
-\fB--backup\fR gibidir fakat herhangi bir bağımsız değişken kabul etmez.
+\fB--backup\fR gibidir fakat herhangi bir girdi kabul etmez.
 .sp
 .TP 4
 \fB-c\fR
@@ -51,7 +51,7 @@ Kaynak ve hedef dosya çiftlerinin her birini karşılaştırır. Bazı durumlar
 .sp
 .TP 4
 \fB-d\fR, \fB--directory\fR
-Tüm bağımsız değişkenleri dizin adı olarak ele alınır; belirtilen dizinlerin tüm bileşenleri oluşturulur.
+Tüm girdileri dizin adı olarak ele alınır; belirtilen dizinlerin tüm bileşenleri oluşturulur.
 .sp
 .TP 4
 \fB-D\fR
@@ -107,7 +107,7 @@ Hedef dosyanın SELinux güvenlik bağlamını ve oluşturulan her dizine öntan
 .sp
 .TP 4
 \fB--context\fR[=\fIBAĞLAM\fR]
-Bağımsız değişkensiz kullanılırsa \fB-Z\fR gibidir. \fIBAĞLAM\fR belirtilirse SELinux veya SMACK güvenlik bağlamına \fIBAĞLAM\fR atanır.
+girdisiz kullanılırsa \fB-Z\fR gibidir. \fIBAĞLAM\fR belirtilirse SELinux veya SMACK güvenlik bağlamına \fIBAĞLAM\fR atanır.
 .sp
 .TP 4
 \fB--help\fR

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:28+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:09+03:00
 .TH "STTY" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -27,7 +27,7 @@ stty - uçbirim hat ayarlarını basar ve değiştirir
 .SH "AÇIKLAMA"
 Uçbirim karakteristiklerin basar ve değiştirir.
 .sp
-Uzun seçenekler için zorunlu olan bağımsız değişkenler kısa seçenekler için de zorunludur.
+Uzun seçenekler için zorunlu olan girdiler kısa seçenekler için de zorunludur.
 .sp
 .TP 4
 \fB-a\fR, \fB--all\fR
@@ -524,7 +524,7 @@ parenb istrip cs7 ile aynı
 cread -ignbrk brkint -inlcr -igncr icrnl -ixoff -iuclc -ixany imaxbel opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke ve tüm özel karakterlerin öntanımlı değerleriyle aynı
 .sp
 .PP
-Standart girdiye bağlı olan tty hattını yönetir. Bağımsız değişkensiz çalıştırıldığında iletişim hızını, hat disiplinini ve stty sane ayarından farklı ayarları gösterir. Ayarlarda \fIKAR\fR yazıldığı gibi ya da ^c, 0x37, 0177 ya da 127 olarak gösterilmiş bir karakter olabilir. ^- veya undef değerleri bu özel karakteri geçersiz kılar.
+Standart girdiye bağlı olan tty hattını yönetir. Girdisiz çalıştırıldığında iletişim hızını, hat disiplinini ve stty sane ayarından farklı ayarları gösterir. Ayarlarda \fIKAR\fR yazıldığı gibi ya da ^c, 0x37, 0177 ya da 127 olarak gösterilmiş bir karakter olabilir. ^- veya undef değerleri bu özel karakteri geçersiz kılar.
 .sp
 .sp
 .SH "YAZAN"

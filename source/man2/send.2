@@ -44,7 +44,7 @@
  * Modified Oct 2003 by aeb
  * Modified 2004-07-01 by mtk
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "SEND" 2 "1 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -86,7 +86,7 @@ int \fIflags\fR);
 .SH "AÇIKLAMA"
 \fBsend\fR(), \fBsendto\fR() ve \fBsendmsg\fR() sistem çağrıları bir başka sokete ileti aktarmakta kullanılır.
 .sp
-\fBsend\fR() çağrısı soket sadece \fIconnected\fR (bağlantılı) durumda ise kullanılabilir (böylece amaçlanan alıcı biliniyor olur). \fBsend\fR() ve \fBwrite\fR(2) arasındaki tek fark \fIflags\fR bağımsız değişkeninin varlığıdır. Sıfır değeri atanmış \fIflags\fR bağımsız değişkeni kullanan \fBsend\fR() ile \fBwrite\fR(2) eşdeğerdir. Ayrıca aşağıdaki
+\fBsend\fR() çağrısı soket sadece \fIconnected\fR (bağlantılı) durumda ise kullanılabilir (böylece amaçlanan alıcı biliniyor olur). \fBsend\fR() ve \fBwrite\fR(2) arasındaki tek fark \fIflags\fR değişkeninin varlığıdır. Sıfır değeri atanmış \fIflags\fR değişkeni kullanan \fBsend\fR() ile \fBwrite\fR(2) eşdeğerdir. Ayrıca aşağıdaki
 .sp
 .RS 4
 .nf
@@ -102,9 +102,9 @@ sendto(sockfd, buf, len, flags, NULL, 0);
 .fi
 .sp
 .RE
-çağrısına eşdeğerdir. \fIsockfd\fR bağımsız değişkeni, gönderen soketin dosya tanıtıcısıdır.
+çağrısına eşdeğerdir. \fIsockfd\fR değişkeni, gönderen soketin dosya tanıtıcısıdır.
 .sp
-Eğer \fBsendto\fR() bağlantılı bir soket (\fBSOCK_STREAM\fR, \fBSOCK_SEQPACKET\fR) ile kullanılırsa, \fIdest_addr\fR ve \fIaddrlen\fR bağımsız değişkenleri görmezden gelinir (eğer bunlar NULL ve 0 değilse \fBEISCONN\fR hatası dönebilir) ve eğer soket bağlanmadıysa \fBENOTCONN\fR hatası döner. Bağlantısız soketle kullanımda, \fIdest_addr\fR hedefin adresini, \fIaddrlen\fR ise hedef adresin boyutunu belirler. \fBsendmsg\fR() için hedef adres \fImsg.msg_name\fR ile belirtilir ve \fImsg.msg_namelen\fR boyutunu belirler.
+Eğer \fBsendto\fR() bağlantılı bir soket (\fBSOCK_STREAM\fR, \fBSOCK_SEQPACKET\fR) ile kullanılırsa, \fIdest_addr\fR ve \fIaddrlen\fR değişkenleri görmezden gelinir (eğer bunlar NULL ve 0 değilse \fBEISCONN\fR hatası dönebilir) ve eğer soket bağlanmadıysa \fBENOTCONN\fR hatası döner. Bağlantısız soketle kullanımda, \fIdest_addr\fR hedefin adresini, \fIaddrlen\fR ise hedef adresin boyutunu belirler. \fBsendmsg\fR() için hedef adres \fImsg.msg_name\fR ile belirtilir ve \fImsg.msg_namelen\fR boyutunu belirler.
 .sp
 \fBsend\fR() ve \fBsendto\fR() için, ileti \fIbuf\fR tamponu içinde tutulur ve \fIlen\fR uzunluktadır. \fBsendmsg\fR() için, ileti \fImsg.msg_iov\fR dizisindeki öğelerle gösterilir. \fBsendmsg\fR() çağrısı yardımcı verinin de yollanmasını sağlar (denetim bilgisi de denir).
 .sp
@@ -115,7 +115,7 @@ Eğer ileti ilgili protokol için bütün olarak gönderilemeyecek kadar uzunsa,
 İleti soketin gönderim tamponuna sığmadığında, \fBsend\fR() eğer soket engellemesiz G/Ç kipine alınmadıysa engellenir. Engellemesiz kip başarısız olduğunda \fBEAGAIN\fR veya \fBEWOULDBLOCK\fR döner. \fBselect\fR(2) çağrısı daha fazla veri gönderme olasılığını saptamak için kullanılabilir.
 .sp
 .SS "flags değerleri"
-\fIflags\fR bağımsız değişkeninin değeri ya sıfırdır ya da aşağıdaki sabitlerin bit düzeyinde veyalanmasıyla elde edilir.
+\fIflags\fR değişkeninin değeri ya sıfırdır ya da aşağıdaki sabitlerin bit düzeyinde veyalanmasıyla elde edilir.
 .sp
 .TP 4
 \fBMSG_CONFIRM\fR (Linux 2.3.15 ve sonrası)
@@ -214,7 +214,7 @@ Soket bağlantılı kipte değil ve karşı adres atanmamış.
 .sp
 .TP 4
 \fBEFAULT\fR
-Bir bağımsız değişken için belirtilen kullanıcı adres uzayı geçersiz.
+Belirtilen kullanıcı adres uzayı geçersiz.
 .sp
 .TP 4
 \fBEINTR\fR
@@ -222,7 +222,7 @@ Veri gönderilmeden önce bir sinyal alınmış; \fBsignal\fR(7) sayfasına bak�
 .sp
 .TP 4
 \fBEINVAL\fR
-Belirtilen bağımsız değişken geçersiz.
+Belirtilen değer geçersiz.
 .sp
 .TP 4
 \fBEISCONN\fR
@@ -250,7 +250,7 @@ Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
 .sp
 .TP 4
 \fBEOPNOTSUPP\fR
-\fIflags\fR bağımsız değişkenindeki bazı bitler soket türüyle uyumsuz.
+\fIflags\fR değişkenindeki bazı bitler soket türüyle uyumsuz.
 .sp
 .TP 4
 \fBEPIPE\fR

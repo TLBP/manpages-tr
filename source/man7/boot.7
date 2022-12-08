@@ -16,7 +16,7 @@
  *
  *  Modified 2004-11-03 patch from Martin Schulze (joey@infodrom.org)
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "BOOT" 7 "Mart 2015" "Linux man-pages 5.10" ">Linux Yazılımcısının Kılavuzu"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -42,9 +42,9 @@ Açılış işlemleri sistemden sisteme değişiklik gösterirse de genellikle b
 .SS "Donanım açılışı"
 Makinayı açıldıktan veya yeniden başlatıldıktan sonra denetim salt okunur bellekte bulunan (genellikle bu bir PROM’dur) bir yazılıma devredilir. PC’lerde bu yazılım genellikle \fBBIOS\fR (bayos okunur) olarak bilinir.
 .sp
-Bu yazılım makina üzerinde bir temel sınama yaptıktan sonra gerekli bağımsız değişkenleri okumak için oynak olmayan (non-volatile) belleğe erişir. Bu bellek PC’lerde pille beslenen bir CMOS bellektir ve \fBCMOS\fR (simos okunur) adıyla bilinir. PC dünyası dışında ise genellikle \fBNVRAM\fR (Non-Volatile RAM) olarak bilinir.
+Bu yazılım makina üzerinde bir temel sınama yaptıktan sonra gerekli girdileri okumak için oynak olmayan (non-volatile) belleğe erişir. Bu bellek PC’lerde pille beslenen bir CMOS bellektir ve \fBCMOS\fR (simos okunur) adıyla bilinir. PC dünyası dışında ise genellikle \fBNVRAM\fR (Non-Volatile RAM) olarak bilinir.
 .sp
-NVRAM üzerinde saklanan bağımsız değişkenler sistemden sisteme değişiklik gösterir, fakat en azından donanım açılış yazılımı, açılışın yapılacağı aygıtı ya da algılanması gereken olası açılış aygıtlarını bilmek zorundadır.
+NVRAM üzerinde saklanan girdiler sistemden sisteme değişiklik gösterir, fakat en azından donanım açılış yazılımı, açılışın yapılacağı aygıtı ya da algılanması gereken olası açılış aygıtlarını bilmek zorundadır.
 .sp
 Donanım açılış adımı ile açılış aygıtına erişildikten sonra, işletim sistemini yükleyecek olan önyükleyici yazılımı yüklenir. Bu yazılım açılış aygıtının belli bir yerinde bulunur ve denetim bu yazılıma aktarılır.
 .sp
@@ -55,7 +55,7 @@ Burada ağdan açılış adımlarını açıklamayacağız. Bu konu ile ilgileni
 .PP
 .sp
 .SS "Önyükleyici"
-Önyükleyicinin asıl görevi disk üzerinde çekirdeğin yerini belirlemek, onu yükleyip çalıştırmaktır. Çoğu önyükleyici başka çekirdeklerin belirtilmesine (son derlediğiniz çekirdek çalışmazsa öncekinin yüklenmesini sağlayabilirsiniz) ve bu çekirdeklere isteğe bağlı bağımsız değişkenlerin aktarılmasına imkan veren etkileşimli bir arayüze sahiptir.
+Önyükleyicinin asıl görevi disk üzerinde çekirdeğin yerini belirlemek, onu yükleyip çalıştırmaktır. Çoğu önyükleyici başka çekirdeklerin belirtilmesine (son derlediğiniz çekirdek çalışmazsa öncekinin yüklenmesini sağlayabilirsiniz) ve bu çekirdeklere isteğe bağlı girdilerin aktarılmasına imkan veren etkileşimli bir arayüze sahiptir.
 .sp
 PC’lerde önyükleyici açılış aygıtının ilk sektöründe bulunur. Bu sektör Asıl Önyükleme Kaydı (\fBMBR\fR - Master Boot Record) olarak bilinir.
 .sp
@@ -68,9 +68,9 @@ Linux işletim sisteminin önyükleyicisi normalde \fBlilo\fR(8) ya da \fBgrub\f
 .SS "Çekirdeğin Yüklenmesi"
 Çekirdek yüklendiğinde aygıtları (sürücüleri üzerinden) ilklendirir, takas alanını etkinleştirir (günümüz çekirdeklerinde \fBkswapd\fR olarak bilinen bir çekirdek sürecidir) ve kök dosya sistemini (/) bağlar.
 .sp
-Çekirdeğe bu etkinliklerle ilgili olarak bazı bağımsız değişkenler aktarılabilir (örneğin kök dosya sistemi olarak başka bir disk bölümünü belirtebilirsiniz). Bu tür Linux bağımsız değişkenleri ile ilgili daha ayrıntılı bilgi için \fBbootparam\fR(7) kılavuzuna bakınız.
+Çekirdeğe bu etkinliklerle ilgili olarak bazı girdiler aktarılabilir (örneğin kök dosya sistemi olarak başka bir disk bölümünü belirtebilirsiniz). Bu tür Linux girdileri ile ilgili daha ayrıntılı bilgi için \fBbootparam\fR(7) kılavuzuna bakınız.
 .sp
-Bundan sonra çekirdek sadece, süreç kimliği 1 olan ilk süreci (kullanıcı tarafı) çalıştırır. Çekirdek kendisine verilmiş bağımsız değişkenlerden işine yaramayanları aktararak \fI/sbin/init\fR yazılımını çalıştırır.
+Bundan sonra çekirdek sadece, süreç kimliği 1 olan ilk süreci (kullanıcı tarafı) çalıştırır. Çekirdek kendisine verilmiş girdilerden işine yaramayanları aktararak \fI/sbin/init\fR yazılımını çalıştırır.
 .sp
 .SS "init ve inittab"
 \fBinit\fR çalışmaya başladığında ilk olarak \fI/etc/inittab\fR dosyasında bulunan yönergeleri okur. Bu dosya farklı çalışma seviyeleri ile bu çalışma seviyelerinde çalıştırılacak komutlara ilişkin bilgiler içerir.
@@ -85,19 +85,19 @@ Hizmetlerin başlatılması ve durdurulması bu dosyayı düzenleyerek yapılmaz
 Aşağıdaki açıklamalar sadece SYSV-R4 temelli sistemlere uygulanır. Bunlar ticari Unix’ler ile bazı Linux dağıtımlarıdır. Bazı sistemler (Slackware Linux, FreeBSD, OpenBSD) açılış betiklerinin düzenlenmesinde biraz daha farklı yapılar kullanır.
 .sp
 .PP
-Yönetilen her hizmet (posta sunucusu, nfs sunucusu, cron, vs.) için belirli bir dizinde (çoğu Linux sürümünde \fI/etc/init.d\fR dizinidir) bulunan tek bir betik vardır. Bu betiklerin her biri tek bir bağımsız değişken kabul eder. Bunlar genel olarak üzerinde anlaşma sağlanmış belirli sözcüklerdir. Örneğin ’start’ sözcüğü hizmetin başlatılmasını, ’stop’ ise durdurulmasını sağlarken ’restart’ ile hizmet önce durdurulur ardından başlatılır, ’status’ ile hizmetin durmu hakkında bilgi alınır. Betikler bağımsız değişkensiz çalıştırıldığında kullanılabilecek bağımsız değişkenlerin listesini gösterir.
+Yönetilen her hizmet (posta sunucusu, nfs sunucusu, cron, vs.) için belirli bir dizinde (çoğu Linux sürümünde \fI/etc/init.d\fR dizinidir) bulunan tek bir betik vardır. Bu betiklerin her biri tek bir girdi kabul eder. Bunlar genel olarak üzerinde anlaşma sağlanmış belirli sözcüklerdir. Örneğin ’start’ sözcüğü hizmetin başlatılmasını, ’stop’ ise durdurulmasını sağlarken ’restart’ ile hizmet önce durdurulur ardından başlatılır, ’status’ ile hizmetin durmu hakkında bilgi alınır. Betikler girdisiz çalıştırıldığında kullanılabilecek girdilerin listesini gösterir.
 .sp
 .SS "Çalışma seviyelerine özel dizinler"
 Hizmetlerin belirli çalışma seviyelerinde çalıştırılması, durdurulması ve çalıştırılma sıralarının belirlenmesi için özel dizinler vardır. Bunlar normalde \fB/etc/rc[0-6S].d\fR dizinleridir. Bu dizinlerin her birinde \fI/etc/init.d\fR dizininde bulunan betiklere sembolik bağlar bulunur.
 .sp
-Bir birincil betik (genellikle \fI/etc/rc\fR) \fBinittab\fR(5) betiğinden çağrılır ve bu betik çalışma seviyesi dizinlerindeki sembolik bağlar üzerinden hizmet betiklerini çalıştırır. Betiklerin sembolik bağ isimlerinden ’S’ ile başlayanlar ’start’ bağımsız değişkeni ile (hizmeti başlatmak için), ’K’ ile başlayanlar ise ’stop’ bağımsız değişkeni ile (hizmeti durdurmak için) çalıştırılır.
+Bir birincil betik (genellikle \fI/etc/rc\fR) \fBinittab\fR(5) betiğinden çağrılır ve bu betik çalışma seviyesi dizinlerindeki sembolik bağlar üzerinden hizmet betiklerini çalıştırır. Betiklerin sembolik bağ isimlerinden ’S’ ile başlayanlar ’start’ ile (hizmeti başlatmak için), ’K’ ile başlayanlar ise ’stop’ ile (hizmeti durdurmak için) çalıştırılır.
 .sp
 Aynı çalışma seviyesinde betiklerin hangi sırada çalıştırılacaklarını belirlemek için sembolik bağ isimleri sıra numaraları içerir. Bu numaradan sonra da çalıştırılacak hizmetin ismi gelir. Örneğin, \fI/etc/rc2.d/S80sendmail\fR ile sendmail 2. çalışma seviyesinde başlatılır. Ancak bu, \fI/etc/rc2.d/S12syslog\fR’dan sonra ve \fI/etc/rc2.d/S90xfs\fR’den önce çalıştırılır.
 .sp
 Çalışma seviyeleri ve açılış sırası bu bağlar sayesinde kolayca yönetilebilir. Bir çok Linux dağıtımı bu işlemi daha da kolaylaştıran araçlarla gelir (örn, \fBchkconfig\fR(8).
 .sp
 .SS "Sistemin açılışta yapılandırılması"
-Artalanda başlatılan süreçler genellikle isteğe bağlı bazı bağımsız değişkenler ve komut satırı seçenekleri kabul ederler. Sistem yöneticilerinin bu bağımsız değişkenleri betiklere dokunmadan daha kolay düzenleyebilmeleri için süreçlerin kendilerine ait yapılandırma dosyaları vardır. Bunların yerleri dağıtımlara göre değişir. Örneğin eski Red Hat sistemlerinde bu dosyalar \fI/etc/sysconfig\fR dizininde bulunurdu.
+Artalanda başlatılan süreçler genellikle isteğe bağlı bazı girdiler ve komut satırı seçenekleri kabul ederler. Sistem yöneticilerinin bu girdileri betiklere dokunmadan daha kolay düzenleyebilmeleri için süreçlerin kendilerine ait yapılandırma dosyaları vardır. Bunların yerleri dağıtımlara göre değişir. Örneğin eski Red Hat sistemlerinde bu dosyalar \fI/etc/sysconfig\fR dizininde bulunurdu.
 .sp
 Eski Unix’lerde bunlar komut satırı seçenekleri iken günümüz Linux sistemlerinde (ve HPUX’de) bu dosyalar kabuk değişkenlerini içerir. \fI/etc/init.d\fR dizininde bulunan betikler bu değişkenlerin değerlerini kullanır.
 .sp

@@ -7,7 +7,7 @@
  * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
  * https://sourceforge.net/p/net-tools/code/ci/master/tree/
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:12+03:00
 .TH "IFCONFIG" 8 "Ocak 2021" "net-tools 2.10" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -28,10 +28,10 @@ ifconfig - ağ arayüzlerini yapılandırır
 .SH "AÇIKLAMA"
 \fBifconfig\fR, çekirdek içinde bulunan ağ arayüzlerini yapılandırmakta kullanılır. Gerekli olan arayüzleri açılış esnasında ayarlamak için kullanılır. Bu işlem sonrasında sadece sistemi yeniden yapılandırmak gerekirse ya da hata ayıklamak için kullanılabilir.
 .sp
-Herhangi bir bağımsız değişken belirtilmemişse, \fBifconfig\fR o an için geçerli olan arayüzlerin durumu hakkında bilgi verir. Tek bir \fIarayüz\fR belirtilirse, sadece bu arayüz hakkında bilgiler alınabilir. Şayet sadece \fB–a\fR seçeneği belirtilmiş ise, sistemde bulunan bütün arayüzler hakkında bilgi görüntülenir. Bu arayüzlerin etkin olup olmaması önemli değildir. Diğer durumlarda arayüzleri yapılandırmak için kullanılır.
+Herhangi bir girdi belirtilmemişse, \fBifconfig\fR o an için geçerli olan arayüzlerin durumu hakkında bilgi verir. Tek bir \fIarayüz\fR belirtilirse, sadece bu arayüz hakkında bilgiler alınabilir. Şayet sadece \fB–a\fR seçeneği belirtilmiş ise, sistemde bulunan bütün arayüzler hakkında bilgi görüntülenir. Bu arayüzlerin etkin olup olmaması önemli değildir. Diğer durumlarda arayüzleri yapılandırmak için kullanılır.
 .sp
 .SS "Adres Aileleri"
-\fIarayüz\fRden sonraki ilk bağımsız değişken desteklenen adres ailelerinden biri ise, bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: \fBinet\fR (TCP/IP, öntanımlıdır), \fBinet6\fR (IPv6), \fBax25\fR (AMPR paket radyo), \fBddp\fR (Appletalk Phase 2), \fBipx\fR (Novell IPX) ve \fBnetrom\fR (AMPR paket radyo). IPv4 noktalı onluk tabanda gösterimin parçaları olarak sağlanan tüm sayılar, ISO C standardında belirtildiği gibi onluk, sekizlik veya onaltılık tabanda olabilir (yani, baştaki 0x veya 0X sayının onaltılık tabanda olduğunu, baştaki ’0’ ise sekizlik tabanda olduğunu gösterir; aksi takdirde, sayı onluk tabanda yorumlanır). Onaltılık ve sekizlik sayıların kullanımı RFC uyumlu değildir ve bu nedenle kullanımı önerilmez.
+\fIarayüz\fRden sonraki ilk girdi desteklenen adres ailelerinden biri ise, bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: \fBinet\fR (TCP/IP, öntanımlıdır), \fBinet6\fR (IPv6), \fBax25\fR (AMPR paket radyo), \fBddp\fR (Appletalk Phase 2), \fBipx\fR (Novell IPX) ve \fBnetrom\fR (AMPR paket radyo). IPv4 noktalı onluk tabanda gösterimin parçaları olarak sağlanan tüm sayılar, ISO C standardında belirtildiği gibi onluk, sekizlik veya onaltılık tabanda olabilir (yani, baştaki 0x veya 0X sayının onaltılık tabanda olduğunu, baştaki ’0’ ise sekizlik tabanda olduğunu gösterir; aksi takdirde, sayı onluk tabanda yorumlanır). Onaltılık ve sekizlik sayıların kullanımı RFC uyumlu değildir ve bu nedenle kullanımı önerilmez.
 .sp
 .sp
 .SH "SEÇENEKLER"

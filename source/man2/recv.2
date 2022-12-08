@@ -45,7 +45,7 @@
  * Modified 1998,1999 by Andi Kleen
  * 2001-06-19 corrected SO_EE_OFFENDER, bug report by James Hawtin
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "RECV" 2 "11 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -87,7 +87,7 @@ int \fIflags\fR);
 .SH "AÇIKLAMA"
 \fBrecv\fR(), \fBrecvfrom\fR() ve \fBrecvmsg\fR() sistem çağrıları bir soketten veri almak için kullanılır. Bu sistem çağrıları hem bağlantılı hem de bağlantısız soketlerde kullanılabilir. Bu sayfada önce bu üç çağrının genel özellikleri ve ardından aralarındaki fark anlatılmıştır.
 .sp
-\fBrecv\fR() ve \fBread\fR(2) arasındaki tek fark \fIflags\fR bağımsız değişkeninin varlığıdır. \fIflags\fR bağımsız değişkenine sıfır değeri atanmış \fBrecv\fR() genel olarak \fBread\fR(2) ile eşdeğerdir (ancak yine de \fBEK BİLGİ\fR bölümüne bakın). Ayrıca aşagıdaki
+\fBrecv\fR() ve \fBread\fR(2) arasındaki tek fark \fIflags\fR değişkeninin varlığıdır. \fIflags\fR değişkenine sıfır değeri atanmış \fBrecv\fR() genel olarak \fBread\fR(2) ile eşdeğerdir (ancak yine de \fBEK BİLGİ\fR bölümüne bakın). Ayrıca aşagıdaki
 .sp
 .RS 4
 .nf
@@ -112,7 +112,7 @@ Eğer sokette ileti yoksa ve soket engellemesiz değilse çağrılar bir iletini
 Bir uygulamada \fBselect\fR(2), \fBpoll\fR(2) veya \fBepoll\fR(2) çağrıları kullanılarak sokete fazla verinin ne zaman geleceğine karar verilebilir.
 .sp
 .SS "flags değerleri"
-\fIflags\fR bağımsız değişkeninin değeri aşağıdaki değerlerin VEYAlanmasıyla elde edilir.
+\fIflags\fR değişkeninin değeri aşağıdaki değerlerin VEYAlanmasıyla elde edilir.
 .sp
 .TP 4
 \fBMSG_CMSG_CLOEXEC\fR (sadece \fBrecvmsg\fR() için geçerlidir, Linux 2.6.23 ve sonrası)
@@ -156,7 +156,7 @@ struct sockaddr *SO_EE_OFFENDER(struct sock_extended_err *);
 .IP
 \fIee_errno\fR kuyruğa alınmış \fIerrno\fR hata numarasını içerir. \fIee_origin\fR hatanın kodda oluştuğu yeri gösterir. Diğer alanlar protokole özeldir. \fBSOCK_EE_OFFENDER\fR makrosu, yardımcı iletinin göstericisinden kaynaklanan hatanın kaynaklandığı ağ nesnesinin adresine bir gösterici döndürür. Eğer adres bilinmiyorsa, \fIsockaddr\fR yapısının \fIsa_family\fR alanı \fBAF_UNSPEC\fR içerirken yapının diğer alanları tanımsız kalır. Hataya sebep olan paket yükü normal veri olarak aktarılır.
 .sp
-Yerel hatalar için adres belirtilmez (bu, \fIcmsghdr\fR üyesi \fIcmsg_len\fR ile sınanabilir). Hata alımı için \fImsghdr\fR bağımsız değişkenine \fBMSG_ERRQUEUE\fR atanır. Bir hata aktarıldıktan sonra, bekleyen soket hatası, hata kuyruğundaki sonraki hataya göre yeniden oluşturulur ve sonraki soket işleminde aktarılır.
+Yerel hatalar için adres belirtilmez (bu, \fIcmsghdr\fR üyesi \fIcmsg_len\fR ile sınanabilir). Hata alımı için \fImsghdr\fR değişkenine \fBMSG_ERRQUEUE\fR atanır. Bir hata aktarıldıktan sonra, bekleyen soket hatası, hata kuyruğundaki sonraki hataya göre yeniden oluşturulur ve sonraki soket işleminde aktarılır.
 .sp
 .TP 4
 \fBMSG_OOB\fR
@@ -179,11 +179,11 @@ Bu seçenek, tüm istekler tamamlandığında işlemin engellemesi içindir. Anc
 .PP
 .sp
 .SS "recvfrom()"
-\fBrecvfrom\fR() gelen iletiyi \fIbuf\fR tamponuna yerleştirir. Çağrıcı tamponun boyutunu \fIlen\fR bağımsız değişkeni ile belirtmelidir.
+\fBrecvfrom\fR() gelen iletiyi \fIbuf\fR tamponuna yerleştirir. Çağrıcı tamponun boyutunu \fIlen\fR değişkeni ile belirtmelidir.
 .sp
 Eğer \fIsrc_addr\fR NULL değilse ve ilgili protokol iletinin kaynak adresini sağlıyorsa \fIsrc_addr\fR tampon içine yerleştirilen kaynak adrese göstericidir. Bu durumda, \fIaddrlen\fR hem aktarılan değere hem de dönen sonuca göstericidir. \fIaddrlen\fR, çağrıdan önce \fIsrc_addr\fR ile ilişkilendirilmiş tamponun boyutuna gösterici olmalıdır. İşlev döndüğünde, \fIaddrlen\fR, kaynak adresin gerçek boyutunu gösterecek şekilde güncellenir. Sağlanan tampon çok küçükse döndürülen adres kırpılır; bu durumda, \fIaddrlen\fR çağrıdan önceki boyuttan daha büyük bir değer döndürür.
 .sp
-Eğer çağrıcı kaynak adresiyle ilgilenmiyorsa \fIsrc_addr\fR ve \fIaddrlen\fR bağımsız değişkenlerinde NULL aktarmalıdır.
+Eğer çağrıcı kaynak adresiyle ilgilenmiyorsa \fIsrc_addr\fR ve \fIaddrlen\fR değişkenlerinde NULL aktarmalıdır.
 .sp
 .SS "recv()"
 \fBrecv\fR() çağrısı normalde \fIconnected\fR (bağlantılı) soketlerle kullanılır (\fBconnect\fR(2) sayfasına bakın). Bu çağrı:
@@ -197,7 +197,7 @@ recvfrom(fd, buf, len, flags, NULL, 0);
 çağrısıyla eşdeğerdir.
 .sp
 .SS "recvmsg()"
-\fBrecvmsg\fR(), \fImsghdr\fR yapısını kullanarak doğrudan sağlanan bağımsız değişken sayısını azaltır. Bu yapı, \fI<sys/socket.h>\fR içerisinde şu şekilde tanımlanmıştır:
+\fBrecvmsg\fR(), \fImsghdr\fR yapısını kullanarak doğrudan sağlanan değişken sayısını azaltır. Bu yapı, \fI<sys/socket.h>\fR içerisinde şu şekilde tanımlanmıştır:
 .sp
 .RS 4
 .nf
@@ -306,7 +306,7 @@ Herhangi bir veri alınmadan aktarım bir sinyal ile kesilmiş; \fBsignal\fR(7) 
 .sp
 .TP 4
 \fBEINVAL\fR
-Belirtilen bağımsız değişken geçersiz.
+Belirtilen değişken geçersiz.
 .sp
 .TP 4
 \fBENOMEM\fR
@@ -328,7 +328,7 @@ POSIX.1-2001, POSIX.1-2008, 4.4BSD (Bu arayüzler ilk defa 4.2BSD ile ortaya ç�
 POSIX.1 sadece \fBMSG_OOB\fR, \fBMSG_PEEK\fR ve \fBMSG_WAITALL\fR seçeneklerini açıklar.
 .sp
 .SH "EK BİLGİ"
-Eğer sıfır uzunluğunda bir verikatarı beklemedeyse, sıfır \fIflags\fR bağımsız değişkenli \fBread\fR(2) ve \fBrecv\fR() farklı davranışlar sergiler. Bu koşullarda, \fBrecv\fR() bekleyen verikatarını tüketirken \fBread\fR(2) hiçbir etkiye sahip değildir (verikatarı beklemede kalır).
+Eğer sıfır uzunluğunda bir verikatarı beklemedeyse, sıfır \fIflags\fR değişkenli \fBread\fR(2) ve \fBrecv\fR() farklı davranışlar sergiler. Bu koşullarda, \fBrecv\fR() bekleyen verikatarını tüketirken \fBread\fR(2) hiçbir etkiye sahip değildir (verikatarı beklemede kalır).
 .sp
 \fIsocklen_t\fR POSIX ile icat edilmiştir. Ayrıca \fBaccept\fR(2) sayfasına bakın.
 .sp

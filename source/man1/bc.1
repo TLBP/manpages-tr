@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:26+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:06+03:00
 .TH "BC" 1 "11 Haziran 2006" "GNU bc 1.07.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -228,7 +228,7 @@ a = 3 < 5
 .RE
 C programcıları bu ifadeyi ele alırken, önce \fB3<5\fR (sonuç 1’dir) ifadesini gerçekleştirir, ardından sonucu "\fIa\fR" değişkenine atarlar. \fBbc\fR’de ise önce "\fIa\fR"ya 3 atanır ve ardından 5 ile karşılaştırma yapılır. Buna dikkat etmek gerekir. En iyisi, ilişkisel ve mantıksal işleçler ile atama işleci aynı ifadede kullanıldığında karmaşayı önlemek için yaylı ayraçları kullanmaktır.
 .sp
-\fBbc\fR’de desteklenen biraz daha özel ifadeler vardır. Bunlar, standart işlevler ve kullanıcı tanımlı işlevlerde, "\fIisim\fR\fB(\fR\fIbağımsız değişkenler\fR\fB)\fR" şeklinde görülmektedirler. Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümündeki kullanıcı tanımlı işlevlere bakınız. Yerleşik işlevler şunlardır:
+\fBbc\fR’de desteklenen biraz daha özel ifadeler vardır. Bunlar, standart işlevler ve kullanıcı tanımlı işlevlerde, "\fIisim\fR\fB(\fR\fIdeğişkenler\fR\fB)\fR" şeklinde görülmektedirler. Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümündeki kullanıcı tanımlı işlevlere bakınız. Yerleşik işlevler şunlardır:
 .sp
 .TP 4
 \fBlength\fR \fB(\fR \fIifade\fR \fB)\fR
@@ -267,7 +267,7 @@ Sayılar keyfi duyarlılıkta ele alındıkları için, bazı sayılar ekrana ya
 .sp
 .TP 4
 \fBprint \fR \fIliste\fR
-\fBprint\fR deyimi (bu bir genişletmedir) çıktıya birşeyler yazdırmak için kullanılan başka bir yöntemdir. \fIliste\fR bağımsız değişkeni zorunludur, aralarına virgül (,) konulmuş dizgelerden ve ifadelerden oluşur. \fIliste\fR’deki her dizge veya ifade, yazıldıkları sıraya göre ekrana yazdırılır. Eğer belirtilmediyse satır sonunda satırsonu karakteri yazdırılmaz. İfadelerin değerleri bulunduktan sonra sonuçları ekrana yazdırılır. Bu esnada ekrana en son yazdırılan sayının değeri \fBlast\fR değişkenine atanır. \fBprint\fR deyimi içindeki dizgeler çıktıya yazdırılır ve özel anlamı olan karakterleri de içerebilir. Özel karakterler ters eğik çizgi karakteri ile başlar. \fBbc\fR tarafından tanınan özel karakterler; "\fBa\fR" (uyarı; bip sesi), "\fBb\fR" (geri silme), "\fBf\fR" (sayfa ileri), "\fBn\fR" (satır sonu), "\fBq\fR" (çift tırnak), "\fBt\fR" (sekme) ve "\fB\\\fR" (ters eğik çizgi) karakterleridir. Bunların dışındaki karakterler yok sayılır.
+\fBprint\fR deyimi (bu bir genişletmedir) çıktıya birşeyler yazdırmak için kullanılan başka bir yöntemdir. \fIliste\fR zorunludur, aralarına virgül (,) konulmuş dizgelerden ve ifadelerden oluşur. \fIliste\fR’deki her dizge veya ifade, yazıldıkları sıraya göre ekrana yazdırılır. Eğer belirtilmediyse satırın sonunda satır sonu karakteri yazdırılmaz. İfadelerin değerleri bulunduktan sonra sonuçları ekrana yazdırılır. Bu esnada ekrana en son yazdırılan sayının değeri \fBlast\fR değişkenine atanır. \fBprint\fR deyimi içindeki dizgeler çıktıya yazdırılır ve özel anlamı olan karakterleri de içerebilir. Özel karakterler ters eğik çizgi karakteri ile başlar. \fBbc\fR tarafından tanınan özel karakterler; "\fBa\fR" (uyarı; bip sesi), "\fBb\fR" (geri silme), "\fBf\fR" (sayfa ileri), "\fBn\fR" (satır sonu), "\fBq\fR" (çift tırnak), "\fBt\fR" (sekme) ve "\fB\\\fR" (ters eğik çizgi) karakterleridir. Bunların dışındaki karakterler yok sayılır.
 .sp
 .TP 4
 \fB{\fR \fIdeyim_listesi\fR \fB}\fR
@@ -343,16 +343,16 @@ Uzun bir garanti iletisi basar. Bu bir genişletmedir.
 .sp
 .RS 4
 .nf
-\fBdefine\fR \fIisim\fR \fB(\fR \fIbağımsız değişkenler\fR \fB) {\fR \fIsatırsonu\fR
+\fBdefine\fR \fIisim\fR \fB(\fR \fIdeğişkenler\fR \fB) {\fR \fIsatırsonu\fR
     \fIauto_listesi\fR   \fIdeyim_listesi\fR \fB}\fR
 .fi
 .sp
 .RE
-Bir işlev çağrısı ise "\fIisim\fR\fB(\fR\fIbağımsız değişkenler\fR\fB)\fR" biçiminde bir ifadedir.
+Bir işlev çağrısı ise "\fIisim\fR\fB(\fR\fIgirdiler\fR\fB)\fR" biçiminde bir ifadedir.
 .sp
-Bağımsız değişkenler sayılar ya da dizilerdir (dizi bağımsız değişkenler bir genişletmedir). İşlev tanımında sıfır ya da daha fazla sayıda bağımsız değişken verilebilir ve bunlar aralarına virgül konularak ayrılmış isimlerden oluşan bir liste olarak tanımlanır. Sayılar sadece değerleriyle çağrılan bağımsız değişkenlerdir. Diziler ise sadece değişkenleriyle çağrılırlar. Diziler, bağımsız değişken tanımında "\fIisim\fR\fB[]\fR" şeklinde belirtilir. İşlev çağrısında asıl bağımsız değişkenler, sayı türünde ifadelerdir. Aynı yazım şekli, dizi bağımsız değişkenlerinin tanımı olarak dizilerin aktarılmasında da kullanılır. Bir isimli dizi bir işleve değişkeni ile aktarılır. İşlev tanımları dinamik olduklarından, bağımsız değişken sayısı ve türleri işlev çağrıldığında değerlendirilir. Bağımsız değişkenlerin sayısı ve türlerindeki herhangi bir uyumsuzluk bir çalışma anı hatasına sebep olur. Ayrıca, tanımsız bir işlevin çağrılması da bir çalışma anı hatasına sebep olacaktır.
+\fIgirdiler\fR sayı ya da dizi olabilir (dizi girdiler bir genişletmedir). İşlev tanımında sıfır ya da daha fazla sayıda girdi olabilir ve bunlar aralarına virgül konularak ayrılmış isimlerden oluşan bir liste olarak tanımlanır. Sayılar sadece değerleriyle aktarılan girdilerdir. Diziler ise sadece değişkenleriyle aktarılır. Dizi değişkenleri "\fIisim\fR\fB[]\fR" şeklinde belirtilir. İşlev çağrısında asıl girdiler, sayı türünde ifadelerdir. Aynı yazım şekli, dizi değişkenleri üzerinden dizilerin aktarılmasında da kullanılır. Bir isimli dizi bir işleve değişkeni ile aktarılır. İşlev tanımları dinamik olduklarından, girdi sayısı ve türleri işlev çağrıldığında değerlendirilir. Girdilerin sayısı ve türlerindeki herhangi bir uyumsuzluk bir çalışma anı hatasına sebep olur. Ayrıca, tanımsız bir işlevin çağrılması da bir çalışma anı hatasına sebep olacaktır.
 .sp
-\fIauto_listesi\fR, "yerel" kullanım için isteğe bağlı bir değişken listesidir. \fIauto_listesi\fR’nin (eğer varsa) sözdizimi "\fBauto\fR \fIisim, ... ;\fR" şeklindedir (Sondaki noktalı virgül isteğe bağlıdır). Her \fIisim\fR \fBauto\fR değişkenin ismidir. Diziler, bağımsız değişkenlerde kullanılan sözdizimi ile belirtilebilir. Bu değişkenler sıfır ile ilklendirilerek, değerleri, işlevin başlangıcında yığıta basılır ve işlevin icrası boyunca kullanılır. İşlevden çıkışta bu değerler yığıttan çekilir, böylece değişkenler işlevin başlangıcındaki ilk değerlerine dönmüş olur. Bağımsız değişkenler gerçekte, işlev çağrısı sırasında ilklendirilen \fBauto\fR değişkenlerdir. \fBauto\fR değişkenler, geleneksel yerel değişkenlerden farklıdır. A işlevi, B işlevini çağırdığında, A işlevinin \fBauto\fR değişkenlerine, B işlevinde \fBauto\fR değişkenler olarak bildirilmedikçe, B işlevi aynı isimlerle erişebilir. \fBauto\fR değişkenler ve bağımsız değişkenler yığıta basıldıklarından dolayı \fBbc\fR kendini çağıran işlevleri destekler.
+\fIauto_listesi\fR, "yerel" kullanım için isteğe bağlı bir değişken listesidir. \fIauto_listesi\fR’nin (eğer varsa) sözdizimi "\fBauto\fR \fIisim, ... ;\fR" şeklindedir (Sondaki noktalı virgül isteğe bağlıdır). Her \fIisim\fR \fBauto\fR değişkenin ismidir. Diziler, değişkenlerde kullanılan sözdizimi ile belirtilebilir. Bu değişkenler sıfır ile ilklendirilerek, değerleri, işlevin başlangıcında yığıta basılır ve işlevin icrası boyunca kullanılır. İşlevden çıkışta bu değerler yığıttan çekilir, böylece değişkenler işlevin başlangıcındaki ilk değerlerine dönmüş olur. Bunlar gerçekte, işlev çağrısı sırasında ilklendirilen \fBauto\fR değişkenlerdir. \fBauto\fR değişkenler, geleneksel yerel değişkenlerden farklıdır. A işlevi, B işlevini çağırdığında, A işlevinin \fBauto\fR değişkenlerine, B işlevinde \fBauto\fR değişkenler olarak bildirilmedikçe, B işlevi aynı isimlerle erişebilir. \fBauto\fR değişkenler ve işlev değişkenleri yığıta basıldıklarından dolayı \fBbc\fR kendini çağıran işlevleri destekler.
 .sp
 İşlevin gövdesi bir \fBbc\fR deyimleri listesidir. Tekrar belitelim, deyimler noktalı virgül ve satır sonu karakterleri ile birbirlerinden ayrılır. \fBreturn\fR deyimi işlevin sonlandırılmasına sebep olur ve bir değer döndürür. \fBreturn\fR deyiminin iki sürümü vardır. ilk şeklinde "\fBreturn\fR" ifadesi işlevi çağıran ifadeye sıfır değerini döndürür. İkinci şeklinde, "\fBreturn\fR \fI( ifade )\fR", \fIifade\fR’nin değeri hesaplanıp çağıran ifadeye sonucu döndürülür. Her işlevin sonunda kendiliğinden bir \fBreturn(0)\fR vardır. Böylece bir işlevin sonunda açıkça bir \fBreturn\fR deyimi kullanmaya gerek kalmaksızın işlev sıfır değeri döndürerek sonlanır.
 .sp
@@ -382,9 +382,9 @@ px(1)
 .fi
 .sp
 .RE
-\fBpy\fR void işlev olmadığından \fBpy(1)\fR çağrısı isteneni bastıktan sonra işlevin dönüş değerini basar. İşlev bir \fBreturn\fR deyimi içermediğinden öntanımlı olan \fBreturn(0)\fR’dan dolayı \fB0\fR değeri basılır. \fBpx(1\fR) için void işlev olduğundan \fB0\fR basılmaz.
+\fBpy\fR void işlev olmadığından \fBpy(1)\fR çağrısı isteneni bastıktan sonra işlevin dönüş değerini basar. İşlev bir \fBreturn\fR deyimi içermediğinden öntanımlı olan \fBreturn(0)\fR’dan dolayı \fB0\fR değeri basılır. \fBpx(1)\fR) için void işlev olduğundan \fB0\fR basılmaz.
 .sp
-Ayrıca, bağımsız değişken dizisi içeren çağrı da eklendi. Bağımsız değişken dizisi içeren çağrıyı bildirmek için işlev tanımındaki dizi bağımsız değişkeni "\fB*\fR\fIisim\fR\fB[]\fR" sözdizimi ile kullanılır. Dizideki bağımsız değişkenlerin değerleriyle çağrılması nedeniyle işlev çağrısı aynı kalır.
+Ayrıca, değişken dizisi içeren çağrı da eklendi. Değişken dizisi içeren çağrıyı bildirmek için işlev tanımındaki dizi değişkeni "\fB*\fR\fIisim\fR\fB[]\fR" sözdizimi ile kullanılır. Dizideki değişkenlerin değerleriyle çağrılması nedeniyle işlev çağrısı aynı kalır.
 .sp
 .SS "MATH KÜTÜPHANESİ"
 \fBbc\fR, \fB-l\fR seçeneği ile çalıştırıldığında math kütüphanesini yükler ve öntanımlı bölüntü 20 yapılır. math işlevleri, çağrıldıkları sırada geçerli olan bölüntüye göre sonuç döndürürler. Math kütüphanesi aşağıdaki işlevleri tanımlar:
@@ -565,8 +565,8 @@ POSIX \fBbc\fR’de \fBcontinue\fR deyimi yoktur.
 POSIX \fBbc\fR, \fBreturn\fR ifadesinin yaylı ayraç içine alınmasını gerektirir.
 .sp
 .TP 4
-dizi bağımsız değişkenleri
-POSIX \fBbc\fR (şimdilik) dizi bağımsız değişkenlerini tamamen desteklememektedir. POSIX sözdiziminde, işlev tanımlarında dizilere izin veriliyor, ancak bir dizinin bir işleve bağımsız değişken olarak aktarılması desteklenmiyor. (Bu, aslında gözden kaçan bir dikkatsizliğin sonucudur.) Geleneksel \fBbc\fR gerçeklemeleri, dizileri sadece elemanlarının değerleri ile çağırabilmektedirler.
+diziler
+POSIX \fBbc\fR (şimdilik) dizi değişkenlerini tamamen desteklememektedir. POSIX sözdiziminde, işlev tanımlarında dizilere izin veriliyor, ancak bir dizinin bir işleve değişken olarak aktarılması desteklenmiyor. (Bu, aslında gözden kaçan bir dikkatsizliğin sonucudur.) Geleneksel \fBbc\fR gerçeklemelerinde, diziler sadece değerleri ile aktarılabilmektedirler.
 .sp
 .TP 4
 işlev biçimi
@@ -612,7 +612,7 @@ tek işletim kümesidir. Oluşan herhangi bir çalışma anı hatası (error), o
 .sp
 .TP 4
 kesmeler
-Bir etkileşimli oturumda, \fBSIGINT\fR sinyali (genelde klavyeden Ctrl-C’ye basıldığında üretilir) o anda işletilmekte olan kümenin yarıda kesilmesine neden olur. Hangi işlevin yarıda kesildiğini belirten bir çalışma anı hatası ekrana yazdırılır. Ardından, tüm çalışma anı yapılarının "temizlenme"sinden sonra, \fBbc\fR’nin yeni girdiler almak için hazır olduğunu yazan bir ileti belirir. Önceden tanımlanmış olan tüm işlevler ve \fBauto\fR-olmayan değişkenler bu noktadan önceki değerleriyle aynen kalırlar. Tüm \fBauto\fR değişkenler ve işlev bağımsız değişkenleri bu "temizleme" işlemi esnasında silinirler. Etkileşimli olmayan bir oturumda ise \fBSIGINT\fR sinyali, \fBbc\fR’nin çalışmasını sonlandırır.
+Bir etkileşimli oturumda, \fBSIGINT\fR sinyali (genelde klavyeden Ctrl-C’ye basıldığında üretilir) o anda işletilmekte olan kümenin yarıda kesilmesine neden olur. Hangi işlevin yarıda kesildiğini belirten bir çalışma anı hatası ekrana yazdırılır. Ardından, tüm çalışma anı yapılarının "temizlenme"sinden sonra, \fBbc\fR’nin yeni girdiler almak için hazır olduğunu yazan bir ileti belirir. Önceden tanımlanmış olan tüm işlevler ve \fBauto\fR-olmayan değişkenler bu noktadan önceki değerleriyle aynen kalırlar. Tüm \fBauto\fR değişkenler ve işlev değişkenleri bu "temizleme" işlemi esnasında silinirler. Etkileşimli olmayan bir oturumda ise \fBSIGINT\fR sinyali, \fBbc\fR’nin çalışmasını sonlandırır.
 .sp
 .PP
 .sp
@@ -655,7 +655,7 @@ Basit değişken, dizi ve işlev isimlerinin her biri için eşsiz isim sayısı
 .sp
 .TP 4
 \fBBC_ENV_ARGS\fR
-Bu, \fBbc\fR’nin bağımsız değişkenleri almak için kullandığı diğer bir mekanizmadır. Biçimi komut satırı bağımsız değişkenleri ile aynıdır. Bu ortam değişkenlerinde listelenmiş dosyalar, komut satırında belirtilen dosyalardan önce işlem görür. Bu, kullanıcıya "standart" seçenekleri ve dosyaları ayarlama imkanını sunar. Ortam değişkenlerinde belirtilen dosyalar genellikle içlerinde kullanıcının tanımladığı işlevler olan ve dosyalardır. Bu ayarlama ile artık, \fBbc\fR her çalıştırıldığında belirtilen dosyalar işleme sokulur.
+Bu, \fBbc\fR’nin girdi almak için kullandığı diğer bir mekanizmadır. Biçimi komut satırı girdileri ile aynıdır. Bu ortam değişkenlerinde listelenmiş dosyalar, komut satırında belirtilen dosyalardan önce işlem görür. Bu, kullanıcıya "standart" seçenekleri ve dosyaları ayarlama imkanını sunar. Ortam değişkenlerinde belirtilen dosyalar genellikle içlerinde kullanıcının tanımladığı işlevler olan ve dosyalardır. Bu ayarlama ile artık, \fBbc\fR her çalıştırıldığında belirtilen dosyalar işleme sokulur.
 .sp
 .TP 4
 \fBBC_LINE_LENGTH\fR

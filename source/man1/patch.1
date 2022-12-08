@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:27+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:07+03:00
 .TH "PATCH" 1 "Şubat 2018" "patch 2.7.6" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -90,7 +90,7 @@ ve, \fIblurfl\fR dizinindeki dosya yama dosyasıyla yamanır.
 Eğer yama dosyası bir yamadan fazlasını içeriyorsa \fBpatch\fR onların her birini farklı birer yama dosyasından geliyormuşçasına uygular. Yama olarak uygulanabilecek her satır grubundan önce gelen satırlarda bulunan dosya isimleri ve sürüm numaralarından yukarıda bahsedildiği gibi yamanacak dosyanın ismi saptanarak bu işlem gerçekleştirilir.
 .sp
 .SH "SEÇENEKLER"
-Uzun seçenekler için zorunlu olan bağımsız değişkenler kısa seçenekler için de zorunludur.
+Uzun seçenekler için zorunlu olan girdiler kısa seçenekler için de zorunludur.
 .sp
 .TP 4
 \fB-b\fR, \fB--backup\fR
@@ -179,7 +179,7 @@ yamadaki yeni satırlar
 .RE
 .RE
 .IP
-\fB--merge\fR seçeneğinin seçimlik bağımsız değişkeni çelişkinin çıktılanma biçemini değiştirir: \fIdiff3\fR biçeminde ||||||| bölümünden sonra yamadaki özgün satırlar gösterilir; \fImerge\fR biçeminde, bu bölüm olmaz. \fImerge\fR biçemi öntanımlıdır.
+\fB--merge\fR seçeneğinin seçimlik girdisi çelişkinin çıktılanma biçemini değiştirir: \fIdiff3\fR biçeminde ||||||| bölümünden sonra yamadaki özgün satırlar gösterilir; \fImerge\fR biçeminde, bu bölüm olmaz. \fImerge\fR biçemi öntanımlıdır.
 .sp
 Bu seçenek \fB--forward\fR seçeneğini de uygularken \fB--fuzz=\fR\fIsayı\fR seçeneğini yok sayar.
 .sp

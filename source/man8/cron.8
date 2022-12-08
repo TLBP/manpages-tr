@@ -21,7 +21,7 @@
  * I’ll try to keep a version up to date.  I can be reached as follows:
  * Paul Vixie          (paul (at) vix.com)      uunet!decwrl!vixie!paul
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "CRON" 8 "Nisan 2010" "Debian Cron" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -131,7 +131,7 @@ Debian’a özgü yapılandırma (\fI/etc/default/cron\fR),
 .sp
 .RE
 .PD 0
-\fI/etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR için destek Debian’da \fI/etc/crontab\fR dosyasındaki öntanımlı yapılandırma ile sağlanır (\fBcrontab\fR(5) sayfasındaki sistem çapında örneklere bakılabilir). Sistem çapında öntanımlı \fIcrontab\fR, dört görev içerir: her saat, her gün, her hafta ve her ay çalıştır. Bu görevlerin her birini, dizinlerin her birini bir bağımsız değişken olarak sağlayan \fBrun-parts\fR(8) yürütür. \fBanacron\fR(8) kuruluysa, iki artalan süreci arasındaki çakışmaları önlemek için bu görevler (saatlik görev hariç) devre dışı bırakılır.
+\fI/etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly\fR ve \fI/etc/cron.monthly\fR için destek Debian’da \fI/etc/crontab\fR dosyasındaki öntanımlı yapılandırma ile sağlanır (\fBcrontab\fR(5) sayfasındaki sistem çapında örneklere bakılabilir). Sistem çapında öntanımlı \fIcrontab\fR, dört görev içerir: her saat, her gün, her hafta ve her ay çalıştır. Bu görevlerin her birini, dizinlerin her birini bir girdi olarak sağlayan \fBrun-parts\fR(8) yürütür. \fBanacron\fR(8) kuruluysa, iki artalan süreci arasındaki çakışmaları önlemek için bu görevler (saatlik görev hariç) devre dışı bırakılır.
 .sp
 Yukarıda açıklandığı gibi, bu dizinler altındaki dosyaların bazı uygunluk denetimlerinden geçmesi gerekir: çalıştırılabilir olmak, root’a ait olmak, grup veya başkaları tarafından yazılabilir olmamak ve sembolik bağlar varsa, root ait dosyalara işaret etmek. Ek olarak, dosya adları \fBrun-parts\fR(8)’ın dosya adı gereksinimlerine uygun olmalıdır: bunlar tamamen harflerden, rakamlardan oluşmalı, alt çizgi (’_’) ve kısa çizgi (’-’) dışında özel imler içermemelidir. Bu gereksinimlere uymayan hiçbir dosya \fBrun-parts\fR(8) tarafından yürütülmeyecektir. Örneğin, noktalar içeren her dosya yok sayılır. Bu, \fI/etc/cron.d/\fR içindeki dosyaları yapılandırma dosyaları olarak işlerken, Debian paket yönetim sistemi tarafından bırakılan dosyalardan (yani \fI.dpkg-dist, .dpkg-orig, .dpkg-old\fR ve \fI.dpkg-new\fR) herhangi birinin \fBcron\fR tarafından çalıştırılmasını önlemek için yapılır .
 .sp

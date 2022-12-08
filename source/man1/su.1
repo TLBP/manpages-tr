@@ -26,7 +26,7 @@
  *
  * Based on an implementation by David MacKenzie <djm@gnu.ai.mit.edu>.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:28+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:09+03:00
 .TH "SU" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -38,14 +38,14 @@ su - başka bir kullanıcı ve grup kimliği ile bir kabuk çalıştırır
 .sp
 .SH KULLANIM
 .IP \fBsu\fR 3
-[\fIseçenekler\fR] [-] [\fIkullanıcı\fR [\fIbağımsız değişken\fR...]]
+[\fIseçenekler\fR] [-] [\fIkullanıcı\fR [\fIgirdi\fR...]]
 .sp
 .PP
 .sp
 .SH "AÇIKLAMA"
 \fBsu\fR, komutların başka bir \fIkullanıcı\fR ve grup kimliği ile çalıştırılmasını sağlar.
 .sp
-\fIkullanıcı\fR belirtilmeden çağrıldığında, \fBsu\fR öntanımlı olarak etkileşimli bir kabuğu root olarak çalıştırır. \fIkullanıcı\fR belirtildiğinde, ek bağımsız değişkenler sağlanabilir, bu durumda bunlar kabuğa aktarılır.
+\fIkullanıcı\fR belirtilmeden çağrıldığında, \fBsu\fR öntanımlı olarak etkileşimli bir kabuğu root olarak çalıştırır. \fIkullanıcı\fR belirtildiğinde, ek girdiler sağlanabilir, bu durumda bunlar kabuğa aktarılır.
 .sp
 Geriye dönük uyumluluk için, \fBsu\fR öntanımlı olarak geçerli dizini değiştirmez ve yalnızca \fBHOME\fR ve \fBSHELL\fR ortam değişkenlerini (hedef kullanıcı root değilse \fBUSER\fR ve \fBLOGNAME\fR değişkenlerini de) ayarlar. Karışık ortamlarının neden olduğu yan etkilerden kaçınmak için daima (kısayol \fB-\fR yerine) \fB--login\fR seçeneğinin kullanılması önerilir.
 .sp

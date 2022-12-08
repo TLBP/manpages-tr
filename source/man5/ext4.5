@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "EXT4" 5 "Aralık 2021" "E2fsprogs 1.46.5" "Dosya Biçimleri ve Dosya Dönüşümleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -277,7 +277,7 @@ Günlüğü dosya sistemini bağlarken yüklemez. Dosya sistemi temiz şekilde a
 .sp
 .TP 4
 \fBdata\fR={journal|ordered|writeback}
-Dosya verileri için günlükleme kipini belirler. Meta veriler daima günlüğe kaydedilir. Kök dosya sisteminde ordered dışındaki kipleri kullanmak için, kip önyükleme bağımsız değişkeni olarak çekirdeğe aktarılabilir (örn, \fBrootflags=data=journal\fR).
+Dosya verileri için günlükleme kipini belirler. Meta veriler daima günlüğe kaydedilir. Kök dosya sisteminde ordered dışındaki kipleri kullanmak için, kip önyükleme girdisi olarak çekirdeğe aktarılabilir (örn, \fBrootflags=data=journal\fR).
 .sp
 .RS
 .TP 4

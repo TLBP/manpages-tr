@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:26+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:07+03:00
 .TH "LSLOGINS" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,12 +23,12 @@ lslogins - sistemde bilinen kullanıcılar hakkında bilgi görüntüler
 .SH "AÇIKLAMA"
 \fI/var/log/wtmp\fR ve \fI/var/log/btmp\fR günlüklerini, \fI/etc/shadow\fR (gerekirse) ve \fI/etc/passwd\fR dosyasını inceleyip istenen verileri çıktılar.
 .sp
-İsteğe bağlı \fIkullanıcı\fR adı bağımsız değişkeni, \fBlslogins\fR’in yalnızca belirtilen kullanıcıyla ilgili kullanılabilir tüm ayrıntıları görüntülemesini sağlar. Bu durumda çıktı biçemi \fB-l\fR veya \fB-g\fR ile elde edilenden farklıdır ve bilinmeyen kullanıcı adı bir hata olarak bildirilir.
+İsteğe bağlı \fIkullanıcı\fR adı girdisi, \fBlslogins\fR’in yalnızca belirtilen kullanıcıyla ilgili kullanılabilir tüm ayrıntıları görüntülemesini sağlar. Bu durumda çıktı biçemi \fB-l\fR veya \fB-g\fR ile elde edilenden farklıdır ve bilinmeyen kullanıcı adı bir hata olarak bildirilir.
 .sp
 Öntanımlı olarak, sistemdeki tüm kullanıcılar hakkındaki bilgiler listelenir.
 .sp
 .SH "SEÇENEKLER"
-Uzun seçeneklerdeki zorunlu bağımsız değişkenler kısa seçenekler için de zorunludur.
+Uzun seçeneklerdeki zorunlu girdiler kısa seçenekler için de zorunludur.
 .sp
 .TP 4
 \fB-a\fR, \fB--acc-expiration\fR
@@ -141,7 +141,7 @@ Başarılı.
 .sp
 .TP 4
 \fB1\fR
-Yanlış bağımsız değişken belirtilmiş.
+Yanlış girdi belirtilmiş.
 .sp
 .TP 4
 \fB2\fR

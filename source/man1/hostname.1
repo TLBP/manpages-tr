@@ -24,7 +24,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:26+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:06+03:00
 .TH "HOSTNAME" 1 "16 Eylüll 2009" "hostname 3.23" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -71,7 +71,7 @@ ypdomainname - sistemin NIS/YP alan adını tanımlar ya da gösterir
 \fBhostname\fR, sistemin DNS adını gösteren ve konak adını ya da NIS alan adını gösteren veya atayan uygulamadır.
 .sp
 .SS "İsmin Öğrenilmesi"
-Bağımsız değişkensiz çağrıldığında komutlar kullanılmakta olan isimleri gösterir:
+Girdi belirtmeden çağrıldığında komutlar kullanılmakta olan isimleri gösterir:
 .sp
 \fBhostname\fR, \fBgethostname\fR(2) işlevi tarafından döndürülen sistem ismini gösterir.
 .sp
@@ -80,7 +80,7 @@ Bağımsız değişkensiz çağrıldığında komutlar kullanılmakta olan isiml
 \fBdnsdomainname\fR ise, tam alan adının (FQDN - Fully Qualified Domain Name) alan adı parçasını basacaktır. Sistemin tam alan adı \fBhostname --fqdn\fR ile döndürülür. Aşağıda \fBTam Alan Adı (FQDN)\fR bölümündeki uyarılara bakınız.
 .sp
 .SS "İsmin Atanması"
-Tek bağımsız değişkenle ya da \fB--file\fR seçeneği ile çağrıldığında komutlar, konak adının veya NIS/YP alan adının atanmasını sağlar. Atama işleminde \fBhostname\fR, \fBsethostname\fR(2) işlevini kullanırken, \fBdomainname\fR, \fBnisdomainname\fR ve \fBypdomainname\fR uygulamaları \fBsetdomainname\fR(2) işlevini kullanır. Sistem yeniden başlatılana kadar atanan ad geçerli olmayacaktır. Kalıcı değişiklik için atanacak adı doğrudan \fI/etc/hostname\fR dosyasına yazın.
+Tek girdi ile ya da \fB--file\fR seçeneği ile çağrıldığında komutlar, konak adının veya NIS/YP alan adının atanmasını sağlar. Atama işleminde \fBhostname\fR, \fBsethostname\fR(2) işlevini kullanırken, \fBdomainname\fR, \fBnisdomainname\fR ve \fBypdomainname\fR uygulamaları \fBsetdomainname\fR(2) işlevini kullanır. Sistem yeniden başlatılana kadar atanan ad geçerli olmayacaktır. Kalıcı değişiklik için atanacak adı doğrudan \fI/etc/hostname\fR dosyasına yazın.
 .sp
 Bu atamaları sadece root kullanıcısı yapabilir.
 .sp
@@ -145,7 +145,7 @@ Sürüm bilgilerini standart çıktıya basar ve çıkar.
 .sp
 .TP 4
 \fB-y\fR, \fB--yp\fR, \fB--nis\fR
-NIS alan adını gösterir. Bir bağımsız değişken verilmişse (veya \fB--file dosya\fR) yeni NIS alan adı root kullanıcısı tarafından atanabilir.
+NIS alan adını gösterir. Bir girdi verilmişse (veya \fB--file dosya\fR) yeni NIS alan adı root kullanıcısı tarafından atanabilir.
 .sp
 .TP 4
 \fB-h\fR, \fB--help\fR

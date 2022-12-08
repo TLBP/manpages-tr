@@ -44,7 +44,7 @@
  * Modified Tue Oct 22 22:04:51 1996 by Eric S. Raymond <esr@thyrsus.com>
  * Modified 1998 by Andi Kleen
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
 .TH "SHUTDOWN" 2 "30 Nisan 2018" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -64,7 +64,7 @@ shutdown - tam çift yönlü bağlantının bir kısmını kapatır
 int \fIhow\fR);
 .sp
 .SH "AÇIKLAMA"
-\fBshutdown\fR() çağrısı, \fIsockfd\fR ile ilişkilendirilmiş soket üzerindeki tam çift yönlü bağlantının tamamının veya bir kısmının kapatılmasına neden olur. Eğer \fIhow\fR bağımsız değişkeninde \fBSHUT_RD\fR belirtilirse başka alıma, \fBSHUT_WR\fR belirtilirse başka gönderime izin verilmez. Eğer \fIhow\fR değiştigesi \fBSHUT_RDWR\fR olarak belirtilirse artık alıma ve gönderime izin verilmez.
+\fBshutdown\fR() çağrısı, \fIsockfd\fR ile ilişkilendirilmiş soket üzerindeki tam çift yönlü bağlantının tamamının veya bir kısmının kapatılmasına neden olur. Eğer \fIhow\fR değişkeninde \fBSHUT_RD\fR belirtilirse başka alıma, \fBSHUT_WR\fR belirtilirse başka gönderime izin verilmez. Eğer \fIhow\fR değiştigesi \fBSHUT_RDWR\fR olarak belirtilirse artık alıma ve gönderime izin verilmez.
 .sp
 .SH "DÖNÜŞ DEĞERİ"
 Başarı durumunda sıfır döner. Hata oluşursa \fB-1\fR döner ve hata \fIerrno\fR değişkenine atanır.
@@ -95,7 +95,7 @@ POSIX.1-2001, POSIX.1-2008, 4.4BSD (\fBshutdown\fR() ilk defa 4.2BSD ile ortaya 
 \fBSHUT_RD\fR, \fBSHUT_WR\fR ve \fBSHUT_RDWR\fR sabitleri sırasıyla 0, 1, ve 2 değerlerine sahiptir, bu sabitler glibc-2.1.91’den itibaren \fI<sys/socket.h>\fR içerisinde tanımlanmıştır.
 .sp
 .SH "HATA AYIKLAMA"
-\fIhow\fR bağımsız değişkeninin geçerliliği için sınamalar alana özgü kodda yapılır, Linux 3.7’den önce çoğu alan kodu bu geçerliliği sınamıyordu. En önemlisi, UNIX alan soketleri geçersiz değerleri görmezden geliyordu. UNIX alan soketlerindeki bu sorun Linux 3.7 ile düzeltildi.
+\fIhow\fR değişkeninin geçerliliği için sınamalar alana özgü kodda yapılır, Linux 3.7’den önce çoğu alan kodu bu geçerliliği sınamıyordu. En önemlisi, UNIX alan soketleri geçersiz değerleri görmezden geliyordu. UNIX alan soketlerindeki bu sorun Linux 3.7 ile düzeltildi.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBclose\fR(2), \fBconnect\fR(2), \fBsocket\fR(2), \fBsocket\fR(7)

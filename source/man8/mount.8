@@ -45,7 +45,7 @@
  * 010725, Nikita Danilov <NikitaDanilov (at) Yahoo.COM>: reiserfs options
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:13+03:00
 .TH "MOUNT" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -94,7 +94,7 @@ Bu komut, çekirdeğe, \fIaygıt\fR üzerinde bulunan, \fItür\fR türündeki do
 .fi
 .sp
 .RE
-\fBmount\fR \fI/etc/fstab\fR dosyasında bir bağlama noktası arar (ve bulamazsa bir aygıt arar). Belirtilen bağımsız değişkenin yorumlanmasındaki belirsizliklerden kaçınmak için \fB--target\fR veya \fB--source\fR seçenekleri kullanılabilir. Örnek:
+\fBmount\fR \fI/etc/fstab\fR dosyasında bir bağlama noktası arar (ve bulamazsa bir aygıt arar). Belirtilen girdinin yorumlanmasındaki belirsizliklerden kaçınmak için \fB--target\fR veya \fB--source\fR seçenekleri kullanılabilir. Örnek:
 .sp
 .RS 4
 .nf
@@ -105,7 +105,7 @@ Bu komut, çekirdeğe, \fIaygıt\fR üzerinde bulunan, \fItür\fR türündeki do
 Aynı dosya sistemi birden fazla kez bağlanabilir ve bazı durumlarda (örneğin, ağ dosya sistemleri) aynı dosya sistemi aynı bağlama noktasına birden çok kez bağlanabilir. \fBmount\fR komutu, bu davranışı denetlemek için herhangi bir ilke uygulamaz. Tüm davranışlar genellikle dosya sistemi sürücüsüne özeldir ve çekirdek tarafından denetlenir. Bunun istisnası \fB--all\fR seçeneği olup böyle bir durumda zaten bağlı olan dosya sistemleri yok sayılır (daha fazla ayrıntı için aşağıdaki \fB--all\fR seçeneğine bakılabilir).
 .sp
 .SS "Bağlı dosya sistemlerinin listelenmesi"
-\fBmount\fR komutu hiçbir seçenek ve bağımsız değişken belirtmeden kullanıldığında bağlı dosya sistemlerinin tamamını listeler. Listeleme kipi yalnızca geriye uyumluluk için vardır.
+\fBmount\fR komutu hiçbir seçenek ve girdi belirtmeden kullanıldığında bağlı dosya sistemlerinin tamamını listeler. Listeleme kipi yalnızca geriye uyumluluk için vardır.
 .sp
 Daha sağlam ve özelleştirilebilir çıktılar için özellikle betiklerde \fBfindmnt\fR(8) kullanılabilir. Bağlantı noktası adında bulunan denetim karakterlerinin ’?’ ile değiştirildiği unutulmamalıdır.
 .sp
@@ -176,7 +176,7 @@ komut satırı, (genellikle bir başlatma betiğinde verilir), \fIfstab\fR dosya
 .sp
 \fBmount\fR ve \fBumount\fR(8), geleneksel olarak \fI/etc/mtab\fR dosyasında sisteme bağlanmış dosya sistemlerinin bir listesini tutar. Klasik \fI/etc/mtab\fR desteği, derleme sırasında öntanımlı olarak tamamen devre dışı bırakılmıştır, çünkü mevcut Linux sistemlerinde \fI/etc/mtab\fR dosyasını \fI/proc/mounts\fR dosyasına sembolik bağ yapmak daha iyidir. Kullanıcı alanında tutulan normal \fImtab\fR dosyası, isim alanları, kapsayıcılar ve diğer gelişmiş Linux özellikleriyle güvenilir bir şekilde çalışamaz. Klasik \fImtab\fR desteği etkinse, dosyanın yanı sıra sembolik bağı da kullanmak mümkündür.
 .sp
-\fBmount\fR komutu bağımsız değişkensiz çalıştırıldığında bağlı dosya sistemlerini listeler.
+\fBmount\fR komutu girdisiz çalıştırıldığında bağlı dosya sistemlerini listeler.
 .sp
 \fI/etc/fstab\fR dosyasındaki "bağlama seçenekleri"ni geçersiz kılmak için \fB-o\fR "komut satırı seçeneği" kullanılmalıdır:
 .sp
@@ -188,7 +188,7 @@ komut satırı, (genellikle bir başlatma betiğinde verilir), \fIfstab\fR dosya
 .RE
 Böylece. komut satırındaki bağlama seçenekleri, \fI/etc/fstab\fR dosyasındaki bağlama seçenekleri listesine eklenir. Bu öntanımlı davranış \fB--options-mode\fR komut satırı seçeneği kullanılarak değiştirilebilir. Genel davranış, çelişkili seçenekler olduğunda belirtilen son seçeneğin etkili olmasıdır.
 .sp
-\fBmount\fR komutuna aygıt (veya LABEL, UUID, ID, PARTUUID, PARTLABEL etiketlerinden biri) ve bağlama dizini birlikte bağımsız değişken olarak belirtilmişse \fI/etc/fstab\fR dosyası okunmaz. Örnekte, \fBfoo\fR aygıtı \fB/dizin\fR altına bağlanmaktadır:
+\fBmount\fR komutuna aygıt (veya LABEL, UUID, ID, PARTUUID, PARTLABEL etiketlerinden biri) ve bağlama dizini birlikte girdi olarak belirtilmişse \fI/etc/fstab\fR dosyası okunmaz. Örnekte, \fBfoo\fR aygıtı \fB/dizin\fR altına bağlanmaktadır:
 .sp
 .RS 4
 .nf
@@ -496,11 +496,11 @@ Uyduruk \fBmount\fR seçeneklerinde hata verilip işlemin yarıda kalmasını ö
 .sp
 .TP 4
 \fB--source\fR \fIaygıt\fR
-\fBmount\fR komutu için yalnızca bir bağımsız değişken verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek kaynağın açıkça tanımlanmasını sağlar.
+\fBmount\fR komutu için yalnızca bir girdi verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek kaynağın açıkça tanımlanmasını sağlar.
 .sp
 .TP 4
 \fB--target\fR \fIbağlama-noktası\fR
-\fBmount\fR komutu için yalnızca bir bağımsız değişken verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek hedefin açıkça tanımlanmasını sağlar.
+\fBmount\fR komutu için yalnızca bir girdi verilirse, bu hedef (\fIbağlama-noktası\fR) veya kaynak (\fIaygıt\fR) olarak yorumlanabilir. Bu seçenek hedefin açıkça tanımlanmasını sağlar.
 .sp
 .TP 4
 \fB--target-prefix\fR \fIdizin\fR
@@ -843,7 +843,7 @@ Util-linux v2.30’dan önce \fBx-*\fR seçeneklerinin libmount tarafından koru
 .sp
 .TP 4
 \fBX-mount.mkdir\fR[=\fIkip\fR]
-Henüz mevcut değilse, bir hedef dizin (bağlama noktası) oluşturmaya izin verir. İsteğe bağlı \fIkip\fR bağımsız değişkeni, sekizli gösterimde \fBmkdir\fR(2) için kullanılan dosya sistemi erişim kipini belirler. Öntanımlı kip 0755’tir. Bu işlevsellik yalnızca root kullanıcılar için veya \fBmount\fR suid izinleri olmadan çalıştırıldığında desteklenir. Seçenek ayrıca \fBx-mount.mkdir\fR olarak da desteklenir, ancak v2.30’dan beri bu gösterimin kullanımı önerilmemektedir. Ayrıca bkz: \fB--mkdir\fR
+Henüz mevcut değilse, bir hedef dizin (bağlama noktası) oluşturmaya izin verir. İsteğe bağlı \fIkip\fR, sekizli gösterimde \fBmkdir\fR(2) için kullanılan dosya sistemi erişim kipini belirler. Öntanımlı kip 0755’tir. Bu işlevsellik yalnızca root kullanıcılar için veya \fBmount\fR suid izinleri olmadan çalıştırıldığında desteklenir. Seçenek ayrıca \fBx-mount.mkdir\fR olarak da desteklenir, ancak v2.30’dan beri bu gösterimin kullanımı önerilmemektedir. Ayrıca bkz: \fB--mkdir\fR
 .sp
 .TP 4
 \fBX-mount.subdir\fR[=\fIdizin\fR]
@@ -1098,7 +1098,7 @@ Sürücü olarak kullanılacak CVF (Compressed Volume File - Sıkıştırılmı�
 .sp
 .TP 4
 \fBdebug\fR
-Hata ayıklama etkinleştirilir. Bir sürüm dizgesi ve bir dosya sistemi bağımsız değişkenleri listesi basılır (bağımsız değişkenlerin tutarsız göründüğü durumlarda da basılır).
+Hata ayıklama etkinleştirilir. Bir sürüm dizgesi ve bir dosya sistemi girdileri listesi basılır (girdilerin tutarsız göründüğü durumlarda da basılır).
 .sp
 .TP 4
 \fBdiscard\fR
@@ -1106,7 +1106,7 @@ Belirtilirse, bloklar serbest bırakıldığında blok aygıtında yoket/kırp i
 .sp
 .TP 4
 \fBdos1xfloppy\fR
-Belirtilirse, yedekleme aygıtı boyutuna göre belirlenen bir son çare öntanımlısı olarak BIOS Bağımsız Değişken Bloğu yapılandırması kullanılır. Bu statik bağımsız değişkenler 160 kiB, 180 kiB, 320 kiB ve 360 kiB disketler ve disket imgeleri için DOS 1.x tarafından kabul edilen öntanımlı değerlerle eşleştirilir.
+Belirtilirse, yedekleme aygıtı boyutuna göre belirlenen bir son çare öntanımlısı olarak BIOS Girdileri Bloğu yapılandırması kullanılır. Bu statik girdiler 160 kiB, 180 kiB, 320 kiB ve 360 kiB disketler ve disket imgeleri için DOS 1.x tarafından kabul edilen öntanımlı değerlerle eşleştirilir.
 .sp
 .TP 4
 \fBerrors=panic\fR\p \fBerrors=continue\fR\p \fBerrors=remount-ro\fR

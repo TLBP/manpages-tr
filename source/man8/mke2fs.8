@@ -14,7 +14,7 @@
  * License.
  *
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:30+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:12+03:00
 .TH "MKE2FS" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -40,7 +40,7 @@ Dosya sisteminin boyu \fIds-boyu\fR ile belirtilir. \fIds-boyu\fR bir sonek içe
 .sp
 \fBmke2fs\fR komutu \fBmke2fs\fR\fI.XXXX\fR (\fBmkfs.ext2\fR, \fBmkfs.ext3\fR veya \fBmkfs.ext4\fR gibi) biçiminde belirtilirse örtük olarak \fB-t XXXX\fR seçeneği uygulanır. Yani, \fBmkfs.ext3\fR dosya sistemini ext3 ile, \fBmkfs.ext4\fR ise ext4 ile kullanmak için yapılandırılır.
 .sp
-Yeni oluşturulan dosya sistemi için bağımsız değişkenlerin ön tanımlıları, aşağıda listelenen seçenekler tarafından geçersiz kılınmadıysa, \fI/etc/mke2fs.conf\fR yapılandırma dosyasında bulunabilir. Daha fazla ayrıntı için bkz: \fBmke2fs.conf\fR(5)
+Yeni oluşturulan dosya sistemi için girdilerin ön tanımlıları, aşağıda listelenen seçenekler tarafından geçersiz kılınmadıysa, \fI/etc/mke2fs.conf\fR yapılandırma dosyasında bulunabilir. Daha fazla ayrıntı için bkz: \fBmke2fs.conf\fR(5)
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -152,7 +152,7 @@ Bloklar mkfs zamanında devreden çıkartılmaya çalışılmaz.
 .sp
 .TP 4
 \fBquotatype\fR \fIkota-türü:kota-türü\fR...
-Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquota\fR, \fBprjquota\fR) etkinleştirilmesi gerektiğini belirler. Bu genişletilmiş seçeneğin bağımsız değişkeni, iki nokta üst üste ayraçlı bir liste olmalıdır. Bu seçenek yalnızca ilgili kota özelliği etkinse etkilidir. Bu seçenek belirtilmemişse başlatılacak ön tanımlı kota türleri \fBusrquota\fR ve \fBgrpquota\fR’dır. \fBproject\fR özelliği etkinleştirilirse, proje kotaları da ilklendirilir.
+Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquota\fR, \fBprjquota\fR) etkinleştirilmesi gerektiğini belirler. Bu genişletilmiş seçeneğin girdisi, iki nokta üst üste ayraçlı bir liste olmalıdır. Bu seçenek yalnızca ilgili kota özelliği etkinse etkilidir. Bu seçenek belirtilmemişse başlatılacak ön tanımlı kota türleri \fBusrquota\fR ve \fBgrpquota\fR’dır. \fBproject\fR özelliği etkinleştirilirse, proje kotaları da ilklendirilir.
 .sp
 .PP
 .RE
@@ -160,7 +160,7 @@ Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquo
 .sp
 .TP 4
 \fB-F\fR
-Belirtilen aygıt, bir blok aygıtındaki bir bölüm olmasa veya diğer bağımsız değişkenler anlamlı olmasa bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlar. Dosya sistemi kullanımda veya bağlı gibi görünse bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlamak için (gerçekten TEHLİKELİ bir seçenek), bu seçenek iki kez belirtilmelidir.
+Belirtilen aygıt, bir blok aygıtındaki bir bölüm olmasa veya diğer girdiler anlamlı olmasa bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlar. Dosya sistemi kullanımda veya bağlı gibi görünse bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlamak için (gerçekten TEHLİKELİ bir seçenek), bu seçenek iki kez belirtilmelidir.
 .sp
 .TP 4
 \fB-g\fR \fIgruptaki-blok-sayısı\fR
@@ -229,7 +229,7 @@ Bir dosya sistemi için \fBsize\fR ve \fBdevice\fR seçeneklerinin ikisi birden 
 .sp
 .TP 4
 \fB-l\fR \fIdosyaismi\fR
-İsmi \fIdosyaismi\fR ile belirtilen bozuk blokların listesini içeren dosyayı okur. Bu listede bulunan bozuk blokların boyu, \fBmke2fs\fR ile kullandığınız blok boyu ile aynı olmak zorundadır. Bir dosya sistemini biçimlemeden önce bozuk blok sınaması için \fBmke2fs\fR’nin \fB–c\fR seçeneğini kullanmak daha kolay ve daha az baş ağrıtıcı olabilir. Böylece \fBmke2fs\fR, \fBbadblocks\fR(8) uygulamasına daima doğru bağımsız değişkenleri geçebilir.
+İsmi \fIdosyaismi\fR ile belirtilen bozuk blokların listesini içeren dosyayı okur. Bu listede bulunan bozuk blokların boyu, \fBmke2fs\fR ile kullandığınız blok boyu ile aynı olmak zorundadır. Bir dosya sistemini biçimlemeden önce bozuk blok sınaması için \fBmke2fs\fR’nin \fB–c\fR seçeneğini kullanmak daha kolay ve daha az baş ağrıtıcı olabilir. Böylece \fBmke2fs\fR, \fBbadblocks\fR(8) uygulamasına daima doğru girdileri geçebilir.
 .sp
 .TP 4
 \fB-L\fR \fIetiket\fR
@@ -245,7 +245,7 @@ Dosya sisteminin en son bağlandığı dizini belirler. Bu, dosya sisteminin ner
 .sp
 .TP 4
 \fB-n\fR
-Dosya sistemi oluşturulmaz, sadece işlemleri gösterir, Yapsaydık ne olurdu sorusuna cevap bulmak için en uygun yoldur. Bu seçenek, belirli bir dosya sistemi için, yedek süper blokların yerini tespit etmek için kullanılır, bunun için dosya sisteminin ilk oluşturulması esnasında kullanılan \fBmke2fs\fR bağımsız değişkenleri kullanılır (tabii ki \fB-n\fR seçeneği eklenerek).
+Dosya sistemi oluşturulmaz, sadece işlemleri gösterir, Yapsaydık ne olurdu sorusuna cevap bulmak için en uygun yoldur. Bu seçenek, belirli bir dosya sistemi için, yedek süper blokların yerini tespit etmek için kullanılır, bunun için dosya sisteminin ilk oluşturulması esnasında kullanılan \fBmke2fs\fR girdileri kullanılır (tabii ki \fB-n\fR seçeneği eklenerek).
 .sp
 .TP 4
 \fB-N\fR \fIdüğüm-sayısı\fR

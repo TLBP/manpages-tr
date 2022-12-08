@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2022-11-24T13:21:29+03:00
+.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
 .TH "MODPROBE.D" 5 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -70,7 +70,7 @@ Bu komut, \fBmodprobe\fR’a belirtilen \fImodül\fRü normal şekilde çekirde�
 .sp
 Ek modül bağımlılıkları sağlama sorununa bir çözüm olarak bu komutun uzun vadeli geleceği garanti edilmez ve bu komutun, gelecekteki bir sürümde kalıcı olarak kaldırılması ya da kullanımdan kaldırılma hakkında bir uyarı ile değiştirilmesi düşünülmektedir. Kullanımı, \fBmkinitrd\fR gibi dağıtıma yardımcı uygulamalar tarafından modül bağımlılıklarının otomatik olarak belirlenmesi işlemini karmaşıklaştırmaktadır. Çünkü bunların artık bir şekilde yükleme komutlarının ne yapıyor olabileceğini yorumlaması gerekmektedir. Mükemmel bir dünyada, modüllerin bu komutu kullanmadan tüm bağımlılık bilgilerini sağlaması gerekir. Linux çekirdeği içinde akıllı bağımlılık desteğini sağlamak için çalışmalar devam etmektedir.
 .sp
-Komutta \fB$CMDLINE_OPTS\fR dizgesini kullanırsanız, \fBmodprobe\fR komut satırını belirtilen seçeneklerle değiştirir. Bu, yapılandırma dosyasında bir \fBinstall\fR komutu olsa bile, kullanıcılar "\fBmodprobe fred opt=1\fR" komutunun "\fBopt=1\fR" bağımsız değişkenini modüle aktarmasını beklediğinden faydalı olabilir. Dolayısıyla yukarıdaki örneğimiz "\fBinstall fred /sbin/modprobe barney; /sbin/modprobe --ignore-install fred $CMDLINE_OPTS\fR" haline gelir.
+Komutta \fB$CMDLINE_OPTS\fR dizgesini kullanırsanız, \fBmodprobe\fR komut satırını belirtilen seçeneklerle değiştirir. Bu, yapılandırma dosyasında bir \fBinstall\fR komutu olsa bile, kullanıcılar "\fBmodprobe fred opt=1\fR" komutunun "\fBopt=1\fR" girdiini modüle aktarmasını beklediğinden faydalı olabilir. Dolayısıyla yukarıdaki örneğimiz "\fBinstall fred /sbin/modprobe barney; /sbin/modprobe --ignore-install fred $CMDLINE_OPTS\fR" haline gelir.
 .sp
 .TP 4
 \fBoptions\fR \fImodül seçenek\fR...
@@ -88,12 +88,12 @@ Bu, \fBmodprobe -r\fR ile çağrılması dışında, yukarıdaki \fBinstall\fR k
 .sp
 \fBpre:\fR ve \fBpost:\fR \fImodül\fRleri, \fIanamodül\fRden önce (pre) ve sonra (post) \fBmodprobe\fR’un kurmaya (veya kaldırmaya) çalışacağı diğer modüllerin adlarının ve/veya takma adlarının listeleridir.
 .sp
-Örnek: Yapılandırmada "\fBsoftdep c pre: a b post: d e\fR" sağlandığı varsayılsın. \fBsoftdep\fR olmadan "\fBmodprobe c\fR"yi çalıştırmak artık "\fBmodprobe a b c d e\fR" çalıştırmaya eşdeğerdir. \fB--use-blacklist\fR gibi seçenekler belirtilen tüm modüllere uygulanırken modül bağımsız değişkenleri yalnızca \fIc\fR modülüne uygulanır.
+Örnek: Yapılandırmada "\fBsoftdep c pre: a b post: d e\fR" sağlandığı varsayılsın. \fBsoftdep\fR olmadan "\fBmodprobe c\fR"yi çalıştırmak artık "\fBmodprobe a b c d e\fR" çalıştırmaya eşdeğerdir. \fB--use-blacklist\fR gibi seçenekler belirtilen tüm modüllere uygulanırken modül girdileri yalnızca \fIc\fR modülüne uygulanır.
 .sp
 .RS 4
 .TP 4
 \fBBilgi:\fR
-\fIanamodül\fR bağımsız değişkenli \fBinstall\fR, \fBremove\fR komutlarına göre \fBsoftdep\fR önceliklidir.
+\fBsoftdep\fR, aynı \fIanamodül\fR için \fBinstall\fR ve \fBremove\fR komutlarına göre önceliklidir.
 .sp
 .RE
 .IP
