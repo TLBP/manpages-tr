@@ -1,0 +1,1879 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Licensed under version 2 of the Gnu General Public License.
+..
+.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.TH "PS" 1 "11 Mayıs 2022" "procps-ng 4.0.2" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+ps - mevcut süreçlerin anlık görüntüsünü listeler
+.sp
+.SH KULLANIM
+.IP \fBps\fR 3
+[\fIseçenekler\fR]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBps\fR, etkin süreçlerin bir seçimi hakkında bilgi görüntüler. Seçimin ve görüntülenen bilgilerin yinelenerek güncellemesi isteniyorsa, bunun yerine \fBtop\fR kullanılabilir.
+.sp
+\fBps\fR’nin bu sürümü birkaç çeşit seçenek kabul eder:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Gruplanabilen ve önünde bir tire olması gereken UNIX seçenekleri.
+.IP 2. 3
+Gruplanabilen ve kısa çizgi ile kullanılmaması gereken BSD seçenekleri.
+.IP 3. 3
+Önlerinde iki tire bulunan GNU uzun seçenekleri.
+.sp
+.RE
+.PD 0
+Farklı türdeki seçenekler özgürce karıştırılabilir, ancak çakışmalar ortaya çıkabilir. \fBps\fR’nin uyumlu olduğu birçok standart ve birçok \fBps\fR gerçeklenimi olması nedeniyle işlevsel olarak aynı olan bazı özdeş seçenekler vardır.
+.sp
+\fBps -aux\fR’un \fBps aux\fR’dan farklı olduğu unutulmamalıdır. POSIX ve UNIX standartları, \fBps -aux\fR’un \fIx\fR adlı bir kullanıcının sahip olduğu tüm süreçleri ve \fB-a\fR seçeneği tarafından seçilecek tüm süreçleri yazdırmasını gerektirir. Eğer \fIx\fR adlı kullanıcı yoksa \fBps\fR, komutu \fBps -aux\fR olarak yorumlayıp uyarı verebilir. Bu davranış, eski komut dosyalarından ve alışkanlıklardan yenisine geçişe yardımcı olmayı amaçlamaktadır. Kırılgandır, değişebilir ve bu nedenle güvenilmemelidir.
+.sp
+Öntanımlı olarak \fBps\fR, geçerli kullanıcıyla aynı etkin kullanıcı kimliğine (\fBeuid=\fR\fIEKK\fR) sahip ve çağrıldığı uçbirimle ilişkili tüm süreçleri seçer. Süreç kimliğini (\fBpid=\fR\fISK\fR), süreçle ilişkili uçbirimi (\fBtname=\fR\fIUÇBİRİM\fR), \fI[GG-]SS:DD:ss\fR biçiminde (\fBtime=\fR\fIZAMAN\fR) birikimli işlemci süresini ve çalıştırılabilir adı (\fBcomm=\fR\fIKOMUT\fR) görüntüler. Çıktı öntanımlı olarak sıralanmamıştır.
+.sp
+BSD tarzı seçeneklerin kullanılması, öntanımlı ekrana süreç durumunu (\fBstat=\fR\fIDURUM\fR) ekler ve komut adı yerine komut girdilerini (\fBargs=\fR\fIKOMUT\fR) gösterir. Bunu \fBPS_FORMAT\fR ortam değişkeni ile geçersiz kılabilirsiniz. BSD tarzı seçeneklerin kullanılması, kullanıcı aidiyetinde olan diğer uçbirimlerdeki süreçleri içerecek şekilde süreç seçimini de değiştirir; bu ayrıca, diğer kullanıcıların sahibi olduğu veya bir uçbirimde olmayan süreçleri hariç tutmak için ayrıştırılan tüm süreçlerin kümesi olacak şekilde seçimi ayarlamak olarak da tanımlanabilir.
+.sp
+Aşağıda açıklananlar dışında, süreç seçim seçenekleri artımlıdır. Öntanımlı seçim yok sayılır ve ardından seçilen süreçler görüntülenecek süreçler grubuna eklenir. Bu nedenle, belirtilen seçim koşullarından herhangi birini karşılayan süreç gösterilir.
+.sp
+.SH "ÖRNEKLER"
+.IP "Örnek 1: Standart sözdizimini kullanarak sistemdeki her süreci görmek için" 4
+.RS 4
+.nf
+\fBps -e
+ps -ef
+ps -eF
+ps -ely\fR
+.fi
+.sp
+.RE
+.IP "Örnek 2: BSD sözdizimini kullanarak sistemdeki her süreci görmek için" 4
+.RS 4
+.nf
+\fBps ax
+ps axu\fR
+.fi
+.sp
+.RE
+.IP "Örnek 3: Süreç ağacını görmek için" 4
+.RS 4
+.nf
+\fBps -ejH
+ps axjf\fR
+.fi
+.sp
+.RE
+.IP "Örnek 4: Evreler hakkında bilgi almak için" 4
+.RS 4
+.nf
+\fBps -eLf
+ps axms\fR
+.fi
+.sp
+.RE
+.IP "Örnek 5: Güvenlik bilgisi almak için" 4
+.RS 4
+.nf
+\fBps -eo euser,ruser,suser,fuser,f,comm,label
+ps axZ
+ps -eM\fR
+.fi
+.sp
+.RE
+.IP "Örnek 6: root (gerçek ve etkin kimlik) aidiyetinde çalışan her süreci kullanıcı biçeminde görmek için" 4
+.RS 4
+.nf
+\fBps -U root -u root u\fR
+.fi
+.sp
+.RE
+.IP "Örnek 7: Her süreci kullanıcı tanımlı biçemde görmek için" 4
+.RS 4
+.nf
+\fBps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,wchan:14,comm
+ps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,comm
+ps -Ao pid,tt,user,fname,tmout,f,wchan\fR
+.fi
+.sp
+.RE
+.IP "Örnek 8: Yalnızca syslogd sürecinin kimliklerini görmek için" 4
+.RS 4
+.nf
+\fBps -C syslogd -o pid=\fR
+.fi
+.sp
+.RE
+.IP "Örnek 9: Yalnızca 42 numaralı sürecin adını görmek için" 4
+.RS 4
+.nf
+\fBps -q 42 -o comm=\fR
+.fi
+.sp
+.RE
+.sp
+.SH "BASİT SÜREÇ SEÇİMİ"
+.TP 4
+\fBa\fR
+Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "yalnızca kendiniz" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR’nin tüm uçbirimli süreçleri listelemesine veya \fBx\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
+.sp
+.TP 4
+\fB-A\fR, \fB-e\fR
+Tüm süreçleri seçer.
+.sp
+.TP 4
+\fB-a\fR
+Bir uçbirimle ilişkili olmayan süreçler ve oturum liderleri (bkz. \fBgetsid\fR(2)) hariç tüm süreçler seçilir.
+.sp
+.TP 4
+\fB-d\fR
+Oturum liderleri hariç tüm süreçler seçilir.
+.sp
+.TP 4
+\fBg\fR
+Gerçekten hepsi, oturum liderleri bile. Bu seçenek eskidir ve gelecekteki bir sürümde kullanımdan kaldırılabilir. Normalde örtük olarak \fBa\fR seçeneği tarafından uygulanır ve yalnızca sunos4 kişiliğinde çalışırken kullanışlıdır.
+.sp
+.TP 4
+\fB-N\fR, \fB--deselect\fR
+Belirtilen koşullara uyanlar hariç tüm süreçler seçilir (seçimi geçersiz kılar).
+.sp
+.TP 4
+\fBT\fR
+Bu uçbirimle ilişkili tüm süreçleri seçer. Girdisiz olarak \fBt\fR ile özdeş.
+.sp
+.TP 4
+\fBr\fR
+Seçimi çalışan süreçlerle sınırlar.
+.sp
+.TP 4
+\fBx\fR
+Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "uçbirimi olmalıdır" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR’nin size ait (\fBps\fR ile aynı etkin kullanıcı kimlikli) tüm süreçleri listelemesine veya \fBa\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
+.sp
+.PP
+.sp
+.SH "LİSTEYE GÖRE SÜREÇ SEÇİMİ"
+Bu seçenekler, boşluk veya virgül ayraçlı bir liste biçiminde tek bir girdi kabul eder ve her seçenek birden çok kez kullanılabilir. Örnek:
+.sp
+.RS 4
+.nf
+\fBps -p "1 2" -p 3,4\fR
+.fi
+.sp
+.RE
+.TP 4
+\fI123\fR\p \fI-123\fR
+\fB--pid\fR \fI123\fR ile özdeş.
+.sp
+.TP 4
+\fB-C\fR \fIKOMUTLAR\fR
+Komut adına göre seçer. \fIKOMUTLAR\fR listesinde çalıştırılabilir dosya adı verilen süreçleri seçer. DİKKAT: Komut adı ile komut satırı aynı değildir. Önceki procps ve çekirdek sürümlerinde komut adı 15 karaktere indirilmişti. Bu sınırlama artık her ikisinde de mevcut değil. Yalnızca 15 karakterlik eşleştirmeye güvendiyseniz, artık bir eşleşme alamayabilirsiniz.
+.sp
+.TP 4
+\fB-G\fR \fIGRUPLAR\fR\p \fB--Group\fR \fIGRUPLAR\fR
+Gerçek grup kimliği veya adına göre seçer. Bu, gerçek grup adı veya numarası \fIGRUPLAR\fR listesinde olan süreçleri seçer. Gerçek grup kimliği, süreci oluşturan kullanıcının grubunu tanımlar, bkz: \fBgetgid\fR(2).
+.sp
+.TP 4
+\fB-g\fR \fIGRUPLAR\fR
+Oturuma göre veya etkin grup adına göre seçer. Oturuma göre seçim, birçok standart tarafından belirtilir, ancak etkin gruba göre seçim, diğer birçok işletim sisteminin kullandığı mantıksal bir davranıştır. Bu \fBps\fR, liste tamamen sayısal olduğunda (oturumlarda olduğu gibi) oturuma göre seçecektir. Grup kimliği numaraları, yalnızca bazı grup adları da belirtildiğinde çalışır. Bkz: \fB-s\fR ve \fB--group\fR seçenekleri.
+.sp
+.TP 4
+\fB--group\fR \fIGRUPLAR\fR
+Etkin grup kimliği veya adına göre seçer. Etkin grup adı veya kimliği \fIGRUPLAR\fR listesinde olan süreçleri seçer. Etkin grup kimliği, dosya erişim izinleri süreç tarafından kullanılan grubu tanımlar (bkz. \fBgetegid\fR(2)). \fB-g\fR seçeneği genellikle \fB--group\fR yerine kullanılır.
+.sp
+.TP 4
+\fBp\fR \fISKİMLİKLERİ\fR\p \fB-p\fR \fISKİMLİKLERİ\fR\p \fB--pid\fR \fISKİMLİKLERİ\fR
+Süreç kimliğine göre seçer. Süreç kimliği \fISKİMLİKLERİ\fR listesinde olan süreçleri seçer.
+.sp
+.TP 4
+\fB--ppid\fR \fIESKİMLİKLERİ\fR
+Üst (ebeveyn) süreç kimliği \fIESKİMLİKLERİ\fR listesinde olan süreçleri seçer. Yani, \fIESKİMLİKLERİ\fR listesindeki süreçlerin çocukları olan süreçleri seçer.
+.sp
+.TP 4
+\fBq\fR \fISKİMLİKLERİ\fR\p \fB-q\fR \fISKİMLİKLERİ\fR\p \fB--quick-pid\fR \fISKİMLİKLERİ\fR
+Süreç kimliğine göre seçer (hızlı kip). Bu, düreç kimlik numaraları \fISKİMLİKLERİ\fR listesinde görünen süreçleri seçer. Bu seçenek ile \fBps\fR, sadece \fISKİMLİKLERİ\fR listesindeki süreç kimlikleri için gerekli bilgileri okur ve ek ayrıştırma kurallarını uygulamaz. Süreç kimlikleri sıralanmaz ve sıra korunur. Bu kipte ek seçim seçeneklerine, sıralamaya ve ağaç türü listelere izin verilmez.
+.sp
+.TP 4
+\fB-s\fR \fIOKİMLİKLERİ\fR\p \fB--sid\fR \fIOKİMLİKLERİ\fR
+Oturum kimliğine göre seçer. Oturum kimliği \fIOKİMLİKLERİ\fR listesinde bulunan süreçleri seçer.
+.sp
+.TP 4
+\fBt\fR \fIUÇBİRİMLER\fR\p \fB-t\fR \fIUÇBİRİMLER\fR\p \fB--tty\fR \fIUÇBİRİMLER\fR
+Uçbirime göre seçer. Bu, \fIUÇBİRİMLER\fR listesinde verilen uçbirimlerle ilişkili süreçleri seçer. Uçbirimler (tty’ler veya metin çıktı ekranları) birkaç biçimde belirtilebilir: \fI/dev/ttyS1, ttyS1, S1\fR. Hiçbir uçbirime bağlı olmayan süreçleri seçmek için düz bir "-" kullanılabilir.
+.sp
+\fBps\fR ile ilişkili uçbirimi belirtmek için boş bir \fIUÇBİRİMLER\fR listesi ile birlikte de kullanılabilir. \fBT\fR seçeneğini kullanmak, boş bir \fIUÇBİRİMLER\fR listesi ile \fBt\fR kullanmaktan daha temiz kabul edilir.
+.sp
+.TP 4
+\fBU\fR \fIKULLANICILAR\fR\p \fB-u\fR \fIKULLANICILAR\fR\p \fB--user\fR \fIKULLANICILAR\fR
+Etkin kullanıcı kimliği veya adına göre seçer. \fIKULLANICILAR\fR listesinde etkin kullanıcı adı veya kimliği olan süreçleri seçer.
+.sp
+Etkin kullanıcı kimliği, dosya erişim izinleri süreç tarafından kullanılan kullanıcıyı tanımlar (bkz. \fBgeteuid\fR(2)).
+.sp
+.TP 4
+\fB-U\fR \fIKULLANICILAR\fR\p \fB--User\fR \fIKULLANICILAR\fR
+Gerçek kullanıcı kimliği veya adına göre seçer. \fIKULLANICILAR\fR listesinde gerçek kullanıcı adı veya kimliği olan süreçleri seçer. Gerçek kullanıcı kimliği, süreci oluşturan kullanıcıyı tanımlar (bkz. \fBgetuid\fR(2)).
+.sp
+.PP
+.sp
+.SH "ÇIKTI BİÇEMİNİN DENETİMİ"
+Bu seçenekler, \fBps\fR tarafından görüntülenen bilgileri seçmek için kullanılır. Çıktı kişiliğe göre farklılık gösterebilir.
+.sp
+.TP 4
+\fB-c\fR
+\fB-l\fR seçeneği için farklı zamanlayıcı bilgileri gösterir.
+.sp
+.TP 4
+\fB--context\fR
+Güvenlik bağlamı biçiminde görüntüler (SELinux için).
+.sp
+.TP 4
+\fB-f\fR
+Tam biçemli listeleme yapılır. Bu seçenek, ek sütunlar eklemek için diğer birçok UNIX tarzı seçenekle birleştirilebilir. Ayrıca komut girdilerinin de yazdırılmasına neden olur. \fB-L\fR ile kullanıldığında, \fBNLWP\fR (evre sayısı) ve \fBLWP\fR (evre kimliği) sütunları eklenir. Ayrıca bkz: \fBc\fR seçeneği, \fBargs\fR ve \fBcomm\fR biçem belirteçleri.
+.sp
+.TP 4
+\fB-F\fR
+Fazlasıyla tam biçem. Bu seçeneği örtük olarak uygulayan \fB-f\fR seçeneğine de bakınız.
+.sp
+.TP 4
+\fBj\fR
+BSD iş denetim biçemi.
+.sp
+.TP 4
+\fB-j\fR
+İş biçemi.
+.sp
+.TP 4
+\fBl\fR
+BSD uzun biçemini gösterir.
+.sp
+.TP 4
+\fB-l\fR
+Uzun biçem. Çoğunlukla \fB-y\fR seçeneği ile birlikte kullanışlı olur.
+.sp
+.TP 4
+\fB-M\fR, \fBZ\fR
+Güvenlik verisi sütunu ekler. \fBZ\fR ile özdeş (SELinux için).
+.sp
+.TP 4
+\fBO\fR \fIBİÇEM\fR
+Önyüklemeli o (aşırı yüklü). BSD \fBO\fR seçeneği, \fB-O\fR gibi davranabilir (bazı öntanımlı sütunları olan kullanıcı tanımlı çıktı biçemi) veya sıralama düzenini belirtmek için kullanılabilir. Buluşsal yöntemler, bu seçeneğin davranışını belirlemek için kullanılır. İstenen davranışın elde edildiğinden emin olmak için (sıralama veya biçemlendirme), başka seçeneklerle birlikte belirtilebilir (örn. \fB-O\fR veya \fB--sort\fR ile). Biçemlendirme seçeneği olarak kullanıldığında, BSD kişiliğiyle \fB-O\fR seçeneğine özdeştir.
+.sp
+.TP 4
+\fB-O\fR \fIBİÇEM\fR
+Bazı öntanımlı sütunlarının olmaması dışında \fB-o\fR gibidir. \fB-o pid,\fR\fIBİÇEM\fR\fB,state,tname,time,command\fR veya \fB-o pid,\fR\fIBİÇEM\fR\fB,tname,time,cmd\fR ile özdeştir; aşağıya, \fB-o\fR seçeneğine bakınız.
+.sp
+.TP 4
+\fBo\fR \fIBİÇEM\fR\p \fB-o\fR \fIBİÇEM\fR\p \fB--format\fR \fIBİÇEM\fR
+Kullanıcı tanımlı biçem. \fIBİÇEM\fR, tek tek çıktı sütunlarını belirtmenin bir yolunu sunan, boşluk veya virgül ayraçlı bir anahtar sözcük listesidir. Tanınan anahtar sözcükler, aşağıdaki \fBSTANDART BİÇEM BELİRTEÇLERİ\fR bölümünde açıklanmıştır. Başlıklar istenildiği gibi yeniden adlandırılabilir (\fBps -o pid,ruser=\fR\fIGerçekKullanıcı\fR \fB-o comm=\fR\fIKomut\fR). Tüm sütun başlıkları boşsa (\fBps -o pid= -o comm=\fR), başlık satırı çıktılanmaz. Geniş başlıklar için sütun genişliği gerektiği gibi artar; bu, WCHAN gibi sütunları genişletmek için (\fBps -o pid,wchan=\fR\fIGENİŞ-WCHAN-SÜTUNU\fR \fB-o comm\fR) kullanılabilir. Doğrudan genişlik denetimi (\fBps opid,wchan:42,cmd\fR) de sunulmaktadır. \fBps -o pid=\fR\fIX\fR\fB,comm=\fR\fIY\fR davranışı kişiliğe göre değişir; çıktıda "\fIX\fR\fB,comm=\fR\fIY\fR" adlı bir sütun veya "\fIX\fR" ve "\fIY\fR" adlı iki sütun olabilir. Şüpheye düşülmesi durumunda birden fazla \fB-o\fR seçeneği kullanılabilir. Öntanımlıyı belirlemek için \fBPS_FORMAT\fR ortam değişkeni kullanılabilir; öntanımlı olarak UNIX veya BSD sütunlarını seçmek için \fBDefSysV\fR ve \fBDefBSD\fR makroları kullanılabilir.
+.sp
+.TP 4
+\fB-P\fR
+\fBpsr\fR gösteren bir sütun ekler.
+.sp
+.TP 4
+\fBs\fR
+Sinyal biçemini gösterir.
+.sp
+.TP 4
+\fBu\fR
+Kullanıcı tanımlı biçemi gösterir.
+.sp
+.TP 4
+\fBv\fR
+Sanal bellek biçemini gösterir.
+.sp
+.TP 4
+\fBX\fR
+Biçemi kaydeder.
+.sp
+.TP 4
+\fB-y\fR
+Bayraklar gösterilmez; \fBaddr\fR yerine \fBrss\fR gösterilir. Yalnızca \fB-l\fR ile birlikte kullanılır.
+.sp
+.PP
+.sp
+.SH "ÇIKTI BELİRLEYİCİLER"
+.TP 4
+\fBc\fR
+Gerçek komut adını gösterir. Bu yürütülebilir dosyanın adından türetilmiştir. Bu nedenle, komut girdileri ve bunlarda yapılan herhangi bir değişiklik gösterilmez. Bu seçenek, \fBargs\fR biçem belirtecini açıkça \fBcomm\fR biçem belirtecine dönüştürür; Tümü normalde komut girdilerini görüntüleyen çeşitli BSD tarzı biçem seçenekleri ve \fB-f\fR biçem seçeneği ile birlikte kullanıldığında yararlıdır. Ayrıca bkz: \fB-f\fR seçeneği, \fBargs\fR ve \fBcomm\fR biçem belirteçleri.
+.sp
+.TP 4
+\fB--cols\fR \fISAYI\fR\p \fB--columns\fR \fISAYI\fR\p \fB--width\fR \fISAYI\fR
+Ekran genişliğini belirler.
+.sp
+.TP 4
+\fBO\fR \fISAYI\fR\p \fB--lines\fR \fISAYI\fR\p \fB--rows\fR \fISAYI\fR
+Ekran yüksekliğini belirler.
+.sp
+.TP 4
+\fBe\fR
+Komuttan sonra ortam değişkenleri gösterilir.
+.sp
+.TP 4
+\fBf\fR, \fB--forest\fR
+Süreç ağaçları ASCII çizimle gösterilir.
+.sp
+.TP 4
+\fB-H\fR
+\fBf\fR seçeneğine benzemekle birlikte özeti gibidir.
+.sp
+.TP 4
+\fBh\fR
+Başlıklar gösterilmez. (BSD kişiliğinde ise başlık her ekranda gösterilir). \fBh\fR seçeneği biraz sorunludur. Standart BSD \fBps\fR sürümünde, çıktının her sayfasında başlığı göstermek için bu seçenek kullanır, ancak daha eski Linux \fBps\fR sürümlerinde bu seçenek, başlığı tamamen devre dışı bırakmak için kullanır. \fBps\fR’nin bu sürümü, BSD kişiliği seçilirse çıktının her sayfasına bir başlık yazdıran, seçilmezse başlığı yazdırmayan Linux kullanımını takip eder. Mevcut kişilikten bağımsız olarak, her sayfaya başlık yazdırmayı etkinleştirmek için \fB--headers\fR, başlıkları tamamen devre dışı bırakmak için \fB--no-headers\fR seçenekleri kullanılabilir.
+.sp
+.TP 4
+\fB--headers\fR
+Her sayfada başlık gösterilir.
+.sp
+.TP 4
+\fB--no-headers\fR, \fB--no-heading\fR
+Başlık satırı hiç basılmaz.
+.sp
+.TP 4
+\fBk\fR \fIDÜZEN\fR\p \fB--sort\fR \fIDÜZEN\fR
+Sıralama \fIDÜZEN\fRini belirler. Sıralama sözdizimi şu şekildedir: \fB[+|-]\fR\fIBELİRTEÇ\fR\fB[,[+|-]\fR\fIBELİRTEÇ\fR\fB[,...]]\fR. \fIBELİRTEÇ\fR, \fBSTANDART BİÇEM BELİRTEÇLERİ\fR bölümündeki anahtar sözcüklerden biridir. "+" isteğe bağlıdır, çünkü sayısal olarak artan yön veya sözlük düzeni öntanımlı yöndür. Örnekler:
+.sp
+.RS 4
+.RS 4
+.nf
+ps jaxkuid,-ppid,+pid
+ps axk comm o comm,args
+ps kstart_time -ef
+ps jax --sort=uid,-ppid,+pid
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBn\fR
+WCHAN ve USER için sayısal çıktı (tüm UID ve GID türleri dahil).
+.sp
+.TP 4
+\fBO\fR \fISIRALAMA\fR
+Önyüklemeli \fBo\fR (aşırı yüklü). BSD \fBO\fR seçeneği, \fB-O\fR gibi davranabilir (bazı öntanımlı sütunları olan kullanıcı tanımlı çıktı biçemi) veya sıralama düzenini belirtmek için kullanılabilir. Buluşsal yöntemler, bu seçeneğin davranışını belirlemek için kullanılır. İstenen davranışın elde edildiğinden emin olmak için (sıralama veya biçemlendirme), başka seçeneklerle birlikte belirtilebilir (örn. \fB-O\fR veya \fB--sort\fR ile). Biçemlendirme seçeneği olarak kullanıldığında, BSD kişiliğiyle \fB-O\fR seçeneğine özdeştir.
+.sp
+Sıralama için eski BSD \fBO\fR seçeneğinin sözdizimi \fBO[+|-]\fR\fIb1\fR\fB[,[+|-]\fR\fIb2\fR\fB[,...]]\fR şeklindedir. Aşağıdaki \fBESKİ SIRALAMA BELİRTEÇLERİ\fR bölümünde açıklanan \fIb1,b2,...\fR tek harfli sıralama belirteçleri ile belirtilen çok düzeyli sıralamaya göre süreçleri sıralar. "+" Şu anda isteğe bağlıdır, yalnızca bir tuş üzerindeki öntanımlı yönü yineler, ancak \fBO\fR sıralamasını \fBO\fR biçeminden ayırmaya yardımcı olabilir. "-", yalnızca önündeki tuş için yönü tersine çevirir.
+.sp
+.TP 4
+\fBO\fR \fISAYI\fR
+Ekran yüksekliğini belirler. \fB--rows\fR ve \fB--lines\fR ile özdeş
+.sp
+.TP 4
+\fBS\fR, \fB--cumulative\fR
+Ölü alt süreçlerdeki işlemci kullanımı gibi bazı bilgilerin üst süreçlerde toplamını gösterir. Bu, bir ebeveyn sürecin tekrar tekrar kısa ömürlü çocukları iş yapmaları için çatalladığı bir sistemi incelemek için kullanılabilir.
+.sp
+.TP 4
+\fB-w\fR, \fBw\fR
+Geniş çıktılama. Sınırsız genişlik için bu seçenek iki kere kullanılabilir.
+.sp
+.PP
+.sp
+.SH "EVRE GÖSTERİMİ"
+.TP 4
+\fBH\fR
+Evreler süreç olarak gösterilir.
+.sp
+.TP 4
+\fB-L\fR
+Evreler çoğunlukla \fBNLWP\fR (evre sayısı) ve \fBLWP\fR (evre kimliği) sütunları ile gösterilir.
+.sp
+.TP 4
+\fB-m\fR, \fBm\fR
+Evreleri süreçlerden sonra gösterir.
+.sp
+.TP 4
+\fB-T\fR
+Evreler çoğunlukla SPID sütunu ile birlikte gösterir.
+.sp
+.PP
+.sp
+.SH "DİĞER BİLGİLER"
+.TP 4
+\fB--help\fR \fIBÖLÜM\fR
+Yardım bilgilerini gösterir. \fIBÖLÜM\fR \fBsimple\fR (basit), \fBlist\fR (liste), \fBoutput\fR (çıktı), \fBthreads\fR (evreler), \fBmisc\fR (çeşitli), \fBall\fR (tümü) veya bunların kısaltması olarak şu harflerden biri olabilir: \fBs|l|o|t|m|a\fR.
+.sp
+.TP 4
+\fB--info\fR
+Hata bildirirken kullanılacak bilgileri basar.
+.sp
+.TP 4
+\fBL\fR
+Tüm biçem belirteçlerini listeler.
+.sp
+.TP 4
+\fB-V\fR, \fBV\fR, \fB--version\fR
+procps-ng sürüm bilgilerini gösterir.
+.sp
+.PP
+.sp
+.SH "EK BİLGİ"
+Bu \fBps\fR, \fI/proc\fR içindeki sanal dosyaları okuyarak çalışır. Bu \fBps\fR’nin çalışması için setuid kmem veya herhangi bir ayrıcalık gerekmez. Bu \fBps\fR’ye herhangi bir özel izin vermek gerekmez.
+.sp
+İşlemci kullanımı şu anda, bir sürecin çalıştığı sürenin tüm yaşam süresine yüzdelik oranı olarak ifade edilmektedir. Bu ideal değildir ve \fBps\fR’nin uyumlu olduğu standartlara uygun değildir. İşlemci kullanımı üst üste eklenerek %100’e ulaşamaz.
+.sp
+SIZE ve RSS alanları, bir sürecin sayfa tabloları, çekirdek yığıtı, struct thread_info ve struct task_struct gibi bazı bölümlerini hesaba katmaz. Bu genellikle kalıcı olan en az 20 KiB bellektir. SIZE, sürecin sanal boyutudur (kod+veri+yığıt).
+.sp
+\fB<defunct>\fR olarak işaretlenen süreçler, ebeveynleri tarafından düzgün bir şekilde yok edilmediği için kalan ölü süreçlerdir ("zombi süreçler" de denir). Ebeveyn süreç çıkarsa, bu süreçler \fBinit\fR(8) tarafından yok edilir.
+.sp
+Kullanıcı adının uzunluğu, görüntülenen sütununun uzunluğundan fazlaysa, kullanıcı adı kısaltılır. \fB-o\fR ve \fB-O\fR biçimlendirme seçenekleri ile uzunluk özelleştirilebilir.
+.sp
+\fBps -aux\fR gibi komut seçenekleri iki farklı standardın karıştırılmasından dolayı önerilmez. POSIX ve UNIX standartlarına göre, yukarıdaki komut "\fIuçbirimi olan tüm süreçleri\fR" (genelde kullanıcıların çalıştırdığı komutlar) artı "\fIx adlı bir kullanıcının aidiyetindeki tüm süreçleri\fR" göstermek ister. Bu kullanıcı yoksa, o zaman \fBps\fR aslında \fBps aux\fR demek istediğinizi varsayacaktır.
+.sp
+.SH "SÜREÇ BAYRAKLARI"
+Bu değerlerin toplamı, \fBflags\fR çıktı belirteci tarafından sağlanan "F" sütununda görüntülenir:
+.sp
+.RS 4
+.nf
+1    çatallandı ama çalıştırılmadı
+4    süper kullanıcı ayrıcalıkları kullanıldı
+.fi
+.sp
+.RE
+.sp
+.SH "SÜREÇ DURUM KODLARI"
+Bir sürecin durumunu açıklamak için \fBs\fR, \fBstat\fR ve \fBstate\fR çıktı belirteçlerinin ("STAT" veya "S" başlığı) göstereceği farklı değerler ve açıklamaları şunlardır:
+.sp
+.RS 4
+.nf
+D    kesintisiz uyku (genelde G/Ç)
+I    boşta kalmış çekirdek evresi
+R    koşuyor veya koşacak (koşma kuyruğunda)
+S    kesintili uyku (sonlanması için bir olay bekleniyor)
+T    iş denetim sinyali ile durduruldu
+t    izleme sırasında hata ayıklayıcı durdurdu
+W    sayfalama (Linux 2.6.xx itibariyle geçersiz)
+X    ölü (asla görülmemeli)
+Z    zombi süreç, işi bitti ama ebeveyni yok etmedi
+.fi
+.sp
+.RE
+\fBstat\fR sözcüğü kullanıldığında ve BSD biçemleri için ek karakterler gösterilebilir::
+.sp
+.RS 4
+.nf
+<    yüksek öncelik (diğer kullanıcılar için iyi değil)
+N    düşük öncelik (diğer kullanıcılar için iyi)
+L    bellekte kilitli sayfaları var (gerçek zamanlı veya özel G/Ç için)
+s    oturum lideri
+l    çok evreli (CLONE_THREAD kullanarak, NPTL pthread’lerinin yaptığı gibi)
++    önalan süreçleri grubunda
+.fi
+.sp
+.RE
+.sp
+.SH "ESKİ SIRALAMA BELİRTEÇLERİ"
+Bu kısa belirteçler BSD \fBO\fR seçeneği tarafından kullanılır (sıralama için kullanıldığında). GNU \fB--sort\fR seçeneği bu belirteçleri kullanmaz, ancak aşağıda \fBSTANDART BİÇEM BELİRTEÇLERİ\fR bölümünde açıklanan belirteçleri kullanır. Sıralamada kullanılan değerlerin, bazı çıktı biçemleme alanlarında kullanılan "harmanlanmış" değerler değil, \fBps\fR’nin kullandığı dahili değerler olduğuna dikkat edin (örneğin, tty’de sıralama, gösterilen uçbirim adına göre değil, aygıt numarasına göre yapılır). Harmanlanmış değerleri sıralamak istenirse \fBps\fR çıktısı \fBsort\fR(1) komutuna aktarılabilir.
+.sp
+.nr ColSize ((\n[.l] - \n[.i]) / 1n - 20)
+.TS
+tab(:);
+c1B 1l1 1lw(\n[ColSize]n).
+\fBKISA\fR :\fBNORMAL\fR :\fBAÇIKLAMA\fR
+T{
+c
+T}:T{
+cmd
+T}:T{
+çalıştırılabilirin basit ismi
+T}
+T{
+C
+T}:T{
+pcpu
+T}:T{
+işlemci kullanımı
+T}
+T{
+f
+T}:T{
+flags
+T}:T{
+uzun biçem F alanındaki gibi bayraklar
+T}
+T{
+g
+T}:T{
+pgrp
+T}:T{
+süreç grup kimliği
+T}
+T{
+G
+T}:T{
+tpgid
+T}:T{
+denetim uçbirimi süreç grup kimliği
+T}
+T{
+j
+T}:T{
+cutime
+T}:T{
+toplam olarak kullanıcı zamanı
+T}
+T{
+J
+T}:T{
+cstime
+T}:T{
+toplam olarak sistem zamanı
+T}
+T{
+k
+T}:T{
+utime
+T}:T{
+kullanıcı zamanı
+T}
+T{
+m
+T}:T{
+min_flt
+T}:T{
+küçük sayfa hatalarının sayısı
+T}
+T{
+M
+T}:T{
+maj_flt
+T}:T{
+büyük sayfa hatalarının sayısı
+T}
+T{
+n
+T}:T{
+cmin_flt
+T}:T{
+toplam olarak küçük sayfa hatalarının sayısı
+T}
+T{
+N
+T}:T{
+cmaj_flt
+T}:T{
+toplam olarak büyük sayfa hatalarının sayısı
+T}
+T{
+o
+T}:T{
+session
+T}:T{
+oturum kimliği
+T}
+T{
+p
+T}:T{
+pid
+T}:T{
+süreç kimliği
+T}
+T{
+P
+T}:T{
+ppid
+T}:T{
+üst (ebeveyn) süreç kimliği
+T}
+T{
+r
+T}:T{
+rss
+T}:T{
+atanan yerleşik boyut
+T}
+T{
+R
+T}:T{
+resident
+T}:T{
+yerleşik sayfa sayısı
+T}
+T{
+s
+T}:T{
+size
+T}:T{
+kilobayt olarak bellek boyutu
+T}
+T{
+S
+T}:T{
+share
+T}:T{
+paylaşımlı sayfa miktarı
+T}
+T{
+t
+T}:T{
+tty
+T}:T{
+denetim uçbirimi aygıt numarası
+T}
+T{
+T
+T}:T{
+start_time
+T}:T{
+sürecin çalıştırıldığı tarih veya saat
+T}
+T{
+U
+T}:T{
+uid
+T}:T{
+kullanıcı kimlik numarası
+T}
+T{
+u
+T}:T{
+user
+T}:T{
+kullanıcı adı
+T}
+T{
+v
+T}:T{
+vsize
+T}:T{
+KiB olarak toplam sanal bellek boyutu
+T}
+T{
+y
+T}:T{
+priority
+T}:T{
+çekirdek zamanlama önceliği
+T}
+.TE
+.sp
+.RE
+.sp
+.SH "AIX BİÇEM BELİRTEÇLERİ"
+Bu \fBps\fR, \fBprintf\fR(1) ve \fBprintf\fR(3) biçemleme belirteçleri gibi çalışan AIX biçem belirteçlerini destekler. Örneğin, normal öntanımlı çıktı şöyle üretilebilir: \fBps -eo "%p %y %x %c"\fR. \fBNORMAL\fR kodlar bir sonraki bölümde açıklanmıştır.
+.sp
+.RS 4
+.nf
+\fBKISA    NORMAL   BAŞLIK\fR
+ %C     pcpu     %CPU
+ %G     group    GROUP
+ %P     ppid     PPID
+ %U     user     USER
+ %a     args     COMMAND
+ %c     comm     COMMAND
+ %g     rgroup   RGROUP
+ %n     nice     NI
+ %p     pid      PID
+ %r     pgid     PGID
+ %t     etime    ELAPSED
+ %u     ruser    RUSER
+ %x     time     TIME
+ %y     tty      TTY
+ %z     vsz      VSZ
+.fi
+.sp
+.RE
+.sp
+.SH "STANDART BİÇEM BELİRTEÇLERİ"
+Bunlar çıktı biçemini belirlemek (örneğin, \fB-o\fR seçeneğiyle) veya GNU tarzı \fB--sort\fR seçeneğiyle seçilen süreçleri sıralamak için kullanılabilecek farklı anahtar sözcüklerdir.
+.sp
+Örnek: \fBps -eo pid,user,args --sort user\fR
+.sp
+Bu \fBps\fR sürümü, diğer \fBps\fR gerçeklenimlerinde kullanılan anahtar sözcüklerin çoğunu tanımaya çalışır.
+.sp
+Boşluk içerebilen kullanıcı tanımlı biçim belirteçleri: \fBargs, cmd, comm, command, fname, ucmd, ucomm, lstart, bsdstart, start\fR.
+.sp
+Bazı belirteçler sıralama için kullanılamayabilir.
+.sp
+.nr ColSize ((\n[.l] - \n[.i]) / 1n - 20)
+.TS
+tab(:);
+l1B 1l1 1lw(\n[ColSize]n).
+\fBKOD\fR :\fBBAŞLIK\fR :\fBAÇIKLAMA\fR
+T{
+%cpu
+T}:T{
+%CPU
+T}:T{
+"##.#" biçeminde sürecin işlemci kullanımı. Şimdilik, yüzde olarak, kullanılan işlemci süresinin sürecinin çalıştığı süreye oranıdır (cputime/realtime). Normalde toplamı %100 olmamalıdır. (\fBpcpu\fR ile özdeş).
+T}
+T{
+%mem
+T}:T{
+%MEM
+T}:T{
+Yüzde olarak, sürecin yerleşik atama boyutunun makinedeki fiziksel belleğe oranıdır. (\fBpmem\fR ile özdeş).
+T}
+T{
+ag_id
+T}:T{
+AGID
+T}:T{
+Etkileşimli masaüstü başarımını iyileştirmek için CFS zamanlayıcı ile birlikte çalışan süreçle ilişkili otomatik grup kimliği.
+T}
+T{
+ag_nice
+T}:T{
+AGNI
+T}:T{
+Bu gruptaki tüm süreçlerin zamanlamasını etkileyen otomatik grup öncelik değeri.
+T}
+T{
+args
+T}:T{
+COMMAND
+T}:T{
+Tüm komut satırı ile bir dizge olarak komut. Komut girdilerindeki değişiklikler gösterilebilir. Bu sütundaki çıktı boşluk içerebilir. <defunct> olarak gösterilen süreçler kısmen ölüdür ve ebeveyni tarafından yok edilmeyi bekliyordur. Bazen süreç komut girdileri kullanılamayabilir; bu olduğunda, \fBps\fR komut adını yaylı ayraç içinde alır. (\fBcmd\fR ve \fBcommand\fR ile özdeş). Ayrıca bkz: \fBcomm\fR biçem beliteci, \fB-f\fR ve \fBc\fR seçeneği. En son belirtildiğinde, bu sütun ekranın kenarına kadar uzanır. Çıktının bir dosyaya veya başka bir komuta yönlendirildiği (borulandığı) durumda olduğu gibi, \fBps\fR görüntü genişliğini belirleyemezse, çıktı genişliği tanımsızdır (80 olabilir, sınırsız olabilir, \fBTERM\fR ortam değişkeni tarafından belirlenir vb.). Bu durumda genişliği tam olarak belirlemek için \fBCOLUMNS\fR ortam değişkeni veya \fB--cols\fR seçeneği kullanılabilir. Genişliği ayarlamak için \fBw\fR veya \fB-w\fR seçeneği de kullanılabilir.
+T}
+T{
+blocked
+T}:T{
+BLOCKED
+T}:T{
+Engellenen sinyallerin maskesi, bkz. \fBsignal\fR(7). Alanın genişliğine göre onaltılık tabanda 32 veya 64 bitlik bir maske gösterilir.  (\fBsig_block\fR ve \fBsigmask\fR ile özdeş).
+T}
+T{
+bsdstart
+T}:T{
+START
+T}:T{
+Komutun çalıştırıldığı zaman. Süreç başlatılalı 24 saat olmamışsa çıktı biçemi " SS:DD", aksi takdirde "Aaa:ss" olur (burada "Aaa" 3 harfli ay kısaltmasıdır. Ayrıca bkz: \fBlstart\fR, \fBstart\fR, \fBstart_time\fR ve \fBstime\fR.
+T}
+T{
+bsdtime
+T}:T{
+TIME
+T}:T{
+Toplam olarak işlemci süresi, kullanıcı + sistem. Genellikle "DDD:ss" biçeminde gösterilir, ancak işlem 999 dakikadan fazla işlemci süresi kullanıyorsa bitsel sağa kaydırma uygulanabilir.
+T}
+T{
+c
+T}:T{
+C
+T}:T{
+İşlemci kullanımı.Şimdilik, sürecin ömrü boyunca kullanım yüzdesinin tamsayı değeridir.  (Bkz: \fB%cpu\fR).
+T}
+T{
+caught
+T}:T{
+CAUGHT
+T}:T{
+Yakalanan sinyallerin maskesi, bkz: \fBsignal\fR(7).  Alanın genişliğine göre onaltılık tabanda 32 veya 64 bitlik bir maske gösterilir. (\fBsig_catch\fR ve \fBsigcatch\fR ile özdeş).
+T}
+T{
+cgname
+T}:T{
+CGNAME
+T}:T{
+Sürecin ait olduğu denetim gruplarının adı.
+T}
+T{
+cgroup
+T}:T{
+CGROUP
+T}:T{
+Sürecin ait olduğu denetim grupları.
+T}
+T{
+cgroupns
+T}:T{
+CGROUPNS
+T}:T{
+Sürecin ait olduğu isim alanını tanımlayan eşsi dosya düğümü numarası. Bkz: \fBnamespaces\fR(7).
+T}
+T{
+class
+T}:T{
+CLS
+T}:T{
+Sürecin zamanlama sınıfı.  (\fBpolicy\fR ve \fBcls\fR ile özdeş).  Alanın olası değerleri:
+.RS -4
+.nf
+-   raporlanmadı
+TS  SCHED_OTHER
+FF  SCHED_FIFO
+RR  SCHED_RR
+B   SCHED_BATCH
+ISO SCHED_ISO
+IDL SCHED_IDLE
+DLN SCHED_DEADLINE
+?   bilinmeyen değer
+.fi
+.RE
+T}
+T{
+cls
+T}:T{
+CLS
+T}:T{
+Sürecin zamanlama sınıfı.  (\fBpolicy\fR ve \fBcls\fR ile özdeş).  Alanın olası değerleri:
+.RS -4
+.nf
+-   raporlanmadı
+TS  SCHED_OTHER
+FF  SCHED_FIFO
+RR  SCHED_RR
+B   SCHED_BATCH
+ISO SCHED_ISO
+IDL SCHED_IDLE
+DLN SCHED_DEADLINE
+?   bilinmeyen değer
+.fi
+.RE
+T}
+T{
+cmd
+T}:T{
+CMD
+T}:T{
+Bkz: \fBargs\fR.  (\fBargs\fR ve \fBcommand\fR ile özdeş).
+T}
+T{
+comm
+T}:T{
+COMMAND
+T}:T{
+Komut adı (yalnızca çalıştırılabilirin adı). Komut girdilerindeki değişiklikler gösterilebilir. Bu sütundaki çıktı boşluk içerebilir. <defunct> olarak gösterilen süreçler kısmen ölüdür ve ebeveyni tarafından yok edilmeyi bekliyordur. (\fBucmd\fR ve \fBucomm\fR ile özdeş). Ayrıca bkz: \fBcomm\fR biçem beliteci, \fB-f\fR ve \fBc\fR seçeneği. En son belirtildiğinde, bu sütun ekranın kenarına kadar uzanır. Çıktının bir dosyaya veya başka bir komuta yönlendirildiği (borulandığı) durumda olduğu gibi, \fBps\fR görüntü genişliğini belirleyemezse, çıktı genişliği tanımsızdır (80 olabilir, sınırsız olabilir, \fBTERM\fR ortam değişkeni tarafından belirlenir vb.). Bu durumda genişliği tam olarak belirlemek için \fBCOLUMNS\fR ortam değişkeni veya \fB--cols\fR seçeneği kullanılabilir. Genişliği ayarlamak için \fBw\fR veya \fB-w\fR seçeneği de kullanılabilir.
+T}
+T{
+command
+T}:T{
+COMMAND
+T}:T{
+Bkz: \fBargs\fR.  (\fBargs\fR ve \fBcommand\fR ile özdeş).
+T}
+T{
+cp
+T}:T{
+CP
+T}:T{
+İşlemci kullanım yüzdesi.  (Bkz: \fB%cpu\fR).
+T}
+T{
+cputime
+T}:T{
+TIME
+T}:T{
+Toplam olarak işlemci zamanı, "[GG-]SS:DD:ss" biçeminde.  (\fBtime\fR ile özdeş).
+T}
+T{
+cputimes
+T}:T{
+TIME
+T}:T{
+Toplam saniye olarak işlemci zamanı (\fBtimes\fR ile özdeş).
+T}
+T{
+cuc
+T}:T{
+%CUC
+T}:T{
+Genişletilmiş "##.###" biçeminde, ölü çocuklar dahil, sürecin işlemci kullanımı.  (Ayrıca bkz: \fB%cpu\fR, \fBc\fR, \fBcp\fR, \fBcuu\fR, \fBpcpu\fR).
+T}
+T{
+cuu
+T}:T{
+%CUU
+T}:T{
+Genişletilmiş "##.###" biçeminde, sürecin işlemci kullanımı.  (Ayrıca bkz: \fB%cpu\fR, \fBc\fR, \fBcp\fR, \fBcuc\fR, \fBpcpu\fR).
+T}
+T{
+drs
+T}:T{
+DRS
+T}:T{
+Yerleşik veri atama boyutu, çalıştırılabilir kod hariç, ayrılan fiziksel bellek miktarı.
+T}
+T{
+egid
+T}:T{
+EGID
+T}:T{
+Ondalık tamsayı olarak sürecin etkin grup kimlik numarası. (\fBgid\fR ile özdeş).
+T}
+T{
+egroup
+T}:T{
+EGROUP
+T}:T{
+Sürecin etkin grup kimliği. Sağlanabiliyorsa ve alan genişliği izin veriyorsa grup adı yoksa grup numarası. (\fBgroup\fR ile özdeş).
+T}
+T{
+eip
+T}:T{
+EIP
+T}:T{
+Opkod göstericisi. Linux 4.9.xx ve sonrasında, görevden çıkılmadığı veya çekirdek dökümü yapılmadığı takdirde sıfırlanır.
+T}
+T{
+esp
+T}:T{
+ESP
+T}:T{
+Yığıt göstericisi. Linux 4.9.xx ve sonrasında, görevden çıkılmadığı veya çekirdek dökümü yapılmadığı takdirde sıfırlanır.
+T}
+T{
+etime
+T}:T{
+ELAPSED
+T}:T{
+Sürecin başlatılmasından beri geçen süre, [[GG-]SS:]DD:ss.
+T}
+T{
+etimes
+T}:T{
+ELAPSED
+T}:T{
+Sürecin başlatılmasından beri geçen saniye miktarı.
+T}
+T{
+euid
+T}:T{
+EUID
+T}:T{
+Etkin kullanıcı kimliği (\fBuid\fR ile özdeş).
+T}
+T{
+euser
+T}:T{
+EUSER
+T}:T{
+Etkin kullanıcı kimliği.  Sağlanabiliyorsa ve alan genişliği izin veriyorsa kullanıcı adı yoksa kullanıcı numarası. Kullanıcı numarasını zorlamak için \fBn\fR seçeneği kullanılabilir.  (\fBuname\fR ve \fBuser\fR ile özdeş).
+T}
+T{
+exe
+T}:T{
+EXE
+T}:T{
+Çalıştırılabilir dosyanın yolu. Dosya yolu \fBcmd\fR, \fBcomm\fR veya \fBargs\fR biçem belirteçleri tarafından gösterilmezse yararlıdır.
+T}
+T{
+f
+T}:T{
+F
+T}:T{
+Süreç ile ilişkili bayraklar, bkz: \fBSÜREÇ BAYRAKLARI\fR.  (\fBflag\fR ve \fBflags\fR ile özdeş).
+T}
+T{
+fgid
+T}:T{
+FGID
+T}:T{
+Dosya sistemi erişim grup kimliği.  (\fBfsgid\fR ile özdeş).
+T}
+T{
+fgroup
+T}:T{
+FGROUP
+T}:T{
+Dosya sistemi erişim grup kimliği.  Sağlanabiliyorsa ve alan genişliği izin veriyorsa grup adı yoksa grup numarası. (\fBfsgroup\fR ile özdeş).
+T}
+T{
+flag
+T}:T{
+F
+T}:T{
+Bkz: \fBf\fR.  (\fBf\fR ve \fBflags\fR ile özdeş).
+T}
+T{
+flags
+T}:T{
+F
+T}:T{
+Bkz: \fBf\fR.  (\fBf\fR ve \fBflags\fR ile özdeş).
+T}
+T{
+fname
+T}:T{
+COMMAND
+T}:T{
+Sürecin çalıştırılabilir salt dosya adının ilk 8 baytı. Bu sütunun çıktısı boşluk içerebilir.
+T}
+T{
+fuid
+T}:T{
+FUID
+T}:T{
+Dosya sistemi erişim kullanıcı kimliği.  (\fBfsuid\fR ile özdeş).
+T}
+T{
+fuser
+T}:T{
+FUSER
+T}:T{
+Dosya sistemi erişim kullanıcı kimliği. Sağlanabiliyorsa ve alan genişliği izin veriyorsa kullanıcı adı yoksa kullanıcı numarası.
+T}
+T{
+gid
+T}:T{
+GID
+T}:T{
+Bkz: \fBegid\fR.  (\fBegid\fR ile özdeş).
+T}
+T{
+group
+T}:T{
+GROUP
+T}:T{
+Bkz: \fBegroup\fR.  (\fBegroup\fR ile özdeş).
+T}
+T{
+ignored
+T}:T{
+IGNORED
+T}:T{
+Yok sayılan sinyallerin maskesi, bkz: \fBsignal\fR(7).  Alan genişliğine bağlı olarak onaltılık tabanda 32 veya 64 bitlik maske gösterilir.  (\fBsig_ignore\fR, \fBsigignore\fR ile özdeş).
+T}
+T{
+ipcns
+T}:T{
+IPCNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.  Bkz: \fBnamespaces\fR(7).
+T}
+T{
+label
+T}:T{
+LABEL
+T}:T{
+Güvenlik etiketi, çoğunlukla SELinux bağlam verisi için kullanılır.  Yüksek güvenlikli sistemlerde bulunan Zorunlı Erişim Denetimi ("MAC") içindir.
+T}
+T{
+lstart
+T}:T{
+STARTED
+T}:T{
+Komutun ilk çalıştırıldığı zaman. Ayrıca bkz: \fBbsdstart\fR, \fBstart\fR, \fBstart_time\fR ve \fBstime\fR.
+T}
+T{
+lsession
+T}:T{
+SESSION
+T}:T{
+Systemd desteği varsa, sürecin açılış oturumun tanıtıcısıdır.
+T}
+T{
+luid
+T}:T{
+LUID
+T}:T{
+Süreçle ilişkili açılış oturumu kimliği.
+T}
+T{
+lwp
+T}:T{
+LWP
+T}:T{
+Sevk edilebilir öğenin evre kimliği (\fBspid\fR ve \fBtid\fR ile özdeş). Ek bilgi için bkz: \fBtid\fR
+T}
+T{
+lxc
+T}:T{
+LXC
+T}:T{
+İçinde bir görevin çalıştığı lxc kapsayıcısının adı. Süreç kapsayıcı içinde çalışmıyorsa, tire (’-’) gösterilir.
+T}
+T{
+machine
+T}:T{
+MACHINE
+T}:T{
+Systemd desteği varsa, sanal makineye veya kapsayıcıya atanan süreçler için makine adı.
+T}
+T{
+maj_flt
+T}:T{
+MAJFLT
+T}:T{
+Bu süreçte oluşan büyük sayfa hatalarının sayısı.
+T}
+T{
+min_flt
+T}:T{
+MINFLT
+T}:T{
+Bu süreçte oluşan küçük sayfa hatalarının sayısı.
+T}
+T{
+mntns
+T}:T{
+MNTNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası. Bkz: \fBnamespaces\fR(7).
+T}
+T{
+netns
+T}:T{
+NETNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.  Bkz: \fBnamespaces\fR(7).
+T}
+T{
+ni
+T}:T{
+NI
+T}:T{
+Öncelik değeri.  19 (herkes için en iyisi) ila -20 (diğerleri için en kötüsü) arasındadır, Bkz: \fBnice\fR(1).  (\fBnice\fR ile özdeş).
+T}
+T{
+nice
+T}:T{
+NI
+T}:T{
+Bkz: \fBni\fR. (\fBni\fR ile özdeş).
+T}
+T{
+nlwp
+T}:T{
+NLWP
+T}:T{
+Süreçteki evre (lwp) sayısı.  (\fBthcount\fR ile özdeş).
+T}
+T{
+numa
+T}:T{
+NUMA
+T}:T{
+Son kullanılan işlemci ile ilişkili düğüm. -1 değeri NUMA bilgisinin yokluğunu belirtir.
+T}
+T{
+nwchan
+T}:T{
+WCHAN
+T}:T{
+Sürecin uyuduğu çekirdek işlevinin adresi (çekirdek işlevinin ismi de isteniyorsa \fBwchan\fR kullanılabilir).
+T}
+T{
+oom
+T}:T{
+OOM
+T}:T{
+Yetersiz Bellek Puanı. 0 ile +1000 arasında değişen değer, bellek tükendiğinde sonlandırılacak görevleri seçmek için kullanılır.
+T}
+T{
+oomadj
+T}:T{
+OOMADJ
+T}:T{
+Yetersiz Bellek Ayar Çarpanı. Değer, bellek tükendiğinde hangi görevin sonlandırılacağını belirlemek için kullanılan geçerli yetersiz bellek puanına eklenir.
+T}
+T{
+ouid
+T}:T{
+OWNER
+T}:T{
+Systemd desteği varsa, sürecin oturum sahibinin Unix kullanıcı kimliği.
+T}
+T{
+pcpu
+T}:T{
+%CPU
+T}:T{
+Bkz: \fB%cpu\fR.  (\fB%cpu\fR ile özdeş).
+T}
+T{
+pending
+T}:T{
+PENDING
+T}:T{
+Askıdaki sinyallerin maskesi, bkz: \fBsignal\fR(7). Süreçte bekleyen sinyaller, tek tek evrelerde bekleyen sinyallerden farklıdır. Her ikisini de görmek için \fBm\fR veya \fB-m\fR seçeneği kullanılır. Alanın genişliğine göre onaltılık tabanda 32 veya 64 bitlik bir maske gösterilir. (\fBsig_catch\fR ve \fBsigcatch\fR ile özdeş).
+T}
+T{
+pgid
+T}:T{
+PGID
+T}:T{
+Süreç grup kimliği veya eşdeğer olarak, süreç grup liderinin süreç kimliği.  (\fBpgrp\fR ile özdeş).
+T}
+T{
+pgrp
+T}:T{
+PGRP
+T}:T{
+Bkz: \fBpgid\fR.  (\fBpgid\fR ile özdeş).
+T}
+T{
+pid
+T}:T{
+PID
+T}:T{
+Süreç numarası (\fBtgid\fR özdeş).
+T}
+T{
+pidns
+T}:T{
+PIDNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.  Bkz: \fBnamespaces\fR(7).
+T}
+T{
+pmem
+T}:T{
+%MEM
+T}:T{
+Bkz: \fB%mem\fR.  (\fB%mem\fR ile özdeş).
+T}
+T{
+policy
+T}:T{
+POL
+T}:T{
+Sürecin zamanlama sınıfı.   (\fBclass\fR ve \fBcls\fR ile özdeş). Alanın olası değerleri:
+.RS -4
+.nf
+-   raporlanmadı
+TS  SCHED_OTHER
+FF  SCHED_FIFO
+RR  SCHED_RR
+B   SCHED_BATCH
+ISO SCHED_ISO
+IDL SCHED_IDLE
+DLN SCHED_DEADLINE
+?   bilinmeyen değer
+.fi
+.RE
+T}
+T{
+ppid
+T}:T{
+PPID
+T}:T{
+Üst (ebeveyn) süreç kimliği.
+T}
+T{
+pri
+T}:T{
+PRI
+T}:T{
+Süreç önceliği. Yüksek değer, düşük öncelik gösterir.
+T}
+T{
+psr
+T}:T{
+PSR
+T}:T{
+Sürecin o an atandığı işlemci
+T}
+T{
+pss
+T}:T{
+PSS
+T}:T{
+Orantılı paylaşım boyutu, takaslanmamış fiziksel bellek ve eşlendiği tüm görevlerle orantılı olarak hesaplanan paylaşımlı bellek.
+T}
+T{
+rbytes
+T}:T{
+RBYTES
+T}:T{
+Bu sürecin gerçekten depolama katmanından alınmasına neden olan bayt sayısı.
+T}
+T{
+rchars
+T}:T{
+RCHARS
+T}:T{
+Bu görevin depodan okunmasına neden olan bayt sayısı.
+T}
+T{
+rgid
+T}:T{
+RGID
+T}:T{
+Gerçek grup kimliği.
+T}
+T{
+rgroup
+T}:T{
+RGROUP
+T}:T{
+Gerçek grup adı. Sağlanabiliyorsa ve alan genişliği izin veriyorsa grup adı yoksa grup numarası.
+T}
+T{
+rops
+T}:T{
+ROPS
+T}:T{
+Okuma G/Ç işlemlerinin sayısı; yani, \fBread\fR(2) ve \fBpread\fR(2) gibi sistem çağrılarının sayısı.
+T}
+T{
+rss
+T}:T{
+RSS
+T}:T{
+Yerleşik atama boyutu, bir görevin kullandığı takaslanmamış fiziksel bellek (kilobayt cinsinden). (\fBrssize\fR ve \fBrsz\fR ile özdeş).
+T}
+T{
+rssize
+T}:T{
+RSS
+T}:T{
+Bkz: \fBrss\fR.  (\fBrss\fR ve \fBrsz\fR ile özdeş).
+T}
+T{
+rsz
+T}:T{
+RSZ
+T}:T{
+Bkz: \fBrss\fR.  (\fBrss\fR ve \fBrssize\fR ile özdeş).
+T}
+T{
+rtprio
+T}:T{
+RTPRIO
+T}:T{
+Gerçek zamanlı öncelik
+T}
+T{
+ruid
+T}:T{
+RUID
+T}:T{
+Gerçek kullanıcı kimliği.
+T}
+T{
+ruser
+T}:T{
+RUSER
+T}:T{
+Gerçek kullanıcı kimliği. Sağlanabiliyorsa ve alan genişliği izin veriyorsa kullanıcı adı yoksa kullanıcı numarası.
+T}
+T{
+s
+T}:T{
+S
+T}:T{
+Olası en küçük durum göstergesi (tek karakter).  Farklı değerler için \fBSÜREÇ DURUM KODLARI\fR bölümüne bakılabilir.  Ayrıca, ek bilgi gösterilmek istenirse bkz: \fBstat\fR.  (\fBstate\fR ile özdeş).
+T}
+T{
+sched
+T}:T{
+SCH
+T}:T{
+Sürecin zamanlama kuralı. \fBSCHED_OTHER (SCHED_NORMAL), SCHED_FIFO, SCHED_RR, SCHED_BATCH, SCHED_ISO, SCHED_IDLE\fR ve \fBSCHED_DEADLINE\fR kuralları sırasıyla 0, 1, 2, 3, 4, 5 ve 6 olarak gösterilir.
+T}
+T{
+seat
+T}:T{
+SEAT
+T}:T{
+Systemd desteği varsa, belirli bir çalışma alanına atanan tüm donanım aygıtlarıyla ilişkili kimlik.
+T}
+T{
+sess
+T}:T{
+SESS
+T}:T{
+Oturum kimliği veya eşdeğeri olarak, oturum liderinin süreç kimliği.  (\fBsession\fR ve \fBsid\fR ile özdeş).
+T}
+T{
+sgi_p
+T}:T{
+P
+T}:T{
+Sürecin o an üzerinde çalıştığı işlemci. Süreç o an çalışmıyor veya çalıştırılabilir durumda değilse "*" görüntülenir.
+T}
+T{
+sgid
+T}:T{
+SGID
+T}:T{
+saved group ID.  (\fBsvgid\fR ile özdeş).
+T}
+T{
+sgroup
+T}:T{
+SGROUP
+T}:T{
+Kayıtlı grup adı. Sağlanabiliyorsa ve alan genişliği izin veriyorsa grup adı yoksa grup numarası.
+T}
+T{
+sid
+T}:T{
+SID
+T}:T{
+Bkz: \fBsess\fR.  (\fBsess\fR ve \fBsession\fR ile özdeş).
+T}
+T{
+sig
+T}:T{
+PENDING
+T}:T{
+Bkz: \fBpending\fR.  (\fBpending\fR ve \fBsig_pend\fR ile özdeş).
+T}
+T{
+sigcatch
+T}:T{
+CAUGHT
+T}:T{
+Bkz: \fBcaught\fR.  (\fBcaught\fR ve \fBsig_catch\fR ile özdeş).
+T}
+T{
+sigignore
+T}:T{
+IGNORED
+T}:T{
+Bkz: \fBignored\fR.  (\fBignored\fR ve \fBsig_ignore\fR ile özdeş).
+T}
+T{
+sigmask
+T}:T{
+BLOCKED
+T}:T{
+Bkz: \fBblocked\fR.  (\fBblocked\fR ve \fBsig_block\fR ile özdeş).
+T}
+T{
+size
+T}:T{
+SIZE
+T}:T{
+Sürecin tüm yazılabilir sayfaları kirletmesi ve ardından takaslanması durumunda gerekli olacak yaklaşık takas alanı miktarı. Bu sayı çok kabadır!
+T}
+T{
+slice
+T}:T{
+SLICE
+T}:T{
+systemd desteği varsa, sürecin ait olduğu dilim birimi.
+T}
+T{
+spid
+T}:T{
+SPID
+T}:T{
+Bkz: \fBlwp\fR.  (\fBlwp\fR ve \fBtid\fR ile özdeş).
+T}
+T{
+stackp
+T}:T{
+STACKP
+T}:T{
+Süreç için yığıtın alt (başlangıç) adresi.
+T}
+T{
+start
+T}:T{
+STARTED
+T}:T{
+Komutun çalıştırıldığı zaman. Süreç başlatılalı 24 saat olmamışsa çıktı biçemi "SS:DD:ss", aksi takdirde "Aaa gg" olur (burada "Aaa" 3 harfli ay kısaltmasıdır. Ayrıca bkz: \fBlstart\fR, \fBbsdstart\fR, \fBstart_time\fR ve \fBstime\fR.
+T}
+T{
+start_time
+T}:T{
+START
+T}:T{
+Sürecin çalıştırıldığı tarih veya saat.  Süreç, \fBps\fR’nin çağrıldığı yıl başlatılmamışsa yalnızca yıl, aynı gün başlatılmamışsa "AaaGG" aksi takdirde "SS:DD" olarak görüntülenir. Ayrıca bkz: \fBbsdstart\fR, \fBstart\fR, \fBlstart\fR ve \fBstime\fR.
+T}
+T{
+stat
+T}:T{
+STAT
+T}:T{
+Çok karakterli durum kodu.  Farklı değerler gösterilmek istenirse bkz: \fBSÜREÇ DURUM KODLARI\fR. Yalnızca ilk karakter gösterilmek istenirse bkz: \fBstate\fR ve \fBs\fR.
+T}
+T{
+state
+T}:T{
+S
+T}:T{
+Bkz: \fBs\fR. (\fBs\fR ile özdeş).
+T}
+T{
+stime
+T}:T{
+STIME
+T}:T{
+Bkz: \fBstart_time\fR. (\fBstart_time\fR ile özdeş).
+T}
+T{
+suid
+T}:T{
+SUID
+T}:T{
+Kayıtlı kullanıcı kimliği.  (\fBsvuid\fR ile özdeş).
+T}
+T{
+supgid
+T}:T{
+SUPGID
+T}:T{
+Varsa, ek grupların grup kimlikleri.  Bkz: \fBgetgroups\fR(2).
+T}
+T{
+supgrp
+T}:T{
+SUPGRP
+T}:T{
+Varsa, ek grupların grup adları.  Bkz: \fBgetgroups\fR(2)
+T}
+T{
+suser
+T}:T{
+SUSER
+T}:T{
+Kayıtlı kullanıcı adı. Sağlanabiliyorsa ve alan genişliği izin veriyorsa kullanıcı adı yoksa kullanıcı numarası.  (\fBsvuser\fR ile özdeş).
+T}
+T{
+svgid
+T}:T{
+SVGID
+T}:T{
+Bkz: \fBsgid\fR.  (\fBsgid\fR ile özdeş).
+T}
+T{
+svuid
+T}:T{
+SVUID
+T}:T{
+Bkz: \fBsuid\fR.  (\fBsuid\fR ile özdeş).
+T}
+T{
+svuser
+T}:T{
+SVUSER
+T}:T{
+Bkz: \fBsuser\fR (\fBsuser\fR ile özdeş).
+T}
+T{
+sz
+T}:T{
+SZ
+T}:T{
+Sürecin çekirdek imgesinin fiziksel sayfa olarak boyutu. Buna metin, veri ve yığıt dahildir. Aygıt eşlemleri şu an hariç tutulmuştur; bu ileride değişebilir. Bkz: \fBvsz\fR ve \fBrss\fR.
+T}
+T{
+tgid
+T}:T{
+TGID
+T}:T{
+Görevin ait olduğu evre grubunun kimliği (\fBpid\fR ile özdeş). Evre grup liderinin süreç kimliğidir.
+T}
+T{
+thcount
+T}:T{
+THCNT
+T}:T{
+Bkz: \fBnlwp\fR.  (\fBnlwp\fR ile özdeş). Sürecin sahip olduğu çekirdek evrelerinin sayısı.
+T}
+T{
+tid
+T}:T{
+TID
+T}:T{
+Sevk edilebilir öğenin eşsiz numarası (\fBlwp\fR ve \fBspid\fR ile özdeş). Bu değer şu şekilde de görünebilir: süreç kimliği (\fBpid\fR), süreç grubu kimliği (\fBpgrp\fR), oturum lideri için oturum kimliği (\fB\fR), ileti dizisi grubu lideri için ileti dizisi grubu kimliği (\fB\fR) ve süreç grubu lideri için uçbirim süreç grubu kimliği (\fB\fR).
+T}
+T{
+time
+T}:T{
+TIME
+T}:T{
+Toplam olarak işlemci zamanı, "[GG-]SS:DD:ss" biçeminde.  (\fBcputime\fR ile özdeş).
+T}
+T{
+timens
+T}:T{
+TIMENS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.  Bkz: \fBnamespaces\fR(7).
+T}
+T{
+times
+T}:T{
+TIME
+T}:T{
+Toplam saniye olarak işlemci zamanı (\fBcputimes\fR ile özdeş).
+T}
+T{
+tname
+T}:T{
+TTY
+T}:T{
+Denetim uçbirimi.  (\fBtt\fR ve \fBtty\fR ile özdeş).
+T}
+T{
+tpgid
+T}:T{
+TPGID
+T}:T{
+Sürecin bağlı olduğu uçbirimdeki önalan süreç grubunun kimliği veya süreç bir uçbirime bağlı değilse -1.
+T}
+T{
+trs
+T}:T{
+TRS
+T}:T{
+Metne atanan yerleşik boyut, çalıştırılabilir koda ayrılan fiziksel bellek miktarı.
+T}
+T{
+tt
+T}:T{
+TT
+T}:T{
+Denetim uçbirimi.  (\fBtname\fR ve \fBtty\fR ile özdeş).
+T}
+T{
+tty
+T}:T{
+TT
+T}:T{
+Denetim uçbirimi.  (\fBtname\fR ve \fBtt\fR ile özdeş).
+T}
+T{
+ucmd
+T}:T{
+CMD
+T}:T{
+Bkz: \fBcomm\fR.  (\fBcomm\fR ve \fBucomm\fR ile özdeş).
+T}
+T{
+ucomm
+T}:T{
+COMMAND
+T}:T{
+Bkz: \fBcomm\fR.  (\fBcomm\fR ve \fBucmd\fR ile özdeş).
+T}
+T{
+uid
+T}:T{
+UID
+T}:T{
+Bkz: \fBeuid\fR.  (\fBeuid\fR ile özdeş).
+T}
+T{
+uname
+T}:T{
+USER
+T}:T{
+Bkz: \fBeuser\fR.  (\fBeuser\fR ve \fBuser\fR ile özdeş).
+T}
+T{
+unit
+T}:T{
+UNIT
+T}:T{
+Systemd desteği varsa, sürecin ait olduğu birim.
+T}
+T{
+user
+T}:T{
+USER
+T}:T{
+Bkz: \fBeuser\fR.  (\fBeuser\fR ve \fBuname\fR ile özdeş).
+T}
+T{
+userns
+T}:T{
+USERNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.   Bkz: \fBnamespaces\fR(7).
+T}
+T{
+uss
+T}:T{
+USS
+T}:T{
+Eşsiz atama boyutu, başka bir görevle paylaşılmayan, takaslanmamış fiziksel bellek.
+T}
+T{
+utsns
+T}:T{
+UTSNS
+T}:T{
+Sürecin ait olduğu isim alanını belirleyen eşsiz dosya düğümü numarası.  Bkz: \fBnamespaces\fR(7).
+T}
+T{
+uunit
+T}:T{
+UUNIT
+T}:T{
+Systemd desteği varsa, sürecin ait olduğu kullanıcı birimi.
+T}
+T{
+vsize
+T}:T{
+VSZ
+T}:T{
+Bkz: \fBvsz\fR.  (\fBvsz\fR ile özdeş).
+T}
+T{
+vsz
+T}:T{
+VSZ
+T}:T{
+KiB cinsinden sürecin sanal bellek boyutu. Aygıt eşlemleri şu an hariç tutulmuştur; bu ileride değişebilir. (\fBvsize\fR ile özdeş).
+T}
+T{
+wbytes
+T}:T{
+WBYTES
+T}:T{
+Bu sürecin depolama katmanına gönderilmesine neden olan bayt sayısı.
+T}
+T{
+wcbytes
+T}:T{
+WCBYTES
+T}:T{
+İptal edildiğinden yazılmayan bayt sayısı.
+T}
+T{
+wchan
+T}:T{
+WCHAN
+T}:T{
+Sürecin uyuduğu çekirdek işlevinin ismi.
+T}
+T{
+wchars
+T}:T{
+WCHARS
+T}:T{
+Bu görevden kaynaklanan veya diske yazılmasına neden olacağı bayt sayısı.
+T}
+T{
+wops
+T}:T{
+WOPS
+T}:T{
+Yaz G/Ç işlemlerinin sayısı; yani, \fBwrite\fR(2) ve \fBpwrite\fR(2) gibi sistem çağrılarının sayısı.
+T}
+.TE
+.sp
+.RE
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBps\fR aşağıdaki ortam değişkenlerinden etkilenebilir.
+.sp
+.TP 4
+\fBCOLUMNS\fR
+Öntanımlı ekran genişliğini geçersiz kılar.
+.sp
+.TP 4
+\fBLINES\fR
+Öntanımlı ekran yüksekliğini geçersiz kılar.
+.sp
+.TP 4
+\fBPS_PERSONALITY\fR
+Şunlardan biridir: posix, old, linux, bsd, sun, digital... (Devamı için bkz: \fBKİŞİLİK\fR)
+.sp
+.TP 4
+\fBCMD_ENV\fR
+Şunlardan biridir: posix, old, linux, bsd, sun, digital... (Devamı için bkz: \fBKİŞİLİK\fR)
+.sp
+.TP 4
+\fBI_WANT_A_BROKEN_PS\fR
+Eski komut satırı yorumlamasını zorlar.
+.sp
+.TP 4
+\fBLC_TIME\fR
+Tarih biçemi
+.sp
+.TP 4
+\fBLIBPROC_HIDE_KERNEL\fR
+Normalde \fB-e\fR seçeneğiyle görüntülenen çekirdek evrelerini gizlemek için herhangi bir değere ayarlanabilir. \fB--ppid 2 -p 2 --deselect\fR seçenek kullanımına eşdeğerdir. BSD kipinde de çalışır.
+.sp
+.TP 4
+\fBPS_COLORS\fR
+Henüz desteklenmiyor.
+.sp
+.TP 4
+\fBPS_FORMAT\fR
+Öntanımlı çıktı biçemini geçersiz kılar. \fB-o\fR seçeneği için kullanılan türden bir biçem dizgesi belirtilebilir. \fBDefSysV\fR ve \fBDefBSD\fR değerleri özellikle kullanışlıdır.
+.sp
+.TP 4
+\fBPOSIXLY_CORRECT\fR
+Kötü "özellikleri" görmezden gelmek için bahaneler bulunmaz.
+.sp
+.TP 4
+\fBPOSIX2\fR
+"On" atanırsa \fBPOSIXLY_CORRECT\fR gibi davranır.
+.sp
+.TP 4
+\fBUNIX95\fR
+Kötü "özellikleri" görmezden gelmek için bahaneler bulunmaz.
+.sp
+.TP 4
+\fB_XPG\fR
+\fBCMD_ENV\fR=\fIirix\fR standartdışı davranışını iptal eder.
+.sp
+.PP
+Genel olarak, bu değişkenleri tanımlamak kötü fikirdir. Tek istisna, normal sistemler için Linux olarak tanımlanabilen \fBCMD_ENV\fR veya \fBPS_PERSONALITY\fR’dir. Bu tanım olmadan \fBps\fR, Unix98 standardının yararsız ve kötü kısımlarını izler.
+.sp
+.SH "KİŞİLİK"
+.RS 0
+.nf
+390        OS/390 OpenEdition \fBps\fR gibidir
+aix        AIX \fBps\fR gibidir
+bsd        FreeBSD \fBps\fR gibidir (tamamen standart-dışı)
+compaq     Digital Unix \fBps\fR gibidir
+debian     Eski Debian \fBps\fR gibidir
+digital    Tru64 (Digital Unix idi, OSF/1 idi) \fBps\fR gibidir
+gnu        Eski Debian \fBps\fR gibidir
+hp         HP-UX \fBps\fR gibidir
+hpux       HP-UX \fBps\fR gibidir
+irix       Irix \fBps\fR gibidir
+\fBlinux      ***** önerilen *****\fR
+old        ilk Linux \fBps\fR gibidir (tamamen standart-dışı)
+os390      OS/390 Open Edition \fBps\fR gibidir
+posix      ard
+s390       OS/390 Open Edition \fBps\fR gibidir
+sco        SCO \fBps\fR gibidir
+sgi        Irix \fBps\fR gibidir
+solaris2   Solaris 2+ (SunOS 5) \fBps\fR gibidir
+sunos4     SunOS 4 (Solaris 1) \fBps\fR gibidir (tamamen standart-dışı)
+svr4       standart
+sysv       standart
+tru64      Tru64 (Digital Unix idi, OSF/1 idi) \fBps\fR gibidir
+unix       standart
+unix95     standart
+unix98     standart
+.fi
+.sp
+.RE
+.sp
+.SH "İLGİLİ BELGELER"
+\fBpgrep\fR(1), \fBpstree\fR(1), \fBtop\fR(1), \fBproc\fR(5).
+.sp
+.SH "STANDARTLAR"
+\fBps\fR’nin bu sürümü şu standartlarla uyumludur:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Single Unix Belirtiminin 2. sürümü
+.IP 2. 3
+The Open Group Teknik Standardının Temel Belirtimleri, Sayı 6
+.IP 3. 3
+IEEE Std 1003.1, 2004 Sürümü
+.IP 4. 3
+X/Open Sistem Arayüzleri Eklentisi [UP XSI]
+.IP 5. 3
+ISO/IEC 9945:2003
+.sp
+.RE
+.PD 0
+.sp
+.SH "YAZAN"
+\fBps\fR ilk olarak Branko Lankester tarafından yazılmıştır. Michael K. Johnson, \fIproc\fR dosya sistemini kullanmak için önemli ölçüde yeniden yazdı ve süreçteki birkaç şeyi değiştirdi. Michael Shields, PID listesi özelliğini ekledi. Charles Blake, çok düzeyli sıralama, dirent tarzı kütüphane, aygıt adından numaraya eşlenmiş veritabanı, doğrudan \fISystem.map\fR üzerinde yaklaşık ikil arama ve birçok kod ekledi ve belge temizliği yaptı. David Mossberger-Tang, psupdate için genel BFD desteğini yazdı. Albert Cahalan, tam Unix98 ve BSD desteği için, bazı çirkin kodlamalarla eski ve yabancı sözdizimini yeniden yazdı.
+.sp
+Hata raporları için lütfen procps (at) freelists.org adresini kullanın. Üyelik gerekmez veya önerilmez.
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

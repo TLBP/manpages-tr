@@ -45,7 +45,7 @@
  * 010725, Nikita Danilov <NikitaDanilov (at) Yahoo.COM>: reiserfs options
  *
 ..
-.\" Derlenme zamanı: 2022-12-08T19:24:13+03:00
+.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
 .TH "MOUNT" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -67,9 +67,9 @@ mount - dosya sistemi bağlar
 .IP \fBmount\fR 6
 [\fB-fFnrsvw\fR] [\fB-t\fR \fIds-türü\fR] [\fB-o\fR \fIseçenekler\fR] \fIaygıt\fR \fIbağlama-noktası\fR
 .IP \fBmount\fR 6
-{\fB--bind\fR|\fB--rbind\fR|\fB--move\fR} \fIeski-bağlama-noktası yeni--bağlama-noktası\fR
+{\fB--bind\fR|\fB--rbind\fR|\fB--move\fR} \fIeski-bağlama-noktası yeni-bağlama-noktası\fR
 .IP \fBmount\fR 6
-\fB--make-\fR[\fBshared\fR|\fBslave\fR|\fBprivate\fR|\fBunbindable\fR|\fBrshared\fR|\fBrslave\fR|\fBrprivate\fR|\fBrunbindable\fR] \fIbağlama-noktası\fR
+\fB--make-\fR[\fBshared\fR |\fBslave\fR |\fBprivate\fR |\fBunbindable\fR |\fBrshared\fR |\fBrslave\fR |\fBrprivate\fR |\fBrunbindable\fR] \fIbağlama-noktası\fR
 .sp
 .PP
 .sp
@@ -859,7 +859,7 @@ Dosya yolları çözümlenirken sembolik bağlar izlenmez. Sembolik bağlar yine
 Aşağıdaki seçenekler, sadece belirli dosya sistemlerinde geçerlidir. Bunlar dosya sistemi çeşitlerine göre sıralanmıştır. Mümkün olduğunca, ayrıntılar için önce dosya sistemine özel kılavuz sayfalarına başvurulmalıdır. Bu sayfalardan bazıları aşağıdaki tabloda listelenmiştir.
 .sp
 .TS
-tab(:) allbox;
+tab(:);
 l1 1l.
 \fBDosya sistemi\fR :\fBKılavuz Sayfası\fR
 T{
@@ -899,6 +899,7 @@ T}:T{
 T}
 .TE
 .sp
+.RE
 Yukarıda listelenen bazı sayfaların yalnızca ilgili kullanıcı alanı araçları kurulduktan sonra kullanılabilir olacağı unutulmamalıdır.
 .sp
 Aşağıdaki seçenekler yalnızca belirli dosya sistemleri için geçerlidir. Bunlar dosya sisteminin adına göre abecesel sıralanmıştır. Tüm seçenekler bağlama seçeneği olup yalnızca \fB-o\fR komut satırı seçeneğinde belirtilebilir.
@@ -1319,7 +1320,7 @@ Bu seçenekler kabul edilir ancak yok sayılır.
 \fBfat\fR dosya sistemi seçeneklerine bakınız. Şayet msdos dosya sisteminde bir tutarsızlık tespit edilirse, hata raporu verir ve dosya sistemini salt okunur bağlar. Dosya sistemini yazılabilir hale dönüştürmek için tekrar bağlamak gerekir.
 .sp
 .SS "ncpfs için bağlama seçenekleri"
-Tıpkı \fInfs\fR gibi, \fIncpfs\fR uygulaması da \fBmount\fR(2) sistem çağrısına bir ikil değer (\fIstruct ncp_mount_data\fR) bekler. Bu değer \fBncpmount\fR(8) tarafından oluşturulmakta ama \fBmount\fR’un geçerli sürümü (2.12) \fIncpfs\fR hakkında hiçbir şey bilmemektedir.
+Tıpkı \fInfs\fR gibi, \fIncpfs\fR uygulaması da \fBmount\fR(2) sistem çağrısına bir ikil değer (struct ncp_mount_data) bekler. Bu değer \fBncpmount\fR(8) tarafından oluşturulmakta ama \fBmount\fR’un geçerli sürümü (2.12) \fIncpfs\fR hakkında hiçbir şey bilmemektedir.
 .sp
 .SS "ntfs için bağlama seçenekleri"
 .TP 4

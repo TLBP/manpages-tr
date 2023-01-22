@@ -1,0 +1,259 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1988, 1990 The Regents of the University of California.
+ * Copyright (c) 1988 Mark Nudleman
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *    This product includes software developed by the University of
+ *    California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * @(#)more.1      5.15 (Berkeley) 7/29/91
+ *
+ * Copyright (c) 1992 Rik Faith (faith@cs.unc.edu)
+..
+.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.TH "MORE" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+more - ekranda dosya okumak için sayfalayıcı
+.sp
+.SH KULLANIM
+.IP \fBmore\fR 5
+[\fIseçenekler\fR] \fBdosya\fR...
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBmore\fR, dosya metninin her seferinde bir ekranlık bölümünü görüntüleyen bir araçtır. Bu sürüm özellikle ilkeldir. Kullanıcılar, \fBless\fR(1)’in daha fazla öykünme ve daha kapsamlı geliştirmeler sağladığını fark etmiş olmalıdır.
+.sp
+.SH "SEÇENEKLER"
+Seçenekler ayrıca \fBMORE\fR ortam değişkeninden alınır (önlerinde tire (-) bulunduğundan emin olun), ancak komut satırı seçenekleri bunları geçersiz kılar.
+.sp
+.TP 4
+\fB-d\fR, \fB--silent\fR
+Geçersiz bir tuşa basıldığında zili çalmak yerine "[Devam etmek için boşluk, çıkmak için ’q’ tuşuna basın.]" istemini ve "[Talimatlar için ’h’ye basın.]" ifadesini gösterir.
+.sp
+.TP 4
+\fB-l\fR, \fB--logical\fR
+\fB^L\fR (sayfa besle) içeren bir satırdan sonra duraklamaz.
+.sp
+.TP 4
+\fB-e\fR, \fB--exit-on-eof\fR
+Dosya Sonunda Çık, uçbirimde çalışmıyorsa öntanımlı olarak etkindir.
+.sp
+.TP 4
+\fB-f\fR, \fB--no-pause\fR
+Ekran satırları yerine mantıksal satırlar sayılır (yani, uzun satırlar katlanmaz).
+.sp
+.TP 4
+\fB-p\fR, \fB--print-over\fR
+Sayfa kaydırılmaz. Bunun yerine, tüm ekran temizlenir ve ardından metin görüntülenir. Sayfa adı verilirse bu seçeneğin otomatik olarak etkinleştiği fark edilecektir.
+.sp
+.TP 4
+\fB-c\fR, \fB--clean-print\fR
+Sayfa kaydırılmaz. Bunun yerine, her ekranı tepesinden aşağıya doğru, her satırın geri kalanını görüntülendiği gibi temizleyerek boyar.
+.sp
+.TP 4
+\fB-s\fR, \fB--squeeze\fR
+Birden fazla boş satırı tek satıra sıkıştırır.
+.sp
+.TP 4
+\fB-u\fR, \fB--plain\fR
+Altçizme yapılmaz. Bu seçenek, geriye uyumluluk adına sessizce yoksayılır.
+.sp
+.TP 4
+\fB-n\fR, \fB--lines\fR \fISAYI\fR
+Ekran başına satır sayısını belirler. \fISAYI\fR onluk tabanda pozitif bir tamsayı olmalıdır. Bu seçenek uçbirim tarafından bildirilen satır sayısı gibi herhangi bir başka kaynaktan elde edilen değerleri geçersiz kılar.
+.sp
+.TP 4
+\fI-SAYI\fR
+Sayısal seçenek; \fB--lines\fR \fISAYI\fR ile aynı anlama gelir.
+.sp
+.TP 4
+\fI+SAYI\fR
+Dosyayı \fISAYI\fRncı satırdan itibaren göstermeye başlar.
+.sp
+.TP 4
+\fI+/DİZGE\fR
+Dosyayı göstermeye başlamadan önce dosyada \fIDİZGE\fR aranır.
+.sp
+.TP 4
+\fB-h\fR, \fB--help\fR
+Kullanım bilgilerini gösterir ve çıkar.
+.sp
+.TP 4
+\fB-V\fR, \fB--version\fR
+Sürüm bilgilerini gösterir ve çıkar.
+.sp
+.PP
+.sp
+.SH "KOMUTLAR"
+Etkileşimli komutlar \fBvi\fR(1) tabanlıdır. Bazı komutlardan önce, aşağıdaki açıklamalarda k adı verilen bir ondalık sayı gelebilir. Aşağıdaki açıklamalarda ^X, Ctrl-X anlamına gelir.
+.sp
+.TP 4
+\fBh\fR veya \fB?\fR
+Yardım; bu komutların özetini gösterir. Tüm komutlar unutulsa bile bu hatırlanmalıdır.
+.sp
+.TP 4
+\fBBOŞLUK\fR
+Metnin sonraki k satırını gösterir. Ekran yüksekliği öntanımlıdır.
+.sp
+.TP 4
+\fBz\fR
+Metnin sonraki k satırını gösterir. Ekran yüksekliği öntanımlıdır. k yeni öntanımlı olur.
+.sp
+.TP 4
+\fBENTER\fR
+Metnin sonraki k satırını gösterir. 1 öntanımlıdır. k yeni öntanımlı olur.
+.sp
+.TP 4
+\fBd\fR veya \fB^D\fR
+k satır kaydırır. 11 satır öntanımlıdır. k yeni öntanımlı olur.
+.sp
+.TP 4
+\fBq\fR veya \fBQ\fR ya da \fB^C\fR
+Çıkar.
+.sp
+.TP 4
+\fBs\fR
+Metnin ileriye doğru k. satırına atlar. 1 öntanımlıdır.
+.sp
+.TP 4
+\fBf\fR
+Metnin ileriye doğru k. ekranına atlar. 1 öntanımlıdır.
+.sp
+.TP 4
+\fBb\fR veya \fB^B\fR
+Metnin geriye doğru k. ekranına atlar. 1 öntanımlıdır. Yalnızca dosyalarda çalışır, borularda çalışmaz.
+.sp
+.TP 4
+\fB’\fR
+Son aramanın başladığı yere gider.
+.sp
+.TP 4
+\fB=\fR
+Geçerli satır numarasını gösterir.
+.sp
+.TP 4
+\fB/kalıp\fR
+Düzenli ifade için k. eşleşme aranır. 1 öntanımlıdır.
+.sp
+.TP 4
+\fBn\fR
+Son düzenli ifade için k. eşleşme aranır. 1 öntanımlıdır.
+.sp
+.TP 4
+\fB!komut\fR veya \fB:!komut\fR
+\fBkomut\fR alt kabukta çalıştırılır.
+.sp
+.TP 4
+\fBv\fR
+Geçerli satırda metin düzenleyiciyi başlatır. Metin düzenleyicinin adı varsa \fBVISUAL\fR yoksa \fBEDITOR\fR ortam değişkeninden alınır. İkisi de tanımlı değilse öntanımlı olarak \fBvi\fR(1) kullanılır.
+.sp
+.TP 4
+\fB^L\fR
+Ekranı tazeler.
+.sp
+.TP 4
+\fB:n\fR
+Sonraki k. dosyaya gider. 1 öntanımlıdır.
+.sp
+.TP 4
+\fB:p\fR
+Önceki k. dosyaya gider. 1 öntanımlıdır.
+.sp
+.TP 4
+\fB:f\fR
+Geçerli dosya ismini ve satır numarasını gösterir.
+.sp
+.TP 4
+\fB.\fR
+Önceki komutu yineler.
+.sp
+.PP
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+\fBmore\fR aşağıdaki ortam değişkenlerini önemser:
+.sp
+.TP 4
+\fBMORE\fR
+Bu değişkene, tercih edilen seçenekler atanabilir.
+.sp
+.TP 4
+\fBSHELL\fR
+Kullanımdaki geçerli kabuk (normalde oturum açma sırasında kabuk tarafından belirlenir)
+.sp
+.TP 4
+\fBTERM\fR
+Ekranı değiştirmek için gerekli uçbirim özelliklerini elde etmek için \fBmore\fR tarafından kullanılan uçbirim türü.
+.sp
+.TP 4
+\fBVISUAL\fR
+Kullanıcının tercih ettiği metin düzenleyici. v komut tuşu ile çalıştırılır.
+.sp
+.TP 4
+\fBEDITOR\fR
+\fBVISUAL\fR etkin değilse, kullanıcının tercih ettiği metin düzenleyici.
+.sp
+.PP
+.sp
+.SH "GEÇMİŞ"
+\fBmore\fR komutu 3.0BSD’de göründü. Bu kılavuz sayfası, şu anda Linux topluluğunda kullanımda olan \fBmore\fR sürüm 5.19’u (Berkeley 6/29/88) belgelemekte olup, \fBmore\fR kılavuz sayfasının başka birkaç sürümünün ve kaynak kodunun kapsamlı bir şekilde incelenmesiyle üretildi.
+.sp
+.SH "YAZANLAR"
+Eric Shienbrood, UC Berkeley.
+.sp
+Altçizmek, tek boşluk eklemek için UCB’den Geoff Peck tarafından değiştirildi.
+.sp
+\fB-c\fR seçeneğini ve \fBMORE\fR ortam değişkenini eklemek için UCB’den John Foderaro tarafından değiştirildi.
+.sp
+.SH "İLGİLİ BELGELER"
+\fBless\fR(1), \fBvi\fR(1)
+.sp
+.SH "GERİBİLDİRİM"
+Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.
+.sp
+.SH "TEMİNİ"
+\fBmore\fR uygulaması util-linux paketiyle gelmekte olup Linux Çekirdeği Arşivinden indirilebilir: <https://www.kernel.org/pub/linux/utils/util-linux/>
+.sp
+.SH "ÇEVİREN"
+© 2022 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

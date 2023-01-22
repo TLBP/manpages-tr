@@ -1,0 +1,1693 @@
+.ig
+ * Bu kılavuz sayfası Türkçe Linux Belgelendirme Projesi (TLBP) tarafından
+ * XML belgelerden derlenmiş olup manpages-tr paketinin parçasıdır:
+ * https://github.com/TLBP/manpages-tr
+ *
+ * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
+ *
+ * Copyright (c) 1991, 1993
+ *     The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 1997-2005
+ *     Herbert Xu <herbert@gondor.apana.org.au>.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Kenneth Almquist.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ * 3. Neither the name of the University nor the names of its
+ *    contributorsmay be used to endorse or promote products derived
+ *    from this softwarewithout specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS
+ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+ * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *     @(#)sh.1        8.6 (Berkeley) 5/4/95
+..
+.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.TH "DASH" 1 "18 Ocak 2003" "dash 0.5.10" "Kullanıcı Komutları"
+.\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
+.nh
+.\" Sözcükleri yayma, sadece sola yanaştır (disable justification)
+.ad l
+.PD 0
+.SH İSİM
+dash - komut yorumlayıcı (kabuk)
+.SH KULLANIM
+.IP \fBdash\fR 5
+[\fB-aCefnuvxIimqVEb\fR] [\fB+aCefnuvxIimqVEb\fR] [\fB-o\fR \fISEÇENEK_ADI\fR] [\fB+o\fR \fISEÇENEK_ADI\fR] [\fIKOMUT_DOSYASI\fR [\fIKOMUT_GİRDİSİ\fR...]]
+.IP \fBdash\fR 5
+\fB-c\fR [\fB-aCefnuvxIimqVEb\fR] [\fB+aCefnuvxIimqVEb\fR] [\fB-o\fR \fISEÇENEK_ADI\fR] [\fB+o\fR \fISEÇENEK_ADI\fR] \fIKOMUT_DİZGESİ\fR [\fIKOMUT_ADI\fR [\fIKOMUT_GİRDİSİ\fR...]]
+.IP \fBdash\fR 5
+\fB-s\fR [\fB-aCefnuvxIimqVEb\fR] [\fB+aCefnuvxIimqVEb\fR] [\fB-o\fR \fISEÇENEK_ADI\fR] [\fB+o\fR \fISEÇENEK_ADI\fR] [\fIGİRDİ\fR...]
+.sp
+.PP
+.sp
+.SH "AÇIKLAMA"
+\fBdash\fR sistem için standart komut yorumlayıcısıdır. \fBdash\fR’in mevcut sürümü, kabuk için POSIX 1003.2 ve 1003.2a belirtimlerine uyacak şekilde değiştirilme sürecindedir. Bu sürüm, bazı açılardan Korn kabuğunun benzeri gibi görünmesini sağlayan birçok özelliğe sahiptir, ancak bu bir Korn kabuğu türevi değildir (bkz. \fBksh\fR(1)). Bu kabuğa yalnızca POSIX tarafından tasarlanmış özellikler artı birkaç Berkeley genişletmesi dahil edilmiştir. Bu kılavuz sayfası, bir öğretici veya kabuğun tam bir belirtimi olarak tasarlanmamıştır.
+.sp
+.SS "Giriş"
+Kabuk, bir dosyadan veya uçbirimden satırları okuyan, yorumlayan ve genellikle diğer komutları yürüten bir komuttur. Bir kullanıcı sisteme oturum açtığında çalışan uygulamadır (kullanıcı \fBchsh\fR(1) komutu ile farklı bir kabuk seçebilmesine rağmen). Kabuk, akış denetim oluşumlarına sahip bir dilin, yerleşik geçmiş ve satır düzenleme yeteneklerinin yanı sıra veri depolamaya ek olarak çeşitli özellikler sağlayan makroların gerçeklenimidir. Etkileşimli kullanıma yardımcı olacak pek çok özelliği bünyesinde barındırır ve yorumlayıcı dilin hem etkileşimli hem de etkileşimsiz kullanımının (kabuk betikleri) sağladığı getirilere sahiptir. Yani, komutlar doğrudan çalışan kabuğa yazılabilir veya bir dosyaya konulabilir ve dosya doğrudan kabuk tarafından yürütülebilir.
+.sp
+.SS "Kullanım"
+Hiçbir komut girdisi yoksa ve kabuğun standart girdisi bir uçbirime bağlıysa (veya \fB-i\fR seçeneği belirtilmişse) ve \fB-c\fR seçeneği belirtilmemişse, kabuğun etkileşimli olduğu varsayılır. Etkileşimli bir kabuk genellikle her komuttan önce bir komut istemi açarak yazılım ve komut hatalarını farklı şekilde ele alır (aşağıda açıklandığı gibi). İlk başlatıldığında, kabuk 0’ıncı girdiyi inceler, girdi tire ’-’ ile başlıyorsa, kabuk bir oturum açma kabuğu olarak kabul edilir. Bu normalde kullanıcı ilk kez oturum açtığında sistem tarafından otomatik olarak yapılır. Bir oturum açma kabuğu önce \fI/etc/profile\fR ve varsa \fI.profile\fR dosyalarında bulunan komutları okur. Bir etkileşimli kabuk girdisi \fBENV\fR ortam değişkenine atanır ve \fBENV\fR oturum açma kabuğunun \fI.profile\fR dosyasına kaydedilirse, kabuk daha sonra komutları \fBENV\fR içindeki dosyadan okur. Bu nedenle, bir kullanıcının \fI.profile\fR dosyasına yalnızca oturum açma sırasında yürütülecek komutları ve \fBENV\fR içindeki dosyaya da her etkileşimli kabuk için yürütülecek komutları yerleştirmesi gerekir. \fBENV\fR değişkenine bir dosya atamak için, aşağıdaki satır kullanıcının ev dizinindeki \fI.profile\fR dosyasına yerleştirilebilir:
+.sp
+.RS 4
+.nf
+ENV=$HOME/.shinit; export ENV
+.fi
+.sp
+.RE
+Burada, “\fI.shinit\fR” yerine uygun herhangi bir dosya adı kullanılabilir.
+.sp
+Seçeneklerin yanı sıra başka komut satırı girdileri de belirtilmişse, kabuk ilk girdiyi komutların okunacağı dosyanın adı (bir kabuk betiği) olarak kabul eder ve geri kalan girdiler kabuğun konumsal değişkenleri (\fI$1\fR, \fI$2\fR, vb.) olarak ayarlanır. Aksi takdirde kabuk, komutları standart girdisinden okur.
+.sp
+.SS "Girdi Listesinin İşlenmesi"
+Aşağıdaki tek harfli seçeneklerin yanlarında belirtilen uzun seçenek adlarını \fB-o\fR seçeneği ile belirtmek zorunluyken, kısa seçenekler tek başlarına belirtilebilir.
+.sp
+Seçeneğin önüne eklenen kısa çizgi "-" seçeneği etkin kılar, artı "+" ise seçeneği devre dışı bırakır. Bu mantıksız gibi görünse de seçenek kullanım uzlaşımları bakımından en uygunu budur. Aşağıdaki seçenekler komut satırından veya \fBset\fR yerleşiğiyle (daha sonra açıklanacaktır) kullanılabilir.
+.sp
+.TP 4
+\fB-a\fR, \fBallexport\fR
+Belirtilen tüm değişkenler dışa aktarılır.
+.sp
+.TP 4
+\fB-c\fR
+Komutlar, standart girdi yerine \fIKOMUT_DİZGESİ\fR teriminden okunur. Konumsal değişkenlerin ilki \fIKOMUT_ADI\fR teriminden diğerleri (\fI$1\fR, \fI$2\fR, vb.) kalan girdilerden (\fIKOMUT_GİRDİSİ\fR) elde edilir.
+.sp
+.TP 4
+\fB-C\fR, \fBnoclobber\fR
+“>” ile dosyaların üzerine yazmaktan korur. Öntanımlı olarak “>” ile dosyaların üzerine yazılır (clobber).
+.sp
+.TP 4
+\fB-e\fR, \fBerrexit\fR
+Kabuk, etkileşimli değilse "denenmemiş" bir komutun çıkış durumu başarısız ise hemen çıkar. Bir komutun "denenmiş" kabul edilebilmesi için \fBif\fR, \fBelif\fR, \fBwhile\fR, \fBuntil\fR deyimlerinde veya “\fB&&\fR” ve “\fB||\fR” işleçlerinde sol taraf terimi olarak kullanılmış olması gerekir.
+.sp
+.TP 4
+\fB-f\fR, \fBnoglob\fR
+\fBDosya Yolu Genişletmesi (Dosya Adı Üretimi)\fR iptal edilir.
+.sp
+.TP 4
+\fB-n\fR, \fBnoexec\fR
+Kabuk, etkileşimli değilse komutları okur ama yürütmez. Kabuk betiklerinde sözdizimi denetimi için yararlıdır.
+.sp
+.TP 4
+\fB-u\fR, \fBnounset\fR
+Değer atanmamış bir değişkeni genişletmeye çalışırken hatayı standart hataya çıktılar ve kabuk etkileşimli değilse hemen çıkar.
+.sp
+.TP 4
+\fB-v\fR, \fBverbose\fR
+Kabuk, girdisini okundukça standart hataya yazar. Hata ayıklama için kullanışlıdır.
+.sp
+.TP 4
+\fB-x\fR, \fBxtrace\fR
+Yürütmeden önce her komutu standart hataya (’+’ ile önceleyerek) yazar. Hata ayıklama için kullanışlıdır.
+.sp
+.TP 4
+\fB-I\fR, \fBignoreeof\fR
+Kabuk, etkileşimli olduğunda girdisinden gelen dosya sonu karakterlerini (EOF) yok sayar.
+.sp
+.TP 4
+\fB-i\fR, \fBinteractive\fR
+Kabuk etkileşimli olur.
+.sp
+.TP 4
+\fB-l\fR
+\fBdash\fR oturum açma kabuğu olarak davranır.
+.sp
+.TP 4
+\fB-m\fR, \fBmonitor\fR
+İş denetimini açar (kabuk etkileşimli olduğunda öntanımlı olarak açılır).
+.sp
+.TP 4
+\fB-s\fR, \fBstdin\fR
+Komutları standart girdiden okur (girdi olarak hiç dosya belirtilmemişse öntanımlı olarak etkindir). Bu seçeneğin, kabuk çalışmaya başladıktan sonra (örneğin, \fBset\fR ile) belirtilmesinin hiçbir etkisi yoktur.
+.sp
+.TP 4
+\fB-V\fR, \fBvi\fR
+Yerleşik \fBvi\fR(1) komut satırı düzenleyicisi etkinleştirilir (\fB-E\fR, \fBemacs\fR etkinse devre dışı bırakılır).
+.sp
+.TP 4
+\fB-E\fR, \fBemacs\fR
+Yerleşik \fBemacs\fR(1) komut satırı düzenleyicisi etkinleştirilir (\fB-V\fR, \fBvi\fR etkinse devre dışı bırakılır).
+.sp
+.TP 4
+\fB-b\fR, \fBnotify\fR
+Artalanda iş tamamlanma uyarısı eşzamansız olur (4.4alfa sürümünde gerçeklenmemişti).
+.sp
+.PP
+.sp
+.SS "Sözdizimsel Yapı"
+Kabuk, girdiyi dosyadan satır satır okuyup boşluklara (boşluklar ve sekmelere) göre sözcüklere ve "işleç" adı verilen özel karakter dizilimlerine böler. İki tür işleç vardır: denetim işleçleri ve yönlendirme işleçleri (anlamları daha sonra açıklanacaktır).
+.sp
+.TP 4
+Denetim işleçleri:
+.RS 4
+.RS 4
+.nf
+& && ( ) ; ;; | || <satırsonu>
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+Yönlendirme işleçleri
+.RS 4
+.RS 4
+.nf
+< > >| << >> <& >& <<- <>
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.PP
+.sp
+.SS "Tırnaklama"
+Tırnaklama, işleçler, boşluk veya anahtar sözcükler gibi belirli karakterlerin veya sözcüklerin kabuğa özgü anlamlarını kaldırmak için kullanılır. Üç tırnaklama yöntemi vardır: eşleşen tek tırnaklar, eşleşen çift tırnaklar ve ters eğik çizgi.
+.sp
+.B Ters Eğik Çizgi
+.RS 4
+Ters eğik çizgi, satır sonu karakteri dışında önündeki karakterin gerçek anlamını korumasını sağlar. Ters eğik çizgi öncelemeli satır sonu karakteri, satırın alt satırda süreceği anlamına gelir.
+.RE 1
+.sp
+.B Tek Tırnak
+.RS 4
+Karakterlerin tek tırnak içine alınması, tüm karakterlerin gerçek anlamlarını korumasını sağlar (tek tırnaklar hariç; tek tırnaklı bir dizgeye, tek tırnaklı sarmalama uygulanamaz).
+.RE 1
+.sp
+.B Çift Tırnak
+.RS 4
+Karakterlerin çift tırnak içine alınması, dolar imi ($), ters tırnak (’) ve ters eğik çizgi (\\) dışındaki tüm karakterlerin gerçek anlamlarını korumasını sağlar. Çift tırnak içindeki ters eğik çizgi, tarihsel olarak tuhaftır ve yalnızca aşağıdaki karakterleri öncelemeye yarar:
+.sp
+.RS 4
+.nf
+$ ’ " \\ <satırsonu>.
+ 
+.fi
+.sp
+.RE
+Bunların dışında kalan herşey aslını korur.
+.RE 1
+.sp
+.SS "Anahtar Sözcükler"
+Anahtar sözcükler, kabuk için özel anlamı olan, bir satırın başında ve bir denetim işlecinden sonra kullanıldığında tanınan sözcüklerdir. Anahtar sözcükler şunlardır:
+.sp
+.RS 4
+.nf
+!       elif    fi      while   case
+else    for     then    {       }
+do      done    until   if      esac
+.fi
+.sp
+.RE
+Bunların anlamları daha sonra açıklanacaktır.
+.sp
+.SS "Takma Adlar"
+Takma ad, \fBalias\fR yerleşik komutu kullanılarak atanan bir ad ile ona karşılık gelen değerden oluşur. Bir anahtar sözcüğe her rastlanışta (yukarıya bakın), bu sözcükler denetimden geçtikten sonra, kabuk bir takma adla eşleşip eşleşmediğini görmek için sözcüğü bir denetimden daha geçirir. Girdi akımında varsa, değeriyle değiştirir. Örneğin, "\fBls -F\fR" değerine sahip "\fBlf\fR" adlı bir takma ad varsa,
+.sp
+.RS 4
+.nf
+lf foobar ⟨return⟩
+.fi
+.sp
+.RE
+komut satırı girdisi şu hale gelir:
+.sp
+.RS 4
+.nf
+ls -F foobar ⟨return⟩
+.fi
+.sp
+.RE
+Takma adlar, yeni kullanıcıların komutların kullanılışını hatırlamak zorunda kalmadan komutları kullanabilmeleri için kısayollar oluşturmalarını sağlar. Sözdizimsel olarak hatırlanması/söylenmesi zor bir kodlama oluşturmak için de kullanılabilir. Ancak bu kullanım önerilmez.
+.sp
+.SS "Komutlar"
+Kabuk, okuduğu sözcükleri, belirtimi bu kılavuz sayfasının kapsamı dışında kalan bir dile göre yorumlar (POSIX 1003.2 belgesindeki BNF’ye bakın). Temel olarak, bir satır okunur ve satırın başındaki (veya bir denetim işlecinden sonraki) ilk sözcük bir anahtar sözcük değilse, kabuk bunu basit bir komut olarak ele alır. Aksi takdirde, karmaşık bir komut veya başka bir özel oluşum olarak ele alınır.
+.sp
+.B Basit Komutlar
+.RS 4
+Ele alınan basit bir komutsa kabuk şunları yapar:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Baştaki "\fIad=değer\fR" biçimindeki sözcükler ayıklanır ve bunlar basit komutun ortam değişkenleri olarak ele alınır. Yönlendirme işleçleri ve bunların terimleri (aşağıda açıklandığı gibi) ayıklanır ve işlenmek üzere kaydedilir.
+.IP 2. 3
+Kalan sözcükler \fBGenişletmeler\fR bölümünde anlatıldığı gibi genişletilir ve ilk kalan sözcük komut adı olarak ele alınır ve komut elde edilir. Kalan sözcükler, komut girdileri olarak ele alınır. Sonuçta hiçbir komut adı yoksa, kabuk dahili olarak 1. maddedeki "\fIad=değer\fR" ortam değişkeni atamalarından etkilenir.
+.IP 3. 3
+Yönlendirmeler sonraki bölümde açıklanan sıraya göre uygulanır.
+.sp
+.RE
+.PD 0
+.RE 1
+.sp
+.SS "Yönlendirmeler"
+Yönlendirmeler, bir komutun girdisini okuduğu veya çıktısını gönderdiği yeri değiştirmek için kullanılır. Genel olarak, yönlendirmeler bir dosyaya yönelik varolan bir başvuruyu açar, kapatır veya yineler. Yönlendirme için kullanılan genel biçim şöyledir:
+.sp
+.RS 4
+.nf
+[\fIn\fR] \fIyönlendirme-işleci dosya\fR
+.fi
+.sp
+.RE
+Burada \fIyönlendirme-işleci\fR evvelce bahsedilen işleçlerden biridir. Olası yönlendirmeler aşağıda listelenmiştir. \fIn\fR bir dosya tanıtıcısı olup 0 ila 9 arasında olabilir ve belirtilmesi isteğe bağlıdır.
+.sp
+.nr ColSize ((\n[.l] - \n[.i]) / 1n - 18)
+.RS 4
+.TS
+tab(:);
+l1 1lw(\n[ColSize]n).
+T{
+[\fIn\fR]\fB>\fR \fIdosya\fR
+T}:T{
+Standart çıktıyı (veya \fIn\fR’yi) \fIdosya\fR’ya yönlendirir.
+T}
+T{
+[\fIn\fR]\fB>|\fR \fIdosya\fR
+T}:T{
+Aynı, fakat \fB-C\fR seçeneğini geçersiz kılar.
+T}
+T{
+[\fIn\fR]\fB>>\fR \fIdosya\fR
+T}:T{
+Standart çıktıyı (veya \fIn\fR’yi) \fIdosya\fR’ya ekler.
+T}
+T{
+[\fIn\fR]\fB<\fR \fIdosya\fR
+T}:T{
+\fIdosya\fR’yı standart girdiye (veya \fIn\fR’ye) yönlendirir.
+T}
+T{
+[\fIn1\fR]\fB<&\fR\fIn2\fR
+T}:T{
+\fIn2\fR dosya tanıtıcısının bir kopyasını standart girdiye (veya \fIn1\fR’e) yönlendirir.
+T}
+T{
+[\fIn\fR]\fB<&-\fR 
+T}:T{
+Standart girdiyi (veya \fIn\fR’yi) kapatır.
+T}
+T{
+[\fIn1\fR]\fB>&\fR\fIn2\fR
+T}:T{
+Standart çıktıyı (veya \fIn1\fR’i) \fIn2\fR’nin bir kopyası olacak şekilde yönlendirir.
+T}
+T{
+[\fIn\fR]\fB>&-\fR
+T}:T{
+Standart çıktıyı (veya \fIn\fR’yi) kapatır.
+T}
+T{
+[\fIn\fR]\fB<>\fR \fIdosya\fR
+T}:T{
+\fIdosya\fR’yı standart girdi (veya \fIn\fR) üzerinde oku-yaz olarak açar.
+T}
+.TE
+.sp
+.RE
+"Belge-burada" yönlendirmesi:
+.sp
+.RS 4
+.nf
+[\fIn\fR]\fB<<\fR \fIsınırlayıcı\fR
+     \fIbelge-burada-metni\fR ...
+\fIsınırlayıcı\fR
+.fi
+.sp
+.RE
+\fIsınırlayıcı\fR’ya kadar ardışık satırlardaki tüm metinler kaydedilir ve standart girdideki komut veya belirtilmişse dosya tanıtıcısı \fIn\fR için kullanılabilir hale getirilir. \fIsınırlayıcı\fR ilk satırda belirtildiği gibi kodlanırsa, \fIbelge-burada-metni\fR genişletmeler uygulanmadan birebir ele alınır, aksi takdirde metne ifade genişletmesi, komut ikamesi ve aritmetik ifade genişletmesi uygulanır (\fBGenişletmeler\fR bölümünde açıklandığı gibi). İşleç "\fB<<\fR" yerine "\fB<<-\fR" ise, \fIbelge-burada-metni\fRnin başındaki sekmeler kaldırılır.
+.sp
+.SS "Arama ve Yürütme"
+Üç tür komut vardır: kabuk işlevleri, yerleşik komutlar ve normal uygulamalar -- ve komut (ada göre) bu sırayla aranır. Her biri farklı bir şekilde yürütülür.
+.sp
+Bir kabuk işlevi yürütüldüğünde, tüm konumsal değişkenler (değişmeden kalan \fI$0\fR hariç) kabuk işlevinin girdileri haline gelir. Açıkça komutun ortamına yerleştirilen değişkenler (işlev adından önce bunlara atamalar yapılarak) değerleri ile birlikte işlevin yerel değişkenleri haline gelir. Daha sonra işlev tanımında verilen komut yürütülür. Konumsal değişkenlere, komut tamamlandığında ilk değerleri geri atanır. Bunların hepsi aynı kabuk içinde gerçekleşir.
+.sp
+Kabuk yerleşikleri, yeni bir süreç oluşturmadan dahili olarak kabukta yürütülür.
+.sp
+Komut adı bir işlev veya yerleşikle eşleşmiyorsa, komut dosya sisteminde normal bir uygulama olarak aranır (sonraki bölümde açıklandığı gibi). Normal bir uygulama yürütüldüğünde, kabuk girdileri ve ortam değişkenleri uygulamaya aktarılarak uygulama yürütülür. Uygulama normal bir yürütülebilir dosya değilse (yani, ASCII gösterimi "#!" olan "sihirli numara" ile başlamıyorsa, dolayısıyla \fBexecve\fR(2) çağrısı \fBENOEXEC\fR döndürüyorsa) kabuk uygulamayı bir alt kabukta yorumlayacaktır. Alt kabuk bu durumda kendisini yeniden ilklendirecek ve böylece etki, bu özel kabuk betiğini yürütmek için yeni bir kabuk çağrılmış gibi olacaktır, ancak ana kabukta bulunan komutların konumu alt kabuk tarafından hatırlanacaktır.
+.sp
+.SS "Dosya Yolu Araması"
+Bir komutun yeri tespit edilirken, kabuk önce bu isimde bir kabuk işlevi olup olmadığına bakar. Sonra aynı isimde yerleşik bir komut arar. Yerleşik bir komut da bulunamazsa iki durumdan biri gerçekleşir:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Eğik çizgi içeren komut adları, herhangi bir arama yapılmadan yürütülür.
+.IP 2. 3
+Kabuk, sırayla \fBPATH\fR içindeki her dizinde komutu arar. \fBPATH\fR değişkeninin değeri, iki nokta üst üste ile ayrılmış bir dizi girdiden oluşmalıdır. Her girdi bir dizin adı içerir. Geçerli dizin, örtük olarak boş bir dizin adıyla veya doğrudan tek bir noktayla belirtilebilir.
+.sp
+.RE
+.PD 0
+.sp
+.SS "Komut Çıkış Durumu"
+Her komutun, diğer kabuk komutlarının davranışını etkileyebilecek bir çıkış durumu vardır. Genel olarak, bir komutun normal veya başarı göstergesi olarak sıfırla, başarısızlık, hata veya olumsuzluk göstergesi olarak sıfırdan farklı bir değerle çıkması gerekir. Her komutun kılavuz sayfasında, çeşitli çıkış kodları ve bunların ne anlama geldiği belirtilmelidir. Ek olarak yerleşik komutlar da, yürütülen kabuk işlevlerinde olduğu gibi çıkış kodları döndürür.
+.sp
+Bir komut tamamen değişken atamalarından oluşuyorsa, komutun çıkış durumu, varsa son komut ikamesinin çıkış durumudur, aksi takdirde 0’dır.
+.sp
+.SS "Karmaşık Komutlar"
+Karmaşık komutlar, birlikte daha büyük bir karmaşık komut oluşturan denetim işleçleri veya anahtar sözcüklerle basit komutların birleşimleridir. Daha genel olarak, bir komut aşağıdakilerden biridir:
+.sp
+.RS 1
+\(bu  basit komut
+.br
+\(bu  ardışık komutlar
+.br
+\(bu  liste veya bileşik liste
+.br
+\(bu  bileşik komut
+.br
+\(bu  işlev tanımı
+.br
+.sp
+.RE
+Aksi belirtilmedikçe, bir komutun çıkış durumu, komut tarafından yürütülen son basit komutun çıkış durumudur.
+.sp
+.SS "Ardışık Komutlar"
+Ardışık komut, \fB|\fR denetim işleciyle ayrılmış bir veya daha fazla komuttan oluşan bir dizilimdir. Son komut hariç tümünün standart çıktısı, bir sonraki komutun standart girdisine bağlanır. Son komutun standart çıktısı, normal olarak kabuktan alınır.
+.sp
+Ardışık komut sözdizimi:
+.sp
+.RS 4
+.nf
+[\fB!\fR] \fIkomut1\fR [\fB|\fR \fIkomut2\fR ...]
+.fi
+.sp
+.RE
+\fIkomut1\fR’in standart çıktısı, \fIkomut2\fR’nin standart girdisine bağlanır. Bir komutun standart girdisi, standart çıktısı veya her ikisinin, komutun parçası olan yönlendirme işleçleri ile belirtilen herhangi bir yönlendirmeden önce ardışık düzen tarafından atandığı varsayılır.
+.sp
+Ardışık komutlar artalanda yürütülmüyorsa (daha sonra açıklanacak), kabuk tüm komutların tamamlanmasını bekleyecektir.
+.sp
+Eğer ardışık komut \fB!\fR anahtar sözcüğü ile başlamıyorsa, ardışık komutun çıkış durumu yürütülen son komutun çıkış durumudur. Aksi takdirde, çıkış durumu, son komutun çıkış durumunun mantıksal DEĞİL’idir. Yani, son komut 0 döndürürse, çıkış durumu 1’dir; son komut sıfırdan büyük bir değerle dönerse, çıkış durumu 0’dır.
+.sp
+Standart girdinin veya standart çıktının veya her ikisinin ardışık komut ataması yönlendirmeden önce gerçekleştiğinden, yalnızca yönlendirme ile değiştirilebilir. Örneğin,
+.sp
+.RS 4
+.nf
+$ \fIkomut1\fR \fB2<&1 |\fR \fIkomut2\fR
+.fi
+.sp
+.RE
+ardışık komutu, \fIkomut1\fR’in hem standart çıktısını hem de standart hatasını \fIkomut2\fR’nin standart girdisine gönderir.
+.sp
+Ardışık komut, VE-VEYA listesinin (aşağıda açıklanmıştır) basit halidir. Satır sonu karakteri, başka bir işleç olmadığında \fB;\fR ile eşdeğerdir. Sonlandırıcı olarak \fB;\fR veya satırsonu karakteri, önceki ardışık komutun veya daha genel olarak, önceki VE-VEYA listesinin sırayla yürütülmesine sebep olur; yani, kabuk komutları yürütür ama sonraki komutlara geçmeden önce bunların tamamlanmasını bekler. Sonlandırıcı olarak \fB&\fR, önceki VE-VEYA listesinin eşzamansız (artanda) yürütülmesine neden olur (aşağıdaki bir sonraki paragrafa bakın). Eşzamansız bir VE-VEYA listesinin çıkış durumu sıfırdır. Tamamlandıktan sonra komutların gerçek çıkış durumu, yerleşik \fBwait\fR komutu kullanılarak elde edilebilir.
+.sp
+Diğer bazı kabuklardan farklı olarak, ardışık komuttaki her sürecin çağrıldığı kabuğun alt kabuğunda yürütüldüğüne dikkat edilmelidir (bir kabuk yerleşiği olmadığı sürece; bu durumda alt kabuk açılmaz, geçerli kabukta yürütülür -- ancak ortam değişkenleri üzerindeki tüm etkiler silinir).
+.sp
+.SS "Artalan Komutları -- &"
+Bir komut "ve (\fB&\fR) denetim işleci" tarafından sonlandırılırsa, kabuk komutu eşzamansız olarak (artalanda) yürütür -- yani, kabuk bir sonraki komutu yürütmeden önce, komutun tamamlanmasını beklemez.
+.sp
+Bir komutun artalanda yürütülmesini sağlayan sözdizimi:
+.sp
+.RS 4
+.nf
+\fIkomut1\fR \fB&\fR [\fIkomut2\fR \fB&\fR ...]
+.fi
+.sp
+.RE
+Kabuk etkileşimli değilse, eşzamansız komutun (artalan komutunun) standart girdisi \fI/dev/null\fR olur.
+.sp
+.SS "Listeler (genel olarak)"
+Liste, satırsonu karakteri, noktalı virgül veya \fB&\fR ile ayrılan ve isteğe bağlı olarak bu üç karakterden biri ile sonlandırılan bir veya daha fazla komuttan oluşan bir dizilimdir. Etkileşimli bir kabuğa verilen komutları içeren her kabuk uygulaması bir listedir. Böyle bir listedeki her komut, tamamen ayrıştırıldıktan sonra yürütülür.
+.sp
+Listedeki komutlar yazıldıkları sıraya göre yürütülür. Komutun ardından bir \fB&\fR işleci geliyorsa, kabuk komutu başlatır ve hemen bir sonraki komuta geçer; aksi halde bir sonrakine geçmeden önce komutun sonlanmasını bekler.
+.sp
+.SS "VE-VEYA Listeleri (Kısa Liste İşleçleri)"
+“\fB&&\fR” ve “\fB||\fR” VE-VEYA listesi işleçleridir. “\fB&&\fR” ve “\fB||\fR” işleçlerinin öncelikleri aynıdır ve soldan ilişkilendirmelidir, yani bu işleçler soldan sağa değerlendirilir.
+.sp
+\fB&&\fR” yalnızca ilk komutun çıkış durumu sıfırsa ikinci komutun yürütülmesini sağlar. “\fB||\fR” işleci de buna benzer, farklı olarak ikinci komutun yürütülebilmesi için birincinin çıkış durumu sıfırdan farklı olmak zorundadır.
+.sp
+.SS "Akış Denetim Deyimleri -- if, while, for, case"
+Bu deyimler aslında bileşik komutlardır. \fBif\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBif\fR \fIliste\fR
+\fBthen\fR \fIliste\fR
+[ \fBelif\fR \fIliste\fR
+\fBthen\fR   \fIliste\fR ] ...
+[ \fBelse\fR \fIliste\fR ]
+\fBfi\fR
+.fi
+.sp
+.RE
+İlk \fIliste\fRnin çıkış durumu sıfır ise, ardından gelen \fIliste\fR yürütülür. Aksi takdirde, \fBelif\fR varsa sonraki \fIliste\fR yürütülür ve işlem tekrarlanır. \fBelif\fR ve beraberindeki \fIliste\fR belirtilmemişse ama \fBelse\fR belirtilmişse sonraki \fIliste\fR yürütülür.
+.sp
+\fBwhile\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBwhile\fR  \fIliste\fR
+\fBdo\fR     \fIliste\fR
+\fBdone\fR
+.fi
+.sp
+.RE
+İlk \fIliste\fRnin çıkış durumu sıfırdan farklı oluncaya dek iki \fIliste\fR yinelenir. \fBwhile\fR deyimini yerini \fBuntil\fR deyimi aldığında ise ilk \fIliste\fRnin çıkış durumu sıfır oluncaya dek iki \fIliste\fR yinelenir.
+.sp
+\fBfor\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBfor\fR \fIdeğişken\fR [ \fBin\fR [ \fIsözcük\fR ... ] ]
+\fBdo\fR  \fIliste\fR
+\fBdone\fR
+.fi
+.sp
+.RE
+\fBin\fR deyimindeki \fIsözcük\fRler genişletilir ve \fIliste\fR, değer olarak her defasında bir \fIsözcük\fR atanan \fIdeğişken\fRle yürütülür. \fBin\fR \fIsözcük\fR ... ile "\fI$@\fR" eşdeğerdir. Değişkenden sonra \fBin\fR olduğu halde hiçbir \fIsözcük\fR belirtilmemişse \fIliste\fR yürütülmez ve çıkış durumu sıfır olur.
+.sp
+\fBbreak\fR and \fBcontinue\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBbreak\fR [ \fIsayı\fR ]
+\fBcontinue\fR [ \fIsayı\fR ]
+.fi
+.sp
+.RE
+\fBbreak\fR içteki \fIsayı\fRncı \fBfor\fR veya \fBwhile\fR döngüsünde döngüden çıkılmasını sağlar. \fBcontinue\fR ise içteki \fIsayı\fRncı döngüden devam edilmesini sağlar. Bunlar yerleşik komut olarak gerçeklenmiştir.
+.sp
+\fBcase\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBcase\fR \fIsözcük\fR \fBin\fR
+[\fB(\fR]\fIkalıp\fR [\fB|\fR \fIkalıp\fR]\fB)\fR [\fIliste\fR] \fB;;\fR
+\&...
+\fBesac\fR
+.fi
+.sp
+.RE
+\fIkalıp\fR, “\fB|\fR” karakteri ayraç olarak kullanıldığında bir veya daha fazla sayıda kalıp içerebilir (Bkz: \fBKabuk Kalıpları\fR). \fIkalıp\fRtan önceki “\fB(\fR” karakterinin kullanımı isteğe bağlıdır.
+.sp
+\fIsözcük\fR genişletilir ve ilkinden sonuncusuna kadar sırayla her \fIkalıp\fR ile eşleştirilir ve her \fIkalıp\fR eşleştirme denenmeden hemen önce genişletilir. Bir eşleşme bulunduğunda, \fIkalıp\fR karşılaştırmaları durur ve varsa ilişkili \fIliste\fR değerlendirilir. \fB;;\fR ile sonlanan bir \fIliste\fR yürütüldüğünde veya \fBesac\fR değerine ulaşıldığında, \fBcase\fR ifadesinin yürütülmesi tamamlanır. Çıkış durumu, varsa değerlendirilen son \fIliste\fRnin yürütülen son komutunun durumudur, yoksa sıfırdır.
+.sp
+.SS "Komutların Gruplanması"
+Komutlar,
+.sp
+.RS 4
+.nf
+\fB(\fR\fIliste\fR\fB)\fR
+.fi
+.sp
+.RE
+sözdizimi ile veya
+.sp
+.RS 4
+.nf
+\fB{\fR \fIliste\fR\fB; }\fR
+.fi
+.sp
+.RE
+sözdizimi ile gruplanabilir. Yaylı ayraçlar işleç olup ayrıntılı bir sözdizimi gerektirmezken kaşlı ayraçlar anahtar sözcüktür, bu nedenle \fIliste\fRden birer boşluk ile ayrılmaları gerekir. İlki, komutları bir alt kabukta yürütür. (\fIliste\fR) halinde gruplanan yerleşik komutlar, geçerli kabuğu etkilemez. İkincisi başka bir kabuğu çatallamaz, bu nedenle daha verimlidir. Komutları bu şekilde gruplamak, çıktılarının tek bir uygulama gibi yönlendirilmesine olanak tanır:
+.sp
+.RS 4
+.nf
+{ printf " hello " ; printf " world\\n" ; } > greeting
+.fi
+.sp
+.RE
+Kaşlı ayracın bir komut girdisi olarak değil, anahtar sözcük olarak tanınması için denetim işlecinin (burada "\fB;\fR") kaşlı ayraçtan önce gelmesi gerektiğine dikkat edilmelidir.
+.sp
+.SS "İşlevler"
+İşlev tanımının sözdizimi:
+.sp
+.RS 4
+.nf
+\fIisim\fR \fB()\fR \fIkomut\fR
+.fi
+.sp
+.RE
+İşlev tanımı yürütülebilir bir ifadedir; yürütüldüğünde, \fIisim\fR adlı işlevi yükler ve sıfır çıkış durumu döndürür. \fIkomut\fR normalde "\fB{\fR" ve "\fB}\fR" arasına alınmış bir listedir.
+.sp
+Değişkenler, \fBlocal\fR deyimi kullanılarak işleve yerel olarak bildirilebilir. Bu, işlevin ilk ifadesi olarak görünmelidir ve sözdizimi şu şekildedir:
+.sp
+.RS 4
+.nf
+\fBlocal\fR [\fIdeğişken\fR | -] ...
+.fi
+.sp
+.RE
+\fBlocal\fR yerleşik komut olarak gerçeklenmiştir.
+.sp
+Bir değişken yerel yapılırsa, başlangıç değerini devralır ve varsa aynı etki alanında aynı adlı değişkenden dışa aktarılabilir ve salt okunur olarak işaretlenebilir. Aksi takdirde, değişkene başlangıçta değer atanmamış olur. Kabuk etki alanını dinamik olarak belirler, böylece g işlevini çağıran x değişkenini f işlevi için yerel yaparsanız, g içinde x değişkenine yapılan atıflar, x küresel değişkenine değil, f içinde bildirilen x değişkenine atıfta bulunur.
+.sp
+Yerel yapılabilecek tek özel değişken “-” dir. “-” yerel yapılırsa, işlev dönüş yaptığında, işlev içinde \fBset\fR yerleşiği üzerinden değiştirilen kabuk değişkenlerine özgün değerleri geri atanır.
+.sp
+\fBreturn\fR deyiminin sözdizimi:
+.sp
+.RS 4
+.nf
+\fBreturn\fR [\fIçıkışdurumu\fR]
+.fi
+.sp
+.RE
+\fBreturn\fR deyimi işlevin yürütmesini durdurur. \fBreturn\fR yerleşik komut olarak gerçeklenmiştir.
+.sp
+.SS "Değişkenler"
+Kabuk bir takım değişkenler içerir. Başlangıçta, kabuk tüm ortam değişkenlerini kabuk değişkenlerine dönüştürür. Yeni bir değişken şöyle atanabilir:
+.sp
+.RS 4
+.nf
+\fIisim\fR\fB=\fR\fIdeğer\fR
+.fi
+.sp
+.RE
+Kullanıcı tarafından tanımlanan değişkenler, yalnızca harfler, rakamlar ve alt çizgilerden oluşan bir ada sahip olmalı, bir rakam ile başlamamalıdır. Kabuk değişkenlerinin adları ise aşağıda açıklanacağı üzere yalnızca rakamlardan (konumsal değişkenler) veya yalnızca tek bir özel karakterden (özel değişkenler) oluşabilir:
+.sp
+.B Konumsal Değişkenler
+.RS 4
+Konumsal değişkenlerin isimleri, yalnızca sıfırdan büyük tamsayılardan oluşur. Kabuk bunlara, kabuk betiğinin adından sonra gelen komut satırı girdilerinin değerlerini atar. Bunları atamak veya sıfırlamak için \fBset\fR yerleşiği de kullanılabilir.
+.RE 1
+.sp
+.B Özel Değişkenler
+.RS 4
+Özel değişkenler, değerleri kabuk tarafından atanan ancak isimleri tek bir özel karakterden oluşan değişkenlerdir. Bu değişkenlerin değerlerine diğer kabuk değişkenleri gibi başlarına \fB$\fR işleci getirilerek ulaşılır. Özel değişkenler ve aldıkları değerler:
+.sp
+.TP 4
+\fB0\fR (Sıfır)
+Kabuğun veya kabuk betiğinin adına genişletilir.
+.sp
+.TP 4
+\fB*\fR
+1’den itibaren konumsal değişkenlere genişletilir. Genişletme çift tırnaklı bir dizge içinde gerçekleştiğinde her değişkenin değeri, \fIIFS\fR değişkeninin ilk karakteriyle veya \fIIFS\fR atanmamışsa bir boşluk ile ayrılmış tek bir alana genişletilir.
+.sp
+.TP 4
+\fB@\fR
+1’den itibaren konumsal değişkenlere genişletilen bir dizidir. Genişletme çift tırnak içinde gerçekleştiğinde, her bir konumsal değişken ayrı bir elemana genişler. Konumsal değişken yoksa, \fB@\fR çift tırnaklı olsa bile \fB@\fR genişletmesi sıfır eleman üretir. Bunun anlamı, temel olarak, örneğin, \fI$1\fR "\fBabc\fR" ve \fI$2\fR "\fBdef ghi\fR" ise, "\fI$@\fR" iki elemana genişleyecektir:
+.sp
+.RS 4
+.RS 4
+.nf
+"abc" "def ghi"
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB#\fR
+Konumsal değişken sayısına genişletilir.
+.sp
+.TP 4
+\fB?\fR
+Ardışık komutlardan son yürütülen komutun çıkış durumuna genişletilir.
+.sp
+.TP 4
+\fB-\fR (tire)
+Çağrı sırasında \fBset\fR yerleşiği veya dolaylı olarak kabuk tarafından belirlenen geçerli seçenek adlarına (tek harfli seçenek adları tek bir dizge halinde birleştirilir) genişler.
+.sp
+.TP 4
+\fB$\fR
+Çağıran kabuğun süreç kimliğine genişler. Bir alt kabuk, ebeveyninin \fB$\fR değerini korur.
+.sp
+.TP 4
+\fB!\fR
+Geçerli kabuk tarafından artalanda en son yürütülen komutun süreç kimliğine genişler. Ardışık komutlarda ise, ardışık komutlardan yürütülen sonuncu komutun süreç kimliğidir.
+.sp
+.PP
+.RE 1
+.sp
+.SS "Genişletmeler"
+Genişletmeler, sözcükler üzerinde gerçekleştirilen çeşitli genişletmeleri içerir. Daha sonra açıklanacağı gibi, her sözcüğe tüm genişletmeler uygulanmaz.
+.sp
+Tek bir sözcük içinde uygulanan \fBEv Dizini olarak Yaklaşık Genişletmesi\fR, \fBİfade Genişletme\fR, \fBKomut İkamesi\fR, \fBAritmetik İfade Genişletmesi\fR ve \fBTırnak kaldırma\fR işlemleri tek bir alana genişler. Yalnızca \fBBoşluk Ayıklama (Alanlara Ayırma)\fR, tek bir sözcükten birden fazla alan oluşturabilir. Bu kuralın tek istisnası, yukarıda açıklandığı gibi çift tırnak içinde \fB@\fR özel değişkeninin genişletilmesidir.
+.sp
+Genişletmeler şu sırayla uygulanır:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+\fBEv Dizini olarak Yaklaşık Genişletmesi\fR, \fBİfade Genişletme\fR, \fBKomut İkamesi\fR, \fBAritmetik İfade Genişletmesi\fR (Tamamı bir kerede uygulanır).
+.IP 2. 3
+\fBBoşluk Ayıklama (Alanlara Ayırma)\fR, \fIIFS\fR değişkeni boş değilse \fBstep\fR(1) tarafından üretilen alanlara uygulanır.
+.IP 3. 3
+\fBDosya Yolu Genişletmesi (Dosya Adı Üretimi)\fR (\fBset -f\fR etkin değilse).
+.IP 4. 3
+\fBTırnak kaldırma\fR.
+.sp
+.RE
+.PD 0
+\fB$\fR karakteri ile başlayan herşeye \fBİfade Genişletme\fR, \fBKomut İkamesi\fR veya \fBAritmetik İfade Genişletmesi\fR uygulanır.
+.sp
+.B Ev Dizini olarak Yaklaşık Genişletmesi
+.RS 4
+Tırnaksız yaklaşık imi (\fB~\fR) ile başlayan sözcüklere, yaklaşık genişletmesi uygulanır. Eğik çizgiye (\fB/\fR) veya sözcüğün sonuna kadar olan tüm karakterler kullanıcı adı olarak ele alınır ve kullanıcının ev dizini ile değiştirilir. Kullanıcı adı yoksa (\fI~/foobar\fR’daki gibi), yaklaşık imi \fBHOME\fR değişkeninin değeri (mevcut kullanıcının ev dizini) ile değiştirilir.
+.RE 1
+.sp
+.B İfade Genişletme
+.RS 4
+İfade genişletme biçemi:
+.sp
+.RS 4
+.nf
+\fB${\fR\fIifade\fR\fB}\fR
+.fi
+.sp
+.RE
+Burada, "\fB}\fR" ile eşleşene kadar tüm karakterler \fIifade\fRyi oluşturur. "\fB}\fR" eşleşmesi belirlenirken, ters eğik çizgi ile öncelenmiş ve tırnak içine alınmış dizgelerin içinde olanlar ile \fBAritmetik İfade Genişletmesi\fR, \fBKomut İkamesi\fR ve değişken genişletmesine konu olanlar dikkate alınmaz.
+.sp
+Değişkeni genişletmesinin en basit biçemi:
+.sp
+.RS 4
+.nf
+\fB${\fR\fIdeğişken\fR\fB}\fR
+.fi
+.sp
+.RE
+\fIdeğişken\fRin değeri varsa, değer genişletilir.
+.sp
+Birden fazla rakam içeren \fBKonumsal Değişkenler\fR ile ardından adın parçası olarak yorumlanabilecek bir karakter gelen \fBÖzel Değişkenler\fR hariç, değişken adı, isteğe bağlı olarak kaşlı ayraçlarla sarmalanabilir. Çift tırnakla sarmalanma durumunda:
+.sp
+.PD 1
+.RS 1
+.IP 1. 3
+Genişletmenin sonuçlarına \fBDosya Yolu Genişletmesi (Dosya Adı Üretimi)\fR uygulanmaz.
+.IP 2. 3
+\fB@\fR haricinde, genişletme sonuçlarında \fBBoşluk Ayıklama (Alanlara Ayırma)\fR yapılmaz.
+.sp
+.RE
+.PD 0
+Ek olarak, aşağıdaki biçemlerden biri kullanılarak değişken genişletmesinde değişiklik yapılabilir:
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB:-\fR\fIsözcük\fR\fB}\fR
+Öntanımlı değerler kullanılır. \fIdeğişken\fR atanmamışsa veya null atanmışsa \fIsözcük\fR genişletmesi kullanılır, aksi takdirde \fIdeğişken\fR değeri kullanılır.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB:=\fR\fIsözcük\fR\fB}\fR
+Öntanımlı değerler atanır. \fIdeğişken\fR atanmamışsa veya null atanmışsa, \fIdeğişken\fR’e değer olarak \fIsözcük\fR genişletmesi atanır. Her durumda, \fIdeğişken\fR’in son değeri kullanılır. Konumsal değişkenler ve özel değişkenler bu yolla atanamaz yalnızca diğer değişkenler bu yolla atanabilir.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB:?\fR[\fIsözcük\fR]\fB}\fR
+\fIdeğişken\fR atanmamışsa veya null atanmışsa bir hata var demektir. \fIdeğişken\fR atanmamışsa veya null atanmışsa \fIsözcük\fR genişletmesi (veya \fIsözcük\fR belirtilmemişse, atanmamış olduğunu belirten bir ileti) standart hataya yazılır ve kabuk sıfırdan farklı bir çıkış durumu ile çıkar. Bununla birlikte, kabuk etkileşimli ise çıkması gerekmez. Aksi takdirde, \fIdeğişken\fR değeri kullanılır.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB:+\fR\fIsözcük\fR\fB}\fR
+Diğer değer kullanılır. \fIdeğişken\fR atanmamışsa veya null atanmışsa, null kullanılır. Aksi takdirde, \fIsözcük\fR genişletmesi kullanılır.
+.sp
+.PP
+Yukarıdaki değişken genişletme biçemlerinde iki nokta üst üste iminin yokluğunda, sınama yalnızca atanmamış \fIdeğişken\fRe uygulanır, null atanmış \fIdeğişken\fRe uygulanmaz.
+.sp
+.TP 4
+\fB${#\fR\fIdeğişken\fR\fB}\fR
+Dizge uzunluğu. \fIdeğişken\fR değerinin karakter sayısı.
+.sp
+.PP
+Aşağıdaki dört değişken genişlemesi alt dizge işlemleri içindir. Kalıpların değerlendirilmesinde, her durumda, düzenli ifade sözdizimi yerine kalıp eşleme sözdizimi kullanılır (Bkz: \fBKabuk Kalıpları\fR). \fIdeğişken\fR adı \fB*\fR veya \fB@\fR ise genişletme sonucu belirlenmemiştir. Değişken genişletme dizgesinin tamamının çift tırnaklarla sarmalanması aşağıdaki dört kalıp karakteri çeşidinin tırnaklanmasına sebep olmaz, oysa kaşlı ayraçlar içinde tırnaklama bu etkiye sebep olur.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB%\fR\fIsözcük\fR\fB}\fR
+En küçük sonek kalıbını kaldırır. \fIsözcük\fR bir kalıp üretecek şekide genişletilir. Daha sonra değişken genişletmesi, sonekin kalıpla eşleşen en küçük kısmının silinmesiyle sonuçlanır.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB%%\fR\fIsözcük\fR\fB}\fR
+En geniş sonek kalıbını kaldırır. \fIsözcük\fR bir kalıp üretecek şekide genişletilir. Daha sonra değişken genişletmesi, sonekin kalıpla eşleşen en geniş kısmının silinmesiyle sonuçlanır.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB#\fR\fIsözcük\fR\fB}\fR
+En küçük önek kalıbını kaldırır. \fIsözcük\fR bir kalıp üretecek şekide genişletilir. Daha sonra değişken genişletmesi, önekin kalıpla eşleşen en küçük kısmının silinmesiyle sonuçlanır.
+.sp
+.TP 4
+\fB${\fR\fIdeğişken\fR\fB##\fR\fIsözcük\fR\fB}\fR
+En geniş önek kalıbını kaldırır. \fIsözcük\fR bir kalıp üretecek şekide genişletilir. Daha sonra değişken genişletmesi, önekin kalıpla eşleşen en geniş kısmının silinmesiyle sonuçlanır.
+.sp
+.PP
+.RE 1
+.sp
+.B Komut İkamesi
+.RS 4
+Komut ikamesi, bir komutun çıktısının, komut adı olarak kullanılmasını sağlar. Komut ikamesi, komut aşağıdaki gibi
+.sp
+.RS 4
+.nf
+\fB$(\fR\fIkomut\fR\fB)\fR
+.fi
+.sp
+.RE
+sarmalandığında veya
+.sp
+.RS 4
+.nf
+\fB’\fR\fIkomut\fR\fB’\fR
+.fi
+.sp
+.RE
+biçeminde ters tek tırnaklarla sarmalandığında gerçekleşir.
+.sp
+Kabuk, bir alt kabuk ortamında komutu yürüterek ve komut ikamesini komutun standart çıktısıyla değiştirerek, ikamenin sonundan bir veya daha fazla satır sonu karakterini kaldırarak komut ikamesini genişletir. (Çıktının bitiminden önceki gömülü satırsonu karakterleri kaldırılmaz; ancak, alan ayırma sırasında bunlar, \fIIFS\fR’nin değerine ve etkin olan tırnaklamaya bağlı olarak boşluklara dönüştürülebilir.)
+.RE 1
+.sp
+.B Aritmetik İfade Genişletmesi
+.RS 4
+Aritmetik ifade genişletmesi, bir aritmetik ifadeyi değerlendirmek ve yerine değerini koymak için bir mekanizma sağlar. Aritmetik ifade genişletmesinin biçemi:
+.sp
+.RS 4
+.nf
+\fB$((\fR\fIifade\fR\fB))\fR
+.fi
+.sp
+.RE
+İfade, çift tırnak içindeymiş gibi ele alınır, ancak ifade içindeki çift tırnak özel olarak ele alınmaz. Kabuk, değişken genişletmesi, \fBKomut İkamesi\fR ve \fBTırnak kaldırma\fR için ifadedeki tüm öğeleri genişletir.
+.sp
+Daha sonra, kabuk bunu aritmetik bir ifade olarak ele alır ve yerine ifadenin değerini koyar.
+.RE 1
+.sp
+.B Boşluk Ayıklama (Alanlara Ayırma)
+.RS 4
+Kabuk, değişken genişletmesi, \fBKomut İkamesi\fR ve \fBAritmetik İfade Genişletmesi\fR sonra, alanlarına ayırmak için çift tırnak içinde olmayan genişletme ve ikame sonuçlarını tarar.
+.sp
+Kabuk \fIIFS\fR değişkenindeki her karakteri bir ayraç olarak ele alır. Bunları değişken genişletmesi ve komut ikamesinin sonuçlarını alanlara ayırmak için kullanır.
+.RE 1
+.sp
+.B Dosya Yolu Genişletmesi (Dosya Adı Üretimi)
+.RS 4
+Alanlara ayırmanın tamamlanmasından sonra \fB-f\fR seçeneği verilmemişse dosya adı üretimine geçilir. Her sözcük, eğik çizgilerle ayrılmış bir dizi kalıp olarak görünür. Genişletme işleminde, mevcut dosyaların adları, her kalıp kendisiyle eşleşen bir dizge ile değiştirilerek elde edilir. Bununla ilgili iki sınırlama vardır:
+.sp
+.RS 1
+\(bu  Bir kalıp eğik çizgi içeren bir dizge ile eşleşemez.
+.br
+\(bu  Bir kalıp, kalıbın ilk karakteri bir nokta olmadıkça nokta ile başlayan bir dizge ile eşleşemez.
+.br
+.sp
+.RE
+Sonraki bölümde, hem dosya yolu genişletmesinde hem de case komutunda kullanılan kalıplar açıklanmaktadır.
+.RE 1
+.sp
+.B Kabuk Kalıpları
+.RS 4
+Bir kalıp, özel kalıp karakterleri ve kendileri ile eşleşen normal karakterlerden oluşur. Özel kalıp karakterleri: “\fB!\fR”, “\fB*\fR”, “\fB?\fR” ve “\fB[\fR”. Bunların normal karakterler olarak davranması istenirse tırnak içine alınmalıdırlar. Komut ikamesi veya değişken genişletmesi yapıldıktan sonra çift tırnak içindeki dolar imi veya ters tırnak imleri hariç, değişkenin değeri veya komut çıktısı dolar imi veya ters tırnak imleri için taranır ve bunlar özel kalıp karakterlerine dönüştürülür.
+.sp
+Yıldız imi (“\fB*\fR”) herhangi bir karakter dizisiyle eşleşir. Soru imi herhangi bir tek karakterle eşleşir. Sol köşeli ayraç (“\fB[\fR”) bir karakter sınıfını tanıtır. Karakter sınıfının sonu bir (“\fB]\fR” ile gösterilir); "\fB]\fR" eksikse "\fB[\fR", bir karakter sınıfı sunmak yerine kendisi ile eşleşir. Bir karakter sınıfı, köşeli parantezler arasındaki herhangi bir karakterle eşleşir. Tire imi kullanılarak bir karakter aralığı belirtilebilir. Karakter sınıfının ilk karakterinden önceki ünlem işareti, karakter sınıfının dışında kalan karakterlerle eşleşme sağlar.
+.sp
+Bir karakter sınıfının “\fB]\fR” içermesi için listelenen ilk karakter olmalıdır (varsa “\fB!\fR” iminden sonra). Tire imini içermesi için listelenen ilk veya son karakter olmalıdır.
+.RE 1
+.sp
+.B Tırnak kaldırma
+.RS 4
+Yorumlamalar uygulandıktan sonra, yukarıdaki yorumlamaların sonucu olmayan ve tırnak içine alınmamış tüm ters eğik çizgi (\\), tek tırnak (’) ve çift tırnak (") karakterleri kaldırılır.
+.RE 1
+.sp
+.SS "Yerleşikler"
+Bu bölümde, ayrı bir süreç tarafından gerçekleştirilemeyen bazı işlemleri gerçekleştirmeleri gerektiği için yerleşik olan yerleşik komutlar açıklanmıştır. Ayrıca, yerleşik olarak daha verimli olabilecek birkaç başka komut da bunlara eklenmiştir (printf, echo, test, vb gibi).
+.sp
+.TP 4
+\fB:\fR\p \fBtrue\fR
+Çıkış durumu olarak 0 (true) döndürmekten başka hiçbir şey yapmaz.
+.sp
+.TP 4
+\fB.\fR \fIdosya\fR
+Belirtilen \fIdosya\fRdaki komutlar okunur ve kabuk tarafından yürütülür.
+.sp
+.TP 4
+\fBalias\fR [\fIisim\fR[=\fIdizge\fR ...]]
+\fIisim\fR=\fIdizge\fR belirtilmişse kabuk, takma adı değer dizgesiyle birlikte tanımlar. Yalnızca \fIisim\fR belirtilmişse takma adın değeri basılır. Girdisiz kullanım, tanımlanmış tüm takma adların isim ve değerlerinin listelenmesini sağlar. Ayrıca bkz: \fBunalias\fR.
+.sp
+.TP 4
+\fBbg\fR [\fIgörev\fR] ...
+Belirtilen \fIgörev\fR (belirtilmemişse geçerli görev) çalışmasını artalanda sürdürür.
+.sp
+.TP 4
+\fBcommand\fR [\fB-p\fR] [\fB-v\fR] [\fB-V\fR] \fIkomut\fR [\fIkomut-girdisi\fR ...]
+Belirtilen \fIkomut\fR aynı addaki kabuk işlevi yok sayılarak yürütülür. Yerleşik komutla aynı adda bir kabuk işlevi de varsa bu yerleşik yararlı olur.
+.sp
+.RS
+.TP 4
+\fB-p\fR
+\fIkomut\fR tüm standart ugulamaları bulmayı garanti eden \fBPATH\fR ortam değişkeni kullanılarak aranır.
+.sp
+.TP 4
+\fB-V\fR
+\fIkomut\fRu yürütmek yerine \fBtype\fR yerleşiğinin yaptığı gibi, komut aramasının sonuçlarını gösterir.
+.sp
+.TP 4
+\fB-v\fR
+\fIkomut\fRu yürütmek yerine komut için arama yapar ve uygulamaları, yerleşik komut adlarını ve takma ad genişletmelerini mutlak dosya yolları ile gösterir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBcd -\fR\p \fBcd\fR [\fB-LP\fR] [\fIdizin\fR]
+Belirtilen \fIdizin\fRe (belirtilmemişse \fBHOME\fR dizinine) geçer. \fBCDPATH\fR değişkeni \fBcd\fR komutunun ortamında görünür durumdaysa veya \fBCDPATH\fR kabuk değişkeni, eğik çizgi ile başlamayan bir dosya yolu ile tanımlanmışsa, belirtilen \fIdizin\fR \fBCDPATH\fR dizinlerinde aranır. \fBCDPATH\fR değerinin biçemi \fBPATH\fR ile aynıdır. \fIdizin\fR olarak tek bir tire belirtilmişse \fBOLDPWD\fR ortam değişkeninin değeri kullanılır. \fBcd\fR komutu belirtilen dizinden farklı bir dizine geçiş yapmışsa dizin adını gösterir. Bu genellikle, \fIdizin\fR olarak tek bir eğik çizgi belirtilmesi veya \fBCDPATH\fR değerinin kullanılması durumunda ortaya çıkar. \fB-P\fR seçeneği fiziksel dizin yapısının kullanılmasına sebep olur, yani tüm sembolik bağlar değerlerine çözümlenir. \fB-L\fR seçeneği önüne getirildiği \fB-P\fR seçeneğini etkisiz kılar.
+.sp
+.TP 4
+\fBecho\fR [\fB-n\fR] \fIdizge\fR...
+Belirtilen \fIdizge\fRleri aralarında boşluk bırakarak standart çıktıya basar. \fB-n\fR seçeneği belirtilmezse \fIdizge\fRlerden sonra satır sonu karakteri çıktılanır.
+.sp
+Aşağıdaki dizgeciklerin varlığında (çift tırnakların içinde belirtildikleri takdirde), dizgecik çıktılanmaz, dizgecikle ilgili eylem gerçekleştirilir :
+.sp
+.RS
+.TP 4
+\fB\\b\fR
+Ters eğik çizgi karakteri çıktılanır.
+.sp
+.TP 4
+\fB\\c\fR
+Ardından gelen çıktıyı baskılar. Genelde, son dizgenin sonunda belirtilerek satır sonu karakterinin basılması önlenir.
+.sp
+.TP 4
+\fB\\f\fR
+Sayfa ileri karakterini çıktılar.
+.sp
+.TP 4
+\fB\\n\fR
+Satır sonu (yeni satır) karakterini çıktılar (daktilodaki şaryoyu döndürüp satırın başına götürme işlemini uçbirimde yapar).
+.sp
+.TP 4
+\fB\\r\fR
+Satır başı karakterini çıktılar (imleci satırın başına gönderir). Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+$ echo "12\\r3"
+32
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB\\t\fR
+Yatay sekme karakterini çıktılar.
+.sp
+.TP 4
+\fB\\v\fR
+Düşey sekme karakterini çıktılar (imleci bulunduğu sütunda düşeyde ilerletir). Örnek:
+.sp
+.RS 4
+.RS 4
+.nf
+$ echo "başlık açıklama\\n" "\\rbaşlık\\v" "açıklama"
+başlık açıklama
+başlık
+       açıklama
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fB\\0\fR\fINNN\fR
+\fINNN\fR sekizlik tabanda en fazla 3 rakam içerebilir. Belirtilmişse sekizlik ASCII \fINNN\fR karakterini belirtilmemişse 0ıncı karakteri (Boş karakter de dediğimiz, meşhur "null" karakterini) basar. Hiçbir çıktı vermez.)
+.sp
+.TP 4
+\fB\\\\\fR
+Ters eğik çizgi çıktılar.
+.sp
+.PP
+.RE
+.IP
+Diğer tüm ters eğik çizgi dizgecikleri, tanımsız davranışı ortaya çıkarır.
+.sp
+.TP 4
+\fBeval\fR \fIdizge\fR ...
+Belirtilen tüm \fIdizge\fRleri aralarına boşluk yerleştirerek birleştirir. Genişletmeleri uyguladıktan sonra komutu yürütür.
+.sp
+.TP 4
+\fBexec\fR [\fIkomut komut-girdisi\fR ...]
+Bir kabuk komutu veya işlev olmamak koşuluyla gerçek bir \fIkomut\fR belirtildiğinde komut, süreci kabuktan devralır. \fIkomut-girdisi\fR içinde belirtilen yönlendirmeler kalıcı olur, yani \fBexec\fR yerleşiğinin işi bittiğinde yönlendirmeler geri alınmaz.
+.sp
+.TP 4
+\fBexit\fR [\fIçıkışdurumu\fR]
+Kabuk oturumunu sonlandırır. \fIçıkışdurumu\fR belirtilmişse kabuğun çıkış durumu olarak kullanılır, aksi takdirde önceki komutun çıkış durumu kullanılır.
+.sp
+.TP 4
+\fBexport\fR \fIisim\fR ...\p \fBexport -p\fR
+Belirtilen \fIisim\fRler dışa aktarılarak sonraki komutların ortam değişkenleri olması sağlanır. Bir değişkenin dışa aktarılmaması için tek yol, onu \fBunset\fR ile atanmamış yapmaktır. Kabuk bir değişkenin değerini dışa aktarırken de atayabilir:
+.sp
+.RS 4
+.RS 4
+.nf
+\fBexport\fR \fIname\fR=\fIvalue\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+\fBexport\fR komutu hiçbir girdi belirtilmeksizin kullanıldığında dışa aktarılmış tüm ortam değişkenlerini listeler. \fB-p\fR seçeneği belirtildiğinde çıktı, etkileşimli olmayan kullanım için uygun şekilde biçimlendirilir.
+.sp
+.TP 4
+\fBfc\fR [\fB-e\fR \fIdüzenleyici\fR] [\fIilk\fR [\fIson\fR]]\p \fBfc\fR \fB-l\fR [\fB-nr\fR] [\fIilk\fR [\fIson\fR]]\p \fBfc\fR \fB-s\fR [\fIeski\fR=\fIyeni\fR] [\fIilk\fR]
+\fBfc\fR yerleşiği etkileşimli kabuğa evvelce girilmiş (komut geçmişindeki) komutları listeler, düzenler veya yeniden çalıştırır.
+.sp
+.RS
+.TP 4
+\fB-e\fR \fIdüzenleyici\fR
+Komutları düzenlemek için belirtilen \fIdüzenleyici\fR kullanılır. \fIdüzenleyici\fR dizgesi bir komut adı olup \fBPATH\fR ortam değişkeninde belirtilen yollar üzerinde olmalıdır. Seçenek belirtilmezse öntanımlı olarak \fBFCEDIT\fR ortam değişkeninde belirtilen düzenleyici kullanılır. \fBFCEDIT\fR tanımlı değilse veya boş değer içeriyorsa \fBEDITOR\fR ortam değişkeninin değeri kullanılır. \fBEDITOR\fR de tanımlı değilse veya boş değer içeriyorsa düzenleyici olarak \fBed\fR(1) kullanılır.
+.sp
+.TP 4
+\fB-l\fR
+Komutları düzenlemek için bir düzenleyici çağırmak yerine komutları listeler. Komutlar öntanımlı olarak \fIilk\fR ve \fIson\fR ile belirtilen sırayla gösterilir. \fB-r\fR belirtilmişse sıralama tersine olur. Her komuttan önce komut geçmişindeki sıra numarası basılır.
+.sp
+.TP 4
+\fB-n\fR
+\fB-l\fR seçeneği ile komutlar listelenirken sıra numaraları gösterilmez.
+.sp
+.TP 4
+\fB-r\fR
+Komutlar listelenirken (\fB-l\fR ile) veya düzenlenirken ( \fB-l\fR veya \fB-s\fR olmaksızın) sıralama \fIson\fRdan \fIilk\fRe doğru olur.
+.sp
+.TP 4
+\fB-s\fR
+Bir düzenleyici çağırmaksızın komut yeniden çalıştırılır.
+.sp
+.TP 4
+\fIilk\fR\p \fIson\fR
+Listelenecek ve düzenlenecek komutları seçmek için kullanılır. Komut geçmişinde saklanabilecek komut sayısı \fBHISTSIZE\fR ortam değişkeninde tutulur. \fIilk\fR ve \fIson\fR değerleri şunlardan biri olmalıdır:
+.sp
+.RS
+.TP 4
+[\fB+\fR]\fIsayı\fR
+\fIsayı\fR komut geçmişinde komutun sıra numarasını belirten pozitif bir tamsayı olmalıdır. Komutların numaralarına \fB-l\fR seçeneği ile erişilebilir.
+.sp
+.TP 4
+\fI-sayı\fR
+\fI-sayı\fR komut geçmişinde komutun sıra numarasını belirten negatif bir tamsayı olmalıdır. Komutların numaralarına \fB-l\fR seçeneği ile erişilebilir. -1 çalıştırılan son komuttur.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fIdizge\fR
+Aranan komutun komut geçmişindeki son kullanımına komutun ilk birkaç karakteri \fIdizge\fR olarak belirtilerek erişilebilir. \fB-s\fR seçeneği \fIeski\fR=\fIyeni\fR terimiyle birlikte kullanılmışsa \fIeski\fR dizgesi eşit imini içermemelidir.
+.sp
+.PP
+.RE
+.IP
+\fBfc\fR komutunun önemsediği ortam değişkenleri:
+.sp
+.RS
+.TP 4
+\fBFCEDIT\fR
+Kullanılacak düzenleyicinin adı.
+.sp
+.TP 4
+\fBHISTSIZE\fR
+Komut geçmişinde tutulabilecek en fazla komut sayısı.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBfg\fR [\fIgörev\fR]
+Belirtilen \fIgörev\fR veya geçerli olan önalana alınır.
+.sp
+.TP 4
+\fBgetopts\fR \fIseçenekler değişken\fR
+POSIX \fBgetopts\fR yerleşik komutu Bell Labs \fBgetopt\fR(1) türevi ile karıştırılmamalıdır.
+.sp
+\fIseçenekler\fR, seçeneğin bir girdi gerektirdiğini belirtmek için isteğe bağlı olarak her birinin ardından iki nokta üst üste gelebilen bir dizi harf olmalıdır. Ayıklanan her seçenek \fIdeğişken\fRe atanır.
+.sp
+\fBgetopts\fR yerleşik komutu, boşluk içeren girdileri işlemesi nedeniyle kullanımı önerilmeyen eski \fBgetopt\fR(1) yardımcı komutunun yerini alır.
+.sp
+\fBgetopts\fR yerleşiği, bir komutun girdi listesinden seçenekleri ve seçenek girdilerini ayıklamak için kullanılabilir. \fBgetopts\fR çağrıldığında, \fIseçenekler\fR dizgesinde belirtilen seçeneklerden komut satırında belirtileni \fIdeğişken\fRe ve seçenek sayısı \fIOPTIND\fRe, girdisini \fIOPTARG\fR kabuk değişkenine yerleştirir. Kabuk çağrıldığında, \fIOPTIND\fR 1 ile ilklendirilir. Bir girdi gerektiren her seçenek için, girdi \fIOPTARG\fR kabuk değişkenine yerleştirilir. Girdisiz seçenekler için \fIOPTARG\fR tanımsızdır.
+.sp
+\fIseçenekler\fR seçenek harflerinden (bkz. \fBgetopt\fR(3) oluşan bir dizgedir. Bir harfin ardından iki nokta üst üste geliyorsa, seçeneğin kendisinden boşlukla ayrılabilen veya kendine bitişik bir girdisi var demektir. Komut satırında belirtilmiş bir seçenek \fIseçenekler\fR arasında yoksa, \fIdeğişken\fRe “?” atanır, \fIOPTARG\fR tanımsız olur ve çıktı standart hataya yazılır. \fIseçenekler\fR dizgesinin ilk karakteri iki nokta üst üste ise, tüm hatalar yok sayılır.
+.sp
+Son seçeneğin ardından \fIdeğişken\fRe “?” atanır ve \fBgetopts\fR sıfırdan farklı bir değerle çıkar.
+.sp
+Aşağıdaki örnekte seçenek olarak [a] ve [b] karakterleri ile girdisi olabilen [c] karakterini kabul eden bir betiğin komut satırını nasıl değerlendirileceği gösterilmiştir.
+.sp
+.RS 4
+.RS 4
+.nf
+while getopts abc: f
+do
+        case $f in
+        a | b)  secenek=$f;;
+        c)      terim=$OPTARG;;
+        \\?)     echo $USAGE; exit 1;;
+        esac
+done
+shift ’expr $OPTIND - 1’
+echo "Seçenek olmayan girdiler: " "$@"
+.fi
+.sp
+.RE
+.RE
+.IP
+Bu kodun kabul ettiği komut şunlardan biri olabilir:
+.sp
+.RS 4
+.RS 4
+.nf
+betikadı -acterim dosya dosya
+betikadı -a -c terim dosya dosya
+betikadı -cterim -a dosya dosya
+betikadı -a -cterim -- dosya dosya
+.fi
+.sp
+.RE
+.RE
+.IP
+.sp
+.TP 4
+\fBhash -rv\fR \fIkomut\fR ...
+Hatırlanan komutların yerlerini bir tablo olarak gösterir. Girdisiz kullanıldığında bu tablonun içeriği gösterilir. Son \fBcd\fR komutundan beri bakılmamış girdiler yıldız imi ile imlenir, bu girdilerin geçersiz olması mümkündür.
+.sp
+Girdi belirterek kullanıldığında, belirtilen \fIkomut\fRlar (işlev değilse) ve tablodan kaldırılır ve konumları saptanır. \fB-v\fR seçeneği ile \fBhash\fR komutların konumlarını bulduğu gibi gösterir. \fB-r\fR seçeneği, işlevler dışındaki tüm öğelerin tablodan silinmesine neden olur.
+.sp
+.TP 4
+\fBpwd\fR [\fB-LP\fR]
+Her seferinde yeniden hesaplamak yerine geçerli dizinin ne olduğunu hatırlar. Bu işleri hızlandırır. Ancak, geçerli dizinin adı değişirse, \fBpwd\fR dizinin eski adını göstermeye devam edecektir. \fB-P\fR seçeneği ile tüm sembolik bağlar hedeflerine çözümlenir. \fB-L\fR seçeneği, önceki tüm \fB-P\fR seçeneklerini etkisiz kılar.
+.sp
+.TP 4
+\fBread\fR [\fB-p\fR \fIistem\fR] [\fB-r\fR] \fIdeğişken\fR [...]
+\fB-p\fR seçeneği belirtilirse ve standart girdi bir uçbirim ise \fIistem\fR gösterilir. Daha sonra standart girdiden bir satır okunur. Satır sonu karakteri, satırdan silinir ve satır, yukarıdaki \fBBoşluk Ayıklama (Alanlara Ayırma)\fR bölümünde açıklandığı gibi bölünür ve parçalar sırayla \fIdeğişken\fRlere atanır. En az bir \fIdeğişken\fR belirtilmelidir. Parça sayısı belirtilen değişkenlerden fazlaysa, kalan parçalar (aralarındaki IFS karakterleri ile birlikte) son değişkene atanır. Parçalardan daha fazla değişken varsa, kalan değişkenlere boş dizge atanır. \fBread\fR yerleşiği, girdide dosya sonu karakteri ile karşılaşılmadığı sürece başarılı olur, aksi takdirde başarısız olur.
+.sp
+Öntanımlı olarak, \fB-r\fR seçeneği belirtilmedikçe, ters eğik çizgi "\\" bir önceleme karakteri gibi davranarak sonraki karakterin kendisi olarak ele alınmasını sağlar. Satır sonu karakterinden önce bir ters eğik çizgi varsa bu ikisi silinir.
+.sp
+.TP 4
+\fBreadonly\fR \fIisim\fR ...\p \fBreadonly -p\fR
+Belirtilen \fIisim\fRler, sonradan değiştirilememeleri veya atanamamaları için salt okunur olarak imlenir.
+.sp
+.RS 4
+.RS 4
+.nf
+\fBreadonly\fR \fIisim\fR=\fIdeğer\fR
+.fi
+.sp
+.RE
+.RE
+.IP
+sözdizimi, salt okunur olarak imlerken aynı zamanda \fIisim\fR ile belirtilen değişkene \fIdeğer\fR atanabilmesini de sağlar.
+.sp
+Komut girdisiz kullanıldığında, tüm salt okunur değişkenlerin adlarını listeler. \fB-p\fR seçeneği ile çıktı, etkileşimli olmayan kullanım için uygun şekilde biçemlendirilir.
+.sp
+.TP 4
+\fBprintf\fR \fIbiçem\fR [\fIgirdi\fR ...]
+printf, \fIbiçem\fR ile belirtilen biçeme göre \fIgirdi\fRleri biçemleyip gösterir. \fIbiçem\fR üç tür nesne içeren bir dizgedir:
+.sp
+.RS 5
+\(bu  Basitçe standart çıktıya kopyalanan karakterler
+.br
+\(bu  Dönüştürülüp standart çıktıya kopyalanan ters eğik çizgi öncelemeli karakterler
+.br
+\(bu  \fIgirdi\fRleri biçemleyen biçem belirteçleri
+.br
+.sp
+.RE
+.IP
+Belirteçler \fBb\fR, \fBc\fR veya \fBs\fR ise, \fIgirdi\fRler dizge olarak ele alınır; aksi takdirde, aşağıdaki genişletmelerle bir C sabiti olarak değerlendirilir:
+.sp
+.RS 5
+\(bu  Baştaki artı veya eksi imine izin verilir.
+.br
+\(bu  Öndeki karakter tek veya çift tırnak ise, değer sonraki karakterin ASCII kodudur.
+.br
+.sp
+.RE
+.IP
+\fIbiçem\fR dizgesi, \fIgirdi\fRler üzerinde gerektiğinde tekrar tekrar kullanılabilir. Herhangi bir ek biçem belirtimi, sıfır veya boş dizge ile değerlendirilir.
+.sp
+Ters eğik çizgi öncelemeli karakterler, ANSI X3.159-1989’da (“ANSI C89”) tanımlanan gösterime uygun olmalıdır. Karakterler ve anlamları:
+.sp
+.RS
+.TP 4
+\fB\\a\fR
+<zil> çalar.
+.sp
+.TP 4
+\fB\\b\fR
+<geri-silme> karakteri basar.
+.sp
+.TP 4
+\fB\\f\fR
+<sayfa-ileri> karakteri basar.
+.sp
+.TP 4
+\fB\\n\fR
+<satır-sonu> karakteri basar.
+.sp
+.TP 4
+\fB\\r\fR
+<satır-başı> karakteri basar.
+.sp
+.TP 4
+\fB\\t\fR
+<sekme> karakteri basar.
+.sp
+.TP 4
+\fB\\v\fR
+<düşey-sekme> karakteri basar.
+.sp
+.TP 4
+\fB\\\\\fR
+Ters eğik çizgi basar.
+.sp
+.TP 4
+\fB\\\fR\fINNN\fR
+ASCII değeri, sekizlik tabanda 1, 2 veya 3 rakamdan oluşan karakteri basar.
+.sp
+.PP
+.RE
+.IP
+Her biçem belirtimi, yüzde imiyle ("%") başlar. Biçem belirtiminin geri kalanı aşağıdaki sırayla şunları içerir:
+.sp
+.RS
+.TP 4
+Aşağıdakilerden sıfır veya daha fazlası:
+.RS
+.TP 4
+\fB#\fR
+Belirtilen alanda çıktının sola yanaştırılacağını belirten eksi imi ’\fB-\fR’; Değerin "başka bir biçimde" yazdırılması gerektiğini belirten bir "\fB#\fR" karakteri. \fBb, c, d\fR ve \fBs\fR biçemleri için bu seçeneğin hiçbir etkisi yoktur. \fBo\fR biçemi için, çıktı dizgesinin ilk karakterini sıfıra zorlamak için sayının hassasiyeti artırılır. \fBx\fR (\fBX\fR) biçemi için, sıfır olmayan bir sonucun başına \fB0x\fR (\fB0X\fR) dizgesi eklenir. \fBe, E, f, g\fR ve \fBG\fR biçemleri için, noktayı takip eden basamak olmasa bile sonuç her zaman bir ondalık nokta içerir (normalde, bu biçemlerin sonuçlarında ondalık nokta yalnızca noktayı bir basamak takip ediyorsa görünür). Normalde sonuçtan kaldırılan sağdaki sıfırlar \fBg\fR ve \fBG\fR biçemleri için kaldırılmaz.
+.sp
+.TP 4
+\fB-\fR
+Belirtilen alanda çıktının sola yanaştırılacağını belirten eksi imi.
+.sp
+.TP 4
+\fB+\fR
+İmli biçimler kullanılırken her zaman sayının önüne bir im konulması gerektiğini belirten artı imi.
+.sp
+.TP 4
+\fB‘ ’\fR
+İmli biçim için pozitif bir sayıdan önce bir boşluk bırakılması gerektiğini belirten boşluk karakteri. "+" imi de belirtilmişse boşluk geçersiz olur.
+.sp
+.TP 4
+\fB0\fR
+Dolgu karakteri olarak boşluk yerine "0" kullanılması gerektiğini belirten sıfır karakteri. "-" imi de belirtilmişse "0" geçersiz olur.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+Alan Genişliği:
+Alan genişliğini belirten isteğe bağlı rakam dizgesi; çıktı dizgesi alan genişliğinden daha az karakter içeriyorsa, alan genişliğini oluşturmak için solda (veya sola yanaştırma imi varsa sağda) boşluk bırakılır (baştaki sıfırın belirteç, aradaki sıfırların, alan genişliğinin parçası olduğu unutulmamalıdır).
+.sp
+.TP 4
+Hassasiyet:
+İsteğe bağlı nokta, ’.’, ardından \fBe\fR ve \fBf\fR biçemleri için ondalık noktadan sonra görünecek basamak sayısını veya bir dizgeden yazdırılacak azami bayt sayısını belirten isteğe bağlı sayısal bir dizge (\fBb\fR ve \fBs\fR biçemleri) hassasiyeti belirler. Sayısal dizge yoksa hassasiyetin sıfır olduğu varsayılır.
+.sp
+.TP 4
+Biçem:
+Kullanılacak biçemin türünü gösteren bir karakter (\fBdiouxXfwEgGbcs\fR harflerinden biri).
+.sp
+Alan genişliği veya hassasiyet için sayısal dizge yerine ‘*’ belirtilebilir. Bu durumda, alan genişliğini veya hassasiyeti bir girdi belirler. Biçem karakterleri ve anlamları:
+.sp
+.RS
+.TP 4
+\fBdiouXx\fR
+\fIgirdi\fR, sırasıyla, işaretli onluk (\fBd\fR veya \fBi\fR), işaretsiz sekizlik (\fBo\fR), işaretsiz onluk (\fBu\fR) veya işaretsiz onaltılık (\fBX\fR veya \fBx\fR) tabanda basılır.
+.sp
+.TP 4
+\fBf\fR
+\fIgirdi\fR, [-]\fIddd.ddd\fR biçeminde basılır; burada ondalık noktadan sonraki \fId\fR’lerin sayısı, hassasiyet belirtimindeki basamak sayısıdır. Hassasiyet belirtilmemişse 6 basamak öntanımlıdır; hassasiyet açıkça 0 ise, ondalık nokta ve sağındaki basamaklar basılmaz.
+.sp
+.TP 4
+\fBeE\fR
+\fIgirdi\fR, [-]\fId.ddde±dd\fR biçeminde basılır; burada ondalık noktadan önce bir basamak vardır ve sonraki basamak sayısı hassasiyet belirtimindeki basamak sayısıdır. Hassasiyet belirtilmemişse 6 basamak öntanımlıdır. ’\fBE\fR’ biçemi için büyük E harfi kullanılır.
+.sp
+.TP 4
+\fBgG\fR
+\fIgirdi\fR, \fBf\fR ve \fBe\fR (\fBE\fR) biçemlerinden tam hassasiyeti en küçük alanda sağlayan biçem kullanılarak basılır.
+.sp
+.TP 4
+\fBb\fR
+\fIgirdi\fRdeki karakterler, ters eğik çizgili karakterler genişletilerek basılır. Diğerlerine ek olarak aşağıdaki ters eğik çizgili karakterler desteklenir:
+.sp
+.RS
+.TP 4
+\fB\\c\fR
+Kendisini içeren \fIgirdi\fRdeki kalan karakterlerin, kalan \fIgirdi\fRlerin ve \fIbiçem\fRdeki tüm ek karakterlerin yok sayılmasına neden olur.
+.sp
+.TP 4
+\fB\\0\fR\fINNN\fR
+ASCII değeri, sekizlik tabanda 1, 2 veya 3 rakamdan oluşan 8 bitlik karakteri basar.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBc\fR
+\fIgirdi\fRnin ilk karakteri basılır.
+.sp
+.TP 4
+\fBs\fR
+\fIgirdi\fRdeki karakterler, sona ulaşılana veya hassasiyet belirtimiyle belirtilen bayt sayısına ulaşılana kadar basılır; hassasiyet belirtilmemişse, \fIgirdi\fRdeki tüm karakterler basılır.
+.sp
+.TP 4
+\fB%\fR
+Yalnızca ’%’ basar.
+.sp
+.PP
+.RE
+.IP
+Hiçbir durumda, alan genişliğinin olmayışı veya küçük alan genişliği, bir alanın kırpılmasına neden olmaz; dolgu, yalnızca belirtilen alan genişliği asıl genişliği aşarsa gerçekleşir.
+.sp
+.PP
+.RE
+.IP
+.sp
+.TP 4
+\fBset\fR [{ -\fIseçenekler\fR | +\fIseçenekler\fR | -- }] \fIgirdi\fR ...
+\fBset\fR komutunun üç farklı işlevi vardır.
+.sp
+Girdisiz kullanımda tüm kabuk değişkenlerinin değerleriyle listeler.
+.sp
+\fIseçenekler\fR verilirse, belirtilen seçenek imlerini ayarlar veya \fBGirdi Listesinin İşlenmesi\fR bölümünde açıklandığı gibi bunları temizler. Özel bir durum olarak, seçenek \fB-o\fR veya \fB+o\fR ise ve herhangi bir \fIgirdi\fR sağlanmazsa, kabuk tüm seçeneklerinin ayarlarını gösterir. Seçenek \fB-o\fR ise, ayarlar tablo olarak gösterilir; seçenek \fB+o\fR ise, ayarlar, aynı seçenek ayarlarını etkilemek için kabuğa yeniden girilmeye uygun biçimde listelenir.
+.sp
+Üçüncü kullanımında, kabuğun konumsal değişkenlerinin değerlerine belirtilen \fIgirdi\fRler atanır. Herhangi bir seçeneği değiştirmeden konumsal değişkenleri değiştirmek için, ilk girdi “--” olmalıdır. Hiçbir \fIgirdi\fR belirtilmezse, set komutu tüm konumsal değişkenleri siler ("\fBshift $#\fR" komutuna eşdeğerdir).
+.sp
+.TP 4
+\fBshift\fR [\fIN\fR]
+Konumsal değişkenleri \fIN\fR kez kaydırır. Kaydırma, \fB$1\fR’in değerini \fB$2\fR’nin değerine, \fB$2\fR’nin değerini \fB$3\fR’e vb. atamak, \fB$#\fR değerini bir azaltmak şeklinde uygulanır. \fIN\fR, konumsal değişken sayısından büyükse, \fBshift\fR hatayı belirten bir ileti gösterir ve 2 durumu ile çıkar.
+.sp
+.TP 4
+\fBtest\fR \fIifade\fR\p \fB[\fR \fIifade\fR \fB]\fR
+\fBtest\fR yerleşiği \fIifade\fRyi değerlendirir ve doğru olarak değerlendirirse çıkış durumu 0 (doğru), aksi takdirde 1 (yanlış) olur. \fIifade\fR belirtilmediği takdirde de, 1 (yanlış) ile çıkar.
+.sp
+Tüm işleçler ve seçenekler, test yerleşiği için ayrı bir girdidir.
+.sp
+\fIifade\fR öncelikle aşağıdakilerden oluşur:
+.sp
+.RS
+.TP 4
+\fB-b\fR \fIdosya\fR
+\fIdosya\fR mevcut ve blok özel dosyası ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-c\fR \fIdosya\fR
+\fIdosya\fR mevcut ve karakter özel dosyası ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-d\fR \fIdosya\fR
+\fIdosya\fR mevcut ve bir dizin ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-e\fR \fIdosya\fR
+\fIdosya\fR mevcut ise sonuç doğrudur (türüne bakılmaksızın).
+.sp
+.TP 4
+\fB-f\fR \fIdosya\fR
+\fIdosya\fR mevcut ve normal bir dosya ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-g\fR \fIdosya\fR
+\fIdosya\fR mevcut ve grup kimliği belirleme biti etkinse sonuç doğrudur.
+.sp
+.TP 4
+\fB-h\fR \fIdosya\fR
+\fIdosya\fR mevcut ve sembolik bağ ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-k\fR \fIdosya\fR
+\fIdosya\fR mevcut ve yapışkan biti etkinse sonuç doğrudur.
+.sp
+.TP 4
+\fB-n\fR \fIdizge\fR
+\fIdizge\fR uzunluğu sıfır değilse sonuç doğrudur.
+.sp
+.TP 4
+\fB-p\fR \fIdosya\fR
+\fIdosya\fR isimli bir ardışık komut (FIFO) ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-r\fR \fIdosya\fR
+\fIdosya\fR mevcut ve okunabilirse sonuç doğrudur.
+.sp
+.TP 4
+\fB-s\fR \fIdosya\fR
+\fIdosya\fR mevcut ve boyutu sıfırdan büyükse sonuç doğrudur.
+.sp
+.TP 4
+\fB-t\fR \fIdosya-tanıtıcı\fR
+\fIdosya-tanıtıcı\fRsı belirtilen dosya açık ve bir uçbirim ile ilişkili ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-u\fR \fIdosya\fR
+\fIdosya\fR mevcut ve kullanıcı kimliği belirleme biti etkinse sonuç doğrudur.
+.sp
+.TP 4
+\fB-w\fR \fIdosya\fR
+\fIdosya\fR mevcut ve yazılabilir ise sonuç doğrudur. Sonuç yanlızca yazmanın etkin olup olmadığı ile ilgilidir. Dosya salt-okunur bağlı bir dosya sisteminde olsa bile sonuç doğru olacaktır.
+.sp
+.TP 4
+\fB-x\fR \fIdosya\fR
+\fIdosya\fR mevcut ve çalıştırılabilir ise sonuç doğrudur. Sonuç yanlızca kipin etkin olup olmadığı ile ilgilidir. Dosya, bir dizin ise doğru sonucu dizinde arama yapılabileceğini belirtir.
+.sp
+.TP 4
+\fB-z\fR \fIdizge\fR
+\fIdizge\fR uzunluğu sıfır ise sonuç doğrudur.
+.sp
+.TP 4
+\fB-L\fR \fIdosya\fR
+\fIdosya\fR mevcut ve sembolik bağ ise sonuç doğrudur. Önceki sürümlerle uyumluluk için vardır. Bu seçeneğe güvenilmemeli, yerine \fB-h\fR kullanılmalıdır.
+.sp
+.TP 4
+\fB-O\fR \fIdosya\fR
+\fIdosya\fR mevcut ve dosyanın sahibi sürecin etkin kullanıcısı ile aynıysa sonuç doğrudur.
+.sp
+.TP 4
+\fB-G\fR \fIdosya\fR
+\fIdosya\fR mevcut ve dosyanın grubu sürecin etkin grubu ile aynıysa sonuç doğrudur.
+.sp
+.TP 4
+\fB-S\fR \fIdosya\fR
+\fIdosya\fR mevcut ve bir soketse sonuç doğrudur.
+.sp
+.TP 4
+\fIdosya1\fR \fB-nt\fR \fIdosya2\fR
+\fIdosya1\fR ve \fIdosya2\fR mevcut ve \fIdosya1\fR \fIdosya2\fR’den yeniyse sonuç doğrudur.
+.sp
+.TP 4
+\fIdosya1\fR \fB-ot\fR \fIdosya2\fR
+\fIdosya1\fR ve \fIdosya2\fR mevcut ve \fIdosya1\fR \fIdosya2\fR’den eskiyse sonuç doğrudur.
+.sp
+.TP 4
+\fIdosya1\fR \fB-ef\fR \fIdosya2\fR
+\fIdosya1\fR ve \fIdosya2\fR mevcut ve ikisi de aynı dosyaya bağlı ise sonuç doğrudur.
+.sp
+.TP 4
+\fIdizge\fR
+\fIdizge\fR null değilse sonuç doğrudur.
+.sp
+.TP 4
+\fIdizge1\fR \fB=\fR \fIdizge2\fR
+\fIdizge1\fR ve \fIdizge2\fR aynıysa sonuç doğrudur.
+.sp
+.TP 4
+\fIdizge1\fR \fB!=\fR \fIdizge2\fR
+\fIdizge1\fR ve \fIdizge2\fR aynı değilse sonuç doğrudur.
+.sp
+.TP 4
+\fIdizge1\fR \fB<\fR \fIdizge2\fR
+Karakterlerinin ASCII değerlerine göre \fIdizge1\fR, \fIdizge2\fRden önce geliyorsa sonuç doğrudur.
+.sp
+.TP 4
+\fIdizge1\fR \fB>\fR \fIdizge2\fR
+Karakterlerinin ASCII değerlerine göre \fIdizge1\fR, \fIdizge2\fRden sonra geliyorsa sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-eq\fR \fItamsayı2\fR
+\fItamsayı1\fR ve \fItamsayı2\fR matematiksel olarak eşitse sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-ne\fR \fItamsayı2\fR
+\fItamsayı1\fR ve \fItamsayı2\fR matematiksel olarak eşit değilse sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-gt\fR \fItamsayı2\fR
+\fItamsayı1\fR, \fItamsayı2\fR’den matematiksel olarak büyükse sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-ge\fR \fItamsayı2\fR
+\fItamsayı1\fR, \fItamsayı2\fR’den matematiksel olarak büyük veya eşitse sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-lt\fR \fItamsayı2\fR
+\fItamsayı1\fR, \fItamsayı2\fR’den matematiksel olarak küçükse sonuç doğrudur.
+.sp
+.TP 4
+\fItamsayı1\fR \fB-le\fR \fItamsayı2\fR
+\fItamsayı1\fR, \fItamsayı2\fR’den matematiksel olarak küçük veya eşitse sonuç doğrudur.
+.sp
+.PP
+.RE
+.IP
+Yukarıdaki öncüller aşağıdaki işleçlerle birlikte belirtilebilir:
+.sp
+.RS
+.TP 4
+\fB!\fR \fIifade\fR
+\fIifade\fR yanlışsa sonuç doğrudur.
+.sp
+.TP 4
+\fIifade1\fR \fB-a\fR \fIifade2\fR
+\fIifade1\fR VE \fIifade2\fR doğru ise sonuç doğrudur.
+.sp
+.TP 4
+\fIifade\fR \fB-o\fR \fIifade2\fR
+\fIifade1\fR VEYA \fIifade2\fR doğru ise sonuç doğrudur.
+.sp
+.TP 4
+(\fIifade\fR)
+\fIifade\fR doğru ise sonuç doğrudur.
+.sp
+.PP
+.RE
+.IP
+\fB-a\fR (VE) işleci \fB-o\fR (VEYA) işlecinden önceliklidir.
+.sp
+.TP 4
+\fBtimes\fR
+Kabuğun ve kabukta çalışan sürecin harcadığı kullanıcı ve sistem sürelerini basar. Çıkış durumu daima sıfırdır.
+.sp
+.TP 4
+\fBtrap\fR [\fIeylem sinyal\fR ...]
+Belirtilen \fIsinyal\fR’lerden biri alındığında kabuk \fIeylem\fR’i genişletir ve yürütür. \fIsinyal\fRler, sinyal numarasıyla veya sinyalin adıyla belirtilebilir. \fIsinyal\fR 0 veya EXIT ise, \fIeylem\fR kabuk çıktığında yürütülür. \fIeylem\fR boş olabilir (’’), bu da belirtilen \fIsinyal\fRlerin yok sayılmasına neden olur. \fIeylem\fR belirtilmez veya ’-’ olursa, belirtilen \fIsinyal\fRler için bunların öntanımlı eylemleri uygulanır. Kabuk bir alt kabuğu çatalladığında, yakalanan (ancak yok sayılmayan) sinyaller için öntanımlı eylemleri uygulanır. Trap komutunun, kabuk başlatılırken yok sayılan sinyaller üzerinde hiçbir etkisi yoktur. \fBtrap\fR girdisiz kullanımda, sinyalleri ve ilişkili eylemleri standart çıktıya (\fBtrap\fR yerleşiğinin aynı sonuçlara ulaşacağı kabuk girdileri olarak) listeler.
+.sp
+Örnekler:
+.sp
+.RS 4
+.RS 4
+.nf
+trap
+.fi
+.sp
+.RE
+.RE
+.IP
+Sinyalleri ve ilişkili eylemleri listeler.
+.sp
+.RS 4
+.RS 4
+.nf
+trap ’’ INT QUIT tstp 30
+.fi
+.sp
+.RE
+.RE
+.IP
+INT QUIT TSTP USR1 sinyallerini yoksayar.
+.sp
+.RS 4
+.RS 4
+.nf
+trap date INT
+.fi
+.sp
+.RE
+.RE
+.IP
+INT sinyali alınınca tarihi basar.
+.sp
+.TP 4
+\fBtype\fR [\fIisim\fR ...]
+Belirtilen her \fIisim\fR bir komut olarak yorumlanır ve komut aramasının çözümü gösterilir. Olası çözümler şunlardır: kabuk anahtar sözcüğü, takma ad, kabuk yerleşiği, komut, izlenen takma ad ve bulunamadı. Takma adlar için takma adın değeri gösterilir; komutlar ve izlenen takma adlar için komutun tam yolu gösterilir.
+.sp
+.TP 4
+\fBulimit\fR [\fB-H\fR | \fB-S\fR] [\fB-a\fR | \fB-tfdscmlpnv\fR [\fIdeğer\fR]]
+Süreçler üzerinde, katı ve esnek sınırları belirler veya bilgi verir ya da yeni sınırları belirler. Katı sınır (hiçbir sürecin ihlal etmesine izin verilmeyen, değeri artırılamayan veya eksiltilemeyen sınırlar) ve esnek sınır (ihlal eden sürecin sinyallenmesine ancak öldürülmemesine sebep olan değeri arttırılabilir/eksiltilebilir sınırlar) arasında seçim yapılabilmesini sağlayan seçenekler:
+.sp
+.RS
+.TP 4
+\fB-H\fR
+Katı sınırları etkinleştirir veya bilgi verir.
+.sp
+.TP 4
+\fB-S\fR
+Esnek sınırları belirler veya bilgi verir. Ne \fB-H\fR ne de \fB-S\fR belirtilmişse ya esnek sınırlar gösterilir ya da sınırların ikisi de etkin olur. İki seçenek de belirtilmişse sonuncusu kazanır.
+.sp
+.PP
+.RE
+.IP
+Sorgulanacak veya atanacak sınır aşağıdaki seçeneklere göre seçilir:
+.sp
+.RS
+.TP 4
+\fB-a\fR
+Geçerli tüm sınırlar gösterilir.
+.sp
+.TP 4
+\fB-t\fR
+İşlemci zamanı ile ilgili sınır (saniye cinsinden) gösterilir veya atanır.
+.sp
+.TP 4
+\fB-f\fR
+Oluşturulabilecek en büyük dosya boyutu (512 baytlık blok sayısı olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-d\fR
+Süreç veri segmanının boyutu (kilobayt olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-s\fR
+Süreç yığıt boyutu (kilobayt olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-c\fR
+Üretilebilecek en büyük çekirdek dökümünün boyutu (512 baytlık blok sayısı olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-m\fR
+Bir sürece ayrılan toplam fiziksel belleğin sınırı (kilobayt olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-l\fR
+Bir sürecin lock veya mlock kullanarak kilitleyebileceği bellek boyutu (kilobayt olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-p\fR
+Kullanıcının aynı anda sahibi olabileceği süreç sayısı gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-n\fR
+Bir sürecin aynı anda açabileceği dosya sayısı gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-v\fR
+Bir sürecin kullanılabileceği toplam sanal bellek (kilobayt olarak) gösterilir veya belirlenir.
+.sp
+.TP 4
+\fB-r\fR
+Bir sürecin gerçek zamanlı zamanlama önceliği gösterilir veya belirlenir.
+.sp
+.PP
+.RE
+.IP
+Bunlardan hiçbiri belirtilmezse, sınır, gösterilen veya ayarlanan dosya boyutunun sınırıdır. \fIdeğer\fR belirtilirse, sınır o sayıya ayarlanır; aksi takdirde geçerli sınır görüntülenir.
+.sp
+Bir sürecin sınırları \fBsysctl\fR(8) ile belirlenebilir veya gösterilebilir.
+.sp
+.TP 4
+\fBumask\fR [\fImaske\fR]
+umask değerini (bkz. \fBumask\fR(2)) belirtilen sekizlik değere ayarlar. \fImaske\fR belirtilmezse, umask değeri gösterilir.
+.sp
+.TP 4
+\fBunalias\fR [\fB-a\fR][\fIisim\fR]
+\fIisim\fR belirtilirse kabuk bu takma adı siler. \fB-a\fR belirtilirse tüm takma adlar silinir.
+.sp
+.TP 4
+\fBunset\fR [\fB-fv\fR ]\fIisim\fR ...
+Belirtilen değişken ve işlev \fIisim\fRleri tanımsız ve dışa aktarılmamış duruma getirilir. \fB-f\fR ve \fB-v\fR belirtilirse, işlem karşılık gelen işlev veya değişkene uygulanır. Belirtilen \fIisim\fR hem bir değişkene hem de bir işleve karşılık geliyorsa ve herhangi bir seçenek verilmezse, yalnızca değişken tanımsız olur.
+.sp
+.TP 4
+\fBwait\fR [\fIgörev\fR]
+Belirtilen \fIgörev\fRin tamamlanmasını bekler ve \fIgörev\fRdeki son sürecin çıkış durumuyla çıkar. \fIgörev\fR belirtilmezse, tüm görevlerin tamamlanmasını bekler ve sıfır durumu ile çıkar.
+.sp
+.PP
+.sp
+.SS "Komut Satırı Düzenleme"
+\fBdash\fR bir uçbirimden etkileşimli olarak kullanıldığında, geçerli komut ve komut geçmişi (Yerleşiklerde \fBfc\fR’ye bakın) \fBvi\fR kipinde komut satırı düzenlemesi kullanılarak düzenlenebilir. Bu kip, \fBvi\fR kılavuz sayfasında açıklandığı gibi kullanılır. ’\fBset -o vi\fR’ komutu, \fBvi\fR kipinde düzenlemeyi etkinleştirir ve kabuğu \fBvi\fR ekleme kipine yerleştirir. \fBvi\fR kipi etkinleştirildiğinde kabuk, ekleme kipine veya komut kipine alınabilir. \fBvi\fR’ye benzer olarak, ESC tuşuna basılırsa komut kipine girer. Komut kipindeyken Enter tuşuna basılırsa, satır kabuğa aktarılır.
+.sp
+.sp
+.SH "ÇIKIŞ DURUMU"
+Kabuk tarafından saptanan sözdizimi hatası gibi hatalar, kabuğun sıfırdan farklı bir çıkış durumuyla çıkmasına neden olur. Kabuk etkileşimli değilse, kabuk dosyasının yürütmesi durdurulur. Aksi takdirde, kabuk yürütülen son komutun çıkış durumunu döndürür veya \fBexit\fR yerleşiği sayısal bir girdi ile kullanılırsa, bu sayıyı döndürür.
+.sp
+.SH "ORTAM DEĞİŞKENLERİ"
+.TP 4
+\fBHOME\fR
+Parola dosyasındaki (\fBpasswd\fR(4)) kullanıcının oturum açma dizini olup değişkene \fBlogin\fR(1) tarafından otomatik olarak atanır. Bu ortam değişkeni ayrıca \fBcd\fR yerleşiğinin de öntanımlı girdisidir.
+.sp
+.TP 4
+\fBPATH\fR
+Yürütülebilirler için öntanımlı dosya arama yolu. Bkz: \fBDosya Yolu Araması\fR
+.sp
+.TP 4
+\fBCDPATH\fR
+\fBcd\fR yerleşik komutuyla kullanılan dosya arama yolu.
+.sp
+.TP 4
+\fBMAIL\fR
+Yeni posta için denetlenecek posta dosyasının adı. \fBMAILPATH\fR tarafından geçersiz kılınır.
+.sp
+.TP 4
+\fBMAILCHECK\fR
+\fBMAILPATH\fR veya \fBMAIL\fR değişkeni ile belirtilen dosyalara posta gelişini kabuğun denetleme sıklığının saniye cinsinden değeri. 0 atanırsa, her istemde posta denetimi yapılır.
+.sp
+.TP 4
+\fBMAILPATH\fR
+Kabuğun gelen postayı denetlemesi için iki nokta üst üste ":" ile ayrılmış dosya adları listesi. \fBMAIL\fR ortam değişkenini geçersiz kılar. Aynı anda en fazla 10 posta kutusu izlenebilir.
+.sp
+.TP 4
+\fBPS1\fR
+Birincil istem dizgesi, süper kullanıcı için “\fB# \fR”, diğer kullanıcılar için “\fB$ \fR” öntanımlıdır.
+.sp
+.TP 4
+\fBPS2\fR
+İkincil istem dizgesi, “\fB> \fR” öntanımlıdır.
+.sp
+.TP 4
+\fBPS4\fR
+Yürütme izi (\fBset -x\fR) etkinleştirildiğinde her satırdan önceki çıktı, “\fB+ \fR” öntanımlıdır.
+.sp
+.TP 4
+\fBIFS\fR
+Girdi Alanı Ayraçları. Normalde boşluk, sekme ve satırsonu karakterlerinden oluşur. Daha fazla ayrıntı için bkz: \fBBoşluk Ayıklama (Alanlara Ayırma)\fR
+.sp
+.TP 4
+\fBTERM\fR
+Kabuğun öntanımlı uçbirimi. Kabuğun çocukları tarafından miras alınır ve geçmiş düzenleme kiplerinde kullanılır.
+.sp
+.TP 4
+\fBHISTSIZE\fR
+Kabuğun geçmiş tamponundaki satır sayısı.
+.sp
+.TP 4
+\fBPWD\fR
+Geçerli çalışma dizininin mantıksal değeri. \fBcd\fR komutuyla ayarlanır.
+.sp
+.TP 4
+\fBOLDPWD\fR
+Geçerli çalışma dizininin önceki mantıksal değeri. \fBcd\fR komutuyla ayarlanır.
+.sp
+.TP 4
+\fBPPID\fR
+Kabuğun üst (ebeveyn) sürecinin süreç kimliği.
+.sp
+.PP
+.sp
+.SH "İLGİLİ DOSYALAR"
+\fI$HOME/.profile\fR
+.br
+\fI/etc/profile\fR
+.sp
+.SH "İLGİLİ BELGELER"
+\fBcsh\fR(1), \fBecho\fR(1), \fBgetopt\fR(1), \fBksh\fR(1), \fBlogin\fR(1), \fBprintf\fR(1), \fBtest\fR(1), \fBgetopt\fR(3), \fBpasswd\fR(5), \fBenviron\fR(7), \fBsysctl\fR(8).
+.sp
+.SH "GEÇMİŞ"
+\fBdash\fR, \fB/bin/sh\fR’nin mümkün olduğu kadar küçük olmayı amaçlayan POSIX uyumlu gerçeklenimidir. Gerçeklenim, \fBash\fR’in (Almquist SHell) NetBSD sürümünden çatallanarak 1997 başlarında Linux’a aktarılmış, 2002’de \fBdash\fR olarak yeniden adlandırılmıştır.
+.sp
+.SH "HATA AYIKLAMA"
+Önemli bir güvenlik riski oluşturduklarından setuid kabuk betiklerinden ne pahasına olursa olsun kaçınılmalıdır.
+.sp
+\fBPS1\fR, \fBPS2\fR ve \fBPS4\fR, gösterilmeden önce içeriği ayrıştırılmalıdır.
+.sp
+.SH "ÇEVİREN"
+© 2023 Nilgün Belma Bugüner
+.br
+Bu çeviri özgür yazılımdır: Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
+.br
+Lütfen, çeviri ile ilgili bildirimde bulunmak veya çeviri yapmak için https://github.com/TLBP/manpages-tr/issues adresinde "New Issue" düğmesine tıklayıp yeni bir konu açınız ve isteğinizi belirtiniz.
+.sp

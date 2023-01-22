@@ -13,7 +13,7 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
 ..
-.\" Derlenme zamanı: 2022-12-08T19:24:08+03:00
+.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
 .TH "PGREP" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -46,7 +46,7 @@ $ pgrep -u root sshd
 .fi
 .sp
 .RE
-komutu yalnızca, root iyeliğinde çalışan süreçlerden \fBsshd\fR(8) süreçlerini listeler. Diğer taraftan,
+komutu yalnızca, \fBroot\fR iyeliğinde çalışan süreçlerden \fBsshd\fR(8) süreçlerini listeler. Diğer taraftan,
 .sp
 .RS 4
 .nf
@@ -54,7 +54,7 @@ $ pgrep -u root,daemon
 .fi
 .sp
 .RE
-komutu root VEYA daemon iyeliğinde çalışan tüm süreçleri listeleyecektir.
+komutu \fBroot\fR VEYA \fBdaemon\fR iyeliğinde çalışan tüm süreçleri listeleyecektir.
 .sp
 \fBpkill\fR eşleşen her sürece belirtilen sinyali gönderir (\fBSIGTERM\fR öntanımlıdır), onları standart çıktıya listelemez.
 .sp
@@ -159,7 +159,7 @@ Yalnızca süreç durumu eşleşen süreçlerle eşleşir.
 .sp
 .TP 4
 \fB--ns\fR \fIsüreç-kiml\fR,...
-Aynı isim uzayına sahip süreçlerle eşleşme sağlanır. Diğer kullanıcıların aidiyetinde çalışan süreçlerle de eşleşme sağlanabilmesi için root tarafından kullanılması gerekir. Eşleşen isim uzayları sınırlanmak istenirse aşağıdaki \fB--nslist\fR seçeneği de kullanılmalıdır.
+Aynı isim uzayına sahip süreçlerle eşleşme sağlanır. Diğer kullanıcıların aidiyetinde çalışan süreçlerle de eşleşme sağlanabilmesi için \fBroot\fR tarafından kullanılması gerekir. Eşleşen isim uzayları sınırlanmak istenirse aşağıdaki \fB--nslist\fR seçeneği de kullanılmalıdır.
 .sp
 .TP 4
 \fB--nslist\fR \fIisim\fR,...

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2022-12-08T19:24:11+03:00
+.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
 .TH "EXT4" 5 "Aralık 2021" "E2fsprogs 1.46.5" "Dosya Biçimleri ve Dosya Dönüşümleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -482,9 +482,10 @@ Bu dosya özniteliklerinin açıklamaları \fBchattr\fR(1) kılavuz sayfasında 
 .SH "ÇEKİRDEK DESTEĞİ"
 Bu bölümde, belirli bir dosya sistemi özelliğinin desteklendiği dosya sistemi sürücüsü (örneğin, ext2, ext3, ext4) ve desteklendiği çekirdek sürümü listelenmiştir. Bazı durumlarda özelliğin erken çekirdek sürümlerinde de mevcut olduğu, ancak bilinen ciddi yazılım hatalarının da bulunduğu unutulmamalıdır. Diğer durumlarda, özellik hala deneysel durumda kabul edilebilir. Son olarak, bazı dağıtımların desteklenmiş özelliklere sahip eski çekirdekler içerebileceği unutulmamalıdır; özellikle belirli "enterprise" dağıtımlardaki çekirdek sürümleri son derece yanıltıcı olabilir.
 .sp
+.nr ColSize ((\n[.l] - \n[.i]) / 1n - 34)
 .TS
-tab(:) allbox;
-l1 1l1 1l.
+tab(:);
+l1 1c1 1lw(\n[ColSize]n).
 \fBÖzellik\fR :\fBDosya Sistemi\fR :\fBÇekirdek Sürümü\fR
 T{
 \fBfiletype\fR
@@ -533,7 +534,7 @@ T{
 T}:T{
 ext3
 T}:T{
-2.6.10 (online resizing)
+2.6.10 (çevrimiçi yeniden boyutlandırma)
 T}
 T{
 \fB64bit\fR
@@ -698,6 +699,7 @@ T}:T{
 T}
 .TE
 .sp
+.RE
 .sp
 .SH "İLGİLİ BELGELER"
 \fBmke2fs\fR(8), \fBmke2fs.conf\fR(5), \fBe2fsck\fR(8), \fBdumpe2fs\fR(8), \fBtune2fs\fR(8) \fBdebugfs\fR(8), \fBmount\fR(8), \fBchattr\fR(1).

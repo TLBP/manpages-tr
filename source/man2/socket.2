@@ -46,7 +46,7 @@
  * Modified 2002-07-17 by Michael Kerrisk <mtk.manpages@gmail.com>
  * Modified 2004-06-17 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2022-12-08T19:24:10+03:00
+.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
 .TH "SOCKET" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -73,8 +73,8 @@ int \fIprotocol\fR);
 \fIdomain\fR değişkeninde belirtilen adres ailesi iletişim alanını, adres ve protokol ailesini belirler. Bu aileler \fI<sys/socket.h>\fR içerisinde tanımlanmıştır. Adres ailesi sabitlerinin isimleri \fBAF\fR, protokol ailesi sabitlerinin isimleri ise \fBPF\fR ile başlar ve bunlar eşdeğerdir. Linux çekirdeği tarafından tanınan aileler:
 .sp
 .TS
-tab(:) allbox;
-l1 lw40 1l.
+tab(:);
+l1 1lw40 1l.
 \fBİsim\fR :\fBAmaç\fR :\fBKılavuz Sayfası\fR
 T{
 \fBAF_UNIX\fR
@@ -238,6 +238,7 @@ T}:T{
 T}
 .TE
 .sp
+.RE
 Yukarıdaki adres aileleri ve diğer adres aileleri için ayrıntılı bilgiler \fBaddress_families\fR(7) sayfasında bulunabilir.
 .sp
 \fBsocket\fR() çağrısının \fItype\fR değişkeni iletişim türünü belirler. Tanımlı türler:
