@@ -1,14 +1,17 @@
 Source: manpages-tr
 Section: doc
 Priority: optional
-Maintainer: Murat Demirten <murat@debian.org>
-Build-Depends: debhelper (>= 5.0), zlib1g-dev, libxslt1.1, libxml2
-Standards-Version: 3.7.3
+Maintainer: Nilgün Belma Bugüner (TLBP) <nilgun@tlbp.org.tr>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: http://tlbp.org.tr/man/
+Vcs-Git: https://github.com/TLBP/manpages-tr.git
+Vcs-Browser: https://github.com/TLBP/manpages-tr
+Rules-Requires-Root: no
 
 Package: manpages-tr
 Architecture: all
-Suggests: man-browser, manpages
-Replaces: dpkg (<< 1.13.2)
+Depends: ${misc:Depends}
 Description: Turkish version of the manual pages
  This package contains the Linux manual pages translated into Turkish.
  The following sections are included:
@@ -22,3 +25,4 @@ Description: Turkish version of the manual pages
   * 7 = Conventions and standards, macro packages, etc.
         (e.g. nroff, ascii).
   * 8 = System administration commands.
+

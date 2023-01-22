@@ -1,3 +1,9 @@
+manpages-tr (2.0.4) unstable; urgency=medium
+
+  * New Release.
+
+ -- Nilgün Belma Bugüner (TLBP) <nilgun@tlbp.org.tr>  Sat, 21 Jan 2023 18:56:59 +0300
+
 manpages-tr (1.0.5) unstable; urgency=low
 
   * New upstream version.
@@ -11,4 +17,3 @@ manpages-tr (1.0.2+cvs20040401-1) unstable; urgency=low
   * Initial Release.
 
  -- Murat Demirten <murat@debian.org>  Thu, 1 Apr 2004 01:04:50 +0100
-

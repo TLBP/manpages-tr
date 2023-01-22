@@ -1,6 +1,11 @@
+# standart kurulum:
+# make clean; make; make install
+#
+
 MANDIR = /usr/share/man/tr
 
-all:
+
+all: ilc
 	./prepare.sh;
 
 # hem paket içinde hem de sistemde varolan dosyaları
@@ -27,12 +32,25 @@ uninstall:
 	done; cd -;
 
 ilc:
-	@LANG=C gcc -Wall -o isutf8 isutf8.c; \
-	str=`./isutf8`; if [ $$str != "yes" ]; then \
+	@str=`./isutf8`; if [ $$str != "yes" ]; then \
 	    echo "Yerel karakter kodlamasi UTF-8 olmak zorunda"; \
 	    exit 1; \
 	fi
 
 clean:
-	rm -dfr ./tr/*
+	rm -rf tr
+
+debclean: clean
+	debclean
+
+deb-build: all
+
+deb-install:
+	cd tr; for i in man?; do \
+	    install -d $(DESTDIR)$(MANDIR)/"$$i"; \
+	    cp -a "$$i"/* $(DESTDIR)$(MANDIR)/"$$i"; \
+	done; cd -;
+
+deb: ilc
+	debuild
 

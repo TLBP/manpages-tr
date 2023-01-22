@@ -4,7 +4,8 @@ src="source"
 dest="tr"
 mandirs=(1 2 3 4 5 6 7 8)
 
-rm -dfr ./$dest/*
+rm -dfr ./$dest
+mkdir $dest
 
 for i in ${mandirs[@]};
 do
