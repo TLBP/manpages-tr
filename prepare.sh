@@ -21,7 +21,7 @@ do
       ln -sfT ${content:4} $j;
       content="";
     else
-      gzip -9 $j;
+      gzip -9 -n $j;
     fi
   done
   cd ../..;

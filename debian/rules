@@ -3,10 +3,6 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
-
-build:
-#empty
-
 clean:
 	dh_testdir
 	dh_testroot
@@ -15,12 +11,10 @@ clean:
 	rm -rf tr/*
 	dh_clean
 
-binary-arch: build
-
-binary-indep: build
-	$(MAKE) deb-build
+build-stamp:
 	dh_testdir
 	dh_testroot
+	$(MAKE) deb-build
 	dh_installdirs
 	$(MAKE) deb-install DESTDIR=$(CURDIR)/debian/manpages-tr
 	dh_installdirs -A /usr/share/man
@@ -42,6 +36,12 @@ binary-indep: build
 	dh_md5sums
 	dh_builddeb
 
-binary: binary-indep binary-arch
+binary: build
 
-.PHONY: binary binary-arch binary-indep clean update-prune
+build: build-arch build-indep
+
+build-arch: build-stamp
+
+build-indep: build-stamp
+
+.PHONY: binary binary-arch binary-indep buid-stamp clean update-prune
