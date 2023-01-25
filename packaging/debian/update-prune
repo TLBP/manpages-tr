@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+MIRRORURL:=http://ftp.de.debian.org/debian
+CONTENTS_ARCHLIST:=amd64 i386
+CONTENTS=$(foreach arch,$(CONTENTS_ARCHLIST),/tmp/manpages-tr.build/Contents-$(arch).gz)
+
+HTTP_GET=$(shell which curl)
+ifeq (,$(HTTP_GET))
+HTTP_GET=$(shell which wget)
+else
+HTTP_GET += -O
+endif
+ifeq (,$(HTTP_GET))
+HTTP_GET=$(shell which GET)
+endif
+
+#
+# Convenience rules. Never used in an automated build. Call by hand before
+# building a new release.
+#
+
+update-prune: debian/manpages-tr.prune
+
+/tmp/manpages-tr.build/Contents-%:
+ifeq (,$(HTTP_GET))
+	@echo "Cannot retrieve Contents files without curl, wget, or GET"; exit 1
+else
+	@echo "Retrieving up-to-date $(CONTENTS)"
+	test -d /tmp/manpages-tr.build || mkdir /tmp/manpages-tr.build
+	cd /tmp/manpages-tr.build; $(HTTP_GET) \
+		"$(MIRRORURL)/dists/unstable/main/`basename $@`"
+endif
+
+debian/manpages-tr.prune: debian/manpages-tr.prune.in $(CONTENTS)
+	cp debian/manpages-tr.prune.in debian/manpages-tr.prune
+	zgrep -vhE '[^,]doc/manpages-tr?$$' \
+		/tmp/manpages-tr.build/Contents-*.gz | \
+		grep -E '/man/tr(\.[^/]+)?/' | while read file rest; do \
+			echo "$${file%.gz}"; \
+		done | sort -u >> debian/manpages-tr.prune
+

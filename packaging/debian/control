@@ -3,10 +3,10 @@ Section: doc
 Priority: optional
 Maintainer: Nilgün Belma Bugüner (TLBP) <nilgun@tlbp.org.tr>
 Build-Depends: debhelper-compat (= 13)
-Standards-Version: 4.5.1
+Standards-Version: 4.6.2
 Homepage: http://tlbp.org.tr/man/
-Vcs-Git: https://github.com/TLBP/manpages-tr.git
 Vcs-Browser: https://github.com/TLBP/manpages-tr
+Vcs-Git: https://github.com/TLBP/manpages-tr.git
 Rules-Requires-Root: no
 
 Package: manpages-tr

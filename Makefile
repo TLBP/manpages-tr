@@ -43,7 +43,8 @@ clean:
 debclean: clean
 	debclean
 
-deb-build: all
+deb-build:
+	./prepare.sh;
 
 deb-install:
 	cd tr; for i in man?; do \
