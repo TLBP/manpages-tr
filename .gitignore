@@ -1,0 +1,4 @@
+debian
+# Swap Files #
+.*.kate-swp
+.swp.*
