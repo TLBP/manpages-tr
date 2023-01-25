@@ -52,6 +52,6 @@ deb-install:
 	    cp -a "$$i"/* $(DESTDIR)$(MANDIR)/"$$i"; \
 	done; cd -;
 
-deb: ilc
+deb:
 	debuild
 
