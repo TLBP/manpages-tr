@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "TAIL" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -33,7 +33,7 @@ Son \fISAYI\fR baytı gösterir. Her dosyanın \fISAYI\fR baytından sonrasını
 .sp
 .TP 4
 \fB-f\fR, \fB--follow\fR[={name|descriptor}]
-Dosyayı sürekli izler, yeni satırlar eklendikçe onları da çıktıya yazar. \fB--follow=name\fR ile dosya ismini kullanarak izler, \fB--follow=descriptor\fR ile dosya açıldığında sistemin döndürdüğü dosya tanıtıcısını kullanarak izler. Seçeneğe değer belirtilmediğinde ’descriptor’ kullanıldığı varsayılır.
+Dosyayı sürekli izler, yeni satırlar eklendikçe onları da çıktıya yazar. \fB--follow=name\fR ile dosya ismini kullanarak izler, \fB--follow=descriptor\fR ile dosya açıldığında sistemin döndürdüğü dosya tanıtıcısını kullanarak izler. Seçeneğe değer belirtilmediğinde \&'descriptor\&' kullanıldığı varsayılır.
 .sp
 .TP 4
 \fB-F\fR
@@ -80,9 +80,9 @@ Sürüm bilgilerini görüntüler ve çıkar.
 Satırları satır sonu karakteri ile değil 0. karakter ile sonlandırır
 .sp
 .PP
-\fISAYI\fRnın (bayt veya satır sayısı) ilk karakteri ’\fB+\fR’ ise, \fISAYI\fRncı satır veya bayttan itibaren dosyanın içeriğini yazar, aksi halde dosyadaki son \fISAYI\fR girdiyi yazar. \fIsayı\fR, çarpım soneki alabilir: b = 512, KB = 1000, K = 1024, MB = 1000*1000, M = 1024*1024 ve G, T, P, E, Z, Y için de benzer şekilde gider. Ayrıca, ikil birimlerde belirtilebilir: KiB=K, MiB=M, vb.
+\fISAYI\fRnın (bayt veya satır sayısı) ilk karakteri `\fB+\fR\&' ise, \fISAYI\fRncı satır veya bayttan itibaren dosyanın içeriğini yazar, aksi halde dosyadaki son \fISAYI\fR girdiyi yazar. \fIsayı\fR, çarpım soneki alabilir: b = 512, KB = 1000, K = 1024, MB = 1000*1000, M = 1024*1024 ve G, T, P, E, Z, Y için de benzer şekilde gider. Ayrıca, ikil birimlerde belirtilebilir: KiB=K, MiB=M, vb.
 .sp
-\fB--follow\fR (\fB-f\fR) seçeneğinde \fB=name\fR belirtilmedikçe, \fBtail\fR dosya tanıtıcısını kullanarak dosyayı izler. Böylelikle dosyanın ismi değişse bile dosyayı izlemeye devam eder. Bazı durumlarda belli bir dosya adını izlemek istiyor olabilirsiniz, o zaman \fB--follow=name\fR seçeneğini kullanın (örneğin ’\fBtail --follow=name deneme\fR’ dediğinizde, \fIdeneme\fR dosyası arada silinse, sonra yerine başka bir \fIdeneme\fR dosyası oluşsa bile bütün bunlar olurken ’\fIdeneme\fR’ dosyasının içinde olanları göstermeye devam eder).
+\fB--follow\fR (\fB-f\fR) seçeneğinde \fB=name\fR belirtilmedikçe, \fBtail\fR dosya tanıtıcısını kullanarak dosyayı izler. Böylelikle dosyanın ismi değişse bile dosyayı izlemeye devam eder. Bazı durumlarda belli bir dosya adını izlemek istiyor olabilirsiniz, o zaman \fB--follow=name\fR seçeneğini kullanın (örneğin `\fBtail --follow=name deneme\fR\&' dediğinizde, \fIdeneme\fR dosyası arada silinse, sonra yerine başka bir \fIdeneme\fR dosyası oluşsa bile bütün bunlar olurken `\fIdeneme\fR\&' dosyasının içinde olanları göstermeye devam eder).
 .sp
 .SH "YAZAN"
 Paul Rubin, David MacKenzie, Ian Lance Taylor ve Jim Meyering tarafından yazılmıştır.
@@ -98,7 +98,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .sp
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/tail>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) tail invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) tail invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006, 2022 Nilgün Belma Bugüner

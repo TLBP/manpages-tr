@@ -7,7 +7,7 @@
  *
  * Licensed under version 2 of the Gnu General Public License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "PS" 1 "11 Mayıs 2022" "procps-ng 4.0.2" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -26,7 +26,7 @@ ps - mevcut süreçlerin anlık görüntüsünü listeler
 .SH "AÇIKLAMA"
 \fBps\fR, etkin süreçlerin bir seçimi hakkında bilgi görüntüler. Seçimin ve görüntülenen bilgilerin yinelenerek güncellemesi isteniyorsa, bunun yerine \fBtop\fR kullanılabilir.
 .sp
-\fBps\fR’nin bu sürümü birkaç çeşit seçenek kabul eder:
+\fBps\fR\&'nin bu sürümü birkaç çeşit seçenek kabul eder:
 .sp
 .PD 1
 .RS 1
@@ -39,9 +39,9 @@ Gruplanabilen ve kısa çizgi ile kullanılmaması gereken BSD seçenekleri.
 .sp
 .RE
 .PD 0
-Farklı türdeki seçenekler özgürce karıştırılabilir, ancak çakışmalar ortaya çıkabilir. \fBps\fR’nin uyumlu olduğu birçok standart ve birçok \fBps\fR gerçeklenimi olması nedeniyle işlevsel olarak aynı olan bazı özdeş seçenekler vardır.
+Farklı türdeki seçenekler özgürce karıştırılabilir, ancak çakışmalar ortaya çıkabilir. \fBps\fR\&'nin uyumlu olduğu birçok standart ve birçok \fBps\fR gerçeklenimi olması nedeniyle işlevsel olarak aynı olan bazı özdeş seçenekler vardır.
 .sp
-\fBps -aux\fR’un \fBps aux\fR’dan farklı olduğu unutulmamalıdır. POSIX ve UNIX standartları, \fBps -aux\fR’un \fIx\fR adlı bir kullanıcının sahip olduğu tüm süreçleri ve \fB-a\fR seçeneği tarafından seçilecek tüm süreçleri yazdırmasını gerektirir. Eğer \fIx\fR adlı kullanıcı yoksa \fBps\fR, komutu \fBps -aux\fR olarak yorumlayıp uyarı verebilir. Bu davranış, eski komut dosyalarından ve alışkanlıklardan yenisine geçişe yardımcı olmayı amaçlamaktadır. Kırılgandır, değişebilir ve bu nedenle güvenilmemelidir.
+\fBps -aux\fR\&'un \fBps aux\fR\&'dan farklı olduğu unutulmamalıdır. POSIX ve UNIX standartları, \fBps -aux\fR\&'un \fIx\fR adlı bir kullanıcının sahip olduğu tüm süreçleri ve \fB-a\fR seçeneği tarafından seçilecek tüm süreçleri yazdırmasını gerektirir. Eğer \fIx\fR adlı kullanıcı yoksa \fBps\fR, komutu \fBps -aux\fR olarak yorumlayıp uyarı verebilir. Bu davranış, eski komut dosyalarından ve alışkanlıklardan yenisine geçişe yardımcı olmayı amaçlamaktadır. Kırılgandır, değişebilir ve bu nedenle güvenilmemelidir.
 .sp
 Öntanımlı olarak \fBps\fR, geçerli kullanıcıyla aynı etkin kullanıcı kimliğine (\fBeuid=\fR\fIEKK\fR) sahip ve çağrıldığı uçbirimle ilişkili tüm süreçleri seçer. Süreç kimliğini (\fBpid=\fR\fISK\fR), süreçle ilişkili uçbirimi (\fBtname=\fR\fIUÇBİRİM\fR), \fI[GG-]SS:DD:ss\fR biçiminde (\fBtime=\fR\fIZAMAN\fR) birikimli işlemci süresini ve çalıştırılabilir adı (\fBcomm=\fR\fIKOMUT\fR) görüntüler. Çıktı öntanımlı olarak sıralanmamıştır.
 .sp
@@ -127,7 +127,7 @@ ps -Ao pid,tt,user,fname,tmout,f,wchan\fR
 .SH "BASİT SÜREÇ SEÇİMİ"
 .TP 4
 \fBa\fR
-Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "yalnızca kendiniz" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR’nin tüm uçbirimli süreçleri listelemesine veya \fBx\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
+Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "yalnızca kendiniz" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR\&'nin tüm uçbirimli süreçleri listelemesine veya \fBx\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
 .sp
 .TP 4
 \fB-A\fR, \fB-e\fR
@@ -159,7 +159,7 @@ Seçimi çalışan süreçlerle sınırlar.
 .sp
 .TP 4
 \fBx\fR
-Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "uçbirimi olmalıdır" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR’nin size ait (\fBps\fR ile aynı etkin kullanıcı kimlikli) tüm süreçleri listelemesine veya \fBa\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
+Bazı BSD tarzı ("-" olmadan) seçenekler kullanıldığında veya \fBps\fR kişiliği BSD-gibi olduğunda, tüm süreçler kümesine uygulanan BSD tarzı "uçbirimi olmalıdır" kısıtlamasını kaldırır. Başka bir deyişle, bu şekilde seçilen süreçler kümesine ek olarak bu seçenek, \fBps\fR\&'nin size ait (\fBps\fR ile aynı etkin kullanıcı kimlikli) tüm süreçleri listelemesine veya \fBa\fR seçeneğiyle birlikte kullanıldığında tüm süreçleri listelemesine neden olur.
 .sp
 .PP
 .sp
@@ -210,7 +210,7 @@ Oturum kimliğine göre seçer. Oturum kimliği \fIOKİMLİKLERİ\fR listesinde 
 .sp
 .TP 4
 \fBt\fR \fIUÇBİRİMLER\fR\p \fB-t\fR \fIUÇBİRİMLER\fR\p \fB--tty\fR \fIUÇBİRİMLER\fR
-Uçbirime göre seçer. Bu, \fIUÇBİRİMLER\fR listesinde verilen uçbirimlerle ilişkili süreçleri seçer. Uçbirimler (tty’ler veya metin çıktı ekranları) birkaç biçimde belirtilebilir: \fI/dev/ttyS1, ttyS1, S1\fR. Hiçbir uçbirime bağlı olmayan süreçleri seçmek için düz bir "-" kullanılabilir.
+Uçbirime göre seçer. Bu, \fIUÇBİRİMLER\fR listesinde verilen uçbirimlerle ilişkili süreçleri seçer. Uçbirimler (tty\&'ler veya metin çıktı ekranları) birkaç biçimde belirtilebilir: \fI/dev/ttyS1, ttyS1, S1\fR. Hiçbir uçbirime bağlı olmayan süreçleri seçmek için düz bir "-" kullanılabilir.
 .sp
 \fBps\fR ile ilişkili uçbirimi belirtmek için boş bir \fIUÇBİRİMLER\fR listesi ile birlikte de kullanılabilir. \fBT\fR seçeneğini kullanmak, boş bir \fIUÇBİRİMLER\fR listesi ile \fBt\fR kullanmaktan daha temiz kabul edilir.
 .sp
@@ -330,7 +330,7 @@ Süreç ağaçları ASCII çizimle gösterilir.
 .sp
 .TP 4
 \fBh\fR
-Başlıklar gösterilmez. (BSD kişiliğinde ise başlık her ekranda gösterilir). \fBh\fR seçeneği biraz sorunludur. Standart BSD \fBps\fR sürümünde, çıktının her sayfasında başlığı göstermek için bu seçenek kullanır, ancak daha eski Linux \fBps\fR sürümlerinde bu seçenek, başlığı tamamen devre dışı bırakmak için kullanır. \fBps\fR’nin bu sürümü, BSD kişiliği seçilirse çıktının her sayfasına bir başlık yazdıran, seçilmezse başlığı yazdırmayan Linux kullanımını takip eder. Mevcut kişilikten bağımsız olarak, her sayfaya başlık yazdırmayı etkinleştirmek için \fB--headers\fR, başlıkları tamamen devre dışı bırakmak için \fB--no-headers\fR seçenekleri kullanılabilir.
+Başlıklar gösterilmez. (BSD kişiliğinde ise başlık her ekranda gösterilir). \fBh\fR seçeneği biraz sorunludur. Standart BSD \fBps\fR sürümünde, çıktının her sayfasında başlığı göstermek için bu seçenek kullanır, ancak daha eski Linux \fBps\fR sürümlerinde bu seçenek, başlığı tamamen devre dışı bırakmak için kullanır. \fBps\fR\&'nin bu sürümü, BSD kişiliği seçilirse çıktının her sayfasına bir başlık yazdıran, seçilmezse başlığı yazdırmayan Linux kullanımını takip eder. Mevcut kişilikten bağımsız olarak, her sayfaya başlık yazdırmayı etkinleştirmek için \fB--headers\fR, başlıkları tamamen devre dışı bırakmak için \fB--no-headers\fR seçenekleri kullanılabilir.
 .sp
 .TP 4
 \fB--headers\fR
@@ -420,9 +420,9 @@ procps-ng sürüm bilgilerini gösterir.
 .PP
 .sp
 .SH "EK BİLGİ"
-Bu \fBps\fR, \fI/proc\fR içindeki sanal dosyaları okuyarak çalışır. Bu \fBps\fR’nin çalışması için setuid kmem veya herhangi bir ayrıcalık gerekmez. Bu \fBps\fR’ye herhangi bir özel izin vermek gerekmez.
+Bu \fBps\fR, \fI/proc\fR içindeki sanal dosyaları okuyarak çalışır. Bu \fBps\fR\&'nin çalışması için setuid kmem veya herhangi bir ayrıcalık gerekmez. Bu \fBps\fR\&'ye herhangi bir özel izin vermek gerekmez.
 .sp
-İşlemci kullanımı şu anda, bir sürecin çalıştığı sürenin tüm yaşam süresine yüzdelik oranı olarak ifade edilmektedir. Bu ideal değildir ve \fBps\fR’nin uyumlu olduğu standartlara uygun değildir. İşlemci kullanımı üst üste eklenerek %100’e ulaşamaz.
+İşlemci kullanımı şu anda, bir sürecin çalıştığı sürenin tüm yaşam süresine yüzdelik oranı olarak ifade edilmektedir. Bu ideal değildir ve \fBps\fR\&'nin uyumlu olduğu standartlara uygun değildir. İşlemci kullanımı üst üste eklenerek %100\&'e ulaşamaz.
 .sp
 SIZE ve RSS alanları, bir sürecin sayfa tabloları, çekirdek yığıtı, struct thread_info ve struct task_struct gibi bazı bölümlerini hesaba katmaz. Bu genellikle kalıcı olan en az 20 KiB bellektir. SIZE, sürecin sanal boyutudur (kod+veri+yığıt).
 .sp
@@ -468,14 +468,14 @@ Z    zombi süreç, işi bitti ama ebeveyni yok etmedi
 N    düşük öncelik (diğer kullanıcılar için iyi)
 L    bellekte kilitli sayfaları var (gerçek zamanlı veya özel G/Ç için)
 s    oturum lideri
-l    çok evreli (CLONE_THREAD kullanarak, NPTL pthread’lerinin yaptığı gibi)
+l    çok evreli (CLONE_THREAD kullanarak, NPTL pthread\&'lerinin yaptığı gibi)
 +    önalan süreçleri grubunda
 .fi
 .sp
 .RE
 .sp
 .SH "ESKİ SIRALAMA BELİRTEÇLERİ"
-Bu kısa belirteçler BSD \fBO\fR seçeneği tarafından kullanılır (sıralama için kullanıldığında). GNU \fB--sort\fR seçeneği bu belirteçleri kullanmaz, ancak aşağıda \fBSTANDART BİÇEM BELİRTEÇLERİ\fR bölümünde açıklanan belirteçleri kullanır. Sıralamada kullanılan değerlerin, bazı çıktı biçemleme alanlarında kullanılan "harmanlanmış" değerler değil, \fBps\fR’nin kullandığı dahili değerler olduğuna dikkat edin (örneğin, tty’de sıralama, gösterilen uçbirim adına göre değil, aygıt numarasına göre yapılır). Harmanlanmış değerleri sıralamak istenirse \fBps\fR çıktısı \fBsort\fR(1) komutuna aktarılabilir.
+Bu kısa belirteçler BSD \fBO\fR seçeneği tarafından kullanılır (sıralama için kullanıldığında). GNU \fB--sort\fR seçeneği bu belirteçleri kullanmaz, ancak aşağıda \fBSTANDART BİÇEM BELİRTEÇLERİ\fR bölümünde açıklanan belirteçleri kullanır. Sıralamada kullanılan değerlerin, bazı çıktı biçemleme alanlarında kullanılan "harmanlanmış" değerler değil, \fBps\fR\&'nin kullandığı dahili değerler olduğuna dikkat edin (örneğin, tty\&'de sıralama, gösterilen uçbirim adına göre değil, aygıt numarasına göre yapılır). Harmanlanmış değerleri sıralamak istenirse \fBps\fR çıktısı \fBsort\fR(1) komutuna aktarılabilir.
 .sp
 .nr ColSize ((\n[.l] - \n[.i]) / 1n - 20)
 .TS
@@ -1083,7 +1083,7 @@ lxc
 T}:T{
 LXC
 T}:T{
-İçinde bir görevin çalıştığı lxc kapsayıcısının adı. Süreç kapsayıcı içinde çalışmıyorsa, tire (’-’) gösterilir.
+İçinde bir görevin çalıştığı lxc kapsayıcısının adı. Süreç kapsayıcı içinde çalışmıyorsa, tire (\&'-\&') gösterilir.
 T}
 T{
 machine
@@ -1474,7 +1474,7 @@ start_time
 T}:T{
 START
 T}:T{
-Sürecin çalıştırıldığı tarih veya saat.  Süreç, \fBps\fR’nin çağrıldığı yıl başlatılmamışsa yalnızca yıl, aynı gün başlatılmamışsa "AaaGG" aksi takdirde "SS:DD" olarak görüntülenir. Ayrıca bkz: \fBbsdstart\fR, \fBstart\fR, \fBlstart\fR ve \fBstime\fR.
+Sürecin çalıştırıldığı tarih veya saat.  Süreç, \fBps\fR\&'nin çağrıldığı yıl başlatılmamışsa yalnızca yıl, aynı gün başlatılmamışsa "AaaGG" aksi takdirde "SS:DD" olarak görüntülenir. Ayrıca bkz: \fBbsdstart\fR, \fBstart\fR, \fBlstart\fR ve \fBstime\fR.
 T}
 T{
 stat
@@ -1809,7 +1809,7 @@ Kötü "özellikleri" görmezden gelmek için bahaneler bulunmaz.
 \fBCMD_ENV\fR=\fIirix\fR standartdışı davranışını iptal eder.
 .sp
 .PP
-Genel olarak, bu değişkenleri tanımlamak kötü fikirdir. Tek istisna, normal sistemler için Linux olarak tanımlanabilen \fBCMD_ENV\fR veya \fBPS_PERSONALITY\fR’dir. Bu tanım olmadan \fBps\fR, Unix98 standardının yararsız ve kötü kısımlarını izler.
+Genel olarak, bu değişkenleri tanımlamak kötü fikirdir. Tek istisna, normal sistemler için Linux olarak tanımlanabilen \fBCMD_ENV\fR veya \fBPS_PERSONALITY\fR\&'dir. Bu tanım olmadan \fBps\fR, Unix98 standardının yararsız ve kötü kısımlarını izler.
 .sp
 .SH "KİŞİLİK"
 .RS 0
@@ -1847,7 +1847,7 @@ unix98     standart
 \fBpgrep\fR(1), \fBpstree\fR(1), \fBtop\fR(1), \fBproc\fR(5).
 .sp
 .SH "STANDARTLAR"
-\fBps\fR’nin bu sürümü şu standartlarla uyumludur:
+\fBps\fR\&'nin bu sürümü şu standartlarla uyumludur:
 .sp
 .PD 1
 .RS 1

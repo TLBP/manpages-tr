@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "STDBUF" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ stdbuf - satırları rasgele karar
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fIKOMUT\fR’u standart akımı için değiştirilmiş tamponlama işlemleri ile çalıştırır.
+\fIKOMUT\fR\&'u standart akımı için değiştirilmiş tamponlama işlemleri ile çalıştırır.
 .sp
 Uzun seçenekler için zorunlu olan girdiler kısa seçenekler için de zorunludur.
 .sp
@@ -46,11 +46,11 @@ Yardım iletisini gösterir ve çıkar.
 Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .PP
-\fIKİP\fR ’L’ ise ilgili akım satır tamponlu olur. Bu seçenek standart girdi için geçersizdir.
+\fIKİP\fR \&'L\&' ise ilgili akım satır tamponlu olur. Bu seçenek standart girdi için geçersizdir.
 .sp
-\fIKİP\fR ’0’ ise ilgili akım tamponlanmaz.
+\fIKİP\fR \&'0\&' ise ilgili akım tamponlanmaz.
 .sp
-\fIKİP\fR ’0’ dışında bir sayı ise şu soneklerden birini içerebilir: KB (1000), K (1024), MB (1000*1000), M (1024*1024) ve G, T, P, E, Z, Y için benzer şekilde. İkil sonekler de kullanılabilir: KiB=K, MiB=M ve benzerleri. Bu durumda ilgili akım \fIKİP\fR baytlık bir tamponla tamamen tamponlanır.
+\fIKİP\fR \&'0\&' dışında bir sayı ise şu soneklerden birini içerebilir: KB (1000), K (1024), MB (1000*1000), M (1024*1024) ve G, T, P, E, Z, Y için benzer şekilde. İkil sonekler de kullanılabilir: KiB=K, MiB=M ve benzerleri. Bu durumda ilgili akım \fIKİP\fR baytlık bir tamponla tamamen tamponlanır.
 .sp
 .TP 4
 \fBBilgi:\fR
@@ -60,7 +60,7 @@ Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .SH "ÖRNEKLER"
 .IP "
-\fBtail -f access.log | stdbuf -oL cut -d ’ ’ -f1 | uniq\fR
+\fBtail -f access.log | stdbuf -oL cut -d \&' \&' -f1 | uniq\fR
 " 4
 Erişim günlüğündeki eşsiz girdilerin anında gösterilmesini sağlar.
 .sp
@@ -79,7 +79,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/stdbuf>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) stdbuf invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) stdbuf invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

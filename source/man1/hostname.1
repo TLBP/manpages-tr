@@ -24,7 +24,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "HOSTNAME" 1 "16 Eylüll 2009" "hostname 3.23" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -91,7 +91,7 @@ Konak adı genellikle sistem açılışı sırasında bir kerelik \fI/etc/init.d
 .SS "Tam Alan Adı (FQDN)"
 Sistemin tam alan adı, konak adı için \fBresolver\fR(3) tarafından döndürülen addır (örn, \fIursula.example.com\fR). genellikle konak adı, alan adının öncesine yazılır (ilk noktadan sonraki ad, alan adıdır) Tam alan adını \fBhostname --fqdn\fR ile ve DNS alan adını \fBdnsdomainname\fR ile öğrenebilirsiniz.
 .sp
-\fBhostname\fR ve \fBdnsdomainname\fR ile tam alan adını (FQDN’yi) değiştiremezsiniz.
+\fBhostname\fR ve \fBdnsdomainname\fR ile tam alan adını (FQDN\&'yi) değiştiremezsiniz.
 .sp
 Tam alan adını atamak için önerilen yöntem, konak adını DNS, NIS veya \fI/etc/hosts\fR dosyasını kullanarak tam alan adının takma adı yapmaktır. Örneğin, konak adı "ursula" ise \fI/etc/hosts\fR dosyasının içeriği şöyle olurdu:
 .sp
@@ -158,7 +158,7 @@ FQDN, takma adlar ve konağın ağ adresleri aranırken \fBhostname\fR tarafınd
 .sp
 .SH "İLGİLİ DOSYALAR"
 .IP "\fI/etc/hostname\fR" 4
-Tarihsel olarak bu dosyanın, tam standart FQDN’yi değil, yalnızca konak adını içermesi gerekiyordu. Günümüzde çoğu yazılım burada tam bir FQDN ile başa çıkabilmektedir. Bu dosya, konak adını ayarlamak için sistem ilklendirme betikleri tarafından önyükleme sırasında okunur.
+Tarihsel olarak bu dosyanın, tam standart FQDN\&'yi değil, yalnızca konak adını içermesi gerekiyordu. Günümüzde çoğu yazılım burada tam bir FQDN ile başa çıkabilmektedir. Bu dosya, konak adını ayarlamak için sistem ilklendirme betikleri tarafından önyükleme sırasında okunur.
 .IP "\fI/etc/hosts\fR" 4
 Genellikle burası, konak adını tam alan adına takma ad olarak vererek alan adının ayarlandığı yerdir.
 .sp

@@ -23,7 +23,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "SULOGIN" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -53,13 +53,13 @@ Tek kullanıcılı kabuktan çıkıldığında veya Ctrl-D tuşlandığında sis
 .SH "SEÇENEKLER"
 .TP 4
 \fB-e\fR, \fB--force\fR
-Sistemden \fBgetpwnam\fR(3) aracılığıyla root parolası alınamazsa, parolayı almak için \fI/etc/passwd\fR ve \fI/etc/shadow\fR incelenir. Bu dosyalar zarar görmüşse veya mevcut değilse veya root hesabı ’\fB!\fR’ ile kilitlendiğinde veya parolanın başında ’\fB*\fR’ varsa \fBsulogin\fR parola sormadan root kabuğunu başlatır.
+Sistemden \fBgetpwnam\fR(3) aracılığıyla root parolası alınamazsa, parolayı almak için \fI/etc/passwd\fR ve \fI/etc/shadow\fR incelenir. Bu dosyalar zarar görmüşse veya mevcut değilse veya root hesabı \&'\fB!\fR\&' ile kilitlendiğinde veya parolanın başında \&'\fB*\fR\&' varsa \fBsulogin\fR parola sormadan root kabuğunu başlatır.
 .sp
 \fB-e\fR seçeneğini yalnızca konsolun yetkisiz erişime karşı fiziksel olarak korunduğundan emin olunduğu takdirde kullanın.
 .sp
 .TP 4
 \fB-p\fR, \fB--login-shell\fR
-\fBsulogin\fR’in kabuğu oturum açma kabuğu olarak başlatmasına sebep olur.
+\fBsulogin\fR\&'in kabuğu oturum açma kabuğu olarak başlatmasına sebep olur.
 .sp
 .TP 4
 \fB-t\fR, \fB--timeout\fR \fISÜRE\fR

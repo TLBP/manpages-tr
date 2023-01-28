@@ -28,7 +28,7 @@
  *    products derived from this software without specific prior written
  *    permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ’’AS IS’’ AND ANY EXPRESS
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -43,7 +43,7 @@
  * Julian Seward, jseward@acm.org
  * bzip2/libbzip2 version 1.0.8 of 13 July 2019
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "BZIP2" 1 "Temmuz 2019" "bzip2 1.0.8" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -74,7 +74,7 @@ bzip2recover - zarar görmüş bzip2 dosyalarındaki verileri kurtarır
 .SH "AÇIKLAMA"
 \fBbzip2\fR, Burrows-Wheeler küme sıralamalı metin sıkıştırma algoritmasını ve Huffman kodlamasını kullanarak dosyaları sıkıştırır. Sıkıştırma oranı geleneksel LZ77/LZ78 tabanlı sıkıştırma araçlarından çok daha iyidir. PPM ailesi istatistiksel sıkıştırıcıların başarımına oldukça yakındır.
 .sp
-Komut satırı seçenekleri kasıtlı olarak GNU \fBgzip\fR’e oldukça benzer şekilde yapılmıştır, fakat birebir aynı değildir.
+Komut satırı seçenekleri kasıtlı olarak GNU \fBgzip\fR\&'e oldukça benzer şekilde yapılmıştır, fakat birebir aynı değildir.
 .sp
 \fBbzip2\fR, komut satırı seçeneklerine eşlik edecek dosya isimlerinin listesini ister. Her dosya sıkıştırılmış sürümü ile değiştirilir ve ismi "\fIözgün_dosya.bz2\fR" şekline dönüştürülür. Her sıkıştırılmış dosya, özgün dosya ile aynı izinlere, aynı düzenlenme tarihlerine ve mümkün ise aynı iyeliklere sahiptir. Bu sayede sıkıştırılmış dosya açıldığı zaman özgün dosya elde edilmiş olur. Dosya isimlerinin yönetimi, özgün dosya ismini koruyamayacak, izinler ve iyelikleri veya tarihleri kendi dosya sistemi içinde bulunduramayacak dosya sistemlerinin (mesela MS-DOS) olduğu düşüncesi ile yürütülmektedir. Muhtemel dosya ismi uzunluğu kısıtlamalarını da unutmamak gerekir.
 .sp
@@ -108,10 +108,10 @@ Ayrıca \fB-c\fR seçeneğini belirterek standart çıktıda dosyaları sıkış
 .sp
 Sıkıştırma işlemi, sıkıştırılmış dosya özgün dosyadan biraz büyük olsa bile, mutlaka yapılır. Yüz bayttan küçük dosyalar şişmanlamaya meyillidir. Çünkü sıkıştırma algoritması ilk 50 bayta yazılacak bir sabite sahiptir. Rasgele veri (pek çok dosya sıkıştırıcısının çıktısı dahil) bayt başına 8.05 bitlik bir oran ile kodlanır. Bu da yaklaşık binde 5 genişlemeye sebep olur.
 .sp
-Bir özdenetim mekanizması olarak, \fBbzip2\fR 32 bitlik CRC kullanır ve açılan dosya ile orijinal sıkıştırılmış dosyanın aynı olup olmadığına bakar. Bu tedbir sıkıştırılmış dosyada oluşabilecek bozulmalar ve \fBbzip2\fR’de olması olası yazılım hatalarına karşı güvenlik sağlar. Elden geçirilen her dosya için saptanamayabilecek hata oranı mikroskobiktir ve 4 milyarda birin altındadır. Bununla birlikte uyanık olmakta fayda vardır, sınama sıkıştırma açılırken yapılır ve sadece bir takım şeylerin yanlış olduğunu söyler. Sıkıştırılmamış özgün verileri kurtarmanıza yardımı olmaz. Bu durumda, verileri kurtarmak için \fBbzip2recover\fR kullanmalısınız.
+Bir özdenetim mekanizması olarak, \fBbzip2\fR 32 bitlik CRC kullanır ve açılan dosya ile orijinal sıkıştırılmış dosyanın aynı olup olmadığına bakar. Bu tedbir sıkıştırılmış dosyada oluşabilecek bozulmalar ve \fBbzip2\fR\&'de olması olası yazılım hatalarına karşı güvenlik sağlar. Elden geçirilen her dosya için saptanamayabilecek hata oranı mikroskobiktir ve 4 milyarda birin altındadır. Bununla birlikte uyanık olmakta fayda vardır, sınama sıkıştırma açılırken yapılır ve sadece bir takım şeylerin yanlış olduğunu söyler. Sıkıştırılmamış özgün verileri kurtarmanıza yardımı olmaz. Bu durumda, verileri kurtarmak için \fBbzip2recover\fR kullanmalısınız.
 .sp
 .SS "Dönen Değerler:"
-Normal çıktı için 0, çevresel sorunlar için 1 (dosya bulunamaması, geçersiz seçenekler, G/Ç hataları, vs..), sıkıştırılmış dosyada bozukluk için 2, bzip2’nin paniklemesine sebep olan dahili bir tutarlılık hatası için 3 (yazılım hatası).
+Normal çıktı için 0, çevresel sorunlar için 1 (dosya bulunamaması, geçersiz seçenekler, G/Ç hataları, vs..), sıkıştırılmış dosyada bozukluk için 2, bzip2\&'nin paniklemesine sebep olan dahili bir tutarlılık hatası için 3 (yazılım hatası).
 .sp
 .sp
 .SH "SEÇENEKLER"
@@ -121,7 +121,7 @@ Standart çıktıda sıkıştırılır veya açar.
 .sp
 .TP 4
 \fB-d\fR, \fB--decompress\fR
-Mutlaka açma işlemi yapılır. \fBbzip2\fR, \fBbunzip2\fR ve \fBbzcat\fR aslında aynı yazılımdır ve yapılması gereken işlem, kullanılan komut ismine göre kararlaştırılır. Bu seçenek, bu yöntemi yoksayar ve \fBbzip2\fR’yi açma işlemine zorlar.
+Mutlaka açma işlemi yapılır. \fBbzip2\fR, \fBbunzip2\fR ve \fBbzcat\fR aslında aynı yazılımdır ve yapılması gereken işlem, kullanılan komut ismine göre kararlaştırılır. Bu seçenek, bu yöntemi yoksayar ve \fBbzip2\fR\&'yi açma işlemine zorlar.
 .sp
 .TP 4
 \fB-z\fR, \fB--compress\fR
@@ -133,7 +133,7 @@ Belirtilen dosya veya dosyaların bütünlüğünü sınar, gerçekte açma işl
 .sp
 .TP 4
 \fB-f\fR, \fB--force\fR
-Çıktı dosyasının üzerine yazmaya zorlar. Normal olarak, \fBbzip2\fR varolan bir dosyanın üzerine yazmayacaktır. Ayrıca bu seçenek \fBbzip2\fR’yi dosyalara olan sabit bağları kırmaya zorlar, böylece bu bağlarda üzerine yazma yapılmaz.
+Çıktı dosyasının üzerine yazmaya zorlar. Normal olarak, \fBbzip2\fR varolan bir dosyanın üzerine yazmayacaktır. Ayrıca bu seçenek \fBbzip2\fR\&'yi dosyalara olan sabit bağları kırmaya zorlar, böylece bu bağlarda üzerine yazma yapılmaz.
 .sp
 \fBbzip2\fR normalde doğru sihirli başlık baytlarına sahip olmayan dosyaları açmayı rededecektir. \fB-f\fR seçeneği kullanılırsa, bu dosyaları değiştirilmeden geçecektir. GNU \fBgzip\fR de bu şekilde davranır.
 .sp
@@ -143,9 +143,9 @@ Sıkıştırma veya açma işlemi esnasında özgün dosyaları silmez, saklar.
 .sp
 .TP 4
 \fB-s\fR, \fB--small\fR
-Sıkıştırma, açma ve sınama işlemleri için bellek ihtiyacını azaltır. Dosyalar küme baytı başına 2.5 bayt gerektiren değişiklik yapılmış bir algoritma ile açılır ve sınanır. Bunun anlamı, herhangi bir dosyanın 2300k’lık bir bellek alanı içinde açılabileceğidir ancak başarım, normal hızın yarısına kadar düşer.
+Sıkıştırma, açma ve sınama işlemleri için bellek ihtiyacını azaltır. Dosyalar küme baytı başına 2.5 bayt gerektiren değişiklik yapılmış bir algoritma ile açılır ve sınanır. Bunun anlamı, herhangi bir dosyanın 2300k\&'lık bir bellek alanı içinde açılabileceğidir ancak başarım, normal hızın yarısına kadar düşer.
 .sp
-Sıkıştırma esnasında, \fB-s\fR seçeneği ile 200k’lık küme boyutu seçilir, bu belleği de aynı şekilde sınırlar ve sıkıştırma oranını artırır. Uzun lafın kısası, makinenizin belleği 8MB’dan daha az ise \fB-s\fR seçeneğini her şeyde kullanın. Aşağıdaki \fBBELLEK YÖNETİMİ\fR bölümüne bakınız.
+Sıkıştırma esnasında, \fB-s\fR seçeneği ile 200k\&'lık küme boyutu seçilir, bu belleği de aynı şekilde sınırlar ve sıkıştırma oranını artırır. Uzun lafın kısası, makinenizin belleği 8MB\&'dan daha az ise \fB-s\fR seçeneğini her şeyde kullanın. Aşağıdaki \fBBELLEK YÖNETİMİ\fR bölümüne bakınız.
 .sp
 .TP 4
 \fB-q\fR, \fB--quiet\fR
@@ -160,7 +160,7 @@ Ayrıntı kipi: İşlenen her dosya için sıkıştırma oranlarını gösterir.
 Yazılımın sürüm, lisans, koşul ve kurallarını görüntüler.
 .sp
 .TP 4
-\fB-1 \fR (veya \fB--fast\fR)’den \fB-9 \fR (veya \fB--best\fR)’e kadar
+\fB-1 \fR (veya \fB--fast\fR)\&'den \fB-9 \fR (veya \fB--best\fR)\&'e kadar
 Sıkıştırma yaparken küme boyutlarını 100k, 200k, .., 900k şeklinde ayarlar. Çözme işleminde bir etkisi yoktur. Aşağıdaki \fBBELLEK YÖNETİMİ\fR bölümüne bakınız. \fB--fast\fR ve \fB--best\fR seçenek isimleri GNU \fBgzip\fR uyumluluğunu sağlamak içindir. Açıkçası, \fB--fast\fR gözle görülür bir hız artışı sağlamaz ve \fB--best\fR sadece öntanımlı değerlerin seçilmesini sağlar.
 .sp
 .TP 4
@@ -174,7 +174,7 @@ Bu seçenekler sürüm 0.9.5 ve üzerinde gereksizdir. Daha eski sürümlerde, b
 .PP
 .sp
 .SH "BELLEK YÖNETİMİ"
-\fBbzip2\fR büyük dosyaları kümeler halinde sıkıştırır. Küme boyutları, hem sıkıştırma oranını, hem de sıkıştırma/açma için gereken bellek miktarını etkiler. \fB-1\fR’den \fB-9\fR’a kadar olan seçenekler ile istenen küme boyutlarının 100.000 bayttan 900.000 bayta (varsayılan değer budur) kadar tanımlanmasını sağlar. Açma işlemi sırasında, sıkıştırılmış dosyanın baş kısmından sıkıştırma esnasında kullanılan küme boyutu okunur ve daha sonra \fBbunzip2\fR kendisi için gerekli olan bellek alanını ayırır ve oraya yerleşir. Sıkıştırma küme boyutları sıkıştırılmış dosya içinde saklandığı için, \fB-1\fR’den \fB-9\fR’a kadar olan seçenekler açma işlemi esnasında geçersizdir. Bu seçenekleri belirtirseniz, bunlar yok sayılacaktır.
+\fBbzip2\fR büyük dosyaları kümeler halinde sıkıştırır. Küme boyutları, hem sıkıştırma oranını, hem de sıkıştırma/açma için gereken bellek miktarını etkiler. \fB-1\fR\&'den \fB-9\fR\&'a kadar olan seçenekler ile istenen küme boyutlarının 100.000 bayttan 900.000 bayta (varsayılan değer budur) kadar tanımlanmasını sağlar. Açma işlemi sırasında, sıkıştırılmış dosyanın baş kısmından sıkıştırma esnasında kullanılan küme boyutu okunur ve daha sonra \fBbunzip2\fR kendisi için gerekli olan bellek alanını ayırır ve oraya yerleşir. Sıkıştırma küme boyutları sıkıştırılmış dosya içinde saklandığı için, \fB-1\fR\&'den \fB-9\fR\&'a kadar olan seçenekler açma işlemi esnasında geçersizdir. Bu seçenekleri belirtirseniz, bunlar yok sayılacaktır.
 .sp
 Sıkıştırma ve açma gereksinimleri, bayt cinsinden, yaklaşık olarak:
 .sp
@@ -187,15 +187,15 @@ Sıkıştırma:   400k + ( 8 x küme boyu )
 .fi
 .sp
 .RE
-Daha büyük küme boyutları hızlı bir şekilde azalan sınıra yakın dönüşler verir. Sıkıştırmanın pek çoğu, küme boyutunun ilk iki veya üç yüz k’lık kısmından elde edilir. Bu kuralı, küçük makinelerde \fBbzip2\fR kullanırken aklınızdan çıkarmayın. Ayrıca akıldan çıkarılmaması gereken diğer bir nokta da, açma sırasındaki bellek gereksinimlerinin, sıkıştırma sırasında kullanılan küme boyutları ile birebir alakalı olduğudur.
+Daha büyük küme boyutları hızlı bir şekilde azalan sınıra yakın dönüşler verir. Sıkıştırmanın pek çoğu, küme boyutunun ilk iki veya üç yüz k\&'lık kısmından elde edilir. Bu kuralı, küçük makinelerde \fBbzip2\fR kullanırken aklınızdan çıkarmayın. Ayrıca akıldan çıkarılmaması gereken diğer bir nokta da, açma sırasındaki bellek gereksinimlerinin, sıkıştırma sırasında kullanılan küme boyutları ile birebir alakalı olduğudur.
 .sp
-900k’lık öntanımlı küme boyutu ile sıkıştırılan dosyalar için, \fBbunzip2\fR açma işlemi sırasında 3700 kB belleğe ihtiyaç duyacaktır. 4 MB belleğe sahip bir makinede herhangi bir dosyayı açmak için, \fBbunzip2\fR, ihtiyaç duyulan bellek miktarının yarısı ile (takriben 2300KB) açma işlemini gerçekleştirecek bir seçeneğe sahiptir. Bu seçeneğin kullanılması açma hızını da yarı yarıya düşürecektir. Çok gerekli olmadıkça bu seçeneği (\fB-s\fR) kullanmayın.
+900k\&'lık öntanımlı küme boyutu ile sıkıştırılan dosyalar için, \fBbunzip2\fR açma işlemi sırasında 3700 kB belleğe ihtiyaç duyacaktır. 4 MB belleğe sahip bir makinede herhangi bir dosyayı açmak için, \fBbunzip2\fR, ihtiyaç duyulan bellek miktarının yarısı ile (takriben 2300KB) açma işlemini gerçekleştirecek bir seçeneğe sahiptir. Bu seçeneğin kullanılması açma hızını da yarı yarıya düşürecektir. Çok gerekli olmadıkça bu seçeneği (\fB-s\fR) kullanmayın.
 .sp
 Genel kural olarak, bellek sınırlarınız elverdiği sürece, mümkün olan en büyük kümeleri kullanın. Böylece azami sıkıştırma elde edilir. Sıkıştırma ya da açma hızının aslında küme boyutu ile bir ilgisi yoktur.
 .sp
-Diğer bir önemli nokta da tek bir kümeye sığacak dosyalara yapılan işlemdir. Aslında karşılaşılan pek çok dosya bir kümeden küçüktür. Dosya bir kümeden küçük olduğundan, gerçekte kullanılan bellek miktarı normalde gerekenden küçük olur. Örneğin: 20.000 baytlık bir dosyayı \fB-9\fR seçeneği ile sıkıştırmak, sıkıştırıcının 7600k belleğe ihtiyaç duymasınan sebep olacaktır ama gerçekte sadece 400k + 20000 * 8 = 560kB bellek kullanılacaktır. Aynı şekilde açma işlemi de 3700k’lık bir bellek ayıracak ama sadece 100k + 20000 * 4 = 180kB’lık bir alanı kullanacaktır.
+Diğer bir önemli nokta da tek bir kümeye sığacak dosyalara yapılan işlemdir. Aslında karşılaşılan pek çok dosya bir kümeden küçüktür. Dosya bir kümeden küçük olduğundan, gerçekte kullanılan bellek miktarı normalde gerekenden küçük olur. Örneğin: 20.000 baytlık bir dosyayı \fB-9\fR seçeneği ile sıkıştırmak, sıkıştırıcının 7600k belleğe ihtiyaç duymasınan sebep olacaktır ama gerçekte sadece 400k + 20000 * 8 = 560kB bellek kullanılacaktır. Aynı şekilde açma işlemi de 3700k\&'lık bir bellek ayıracak ama sadece 100k + 20000 * 4 = 180kB\&'lık bir alanı kullanacaktır.
 .sp
-Aşağıda değişik küme boyutlarının bellek kullanımını gösteren bir tablo bulacaksınız. Ayrıca Calgary Text Compression Corpus’da (Calgary Metin Sıkıştırma Külliyatı) 14 dosyalık sıkıştırılmış toplam boyut olarak 3.141.622 bayt kayıtlıdır. Aşağıdaki sütunlar, küme boyutu ile sıkıştırma arasındaki ilgi hakkında bir fikir verecektir. Büyük dosyalar için büyük küme boyutlarını kullanmak daha iyidir. Çünkü Külliyat daha küçük dosyalar üzerine kuruludur.
+Aşağıda değişik küme boyutlarının bellek kullanımını gösteren bir tablo bulacaksınız. Ayrıca Calgary Text Compression Corpus\&'da (Calgary Metin Sıkıştırma Külliyatı) 14 dosyalık sıkıştırılmış toplam boyut olarak 3.141.622 bayt kayıtlıdır. Aşağıdaki sütunlar, küme boyutu ile sıkıştırma arasındaki ilgi hakkında bir fikir verecektir. Büyük dosyalar için büyük küme boyutlarını kullanmak daha iyidir. Çünkü Külliyat daha küçük dosyalar üzerine kuruludur.
 .sp
 .RS 4
 .nf
@@ -216,9 +216,9 @@ Seçenek  kullanımı   kullanımı   kullanımı     boyutu
 .RE
 .sp
 .SH "HASARLI DOSYADAN VERİ KURTARMA"
-\fBbzip2\fR dosyaları genellikle 900k’lık kümeler halinde sıkıştırır. Her bir küme birbirinden bağımsız olarak ele alınır. Bir aygıt ya da aktarım hatası pek çok \fB.bz2\fR kümesinin hasar görmesine sebep olursa, zarar görmemiş kümelerdeki verileri kurtarmak mümkün olabilir.
+\fBbzip2\fR dosyaları genellikle 900k\&'lık kümeler halinde sıkıştırır. Her bir küme birbirinden bağımsız olarak ele alınır. Bir aygıt ya da aktarım hatası pek çok \fB.bz2\fR kümesinin hasar görmesine sebep olursa, zarar görmemiş kümelerdeki verileri kurtarmak mümkün olabilir.
 .sp
-Sıkıştırılmış her bir küme 48 bitlik bir şablon ile temsil edilir. Böylece küme sınırlarını kesin olarak bulmak mümkün olabilir. Ayrıca her bir küme kendi 32 bitlik CRC’sini bulundurur, böylece bozuk kümeler sağlam olanlardan ayırt edilebilir.
+Sıkıştırılmış her bir küme 48 bitlik bir şablon ile temsil edilir. Böylece küme sınırlarını kesin olarak bulmak mümkün olabilir. Ayrıca her bir küme kendi 32 bitlik CRC\&'sini bulundurur, böylece bozuk kümeler sağlam olanlardan ayırt edilebilir.
 .sp
 \fBbzip2recover\fR, basitçe, \fB.bz2\fR dosyaların içindeki kümeleri tarayan bir yazılımdır. Buradaki taranmış her küme kendi \fB.bz2\fR dosyasına aktarılır. Sonuçların bütünlüğünü sınamak için \fBbzip2 -t\fR komutunu kullanabilirsiniz. Ardından bozulmamış verileri açabilirsiniz.
 .sp
@@ -231,21 +231,21 @@ Sıkıştırmanın sınıflandırma aşaması, birbirine benzer dizgeleri bir ar
 .sp
 Açma hızı bu durumdan bağımsızdır.
 .sp
-\fBbzip2\fR genellikle işlem yapmak için, çok MB’lı bellek alanları ayırır ve daha sonra tarafsız ve rasgele bir şekilde saldırır. Bunun anlamı, açma ve sıkıştırma başarımlarının makinenizin önbelleğine erişim süresi ile alakalı olduğudur. Önbelleğe erişim kayıplarını düşürecek küçük kod değişiklikleri büyük başarım artışları getirebilir. Çok büyük önbelleklere sahip makinelerde \fBbzip2\fR çok yüksek başarım göstermektedir.
+\fBbzip2\fR genellikle işlem yapmak için, çok MB\&'lı bellek alanları ayırır ve daha sonra tarafsız ve rasgele bir şekilde saldırır. Bunun anlamı, açma ve sıkıştırma başarımlarının makinenizin önbelleğine erişim süresi ile alakalı olduğudur. Önbelleğe erişim kayıplarını düşürecek küçük kod değişiklikleri büyük başarım artışları getirebilir. Çok büyük önbelleklere sahip makinelerde \fBbzip2\fR çok yüksek başarım göstermektedir.
 .sp
 .SH "YETERSİZLİKLER"
 G/Ç hata iletileri olmaları gerektiği kadar faydalı değildir. \fBbzip2\fR G/Ç hatalarını tespit etmek ve temiz bir şekilde çıkmak için oldukça ter döker ama bazen sorunun ayrıntıları gözden kaçabilmektedir.
 .sp
-Bu kılavuz sayfası \fBbzip2\fR’nin 1.0.8 sürümüne aittir. Bu sürüm ile sıkıştırılmış veriler geçmiş sürümler ile tamamen uyumludur (sürüm 0.1pl2, 0.9.0, 0.9.5, 1.0.0, 1.0.1, 1.0.2 ve üstü ile). İstisnalar: 0.9.0 ve üzeri sürümler çoklu dosya sıkıştırmalarını düzgünce açabilir, 0.1p12 bunu yapamaz, ilk dosyayı açtıktan sonra duracak ve akımın gerisini getirmeyecektir.
+Bu kılavuz sayfası \fBbzip2\fR\&'nin 1.0.8 sürümüne aittir. Bu sürüm ile sıkıştırılmış veriler geçmiş sürümler ile tamamen uyumludur (sürüm 0.1pl2, 0.9.0, 0.9.5, 1.0.0, 1.0.1, 1.0.2 ve üstü ile). İstisnalar: 0.9.0 ve üzeri sürümler çoklu dosya sıkıştırmalarını düzgünce açabilir, 0.1p12 bunu yapamaz, ilk dosyayı açtıktan sonra duracak ve akımın gerisini getirmeyecektir.
 .sp
-\fBbzip2recover\fR 1.0.2’den önceki sürümler sıkıştırılmış dosya içindeki bit konumlarını belirtmek için 32 bitlik tamsayılar kullanır ve bu yüzden 512 MB’den daha büyük sıkıştırılmış dosyalar elde edilemez. Sürüm 1.0.2 ve üzeri 64 bitlik tamsayılar kullanır ve GNU ile Windows platformlarını desteklerler. Böyle bir sınır ile kurulup kurulmadığını anlamak için \fBbzip2recover\fR’ı komut satırı girdileri olmadan çalıştırılır. Yine de, bu sınırı ortadan kaldırmak mümkündür. Yazılımı MaybeUInt64 ile yeniden derleyebilirseniz, işaretsiz 64 bitlik tamsayı ayarlanmış olacağından bu sınır ortadan kalkmış olur.
+\fBbzip2recover\fR 1.0.2\&'den önceki sürümler sıkıştırılmış dosya içindeki bit konumlarını belirtmek için 32 bitlik tamsayılar kullanır ve bu yüzden 512 MB\&'den daha büyük sıkıştırılmış dosyalar elde edilemez. Sürüm 1.0.2 ve üzeri 64 bitlik tamsayılar kullanır ve GNU ile Windows platformlarını desteklerler. Böyle bir sınır ile kurulup kurulmadığını anlamak için \fBbzip2recover\fR\&'ı komut satırı girdileri olmadan çalıştırılır. Yine de, bu sınırı ortadan kaldırmak mümkündür. Yazılımı MaybeUInt64 ile yeniden derleyebilirseniz, işaretsiz 64 bitlik tamsayı ayarlanmış olacağından bu sınır ortadan kalkmış olur.
 .sp
 .SH "YAZAN"
 Julian Seward tarafından yazılmıştır.
 .br
 http://sources.redhat.com/bzip2
 .sp
-\fBbzip2\fR’deki fikirlerin sahipleri şunlardır (en azından): Michael Burrows ve David Wheeler (küme sıralamalı dönüşüm için), David Wheeler (tekrar, Huffman kodlayıcısı), Peter Fenwick (özgün bzip’teki yapısal kodlama modeli ve pek çok tasfiye için) ve Alistair Moffat, Radford Neal ve Ian Witten (özgün bzip’teki aritmetik kodlayıcı için). Onlara yardımları, destek ve tavsiyeleri için şükran borçluyum. Belgeler için kaynak kod paketine bakınız. Christian von Roques, daha hızlı sıralama algoritması için beni cesaretlendirdi ve böylece daha hızlı bir sıkıştırma elde edebildik. Bela Lubkin, en kötü durum sıkıştırması için cesaret verdi. Dona Robinson belgeleri XML’e dönüştürdü. \fBbz*\fR betikleri GNU \fBgzip\fR’inkilerden türetildi. Bir çok kimse de, yamalar gönderdi, taşınabilirlik sorunlarında yardımcı oldu, tavsiyelerde bulundu; bunlar çoğunlukla faydalı oldu.
+\fBbzip2\fR\&'deki fikirlerin sahipleri şunlardır (en azından): Michael Burrows ve David Wheeler (küme sıralamalı dönüşüm için), David Wheeler (tekrar, Huffman kodlayıcısı), Peter Fenwick (özgün bzip\&'teki yapısal kodlama modeli ve pek çok tasfiye için) ve Alistair Moffat, Radford Neal ve Ian Witten (özgün bzip\&'teki aritmetik kodlayıcı için). Onlara yardımları, destek ve tavsiyeleri için şükran borçluyum. Belgeler için kaynak kod paketine bakınız. Christian von Roques, daha hızlı sıralama algoritması için beni cesaretlendirdi ve böylece daha hızlı bir sıkıştırma elde edebildik. Bela Lubkin, en kötü durum sıkıştırması için cesaret verdi. Dona Robinson belgeleri XML\&'e dönüştürdü. \fBbz*\fR betikleri GNU \fBgzip\fR\&'inkilerden türetildi. Bir çok kimse de, yamalar gönderdi, taşınabilirlik sorunlarında yardımcı oldu, tavsiyelerde bulundu; bunlar çoğunlukla faydalı oldu.
 .sp
 .SH "ÇEVİREN"
 © 2004 Yalçın Kolukısa

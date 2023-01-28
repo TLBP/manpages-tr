@@ -5,7 +5,7 @@
  *
  * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
  *
- * Alternate Getty (agetty) ’agetty’ is a versatile, portable, easy to use
+ * Alternate Getty (agetty) `agetty` is a versatile, portable, easy to use
  * replacement for getty on SunOS 4.1.x or the SAC ttymon/ttyadm/sacadm/pmadm
  * suite on Solaris and other SVR4 systems. ´agetty´ was written by Wietse
  * Venema, enhanced by John DiMarco, and further enhanced by Dennis Cronin.
@@ -16,7 +16,7 @@
  *
  * This program is freely distributable.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "AGETTY" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -76,11 +76,11 @@ System V altında "-" belirtilecekse "--" ile öncelenmelidir.
 .sp
 Bu girdi isteğe bağlıdır ve sanal uçbirimler için gereksizdir.
 .sp
-Seri uçbirimler için mevcut hat hızını korumak öntanımlıdır (bkz: \fB--keep-baud\fR) ve başarısızlık durumunda ’9600’ tek hızdır.
+Seri uçbirimler için mevcut hat hızını korumak öntanımlıdır (bkz: \fB--keep-baud\fR) ve başarısızlık durumunda \&'9600\&' tek hızdır.
 .sp
 .TP 4
 \fIuçbirim\fR
-\fBTERM\fR ortam değişkeni için kullanılacak değer. Bu, \fBinit\fR(1)’in ayarlamış olabileceği her şeyi geçersiz kılar ve \fBlogin\fR(1) ve kabuk tarafından devralınır.
+\fBTERM\fR ortam değişkeni için kullanılacak değer. Bu, \fBinit\fR(1)\&'in ayarlamış olabileceği her şeyi geçersiz kılar ve \fBlogin\fR(1) ve kabuk tarafından devralınır.
 .sp
 Sanal uçbirimde Linux için \fBvt100\fR veya \fBlinux\fR; Sanal uçbirimde GNU Hurd için \fBhurd\fR öntanımlıdır.
 .sp
@@ -95,7 +95,7 @@ Uçbirimin temiz 8 bitlik olduğunu varsayar, bu nedenle eşlik algılamasını 
 \fB-a\fR, \fB--autologin\fR \fIkullanıcı\fR
 Belirtilen \fIkullanıcı\fR için kullanıcı adı ve parola sorulmaksızın otomatik olarak oturum açılır. Bu seçeneğin kullanımı \fBlogin\fR(1) komut satırına \fB-f\fR seçeneğinin \fIkullanıcı\fR girdisi ile eklenmesine sebep olur. Ayrıca, bu seçeneğin davranışında değişiklik yapan \fB--login-options\fR seçeneğine de bakılabilir.
 .sp
-\fB--autologin\fR seçeneğinin \fBagetty\fR’nin seri hattı başlatma şeklini etkileyebileceği unutulmamalıdır, çünkü otomatik oturum açmada \fBagetty\fR hattı okumadığından hat ayarlarını iyileştirme şansı yoktur.
+\fB--autologin\fR seçeneğinin \fBagetty\fR\&'nin seri hattı başlatma şeklini etkileyebileceği unutulmamalıdır, çünkü otomatik oturum açmada \fBagetty\fR hattı okumadığından hat ayarlarını iyileştirme şansı yoktur.
 .sp
 .TP 4
 \fB-c\fR, \fB--noreset\fR
@@ -103,7 +103,7 @@ Uçbirim denetim kiplerini (cflags) sıfırlamaz. Ayrıntılar için bkz: \fBter
 .sp
 .TP 4
 \fB-E\fR, \fB--remote\fR
-Genellikle \fBtelnetd\fR(8) gibi bir şey tarafından çağrıldığında \fBlogin\fR(1) komutuna uzak konağın adı belirtilir. Bu seçenek, agetty’nin \fButmp\fR(5)’te kullanılmak üzere \fBlogin\fR(1) komutuna uzak konağın adını aktarmakta kullanılır. Bkz: \fB--host\fR seçeneği.
+Genellikle \fBtelnetd\fR(8) gibi bir şey tarafından çağrıldığında \fBlogin\fR(1) komutuna uzak konağın adı belirtilir. Bu seçenek, agetty\&'nin \fButmp\fR(5)\&'te kullanılmak üzere \fBlogin\fR(1) komutuna uzak konağın adını aktarmakta kullanılır. Bkz: \fB--host\fR seçeneği.
 .sp
 \fB--host\fR \fBsahtekonak\fR seçeneği de belirtilmişse bunlar da \fBlogin\fR(1) komut satırına eklenir.
 .sp
@@ -176,7 +176,7 @@ Desteklenen hat hızlarını gösterir. Bu derleme sırasında belirlenir.
 .sp
 .TP 4
 \fB-n\fR, \fB--skip-login\fR
-Oturum açma istemini göstermez. BBS gibi sistemlerde standart-dışı oturum açma işlemlerinde \fB--login-program\fR seçeneği ile bağlanmak için kullanılabilir. \fB--skip-login\fR seçeneğiyle, \fBagetty\fR’nin oturum açan kullanıcıdan hiçbir girdi almayacağı, bu nedenle bağlantının eşlik, karakter boyutu ve satır sonu işlemlerini çözümleyemeyeceği unutulmamalıdır. Eşlik biti 0, 7 bitlik karakterler ve ASCII CR (13) satır başı karakteri öntanımlıdır. \fBagetty\fR’nin başlattığı uygulamanın (genellikle \fBlogin\fR(1)) \fBroot\fR aidiyetinde çalıştığına dikkat edilmelidir.
+Oturum açma istemini göstermez. BBS gibi sistemlerde standart-dışı oturum açma işlemlerinde \fB--login-program\fR seçeneği ile bağlanmak için kullanılabilir. \fB--skip-login\fR seçeneğiyle, \fBagetty\fR\&'nin oturum açan kullanıcıdan hiçbir girdi almayacağı, bu nedenle bağlantının eşlik, karakter boyutu ve satır sonu işlemlerini çözümleyemeyeceği unutulmamalıdır. Eşlik biti 0, 7 bitlik karakterler ve ASCII CR (13) satır başı karakteri öntanımlıdır. \fBagetty\fR\&'nin başlattığı uygulamanın (genellikle \fBlogin\fR(1)) \fBroot\fR aidiyetinde çalıştığına dikkat edilmelidir.
 .sp
 .TP 4
 \fB-N\fR, \fB--nonewline\fR
@@ -184,12 +184,12 @@ Oturum açma istemini göstermez. BBS gibi sistemlerde standart-dışı oturum a
 .sp
 .TP 4
 \fB-o\fR, \fB--login-options\fR \fIlogin_seçenekleri\fR
-\fBlogin\fR(1)’e aktarılacak seçenekler ve girdiler. Kullanıcı adı istemi için \fB\\u\fR belirtilmelidir. Örnek:
+\fBlogin\fR(1)\&'e aktarılacak seçenekler ve girdiler. Kullanıcı adı istemi için \fB\\u\fR belirtilmelidir. Örnek:
 .sp
 .RS 4
 .RS 4
 .nf
---login-options ’-h darkstar -- \\u’
+--login-options \&'-h darkstar -- \\u\&'
 .fi
 .sp
 .RE
@@ -213,7 +213,7 @@ Belirtilen uçbirimin sanal olarak kapatılması için \fBvhangup\fR(2) çağrı
 .sp
 .TP 4
 \fB-s\fR, \fB--keep-baud\fR
-Mevcut hat hızı korunmaya çalışılır. \fBagetty\fR her BREAK karakteri alışında komut satırında belirtilen hat hızlarından bir sonrakini kullanılır. \fIhat_hızları\fRnın belirtilmesi durumunda, özgün hat hızı belirtilen \fIhat_hızları\fR listesinin sonuna kaydedilir. Böylece, beklenmedik BREAK’lerden sonra özgün hat hızına dönmek mümkün olur.
+Mevcut hat hızı korunmaya çalışılır. \fBagetty\fR her BREAK karakteri alışında komut satırında belirtilen hat hızlarından bir sonrakini kullanılır. \fIhat_hızları\fRnın belirtilmesi durumunda, özgün hat hızı belirtilen \fIhat_hızları\fR listesinin sonuna kaydedilir. Böylece, beklenmedik BREAK\&'lerden sonra özgün hat hızına dönmek mümkün olur.
 .sp
 .TP 4
 \fB-t\fR, \fB--timeout\fR \fIsüre\fR
@@ -241,11 +241,11 @@ Konak adı öntanımlı olarak basılır. Bu seçenek belirtilirse konak adı g�
 .sp
 .TP 4
 \fB--erase-chars\fR \fIdizge\fR
-Bu seçenek, kullanıcı oturum açma adını yazdığında ’geri sil’ ("önceki karakteri yoksay") olarak yorumlanması gereken ek karakterleri belirler. util-linux 2.23’ten beri hiçbir ek ’geri sil’ karakteri öntanımlısı etkin değildir, evvelce ek ’geri sil’ karakteri ’#’ idi.
+Bu seçenek, kullanıcı oturum açma adını yazdığında \&'geri sil\&' ("önceki karakteri yoksay") olarak yorumlanması gereken ek karakterleri belirler. util-linux 2.23\&'ten beri hiçbir ek \&'geri sil\&' karakteri öntanımlısı etkin değildir, evvelce ek \&'geri sil\&' karakteri \&'#\&' idi.
 .sp
 .TP 4
 \fB--kill-chars\fR \fIdizge\fR
-Bu seçenek, kullanıcı oturum açma adını yazdığında ’geri yoket’ ("önceki karakterin tamamını yoksay") olarak yorumlanması gereken ek karakterleri belirler. util-linux 2.23’ten beri hiçbir ek ’geri yoket’ karakteri öntanımlısı etkin değildir, evvelce ek ’geri yoket’ karakteri ’@’ idi.
+Bu seçenek, kullanıcı oturum açma adını yazdığında \&'geri yoket\&' ("önceki karakterin tamamını yoksay") olarak yorumlanması gereken ek karakterleri belirler. util-linux 2.23\&'ten beri hiçbir ek \&'geri yoket\&' karakteri öntanımlısı etkin değildir, evvelce ek \&'geri yoket\&' karakteri \&'@\&' idi.
 .sp
 .TP 4
 \fB--chdir\fR \fIdizin\fR
@@ -300,11 +300,11 @@ Uygun taşıyıcı algılama kablolaması olmayan doğrudan bağlı bir uçbirim
 .fi
 .sp
 .RE
-Sabit 115200 bps arabirimli bir Hayes modem için (örnek ilklendirme dizgesi modem yankısını ve sonuç kodlarını kapatır, modem/bilgisayar DCD’sinin modem/modem DCD’sini izlemesini, bir DTR düşürümüyle bağlantının kesilmesini ve 1 çalmadan sonra otomatik yanıt verilmesini sağlar):
+Sabit 115200 bps arabirimli bir Hayes modem için (örnek ilklendirme dizgesi modem yankısını ve sonuç kodlarını kapatır, modem/bilgisayar DCD\&'sinin modem/modem DCD\&'sini izlemesini, bir DTR düşürümüyle bağlantının kesilmesini ve 1 çalmadan sonra otomatik yanıt verilmesini sağlar):
 .sp
 .RS 4
 .nf
-/sbin/agetty --wait-cr --init-string ’ATE0Q1&D2&C1S0=1\\015’ 115200 ttyS1
+/sbin/agetty --wait-cr --init-string \&'ATE0Q1&D2&C1S0=1\\015\&' 115200 ttyS1
 .fi
 .sp
 .RE
@@ -433,7 +433,7 @@ Sorunların bildirildiği aygıt (\fBsyslog\fR(3) kulllanılıyorsa)
 .PP
 .sp
 .SH "HATA AYIKLAMA"
-Hat hızı algılama özelliğini (\fB--extract-baud\fR seçeneği) kullanabilmek için çevirmeli aramanın tamamlanmasından hemen sonra \fBagetty\fR’nin başlatılması gerekir (2400 bps ile konuşan modemlerde 30 ms içinde). Özelliğin aşırı yüklü sistemlerde bile çalışmasını sağlama almak için, \fB--extract-baud\fR seçeneğini daima \fIhat_hızları\fR girdisi birlikte kullanmak gerekir, böylece BREAK işleminin etkinleşmesi sağlanır.
+Hat hızı algılama özelliğini (\fB--extract-baud\fR seçeneği) kullanabilmek için çevirmeli aramanın tamamlanmasından hemen sonra \fBagetty\fR\&'nin başlatılması gerekir (2400 bps ile konuşan modemlerde 30 ms içinde). Özelliğin aşırı yüklü sistemlerde bile çalışmasını sağlama almak için, \fB--extract-baud\fR seçeneğini daima \fIhat_hızları\fR girdisi birlikte kullanmak gerekir, böylece BREAK işleminin etkinleşmesi sağlanır.
 .sp
 \fI/etc/issue\fR vb. içindeki metin ve oturum açma ismi daima 0 eşlik bitli 7 bitlik karakterler ile çıktılanır.
 .sp
@@ -445,7 +445,7 @@ Yapılandırmaya bağlı olarak, tüm teşhisler konsol aygıtına yazılır vey
 .SH "YAZAN"
 Werner Fink (Suse) ve Karel Zak (Redhat) tarafından yazılmıştır.
 .sp
-Özgün \fBagetty\fR seri uçbirimler için W.Z. Venema tarfından yazılmış ve Peter Orbaek tarafından Linux’a uyarlanmıştır.
+Özgün \fBagetty\fR seri uçbirimler için W.Z. Venema tarfından yazılmış ve Peter Orbaek tarafından Linux\&'a uyarlanmıştır.
 .sp
 .SH "GERİBİLDİRİM"
 Yazılım hatalarını bildirmek için <https://github.com/util-linux/util-linux/issues> altında bir konu açın.

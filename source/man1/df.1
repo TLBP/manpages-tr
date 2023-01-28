@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DF" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,9 +21,9 @@ df - dosya sisteminin disk alanı kullanımını gösterir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Bu kılavuz sayfası, \fBdf\fR komutunun GNU sürümünü belgelendirmektedir. \fBdf\fR, \fIDOSYA\fR ile belirtilen dosya sistemindeki kullanılabilir disk alanı miktarını görüntüler. Şayet \fIDOSYA\fR belirtilmemişse, o an bağlı olan bütün dosya sistemlerindeki kullanılabilir alan görüntülenir. \fBPOSIXLY_CORRECT\fR ortam değişkeni tanımlanmadığı müddetçe, öntanımlı olarak disk alanı 1 kB’lık bloklar halinde gösterilir, aksi takdirde 512 baytlık bloklar halinde gösterilir.
+Bu kılavuz sayfası, \fBdf\fR komutunun GNU sürümünü belgelendirmektedir. \fBdf\fR, \fIDOSYA\fR ile belirtilen dosya sistemindeki kullanılabilir disk alanı miktarını görüntüler. Şayet \fIDOSYA\fR belirtilmemişse, o an bağlı olan bütün dosya sistemlerindeki kullanılabilir alan görüntülenir. \fBPOSIXLY_CORRECT\fR ortam değişkeni tanımlanmadığı müddetçe, öntanımlı olarak disk alanı 1 kB\&'lık bloklar halinde gösterilir, aksi takdirde 512 baytlık bloklar halinde gösterilir.
 .sp
-\fIDOSYA\fR, bağlanmış bir dosya sistemini içeren bir disk aygıt düğümünün tam dosya adı ise \fBdf\fR, bu aygıt düğümünü içeren dosya sistemi yerine, bu dosya sistemindeki kullanılabilir alanı görüntüler. \fBdf\fR’nin bu sürümü bağlanmamış dosya sistemlerindeki boş alanları gösterme yeteneğine sahip değildir, çünkü bunu yapabilen sistemlerin pek çoğu, dosya sistemi yapısının taşınabilir olmayan bilgilerine ihtiyaç duyar.
+\fIDOSYA\fR, bağlanmış bir dosya sistemini içeren bir disk aygıt düğümünün tam dosya adı ise \fBdf\fR, bu aygıt düğümünü içeren dosya sistemi yerine, bu dosya sistemindeki kullanılabilir alanı görüntüler. \fBdf\fR\&'nin bu sürümü bağlanmamış dosya sistemlerindeki boş alanları gösterme yeteneğine sahip değildir, çünkü bunu yapabilen sistemlerin pek çoğu, dosya sistemi yapısının taşınabilir olmayan bilgilerine ihtiyaç duyar.
 .sp
 .SH "SEÇENEKLER"
 \fIDOSYA\fR ile belirtilen dosya sistemi hakkındaki bilgileri gösterir. Öntanımlı olarak bütün dosya sistemlerini görüntüler.
@@ -36,15 +36,15 @@ Sözde, yinelenen, erişilemeyen dosya sistemleri dahil edilir.
 .sp
 .TP 4
 \fB-B\fR, \fB--block-size\fR=\fIBOYUT\fR
-\fIBOYUT\fR baytlık bloklar kullanır. Boyutlar yazdırılmadan önce \fIBOYUT\fR’a göre ölçeklendirilir; örneğin, \fB-BM\fR boyutları 1.048.576 baytlık birimler halinde yazdırır; aşağıdaki \fIBOYUT\fR açıklamasına bakın.
+\fIBOYUT\fR baytlık bloklar kullanır. Boyutlar yazdırılmadan önce \fIBOYUT\fR\&'a göre ölçeklendirilir; örneğin, \fB-BM\fR boyutları 1.048.576 baytlık birimler halinde yazdırır; aşağıdaki \fIBOYUT\fR açıklamasına bakın.
 .sp
 .TP 4
 \fB-h\fR, \fB--human-readable\fR
-Boyutları, 1024’ün katları olarak gösterir (1K, 234M, 2G gibi).
+Boyutları, 1024\&'ün katları olarak gösterir (1K, 234M, 2G gibi).
 .sp
 .TP 4
 \fB-H\fR, \fB--si\fR
-Boyutları, 1000’in katları olarak gösterir (1.1G gibi).
+Boyutları, 1000\&'in katları olarak gösterir (1.1G gibi).
 .sp
 .TP 4
 \fB-i\fR, \fB--inodes\fR
@@ -64,7 +64,7 @@ Kullanım bilgisini almadan önce sync çağrısı yapmaz (öntanımlıdır).
 .sp
 .TP 4
 \fB--output\fR[=\fIALANLAR\fR]
-Çıktı belirtilen \fIALANLAR\fR’a göre biçimlenir. \fIALANLAR\fR belirtilmezse tüm alanlar basılır. İkinci durumda, sütunların sırası aşağıdaki alan açıklamalarının sırasına uygun olur.
+Çıktı belirtilen \fIALANLAR\fR\&'a göre biçimlenir. \fIALANLAR\fR belirtilmezse tüm alanlar basılır. İkinci durumda, sütunların sırası aşağıdaki alan açıklamalarının sırasına uygun olur.
 .sp
 \fB--output\fR \fB-i\fR, \fB-P\fR ve \fB-T\fR seçeneklerinden yalnızca biri ile kullanılabilir, diğer biri veya birkaçı ile birlikte belirtilemez.
 .sp
@@ -95,7 +95,7 @@ Kullanılabilir dosya düğümü sayısı.
 .sp
 .TP 4
 \fBipcent\fR
-Yüzde olarak,\fBiused\fR’nin \fBitotal\fR’a oranı.
+Yüzde olarak,\fBiused\fR\&'nin \fBitotal\fR\&'a oranı.
 .sp
 .TP 4
 \fBsize\fR
@@ -111,7 +111,7 @@ Kullanılabilir blok sayısı.
 .sp
 .TP 4
 \fBpcent\fR
-Yüzde olarak,\fBused\fR’nin \fBsize\fR’a oranı.
+Yüzde olarak,\fBused\fR\&'nin \fBsize\fR\&'a oranı.
 .sp
 .TP 4
 \fBfile\fR
@@ -124,14 +124,14 @@ Bağlama noktası.
 .PP
 .RE
 .IP
-Blok ve dosya düğümü istatistikleri alanları, her zamanki gibi ’\fB-h\fR’ gibi ölçekleme seçeneklerinden etkilenir.
+Blok ve dosya düğümü istatistikleri alanları, her zamanki gibi \&'\fB-h\fR\&' gibi ölçekleme seçeneklerinden etkilenir.
 .sp
 \fIALANLAR\fR listesini birkaç \fB--output\fR kullanımına bölmek mümkündür.
 .sp
 .RS 4
 .RS 3
 .nf
-# HEDEF’i (bağlama noktasını), bloklar ve dosya düğümleriyle
+# HEDEF\&'i (bağlama noktasını), bloklar ve dosya düğümleriyle
 # ilgili yüzdelik istatistiklerle birlikte göster.
 df --out=target --output=pcent,ipcent
 \&
@@ -158,7 +158,7 @@ Kullanılabilir alan için önemsiz olan tüm girdiler elenip genel bir toplam �
 .sp
 .TP 4
 \fB-t\fR, \fB--type\fR=\fITÜR\fR
-Sadece belirtilen \fITÜR\fR’deki dosya sistemleri listelenir.
+Sadece belirtilen \fITÜR\fR\&'deki dosya sistemleri listelenir.
 .sp
 .TP 4
 \fB-T\fR, \fB--print-type\fR
@@ -166,7 +166,7 @@ Dosya sistemi türünü gösterir.
 .sp
 .TP 4
 \fB-x\fR, \fB--exclude-type\fR=\fITÜR\fR
-Belirtilen \fITÜR\fR’de olmayan dosya sistemleri listelenir.
+Belirtilen \fITÜR\fR\&'de olmayan dosya sistemleri listelenir.
 .sp
 .TP 4
 \fB-v\fR
@@ -181,9 +181,9 @@ Yardım iletisini gösterir ve çıkar.
 Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .PP
-Boyut değerleri \fB--block-size\fR seçeneğinde belirtilen \fIBOYUT\fR’lardan ilkine veya \fBDF_BLOCK_SIZE\fR, \fBBLOCK_SIZE\fR ve \fBBLOCKSIZE\fR ortam değişkenlerinde belirtilen boyuta göre gösterilir. Hiçbiri yoksa 1024 baytlık boyut öntanımlıdır (\fBPOSIXLY_CORRECT\fR tanımlıysa 512 bayt).
+Boyut değerleri \fB--block-size\fR seçeneğinde belirtilen \fIBOYUT\fR\&'lardan ilkine veya \fBDF_BLOCK_SIZE\fR, \fBBLOCK_SIZE\fR ve \fBBLOCKSIZE\fR ortam değişkenlerinde belirtilen boyuta göre gösterilir. Hiçbiri yoksa 1024 baytlık boyut öntanımlıdır (\fBPOSIXLY_CORRECT\fR tanımlıysa 512 bayt).
 .sp
-\fIBOYUT\fR bir tamsayı ve seçimlik bir birimden oluşur (10K örneğin, 10*1024’tür). Birimler K,M,G,T,P,E,Z,Y (1024’ün katları) veya KB, MB,... (1000’in katları) olabilir. Bibaytlık birimler de belirtilebilir (KiB, MiB gibi).
+\fIBOYUT\fR bir tamsayı ve seçimlik bir birimden oluşur (10K örneğin, 10*1024\&'tür). Birimler K,M,G,T,P,E,Z,Y (1024\&'ün katları) veya KB, MB,... (1000\&'in katları) olabilir. Bibaytlık birimler de belirtilebilir (KiB, MiB gibi).
 .sp
 .SH "YAZAN"
 Torbjorn Granlund, David MacKenzie, Larry McVoy ve Paul Eggert tarafından yazılmıştır.
@@ -197,7 +197,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/df>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) df invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) df invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006 Yalçın Kolukısa

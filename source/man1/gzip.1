@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "GZIP" 1 "26 Şubat 2021" "gzip 1.11" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -28,7 +28,7 @@ zcat - sıkıştırılmış dosyaları standart çıktıda açar
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBgzip\fR, \fIisim\fR ile belirtilen dosyanın boyutunu Lempel-Ziv Kodlamasını (LZ77) kullanarak küçültür. Mümkün olan bütün dosyaların isimlerinin sonuna \fB.gz\fR soneki getirilir ama dosyaların sahiplik, erişim ve düzenlenme zamanları korunur (Öntanımlı uzantı, MSDOS, OS/2 FAT, Windows NT FAT ve Atari için \fBz\fR’dir). Şayet herhangi bir dosya ismi belirtilmemişse veya dosya ismi olarak "-" belirtilmişse, standart girdi sıkıştırılır ve standart çıktıya gönderilir. Sembolik bağlar, özellikle yoksayılır.
+\fBgzip\fR, \fIisim\fR ile belirtilen dosyanın boyutunu Lempel-Ziv Kodlamasını (LZ77) kullanarak küçültür. Mümkün olan bütün dosyaların isimlerinin sonuna \fB.gz\fR soneki getirilir ama dosyaların sahiplik, erişim ve düzenlenme zamanları korunur (Öntanımlı uzantı, MSDOS, OS/2 FAT, Windows NT FAT ve Atari için \fBz\fR\&'dir). Şayet herhangi bir dosya ismi belirtilmemişse veya dosya ismi olarak "-" belirtilmişse, standart girdi sıkıştırılır ve standart çıktıya gönderilir. Sembolik bağlar, özellikle yoksayılır.
 .sp
 Sıkıştırılmış dosya ismi, içinde bulunduğu dosya sistemi için çok uzun ise, \fBgzip\fR bu ismi kısaltır. \fBgzip\fR, 3 karakterden uzun dosya ismi bölümlerini kısaltmaya çalışır (noktalar ile sınırlanmış bölümler). Şayet isim sadece küçük bölümler içeriyorsa, uzun kısımlar kısaltılır. Örneğin; dosya isimleri 14 karakter ile sınırlanmış ise, \fIgzip.msdos.exe\fR, \fIgzi.msd.exe.gz\fR şeklinde sıkıştırılır. Dosya isimleri için sınırlama olmayan dosya sistemlerinde isimler kısaltılmaz.
 .sp
@@ -40,18 +40,18 @@ Sıkıştırılmış dosyalar, \fBgzip -d\fR, \fBgunzip\fR veya \fBzcat\fR kulla
 .sp
 \fBgunzip\fR; \fBgzip\fR, \fBzip\fR, \fBcompress\fR, \fBcompress -H\fR veya \fBpack\fR ile sıkıştırılmış dosyaları açabilir. Girdi biçiminin tespiti otomatik olarak yapılır. İlk iki biçim için, \fBgunzip\fR bir 32 bitlik CRC sınaması yapar. \fBpack\fR ve \fBgunzip\fR için, sıkıştırılmamış uzunluğa bakılır. Standart \fBcompress\fR biçimi uyum sınamalarına izin verecek şekilde tasarlanmamıştır. Bununla birlikte, \fBgunzip\fR bazen bozuk bir \fI.Z\fR dosyasını tespit edebilir. Bir \fI.Z\fR dosyasını açarken bir hata alırsanız, standart \fBuncompress\fR komutunun uyarmadığını görüp de, \fI.Z\fR dosyasının sağlam olduğunu düşünmeyin. Bunun anlamı, standart \fBuncompress\fR, girdinin bozuk olup olmadığına bakmaz ve çıktı olarak çöp yığını üretebilir. SCO sıkıştırmasının \fB-H\fR biçimi (lzh sıkıştırma yöntemi) bir CRC ihtiva etmez ama bazı tutarlılık denetimlerine izin verir.
 .sp
-\fBzip\fR ile sıkıştırılmış dosyalar, sadece ’deflation’ yöntemi ile sıkıştırılmış tek bir üyeye sahip oldukları durumlarda, \fBgzip\fR ile açılabilir. Bu özellik, sadece \fItar.zip\fR dosyalarının \fItar.gz\fR biçimine dönüştürülebilmesi amacı ile tasarlanmıştır. Tek üyeli zip dosyalarını açmak için ’\fBgunzip < foo.zip\fR’ veya ’\fBgunzip -S .zip foo.zip\fR’ komutları kullanılabilir. Çok üyeli \fIzip\fR dosyaları \fBgunzip\fR ile değil \fBunzip\fR ile açılmalıdır.
+\fBzip\fR ile sıkıştırılmış dosyalar, sadece \&'deflation\&' yöntemi ile sıkıştırılmış tek bir üyeye sahip oldukları durumlarda, \fBgzip\fR ile açılabilir. Bu özellik, sadece \fItar.zip\fR dosyalarının \fItar.gz\fR biçimine dönüştürülebilmesi amacı ile tasarlanmıştır. Tek üyeli zip dosyalarını açmak için \&'\fBgunzip < foo.zip\fR\&' veya \&'\fBgunzip -S .zip foo.zip\fR\&' komutları kullanılabilir. Çok üyeli \fIzip\fR dosyaları \fBgunzip\fR ile değil \fBunzip\fR ile açılmalıdır.
 .sp
 \fBzcat\fR komutu, \fBgunzip -c\fR ile aynıdır. (\fBzcat\fR ise aslında \fBcompress\fR ailesine aittir. Bu bakımdan, \fBcompress\fR kurulu sistemlerde komut, \fBgzcat\fR şeklinde bulunabilir.) \fBzcat\fR, ya komut satırındaki ya da standart girdideki dosyaları açar ve açılmış veriyi standart çıktıya yazar. \fBzcat\fR, sonu \fI.gz\fR ile bitsin ya da bitmesin, doğru sihirli numaraya sahip dosyaları açar.
 .sp
-\fBgzip\fR, \fBzip\fR ve \fBPKZIP\fR’de kullanılan Lempel-Ziv algoritmasını kullanır. Elde edilen sıkıştırma, dosyanın boyutuna ve ortak alt dizgelerin dağılımına bağlıdır. (*Ç.N.: \fBgzip\fR ingilizce metinler için iyi sonuç verir. Türkçe metinlerin sıkıştırılmasında \fBbzip2\fR bariz şekilde daha iyi sıkıştırır.) Sıkıştırma, LZW (\fBcompress\fR’de kullanılan), Huffman kodu (\fBpack\fR’de kullanılan) veya \fBcompact\fR’daki uyarlanmış Huffman kodu ile yapılandan daha iyi sonuç verir.
+\fBgzip\fR, \fBzip\fR ve \fBPKZIP\fR\&'de kullanılan Lempel-Ziv algoritmasını kullanır. Elde edilen sıkıştırma, dosyanın boyutuna ve ortak alt dizgelerin dağılımına bağlıdır. (*Ç.N.: \fBgzip\fR ingilizce metinler için iyi sonuç verir. Türkçe metinlerin sıkıştırılmasında \fBbzip2\fR bariz şekilde daha iyi sıkıştırır.) Sıkıştırma, LZW (\fBcompress\fR\&'de kullanılan), Huffman kodu (\fBpack\fR\&'de kullanılan) veya \fBcompact\fR\&'daki uyarlanmış Huffman kodu ile yapılandan daha iyi sonuç verir.
 .sp
 Sıkıştırma işlemi, sıkıştırılmış dosya özgüninden büyük olsa bile, gerçekleştirilir. Bu durum için en kötü senaryo: \fBgzip\fR dosya başlığı için fazladan bir kaç bayt, artı her 32K blok için 5 bayt veya büyük dosyalar için %0.015 oranında boyut artışıdır. Gerçekte kullanılan disk bloklarının sayısı asla artmaz. \fBgzip\fR, sıkıştırma veya açma işlemi esnasında, dosya iyeliklerini, kiplerini ve zaman etiketlerini korur.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
 \fB-a\fR, \fB--ascii\fR
-Ascii metin kipi: satır sonları yerel ayarlara göre dönüştürülür. Bu seçenek, sadece Unix dışı birkaç sistemde desteklenir. Örneğin MSDOS’da sıkıştırma esnasında CRLF’ler LF’ye çevrilir ve açma işleminde LF’ler CRLF’ye dönüştürülür.
+Ascii metin kipi: satır sonları yerel ayarlara göre dönüştürülür. Bu seçenek, sadece Unix dışı birkaç sistemde desteklenir. Örneğin MSDOS\&'da sıkıştırma esnasında CRLF\&'ler LF\&'ye çevrilir ve açma işleminde LF\&'ler CRLF\&'ye dönüştürülür.
 .sp
 .TP 4
 \fB-c\fR, \fB--stdout\fR, \fB--to-stdout\fR
@@ -63,7 +63,7 @@ Sıkıştırılmış dosyayı açar.
 .sp
 .TP 4
 \fB-f\fR, \fB--force\fR
-Dosyanın çoklu bağlara sahip olduğu durumlarda veya benzer dosyanın sistemde var olması durumunda ya da sıkıştırılmış verinin bir uçbirimden okunması/yazılması durumunda bile sıkıştırma/açma işleminin yapılmasını sağlar. Girdinin verisi \fBgzip\fR tarafından tanınmayan bir biçimde ise ve ayrıca \fB--stdout\fR seçeneği de belirtilmişse, girdi dosyası hiç değiştirilmeden standart çıktıya kopyalanır: \fBzcat\fR’in, \fBcat\fR gibi davranmasına izin verir. \fB-f\fR verilmemiş ve \fBgzip\fR artalanda çalışmıyorsa, varolan dosyanın üzerine yazılıp yazılmayacağı kullanıcıya sorulur.
+Dosyanın çoklu bağlara sahip olduğu durumlarda veya benzer dosyanın sistemde var olması durumunda ya da sıkıştırılmış verinin bir uçbirimden okunması/yazılması durumunda bile sıkıştırma/açma işleminin yapılmasını sağlar. Girdinin verisi \fBgzip\fR tarafından tanınmayan bir biçimde ise ve ayrıca \fB--stdout\fR seçeneği de belirtilmişse, girdi dosyası hiç değiştirilmeden standart çıktıya kopyalanır: \fBzcat\fR\&'in, \fBcat\fR gibi davranmasına izin verir. \fB-f\fR verilmemiş ve \fBgzip\fR artalanda çalışmıyorsa, varolan dosyanın üzerine yazılıp yazılmayacağı kullanıcıya sorulur.
 .sp
 .TP 4
 \fB-h\fR, \fB--help\fR
@@ -106,14 +106,14 @@ zcat file.Z | wc -c
 .RS 4
 .nf
 method:      sıkıştırma yöntemi
-crc:         sıkıştırılmamış verinin 32 bitlik CRC’si
+crc:         sıkıştırılmamış verinin 32 bitlik CRC\&'si
 date & time: sıkıştırılmamış dosya için tarih damgası
 .fi
 .sp
 .RE
 .RE
 .IP
-Desteklenen sıkıştırma yöntemleri: deflate, compress, lzh (SCO compress -H) ve pack’dir. \fBgzip\fR biçiminde olmayan bir dosya için crc, ffffffff şeklinde belirtilir.
+Desteklenen sıkıştırma yöntemleri: deflate, compress, lzh (SCO compress -H) ve pack\&'dir. \fBgzip\fR biçiminde olmayan bir dosya için crc, ffffffff şeklinde belirtilir.
 .sp
 \fB--name\fR seçeneği ile sıkıştırılmış dosya içinde eğer varsa, sıkıştırılmamış dosya ismi, tarih ve zaman saklanır.
 .sp
@@ -147,7 +147,7 @@ Sıkıştırmanın açılması sırasında, çıktı dosyası ismi, girdi dosyas
 .sp
 .TP 4
 \fB--synchronous\fR
-Eşzamanlı çıktı kullanılır. Bu seçenekle, \fBgzip\fR’in bir sistem çökmesi sırasında veri kaybetme olasılığı daha düşüktür, ancak işlem önemli ölçüde yavaş olabilir.
+Eşzamanlı çıktı kullanılır. Bu seçenekle, \fBgzip\fR\&'in bir sistem çökmesi sırasında veri kaybetme olasılığı daha düşüktür, ancak işlem önemli ölçüde yavaş olabilir.
 .sp
 .TP 4
 \fB-t\fR, \fB--test\fR
@@ -163,11 +163,11 @@ Sürüm numarasını ve derleme seçeneklerini gösterir ve çıkar.
 .sp
 .TP 4
 \fB-#\fR, \fB--fast\fR, \fB--best\fR
-Sıkıştırma hızını ayarlamayı sağlar. \fB-#\fR seçeneğinde # yerine \fB-1\fR ile \fB-9\fR arasında değişen değerler alır. \fB-1\fR (\fB--fast\fR) ile en hızlı yöntemle en az sıkıştırma, \fB-9\fR (\fB--best\fR) ile en yavaş yöntemle en yüksek sıkıştırma yapılır. Öntanımlı değer \fB-6\fR’dır (hız pahasına yüksek sıkıştırmaya eğilimlilik).
+Sıkıştırma hızını ayarlamayı sağlar. \fB-#\fR seçeneğinde # yerine \fB-1\fR ile \fB-9\fR arasında değişen değerler alır. \fB-1\fR (\fB--fast\fR) ile en hızlı yöntemle en az sıkıştırma, \fB-9\fR (\fB--best\fR) ile en yavaş yöntemle en yüksek sıkıştırma yapılır. Öntanımlı değer \fB-6\fR\&'dır (hız pahasına yüksek sıkıştırmaya eğilimlilik).
 .sp
 .TP 4
 \fB--rsyncable\fR
-Sıkıştırılmış bir dosyayı iki bilgisayar arasında eşzamanladığınızda, bu seçenek \fBrsync\fR’in tüm arşiv yerine yalnızca arşivde değiştirilen dosyaları aktarmasını sağlar. Normalde, arşivdeki herhangi bir dosyada değişiklik yapıldıktan sonra, sıkıştırma algoritması arşivin önceki sürümüyle eşleşmeyen yeni bir arşiv sürümü oluşturabilir. Bu durumda \fBrsync\fR(1), arşivin tüm yeni sürümünü uzak bilgisayara aktarır. Bu seçenekle, \fBrsync\fR yalnızca değiştirilen dosyaların yanı sıra, değiştirilen alandaki arşiv yapısını güncellemek için gerekli olan az miktarda meta veriyi aktarabilir.
+Sıkıştırılmış bir dosyayı iki bilgisayar arasında eşzamanladığınızda, bu seçenek \fBrsync\fR\&'in tüm arşiv yerine yalnızca arşivde değiştirilen dosyaları aktarmasını sağlar. Normalde, arşivdeki herhangi bir dosyada değişiklik yapıldıktan sonra, sıkıştırma algoritması arşivin önceki sürümüyle eşleşmeyen yeni bir arşiv sürümü oluşturabilir. Bu durumda \fBrsync\fR(1), arşivin tüm yeni sürümünü uzak bilgisayara aktarır. Bu seçenekle, \fBrsync\fR yalnızca değiştirilen dosyaların yanı sıra, değiştirilen alandaki arşiv yapısını güncellemek için gerekli olan az miktarda meta veriyi aktarabilir.
 .sp
 .PP
 .sp
@@ -221,12 +221,12 @@ gzip -cd dosya.gz | wc -c
 .fi
 .sp
 .RE
-Çok üyeli tek bir arşiv oluşturmak ve daha sonra bunların birbirinden bağımsız olarak açılabilmesini istiyorsanız, \fBtar\fR(1) veya \fBzip\fR(1) gibi bir arşivleyici kullanın. GNU \fBtar\fR yazılımı \fBgzip\fR’i başlatmak için \fB-z\fR seçeneğine sahiptir. \fBgzip\fR, \fBtar\fR uygulamasına tamamlayıcı olarak geliştirilmiştir, onun yerini alacak bir uygulama değildir.
+Çok üyeli tek bir arşiv oluşturmak ve daha sonra bunların birbirinden bağımsız olarak açılabilmesini istiyorsanız, \fBtar\fR(1) veya \fBzip\fR(1) gibi bir arşivleyici kullanın. GNU \fBtar\fR yazılımı \fBgzip\fR\&'i başlatmak için \fB-z\fR seçeneğine sahiptir. \fBgzip\fR, \fBtar\fR uygulamasına tamamlayıcı olarak geliştirilmiştir, onun yerini alacak bir uygulama değildir.
 .sp
 .SH "ORTAM DEĞİŞKENLERİ"
-\fBGZIP\fR ortam değişkeni, \fBgzip\fR uygulaması için öntanımlı birkaç değer içerir. Bu değerler önce yorumlanır ve daha sonra komut satırından belirtilen girdilerle değiştirilebilir. Bu özellik, komut dosyalarını kullanırken sorunlara neden olabileceğinden, yalnızca çok fazla zarar vermeme olasılığı olan seçenekler için desteklenir ve kullanılırsa gzip uyarır. Bu özellik, gzip’in gelecekteki bir sürümünde kaldırılacaktır.
+\fBGZIP\fR ortam değişkeni, \fBgzip\fR uygulaması için öntanımlı birkaç değer içerir. Bu değerler önce yorumlanır ve daha sonra komut satırından belirtilen girdilerle değiştirilebilir. Bu özellik, komut dosyalarını kullanırken sorunlara neden olabileceğinden, yalnızca çok fazla zarar vermeme olasılığı olan seçenekler için desteklenir ve kullanılırsa gzip uyarır. Bu özellik, gzip\&'in gelecekteki bir sürümünde kaldırılacaktır.
 .sp
-Bunun yerine bir takma ad veya betik kullanabilirsiniz. Örneğin, \fBgzip\fR \fI/usr/bin\fR dizinindeyse \fBPATH\fR’inizin başına \fI$HOME/bin\fR ekleyebilir ve aşağıdakileri içeren bir \fB$HOME/bin/gzip\fR betiği oluşturabilirsiniz:
+Bunun yerine bir takma ad veya betik kullanabilirsiniz. Örneğin, \fBgzip\fR \fI/usr/bin\fR dizinindeyse \fBPATH\fR\&'inizin başına \fI$HOME/bin\fR ekleyebilir ve aşağıdakileri içeren bir \fB$HOME/bin/gzip\fR betiği oluşturabilirsiniz:
 .sp
 .RS 4
 .nf
@@ -240,10 +240,10 @@ exec gzip -9 "$@"
 .SH "İLGİLİ BELGELER"
 \fBznew\fR(1), \fBzcmp\fR(1), \fBzmore\fR(1), \fBzforce\fR(1), \fBgzexe\fR(1), \fBzip\fR(1), \fBunzip\fR(1), \fBcompress\fR(1)
 .sp
-\fBgzip\fR dosya biçimi P. Deutsch içinde GZIP dosya biçimi belirtimi sürüm 4.3 olarak Internet RFC 1952’de (Mayıs 1996) belirtilmiştir ve <ftp://ftp.isi.edu/in-notes/rfc1952.txt> adresinde bulunabilir. \fBzip\fR biçimi ise P. Deutsch içinde DEFLATE sıkıştırılmış veri biçimi belirtimi sürüm 1.3 olarak Internet RFC 1951’de (Mayıs 1996) belirtilmiştir ve <ftp://ftp.isi.edu/in-notes/rfc1951.txt> adresinde bulunabilir.
+\fBgzip\fR dosya biçimi P. Deutsch içinde GZIP dosya biçimi belirtimi sürüm 4.3 olarak Internet RFC 1952\&'de (Mayıs 1996) belirtilmiştir ve <ftp://ftp.isi.edu/in-notes/rfc1952.txt> adresinde bulunabilir. \fBzip\fR biçimi ise P. Deutsch içinde DEFLATE sıkıştırılmış veri biçimi belirtimi sürüm 1.3 olarak Internet RFC 1951\&'de (Mayıs 1996) belirtilmiştir ve <ftp://ftp.isi.edu/in-notes/rfc1951.txt> adresinde bulunabilir.
 .sp
 .SH "ÇIKIŞ DURUMU VE HATA İLETİLERİ"
-Çıkış durumu normalde 0’dır, hata oluşması durumunda 1, uyarı oluşması durumunda 2’dir.
+Çıkış durumu normalde 0\&'dır, hata oluşması durumunda 1, uyarı oluşması durumunda 2\&'dir.
 .sp
 .TP 4
 Usage: gzip [-cdfhlLnNrtvV19] [-S suffix] [file ...]
@@ -251,7 +251,7 @@ Komut satırında geçersiz seçenekler tanımlandı.
 .sp
 .TP 4
 \fIdosyaismi\fR: not in gzip format
-\fBgunzip\fR’e belirtilen dosya, sıkıştırılmamış.
+\fBgunzip\fR\&'e belirtilen dosya, sıkıştırılmamış.
 .sp
 .TP 4
 \fIdosyaismi\fR: Corrupt input. Use zcat to recover some data.
@@ -293,12 +293,12 @@ Girdi dosyası normal bir dosya veya dizin değil ise (örneğin, bir sembolik b
 .sp
 .TP 4
 -- has xx other links: unchanged
-Girdi dosyası bağlara sahip; dokunulmadan geçildi. Daha fazla bilgi için \fBln\fR(1)’e bakınız. Çok sayıda bağa sahip dosyaları sıkıştırmak için \fB-f\fR seçeneği kullanılabilir.
+Girdi dosyası bağlara sahip; dokunulmadan geçildi. Daha fazla bilgi için \fBln\fR(1)\&'e bakınız. Çok sayıda bağa sahip dosyaları sıkıştırmak için \fB-f\fR seçeneği kullanılabilir.
 .sp
 .PP
 .sp
 .SH "YETERSİZLİKLER"
-Sıkıştırılmış veriyi bir teybe yazarken, genellikle, çıktıyı blok sınırına kadar sıfırlarla doldurmak gerekebilir. Veri okunup bütün blok \fBgunzip\fR’e açılmak üzere gönderilirse, \fBgunzip\fR sıkıştırılmış verinin ardındaki fazladan çöpü bulur ve öntanımlı olarak bir uyarı verir. Bu iletiyi atlamak için \fB--quiet\fR seçeneğini kullanmak gerekir.
+Sıkıştırılmış veriyi bir teybe yazarken, genellikle, çıktıyı blok sınırına kadar sıfırlarla doldurmak gerekebilir. Veri okunup bütün blok \fBgunzip\fR\&'e açılmak üzere gönderilirse, \fBgunzip\fR sıkıştırılmış verinin ardındaki fazladan çöpü bulur ve öntanımlı olarak bir uyarı verir. Bu iletiyi atlamak için \fB--quiet\fR seçeneğini kullanmak gerekir.
 .sp
 .SH "YAZILIM HATALARI"
 \fBgzip\fR biçimi, modulo 2^32 girdi boyutuna göre davranır, bu nedenle \fB--list\fR seçeneği, 4 GB veya daha büyük dosyakarın sıkıştırılmamış boyunu ve sıkıştırma oranını yanlış raporlar. Daha büyük dosyaların gerçek boyutlarını tespit etmek için aşağıdaki komutu kullanarak bu sorunun çevresinden dolanabilirsiniz:
@@ -311,7 +311,7 @@ zcat dosya.gz | wc -c
 .RE
 Sıkıştırılmış dosya araştırılamayan bir ortam üzerinde ise, \fB--list\fR seçeneği boyut olarak -1 ve crc olarak ffffffff döndürür.
 .sp
-Bazı çok nadir durumlarda, \fB--best\fR seçeneği öntanımlı seviye \fB-6\fR’dan daha kötü bir sıkıştırma uygular. Bazı son derece gereksiz dosyalarda, \fBcompress\fR, \fBgzip\fR’den daha iyi sıkıştırma sağlar.
+Bazı çok nadir durumlarda, \fB--best\fR seçeneği öntanımlı seviye \fB-6\fR\&'dan daha kötü bir sıkıştırma uygular. Bazı son derece gereksiz dosyalarda, \fBcompress\fR, \fBgzip\fR\&'den daha iyi sıkıştırma sağlar.
 .sp
 .SH "GERİBİLDİRİM"
 Hataları bildirmek için: <bug-gzip@gnu.org>

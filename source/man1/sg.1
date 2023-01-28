@@ -22,7 +22,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "SG" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -51,7 +51,7 @@ sg - komutu farklı bir grup kimliği ile çalıştırır
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBsg\fR komutu, \fBnewgrp\fR(1) komutuna benzer şekilde çalışır ancak bir \fIkomut\fR kabul eder. \fIkomut\fR \fB/bin/sh\fR kabuğunda çalıştırılır. \fBsg\fR’nin komut çalıştırabileceği çoğu kabukta, çok girdili komutları tırnak içine almanız gerekir. \fBnewgrp\fR ve \fBsg\fR arasındaki diğer bir fark, bazı kabukların \fBnewgrp\fR’u özel olarak ele alması ve kendilerini \fBnewgrp\fR’un oluşturduğu yeni kabuk örneğine çatallamasıdır. \fBsg\fR için bu böyle olmaz, bu nedenle bir \fBsg\fR komutundan çıktığınızda önceki grup kimliğinize dönersiniz.
+\fBsg\fR komutu, \fBnewgrp\fR(1) komutuna benzer şekilde çalışır ancak bir \fIkomut\fR kabul eder. \fIkomut\fR \fB/bin/sh\fR kabuğunda çalıştırılır. \fBsg\fR\&'nin komut çalıştırabileceği çoğu kabukta, çok girdili komutları tırnak içine almanız gerekir. \fBnewgrp\fR ve \fBsg\fR arasındaki diğer bir fark, bazı kabukların \fBnewgrp\fR\&'u özel olarak ele alması ve kendilerini \fBnewgrp\fR\&'un oluşturduğu yeni kabuk örneğine çatallamasıdır. \fBsg\fR için bu böyle olmaz, bu nedenle bir \fBsg\fR komutundan çıktığınızda önceki grup kimliğinize dönersiniz.
 .sp
 .SH "YAPILANDIRMA"
 Bu aracın davranışını değiştiren \fI/etc/login.defs\fR yapılandırma değişkenleri:

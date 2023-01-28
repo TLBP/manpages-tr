@@ -18,7 +18,7 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "CFDISK" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -44,7 +44,7 @@ cfdisk - disk bölümleme tablosunu gösterir veya değiştirir
 .PP
 2.25 sürümünden beri \fBcfdisk\fR MBR (DOS), GPT, SUN ve SGI disk etiketlerini desteklemektedir. SKS (Silindir-Kafa-Sektor) adreslemesi artık kullanılmamaktadır. SKS adreslemesi Linux için hiç önemli olmamıştır ve bu kavram yeni aygıtlar için hiçbir şey ifade etmemektedir.
 .sp
-2.25 sürümünden beri \fBcfdisk\fR ’print’ komutunu da desteklememektedir. Bu işlevsellik \fBpartx\fR(8) ve \fBlsblk\fR(8) tarafından daha ayrıntılı biçimde sunulmaktadır.
+2.25 sürümünden beri \fBcfdisk\fR \&'print\&' komutunu da desteklememektedir. Bu işlevsellik \fBpartx\fR(8) ve \fBlsblk\fR(8) tarafından daha ayrıntılı biçimde sunulmaktadır.
 .sp
 Aygıttan eski bölümleme tablosu kaldırılmak istenirse \fBwipefs\fR(8) kullanılması önerilir.
 .sp
@@ -120,11 +120,11 @@ Bellekteki bölümleme tablosunu \fBsfdisk\fR(8) uyumlu bir betik dosyasına bo�
 .sp
 Oluşturulan betik dosyaları \fBcfdisk\fR, \fBfdisk\fR(8) \fBsfdisk\fR(8) ve diğer libfdisk uygulamaları arasında uyumludur. Ayrıntılar için bkz: \fBsfdisk\fR(8)
 .sp
-Aygıtta bölümleme tablosu yoksa veya \fBcfdisk\fR \fB--zero\fR komut satırı seçeneğiyle başlatılırsa \fBcfdisk\fR’e bir sfdisk betiği yüklemek de mümkündür.
+Aygıtta bölümleme tablosu yoksa veya \fBcfdisk\fR \fB--zero\fR komut satırı seçeneğiyle başlatılırsa \fBcfdisk\fR\&'e bir sfdisk betiği yüklemek de mümkündür.
 .sp
 .TP 4
 \fBW\fR
-Bölüm tablosunu diske yazar (büyük harf \fBW\fR girilmelidir). Bu, diskteki verileri yok edebileceğinden, "evet/yes" veya "hayır/no" girerek yazmayı onaylamanız veya reddetmeniz gerekir. ’evet’ girerseniz, \fBcfdisk\fR bölüm tablosunu diske yazar ve çekirdeğe diskten bölüm tablosunu yeniden okumasını söyler.
+Bölüm tablosunu diske yazar (büyük harf \fBW\fR girilmelidir). Bu, diskteki verileri yok edebileceğinden, "evet/yes" veya "hayır/no" girerek yazmayı onaylamanız veya reddetmeniz gerekir. \&'evet\&' girerseniz, \fBcfdisk\fR bölüm tablosunu diske yazar ve çekirdeğe diskten bölüm tablosunu yeniden okumasını söyler.
 .sp
 Bölüm tablosu bazı durumlarda çekirdek tarafından yeniden okunmayabilir. Böyle bir durumda, \fBpartprobe\fR(8) veya \fBpartx\fR(8) kullanarak veya sistemi yeniden başlatarak yeni bölümler hakkında çekirdeği bilgilendirmek gerekir.
 .sp
@@ -138,7 +138,7 @@ Bir bölüm hakkındaki ek bilgiyi değiş/tokuş eder.
 .sp
 .TP 4
 \fISola ok, Sağa ok\fR
-Önceki veya sonraki menü öğesini seçer. Enter’a basmak, seçili olan öğeyi yürütecektir.
+Önceki veya sonraki menü öğesini seçer. Enter\&'a basmak, seçili olan öğeyi yürütecektir.
 .sp
 .PP
 Tüm komutlar büyük veya küçük harf olarak girilebilir (W hariç). Bir alt menüdeyken veya bir istemdeyken, ana menüye dönmek için Esc tuşuna basmak gerekir.
@@ -195,7 +195,7 @@ dosyasıyla devre dışı bırakılabilir. Kullanıcıya özel \fB$XDG_CONFIG_HO
 .SH "YAZAN"
 Karel Zak tarafından yazılmıştır.
 .sp
-Şimdiki cfdisk gerçeklenimi Kevin E. Martin tarafından yazılan özgün cfdisk’e dayanır.
+Şimdiki cfdisk gerçeklenimi Kevin E. Martin tarafından yazılan özgün cfdisk\&'e dayanır.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBfdisk\fR(8), \fBparted\fR(8), \fBpartprobe\fR(8), \fBpartx\fR(8), \fBsfdisk\fR(8)

@@ -70,7 +70,7 @@
  * Modified 1998, 1999 by Andi Kleen
  * Modified 2004-06-23 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "CONNECT" 2 "11 Nisan 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -82,7 +82,7 @@ connect - soket üzerinde bağlantı oluşturur
 .sp
 .SH BİLDİRİM
 .nf
-\fB#include <sys/types.h>\fR          /* NOTLAR’a bakın */
+\fB#include <sys/types.h>\fR          /* NOTLAR\&'a bakın */
 \fB#include <sys/socket.h>\fR
 .fi
 .sp
@@ -98,9 +98,9 @@ Eğer soket \fIsockfd\fR \fBSOCK_DGRAM\fR türünden ise, \fIaddr\fR, verilerin 
 .sp
 Bazı protokol soketleri (örneğin UNIX alanı akım soketleri) sadece bir kere başarıyla \fBconnect\fR() yapabilir.
 .sp
-Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki veri soketleri) bağlantılarını değiştirmek için \fBconnect\fR()’i çok kez kullanabilir.
+Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki veri soketleri) bağlantılarını değiştirmek için \fBconnect\fR()\&'i çok kez kullanabilir.
 .sp
-Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki TCP ve veri soketleri) \fIsockaddr\fR’in \fIsa_family\fR üyesi \fBAF_UNSPEC\fR olarak ayarlanmış bir adrese bağlanarak ilişkiyi çözebilir; sonrasında, soket bir başka adrese bağlanabilir. (\fBAF_UNSPEC\fR Linux’da, çekirdek 2.2’den itibaren desteklenmektedir.)
+Bazı protokol soketleri (örneğin UNIX ve İnternet alanları içerisindeki TCP ve veri soketleri) \fIsockaddr\fR\&'in \fIsa_family\fR üyesi \fBAF_UNSPEC\fR olarak ayarlanmış bir adrese bağlanarak ilişkiyi çözebilir; sonrasında, soket bir başka adrese bağlanabilir. (\fBAF_UNSPEC\fR Linux\&'da, çekirdek 2.2\&'den itibaren desteklenmektedir.)
 .sp
 .SH "DÖNÜŞ DEĞERİ"
 Bağlantı veya ilişkilendirme bşarılı ise sıfır döner. Hata durumunda \fB-1\fR dönder ve hata \fIerrno\fR değişkenine atanır.
@@ -152,7 +152,7 @@ Soket adres yapısı, kullanıcı adres uzayının dışında.
 .sp
 .TP 4
 \fBEINPROGRESS\fR
-Soket engellemesiz ve bağlantı hemen tamamlanamıyor. (Başarısız UNIX alan soketleri bunun yerine \fBEAGAIN\fR ile döner.) \fBselect\fR(2) veya \fBpoll\fR(2) ile soketi yazmak için seçerek bağlantıyı tamamlamak mümkündür. \fBselect\fR(2) yazılabilirliği gösterdikten sonra, \fBgetsockopt\fR(2) kullanarak \fBSOL_SOCKET\fR seviyesinde \fBSO_ERROR\fR ayarını okuyup \fBconnect\fR()’in başarılı olduğu (\fBSO_ERROR\fR sıfır olur) veya olmadığı (\fBSO_ERROR\fR burada listelenen bir hata kodu olur ve hatanın sebebini açıklar) belirlenir.
+Soket engellemesiz ve bağlantı hemen tamamlanamıyor. (Başarısız UNIX alan soketleri bunun yerine \fBEAGAIN\fR ile döner.) \fBselect\fR(2) veya \fBpoll\fR(2) ile soketi yazmak için seçerek bağlantıyı tamamlamak mümkündür. \fBselect\fR(2) yazılabilirliği gösterdikten sonra, \fBgetsockopt\fR(2) kullanarak \fBSOL_SOCKET\fR seviyesinde \fBSO_ERROR\fR ayarını okuyup \fBconnect\fR()\&'in başarılı olduğu (\fBSO_ERROR\fR sıfır olur) veya olmadığı (\fBSO_ERROR\fR burada listelenen bir hata kodu olur ve hatanın sebebini açıklar) belirlenir.
 .sp
 .TP 4
 \fBEINTR\fR
@@ -168,7 +168,7 @@ Ağa ulaşılamıyor.
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+Belirtilen \fIsockfd\fR\&'nin bir soketle ilgisi yok.
 .sp
 .TP 4
 \fBEPROTOTYPE\fR
@@ -184,14 +184,14 @@ Bağlama girişimi sırasında zaman aşımı. Sunucu yeni bağlantıları kabul
 POSIX.1-2001, POSIX.1-2008, SVr4, 4.4BSD (\fBconnect\fR() ilk defa 4.2BSD ile ortaya çıktı).
 .sp
 .SH "NOTLAR"
-POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+POSIX.1\&'de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux\&'da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
 .sp
-\fIsocklen_t\fR’nin arka planı için \fBaccept\fR(2) sayfasına bakın.
+\fIsocklen_t\fR\&'nin arka planı için \fBaccept\fR(2) sayfasına bakın.
 .sp
 Eğer \fBconnect\fR() başarılı olmazsa, soketin durumu belirtilmemiş olarak kabul edilir. Taşınabilir uygulamalar tekrar bağlanmak için soketi kapatmalı ve yeni bir tane oluşturmalıdır.
 .sp
 .SH "ÖRNEKLER"
-\fBconnect\fR()’in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+\fBconnect\fR()\&'in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBaccept\fR(2), \fBbind\fR(2), \fBgetsockname\fR(2), \fBlisten\fR(2), \fBsocket\fR(2), \fBpath_resolution\fR(7), \fBselinux\fR(8)

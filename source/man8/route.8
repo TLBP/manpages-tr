@@ -7,7 +7,7 @@
  * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
  * https://sourceforge.net/p/net-tools/code/ci/master/tree/
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "ROUTE" 8 "Ocak 2021" "net-tools 2.10" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,7 +43,7 @@ route - IP yönlendirme tablosunu yönetir/içeriğini gösterir
 .SH "SEÇENEKLER"
 .TP 4
 \fB-A\fR \fIaile\fR
-Belirtilen adres ailesi kullanılır. (Örneğin: ’inet’) Tam listeyi elde etmek için \fBroute -–help\fR komutunu kullanın. \fB--inet6\fR yerine \fB-6\fR, \fB-A inet\fR yerine \fB-4\fR kullanılabilir.
+Belirtilen adres ailesi kullanılır. (Örneğin: `inet\&') Tam listeyi elde etmek için \fBroute -–help\fR komutunu kullanın. \fB--inet6\fR yerine \fB-6\fR, \fB-A inet\fR yerine \fB-4\fR kullanılabilir.
 .sp
 .TP 4
 \fB-F\fR
@@ -97,11 +97,11 @@ Paketler bu \fIağgeçidi\fR üzerinden yollanır.
 .sp
 .TP 4
 \fBmetric\fR \fIN\fR
-Yönlendirme tablosundaki (yönlendirme süreçleri tarafından kullanılan) metric alanına belirtilen \fIN\fR değerini atar. Seçenek belirtilmezse, inet6 (IPv6) adres için öntanımlı \fIN\fR değeri 1, inet (IPv4) için ise 0’dır. Bu öntanımlılara (iproue2’dekilerden farklıdır) güvenmek yerine daima \fIN\fR değeri açıkça belirtilmelidir.
+Yönlendirme tablosundaki (yönlendirme süreçleri tarafından kullanılan) metric alanına belirtilen \fIN\fR değerini atar. Seçenek belirtilmezse, inet6 (IPv6) adres için öntanımlı \fIN\fR değeri 1, inet (IPv4) için ise 0\&'dır. Bu öntanımlılara (iproue2\&'dekilerden farklıdır) güvenmek yerine daima \fIN\fR değeri açıkça belirtilmelidir.
 .sp
 .TP 4
 \fBmss\fR \fIN\fR
-Arayüzün MTU değerini \fIN\fR bayta ayarlar. \fBroute\fR komutunun kullanılan sürümü ile MSS’nin (Azami Parça Boyutu) ayarlanamadığı unutulmamalıdır.
+Arayüzün MTU değerini \fIN\fR bayta ayarlar. \fBroute\fR komutunun kullanılan sürümü ile MSS\&'nin (Azami Parça Boyutu) ayarlanamadığı unutulmamalıdır.
 .sp
 .TP 4
 \fBwindow\fR \fIN\fR
@@ -159,7 +159,7 @@ route del default
 .RE
 .sp
 .SS "Bir yolu silmek"
-Linux yönlendirme çekirdeği sınıfsız adresleme kullandığından, hemen hemen her zaman ’route -n’ listesinde görüldüğü gibi ağ maskesinin belirtilmesi gerekir.
+Linux yönlendirme çekirdeği sınıfsız adresleme kullandığından, hemen hemen her zaman \&'route -n\&' listesinde görüldüğü gibi ağ maskesinin belirtilmesi gerekir.
 .sp
 .RS 4
 .nf
@@ -242,7 +242,7 @@ Ağ geçidi adresi; belirtilmemişse “*”.
 .sp
 .TP 4
 \fBGenmask\fR
-Hedef ağ için ağ maskesi; konak hedefler için ’255.255.255.255’, öntanımlı (\fBdefault\fR) yol için ’0.0.0.0’.
+Hedef ağ için ağ maskesi; konak hedefler için `255.255.255.255’, öntanımlı (\fBdefault\fR) yol için `0.0.0.0’.
 .sp
 .TP 4
 \fBFlags\fR

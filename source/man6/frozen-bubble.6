@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "FROZEN-BUBBLE" 6 "Haziran 2008" "frozen-bubble 2.2.0" "Oyunlar"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -27,7 +27,7 @@ frozen-bubble - atari tarzı, çabuk tepki vermeye dayalı bir oyun
 Öntanımlı denetim mekanizması klavye aracılığıyladır, ancak sistem tarafından destekleniyorsa bir oyun çubuğu veya oyun tableti ile oynayabilirsiniz (donmuş balonun oyun çubuğunuzu algıladığından emin olmak için \fB-ji\fR komut satırı seçeneğini kullanın). Nişanı sağa, sola hareket ettirmek, ortalamak ve ateş etmek için bir tuşa veya bir kumanda kolu yönü veya düğmesine ihtiyaç vardır.
 .sp
 .SH "TEK OYUNCULU"
-Tek oyunculu kipte, yeni başlayanlar için en iyi eğitim, giderek artan bir zorlukla 100 seviyeyi geçmenize izin veren \fBPlay Default Levelset\fR (Öntanımlı Seviyeleri Oynat)’ı seçmektir. Bir sonraki seviyeye geçmek için her seviyedeki tüm baloncukları patlatın.
+Tek oyunculu kipte, yeni başlayanlar için en iyi eğitim, giderek artan bir zorlukla 100 seviyeyi geçmenize izin veren \fBPlay Default Levelset\fR (Öntanımlı Seviyeleri Oynat)\&'ı seçmektir. Bir sonraki seviyeye geçmek için her seviyedeki tüm baloncukları patlatın.
 .sp
 Çok oyunculu için antrenman yapmak isterseniz, 2 oyunculu veya ağ kipi koşullarını yeniden üreten \fBMultiplayer Training\fR (Çok Oyunculu Eğitimi) seçin; tek fark, oluşturulan kötü amaçlı baloncukların puanınızdan sayılması ve 2 dakikada alabileceğiniz en yüksek puanı almanız gerektiğidir.
 .sp
@@ -35,9 +35,9 @@ Tek oyunculu kipte, yeni başlayanlar için en iyi eğitim, giderek artan bir zo
 2 oyunculu kipte, aynı bilgisayarda bir arkadaşınıza (veya aslında bir düşmana) karşı oynayabilirsiniz. Tahta rastgele baloncuklarla doldurulur ve amaç büyük kümeler oluşturarak rakibe kötü amaçlı baloncuklar göndermektir.
 .sp
 .SH "AĞ OYUNU"
-Bilgisayarınızda ağ bağlantısı varsa, yerel ağınızdaki diğer oyunculara karşı (5 oyuncuya kadar) oyun oynamak için \fBLAN GAME\fR’i (yerel ağ oyunu) seçebilirsiniz. Frozen-Bubble yerel ağda UDP yayını olan bir oyun sunucusu arar, bulursa ona bağlanır veya bulamazsa yeni bir oyun sunucusu başlatır.
+Bilgisayarınızda ağ bağlantısı varsa, yerel ağınızdaki diğer oyunculara karşı (5 oyuncuya kadar) oyun oynamak için \fBLAN GAME\fR\&'i (yerel ağ oyunu) seçebilirsiniz. Frozen-Bubble yerel ağda UDP yayını olan bir oyun sunucusu arar, bulursa ona bağlanır veya bulamazsa yeni bir oyun sunucusu başlatır.
 .sp
-Bilgisayarınız İnternet’e bağlıysa, Dünyadaki (veya ötesinde?) diğerlerine karşı oynamak için \fBNET GAME\fR’i seçebilirsiniz. Frozen-Bubble ana sunucudan sunucu listesini alacak ve mevcut sunucular arasında seçim yapmanızı önerecektir. Bir sunucunun önündeki bayrak, oyun başlamadan önce başkalarıyla sohbet etmek için tercih edilen dili gösterir. Ping, sunucuyla konuşurken gidiş-dönüş süresidir, mümkünse düşük bir ping seçin.
+Bilgisayarınız İnternet\&'e bağlıysa, Dünyadaki (veya ötesinde?) diğerlerine karşı oynamak için \fBNET GAME\fR\&'i seçebilirsiniz. Frozen-Bubble ana sunucudan sunucu listesini alacak ve mevcut sunucular arasında seçim yapmanızı önerecektir. Bir sunucunun önündeki bayrak, oyun başlamadan önce başkalarıyla sohbet etmek için tercih edilen dili gösterir. Ping, sunucuyla konuşurken gidiş-dönüş süresidir, mümkünse düşük bir ping seçin.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -90,7 +90,7 @@ Rastgele seviyede, tek oyunculu kipte oyunu başlatır.
 .sp
 .TP 4
 \fB--gameserver\fR \fIsunucu\fR[:\fIport\fR]
-Doğrudan \fIsunucu\fR’ya bağlanarak ağ oyununu başlatır (\fIport\fR belirtilmezse öntanımlı port kullanılır.)
+Doğrudan \fIsunucu\fR\&'ya bağlanarak ağ oyununu başlatır (\fIport\fR belirtilmezse öntanımlı port kullanılır.)
 .sp
 .TP 4
 \fB--chain_reaction\fR
@@ -136,15 +136,15 @@ Ağ oyunu için bir sunucuya bağlandıktan sonra, diğer oyunculara göndermek 
 .sp
 .TP 4
 \fB--record\fR \fIdizin\fR
-Kayıt dizinini belirtir (normalde kayıtlar ev dizini altındaki ’\fI.frozen-bubble/records\fR’ dizinine kaydedilir).
+Kayıt dizinini belirtir (normalde kayıtlar ev dizini altındaki \&'\fI.frozen-bubble/records\fR\&' dizinine kaydedilir).
 .sp
 .TP 4
 \fB--auto-record\fR
 Uygulanabilir tüm oyunları otomatik olarak kaydeder (normalde, oyun sırasında Print Screen tuşuna basılarak kayıt tetiklenebilir).
 .sp
 .TP 4
-\fB--comment\fR ’\fI...\fR’
-Tek tırnaklar arasına alınan yorum kayıtlara eklenir (ASCII’den başka bir şey içermemelidir), daha sonra kayıt oynatılırken konsolda gösterilir.
+\fB--comment\fR \&'\fI...\fR\&'
+Tek tırnaklar arasına alınan yorum kayıtlara eklenir (ASCII\&'den başka bir şey içermemelidir), daha sonra kayıt oynatılırken konsolda gösterilir.
 .sp
 .TP 4
 \fB--replay\fR \fIdosya|url\fR
@@ -154,7 +154,7 @@ Belirtilen dosyadaki kaydı oynatır.
 \fB--save-frames\fR \fIdizin\fR
 Tüm (oyun) karelerinin kaydedileceği dizin; oyun yavaşladığı için sadece \fB--replay\fR ile kullanılabilir.
 .br
-Uyarı: Saniyede 900 KB’lık 50 kare kaydedildiği için çıktı çok büyüktür (örn, 43 MB/s); örneğin, çerçevelerden bir video oluşturmak için şöyle bir komut verilebilir:
+Uyarı: Saniyede 900 KB\&'lık 50 kare kaydedildiği için çıktı çok büyüktür (örn, 43 MB/s); örneğin, çerçevelerden bir video oluşturmak için şöyle bir komut verilebilir:
 .sp
 .RS 4
 .RS 0

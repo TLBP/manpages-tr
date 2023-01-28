@@ -8,9 +8,9 @@
  * Copyright 1988,1990,1993 by Paul Vixie
  * All rights reserved
  *
- * Distribute freely, except: don’t remove my name from the source or
- * documentation (don’t take credit for my work), mark your changes (don’t
- * get me blamed for your possible bugs), don’t alter or remove this
+ * Distribute freely, except: don\&'t remove my name from the source or
+ * documentation (don\&'t take credit for my work), mark your changes (don\&'t
+ * get me blamed for your possible bugs), don\&'t alter or remove this
  * notice.  May be sold if buildable source is provided to buyer.  No
  * warrantee of any kind, express or implied, is included with this
  * software; use at your own risk, responsibility for damages (if any) to
@@ -18,10 +18,10 @@
  * user.
  *
  * Send bug reports, bug fixes, enhancements, requests, flames, etc., and
- * I’ll try to keep a version up to date.  I can be reached as follows:
+ * I\&'ll try to keep a version up to date.  I can be reached as follows:
  * Paul Vixie         <paul@vix.com>          uunet!decwrl!vixie!paul
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CRONTAB" 1 "29 Aralık 1993" "cron 3.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -44,13 +44,13 @@ crontab - bağımsız kullanıcılar için crontab dosyalarının işletilmesini
 .sp
 Şayet bir \fIcron.allow\fR (izin) dosyası varsa, bu komutu kullanabilmek için, bu dosyada listelenmiş olmak zorundasınız. Eğer \fIcron.allow\fR dosyası yok fakat bir \fIcron.deny\fR (red) dosyası mevcut ise, bu komutu kullanabilmek için \fIcron.deny\fR dosyası içindeki listede adınızın olmaması gerekir. Eğer bu dosyaların hiçbiri yoksa, ayar seçeneneklerine bağlı olarak, ya sadece root ya da bütün kullanıcılar bu komutu çalıştırma hakkına sahip olabilirler. Buradaki temel nokta ayar seçenekleridir.
 .sp
-\fB-u\fR seçeneği belirtilmişse, bu seçenek ile crontab dosyası çimdiklenecek olan kullanıcının adı belirtilir. Şayet bu seçenek yok ise, crontab komutu çalıştıran kullanıcı olarak "sizin" crontab dosyanızı araştıracaktır. Unutmayın ki; \fBsu\fR(8), crontab’ın kafasını karıştırabilir. Eğer crontab’ı \fBsu\fR(8) altında kullanacaksanız, güvenlik amacı ile, \fB-u\fR seçeneğiyle kullanmalısınız.
+\fB-u\fR seçeneği belirtilmişse, bu seçenek ile crontab dosyası çimdiklenecek olan kullanıcının adı belirtilir. Şayet bu seçenek yok ise, crontab komutu çalıştıran kullanıcı olarak "sizin" crontab dosyanızı araştıracaktır. Unutmayın ki; \fBsu\fR(8), crontab\&'ın kafasını karıştırabilir. Eğer crontab\&'ı \fBsu\fR(8) altında kullanacaksanız, güvenlik amacı ile, \fB-u\fR seçeneğiyle kullanmalısınız.
 .sp
-Bu komutun yukarda gösterilen ilk kullanım şekli, belirtilen \fIdosya\fR ya da dosya yerine ’’-’’ verildiğinde standart girdiden yeni bir crontab dosyasını yüklemek için kullanılır.
+Bu komutun yukarda gösterilen ilk kullanım şekli, belirtilen \fIdosya\fR ya da dosya yerine ``-\&'\&' verildiğinde standart girdiden yeni bir crontab dosyasını yüklemek için kullanılır.
 .sp
-\fB-l\fR seçeneği, geçerli crontab’ın standart çıktıda görüntülenmesini sağlar.
+\fB-l\fR seçeneği, geçerli crontab\&'ın standart çıktıda görüntülenmesini sağlar.
 .sp
-\fB-r\fR seçeneği, geçerli crontab’ı siler.
+\fB-r\fR seçeneği, geçerli crontab\&'ı siler.
 .sp
 \fB-e\fR seçeneği, \fBVISUAL\fR veya \fBEDITOR\fR ortam değişkeni ile belirtilmiş olan metin düzenleyici ile, o anki crontab dosyasını düzenlemek için kullanılır. Metin düzenleyiciden çıktıktan sonra, düzenlenmiş olan crontab dosyası otomatik olarak yüklenecektir.
 .sp
@@ -63,7 +63,7 @@ Bu komutun yukarda gösterilen ilk kullanım şekli, belirtilen \fIdosya\fR ya d
 \fI/etc/cron.deny\fR
 .sp
 .SH "STANDARTLAR"
-\fBcrontab\fR komutu, IEEE Std1003.2-1992 (’’POSIX’’) ile uyumludur. Bu yeni komut sözdizimi, klasik SVR3 sözdiziminden farklı olduğu gibi, Vixie Cron’un önceki sürümlerinden de farklılık gösterir.
+\fBcrontab\fR komutu, IEEE Std1003.2-1992 (\&'\&'POSIX\&'\&') ile uyumludur. Bu yeni komut sözdizimi, klasik SVR3 sözdiziminden farklı olduğu gibi, Vixie Cron\&'un önceki sürümlerinden de farklılık gösterir.
 .sp
 .SH "TANILAMA"
 Şayet yanlış bir komut sözdizimi ile çalıştırmaya kalkarsanız, kısa bir kullanım bilgisi alırsınız.

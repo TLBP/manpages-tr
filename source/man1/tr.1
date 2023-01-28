@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "TR" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -25,11 +25,11 @@ Standart girdiden okuduğu karakterleri dönüştürerek, sıkıştırarak ve/ve
 .sp
 .TP 4
 \fB-c\fR, \fB-C\fR, \fB--complement\fR
-\fIKÜME1\fR’in tümleyeni kullanılır.
+\fIKÜME1\fR\&'in tümleyeni kullanılır.
 .sp
 .TP 4
 \fB-d\fR, \fB--delete\fR
-\fIKÜME1\fR’deki karakterleri siler, dönüştürmez.
+\fIKÜME1\fR\&'deki karakterleri siler, dönüştürmez.
 .sp
 .TP 4
 \fB-s\fR, \fB--squeeze-repeats\fR
@@ -37,7 +37,7 @@ Aynı karakterden oluşmuş bir sırayı, karakterler \fIKÜME1\fR içinde varsa
 .sp
 .TP 4
 \fB-t\fR, \fB--truncate-set1\fR
-Önce \fIKÜME1\fR’i, \fIKÜME2\fR’nin boyuna eşit olacak şekilde kısaltır.
+Önce \fIKÜME1\fR\&'i, \fIKÜME2\fR\&'nin boyuna eşit olacak şekilde kısaltır.
 .sp
 .TP 4
 \fB--help\fR
@@ -61,9 +61,9 @@ Sürüm bilgilerini görüntüler ve çıkar.
 \\r             satır başı
 \\t             yatay sekme
 \\v             düşey sekme
-KAR1-KAR2      artan sırada KAR1’den KAR2’ye kadar
+KAR1-KAR2      artan sırada KAR1\&'den KAR2\&'ye kadar
                tüm karakterler
-[KAR*]         KAR karakterini KUME2’de KUME1 uzunluğu
+[KAR*]         KAR karakterini KUME2\&'de KUME1 uzunluğu
                kadar tekrarlar
 [KAR*TEKRAR]   KAR karakterini TEKRAR kere tekrarlar,
                TEKRAR 0 ile başlıyorsa sekizlik sayıdır
@@ -83,7 +83,7 @@ KAR1-KAR2      artan sırada KAR1’den KAR2’ye kadar
 .fi
 .sp
 .RE
-Dönüşüm, \fB-d\fR seçeneği kullanılmadığında ve \fIKÜME1\fR ve \fIKÜME2\fR’nin her ikisi de verildiğinde gerçekleşir. \fB-t\fR sadece dönüşüm yaparken kullanılabilir. \fIKÜME2\fR gerektiğinde son karakteri tekrar edilerek \fIKÜME1\fR ile aynı uzunluğa getirilir. \fIKÜME2\fR’deki fazlalık karakterler dikkate alınmaz. Çeviri yapılılırken \fIKÜME2\fR’de kullanılan karakter sınıflarından sadece [:lower:] ve [:upper:] kesin olarak büyükten küçüğe açılır, bu ikisi beraberce sadece büyük harf / küçük harf dönüşümü yapılırken kullanılabilir. \fB-s\fR sadece ne dönüşüm ne de silme yapılıyorsa \fIKÜME1\fR’i kullanır; aksi takdirde dönüşüm veya sıkıştırma bittikten sonra sıkıştırma yapılıyorsa \fIKÜME2\fR’yi kullanır.
+Dönüşüm, \fB-d\fR seçeneği kullanılmadığında ve \fIKÜME1\fR ve \fIKÜME2\fR\&'nin her ikisi de verildiğinde gerçekleşir. \fB-t\fR sadece dönüşüm yaparken kullanılabilir. \fIKÜME2\fR gerektiğinde son karakteri tekrar edilerek \fIKÜME1\fR ile aynı uzunluğa getirilir. \fIKÜME2\fR\&'deki fazlalık karakterler dikkate alınmaz. Çeviri yapılılırken \fIKÜME2\fR\&'de kullanılan karakter sınıflarından sadece [:lower:] ve [:upper:] kesin olarak büyükten küçüğe açılır, bu ikisi beraberce sadece büyük harf / küçük harf dönüşümü yapılırken kullanılabilir. \fB-s\fR sadece ne dönüşüm ne de silme yapılıyorsa \fIKÜME1\fR\&'i kullanır; aksi takdirde dönüşüm veya sıkıştırma bittikten sonra sıkıştırma yapılıyorsa \fIKÜME2\fR\&'yi kullanır.
 .sp
 .SH "YAZAN"
 Jim Meyering tarafından yazılmıştır.
@@ -97,7 +97,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/tr>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) tr invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) tr invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006, 2022 Nilgün Belma Bugüner

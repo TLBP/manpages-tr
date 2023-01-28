@@ -22,7 +22,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "PASSWD" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -67,7 +67,7 @@ Ardından parolanın yeterli karmaşıklığa sahip olup olmadığına bakılır
 .IP \(bu 3
 küçük harfler
 .IP \(bu 3
-0’dan 9’a kadar rakamlar
+0\&'dan 9\&'a kadar rakamlar
 .IP \(bu 3
 noktalama işaretleri
 .sp
@@ -114,7 +114,7 @@ Parola değişikliğinin yalnızca süresi dolmuş kimlik doğrulama belirteçle
 \fB-l\fR, \fB--lock\fR
 Hesabın parolasını kilitler. Bunu, girilen parolanın saklanan şifreli parola ile eşleşmemesini sağlayarak yapar (şifreli parolanın önüne bir ünlem imi koymak gibi).
 .sp
-Burada dikkat edilmesi gereken nokta, bu işlemin oturum açmayı engellemeyeceğidir. Kullanıcı başka bir kimlik doğrulama belirtecini (örneğin SSH anahtarını) kullanarak hala oturum açabilir. Kullanıcının oturum açmasını engellemek için yönetici \fBusermod --expiredate 1\fR komutunu kullanmalıdır (bu komut, hesabın kullanım süresinin 2 Ocak 1970’te dolmasını sağlar).
+Burada dikkat edilmesi gereken nokta, bu işlemin oturum açmayı engellemeyeceğidir. Kullanıcı başka bir kimlik doğrulama belirtecini (örneğin SSH anahtarını) kullanarak hala oturum açabilir. Kullanıcının oturum açmasını engellemek için yönetici \fBusermod --expiredate 1\fR komutunu kullanmalıdır (bu komut, hesabın kullanım süresinin 2 Ocak 1970\&'te dolmasını sağlar).
 .sp
 Parolası kilitlenen kullanıcıların parola değiştirmesine izin verilmez.
 .sp
@@ -178,7 +178,7 @@ Bu değişken, \fBMD5_CRYPT_ENAB\fR değişkenini geçersiz kılar.
 .sp
 .TP 4
 \fBMD5_CRYPT_ENAB\fR (mantıksal)
-Parolaların MD5 tabanlı algoritma kullanılarak şifrelenmesi gerekip gerekmediğini belirler. \fIyes\fR atanırsa, yeni parolalar, FreeBSD’nin son sürümlerinde kullanılanla uyumlu MD5 tabanlı algoritma kullanılarak şifrelenir. Sınırsız uzunluktaki parolaları ve uzun tuz dizgelerini destekler. Yeni algoritmayı anlamayan sistemlere şifrelenmiş parolaların kopyalanması gerekiyorsa \fIno\fR atanmalıdır.
+Parolaların MD5 tabanlı algoritma kullanılarak şifrelenmesi gerekip gerekmediğini belirler. \fIyes\fR atanırsa, yeni parolalar, FreeBSD\&'nin son sürümlerinde kullanılanla uyumlu MD5 tabanlı algoritma kullanılarak şifrelenir. Sınırsız uzunluktaki parolaları ve uzun tuz dizgelerini destekler. Yeni algoritmayı anlamayan sistemlere şifrelenmiş parolaların kopyalanması gerekiyorsa \fIno\fR atanmalıdır.
 .sp
 Bu değişken, \fBENCRYPT_METHOD\fR değişkeni ile veya şifreleme algoritmasını değiştirmek için belirtilen bir komut satırı seçeneği ile geçersiz kılınabilir.
 .sp
@@ -198,7 +198,7 @@ Reddedilirse parolayı değiştirmek için azami deneme sayısı (çok kolay).
 .sp
 .TP 4
 \fBPASS_MAX_LEN\fR (sayısal), \fBPASS_MIN_LEN\fR (sayısal)
-\fBcrypt\fR(3) işlevi için paroladaki anlamlı karakter sayısını belirleyen \fBPASS_MAX_LEN\fR için öntanımlı değer 8’dir. Sistemdeki \fBcrypt()\fR işlevi daha iyisini yapmıyorsa değiştirmeyin. \fBMD5_CRYPT_ENAB\fR değişkenine \fIyes\fR atanırsa bu değişken yok sayılır.
+\fBcrypt\fR(3) işlevi için paroladaki anlamlı karakter sayısını belirleyen \fBPASS_MAX_LEN\fR için öntanımlı değer 8\&'dir. Sistemdeki \fBcrypt()\fR işlevi daha iyisini yapmıyorsa değiştirmeyin. \fBMD5_CRYPT_ENAB\fR değişkenine \fIyes\fR atanırsa bu değişken yok sayılır.
 .sp
 .TP 4
 \fBSHA_CRYPT_MIN_ROUNDS\fR (sayısal), \fBSHA_CRYPT_MAX_ROUNDS\fR (sayısal)

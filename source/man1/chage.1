@@ -22,7 +22,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CHAGE" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -58,11 +58,11 @@ chage - kullanıcı parolasının ömür bilgilerini değiştirir
 .sp
 .TP 4
 \fB-d\fR, \fB--lastday\fR \fISON-GÜN\fR
-\fISON-GÜN\fR’ün değeri 1 Ocak 1970’den parolanın son değiştiği güne kadar olan gün sayısıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. \fISON-GÜN\fR olarak 0 değeri belirtilirse, kullanıcı, bir sonraki oturum açışında parolasını değiştirmek zorunda bırakılır.
+\fISON-GÜN\fR\&'ün değeri 1 Ocak 1970\&'den parolanın son değiştiği güne kadar olan gün sayısıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. \fISON-GÜN\fR olarak 0 değeri belirtilirse, kullanıcı, bir sonraki oturum açışında parolasını değiştirmek zorunda bırakılır.
 .sp
 .TP 4
 \fB-E\fR, \fB--expiredate\fR \fISON_TARİH\fR
-Kullanıcı hesabının hangi tarihten sonra erişilemez olacağını belirlemekte kullanılır. \fISON_TARİH\fR’in değeri; 1 Ocak 1970’den hesabın kilitleneceği güne kadar olan sürenin gün cinsinden miktarıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
+Kullanıcı hesabının hangi tarihten sonra erişilemez olacağını belirlemekte kullanılır. \fISON_TARİH\fR\&'in değeri; 1 Ocak 1970\&'den hesabın kilitleneceği güne kadar olan sürenin gün cinsinden miktarıdır. YYYY-AA-GG biçiminde bir tarih olarak da (veya yaşadığınız bölgede kabul edilen tarih biçimi ile) belirtilebilir. Hesabı kilitlenen bir kullanıcının hesabını tekrar kullanabilmesi için, mutlaka sistem yöneticisine baş vurması gerekmektedir.
 .sp
 Örneğin, bir hesabın 180 gün sonra erişilemez olacağı şöyle belirlenebilir:
 .sp

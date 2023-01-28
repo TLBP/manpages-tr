@@ -25,7 +25,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
@@ -41,7 +41,7 @@
  *
  * Copyright (c) 1992 Rik Faith (faith@cs.unc.edu)
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "MORE" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -58,14 +58,14 @@ more - ekranda dosya okumak için sayfalayıcı
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBmore\fR, dosya metninin her seferinde bir ekranlık bölümünü görüntüleyen bir araçtır. Bu sürüm özellikle ilkeldir. Kullanıcılar, \fBless\fR(1)’in daha fazla öykünme ve daha kapsamlı geliştirmeler sağladığını fark etmiş olmalıdır.
+\fBmore\fR, dosya metninin her seferinde bir ekranlık bölümünü görüntüleyen bir araçtır. Bu sürüm özellikle ilkeldir. Kullanıcılar, \fBless\fR(1)\&'in daha fazla öykünme ve daha kapsamlı geliştirmeler sağladığını fark etmiş olmalıdır.
 .sp
 .SH "SEÇENEKLER"
 Seçenekler ayrıca \fBMORE\fR ortam değişkeninden alınır (önlerinde tire (-) bulunduğundan emin olun), ancak komut satırı seçenekleri bunları geçersiz kılar.
 .sp
 .TP 4
 \fB-d\fR, \fB--silent\fR
-Geçersiz bir tuşa basıldığında zili çalmak yerine "[Devam etmek için boşluk, çıkmak için ’q’ tuşuna basın.]" istemini ve "[Talimatlar için ’h’ye basın.]" ifadesini gösterir.
+Geçersiz bir tuşa basıldığında zili çalmak yerine "[Devam etmek için boşluk, çıkmak için \&'q\&' tuşuna basın.]" istemini ve "[Talimatlar için \&'h\&'ye basın.]" ifadesini gösterir.
 .sp
 .TP 4
 \fB-l\fR, \fB--logical\fR
@@ -161,7 +161,7 @@ Metnin ileriye doğru k. ekranına atlar. 1 öntanımlıdır.
 Metnin geriye doğru k. ekranına atlar. 1 öntanımlıdır. Yalnızca dosyalarda çalışır, borularda çalışmaz.
 .sp
 .TP 4
-\fB’\fR
+\fB\&'\fR
 Son aramanın başladığı yere gider.
 .sp
 .TP 4
@@ -232,14 +232,14 @@ Kullanıcının tercih ettiği metin düzenleyici. v komut tuşu ile çalıştı
 .PP
 .sp
 .SH "GEÇMİŞ"
-\fBmore\fR komutu 3.0BSD’de göründü. Bu kılavuz sayfası, şu anda Linux topluluğunda kullanımda olan \fBmore\fR sürüm 5.19’u (Berkeley 6/29/88) belgelemekte olup, \fBmore\fR kılavuz sayfasının başka birkaç sürümünün ve kaynak kodunun kapsamlı bir şekilde incelenmesiyle üretildi.
+\fBmore\fR komutu 3.0BSD\&'de göründü. Bu kılavuz sayfası, şu anda Linux topluluğunda kullanımda olan \fBmore\fR sürüm 5.19\&'u (Berkeley 6/29/88) belgelemekte olup, \fBmore\fR kılavuz sayfasının başka birkaç sürümünün ve kaynak kodunun kapsamlı bir şekilde incelenmesiyle üretildi.
 .sp
 .SH "YAZANLAR"
 Eric Shienbrood, UC Berkeley.
 .sp
-Altçizmek, tek boşluk eklemek için UCB’den Geoff Peck tarafından değiştirildi.
+Altçizmek, tek boşluk eklemek için UCB\&'den Geoff Peck tarafından değiştirildi.
 .sp
-\fB-c\fR seçeneğini ve \fBMORE\fR ortam değişkenini eklemek için UCB’den John Foderaro tarafından değiştirildi.
+\fB-c\fR seçeneğini ve \fBMORE\fR ortam değişkenini eklemek için UCB\&'den John Foderaro tarafından değiştirildi.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBless\fR(1), \fBvi\fR(1)

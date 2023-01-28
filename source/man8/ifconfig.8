@@ -7,7 +7,7 @@
  * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
  * https://sourceforge.net/p/net-tools/code/ci/master/tree/
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "IFCONFIG" 8 "Ocak 2021" "net-tools 2.10" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -31,7 +31,7 @@ ifconfig - ağ arayüzlerini yapılandırır
 Herhangi bir girdi belirtilmemişse, \fBifconfig\fR o an için geçerli olan arayüzlerin durumu hakkında bilgi verir. Tek bir \fIarayüz\fR belirtilirse, sadece bu arayüz hakkında bilgiler alınabilir. Şayet sadece \fB–a\fR seçeneği belirtilmiş ise, sistemde bulunan bütün arayüzler hakkında bilgi görüntülenir. Bu arayüzlerin etkin olup olmaması önemli değildir. Diğer durumlarda arayüzleri yapılandırmak için kullanılır.
 .sp
 .SS "Adres Aileleri"
-\fIarayüz\fRden sonraki ilk girdi desteklenen adres ailelerinden biri ise, bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: \fBinet\fR (TCP/IP, öntanımlıdır), \fBinet6\fR (IPv6), \fBax25\fR (AMPR paket radyo), \fBddp\fR (Appletalk Phase 2), \fBipx\fR (Novell IPX) ve \fBnetrom\fR (AMPR paket radyo). IPv4 noktalı onluk tabanda gösterimin parçaları olarak sağlanan tüm sayılar, ISO C standardında belirtildiği gibi onluk, sekizlik veya onaltılık tabanda olabilir (yani, baştaki 0x veya 0X sayının onaltılık tabanda olduğunu, baştaki ’0’ ise sekizlik tabanda olduğunu gösterir; aksi takdirde, sayı onluk tabanda yorumlanır). Onaltılık ve sekizlik sayıların kullanımı RFC uyumlu değildir ve bu nedenle kullanımı önerilmez.
+\fIarayüz\fRden sonraki ilk girdi desteklenen adres ailelerinden biri ise, bütün protokol adreslerinin çözümlenmesi ve görüntülenmesi için bu adres ailesi kullanılır. Desteklenen adres aileleri: \fBinet\fR (TCP/IP, öntanımlıdır), \fBinet6\fR (IPv6), \fBax25\fR (AMPR paket radyo), \fBddp\fR (Appletalk Phase 2), \fBipx\fR (Novell IPX) ve \fBnetrom\fR (AMPR paket radyo). IPv4 noktalı onluk tabanda gösterimin parçaları olarak sağlanan tüm sayılar, ISO C standardında belirtildiği gibi onluk, sekizlik veya onaltılık tabanda olabilir (yani, baştaki 0x veya 0X sayının onaltılık tabanda olduğunu, baştaki \&'0\&' ise sekizlik tabanda olduğunu gösterir; aksi takdirde, sayı onluk tabanda yorumlanır). Onaltılık ve sekizlik sayıların kullanımı RFC uyumlu değildir ve bu nedenle kullanımı önerilmez.
 .sp
 .sp
 .SH "SEÇENEKLER"
@@ -53,7 +53,7 @@ Bazı hata durumlarında çıktı daha ayrıntılı olur.
 .sp
 .TP 4
 \fIarayüz\fR
-Arayüzün adı. Bu genellikle bir sürücü adı ve bir birim numarasından oluşur, örneğin ilk Ethernet arabirimi için genelde \fBeth0\fR’dır. Çekirdek takma adlı arabirimleri destekliyorsa, bunlar \fBeth0\fR’ın ilk takma adı için \fBeth0:0\fR gibi bir sözdizimi ile belirtilebilir. Bir arabirime birden fazla adres atamak için bunlar kullanılabilir. Bir takma adlı arabirimi silmek için \fBifconfig eth0:0 down\fR komutu kullanılabilir.
+Arayüzün adı. Bu genellikle bir sürücü adı ve bir birim numarasından oluşur, örneğin ilk Ethernet arabirimi için genelde \fBeth0\fR\&'dır. Çekirdek takma adlı arabirimleri destekliyorsa, bunlar \fBeth0\fR\&'ın ilk takma adı için \fBeth0:0\fR gibi bir sözdizimi ile belirtilebilir. Bir arabirime birden fazla adres atamak için bunlar kullanılabilir. Bir takma adlı arabirimi silmek için \fBifconfig eth0:0 down\fR komutu kullanılabilir.
 .sp
 .RS 4
 .TP 4

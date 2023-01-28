@@ -44,7 +44,7 @@
  * Modified Oct 2003 by aeb
  * Modified 2004-07-01 by mtk
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "SEND" 2 "1 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -137,7 +137,7 @@ Bir kaydı sonlandırır (bu kavram \fBSOCK_SEQPACKET\fR türündeki soketlerdek
 \fBMSG_MORE\fR (Linux 2.4.4 ve sonrası)
 Çağrıcının hala yollayacağı veri var. Bu seçenek \fBTCP_CORK\fR soket seçeneğine ait etkiyi TCP soketleri ile elde etmek için kullanılır (\fBtcp\fR(7) sayfasına bakın). Bu seçeneğin farkı çağrıya özel olmasıdır.
 .sp
-Linux 2.6’dan itibaren, bu seçenek UDP soketleri için de desteklenmektedir. Çekirdeğe, sadece bu seçenek belirtilmeksizin yapılan bir çağrı ile aktarım yapılan tek bir verikatarına gönderilecek tüm veriyi bu seçenek kullanılarak yapılan çağrılarla gönderilecek şekilde paketlemesini söyler. (Ayrıca \fBudp\fR(7)’de açıklanan \fBUDP_CORK\fR soket seçeneğine de bakın.)
+Linux 2.6\&'dan itibaren, bu seçenek UDP soketleri için de desteklenmektedir. Çekirdeğe, sadece bu seçenek belirtilmeksizin yapılan bir çağrı ile aktarım yapılan tek bir verikatarına gönderilecek tüm veriyi bu seçenek kullanılarak yapılan çağrılarla gönderilecek şekilde paketlemesini söyler. (Ayrıca \fBudp\fR(7)\&'de açıklanan \fBUDP_CORK\fR soket seçeneğine de bakın.)
 .sp
 .TP 4
 \fBMSG_NOSIGNAL\fR (Linux 2.2 ve sonrası)
@@ -234,7 +234,7 @@ Soket türü iletinin bütün olarak gönderilmesini gerektiriyor ancak iletinin
 .sp
 .TP 4
 \fBENOBUFS\fR
-Ağ arabiriminin çıktı kuyruğu dolu. Bu, genellikle arabirimin göndermeyi durdurduğunu gösterir, ancak geçici bir tıkanıklıktan ötürü de olabilir. (Normalde bu durum Linux’ta olmaz. Aygıtın kuyruğu taşarsa paketler sessizce düşürülür.)
+Ağ arabiriminin çıktı kuyruğu dolu. Bu, genellikle arabirimin göndermeyi durdurduğunu gösterir, ancak geçici bir tıkanıklıktan ötürü de olabilir. (Normalde bu durum Linux\&'ta olmaz. Aygıtın kuyruğu taşarsa paketler sessizce düşürülür.)
 .sp
 .TP 4
 \fBENOMEM\fR
@@ -246,7 +246,7 @@ Soket bağlantısız ve bir hedef belirtilmemiş.
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+Belirtilen \fIsockfd\fR\&'nin bir soketle ilgisi yok.
 .sp
 .TP 4
 \fBEOPNOTSUPP\fR
@@ -261,12 +261,12 @@ Bağlantı yönelimli sokette yerel uç kapatılmış. Bu durumda, \fBMSG_NOSIGN
 .SH "UYUMLULUK"
 4.4BSD, SVr4, POSIX.1-2001. Bu arayüzler ilk defa 4.2BSD ile ortaya çıktı.
 .sp
-POSIX.1-2001 sadece \fBMSG_OOB\fR ve \fBMSG_EOR\fR seçeneklerini açıklar. POSIX.1-2008 \fBMSG_NOSIGNAL\fR’e bir belirtim ekler. \fBMSG_CONFIRM\fR seçeneği ise Linux eklentisidir.
+POSIX.1-2001 sadece \fBMSG_OOB\fR ve \fBMSG_EOR\fR seçeneklerini açıklar. POSIX.1-2008 \fBMSG_NOSIGNAL\fR\&'e bir belirtim ekler. \fBMSG_CONFIRM\fR seçeneği ise Linux eklentisidir.
 .sp
 .SH "EK BİLGİ"
-POSIX.1-2001’e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünden, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
+POSIX.1-2001\&'e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünden, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
 .sp
-Tek çağrıda çok sayıda verikatarı iletmek için kullanılan Linux’a özgü sistem çağrısı hakkında bilgi edinmek için \fBsendmmsg\fR(2) sayfasına bakın.
+Tek çağrıda çok sayıda verikatarı iletmek için kullanılan Linux\&'a özgü sistem çağrısı hakkında bilgi edinmek için \fBsendmmsg\fR(2) sayfasına bakın.
 .sp
 .SH "HATALAR"
 Linux, \fBENOTCONN\fR yerine \fBEPIPE\fR döndürebilir.

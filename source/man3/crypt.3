@@ -15,12 +15,12 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted.
  *
- * There’s ABSOLUTELY NO WARRANTY, express or implied.
+ * There\&'s ABSOLUTELY NO WARRANTY, express or implied.
  *
  * This manual page in its current form is intended for use on systems
  * based on the GNU C Library with crypt_blowfish patched into libcrypt.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "CRYPT" 3 "7 Temmuz 2014" "crypt_blowfish 1.3" "Kütüphane İşlevleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -104,16 +104,16 @@ int \fIsize\fR);
 .SH "AÇIKLAMA"
 \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri, bir tuz ve muhtemelen diğer değişkenleri de aktarmak için kullanılan bir dizi desteklenen yöntemden biriyle istendiği şekilde anahtarın kriptografik aş işlevini hesaplar.
 .sp
-\fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri \fBcrypt\fR’ten farklı olarak evrelidir. Bu işlevler sonuçlarını ve muhtemelen özel verilerini, bir uygulama tarafından kendilerine belirtilen \fIsize\fR boyutundaki bir \fIdata\fR alanına ve/veya dinamik olarak ayırdıkları belleğe yerleştirir. Bazı aşlama algoritmaları veri alanını, çağrılar arasında hesaplanmış ara değerleri önbelleğe almak için kullanabilir. Bu sebeple, uygulamalar ilk kullanımdan önce veri alanını doğru bir şekilde ilklendirmelidir. \fBcrypt_r\fR yalnızca \fIdata->initialized\fR’in sıfırla ilklendirilmesini gerektirir; \fBcrypt_rn\fR ve \fBcrypt_ra\fR için tüm \fIdata\fR alanının sıfırlarla doldurulması veya \fBcrypt_ra\fR durumunda *\fIdata\fR’nın NULL olması gerekir. Eğer \fBcrypt_ra\fR, talep edilen aşlama algoritmasını NULL *\fIdata\fR veya yeterli olmayan *\fIsize\fR ile çağrırırsa gerekli bellek dinamik olarak \fBrealloc\fR(3) ile ayrılır. Bu sebeple \fBcrypt_ra\fR, *\fIdata\fR NULL olmadığında bir önceki \fBcrypt_ra\fR çağrısıyla veya \fBmalloc\fR(3) ailesinden bir çağrıyla ayrılan bir alana gösterici olmalıdır. \fBcrypt_ra\fR ile ayrılan belleğin \fBfree\fR(3) ile serbest bırakılması gerekir.
+\fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri \fBcrypt\fR\&'ten farklı olarak evrelidir. Bu işlevler sonuçlarını ve muhtemelen özel verilerini, bir uygulama tarafından kendilerine belirtilen \fIsize\fR boyutundaki bir \fIdata\fR alanına ve/veya dinamik olarak ayırdıkları belleğe yerleştirir. Bazı aşlama algoritmaları veri alanını, çağrılar arasında hesaplanmış ara değerleri önbelleğe almak için kullanabilir. Bu sebeple, uygulamalar ilk kullanımdan önce veri alanını doğru bir şekilde ilklendirmelidir. \fBcrypt_r\fR yalnızca \fIdata->initialized\fR\&'in sıfırla ilklendirilmesini gerektirir; \fBcrypt_rn\fR ve \fBcrypt_ra\fR için tüm \fIdata\fR alanının sıfırlarla doldurulması veya \fBcrypt_ra\fR durumunda *\fIdata\fR\&'nın NULL olması gerekir. Eğer \fBcrypt_ra\fR, talep edilen aşlama algoritmasını NULL *\fIdata\fR veya yeterli olmayan *\fIsize\fR ile çağrırırsa gerekli bellek dinamik olarak \fBrealloc\fR(3) ile ayrılır. Bu sebeple \fBcrypt_ra\fR, *\fIdata\fR NULL olmadığında bir önceki \fBcrypt_ra\fR çağrısıyla veya \fBmalloc\fR(3) ailesinden bir çağrıyla ayrılan bir alana gösterici olmalıdır. \fBcrypt_ra\fR ile ayrılan belleğin \fBfree\fR(3) ile serbest bırakılması gerekir.
 .sp
-\fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR, ve \fBcrypt_gensalt_ra\fR işlevleri belirtilen \fIprefix\fR öneki (aşlama yöntemini belirler), yineleme sayısı \fIcount\fR (seçilen yöntem destekliyorsa) ve aslında tuz olarak kullanacak en fazla \fIsize\fR baytlık kriptografik değerlerden oluşan \fIinput\fR girdisi ile diğer işlevlerde \fIsetting\fR olarak kullanılabilecek bir dizge derler. Eğer yineleme sayısı \fIcount\fR 0 ise, düşük bir öntanımlı seçilir. Rastgele baytlar \fI/dev/urandom\fR’dan elde edilebilir. \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri \fBcrypt_gensalt\fR işlevinden farklı olarak evrelidir. \fBcrypt_gensalt_rn\fR, sonuçları \fIoutput_size\fR baytlık \fIoutput\fR tamponuna yerleştirir. \fBcrypt_gensalt_ra\fR ise, sonuçları için bellekte dinamik olarak yer ayırır. Bu belleğin \fBfree\fR(3) ile serbest bırakılması gerekir.
+\fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR, ve \fBcrypt_gensalt_ra\fR işlevleri belirtilen \fIprefix\fR öneki (aşlama yöntemini belirler), yineleme sayısı \fIcount\fR (seçilen yöntem destekliyorsa) ve aslında tuz olarak kullanacak en fazla \fIsize\fR baytlık kriptografik değerlerden oluşan \fIinput\fR girdisi ile diğer işlevlerde \fIsetting\fR olarak kullanılabilecek bir dizge derler. Eğer yineleme sayısı \fIcount\fR 0 ise, düşük bir öntanımlı seçilir. Rastgele baytlar \fI/dev/urandom\fR\&'dan elde edilebilir. \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri \fBcrypt_gensalt\fR işlevinden farklı olarak evrelidir. \fBcrypt_gensalt_rn\fR, sonuçları \fIoutput_size\fR baytlık \fIoutput\fR tamponuna yerleştirir. \fBcrypt_gensalt_ra\fR ise, sonuçları için bellekte dinamik olarak yer ayırır. Bu belleğin \fBfree\fR(3) ile serbest bırakılması gerekir.
 .sp
 .SH "DÖNÜŞ DEĞERİ"
-Başarılı bir şekilde tamamlandığında \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri, gerçekte kullanılan \fIsetting\fR’i ve aşlama işlevinin yazdırılabilir kodlama değerini içeren bir dizgeye gösterici döndürür. Dizgenin tamamı, \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR’ya yapılan çağrılarda \fIsetting\fR olarak, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR’ya yapılan çağrılarda \fIprefix\fR olarak doğrudan kullanılabilir.
+Başarılı bir şekilde tamamlandığında \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri, gerçekte kullanılan \fIsetting\fR\&'i ve aşlama işlevinin yazdırılabilir kodlama değerini içeren bir dizgeye gösterici döndürür. Dizgenin tamamı, \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR ve \fBcrypt_ra\fR\&'ya yapılan çağrılarda \fIsetting\fR olarak, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR\&'ya yapılan çağrılarda \fIprefix\fR olarak doğrudan kullanılabilir.
 .sp
-\fBcrypt\fR’in hata durumundaki davranışları tam olarak standartlaştırılmamıştır. Bazı gerçeklemeler başarısız olamaz (süreç ölmediği sürece; bu durumda birşey döndürelemez), diğerleri NULL veya sabit dizge döndürür. Çoğu gerçeklemeler \fIerrno\fR değişkenine atama yapmaz, bazıları yapar. SUSv2, sadece NULL döndürülmesini ve \fIerrno\fR değişkenine atama yapılmasını geçerli bir davranış olarak belirtir ve olası tek bir hatayı tanımlar: \fBENOSYS\fR, "işlevsellik bu gerçeklenimde desteklenmiyor". Ne yazık ki, mevcut çoğu uygulama \fBcrypt\fR’in NULL döndürmesini işlemeye hazır değildir. Aşağıdaki açıklama sadece \fBcrypt\fR ve \fBcrypt_r\fR’in bu gerçeklemesine ve \fBcrypt_rn\fR ile \fBcrypt_ra\fR işlevlerine karşılık gelir. Bu davranış, standartlara, mevcut uygulamalara veya gerçeklenimlere uygun olarak değişebilir.
+\fBcrypt\fR\&'in hata durumundaki davranışları tam olarak standartlaştırılmamıştır. Bazı gerçeklemeler başarısız olamaz (süreç ölmediği sürece; bu durumda birşey döndürelemez), diğerleri NULL veya sabit dizge döndürür. Çoğu gerçeklemeler \fIerrno\fR değişkenine atama yapmaz, bazıları yapar. SUSv2, sadece NULL döndürülmesini ve \fIerrno\fR değişkenine atama yapılmasını geçerli bir davranış olarak belirtir ve olası tek bir hatayı tanımlar: \fBENOSYS\fR, "işlevsellik bu gerçeklenimde desteklenmiyor". Ne yazık ki, mevcut çoğu uygulama \fBcrypt\fR\&'in NULL döndürmesini işlemeye hazır değildir. Aşağıdaki açıklama sadece \fBcrypt\fR ve \fBcrypt_r\fR\&'in bu gerçeklemesine ve \fBcrypt_rn\fR ile \fBcrypt_ra\fR işlevlerine karşılık gelir. Bu davranış, standartlara, mevcut uygulamalara veya gerçeklenimlere uygun olarak değişebilir.
 .sp
-\fBcrypt\fR ve \fBcrypt_r\fR yalnızca geçersiz veya desteklenmeyen bir \fIsetting\fR dizgesi aktarıldığında başarısız olabilir (ve dönebilir). Bu durumda farklılığı garanti etmek için uzunluğu 13 karakterden kısa ve \fIsetting\fR’den farklı olan sihirli bir dizgeye gösterici döndürür. Bu davranış hem yeni parolaları tanımlarken hem de mevcut parola aşlamalarına karşı kimlik doğrulaması yaparken \fBcrypt\fR’in başarısız olmayacağını kabul eden eski uygulamalar için güvenlidir. \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri hatayı belirtmek için NULL döndürür. Dört işlevin tümü, hata olduğunda hata kodunu \fIerrno\fR’yu atar.
+\fBcrypt\fR ve \fBcrypt_r\fR yalnızca geçersiz veya desteklenmeyen bir \fIsetting\fR dizgesi aktarıldığında başarısız olabilir (ve dönebilir). Bu durumda farklılığı garanti etmek için uzunluğu 13 karakterden kısa ve \fIsetting\fR\&'den farklı olan sihirli bir dizgeye gösterici döndürür. Bu davranış hem yeni parolaları tanımlarken hem de mevcut parola aşlamalarına karşı kimlik doğrulaması yaparken \fBcrypt\fR\&'in başarısız olmayacağını kabul eden eski uygulamalar için güvenlidir. \fBcrypt_rn\fR ve \fBcrypt_ra\fR işlevleri hatayı belirtmek için NULL döndürür. Dört işlevin tümü, hata olduğunda hata kodunu \fIerrno\fR\&'yu atar.
 .sp
 \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri, \fIsetting\fR için derlenen dizgeye bir gösterici döndürür veya hata durumunda ise hata \fIerrno\fR değişkenine atanıp NULL döndürülür.
 .sp
@@ -142,11 +142,11 @@ Başarılı bir şekilde tamamlandığında \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt
 \fBENOSYS\fR
 \fBcrypt\fR (SUSv2): işlevsellik bu gerçeklenimde desteklenmiyorsa;
 .sp
-\fBcrypt\fR, \fBcrypt_r\fR (sadece glibc 2.0’dan 2.0.1’e kadar): \fBcrypt\fR eklentisi derlenmediyse ve \fIsetting\fR MD5 temelli algoritmadan başka bir şey istiyorsa.
+\fBcrypt\fR, \fBcrypt_r\fR (sadece glibc 2.0\&'dan 2.0.1\&'e kadar): \fBcrypt\fR eklentisi derlenmediyse ve \fIsetting\fR MD5 temelli algoritmadan başka bir şey istiyorsa.
 .sp
 .TP 4
 \fBEOPNOTSUPP\fR
-\fBcrypt\fR, \fBcrypt_r\fR (sadece glibc 2.0.2’den 2.1.3’e kadar): \fBcrypt\fR eklentisi derlenmediyse ve \fIsetting\fR MD5 temelli algoritmadan başka bir şey istiyorsa.
+\fBcrypt\fR, \fBcrypt_r\fR (sadece glibc 2.0.2\&'den 2.1.3\&'e kadar): \fBcrypt\fR eklentisi derlenmediyse ve \fIsetting\fR MD5 temelli algoritmadan başka bir şey istiyorsa.
 .sp
 .PP
 .sp
@@ -206,7 +206,7 @@ Yineleme sayısı
 .RE
 .sp
 .SS "Genişletilmiş BSDI biçimi DES temelli"
-Bu yöntem BSDI üzerinde kullanılır ve David Burren’in FreeSec kütüphanesinin kullanılması nedeniyle en azından NetBSD, OpenBSD ve FreeBSD üzerinde de mevcuttur.
+Bu yöntem BSDI üzerinde kullanılır ve David Burren\&'in FreeSec kütüphanesinin kullanılması nedeniyle en azından NetBSD, OpenBSD ve FreeBSD üzerinde de mevcuttur.
 .sp
 .RS 4
 .nf
@@ -234,7 +234,7 @@ Yineleme sayısı
 .RE
 .sp
 .SS "FreeBSD biçimi MD5 temelli"
-Aslen FreeBSD için geliştirilen Poul-Henning Kamp’ın MD5 temelli parola aşlama yöntemidir. Unix benzeri çoğu sistemde, Solaris 10 ve üstlerinde desteklenir, resmi glibc’nin bir parçasıdır. Ana götürüsü sabit yineleme sayısıdır, bu da mevcut donanım için zaten çok düşüktür.
+Aslen FreeBSD için geliştirilen Poul-Henning Kamp\&'ın MD5 temelli parola aşlama yöntemidir. Unix benzeri çoğu sistemde, Solaris 10 ve üstlerinde desteklenir, resmi glibc\&'nin bir parçasıdır. Ana götürüsü sabit yineleme sayısıdır, bu da mevcut donanım için zaten çok düşüktür.
 .sp
 .RS 4
 .nf
@@ -262,7 +262,7 @@ Yineleme sayısı
 .RE
 .sp
 .SS "OpenBSD biçimi Blowfish temelli (bcrypt)"
-\fBbcrypt\fR, aslen Niels Provos ve David Mazieres tarafından OpenBSD için geliştirilmiştir ve FreeBSD ile NetBSD’nin yeni sürümlerini, Solaris 10 ve üstlerini, birçok GNU/*/Linux dağıtımında desteklenmektedir. Fakat resmi glibc’nin parçası değildir.
+\fBbcrypt\fR, aslen Niels Provos ve David Mazieres tarafından OpenBSD için geliştirilmiştir ve FreeBSD ile NetBSD\&'nin yeni sürümlerini, Solaris 10 ve üstlerini, birçok GNU/*/Linux dağıtımında desteklenmektedir. Fakat resmi glibc\&'nin parçası değildir.
 .sp
 Hem \fBbcrypt\fR hem de BSDI biçimi DES temelli aşlama yönteminde değişken yineleme sayısı sunulsa da, \fBbcrypt\fR daha da hızlı donanıma bile ölçeklenebilir, yalnızca parola kırmaya özgü bazı belirli iyileştirmelere izin vermez, etkin anahtar boyutu sınırlamasına sahip değildir ve parolalar için 8 bitlik karakter kullanır.
 .sp
@@ -292,13 +292,13 @@ Yineleme sayısı
 .RE
 \fBbcrypt\fR ile, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevlerine aktarılan \fIcount\fR değişkeni, asıl yineleme sayısının 2 tabanlı logaritmasıdır.
 .sp
-\fBbcrypt\fR aşlamaları, "$2a$" önekini 1997’den beri kullanıyordu. Ancak, 2011 senesinde crypt_blowfish paketinde (1.0.4’e kadar olan sürümler dahil) 8 bitlik parola karakterlerinin işlenmesini etkileyen bir gerçekleme hatası bulundu. Hatayı düzeltmenin yanı sıra, mevcut sistemlere yükseltme yöntemleri sağlamak için iki yeni önek tanıtıldı: hatayı tamamen yeniden tanıtan "$2x$", 7 ve 8 bitlik karakterlerin doğru işlenmesini güvenceleyen "$2y$". OpenBSD 5.5, crypt_blowfish’in "$2y$" önekiyle aynı etkiyi gösteren "$2b$" önekini tanıtmıştır ve mevcut crypt_blowfish’te bunu desteklemektedir. Ne yazık ki, "$2a$" önekinin 8 bitlik parola karakterleri üzerindeki etkisi sisteme özgü olarak kabul edilmelidir. Yeni parola aşlamaları üretilirken, "$2b$" ve "$2y$" önekleri kullanılmalıdır. (Bu tür aşlamaların, bu yeni önekleri desteklemeyen bir sisteme aktarılması gerekirse önceden oluşturulmuş aşlamaların aktarılan kopyalarındaki önek "$2a$" olarak değiştirilebilir.)
+\fBbcrypt\fR aşlamaları, "$2a$" önekini 1997\&'den beri kullanıyordu. Ancak, 2011 senesinde crypt_blowfish paketinde (1.0.4\&'e kadar olan sürümler dahil) 8 bitlik parola karakterlerinin işlenmesini etkileyen bir gerçekleme hatası bulundu. Hatayı düzeltmenin yanı sıra, mevcut sistemlere yükseltme yöntemleri sağlamak için iki yeni önek tanıtıldı: hatayı tamamen yeniden tanıtan "$2x$", 7 ve 8 bitlik karakterlerin doğru işlenmesini güvenceleyen "$2y$". OpenBSD 5.5, crypt_blowfish\&'in "$2y$" önekiyle aynı etkiyi gösteren "$2b$" önekini tanıtmıştır ve mevcut crypt_blowfish\&'te bunu desteklemektedir. Ne yazık ki, "$2a$" önekinin 8 bitlik parola karakterleri üzerindeki etkisi sisteme özgü olarak kabul edilmelidir. Yeni parola aşlamaları üretilirken, "$2b$" ve "$2y$" önekleri kullanılmalıdır. (Bu tür aşlamaların, bu yeni önekleri desteklemeyen bir sisteme aktarılması gerekirse önceden oluşturulmuş aşlamaların aktarılan kopyalarındaki önek "$2a$" olarak değiştirilebilir.)
 .sp
 \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri, "$2x$" hariç (yeni aşlamalarda kullanılmamalıdır) "$2b$", "$2y$", ve "$2a$" öneklerini destekler. \fBcrypt\fR, \fBcrypt_r\fR, \fBcrypt_rn\fR, \fBcrypt_ra\fR işlevleri, bu dört öneki de destekler.
 .sp
 .sp
 .SH "TAŞINABİLİRLİK"
-Bir glibc 2.x sisteminde bu işlevlerden herhangi birini kullanan yazılımların, libcrypt ile ilintilenmesi gerekir. Bununla birlikte, birçok Unix benzeri işletim sistemi ve GNU C Kitaplığının eski sürümleri, libc’de \fBcrypt\fR işlevini içermektedir. \fBcrypt\fR ve \fBcrypt_r\fR glibc-2.28’de kaldırılmıştır.
+Bir glibc 2.x sisteminde bu işlevlerden herhangi birini kullanan yazılımların, libcrypt ile ilintilenmesi gerekir. Bununla birlikte, birçok Unix benzeri işletim sistemi ve GNU C Kitaplığının eski sürümleri, libc\&'de \fBcrypt\fR işlevini içermektedir. \fBcrypt\fR ve \fBcrypt_r\fR glibc-2.28\&'de kaldırılmıştır.
 .sp
 \fBcrypt_r\fR, \fBcrypt_rn\fR, \fBcrypt_ra\fR, \fBcrypt_gensalt\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri çok taşınabilir değildir.
 .sp
@@ -330,7 +330,7 @@ T}
 .RE
 .sp
 .SH "TARİHÇE"
-Rotor temelli \fBcrypt\fR işlevi Sürüm 6 AT&T UNIX’te göründü. "Geleneksel" DES temelli \fBcrypt\fR ilk kez Sürüm 7 AT&T UNIX’te göründü.
+Rotor temelli \fBcrypt\fR işlevi Sürüm 6 AT&T UNIX\&'te göründü. "Geleneksel" DES temelli \fBcrypt\fR ilk kez Sürüm 7 AT&T UNIX\&'te göründü.
 .sp
 \fBcrypt\fR işlevi SVID, X/OPEN uyumludur ve BSD 4.3 üzerinde kullanılmaktadır. \fBcrypt\fR tarafından döndürülen dizgelerin uyumlu sistemler arasında taşınabilir olması gerekmez.
 .sp
@@ -341,11 +341,11 @@ Rotor temelli \fBcrypt\fR işlevi Sürüm 6 AT&T UNIX’te göründü. "Geleneks
 \fBcrypt_rn\fR, \fBcrypt_ra\fR, \fBcrypt_gensalt_rn\fR ve \fBcrypt_gensalt_ra\fR işlevleri de Openwall eklentisidir.
 .sp
 .SH "HATA AYIKLAMA"
-\fBcrypt\fR ve \fBcrypt_gensalt\fR işlevlerinin dönüş değerleri sonraki çağrılar tarafından üzerine yazılan sabit tamponları gösterir. (Solaris’in son sürümlerinde \fBcrypt\fR evreye özgü verileri kullanır ve aslında evre güvenliklidir.)
+\fBcrypt\fR ve \fBcrypt_gensalt\fR işlevlerinin dönüş değerleri sonraki çağrılar tarafından üzerine yazılan sabit tamponları gösterir. (Solaris\&'in son sürümlerinde \fBcrypt\fR evreye özgü verileri kullanır ve aslında evre güvenliklidir.)
 .sp
 Hata durumunda \fBcrypt\fR işlevinin diğer gerçeklemelerinden döndürülen dizgeler, salt okunur konumlarda tutulur veya yalnızca bir kez ilklendirilir, bu da normalde göstericisi \fBcrypt\fR işlevinin dönüş değeri olan tamponu sıfırlarla doldurmaya çalışmayı her zaman emniyetsiz yapar, aksi takdirde güvenlik açısından tercih edilebilir. Uygulamanın çıktı tamponlarında tam denetime (ve çoğu zaman özel verilerin bir kısmı üzerinde de) sahip olduğu, \fBcrypt_r\fR, \fBcrypt_rn\fR veya \fBcrypt_ra\fR işlevlerinin kullanılmasıyla bu sorundan kaçınılabilir. Ne yazık ki bu işlevler, \fBcrypt\fR işlevinin istenmeyen bu özelliğine sahip sistemlerde mevcut değildir.
 .sp
-Evre güvenlikli \fBcrypt_r\fR kullanan uygulamalar, \fIcrypt_data\fR yapısı için büyük alan (128 KB’den fazla) ayırmaya ihtiyaç duyar. Her evre, bu yapının ayrı bir örneğine ihtiyaç duyar. \fBcrypt_r\fR arayüzü, ikil uyumluğu bozmadan, büyük miktarda özel veri tutabilen bir aşlama algoritmasının gerçeklenmesini imkansız kılar. \fBcrypt_ra\fR, kullanılan aşlama algoritması için gereken ayırma boyutunun dinamik olarak arttırılmasına izin verir. Ne yazık ki \fBcrypt_ra\fR işlevi, \fBcrypt_r\fR işlevine göre daha az taşınabilirdir.
+Evre güvenlikli \fBcrypt_r\fR kullanan uygulamalar, \fIcrypt_data\fR yapısı için büyük alan (128 KB\&'den fazla) ayırmaya ihtiyaç duyar. Her evre, bu yapının ayrı bir örneğine ihtiyaç duyar. \fBcrypt_r\fR arayüzü, ikil uyumluğu bozmadan, büyük miktarda özel veri tutabilen bir aşlama algoritmasının gerçeklenmesini imkansız kılar. \fBcrypt_ra\fR, kullanılan aşlama algoritması için gereken ayırma boyutunun dinamik olarak arttırılmasına izin verir. Ne yazık ki \fBcrypt_ra\fR işlevi, \fBcrypt_r\fR işlevine göre daha az taşınabilirdir.
 .sp
 Çok evreli uygulamalar veya evre güvenlikli olması gereken kütüphane işlevleri \fBcrypt_gensalt\fR yerine \fBcrypt_gensalt_rn\fR veya \fBcrypt_gensalt_ra\fR kullanmalıdır.
 .sp

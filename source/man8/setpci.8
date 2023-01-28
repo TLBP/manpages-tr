@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "SETPCI" 8 "Ocak 2021" "pciutils-3.8.0" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -57,7 +57,7 @@ Sonuçlar daha ayrıntılı olur ve yapılandırma alanı erişimleri hakkında 
 .sp
 .TP 4
 \fB-D\fR
-’Gösteri kipi’ -- Yapılanırma yazmaçlarına hiçbir şey yazmaz. Komutu \fBsetpci -vD\fR şeklinde kullanarak oldukça karmaşık olan komut diziminin sonucu gerçekte komut uygulanmadan görülebilir.
+\&'Gösteri kipi\&' -- Yapılanırma yazmaçlarına hiçbir şey yazmaz. Komutu \fBsetpci -vD\fR şeklinde kullanarak oldukça karmaşık olan komut diziminin sonucu gerçekte komut uygulanmadan görülebilir.
 .sp
 .TP 4
 \fB-r\fR
@@ -101,7 +101,7 @@ Kütüphanenin hata ayıklama seviyesini artırır.
 .SS "Aygıt seçimi"
 .TP 4
 \fB-s\fR [[[[\fIETKİ_ALANI\fR]:]\fIVERİ_YOLU\fR]:][\fIAYGIT\fR][.[\fIİŞLEV\fR]]
-Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0’dan ffff’ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0’ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0’ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
+Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0\&'dan ffff\&'ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0\&'ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0\&'ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
 .sp
 .TP 4
 \fB-d\fR [\fISATICI\fR]:[\fIAYGIT\fR][:\fISINIF\fR[:\fIARAYÜZ\fR]]
@@ -123,7 +123,7 @@ Onaltılık tabanda adresi belirtilir.
 .IP \(bu 3
 Adı belirtilir. \fBsetpci\fR, standart yapılandırma başlıklarındaki tüm yazmaçların isimlerini bilir. Tam listeyi almak için \fBsetpci --dumpregs\fR kullanılabilir. Bu yazmaçların kesin anlamı için PCI veri yolu özelliklerine veya kısa bir taslak için \fIheader.h\fR veya \fI/usr/include/pci/pci.h\fR dosyasına bakılabilir.
 .IP \(bu 3
-Yazmaç bir PCI yeteneğinin parçasıysa, ilk yazmacının adresini almak için yeteneğin adı belirtilebilir. \fB--dumpregs\fR çıktısında ’CAP_’ veya ’ECAP_’ ile başlayan adlara bakılabilir.
+Yazmaç bir PCI yeteneğinin parçasıysa, ilk yazmacının adresini almak için yeteneğin adı belirtilebilir. \fB--dumpregs\fR çıktısında \&'CAP_\&' veya \&'ECAP_\&' ile başlayan adlara bakılabilir.
 .IP \(bu 3
 Yeteneğin adı \fBsetpci\fR tarafından bilinmiyorsa, buna CAP\fInum\fR veya ECAP\fInum\fR biçiminde numarasıyla başvurulabilir; burada \fInum\fR, yeteneğin onaltılık tabanda sayısal tanıtıcısıdır.
 .IP \(bu 3
@@ -131,7 +131,7 @@ Adrese bir \fIkonum\fR (onaltılık sayı) eklemek için önceki biçimlerin her
 .IP \(bu 3
 Kaç bayt (1, 2 veya 4) aktarılacağını seçmek için bir genişlik belirteci olarak \fB.B\fR, \fB.W\fR veya \fB.L\fR eklenebilir. Bir yazmaçtan ismiyle bahsediliyorsa ve yazmacın genişliği iyi biliniyorsa genişlik atlanabilir.
 .IP \(bu 3
-Son olarak, birden çok yetenek varsa, \fB@\fR\fInumara\fR kullanılarak hangisinin hedefleneceği belirtilebilir. Sıralama 0’dan başlar.
+Son olarak, birden çok yetenek varsa, \fB@\fR\fInumara\fR kullanılarak hangisinin hedefleneceği belirtilebilir. Sıralama 0\&'dan başlar.
 .sp
 .RE
 .PD 0

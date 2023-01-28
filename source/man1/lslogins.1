@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "LSLOGINS" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,7 +23,7 @@ lslogins - sistemde bilinen kullanıcılar hakkında bilgi görüntüler
 .SH "AÇIKLAMA"
 \fI/var/log/wtmp\fR ve \fI/var/log/btmp\fR günlüklerini, \fI/etc/shadow\fR (gerekirse) ve \fI/etc/passwd\fR dosyasını inceleyip istenen verileri çıktılar.
 .sp
-İsteğe bağlı \fIkullanıcı\fR adı girdisi, \fBlslogins\fR’in yalnızca belirtilen kullanıcıyla ilgili kullanılabilir tüm ayrıntıları görüntülemesini sağlar. Bu durumda çıktı biçemi \fB-l\fR veya \fB-g\fR ile elde edilenden farklıdır ve bilinmeyen kullanıcı adı bir hata olarak bildirilir.
+İsteğe bağlı \fIkullanıcı\fR adı girdisi, \fBlslogins\fR\&'in yalnızca belirtilen kullanıcıyla ilgili kullanılabilir tüm ayrıntıları görüntülemesini sağlar. Bu durumda çıktı biçemi \fB-l\fR veya \fB-g\fR ile elde edilenden farklıdır ve bilinmeyen kullanıcı adı bir hata olarak bildirilir.
 .sp
 Öntanımlı olarak, sistemdeki tüm kullanıcılar hakkındaki bilgiler listelenir.
 .sp
@@ -102,7 +102,7 @@ Sistem hesaplarını gösterir. Bunlar, nobody veya nfsnobody (UID 65534) hariç
 .sp
 .TP 4
 \fB-u\fR, \fB--user-accs\fR
-Kullanıcı hesaplarını gösterir. Bunlar, nobody veya nfsnobody (UID 65534) hariç olmak üzere, öntanımlı olarak 1000’in üzerinde (dahil) kullanıcı kimliğine sahip hesapların tamamıdır. Sabit kodlanmış 1000 öntanımlı değeri, \fI/etc/login.defs\fR dosyasındaki \fBUID_MIN\fR ve \fBUID_MAX\fR yapılandırma değişkenleri ile geçersiz kılınabilir.
+Kullanıcı hesaplarını gösterir. Bunlar, nobody veya nfsnobody (UID 65534) hariç olmak üzere, öntanımlı olarak 1000\&'in üzerinde (dahil) kullanıcı kimliğine sahip hesapların tamamıdır. Sabit kodlanmış 1000 öntanımlı değeri, \fI/etc/login.defs\fR dosyasındaki \fBUID_MIN\fR ve \fBUID_MAX\fR yapılandırma değişkenleri ile geçersiz kılınabilir.
 .sp
 .TP 4
 \fB-h\fR, \fB--help\fR
@@ -153,7 +153,7 @@ Ciddi bir hata oluşmuş (örn, bozuk günlük kaydı).
 Öntanımlı kullanıcı kimliği eşikleri \fI/etc/login.defs\fR dosyasından okunur.
 .sp
 .SH "TARİHÇE"
-\fBlslogins\fR uygulaması için, ilk olarak FreeBSD 4.10’da ortaya çıkan \fBlogins\fR uygulamasından esinlenmiştir.
+\fBlslogins\fR uygulaması için, ilk olarak FreeBSD 4.10\&'da ortaya çıkan \fBlogins\fR uygulamasından esinlenmiştir.
 .sp
 .SH "GERİBİLDİRİM"
 Hata bildirimleri için: <https://github.com/util-linux/util-linux/issues>

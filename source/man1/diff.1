@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DIFF" 1 "Ağustos 2021" "GNU diffutils 3.8" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -144,7 +144,7 @@ Tüm terimleri \fIDOSYA1\fR ile karşılaştırır. \fIDOSYA1\fR bir dizin olabi
 .sp
 .TP 4
 \fB--to-file=\fR\fIDOSYA2\fR
-\fIDOSYA2\fR’yi tüm terimlerle karşılaştırır. \fIDOSYA2\fR bir dizin olabilir.
+\fIDOSYA2\fR\&'yi tüm terimlerle karşılaştırır. \fIDOSYA2\fR bir dizin olabilir.
 .sp
 .TP 4
 \fB-i\fR, \fB--ignore-case\fR
@@ -184,7 +184,7 @@ Girdideki satırbaşı karakterlerini ayıklar.
 .sp
 .TP 4
 \fB-D\fR, \fB--ifdef=\fR\fIİSİM\fR
-’\fB#ifdef İSİM\fR’ farklarıyla birleştirilmiş dosya çıktılar.
+\&'\fB#ifdef İSİM\fR\&' farklarıyla birleştirilmiş dosya çıktılar.
 .sp
 .TP 4
 \fB--\fR\fIGTYPE\fR\fB-group-format=\fR\fIGFMT\fR
@@ -198,11 +198,11 @@ Tüm girdi satırlarını \fILFMT\fR ile biçemler.
 \fB--\fR\fILTYPE\fR\fB-line-format=\fR\fILFMT\fR
 \fILTYPE\fR girdi satırlarını \fILFMT\fR ile biçemler.
 .sp
-Bu biçem seçenekleri, \fB-D/--ifdef\fR’i genelleştirerek diff çıktısı üzerinde ayrıntılı denetim sağlar:
+Bu biçem seçenekleri, \fB-D/--ifdef\fR\&'i genelleştirerek diff çıktısı üzerinde ayrıntılı denetim sağlar:
 .br
-\fILTYPE\fR ’old’, ’new’, veya ’unchanged’ olabilir.
+\fILTYPE\fR \&'old\&', \&'new\&', veya \&'unchanged\&' olabilir.
 .br
-\fIGTYPE\fR ise ’old’, ’new’, ’unchanged’ veya ’changed’ olabilir.
+\fIGTYPE\fR ise \&'old\&', \&'new\&', \&'unchanged\&' veya \&'changed\&' olabilir.
 .sp
 \fIGFMT\fR sadece şunları içerebilir:
 .sp
@@ -272,11 +272,11 @@ Girdi satır numarası için printf tarzı belirtim.
 \fB%\fR
 .sp
 .TP 4
-\fB%c’C’\fR
+\fB%c\&'C\&'\fR
 Tek bir \fIC\fR karakteri
 .sp
 .TP 4
-\fB%c’\\OOO’\fR
+\fB%c\&'\\OOO\&'\fR
 Sekizlik kodu \fIOOO\fR olan karakter
 .sp
 .TP 4
@@ -301,11 +301,11 @@ Pek çok küçük değişikliğe sahip büyük dosyaların karşılaştırılmas
 .sp
 .TP 4
 \fB--color\fR[=\fIKOŞUL\fR]
-Renkli çıktı üretir. \fIKOŞUL\fR ’never’, ’always’ veya ’auto’ olabilir. Belirtilmezse ’auto’ öntanımlıdır.
+Renkli çıktı üretir. \fIKOŞUL\fR \&'never\&', \&'always\&' veya \&'auto\&' olabilir. Belirtilmezse \&'auto\&' öntanımlıdır.
 .sp
 .TP 4
 \fB--palette=\fR\fIPALET\fR
-Renkli çıktı etkinse \fIPALET\fR ile belirtilen renkler kullanılır. \fIPALET\fR ’:’ ayraçlı terminfo yetenekleridir.
+Renkli çıktı etkinse \fIPALET\fR ile belirtilen renkler kullanılır. \fIPALET\fR \&':\&' ayraçlı terminfo yetenekleridir.
 .sp
 .TP 4
 \fB--help\fR
@@ -316,7 +316,7 @@ Yardım metnini görüntüler ve çıkar.
 Sürüm bilgilerini görüntüler ve çıkar.
 .sp
 .PP
-\fIDOSYALAR\fR yerine ’\fIDOSYA1\fR \fIDOSYA2\fR’, ’\fIDİZİN1\fR \fIDİZİN2\fR’, ’\fIDİZİN\fR \fIDOSYA\fR’ veya ’\fIDOSYA\fR \fIDİZİN\fR’ belirtilebilir. \fB--from-file\fR veya \fB--to-file\fR belirtilmişse \fIDOSYA\fR(lar) için hiçbir sınırlama yoktur. \fIDOSYA\fR olarak ’-’ verilmişse standart girdi okunur. Girdiler aynı ise çıkış durumu 0, farklıysa 1, sorun varsa 2’dir.
+\fIDOSYALAR\fR yerine \&'\fIDOSYA1\fR \fIDOSYA2\fR\&', \&'\fIDİZİN1\fR \fIDİZİN2\fR\&', \&'\fIDİZİN\fR \fIDOSYA\fR\&' veya \&'\fIDOSYA\fR \fIDİZİN\fR\&' belirtilebilir. \fB--from-file\fR veya \fB--to-file\fR belirtilmişse \fIDOSYA\fR(lar) için hiçbir sınırlama yoktur. \fIDOSYA\fR olarak \&'-\&' verilmişse standart girdi okunur. Girdiler aynı ise çıkış durumu 0, farklıysa 1, sorun varsa 2\&'dir.
 .sp
 .sp
 .SH "YAZAN"

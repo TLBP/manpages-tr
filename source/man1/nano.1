@@ -13,7 +13,7 @@
  * along with this program.  If not, see
  * <https://www.gnu.org/licenses>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "NANO" 1 "Kasım 2022" "nano 7.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@
 .ad l
 .PD 0
 .SH İSİM
-nano - pico’dan esinlenilmiş başka bir düzenleyici
+nano - pico\&'dan esinlenilmiş başka bir düzenleyici
 .SH KULLANIM
 .IP \fBnano\fR 5
 [\fISEÇENEKLER\fR] [[+\fISATIR\fR[,\fISÜTUN\fR]] \fIDOSYA\fR]...
@@ -31,7 +31,7 @@ nano - pico’dan esinlenilmiş başka bir düzenleyici
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBnano\fR küçük ve kullanıcı dostu bir metin düzenleyicisidir. Pico’nun görünüşünde, ancak özgür bir yazılımdır. Birden fazla dosya açma, satır satır kaydırma, geri alma/yineleme, sözdizimi renklendirme, satır numaralandırma ve çok uzun satırları sarmalama gibi Pico’da olmayan özellikleri vardır.
+\fBnano\fR küçük ve kullanıcı dostu bir metin düzenleyicisidir. Pico\&'nun görünüşünde, ancak özgür bir yazılımdır. Birden fazla dosya açma, satır satır kaydırma, geri alma/yineleme, sözdizimi renklendirme, satır numaralandırma ve çok uzun satırları sarmalama gibi Pico\&'da olmayan özellikleri vardır.
 .sp
 Komut satırında dosya adı verilirken, dosya adının önüne artı imi (\fB+\fR) ile satır numarası eklenerek imleç belirli bir satıra, hatta virgülle eklenerek belirli bir sütuna yerleştirilebilir. (Negatif sayılar dosyanın veya satırın sonundan itibaren sayılır.) Dosya isminden önce, bir dizgenin önüne \fB+/\fR/ veya \fB+?\fR konularak imleç, bu dizgenin ilk veya son oluşumuna yerleştirilebilir. \fB+\fR işaretinden sonra \fBc\fR ve/veya \fBr\fR eklenerek dizge harf büyüklüğüne duyarlı hale getirilebilir ve/veya düzenli ifade olarak yorumlanabilir, \fBc\fR ve \fBr\fR yerine \fBC\fR ve \fBR\fR eklenerek bu arama kipleri devre dışı bırakılabilir. Dizge boşluk içeriyorsa, dizgenin tırnak içine alınması gerekir. Örnek vermek gerekirse: "Foo" kelimesinin ilk geçtiği yerde \fIdosya\fRnın açılması istenirse şöyle yapılabilir:
 .sp
@@ -44,7 +44,7 @@ Komut satırında dosya adı verilirken, dosya adının önüne artı imi (\fB+\
 Özel bir durum olarak, \fIdosya\fR yerine bir tire (\fB-\fR) verilirse, nano verileri standart girdiden okur.
 .sp
 .SH "METNİ DÜZENLEME"
-Bir dosyaya metin girmek ve içinde dolaşmak kolaydır: Harfleri yazmak ve hareket tuşlarını kullanarak imleci hareket ettirmek yeterlidir. Komutlar Ctrl (\fB^\fR) ve Sol Alt (\fBM-\fR) (Meta tuşu da denir) tuşları kullanılarak girilir. \fB^K\fR, geçerli satırı siler ve onu kesme tamponuna koyar. Ardışık \fB^K\fR’ler, silinen tüm satırları kesme tamponunda bir araya getirecektir. Herhangi bir imleç hareketi veya başka bir komutun yürütülmesinden sonraki \fB^K\fR kesme tamponunun üzerine yazılmasına neden olacaktır. \fB^U\fR, kesme tamponunun içeriğini geçerli imleç konumuna yapıştıracaktır.
+Bir dosyaya metin girmek ve içinde dolaşmak kolaydır: Harfleri yazmak ve hareket tuşlarını kullanarak imleci hareket ettirmek yeterlidir. Komutlar Ctrl (\fB^\fR) ve Sol Alt (\fBM-\fR) (Meta tuşu da denir) tuşları kullanılarak girilir. \fB^K\fR, geçerli satırı siler ve onu kesme tamponuna koyar. Ardışık \fB^K\fR\&'ler, silinen tüm satırları kesme tamponunda bir araya getirecektir. Herhangi bir imleç hareketi veya başka bir komutun yürütülmesinden sonraki \fB^K\fR kesme tamponunun üzerine yazılmasına neden olacaktır. \fB^U\fR, kesme tamponunun içeriğini geçerli imleç konumuna yapıştıracaktır.
 .sp
 Bir metin parçasının daha hassas kesilmesi veya kopyalanması gerektiğinde, başlangıç \fB^6\fR ile işaretlenebilir, imleç sonuna hareket ettirebilir (işaretli metin vurgulanacaktır) ve ardından kesmek için \fB^K\fR veya kesme tamponuna kopyalamak \fBM-6\fR tuşları kullanılabilir. Ayrıca işaretli metin \fB^O\fR ile bir dosyaya kaydedilebilir veya \fB^T^T\fR ile yazım denetimi uygulanabilir.
 .sp
@@ -97,11 +97,11 @@ Metnin genişliğini saptamaya yardımcı olmak için belirtilen sütuna dikey b
 .sp
 .TP 4
 \fB-K\fR, \fB--rawsequences\fR
-Önceleme dizilimlerinin yorumlanması ncurses’ten istenmedez, doğrudan yapılır. (Bazı tuşların düzgün çalışması için bu seçeneğe ihtiyaç varsa, terminfo uçbirim açıklamasının kullanılan uçbirimin gerçek davranışıyla tam olarak eşleşmediği anlamına gelir. Bu, örneğin bir BSD makinesine \fBssh\fR(1) oturumu açtığınızda olabilir.) Bu seçeneğin kullanılması \fBnano\fR’nun fare desteğini devre dışı bırakır.
+Önceleme dizilimlerinin yorumlanması ncurses\&'ten istenmedez, doğrudan yapılır. (Bazı tuşların düzgün çalışması için bu seçeneğe ihtiyaç varsa, terminfo uçbirim açıklamasının kullanılan uçbirimin gerçek davranışıyla tam olarak eşleşmediği anlamına gelir. Bu, örneğin bir BSD makinesine \fBssh\fR(1) oturumu açtığınızda olabilir.) Bu seçeneğin kullanılması \fBnano\fR\&'nun fare desteğini devre dışı bırakır.
 .sp
 .TP 4
 \fB-L\fR, \fB--nonewlines\fR
-Satır sonu karakteri ile bitmeyen satırların sonuna satır sonu karakterini otomatik olarak eklemez. (POSIX’e uygun olmayan metin dosyaları kaydedilmesine sebep olur.)
+Satır sonu karakteri ile bitmeyen satırların sonuna satır sonu karakterini otomatik olarak eklemez. (POSIX\&'e uygun olmayan metin dosyaları kaydedilmesine sebep olur.)
 .sp
 .TP 4
 \fB-M\fR, \fB--trimblanks\fR
@@ -125,7 +125,7 @@ Satırın tırnak içine alınan bölümüne uygulanacak düzenli ifadeyi belirl
 .sp
 .TP 4
 \fB-R\fR, \fB--restricted\fR
-Kısıtlı kip: Komut satırında belirtilmeyen herhangi bir dosyayı okumaz veya yazmaz. Bunun anlamı: Geçmiş dosyalarını okuma veya yazma; askıya alma; yazım denetimi yapma; bir dosyayı başa veya sona ekleme, dosyayı var olan bir dosyanın üzerine farklı adla kaydetme; dosyaları yedekleme. Kısıtlı kip, \fBnano\fR’yu isminin başına ’r’ ekleyip ("\fBrnano\fR" olarak) çağırarak da etkinleştirilebilir.
+Kısıtlı kip: Komut satırında belirtilmeyen herhangi bir dosyayı okumaz veya yazmaz. Bunun anlamı: Geçmiş dosyalarını okuma veya yazma; askıya alma; yazım denetimi yapma; bir dosyayı başa veya sona ekleme, dosyayı var olan bir dosyanın üzerine farklı adla kaydetme; dosyaları yedekleme. Kısıtlı kip, \fBnano\fR\&'yu isminin başına \&'r\&' ekleyip ("\fBrnano\fR" olarak) çağırarak da etkinleştirilebilir.
 .sp
 .TP 4
 \fB-S\fR, \fB--softwrap\fR
@@ -157,7 +157,7 @@ Abecesayısal olanlardan başka, kelimenin parçası olarak kabul edilecek \fI"K
 .sp
 .TP 4
 \fB-Z\fR, \fB--zap\fR
-Değiştirilmemiş Geri Al veya Sil’in tek bir karakter yerine işaretli bölgeyi kesme tamponunu etkilemeden silmesine izin verir.
+Değiştirilmemiş Geri Al veya Sil\&'in tek bir karakter yerine işaretli bölgeyi kesme tamponunu etkilemeden silmesine izin verir.
 .sp
 .TP 4
 \fB-a\fR, \fB--atblanks\fR
@@ -201,7 +201,7 @@ Tampon içeriğini satır satır değil yarım ekranlık parçalar halinde kayd�
 .sp
 .TP 4
 \fB-k\fR, \fB--cutfromcursor\fR
-’Metni Kes’ komutu (normalde \fB^K\fR), satırı satır başlangıcından itibaren değil, geçerli imleç konumundan itibaren keser.
+\&'Metni Kes\&' komutu (normalde \fB^K\fR), satırı satır başlangıcından itibaren değil, geçerli imleç konumundan itibaren keser.
 .sp
 .TP 4
 \fB-l\fR, \fB--linenumbers\fR
@@ -213,11 +213,11 @@ Sistemde varsa fare desteği etkinleştirilir. Etkinleştirildiğinde, imleci ye
 .sp
 .TP 4
 \fB-n\fR, \fB--noread\fR
-Komut satırında verilen herhangi bir isme yeni bir dosya gibi davranılır. Bu, \fBnano\fR’nun isimli borulara yazabilmesini sağlar: boş bir tamponla başlar ve kullanıcı "dosyayı" kaydettiğinde boruya yazar. Bu şekilde \fBnano\fR, hassas verileri diske yazmak zorunda kalmadan, örneğin \fBgpg\fR(1) ile birlikte bir düzenleyici olarak kullanılabilir.
+Komut satırında verilen herhangi bir isme yeni bir dosya gibi davranılır. Bu, \fBnano\fR\&'nun isimli borulara yazabilmesini sağlar: boş bir tamponla başlar ve kullanıcı "dosyayı" kaydettiğinde boruya yazar. Bu şekilde \fBnano\fR, hassas verileri diske yazmak zorunda kalmadan, örneğin \fBgpg\fR(1) ile birlikte bir düzenleyici olarak kullanılabilir.
 .sp
 .TP 4
 \fB-o\fR \fIDİZİN\fR, \fB--operatingdir\fR=\fIDİZİN\fR
-Çalışma \fIDİZİN\fRini belirler. \fBnano\fR’nun \fBchroot\fR(8)’a benzer şeyler yapmasına sebep olur.
+Çalışma \fIDİZİN\fRini belirler. \fBnano\fR\&'nun \fBchroot\fR(8)\&'a benzer şeyler yapmasına sebep olur.
 .sp
 .TP 4
 \fB-p\fR, \fB--preserve\fR
@@ -229,11 +229,11 @@ Düzenleme penceresinin sağ tarafında bir "kaydırma çubuğu" görüntüler. 
 .sp
 .TP 4
 \fB-r\fR \fISAYI\fR, \fB--fill\fR=\fISAYI\fR
-Yanlara hizalama ve otomatik kesin sarmalama için hedef genişliği \fISAYI\fR sütun olarak belirler. Değer sıfır veya sıfırdan küçükse ve ekran yeniden boyutlandırılırsa, "ekran genişliği eksi \fISAYI\fR" sütundan sarmalama yapılır. Böylece ekran yeniden boyutlandırıldığında sarmalama genişliğinin ekran genişliğine göre değişmesi sağlanır. Öntanımlı değer -8’dir.
+Yanlara hizalama ve otomatik kesin sarmalama için hedef genişliği \fISAYI\fR sütun olarak belirler. Değer sıfır veya sıfırdan küçükse ve ekran yeniden boyutlandırılırsa, "ekran genişliği eksi \fISAYI\fR" sütundan sarmalama yapılır. Böylece ekran yeniden boyutlandırıldığında sarmalama genişliğinin ekran genişliğine göre değişmesi sağlanır. Öntanımlı değer -8\&'dir.
 .sp
 .TP 4
 \fB-s\fR "\fIUYGULAMA\fR [\fIBĞMSZDEĞİŞKEN\fR ...]", \fB--speller\fR="\fIUYGULAMA\fR [\fIBĞMSZDEĞİŞKEN\fR ...]"
-Yazım denetimi ve düzeltimi yapmak için, \fBhunspell\fR(1) veya \fBspell\fR(1)’i çağıran yerleşik düzelticiyi kullanmak yerine komut satırı ile birlikte belirtilen \fIUYGULAMA\fR kullanılır.
+Yazım denetimi ve düzeltimi yapmak için, \fBhunspell\fR(1) veya \fBspell\fR(1)\&'i çağıran yerleşik düzelticiyi kullanmak yerine komut satırı ile birlikte belirtilen \fIUYGULAMA\fR kullanılır.
 .sp
 .TP 4
 \fB-t\fR, \fB--saveonexit\fR
@@ -241,7 +241,7 @@ Değişmiş tamponu kullanıcıya sormadan kaydeder (\fB^X\fR ile çıkarken).
 .sp
 .TP 4
 \fB-u\fR, \fB--unix\fR
-Bir dosyayı öntanımlı olarak Unix biçiminde kaydeder. Bu, \fBnano\fR’nun öntanımlı olan bir dosyayı olduğu gibi kaydetme davranışını geçersiz kılar. (Bu seçeneğin \fB--noconvert\fR ile birlikte kullanıldığında hiçbir etkisi olmaz.)
+Bir dosyayı öntanımlı olarak Unix biçiminde kaydeder. Bu, \fBnano\fR\&'nun öntanımlı olan bir dosyayı olduğu gibi kaydetme davranışını geçersiz kılar. (Bu seçeneğin \fB--noconvert\fR ile birlikte kullanıldığında hiçbir etkisi olmaz.)
 .sp
 .TP 4
 \fB-v\fR, \fB--view\fR
@@ -283,12 +283,12 @@ Yukarıdaki seçeneklerin birçoğu \fBnano\fR çalışırken de açılıp kapat
 \fBM-X\fR komutu özeldir: yardım görüntüleyici ve hata ayıklayıcı (linter) hariç tüm menülerde çalışır. Diğer takaslama komutları yalnızca ana menüde çalışır.
 .sp
 .SH "İLGİLİ DOSYALAR"
-\fB--rcfile\fR verildiğinde, seçenekleri, sözdizimlerini ve tuş kısayollarını ayarlamak için yalnızca seçenekle birlikte belirtilen dosya okunur. Bu seçenek olmadan, iki yapılandırma dosyası okunur: Önce sistemin \fInanorc\fR’si (varsa) ve sonra kullanıcının \fInanorc\fR’si (\fI~/.nanorc\fR veya \fI$XDG_CONFIG_HOME/nano/nanorc\fR veya \fI~/.config/ nano/nanorc\fR, önce hangisiyle karşılaşılırsa). Bu dosyaların olası içerikleri hakkında ayrıntılı bilgi için bkz. \fBnanorc\fR(5).
+\fB--rcfile\fR verildiğinde, seçenekleri, sözdizimlerini ve tuş kısayollarını ayarlamak için yalnızca seçenekle birlikte belirtilen dosya okunur. Bu seçenek olmadan, iki yapılandırma dosyası okunur: Önce sistemin \fInanorc\fR\&'si (varsa) ve sonra kullanıcının \fInanorc\fR\&'si (\fI~/.nanorc\fR veya \fI$XDG_CONFIG_HOME/nano/nanorc\fR veya \fI~/.config/ nano/nanorc\fR, önce hangisiyle karşılaşılırsa). Bu dosyaların olası içerikleri hakkında ayrıntılı bilgi için bkz. \fBnanorc\fR(5).
 .sp
 Kullanılabilir sözdizimi renklendirme tanımları \fI/usr/share/nano/\fR ve \fI/usr/share/nano/extra/\fR altında bulunabilir.
 .sp
 .SH "EK BİLGİ"
-\fB-z\fR (\fB--suspendable\fR) seçeneği kaldırıldı. Askıya alma öntanımlı olarak etkindir, \fB^T^Z\fR ile erişilebilir. (\fBnano\fR’yu askıya almak için düz bir \fB^Z\fR atanmak isteniyorsa, \fInanorc\fR dosyasına \fBbind ^Z suspend main\fR satırı eklenebilir.)
+\fB-z\fR (\fB--suspendable\fR) seçeneği kaldırıldı. Askıya alma öntanımlı olarak etkindir, \fB^T^Z\fR ile erişilebilir. (\fBnano\fR\&'yu askıya almak için düz bir \fB^Z\fR atanmak isteniyorsa, \fInanorc\fR dosyasına \fBbind ^Z suspend main\fR satırı eklenebilir.)
 .sp
 Komut satırında veya nanorc dosyalarından birinde uygun bir yazım denetleyici komutu belirtilmemişse, \fBSPELL\fR ortam değişkenine bakılır.
 .sp

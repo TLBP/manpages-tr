@@ -10,7 +10,7 @@
  * May be distributed under the GNU General Public License
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "MKSWAP" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -33,7 +33,7 @@ mkswap - Linux takas alanını oluşturur
 .sp
 .TP 4
 \fBUyarı:\fR
-Solaris disk bölümü türü de 82’dir. Solaris disk bölümü öldürülürken dikkatli olunmalıdır.
+Solaris disk bölümü türü de 82\&'dir. Solaris disk bölümü öldürülürken dikkatli olunmalıdır.
 .sp
 .PP
 \fIboyut\fR gereksiz olmakla birlikte geriye uyumluluk amacıyla korunmuştur. İstenen takas alanı miktarını 1024 baytlık bloklar halinde belirtmek için kullanılır. Şayet \fIboyut\fR belirtilmezse, \fBmkswap\fR bütün disk bölümünü veya dosyanın tamamını takas alanı olarak kabul eder. \fIboyut\fR olarak \fB-\fR belirtmek pek akıllıca olmaz, diskin bozulmasına sebep olabilir.
@@ -84,7 +84,7 @@ Dosya sisteminin evrensel benzersiz tanımlayıcısını \fIUUID\fR olarak belir
 .RS 4
 .RS 4
 .nf
-\fBclear\fR  dosya sistemi UUID’sini temizler
+\fBclear\fR  dosya sistemi UUID\&'sini temizler
 \fBrandom\fR rastgele bir UUID üretir
 \fBtime\fR   zamana dayalı bir UUID üretir
 .fi
@@ -95,7 +95,7 @@ Dosya sisteminin evrensel benzersiz tanımlayıcısını \fIUUID\fR olarak belir
 .sp
 .TP 4
 \fB-v\fR, \fB--swapversion 1\fR
-Takas alanı sürümü belirtilir. (Eski -v 0 seçeneği geçersiz olduğundan ve artık yalnızca -v 1 desteklendiğinden bu seçenek şu anda anlamsızdır. Çekirdek, 2.5.22’den (Haziran 2002) beri v0 takas alanı biçimini desteklememektedir. Yeni sürüm v1 2.1.117’den beri desteklenmektedir (Ağustos 1998).)
+Takas alanı sürümü belirtilir. (Eski -v 0 seçeneği geçersiz olduğundan ve artık yalnızca -v 1 desteklendiğinden bu seçenek şu anda anlamsızdır. Çekirdek, 2.5.22\&'den (Haziran 2002) beri v0 takas alanı biçimini desteklememektedir. Yeni sürüm v1 2.1.117\&'den beri desteklenmektedir (Ağustos 1998).)
 .sp
 .TP 4
 \fB--verbose\fR
@@ -125,7 +125,7 @@ Ayrıcalıklı BSD kilidi kullanılır. \fIkip\fR "1" veya "0" olabilir. Ayrınt
 .SH "EK BİLGİ"
 Takas alanının kullanışlı azami boyutu mimariye ve çekirdek sürümüne bağlıdır.
 .sp
-Takas alanı başlığı ile adreslenebilecek sayfa sayısı en fazla 4.294.967.295’tir (32 bitlik işaretsiz tamsayı). Takas aygıtında kalan alan yok sayılır.
+Takas alanı başlığı ile adreslenebilecek sayfa sayısı en fazla 4.294.967.295\&'tir (32 bitlik işaretsiz tamsayı). Takas aygıtında kalan alan yok sayılır.
 .sp
 Şu an, Linux 32 adet takas alanına izin vermektedir. Kullanımdaki takas alanları \fI/proc/swaps\fR dosyası içinde görülebilir.
 .sp
@@ -141,7 +141,7 @@ Bir takas dosyası oluşturmak için, \fBmkswap\fR ile ilklendirmeden önce aşa
 .fi
 .sp
 .RE
-Bu komut \fIswapfile\fR adında 8GiB’lık takas dosyası oluşturur.
+Bu komut \fIswapfile\fR adında 8GiB\&'lık takas dosyası oluşturur.
 .sp
 Takas dosyası kullanım kısıtlamaları (delikler, ön tahsis ve yazarak kopyalama sorunları) hakkında \fBswapon\fR(8) kılavuz sayfasındaki EK BİLGİ bölümüne bakılabilir.
 .sp

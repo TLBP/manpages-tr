@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DBMMANAGE" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,9 +43,9 @@ dbmmanage - DBM biçemli kullanıcı kimlik doğrulama dosyalarını yönetir
 .SH "AÇIKLAMA"
 \fBdbmmanage\fR, \fBmod_authn_dbm\fR üzerinden HTTP kullanıcılarının temel kimlik doğrulaması için kullanıcı isimlerinin ve parolalarının saklanmasında kullanılacak DBM dosyalarını oluşturmak ve güncellemek için kullanılır. Apache HTTP sunucusunun mevcut özkaynaklarının kullanımı sadece \fBdbmmanage\fR tarafından oluşturulan dosyalarda listelenmiş kullanıcılara tahsis edilebilir. \fBdbmmanage\fR sadece, kullanıcı isimleri bir DBM dosyasında saklanmak istenirse işe yarar. Düz metin bir veritabanı kullanmak isterseniz \fBhtpasswd\fR(1) sayfasına bakınız.
 .sp
-DBM parola veritabanı sağlayan diğer bir araç da \fBhtdbm\fR(1)’dir.
+DBM parola veritabanı sağlayan diğer bir araç da \fBhtdbm\fR(1)\&'dir.
 .sp
-Bu kılavuz sayfası sadece komut satırı girdilerini listeler. Kullanıcı kimlik doğrulamasını \fBhttpd\fR(8)’de yapılandırmak için gerekli yönergelerle ilgili ayrıntılar için Apache dağıtımının bir parçası olan ve http://httpd.apache.org/ adresinde de bulunan Apache HTTP Sunucusu Belgelerine bakınız.
+Bu kılavuz sayfası sadece komut satırı girdilerini listeler. Kullanıcı kimlik doğrulamasını \fBhttpd\fR(8)\&'de yapılandırmak için gerekli yönergelerle ilgili ayrıntılar için Apache dağıtımının bir parçası olan ve http://httpd.apache.org/ adresinde de bulunan Apache HTTP Sunucusu Belgelerine bakınız.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -91,7 +91,7 @@ düz metin (\fIönerilmez\fR)
 .SS "Komutlar"
 .TP 4
 \fBadd\fR
-\fIşifreli_parola\fR’yı kullanarak \fIdosyaismi\fR dosyasına \fIkullanıcı\fR için bir girdi ekler. Örnek:
+\fIşifreli_parola\fR\&'yı kullanarak \fIdosyaismi\fR dosyasına \fIkullanıcı\fR için bir girdi ekler. Örnek:
 .sp
 .RS 4
 .RS 7
@@ -151,7 +151,7 @@ Standart girdiden \fIkullanıcı\fR:\fIparola\fR satırlarını (her satırda bi
 .sp
 .TP 4
 \fBupdate\fR
-Belirtilen \fIkullanıcı\fR’nın \fIdosyaismi\fR dosyasında mevcut olması dışında \fBadduser\fR komutu gibidir. Örnek:
+Belirtilen \fIkullanıcı\fR\&'nın \fIdosyaismi\fR dosyasında mevcut olması dışında \fBadduser\fR komutu gibidir. Örnek:
 .sp
 .RS 4
 .RS 7
@@ -181,9 +181,9 @@ dbmmanage passwords.dat view
 .sp
 .sp
 .SH "YETERSİZLİKLER"
-Birden fazla DBM dosya biçemi vardır ve büyük bir olasılıkla da sisteminizde bu birden fazla biçemle ilgili kütüphaneler vardır. SDBM, NDBM, GNU’nun GDBM projesi ve Berkeley DB 2 bunların başlıcalarıdır. Ne yazık ki, bu kütüphanelerin her birinin dosya biçimleri farklıdır. Bu bakımdan, \fIdosyaismi\fR dosyasında kullanılan dosya biçeminin \fBdbmmanage\fR tarafından kullanılanla aynı biçemde olduğundan emin olmalısınız. \fBdbmmanage\fR hangi tür DBM dosyasına baktığını saptayacak yeterliliğe sahip değildir. Yanlış biçemli bir dosya belirtirseniz hiçbir şey dönmeyebileceği gibi, başka isimde bir DBM dosyasının oluşturulması veya daha da kötüsü üzerine yazmaya çalışıyorsanız DBM dosyasının bozulması bile olasıdır.
+Birden fazla DBM dosya biçemi vardır ve büyük bir olasılıkla da sisteminizde bu birden fazla biçemle ilgili kütüphaneler vardır. SDBM, NDBM, GNU\&'nun GDBM projesi ve Berkeley DB 2 bunların başlıcalarıdır. Ne yazık ki, bu kütüphanelerin her birinin dosya biçimleri farklıdır. Bu bakımdan, \fIdosyaismi\fR dosyasında kullanılan dosya biçeminin \fBdbmmanage\fR tarafından kullanılanla aynı biçemde olduğundan emin olmalısınız. \fBdbmmanage\fR hangi tür DBM dosyasına baktığını saptayacak yeterliliğe sahip değildir. Yanlış biçemli bir dosya belirtirseniz hiçbir şey dönmeyebileceği gibi, başka isimde bir DBM dosyasının oluşturulması veya daha da kötüsü üzerine yazmaya çalışıyorsanız DBM dosyasının bozulması bile olasıdır.
 .sp
-\fBdbmmanage\fR yazılımının başlangıcında \fB@AnyDBM::ISA\fR dizisi olarak tanımlanmış DBM biçem tercihlerinin bir listesi vardır. Berkeley DB 2 biçemini tercih ettiğimizden \fBdbmmanage\fR sistem kütüphanelerini şu sıraya göre arar: Berkeley DB 2, NDBM, GDBM ve SDBM. \fBdbmmanage\fR DBM dosyası hareketleri için bu sıralamaya göre bulduğu ilk kütüphaneyi kullanacaktır. Sıralama Perl’deki \fBdbmopen\fR(3) çağrısının kullandığından farklı olduğu gibi, Perl’deki standart \fB@AnyDBM::ISA\fR sıralamasından da oldukça farklıdır. Bu bakımdan, DBM dosyalarınızı yönetmek için \fBperl\fR(1) ile yazılmış başka araçlar kullanıyorsanız, onların da bu tercih sırasını izlemesini sağlamalısınız. Benzer şekilde, bu dosyalara erişmek için diğer dillerde (C gibi) yazılmış uygulamalar kullanıyorsanız bunlar için de aynı durum geçerlidir.
+\fBdbmmanage\fR yazılımının başlangıcında \fB@AnyDBM::ISA\fR dizisi olarak tanımlanmış DBM biçem tercihlerinin bir listesi vardır. Berkeley DB 2 biçemini tercih ettiğimizden \fBdbmmanage\fR sistem kütüphanelerini şu sıraya göre arar: Berkeley DB 2, NDBM, GDBM ve SDBM. \fBdbmmanage\fR DBM dosyası hareketleri için bu sıralamaya göre bulduğu ilk kütüphaneyi kullanacaktır. Sıralama Perl\&'deki \fBdbmopen\fR(3) çağrısının kullandığından farklı olduğu gibi, Perl\&'deki standart \fB@AnyDBM::ISA\fR sıralamasından da oldukça farklıdır. Bu bakımdan, DBM dosyalarınızı yönetmek için \fBperl\fR(1) ile yazılmış başka araçlar kullanıyorsanız, onların da bu tercih sırasını izlemesini sağlamalısınız. Benzer şekilde, bu dosyalara erişmek için diğer dillerde (C gibi) yazılmış uygulamalar kullanıyorsanız bunlar için de aynı durum geçerlidir.
 .sp
 Unix sistemlerinde, kullanılan DBM dosyasının biçemini öğrenmek için \fBfile\fR(1) komutu kullanılabilir.
 .sp

@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "LSPCI" 8 "Ocak 2021" "pciutils-3.8.0" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,11 +43,11 @@ lspci - bütün PCI aygıtlarını listeler
 .sp
 Ön tanımlı olarak, aygıtların kısa bir listesini gösterir. Daha ayrıntılı bir çıktı veya diğer uygulamalar tarafından ayrıştırılması amaçlanan çıktılar için aşağıda açıklanan seçenekler kullanılır.
 .sp
-Hatalar, PCI aygıt sürücülerinde veya \fBlspci\fR’nin kendisinde bildirilecekse, lütfen "\fBlspci -vvx\fR" veya daha iyisi "\fBlspci -vvxxx\fR" çıktısı eklenebilir (bkz: \fBYETERSİZLİKLER\fR).
+Hatalar, PCI aygıt sürücülerinde veya \fBlspci\fR\&'nin kendisinde bildirilecekse, lütfen "\fBlspci -vvx\fR" veya daha iyisi "\fBlspci -vvxxx\fR" çıktısı eklenebilir (bkz: \fBYETERSİZLİKLER\fR).
 .sp
 Çıktının bazı kısımları, özellikle oldukça ayrıntılı kiplerde, muhtemelen yalnızca deneyimli PCI yazılımcıları tarafından anlaşılabilir. Alanların tam tanımları için PCI belirtimlerine veya \fIheader.h\fR ve \fI/usr/include/linux/pci.h\fR dosyalarına bakılabilir.
 .sp
-PCI yapılandırma alanının bazı bölümlerine erişim, birçok işletim sisteminde root ayrıcalıkları gerektirir, bu nedenle \fBlspci\fR’nin normal kullanıcıların inceleyebileceği özellikleri sınırlıdır. Ancak, \fBlspci\fR, mevcut olduğu kadarını görüntülemek ve diğer tüm bilgileri <erişim reddedildi> metni ile işaretlemek için elinden gelenin en iyisini yapmaya çalışır.
+PCI yapılandırma alanının bazı bölümlerine erişim, birçok işletim sisteminde root ayrıcalıkları gerektirir, bu nedenle \fBlspci\fR\&'nin normal kullanıcıların inceleyebileceği özellikleri sınırlıdır. Ancak, \fBlspci\fR, mevcut olduğu kadarını görüntülemek ve diğer tüm bilgileri <erişim reddedildi> metni ile işaretlemek için elinden gelenin en iyisini yapmaya çalışır.
 .sp
 .SH "SEÇENEKLER"
 .SS "Temel görüntüleme seçenekleri"
@@ -123,7 +123,7 @@ PCI satıcı ve aygıt kodlarını numara ve ad olarak gösterir.
 .sp
 .TP 4
 \fB-q\fR
-Yerel \fIpci.ids\fR dosyasında bir aygıt bulunamazsa, merkezi PCI kimlikleri veritabanını sorgulamak için DNS’yi kullanır. DNS sorgusu başarılı olursa, sonuç \fI~/.pciids-cache\fR içinde önbelleğe alınır ve \fB-q\fR belirtilmese bile sonraki çalıştırmalarda tanınır. Veritabanı sunucularının aşırı yüklenmesini önlemek için bu seçeneğin yalnızca otomatikleştirilmiş betiklerin içinde kullanılması gerekir.
+Yerel \fIpci.ids\fR dosyasında bir aygıt bulunamazsa, merkezi PCI kimlikleri veritabanını sorgulamak için DNS\&'yi kullanır. DNS sorgusu başarılı olursa, sonuç \fI~/.pciids-cache\fR içinde önbelleğe alınır ve \fB-q\fR belirtilmese bile sonraki çalıştırmalarda tanınır. Veritabanı sunucularının aşırı yüklenmesini önlemek için bu seçeneğin yalnızca otomatikleştirilmiş betiklerin içinde kullanılması gerekir.
 .sp
 .TP 4
 \fB-qq\fR
@@ -138,7 +138,7 @@ Yerel olarak tanınan girdiler için bile merkezi veritabanını sorgular. Göst
 .SS "Aygıt seçimi"
 .TP 4
 \fB-s\fR [[[[\fIETKİ_ALANI\fR]:]\fIVERİ_YOLU\fR]:][\fIAYGIT\fR][.[\fIİŞLEV\fR]]
-Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0’dan ffff’ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0’ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0’ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
+Yalnızca belirtilen etki alanındaki aygıtlar gösterilir (makinede birkaç konak köprüsü olması durumunda, bunlar ortak bir veri yolu numarası alanını paylaşabilir veya her biri kendi PCI etki alanını adresleyebilir; etki alanları 0\&'dan ffff\&'ye kadar numaralandırılmıştır: veri yolu (0 ila ff), aygıt (0 ila 1) ve işlev (0 ila 7). Aygıt adresinin her bileşeni atlanabilir veya "\fB*\fR" ile belirtilebilir, her ikisi de "herhangi bir değer" anlamına gelir. Tüm sayılar onaltılıktır. Örneğin, "0:" veri yolu 0 üzerindeki tüm aygıtlar; "0" ise herhangi bir veri yolu üzerindeki aygıt 0\&'ın tüm işlevleri anlamına gelir; "0.3" tüm veri yollarında aygıt 0\&'ın üçüncü işlevini seçer ve ".4" her birinin yalnızca dördüncü işlevini gösterir.
 .sp
 .TP 4
 \fB-d\fR [\fISATICI\fR]:[\fIAYGIT\fR][:\fISINIF\fR[:\fIARAYÜZ\fR]]
@@ -283,7 +283,7 @@ Bu kipte, \fBlspci\fR eski sürümleriyle mükemmel bir şekilde uyumlu olmaya �
 Bilinen bütün PCI kimliklerinin listesi (satıcılar, aygıtlar, sınıflar ve altsınıflar). https://pci-ids.ucw.cz/ adresinde sürdürülmektedir. En son sürümü indirmek için \fBupdate-pciids\fR aracı kullanılabilir.
 .sp
 .SS "/usr/share/misc/pci.ids.gz"
-\fBlspci\fR sıkıştırma desteği ile derlenmişse, bu dosya \fIpci.ids\fR’den önce denenir.
+\fBlspci\fR sıkıştırma desteği ile derlenmişse, bu dosya \fIpci.ids\fR\&'den önce denenir.
 .sp
 .SS "~/.pciids-cache"
 DNS sorgu kipinde bulunan tüm kimlikler bu dosyada önbelleğe alınır.

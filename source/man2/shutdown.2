@@ -44,7 +44,7 @@
  * Modified Tue Oct 22 22:04:51 1996 by Eric S. Raymond <esr@thyrsus.com>
  * Modified 1998 by Andi Kleen
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "SHUTDOWN" 2 "30 Nisan 2018" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -92,10 +92,10 @@ Belirtilen dosya tanıtıcısı \fIsockfd\fR bir soketle ilgili değil.
 POSIX.1-2001, POSIX.1-2008, 4.4BSD (\fBshutdown\fR() ilk defa 4.2BSD ile ortaya çıktı).
 .sp
 .SH "EK BİLGİ"
-\fBSHUT_RD\fR, \fBSHUT_WR\fR ve \fBSHUT_RDWR\fR sabitleri sırasıyla 0, 1, ve 2 değerlerine sahiptir, bu sabitler glibc-2.1.91’den itibaren \fI<sys/socket.h>\fR içerisinde tanımlanmıştır.
+\fBSHUT_RD\fR, \fBSHUT_WR\fR ve \fBSHUT_RDWR\fR sabitleri sırasıyla 0, 1, ve 2 değerlerine sahiptir, bu sabitler glibc-2.1.91\&'den itibaren \fI<sys/socket.h>\fR içerisinde tanımlanmıştır.
 .sp
 .SH "HATA AYIKLAMA"
-\fIhow\fR değişkeninin geçerliliği için sınamalar alana özgü kodda yapılır, Linux 3.7’den önce çoğu alan kodu bu geçerliliği sınamıyordu. En önemlisi, UNIX alan soketleri geçersiz değerleri görmezden geliyordu. UNIX alan soketlerindeki bu sorun Linux 3.7 ile düzeltildi.
+\fIhow\fR değişkeninin geçerliliği için sınamalar alana özgü kodda yapılır, Linux 3.7\&'den önce çoğu alan kodu bu geçerliliği sınamıyordu. En önemlisi, UNIX alan soketleri geçersiz değerleri görmezden geliyordu. UNIX alan soketlerindeki bu sorun Linux 3.7 ile düzeltildi.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBclose\fR(2), \fBconnect\fR(2), \fBsocket\fR(2), \fBsocket\fR(7)

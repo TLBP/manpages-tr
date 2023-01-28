@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "ROTATELOGS" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -37,7 +37,7 @@ rotatelogs - Apache günlüklerini döndürmek için borulu günlük kayıt arac
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBrotatelogs\fR, Apache’nin borulu günlük dosyaları özelliği ile birlikte kullanmak için tasarlanmış basit bir uygulamadır. Günlük dosyasının azami boyutuna göre veya belli aralıklarla günlük dosyalarını döndürür.
+\fBrotatelogs\fR, Apache\&'nin borulu günlük dosyaları özelliği ile birlikte kullanmak için tasarlanmış basit bir uygulamadır. Günlük dosyasının azami boyutuna göre veya belli aralıklarla günlük dosyalarını döndürür.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -48,11 +48,11 @@ GMT yerine yerel zamanın kullanılmasını sağlar.
 \fB-L\fR \fIbagismi\fR
 Belirtilen bağ dosyası ismine geçerli günlük dosyasından kalıcı bir bağ oluşturulur. \fBtail -F bagismi\fR gibi bir komut kullanılarak günlüğün sürekli izlenmesi için kullanılabilir.
 .sp
-Bağ ismi mutlak bir yol içermiyorsa, \fBrotatelogs\fR’un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
+Bağ ismi mutlak bir yol içermiyorsa, \fBrotatelogs\fR\&'un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
 .sp
 .TP 4
 \fB-p\fR \fIuygulama\fR
-Belirtildiği takdirde, \fBrotatelogs\fR yeni bir günlük dosyasının her açılışında belirtilen uygulamayı çalıştırır. Yeni açılan dosyanın ismi uygulamaya ilk girdi olarak aktarılır. Bu işlem bir döndürme sonrası yapılırsa eski günlük dosyası ikinci girdi olarak aktarılır. \fBrotatelogs\fR işlemini sürdürmek için belirtilen uygulamanın sonlanmasını beklemez, dolayısıyla sonlanma soucunda döndürülen hata kodunu günlüğe kaydetmez. Çalıştırılan uygulama \fBrotatelogs\fR ile aynı \fIstdin\fR, \fIstdout\fR ve \fIstderr\fR’i kullanır ve ortamı da miras alır.
+Belirtildiği takdirde, \fBrotatelogs\fR yeni bir günlük dosyasının her açılışında belirtilen uygulamayı çalıştırır. Yeni açılan dosyanın ismi uygulamaya ilk girdi olarak aktarılır. Bu işlem bir döndürme sonrası yapılırsa eski günlük dosyası ikinci girdi olarak aktarılır. \fBrotatelogs\fR işlemini sürdürmek için belirtilen uygulamanın sonlanmasını beklemez, dolayısıyla sonlanma soucunda döndürülen hata kodunu günlüğe kaydetmez. Çalıştırılan uygulama \fBrotatelogs\fR ile aynı \fIstdin\fR, \fIstdout\fR ve \fIstderr\fR\&'i kullanır ve ortamı da miras alır.
 .sp
 .TP 4
 \fB-f\fR
@@ -64,7 +64,7 @@ Günlük dosyasının yerleştirileceği dizini (eğer yoksa) üst dizinleri ile
 .sp
 .TP 4
 \fB-t\fR
-Günlük dosyasının döndürülmek yerine tepeden kırpılmasına sebep olur. Günlüğün \fBtail\fR(1) gibi bir araç tarafından gerçek zamanda işlendiği ve veriyi saklamanın gerekmediği durumda kullanışlıdır. Dosya ismine bir sonek eklenmez, ancak biçem dizgesi ’%’ karakteri içeriyorsa buna uyulur.
+Günlük dosyasının döndürülmek yerine tepeden kırpılmasına sebep olur. Günlüğün \fBtail\fR(1) gibi bir araç tarafından gerçek zamanda işlendiği ve veriyi saklamanın gerekmediği durumda kullanışlıdır. Dosya ismine bir sonek eklenmez, ancak biçem dizgesi \&'%\&' karakteri içeriyorsa buna uyulur.
 .sp
 .TP 4
 \fB-v\fR
@@ -84,11 +84,11 @@ Zaman damgalarına bakılmaksızın bir dosya dizisi açılır. Örneğin \fB-n3
 .sp
 .TP 4
 \fIdosyaismi\fR
-Günlük dosyasının ismi yoluyla birlikte belirtilir. \fIdosyaismi\fR ’%’ karakterleri içeriyorsa bunlar \fBstrftime\fR(3) biçem belirteçleri olarak ele alınır. Aksi takdirde, otomatik olarak \fI.nnnnnnnnnn\fR uzantısı üretilir (\fB-t\fR seçeneği kullanılmadıkça). Uzantı saniye cinsindendir ve her iki durumda da bu değer, mevcut döngü diliminin başlangıcına göre hesaplanır. Örneğin, döndürmenin 86400 saniyede bir yapılacağı belirtilmişse, \fBstrftime\fR(3) biçeminde oluşturulan saat, dakika ve saniye alanları, 24 saatlik sürenin başlangıcını (geceyarısı) göstermek üzere sıfırlarla doldurulur.
+Günlük dosyasının ismi yoluyla birlikte belirtilir. \fIdosyaismi\fR \&'%\&' karakterleri içeriyorsa bunlar \fBstrftime\fR(3) biçem belirteçleri olarak ele alınır. Aksi takdirde, otomatik olarak \fI.nnnnnnnnnn\fR uzantısı üretilir (\fB-t\fR seçeneği kullanılmadıkça). Uzantı saniye cinsindendir ve her iki durumda da bu değer, mevcut döngü diliminin başlangıcına göre hesaplanır. Örneğin, döndürmenin 86400 saniyede bir yapılacağı belirtilmişse, \fBstrftime\fR(3) biçeminde oluşturulan saat, dakika ve saniye alanları, 24 saatlik sürenin başlangıcını (geceyarısı) göstermek üzere sıfırlarla doldurulur.
 .sp
 \fBstrftime\fR(3) dosyaismi biçemlemesi kullanılırken, günlük dosyası biçeminin günlük dosyası döndürülürken her zaman farklı bir dosya ismi üretecek yeterlilikte parçacıklı yapıya sahip olduğundan emin olmalısınız. Aksi takdirde döndürme işlemi yeni bir dosya başlatmak yerine hep aynı dosyanın üzerine yazar. Örneğin, \fIlogfile\fR için \fI/var/log/errorlog.%Y-%m-%d\fR belirtilmişse 5 megabaytta bir yeni bir günlük dosyasına başlanacaktır. Fakat 5 megabayta gün içinde iki kez ulaşılırsa aynı günlük dosyası üretilir ve günlük hep aynı dosyanın üzerine yazılır.
 .sp
-Günlük dosyası mutlak bir yol içermiyorsa, \fBrotatelogs\fR’un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
+Günlük dosyası mutlak bir yol içermiyorsa, \fBrotatelogs\fR\&'un çalışma dizinine, \fBrotatelogs\fR sunucu tarafından çalıştırılıyorsa \fBServerRoot\fR dizinine görelidir.
 .sp
 .TP 4
 \fIsüre\fR
@@ -236,7 +236,7 @@ zaman dilimi ismi
 .sp
 .TP 4
 \fB%%\fR
-’%’ iminin kendisi
+`%\&' iminin kendisi
 .sp
 .PP
 .sp

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "SPLIT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ split - bir dosyayı parçalara ayırır
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fIDOSYA\fRyı eşit büyüklükte (öntanımlı: 1000 satır) parçalara bölüp \fIÖNEK\fRaa, \fIÖNEK\fRab, ... isimli dosyalara koyar. \fIÖNEK\fR belirtilmediğinde parça isimleri ’\fBx\fR’ ile başlar.
+\fIDOSYA\fRyı eşit büyüklükte (öntanımlı: 1000 satır) parçalara bölüp \fIÖNEK\fRaa, \fIÖNEK\fRab, ... isimli dosyalara koyar. \fIÖNEK\fR belirtilmediğinde parça isimleri `\fBx\fR\&' ile başlar.
 .sp
 \fIDOSYA\fR belirtilmediğinde veya - olduğunda standart girdi okunur.
 .sp
@@ -73,11 +73,11 @@ Her çıktı dosyasına en fazla \fISAYI\fR satır koyar.
 .sp
 .TP 4
 \fB-t\fR, \fB--separator=\fR\fIAYRAÇ\fR
-Kayıt ayracı olarak satır sonu karakteri yerine \fIAYRAÇ\fR kullanılır; ’\\0’ (sıfır) boş karakteri ifade eder.
+Kayıt ayracı olarak satır sonu karakteri yerine \fIAYRAÇ\fR kullanılır; \&'\\0\&' (sıfır) boş karakteri ifade eder.
 .sp
 .TP 4
 \fB-u\fR, \fB--unbuffered\fR
-Girdiyi çıktıya ’-n r/...’ ile anında kopyalar.
+Girdiyi çıktıya \&'-n r/...\&' ile anında kopyalar.
 .sp
 .TP 4
 \fB--verbose\fR
@@ -92,7 +92,7 @@ Yardım iletisini görüntüler ve çıkar.
 Sürüm bilgilerini görüntüler ve çıkar.
 .sp
 .PP
-\fISAYI\fR, bir katsayı soneki içerebilir: K,M,G,T,P,E,Z,Y (1024’ün katları için: K, M, ... veya KiB, MiB, ...; 1000’in katları için: KB, MB, ...).
+\fISAYI\fR, bir katsayı soneki içerebilir: K,M,G,T,P,E,Z,Y (1024\&'ün katları için: K, M, ... veya KiB, MiB, ...; 1000\&'in katları için: KB, MB, ...).
 .sp
 .SS "LOKMA şunlardan biri olabilir:"
 .TP 4
@@ -101,7 +101,7 @@ Girdinin boyutuna bağlı olarak dosyalar \fBN\fR lokmaya ayrılır.
 .sp
 .TP 4
 \fBK/N\fR
-Standart çıktıya \fBN\fR lokmadan \fBK\fR’ıncısı çıktılanır.
+Standart çıktıya \fBN\fR lokmadan \fBK\fR\&'ıncısı çıktılanır.
 .sp
 .TP 4
 \fBl/N\fR
@@ -109,7 +109,7 @@ Kayıtlara/satırlara bölünmeden dosyalar \fBN\fR lokmaya ayrılır.
 .sp
 .TP 4
 \fBl/K/N\fR
-Kayıtlara/satırlara bölünmeden standart çıktıya \fBN\fR lokmadan \fBK\fR’ıncısı çıktılanır.
+Kayıtlara/satırlara bölünmeden standart çıktıya \fBN\fR lokmadan \fBK\fR\&'ıncısı çıktılanır.
 .sp
 .TP 4
 \fBr/N\fR
@@ -134,7 +134,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/split>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) split invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) split invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

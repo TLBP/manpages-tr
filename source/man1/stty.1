@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "STTY" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -50,7 +50,7 @@ Yardım iletisini görüntüler ve çıkar.
 Sürüm bilgilerini görüntüler ve çıkar.
 .sp
 .PP
-\fIAYARLAR\fRdan önceki seçimlik ’\fB-\fR’ anlamı ters çevirir. \fB*\fR karakteri POSIX olmayan ayarları gösterir. Hangi ayarların kullanılabileceği sisteme göre değişir.
+\fIAYARLAR\fRdan önceki seçimlik `\fB-\fR\&' anlamı ters çevirir. \fB*\fR karakteri POSIX olmayan ayarları gösterir. Hangi ayarların kullanılabileceği sisteme göre değişir.
 .sp
 .SS "Özel karakterler:"
 .TP 4
@@ -185,11 +185,11 @@ karakter bit sayısını \fIN\fR (5,6,7 veya 8) olarak ayarlar
 .sp
 .TP 4
 \fB[-]cstopb\fR
-her karakter için iki durma biti kullanılır (’-’ ile bir)
+her karakter için iki durma biti kullanılır (`-\&' ile bir)
 .sp
 .TP 4
 \fB[-]hup\fR
-son işlem tty’yi kapatıyorsa, kapatMA \fBSIGHUP\fR sinyali gönderilir
+son işlem tty\&'yi kapatıyorsa, kapatMA \fBSIGHUP\fR sinyali gönderilir
 .sp
 .TP 4
 \fB[-]hupcl\fR
@@ -201,7 +201,7 @@ son işlem tty’yi kapatıyorsa, kapatMA \fBSIGHUP\fR sinyali gönderilir
 .sp
 .TP 4
 \fB[-]parodd\fR
-tek eşlik biti kullanılır (’-’ ile çift)
+tek eşlik biti kullanılır (`-\&' ile çift)
 .sp
 .TP 4
 \fB* [-]cmspar\fR
@@ -358,7 +358,7 @@ satırları echoctl ve echok ayarlarına uygun olarak siler
 .sp
 .TP 4
 \fB* [-]ctlecho\fR
-denetim karakterlerini şapkalı gösterim (’\fB^c\fR’) ile yansılar
+denetim karakterlerini şapkalı gösterim (`\fB^c\fR\&') ile yansılar
 .sp
 .TP 4
 \fB[-]echo\fR
@@ -386,7 +386,7 @@ diğer karakterler yansılanmamış olsa bile alt satıra geçişi yansılar
 .sp
 .TP 4
 \fB* [-]echoprt\fR
-geriye doğru silinmiş karakterleri ’\fB\\\fR’ ve ’\fB/\fR’ arasında yansılar
+geriye doğru silinmiş karakterleri `\fB\\\fR\&' ve \&'\fB/\fR\&' arasında yansılar
 .sp
 .TP 4
 \fB* [-]extproc\fR
@@ -422,7 +422,7 @@ uçbirime yazmaya çalışan artalandaki işleri durdurur
 .sp
 .TP 4
 \fB* [-]xcase\fR
-icanon ile, büyük harfleri ’\fB\\\fR’ ile önceleyerek gösterir
+icanon ile, büyük harfleri `\fB\\\fR\&' ile önceleyerek gösterir
 .sp
 .PP
 .sp
@@ -539,7 +539,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/stty>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) stty invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) stty invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006, 2022 Nilgün Belma Bugüner

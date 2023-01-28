@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "DEPMOD" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -58,7 +58,7 @@ Bu seçenek, herhangi bir çalışma yapılmadan önce modüllerin \fImodule.dep
 .sp
 .TP 4
 \fB-b\fR, \fB--basedir\fR \fIDİZİN\fR
-Modüller normalde \fI/lib/modules/<sürüm>\fR dizininde değilse, ancak bir hazırlama alanındaysa, dizin adının önüne eklenecek bir \fIDİZİN\fR belirtilebilir. Bu dizin, sonuçlanan \fImodule.dep\fR dosya adından ayıklanır, bu nedenle normal konumuna taşınmaya hazırdır. \fBdepmod\fR’u daha sonra yeniden çalıştırmak yerine meta veri dosyalarını önceden oluşturması gereken bir dağıtım satıcısının bu seçeneği kullanması gerekir.
+Modüller normalde \fI/lib/modules/<sürüm>\fR dizininde değilse, ancak bir hazırlama alanındaysa, dizin adının önüne eklenecek bir \fIDİZİN\fR belirtilebilir. Bu dizin, sonuçlanan \fImodule.dep\fR dosya adından ayıklanır, bu nedenle normal konumuna taşınmaya hazırdır. \fBdepmod\fR\&'u daha sonra yeniden çalıştırmak yerine meta veri dosyalarını önceden oluşturması gereken bir dağıtım satıcısının bu seçeneği kullanması gerekir.
 .sp
 .TP 4
 \fB-C\fR, \fB--config\fR \fIDOSYA veya DİZİN\fR
@@ -86,7 +86,7 @@ Elde edilen \fImodule.dep\fR dosyasını ve çeşitli \fI.map\fR dosyalarını m
 .sp
 .TP 4
 \fB-P\fR
-Bazı mimariler, yabancı bir karaktere sahip sembollere önek ekler. Yoksayılacak bir önek karakteri (örneğin ’_’) belirtmek için kullanılır.
+Bazı mimariler, yabancı bir karaktere sahip sembollere önek ekler. Yoksayılacak bir önek karakteri (örneğin \&'_\&') belirtmek için kullanılır.
 .sp
 .TP 4
 \fB-v\fR, \fB--verbose\fR

@@ -14,7 +14,7 @@
  * This file can be redistributed under the terms of the GNU General
  * Public License
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CHATTR" 1 "Aralık 2021" "E2fsprogs 1.46.5" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -37,9 +37,9 @@ Sembolik kip sözdizimi: \fB+-=[aAcCdDeFijmPsStTux]\fR
 .sp
 .RS 4
 .nf
-’\fB+\fR’ belirtilen özniteliklerin varolanlara eklenmesini sağlar
-’\fB-\fR’ belirtilen öznitelikleri dosya özniteliklerinden kaldırır
-’\fB=\fR’ belirtilen özniteliklerin dosyadakilerin yerini almasını sağlar
+\&'\fB+\fR\&' belirtilen özniteliklerin varolanlara eklenmesini sağlar
+\&'\fB-\fR\&' belirtilen öznitelikleri dosya özniteliklerinden kaldırır
+\&'\fB=\fR\&' belirtilen özniteliklerin dosyadakilerin yerini almasını sağlar
 .fi
 .sp
 .RE
@@ -115,7 +115,7 @@ Dosyanın proje numarasını ayarlar.
 .sp
 .TP 4
 \fBc\fR
-\fBc\fR özniteliği atanmış bir dosyanın okuma-yazma sırasındaki açılması/sıkıştırılması çekirdeğin denetimindedir. Bu dosyadan okuma yapılmak istendiğinde sıkıştırılmamış veri döner. Yazılmak istendiğinde ise diske yazılmadan önce sıkıştırma yapılır. Ayrıca, \fBYAZILIM HATALARI ve SINIRLAMALAR\fR bölümü de okunmalıdır. (Ek bilgi: \fBbtrfs\fR(5) dosya sisteminde \fBc\fR atanmışsa \fBC\fR atanamaz. Ayrıca, btrfs bağlama seçeneği ’nodatasum’ ile de çelişir.)
+\fBc\fR özniteliği atanmış bir dosyanın okuma-yazma sırasındaki açılması/sıkıştırılması çekirdeğin denetimindedir. Bu dosyadan okuma yapılmak istendiğinde sıkıştırılmamış veri döner. Yazılmak istendiğinde ise diske yazılmadan önce sıkıştırma yapılır. Ayrıca, \fBYAZILIM HATALARI ve SINIRLAMALAR\fR bölümü de okunmalıdır. (Ek bilgi: \fBbtrfs\fR(5) dosya sisteminde \fBc\fR atanmışsa \fBC\fR atanamaz. Ayrıca, btrfs bağlama seçeneği \&'nodatasum\&' ile de çelişir.)
 .sp
 .TP 4
 \fBC\fR
@@ -127,7 +127,7 @@ Dosyanın proje numarasını ayarlar.
 .sp
 .TP 4
 \fBD\fR
-\fBD\fR özniteliği bir dizine uygulanırsa dizindeki değişiklikler diske eşzamanlı yazılır; bu, dosya alt kümesine ’dirsync’ bağlama seçeneği atanmasına eşdeğerdir.
+\fBD\fR özniteliği bir dizine uygulanırsa dizindeki değişiklikler diske eşzamanlı yazılır; bu, dosya alt kümesine \&'dirsync\&' bağlama seçeneği atanmasına eşdeğerdir.
 .sp
 .TP 4
 \fBe\fR
@@ -171,7 +171,7 @@ Dosyanın proje numarasını ayarlar.
 .sp
 .TP 4
 \fBS\fR
-\fBS\fR özniteliği atanmış bir dosyada değişiklik yapıldığında değişiklikler anında diske yazılır, dosya alt sisteminin ’\fBsync\fR’ seçeneği ile bağlanmasına eşdeğer özellik sağlar.
+\fBS\fR özniteliği atanmış bir dosyada değişiklik yapıldığında değişiklikler anında diske yazılır, dosya alt sisteminin \&'\fBsync\fR\&' seçeneği ile bağlanmasına eşdeğer özellik sağlar.
 .sp
 .TP 4
 \fBt\fR
@@ -196,7 +196,7 @@ Dosyanın proje numarasını ayarlar.
 .PP
 .sp
 .SH "YAZAN"
-\fBchattr\fR Remy Card tarafından yazılmış olup Theodore Ts’o tarafından sürdürülmektedir.
+\fBchattr\fR Remy Card tarafından yazılmış olup Theodore Ts\&'o tarafından sürdürülmektedir.
 .sp
 .SH "YAZILIM HATALARI VE SINIRLAMALAR"
 \fBc\fR, \fBs\fR ve \fBu\fR öznitelikleri halen Linux çekirdeğinde gerçeklenmiş olan ext2, ext3 ve ext4 dosya sistemleri tarafından desteklenmemektedir. \fBa\fR ve \fBi\fR öznitelikleri var olan dosya tanıtıcılarına yazma yeteneğinde etkili olmaz.

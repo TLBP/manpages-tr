@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "AB" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -66,7 +66,7 @@ Aynı anda işleme sokulacak bağlantı sayısı. Aynı anda bir bağlantı önt
 .sp
 .TP 4
 \fB-e\fR \fIcsv-dosyası\fR
-Sunulan isteğin birim zamanda (milisaniye) ne kadarının (yüzde cinsinden) sunulduğunu gösteren virgül ayraçlı değerler (CSV) dosyası. Sonuçlar ’bobin haline’ getirilmiş olduğundan doğal olarak ’gnuplot’ dosyasından daha yararlıdır.
+Sunulan isteğin birim zamanda (milisaniye) ne kadarının (yüzde cinsinden) sunulduğunu gösteren virgül ayraçlı değerler (CSV) dosyası. Sonuçlar \&'bobin haline\&' getirilmiş olduğundan doğal olarak \&'gnuplot\&' dosyasından daha yararlıdır.
 .sp
 .TP 4
 \fB-E\fR \fIistemci-sertifikası-dosyası\fR
@@ -78,7 +78,7 @@ SSL/TLS protokolü belirtilir (SSL2, SSL3, TLS1, TLS1.1, TLS1.2 veya ALL). TLS1.
 .sp
 .TP 4
 \fB-g\fR \fIgnuplot-dosyası\fR
-Ölçülen değerler bir ’gnuplot’ veya TSV (sekme ayraçlı değerler) dosyasına yazılır. Bu dosya, Gnuplot, IDL, Mathematica, Igor hatta Excel tarafından veri dosyası olarak kabul edilir. Veri sütunlarının başlıkları dosyanın ilk satırında bulunur.
+Ölçülen değerler bir \&'gnuplot\&' veya TSV (sekme ayraçlı değerler) dosyasına yazılır. Bu dosya, Gnuplot, IDL, Mathematica, Igor hatta Excel tarafından veri dosyası olarak kabul edilir. Veri sütunlarının başlıkları dosyanın ilk satırında bulunur.
 .sp
 .TP 4
 \fB-h\fR
@@ -118,7 +118,7 @@ Vekil sunucuya TEMEL Kimlik Doğrulamasında kullanılacak kanıtları sağlar. 
 .sp
 .TP 4
 \fB-q\fR
-İstek sayısı 150’den fazla olduğunda, \fBab\fR her 100 veya %10 istekte bir, standart hataya bir işlenen istek sayacı çıktılar. \fB-q\fR seçeneği bu çıktının üretilmemesini sağlar.
+İstek sayısı 150\&'den fazla olduğunda, \fBab\fR her 100 veya %10 istekte bir, standart hataya bir işlenen istek sayacı çıktılar. \fB-q\fR seçeneği bu çıktının üretilmemesini sağlar.
 .sp
 .TP 4
 \fB-r\fR
@@ -191,7 +191,7 @@ Komut satırında belirtilen DNS veya IP adresi.
 .sp
 .TP 4
 Server Port
-\fBab\fR’nin bağlandığı port. Komut satırında port belirtilmemişse, öntanımlı olarak http için 80, https için 443’tür.
+\fBab\fR\&'nin bağlandığı port. Komut satırında port belirtilmemişse, öntanımlı olarak http için 80, https için 443\&'tür.
 .sp
 .TP 4
 SSL/TLS Protocol
@@ -199,7 +199,7 @@ SSL/TLS Protocol
 .sp
 .TP 4
 Document Path
-Komut satırı dizgesinden çözümlenen isteğin URI’si.
+Komut satırı dizgesinden çözümlenen isteğin URI\&'si.
 .sp
 .TP 4
 Document Length
@@ -262,7 +262,7 @@ Transfer rate
 .SH "YETERSİZLİKLER"
 Statik bildirimli sabit uzunlukta çeşitli tamponlar vardır. Sunucudan gelen yanıt başlıkları ve diğer harici girdiler, komut satırı girdileri ile birlikte basitçe çözümlenir, bu size can sıkıcı gelebilir.
 .sp
-HTTP/1.x protokolünü tamamen gerçeklemez; sadece yanıtların ’belli başlı’ bazı biçimlerini kabul eder. Aksi takdirde, \fBstrstr\fR(3) işlevinin yoğun kullanımı nedeniyle sunucu yerine \fBab\fR’nin başarımını ölçerdiniz.
+HTTP/1.x protokolünü tamamen gerçeklemez; sadece yanıtların \&'belli başlı\&' bazı biçimlerini kabul eder. Aksi takdirde, \fBstrstr\fR(3) işlevinin yoğun kullanımı nedeniyle sunucu yerine \fBab\fR\&'nin başarımını ölçerdiniz.
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

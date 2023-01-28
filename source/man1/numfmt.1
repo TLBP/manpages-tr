@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "NUMFMT" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,7 +43,7 @@ printf tarzı kayan nokta \fIBİÇEM\fRi kullanılır. Aşağıda BİÇEM ile il
 .sp
 .TP 4
 \fB--from\fR[=\fIBİRİM\fR]
-Belirtilen sayılar \fIBİRİM\fR ile oranlanır; öntanımlı: ’none’. Aşağıda BİRİM ile ilgili bölüme bakınız.
+Belirtilen sayılar \fIBİRİM\fR ile oranlanır; öntanımlı: \&'none\&'. Aşağıda BİRİM ile ilgili bölüme bakınız.
 .sp
 .TP 4
 \fB--from-unit\fR[=\fIBOYUT\fR]
@@ -63,7 +63,7 @@ Geçersiz sayılar için başarısızlık \fIKİP\fRi. Şunlardan biri olabilir:
 .sp
 .TP 4
 \fB--padding\fR=\fISAYI\fR
-Çıktıyı \fISAYI\fR karakter yastıklar. +\fISAYI\fR sağa yanaştırır, -\fISAYI\fR sola yanaştırır, çıktı \fISAYI\fR’dan büyükse yastıklama yapılmaz. Öntanımlı olarak, boşluk karakteri varsa otomatik olarak yastıklama yapılır.
+Çıktıyı \fISAYI\fR karakter yastıklar. +\fISAYI\fR sağa yanaştırır, -\fISAYI\fR sola yanaştırır, çıktı \fISAYI\fR\&'dan büyükse yastıklama yapılmaz. Öntanımlı olarak, boşluk karakteri varsa otomatik olarak yastıklama yapılır.
 .sp
 .TP 4
 \fB--round\fR=\fIYÖNTEM\fR
@@ -128,19 +128,19 @@ Seçimlik iki harfli sonek kabul eder. Örnekler:
 .SS "ALANLARda cut(1) tarzı desteklenir:"
 .TP 4
 N
-N’inci alan, 1’den itibaren sayılır.
+N\&'inci alan, 1\&'den itibaren sayılır.
 .sp
 .TP 4
 N-
-N’inci alandan, satır sonuna kadar.
+N\&'inci alandan, satır sonuna kadar.
 .sp
 .TP 4
 N-M
-N’inci alandan, M’inci alana kadar (M ve N dahil).
+N\&'inci alandan, M\&'inci alana kadar (M ve N dahil).
 .sp
 .TP 4
 -M
-İlkinden M’inci alana kadar.
+İlkinden M\&'inci alana kadar.
 .sp
 .TP 4
 -
@@ -150,18 +150,18 @@ Tüm alanlar.
 Çoklu alanlar/aralıklar virgüllerle ayrılabilir.
 .sp
 .SS "BİÇEM"
-\fIBİÇEM\fR tek bir kayan noktalı ’\fB%f\fR’ değişkenini basmaya uygun olmalıdır. Seçimlik tek tırnak (\fB%’f\fR) yerel tarafından destekleniyorsa gruplamayı etkin kılar. Seçimlik genişlik değeri (\fB%10f\fR) çıktıyı yastıklar. Seçimlik 0 (\fB%010f\fR) genişliği sıfırlarla yastıklar. Seçimlik negatif değerler (\fB%-10f\fR) alan içinde sola yanaştırır. Seçimlik hassasiyet (\fB%.1f\fR) girdiden saptanan hassasiyeti geçersiz kılar.
+\fIBİÇEM\fR tek bir kayan noktalı \&'\fB%f\fR\&' değişkenini basmaya uygun olmalıdır. Seçimlik tek tırnak (\fB%\&'f\fR) yerel tarafından destekleniyorsa gruplamayı etkin kılar. Seçimlik genişlik değeri (\fB%10f\fR) çıktıyı yastıklar. Seçimlik 0 (\fB%010f\fR) genişliği sıfırlarla yastıklar. Seçimlik negatif değerler (\fB%-10f\fR) alan içinde sola yanaştırır. Seçimlik hassasiyet (\fB%.1f\fR) girdiden saptanan hassasiyeti geçersiz kılar.
 .sp
 .SS "Çıkış Durumu"
-Tüm girdi sayılar başarıyla dönüştürülmüşse çıkış durumu 0’dır.
+Tüm girdi sayılar başarıyla dönüştürülmüşse çıkış durumu 0\&'dır.
 .br
 Öntanımlı olarak ilk dönüşüm hatasında çalışmayı durdurur ve çıkış durumu 2 olur.
 .br
-\fB--invalid\fR=’fail’ ile her dönüşüm hatası için uyarı basılır ve çıkış durumu 2 olur.
+\fB--invalid\fR=\&'fail\&' ile her dönüşüm hatası için uyarı basılır ve çıkış durumu 2 olur.
 .br
-\fB--invalid\fR=’warn’ ile her dönüşüm hatası tanılanır fakat çıkış durumu 0 olur.
+\fB--invalid\fR=\&'warn\&' ile her dönüşüm hatası tanılanır fakat çıkış durumu 0 olur.
 .br
-\fB--invalid\fR=’ignore’ ile dönüşüm hataları tanılanmaz ve çıkış durumu 0 olur.
+\fB--invalid\fR=\&'ignore\&' ile dönüşüm hataları tanılanmaz ve çıkış durumu 0 olur.
 .sp
 .sp
 .SH "ÖRNEKLER"
@@ -207,7 +207,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/nohup>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) nohup invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) nohup invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

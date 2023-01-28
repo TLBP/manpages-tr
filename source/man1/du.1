@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DU" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -41,11 +41,11 @@ Disk kullanımından çok gerçek dosya boyu basılır; normalde disk kullanım�
 .sp
 .TP 4
 \fB-B\fR, \fB--block-size=\fR\fIBOYUT\fR
-Boyutlar basılmadan önce \fIBOYUT\fR’a göre ölçeklendirilir; örneğin, \fB-BM\fR boyutları 1.048.576 baytlık birimler halinde basar; aşağıdaki \fIBOYUT\fR açıklamasına bakın.
+Boyutlar basılmadan önce \fIBOYUT\fR\&'a göre ölçeklendirilir; örneğin, \fB-BM\fR boyutları 1.048.576 baytlık birimler halinde basar; aşağıdaki \fIBOYUT\fR açıklamasına bakın.
 .sp
 .TP 4
 \fB-b\fR, \fB--bytes\fR
-’\fB--apparent-size --block-size=1\fR’ ile aynı.
+\&'\fB--apparent-size --block-size=1\fR\&' ile aynı.
 .sp
 .TP 4
 \fB-c\fR, \fB--total\fR
@@ -101,7 +101,7 @@ Alt dizinlerin boyutları hesaba katılmaz.
 .sp
 .TP 4
 \fB--si\fR
-\fB-h\fR gibidir, fakat 1024’ün değil 1000’in katları kullanılır.
+\fB-h\fR gibidir, fakat 1024\&'ün değil 1000\&'in katları kullanılır.
 .sp
 .TP 4
 \fB-s\fR, \fB--summarize\fR
@@ -109,7 +109,7 @@ Her girdi için sadece toplam gösterilir.
 .sp
 .TP 4
 \fB-t\fR, \fB--threshold=\fR\fIBOYUT\fR
-\fIBOYUT\fR pozitifse \fIBOYUT\fR’tan küçük girdiler, negatifse \fIBOYUT\fR’tan büyük girdiler hesaba katılmaz.
+\fIBOYUT\fR pozitifse \fIBOYUT\fR\&'tan küçük girdiler, negatifse \fIBOYUT\fR\&'tan büyük girdiler hesaba katılmaz.
 .sp
 .TP 4
 \fB--time\fR
@@ -144,16 +144,16 @@ Yardım iletisini gösterir ve çıkar.
 Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .PP
-Boyut değerleri \fB--block-size\fR seçeneğinde belirtilen \fIBOYUT\fR’lardan ilkine veya \fBDF_BLOCK_SIZE\fR, \fBBLOCK_SIZE\fR ve \fBBLOCKSIZE\fR ortam değişkenlerinde belirtilen boyuta göre gösterilir. Hiçbiri yoksa 1024 baytlık boyut öntanımlıdır (\fBPOSIXLY_CORRECT\fR tanımlıysa 512 bayt).
+Boyut değerleri \fB--block-size\fR seçeneğinde belirtilen \fIBOYUT\fR\&'lardan ilkine veya \fBDF_BLOCK_SIZE\fR, \fBBLOCK_SIZE\fR ve \fBBLOCKSIZE\fR ortam değişkenlerinde belirtilen boyuta göre gösterilir. Hiçbiri yoksa 1024 baytlık boyut öntanımlıdır (\fBPOSIXLY_CORRECT\fR tanımlıysa 512 bayt).
 .sp
-\fIBOYUT\fR bir tamsayı ve seçimlik bir birimden oluşur (10K örneğin, 10*1024’tür). Birimler K,M,G,T,P,E,Z,Y (1024’ün katları) veya KB, MB,... (1000’in katları) olabilir. Bibaytlık birimler de belirtilebilir (KiB, MiB gibi).
+\fIBOYUT\fR bir tamsayı ve seçimlik bir birimden oluşur (10K örneğin, 10*1024\&'tür). Birimler K,M,G,T,P,E,Z,Y (1024\&'ün katları) veya KB, MB,... (1000\&'in katları) olabilir. Bibaytlık birimler de belirtilebilir (KiB, MiB gibi).
 .sp
 .SH "ŞABLONLAR"
 \fIŞABLON\fR, bir kabuk şablonudur (bir düzenli ifade değildir). Şablon olarak \fB?\fR işareti herhangi bir tek karakteri, \fB*\fR ise sıfır ya da daha çok karakterli herhangi bir dizgeyi ifade eder. Örneğin, \fB*.o\fR şablonu \fI.o\fR ile biten dosyalar demektir. Komut olarak,
 .sp
 .RS 4
 .nf
-\fBdu --exclude=’*.o’\fR
+\fBdu --exclude=\&'*.o\&'\fR
 .fi
 .sp
 .RE
@@ -171,7 +171,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/du>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) du invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) du invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

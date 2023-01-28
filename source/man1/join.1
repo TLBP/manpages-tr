@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "JOIN" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ join - iki dosyanın satırlarını ortak bir alanda birleştir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Aynı birleştirme alanlarına sahip her girdi satırı çifti için standart çıktıya bir satır yazar. Öntanımlı birleştirme alanı, boşluklarla sınırlı ilk alandır. \fIDOSYA1\fR ve \fIDOSYA2\fR’den biri yerine (ikisi birden değil) - verilirse standart girdi okunur.
+Aynı birleştirme alanlarına sahip her girdi satırı çifti için standart çıktıya bir satır yazar. Öntanımlı birleştirme alanı, boşluklarla sınırlı ilk alandır. \fIDOSYA1\fR ve \fIDOSYA2\fR\&'den biri yerine (ikisi birden değil) - verilirse standart girdi okunur.
 .sp
 .TP 4
 \fB-a\fR \fIDOSYANUM\fR
@@ -37,7 +37,7 @@ Alanlar karşılaştırılırken harf büyüklükleri ile ilgili farklar yoksay�
 .sp
 .TP 4
 \fB-j\fR \fIALAN\fR
-’\fB-1\fR \fIALAN\fR \fB-2\fR \fIALAN\fR’ ile aynıdır.
+\&'\fB-1\fR \fIALAN\fR \fB-2\fR \fIALAN\fR\&' ile aynıdır.
 .sp
 .TP 4
 \fB-o\fR \fIBİÇEM\fR
@@ -84,7 +84,7 @@ Yardım iletisini gösterir ve çıkar.
 Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .PP
-\fB-t\fR \fIKARAKTER\fR verilmedikçe, baştaki boş alanlar ayrılıp yoksayılır, aksi takdirde alanların arasına \fIKARAKTER\fR konur. Her \fIALAN\fR 1’den başlayan bir alan numarasıdır. \fIBİÇEM\fR, her biri \fIDOSYANUM.ALAN\fR biçiminde veya ’0’ olabilen bir veya daha fazla virgül veya boşlukla ayrılmış belirtimden oluşur. \fIBİÇEM\fR olarak ’auto’ anahtar sözcüğü verilirse, her dosyanın ilk satırı, her satır için çıktı alan sayısını belirler.
+\fB-t\fR \fIKARAKTER\fR verilmedikçe, baştaki boş alanlar ayrılıp yoksayılır, aksi takdirde alanların arasına \fIKARAKTER\fR konur. Her \fIALAN\fR 1\&'den başlayan bir alan numarasıdır. \fIBİÇEM\fR, her biri \fIDOSYANUM.ALAN\fR biçiminde veya `0\&' olabilen bir veya daha fazla virgül veya boşlukla ayrılmış belirtimden oluşur. \fIBİÇEM\fR olarak \&'auto\&' anahtar sözcüğü verilirse, her dosyanın ilk satırı, her satır için çıktı alan sayısını belirler.
 .sp
 Öntanımlı \fIBİÇEM\fRde her çıktı satırı sırayla, birleştirme alanını, \fIDOSYA1\fRin kalan alanları, \fIDOSYA2\fRin kalan alanlarından oluşur ve tümü \fIKARAKTER\fR ile ayrılmış olarak verilir. Örnek:
 .sp
@@ -108,7 +108,7 @@ b b1 b2
 .sp
 .RE
 .SS "Önemli:"
-\fIDOSYA1\fR ve \fIDOSYA2\fR birleştirme alanları bakımından sıralanmış olmalıdırlar. Örneğin, eğer \fBjoin\fR seçeneksizse, "\fBsort -k 1b,1\fR" kullanın. \fBsort\fR seçeneksizse "\fBjoin -t ’’\fR" kullanın. Karşılaştırmaların \fBLC_COLLATE\fR ile belirtilen kurallara uyduğunu unutmayın. Girdi sıralı değilse ve bazı satırlar birleştirilemezse bir uyarı iletisi verilir.
+\fIDOSYA1\fR ve \fIDOSYA2\fR birleştirme alanları bakımından sıralanmış olmalıdırlar. Örneğin, eğer \fBjoin\fR seçeneksizse, "\fBsort -k 1b,1\fR" kullanın. \fBsort\fR seçeneksizse "\fBjoin -t \&'\&'\fR" kullanın. Karşılaştırmaların \fBLC_COLLATE\fR ile belirtilen kurallara uyduğunu unutmayın. Girdi sıralı değilse ve bazı satırlar birleştirilemezse bir uyarı iletisi verilir.
 .sp
 .sp
 .SH "YAZAN"
@@ -123,7 +123,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/join>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) join invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) join invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

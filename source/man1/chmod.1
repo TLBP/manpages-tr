@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CHMOD" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -25,7 +25,7 @@ chmod - dosya kipi bitlerini değiştirir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Bu kılavuzda, \fBchmod\fR komutunun GNU sürümü anlatılmaktadır. \fBchmod\fR, belirtilen her dosyanın kip bitlerini belirtilen \fIKİP\fR’e göre değiştirir. Kip belirtimi yapılacak değişiklilerin sembolik gösterimlerinden oluşabileceği gibi yeni kip bitlerinin belirtildiği bit kalıbını içeren sekizlik sayılardan da oluşabilir.
+Bu kılavuzda, \fBchmod\fR komutunun GNU sürümü anlatılmaktadır. \fBchmod\fR, belirtilen her dosyanın kip bitlerini belirtilen \fIKİP\fR\&'e göre değiştirir. Kip belirtimi yapılacak değişiklilerin sembolik gösterimlerinden oluşabileceği gibi yeni kip bitlerinin belirtildiği bit kalıbını içeren sekizlik sayılardan da oluşabilir.
 .sp
 Sembolik kip sözdizimi:
 .sp
@@ -96,7 +96,7 @@ Dosyanın grup kimliği kullanıcının etkin grup kimliğiyle veya kullanıcın
 Sınırlı silme bayrağı ve yapışkan bit tek bir bit olup, bit dosyanın türüne bağlı olarak yorumlanır. Dizinler için bu bit sıradan kullanıcıların kendilerine ait olmayan dizinleri ve dosyaları dizinden silmelerini veya isimlerini değiştirmelerini engeller; bu durumda bit, dizin için \fIsınırlı silme bayrağı\fR adını alır ve genelde \fI/tmp\fR gibi herkesin yazabildiği dizinlerde kullanılır. Bazı eski sistemlerdeki normal dosyalarda bu bit uygulamaların metin bağlamlarının takas alanında saklanmasına ve böylece çalıştırılırken daha hızlı yüklenmesini sağlardı; bu durumda bit \fIyapışkan bit\fR adını alırdı. (Linux çekirdeği bu yapışkan bitleri yoksayar.)
 .sp
 .SH "SEÇENEKLER"
-Her \fIDOSYA\fR’nın kipine belirtilen \fIKİP\fR atanır. \fB--reference\fR seçeneği ile \fIDOSYA\fR’nın kipine \fIÖRNEK-DOSYA\fR’nın kipi atanır.
+Her \fIDOSYA\fR\&'nın kipine belirtilen \fIKİP\fR atanır. \fB--reference\fR seçeneği ile \fIDOSYA\fR\&'nın kipine \fIÖRNEK-DOSYA\fR\&'nın kipi atanır.
 .sp
 .TP 4
 \fB-c\fR, \fB--changes\fR
@@ -112,15 +112,15 @@ Sadece değişiklik yapıldığında bildirilmesi dışında \fB--verbose\fR gib
 .sp
 .TP 4
 \fB--no-preserve-root\fR
-Kök dizin (’/’) özellikle işleme alınmaz (öntanımlı).
+Kök dizin (\&'/\&') özellikle işleme alınmaz (öntanımlı).
 .sp
 .TP 4
 \fB--preserve-root\fR
-Kök dizin (’/’) üzerinde ardışık işlem başarısız olur.
+Kök dizin (\&'/\&') üzerinde ardışık işlem başarısız olur.
 .sp
 .TP 4
 \fB--reference\fR=\fIÖRNEK-DOSYA\fR
-Bir \fIKİP\fR belirtmek yerine \fIÖRNEK-DOSYA\fR’nın kipi kullanılır.
+Bir \fIKİP\fR belirtmek yerine \fIÖRNEK-DOSYA\fR\&'nın kipi kullanılır.
 .sp
 .TP 4
 \fB-R\fR, \fB--recursive\fR
@@ -137,7 +137,7 @@ Sürüm bilgilerini basar ve çıkar.
 .PP
 Her bir \fIKİP\fR \fBugoa\fR harflerinin sıfır ya da birinden, \fB+-=\fR imlerinin birinden ve \fBrwxXst\fR harflerinden sıfır veya bir kaçından, \fBugo\fR harflerinin birinden oluşur.
 .br
-(veya kısaca ’[ugoa]*([-+=]([rwxXst]*|[ugo]))+’)
+(veya kısaca `[ugoa]*([-+=]([rwxXst]*|[ugo]))+\&')
 .sp
 .SH "YAZAN"
 David MacKenzie ve Jim Meyering tarafından yazılmıştır.
@@ -153,7 +153,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .br
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/chmod>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) chmod invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) chmod invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006 Yalçın Kolukısa

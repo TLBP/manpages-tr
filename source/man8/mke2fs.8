@@ -8,13 +8,13 @@
  * mke2fs.c - Make a ext2fs filesystem.
  *
  * Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
- *      2003, 2004, 2005 by Theodore Ts’o.
+ *      2003, 2004, 2005 by Theodore Ts\&'o.
  *
  * This file may be redistributed under the terms of the GNU Public
  * License.
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "MKE2FS" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -36,7 +36,7 @@ mke2fs - ext2/3/4 dosya sistemi oluşturur
 .SH "AÇIKLAMA"
 \fBmke2fs\fR, genellikle belirtilen \fIaygıt\fRın disk bölümü (veya dosya) üzerinde ext2, ext3 veya ext4 dosya sistemi oluşturmak için kullanılır.
 .sp
-Dosya sisteminin boyu \fIds-boyu\fR ile belirtilir. \fIds-boyu\fR bir sonek içermiyorsa ve \fB-b\fR \fIblok-boyu\fR seçeneği de belirtilmemişse, ikinin üstelleri kilobayt boyda olduğu varsayılır. \fB-b\fR seçeneği belirtilmişse \fIds-boyu\fR, \fIblok-boyu\fRndaki blok sayısı olarak yorumlanır. \fIds-boyu\fR ’k’, ’m’, ’g’, ’t’ ve benzeri (büyük/küçük harf oluşu farketmeksizin) harfler ile bitiyorsa ikinin üstelleri kilobayt, megabayt, gigabayt, terabayt ve benzeri boyutta olduğu varsayılır. \fIds-boyu\fR belirtilmezse dosya sistemi için aygıtın tamamı kullanılır.
+Dosya sisteminin boyu \fIds-boyu\fR ile belirtilir. \fIds-boyu\fR bir sonek içermiyorsa ve \fB-b\fR \fIblok-boyu\fR seçeneği de belirtilmemişse, ikinin üstelleri kilobayt boyda olduğu varsayılır. \fB-b\fR seçeneği belirtilmişse \fIds-boyu\fR, \fIblok-boyu\fRndaki blok sayısı olarak yorumlanır. \fIds-boyu\fR \&'k\&', \&'m\&', \&'g\&', \&'t\&' ve benzeri (büyük/küçük harf oluşu farketmeksizin) harfler ile bitiyorsa ikinin üstelleri kilobayt, megabayt, gigabayt, terabayt ve benzeri boyutta olduğu varsayılır. \fIds-boyu\fR belirtilmezse dosya sistemi için aygıtın tamamı kullanılır.
 .sp
 \fBmke2fs\fR komutu \fBmke2fs\fR\fI.XXXX\fR (\fBmkfs.ext2\fR, \fBmkfs.ext3\fR veya \fBmkfs.ext4\fR gibi) biçiminde belirtilirse örtük olarak \fB-t XXXX\fR seçeneği uygulanır. Yani, \fBmkfs.ext3\fR dosya sistemini ext3 ile, \fBmkfs.ext4\fR ise ext4 ile kullanmak için yapılandırılır.
 .sp
@@ -45,7 +45,7 @@ Yeni oluşturulan dosya sistemi için girdilerin ön tanımlıları, aşağıda 
 .SH "SEÇENEKLER"
 .TP 4
 \fB-b\fR \fIblok-boyu\fR
-Blok boyutlarını bayt cinsinden tanımlar. Geçerli değerler blok başına ikinin üsteli bir sayı olarak 1024 ila 65536 bayt arasında seçilebilir. Şayet bu seçenek belirtilmemişse, \fBmke2fs\fR blok boyutu dosya sisteminin kullanımına uygun olarak dosya sistemi boyutuna göre kararlaştırılır (bkz: \fB-T\fR seçeneği). Çoğu durumda, ön tanımlı blok boyutu 4k’dır. Blok boyutunun önünde eksi imi (’-’) varsa, \fBmke2fs\fR uygun blok boyutunu belirlemek için buluşsal yöntemler kullanır ve blok boyutunu en az \fIblok-boyu\fR bayt olacak şekilde ele alır. Bu, blok boyunun 2k’nın katları olmasını gerektiren bazı donanım aygıtları için kullanışlıdır.
+Blok boyutlarını bayt cinsinden tanımlar. Geçerli değerler blok başına ikinin üsteli bir sayı olarak 1024 ila 65536 bayt arasında seçilebilir. Şayet bu seçenek belirtilmemişse, \fBmke2fs\fR blok boyutu dosya sisteminin kullanımına uygun olarak dosya sistemi boyutuna göre kararlaştırılır (bkz: \fB-T\fR seçeneği). Çoğu durumda, ön tanımlı blok boyutu 4k\&'dır. Blok boyutunun önünde eksi imi (\&'-\&') varsa, \fBmke2fs\fR uygun blok boyutunu belirlemek için buluşsal yöntemler kullanır ve blok boyutunu en az \fIblok-boyu\fR bayt olacak şekilde ele alır. Bu, blok boyunun 2k\&'nın katları olmasını gerektiren bazı donanım aygıtları için kullanışlıdır.
 .sp
 .TP 4
 \fB-c\fR
@@ -61,11 +61,11 @@ Belirtilen \fIkök-dizin\fR içeriği dosya sisteminin kök dizinine kopyalanır
 .sp
 .TP 4
 \fB-D\fR
-Diske yazarken doğrudan G/Ç kullanılır. Bu, \fBmke2fs\fR’nin yoğun bir sunucuda çalışan diğer uygulamaları etkileyebilecek çok sayıda tampon önbelleğini kirletmesini önler. Ancak bu seçenek \fBmke2fs\fR’nin çok daha yavaş çalışmasına neden olur, bu nedenle doğrudan G/Ç kullanmanın böyle bir götürüsü vardır.
+Diske yazarken doğrudan G/Ç kullanılır. Bu, \fBmke2fs\fR\&'nin yoğun bir sunucuda çalışan diğer uygulamaları etkileyebilecek çok sayıda tampon önbelleğini kirletmesini önler. Ancak bu seçenek \fBmke2fs\fR\&'nin çok daha yavaş çalışmasına neden olur, bu nedenle doğrudan G/Ç kullanmanın böyle bir götürüsü vardır.
 .sp
 .TP 4
 \fB-e\fR \fIhata-davranışı\fR
-Hatalar tespit edildiğinde çekirdek kodunun davranışını değiştirir. Her durumda, bir dosya sistemi hatası \fBe2fsck\fR(8)’in bir sonraki önyüklemede dosya sistemini denetlemesine neden olur. \fIhata-davranışı\fR aşağıdakilerden biri olabilir:
+Hatalar tespit edildiğinde çekirdek kodunun davranışını değiştirir. Her durumda, bir dosya sistemi hatası \fBe2fsck\fR(8)\&'in bir sonraki önyüklemede dosya sistemini denetlemesine neden olur. \fIhata-davranışı\fR aşağıdakilerden biri olabilir:
 .sp
 .RS 4
 .RS 4
@@ -81,7 +81,7 @@ Hatalar tespit edildiğinde çekirdek kodunun davranışını değiştirir. Her 
 .sp
 .TP 4
 \fB-E\fR \fIgenişletilmiş-seçenekler\fR
-Dosya sistemi için \fIgenişletilmiş-seçenekler\fRin kulanılmasını sağlar. Genişletilmiş seçenekler virgülle ayrılır ve eşittir (’\fB=\fR’) işaretini kullanarak bir değer belirtilebilir. \fB-E\fR seçeneği, \fBmke2fs\fR’nin önceki sürümlerinde \fB-R\fR idi. \fB-R\fR seçeneği geriye dönük uyumluluk için hala kabul edilmektedir, ancak kullanımı önerilmemektedir. Aşağıdaki \fIgenişletilmiş-seçenekler\fR desteklenmektedir:
+Dosya sistemi için \fIgenişletilmiş-seçenekler\fRin kulanılmasını sağlar. Genişletilmiş seçenekler virgülle ayrılır ve eşittir (\&'\fB=\fR\&') işaretini kullanarak bir değer belirtilebilir. \fB-E\fR seçeneği, \fBmke2fs\fR\&'nin önceki sürümlerinde \fB-R\fR idi. \fB-R\fR seçeneği geriye dönük uyumluluk için hala kabul edilmektedir, ancak kullanımı önerilmemektedir. Aşağıdaki \fIgenişletilmiş-seçenekler\fR desteklenmektedir:
 .sp
 .RS
 .TP 4
@@ -92,7 +92,7 @@ Süper blokta \fBcasefold\fR özelliğini etkinleştirir ve belirtilen \fIkodlam
 \fBencoding_flags\fR=\fIbayraklar\fR
 Dosya adı karakter kodlama işlemleri için \fIbayraklar\fRı belirler. Belirtilen \fIbayraklar\fR kullanılarak bir bayrak değiştirilmezse, onun ön tanımlı değeri kullanılır. \fIbayraklar\fR, etkinleştirilecek bayrakların virgülle ayrılmış bir listesi olmalıdır. Bir bayrağı devre dışı bırakmak için, listeye "no" önekiyle eklenmelidir.
 .sp
-Şu anda ayarlanabilen tek bayrak \fBstrict\fR’tir, bu da geçersiz dizgelerin dosya sistemi tarafından reddedilmesi gerektiği anlamına gelir. Ön tanımlı yapılandırmada \fBstrict\fR bayrağı devre dışıdır.
+Şu anda ayarlanabilen tek bayrak \fBstrict\fR\&'tir, bu da geçersiz dizgelerin dosya sistemi tarafından reddedilmesi gerektiği anlamına gelir. Ön tanımlı yapılandırmada \fBstrict\fR bayrağı devre dışıdır.
 .sp
 .TP 4
 \fBmmp_update_interval\fR=\fIsüre\fR
@@ -104,7 +104,7 @@ Dosya adı karakter kodlama işlemleri için \fIbayraklar\fRı belirler. Belirti
 .sp
 .TP 4
 \fBstripe_width\fR=\fIşerit-genişliği\fR
-Şerit başına \fIşerit-genişliği\fRnde dosya sistemi blokları olan bir RAID dizisi için dosya sistemini yapılandırır. Bu genellikle \fIadım-boyu\fR * \fIN\fR’dir, burada \fIN\fR, RAID’deki veri taşıyan disklerin sayısıdır (örneğin, RAID 5 için bir eşlik diski vardır, dolayısıyla \fIN\fR, dizi eksi 1 dizisindeki disk sayısı olacaktır). Bu, blok ayırıcının, veriler yazılırken mümkünse bir RAID şeridinde eşlik oku-değiştir-yaz işlemini engellemesine izin verir.
+Şerit başına \fIşerit-genişliği\fRnde dosya sistemi blokları olan bir RAID dizisi için dosya sistemini yapılandırır. Bu genellikle \fIadım-boyu\fR * \fIN\fR\&'dir, burada \fIN\fR, RAID\&'deki veri taşıyan disklerin sayısıdır (örneğin, RAID 5 için bir eşlik diski vardır, dolayısıyla \fIN\fR, dizi eksi 1 dizisindeki disk sayısı olacaktır). Bu, blok ayırıcının, veriler yazılırken mümkünse bir RAID şeridinde eşlik oku-değiştir-yaz işlemini engellemesine izin verir.
 .sp
 .TP 4
 \fBoffset\fR=\fIkonum\fR
@@ -132,7 +132,7 @@ Dosya sistemi özelliği \fBsparse_super2\fR etkinse bu seçenekle dosya sistemi
 .sp
 .TP 4
 \fBpacked_meta_blocks\fR[=\fI1 etkinleştirir, <0 iptal eder\fR]
-Tahsis bit eşlemlerini ve dosya düğümü tablosunu diskin başına yerleştirir. Bu seçenek, etkili olabilmesi için \fBflex_bg\fR dosya sistemi özelliğinin etkinleştirilmesini gerektirir ve ayrıca günlüğü dosya sisteminin başlangıcında oluşturur. Bu seçenek, diskin başında SLC flaş kullanan flaş aygıtları için kullanışlıdır. Ayrıca, desteklenen Shingled Drive’lar gibi belirli özel kullanım durumları için yararlı olabilecek bitişik veri bloklarının aralığını en üst düzeye çıkarır.
+Tahsis bit eşlemlerini ve dosya düğümü tablosunu diskin başına yerleştirir. Bu seçenek, etkili olabilmesi için \fBflex_bg\fR dosya sistemi özelliğinin etkinleştirilmesini gerektirir ve ayrıca günlüğü dosya sisteminin başlangıcında oluşturur. Bu seçenek, diskin başında SLC flaş kullanan flaş aygıtları için kullanışlıdır. Ayrıca, desteklenen Shingled Drive\&'lar gibi belirli özel kullanım durumları için yararlı olabilecek bitişik veri bloklarının aralığını en üst düzeye çıkarır.
 .sp
 .TP 4
 \fBroot_owner\fR[=\fIUID:GID\fR]
@@ -144,7 +144,7 @@ Dosya sistemi süper bloğunda, dosya sisteminin örneğin, \fBext4dev\fR dosya 
 .sp
 .TP 4
 \fBdiscard\fR
-Bloklar mkfs zamanında devreden çıkartılmaya çalışılır (dosya sistemi biçimlenirken blokları devre dışı bırakmak, katı hal aygıtlarında (SSD) ve seyrek/ince olarak sağlanan depolamada kullanışlıdır). Aygıt, bu işleminin verileri de sıfır’ladığını bildirdiğinde (işlemden sonraki ve yazmadan önceki okumalar sıfır döndürür), henüz sıfır’lanmamış tüm düğüm tablolarını sıfır’lanmış olarak işaretler. Bu, dosya sisteminin başlatılmasını önemli ölçüde hızlandırır. Bu seçenek ön tanımlı olarak etkindir.
+Bloklar mkfs zamanında devreden çıkartılmaya çalışılır (dosya sistemi biçimlenirken blokları devre dışı bırakmak, katı hal aygıtlarında (SSD) ve seyrek/ince olarak sağlanan depolamada kullanışlıdır). Aygıt, bu işleminin verileri de sıfır\&'ladığını bildirdiğinde (işlemden sonraki ve yazmadan önceki okumalar sıfır döndürür), henüz sıfır\&'lanmamış tüm düğüm tablolarını sıfır\&'lanmış olarak işaretler. Bu, dosya sisteminin başlatılmasını önemli ölçüde hızlandırır. Bu seçenek ön tanımlı olarak etkindir.
 .sp
 .TP 4
 \fBnodiscard\fR
@@ -152,7 +152,7 @@ Bloklar mkfs zamanında devreden çıkartılmaya çalışılmaz.
 .sp
 .TP 4
 \fBquotatype\fR \fIkota-türü:kota-türü\fR...
-Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquota\fR, \fBprjquota\fR) etkinleştirilmesi gerektiğini belirler. Bu genişletilmiş seçeneğin girdisi, iki nokta üst üste ayraçlı bir liste olmalıdır. Bu seçenek yalnızca ilgili kota özelliği etkinse etkilidir. Bu seçenek belirtilmemişse başlatılacak ön tanımlı kota türleri \fBusrquota\fR ve \fBgrpquota\fR’dır. \fBproject\fR özelliği etkinleştirilirse, proje kotaları da ilklendirilir.
+Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquota\fR, \fBprjquota\fR) etkinleştirilmesi gerektiğini belirler. Bu genişletilmiş seçeneğin girdisi, iki nokta üst üste ayraçlı bir liste olmalıdır. Bu seçenek yalnızca ilgili kota özelliği etkinse etkilidir. Bu seçenek belirtilmemişse başlatılacak ön tanımlı kota türleri \fBusrquota\fR ve \fBgrpquota\fR\&'dır. \fBproject\fR özelliği etkinleştirilirse, proje kotaları da ilklendirilir.
 .sp
 .PP
 .RE
@@ -160,7 +160,7 @@ Oluşturulan dosya sisteminde hangi kota türlerinin (\fBquota, usrquota, grpquo
 .sp
 .TP 4
 \fB-F\fR
-Belirtilen aygıt, bir blok aygıtındaki bir bölüm olmasa veya diğer girdiler anlamlı olmasa bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlar. Dosya sistemi kullanımda veya bağlı gibi görünse bile \fBmke2fs\fR’yi bir dosya sistemi oluşturmaya zorlamak için (gerçekten TEHLİKELİ bir seçenek), bu seçenek iki kez belirtilmelidir.
+Belirtilen aygıt, bir blok aygıtındaki bir bölüm olmasa veya diğer girdiler anlamlı olmasa bile \fBmke2fs\fR\&'yi bir dosya sistemi oluşturmaya zorlar. Dosya sistemi kullanımda veya bağlı gibi görünse bile \fBmke2fs\fR\&'yi bir dosya sistemi oluşturmaya zorlamak için (gerçekten TEHLİKELİ bir seçenek), bu seçenek iki kez belirtilmelidir.
 .sp
 .TP 4
 \fB-g\fR \fIgruptaki-blok-sayısı\fR
@@ -170,7 +170,7 @@ Bir blok grubundaki blok sayısını belirler. Dosya sistemi için ön tanımlı
 .sp
 .TP 4
 \fB-G\fR \fIgrup-sayısı\fR
-Bir ext4 dosya sisteminde büyükçe bir sanal blok grubu (veya "\fBflex_bg\fR grubu") oluşturmak için birlikte paketlenecek blok gruplarının sayısını belirler. Bu, meta veri yerleşimini ve meta veri yoğun iş yüklerinde başarımı iyileştirir. \fIgrup-sayısı\fR 2’nin üsteli olmalıdır ve yalnızca \fBflex_bg\fR dosya sistemi özelliği etkinse belirtilebilir.
+Bir ext4 dosya sisteminde büyükçe bir sanal blok grubu (veya "\fBflex_bg\fR grubu") oluşturmak için birlikte paketlenecek blok gruplarının sayısını belirler. Bu, meta veri yerleşimini ve meta veri yoğun iş yüklerinde başarımı iyileştirir. \fIgrup-sayısı\fR 2\&'nin üsteli olmalıdır ve yalnızca \fBflex_bg\fR dosya sistemi özelliği etkinse belirtilebilir.
 .sp
 .TP 4
 \fB-i\fR \fIdosya_düğümü-başına-bayt-sayısı\fR
@@ -178,9 +178,9 @@ Bayt/dosya_düğümü oranını (inode_ratio) belirler. \fBmke2fs\fR, diskteki h
 .sp
 .TP 4
 \fB-I\fR \fIdosya_düğümü-boyu\fR
-Her düğümün boyutunu (inode_size) bayt cinsinden belirler. \fIdosya_düğümü-boyu\fR değeri, 2’nin üsteli olarak 128 ve üstü olmalıdır. \fIdosya_düğümü-boyu\fR ne kadar büyük olursa, dosya düğümü tablosu o kadar fazla yer kaplar ve bu, dosya sistemindeki kullanılabilir alanı azaltır ve başarımı olumsuz etkileyebilir. Dosya sistemi oluşturulduktan sonra bu değeri değiştirmek mümkün değildir.
+Her düğümün boyutunu (inode_size) bayt cinsinden belirler. \fIdosya_düğümü-boyu\fR değeri, 2\&'nin üsteli olarak 128 ve üstü olmalıdır. \fIdosya_düğümü-boyu\fR ne kadar büyük olursa, dosya düğümü tablosu o kadar fazla yer kaplar ve bu, dosya sistemindeki kullanılabilir alanı azaltır ve başarımı olumsuz etkileyebilir. Dosya sistemi oluşturulduktan sonra bu değeri değiştirmek mümkün değildir.
 .sp
-128 baytlık dosya düğümü boyutuna sahip dosya sistemleri, 19 Ocak 2038’den sonraki zaman damgalarını desteklemez. 256 bayt veya üstü dosya düğümleri, geliştirilmiş başarım için genişletilmiş zaman damgalarını, proje kimliklerini ve bazı genişletilmiş öznitelikleri dosya düğümü tablosunda saklama yeteneğini destekler.
+128 baytlık dosya düğümü boyutuna sahip dosya sistemleri, 19 Ocak 2038\&'den sonraki zaman damgalarını desteklemez. 256 bayt veya üstü dosya düğümleri, geliştirilmiş başarım için genişletilmiş zaman damgalarını, proje kimliklerini ve bazı genişletilmiş öznitelikleri dosya düğümü tablosunda saklama yeteneğini destekler.
 .sp
 Ön tanımlı dosya düğümü boyu, \fBmke2fs.conf\fR(5) dosyasında tutulur. e2fsprogs ile birlikte gönderilen \fImke2fs.conf\fR dosyasında, dosya düğümü boyunun 128 bayt olacağı küçük dosya sistemleri dışında, çoğu dosya sistemi için ön tanımlı dosya düğümü tablosu boyu 256 bayttır (inode_size = 256).
 .sp
@@ -203,7 +203,7 @@ Dosya sisteminin içinde \fIgünlük-boyu\fR MB cinsinden belirtilen günlük do
 .sp
 .TP 4
 \fBlocation=\fR\fIgünlük-yeri\fR
-Günlüğün konumunu belirler. \fIgünlük-yeri\fR bir blok numarası olarak belirtilebilir veya sayının bir birim soneki varsa (örneğin, ’M’, ’G’, vb.) dosya sisteminin başlangıcından itibaren belirtilen (örneğin, ’M’, ’G’, vb.) baytlık konum olarak yorumlanır.
+Günlüğün konumunu belirler. \fIgünlük-yeri\fR bir blok numarası olarak belirtilebilir veya sayının bir birim soneki varsa (örneğin, \&'M\&', \&'G\&', vb.) dosya sisteminin başlangıcından itibaren belirtilen (örneğin, \&'M\&', \&'G\&', vb.) baytlık konum olarak yorumlanır.
 .sp
 .TP 4
 \fBdevice=\fR\fIdış-günlük-aygıtı\fR
@@ -220,7 +220,7 @@ Başka bir aygıt üzerindeki günlük dosyasının kullanılması sağlanır. B
 .IP
 Dış günlük dosyası, oluşturulacak yeni dosya sistemi ile aynı blok boyuna sahip olmalıdır. Ayrıca, tek bir harici günlüğe birden çok dosya sistemi ekleme desteği olsa da, Linux çekirdeği ve \fBe2fsck\fR(8) henüz paylaşımlı harici günlükleri desteklememektedir.
 .sp
-\fIdış-günlük-aygıtı\fR olarak doğrudan bir aygıt ismi belirtmek yerine, \fBLABEL=\fR\fIetiket\fR veya \fBUUID=\fR\fIuuid\fR de tanımlanabilir. Bu yöntemle, günlük dosyasının başlangıçındaki ext2 süper bloğunda saklanan \fIetiket\fR veya \fIuuid\fR’e göre dış aygıt atanmış olur. Bir günlük aygıtının \fIetiket\fR veya \fIuuid\fR’ini görebilmek için \fBdumpe2fs\fR(8)’i kullanabilirsiniz. Ayrıca, \fBtune2fs\fR(8)’in \fB-L\fR seçeneğine de bakınız.
+\fIdış-günlük-aygıtı\fR olarak doğrudan bir aygıt ismi belirtmek yerine, \fBLABEL=\fR\fIetiket\fR veya \fBUUID=\fR\fIuuid\fR de tanımlanabilir. Bu yöntemle, günlük dosyasının başlangıçındaki ext2 süper bloğunda saklanan \fIetiket\fR veya \fIuuid\fR’e göre dış aygıt atanmış olur. Bir günlük aygıtının \fIetiket\fR veya \fIuuid\fR’ini görebilmek için \fBdumpe2fs\fR(8)’i kullanabilirsiniz. Ayrıca, \fBtune2fs\fR(8)\&'in \fB-L\fR seçeneğine de bakınız.
 .sp
 .PP
 .RE
@@ -298,7 +298,7 @@ Dosya sisteminin evrensel benzersiz tanımlayıcısını \fIUUID\fR olarak belir
 .RS 4
 .RS 4
 .nf
-\fBclear\fR  dosya sistemi UUID’sini temizler
+\fBclear\fR  dosya sistemi UUID\&'sini temizler
 \fBrandom\fR rastgele bir UUID üretir
 \fBtime\fR   zamana dayalı bir UUID üretir
 .fi
@@ -357,7 +357,7 @@ Tanımlanırsa, bağlama sayısı veya denetim aralığının sebep olduğu dosy
 .PP
 .sp
 .SH "YAZAN"
-\fBmke2fs\fR’nin bu sürümü Theodore Ts’o tarafından yazılmıştır.
+\fBmke2fs\fR\&'nin bu sürümü Theodore Ts\&'o tarafından yazılmıştır.
 .sp
 .SH "YARARLANIM"
 \fBmke2fs\fR, e2fsprogs paketinin bir parçasıdır ve http://e2fsprogs.sourceforge.net adresinden edinilebilir.

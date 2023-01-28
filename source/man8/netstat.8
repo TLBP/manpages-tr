@@ -7,7 +7,7 @@
  * Lisans: GPL-2+, Diğer bilgiler için net-tools deposuna bakılabilir:
  * https://sourceforge.net/p/net-tools/code/ci/master/tree/
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "NETSTAT" 8 "Ekim 2014" "net-tools 2.10" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -116,7 +116,7 @@ Sayısal kullanıcı kimlikleri gösterir ancak konak veya port adlarının çö
 .sp
 .TP 4
 \fB-A\fR, \fB--protocol\fR=\fIadres_ailesi\fR
-Bağlantıların gösterileceği adres ailelerini (belki de düşük seviyeli protokoller olarak daha iyi tanımlanır) belirler. \fIadres_ailesi\fR, \fBinet\fR, \fBinet6\fR, \fBunix\fR, \fBipx\fR, \fBax25\fR, \fBnetrom\fR, \fBeconet\fR, \fBddp\fR ve \fBbluetooth\fR gibi adres ailesi anahtar sözcüklerinin virgülle (’,’) ayrılmış bir listesidir. Bu, \fB--inet\fR|\fB-4\fR, \fB--inet6\fR|\fB-6\fR, \fB--unix\fR|\fB-x\fR, \fB--ipx\fR, \fB--ax25\fR, \fB--netrom\fR, \fB--ddp\fR ve \fB--bluetooth\fR seçenekleri kullanılmış gibi etki eder.
+Bağlantıların gösterileceği adres ailelerini (belki de düşük seviyeli protokoller olarak daha iyi tanımlanır) belirler. \fIadres_ailesi\fR, \fBinet\fR, \fBinet6\fR, \fBunix\fR, \fBipx\fR, \fBax25\fR, \fBnetrom\fR, \fBeconet\fR, \fBddp\fR ve \fBbluetooth\fR gibi adres ailesi anahtar sözcüklerinin virgülle (\&',\&') ayrılmış bir listesidir. Bu, \fB--inet\fR|\fB-4\fR, \fB--inet6\fR|\fB-6\fR, \fB--unix\fR|\fB-x\fR, \fB--ipx\fR, \fB--ax25\fR, \fB--netrom\fR, \fB--ddp\fR ve \fB--bluetooth\fR seçenekleri kullanılmış gibi etki eder.
 .sp
 \fBinet\fR (IPv4) adres ailesi raw, udp, udplite ve tcp protokollerinin soketlerini içerir.
 .sp
@@ -124,7 +124,7 @@ Bağlantıların gösterileceği adres ailelerini (belki de düşük seviyeli pr
 .sp
 .TP 4
 \fB-c\fR, \fB--continuous\fR
-\fBnetstat\fR’ın seçilen bilgileri her saniye sürekli olarak ekrana yazmasına neden olur.
+\fBnetstat\fR\&'ın seçilen bilgileri her saniye sürekli olarak ekrana yazmasına neden olur.
 .sp
 .TP 4
 \fB-e\fR, \fB--extend\fR
@@ -166,12 +166,12 @@ Soketin protokolü (tcp, udp, udpl, raw)
 .SS "Recv-Q"
 Established: (Kuruldu:) Bu sokete bağlı kullanıcı uygulaması tarafından kopyalanmayan bayt sayısı.
 .br
-Listening: (Dinleme:) Kernel 2.6.18’den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için kuyruk uzunluğunu (SYN backlog) içerir.
+Listening: (Dinleme:) Kernel 2.6.18\&'den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için kuyruk uzunluğunu (SYN backlog) içerir.
 .sp
 .SS "Send-Q"
 Established: (Kuruldu:) Uzak soketten alındısı (ACK) dönmeyen bayt sayısı.
 .br
-Listening: (Dinleme:) Kernel 2.6.18’den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için azami kuyruk uzunluğunu (\fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR) içerir.
+Listening: (Dinleme:) Kernel 2.6.18\&'den beri bu sütun, kabul edilmeyi bekleyen tamamen kurulu soketler için azami kuyruk uzunluğunu (\fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR) içerir.
 .sp
 .SS "Local Address"
 Soketin yerel uç adresi ve port numarası. \fB--numeric\fR (\fB-n\fR) seçeneği belirtilmedikçe, soket adresi nitelikli konak adına (FQDN) çözümlenir ve port numarası karşılık gelen hizmet adına dönüştürülür.

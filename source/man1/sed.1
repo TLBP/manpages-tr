@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "SED" 1 "Ocak 2020" "sed-4.8" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ sed - metni süzmek ve dönüştürmek için akım düzenleyici
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBsed\fR bir akım düzenleyicisidir. Akım düzenleyicisi girdi akımında (dosya veya boru hattı girdisi) temel metin dönüşümlerini gerçekleştirmek için kullanılır. Bazı yönlerden komut dosyasıyla düzenlemelere (ed gibi) izin veren bir düzenleyiciye benzese de, \fBsed\fR girdi(ler) üzerinden yalnızca bir geçiş yaparak çalışır ve sonuç olarak daha verimlidir. Ancak, onu diğer düzenleyicilerden özellikle ayıran, \fBsed\fR’in bir boru hattındaki metni süzme yeteneğidir.
+\fBsed\fR bir akım düzenleyicisidir. Akım düzenleyicisi girdi akımında (dosya veya boru hattı girdisi) temel metin dönüşümlerini gerçekleştirmek için kullanılır. Bazı yönlerden komut dosyasıyla düzenlemelere (ed gibi) izin veren bir düzenleyiciye benzese de, \fBsed\fR girdi(ler) üzerinden yalnızca bir geçiş yaparak çalışır ve sonuç olarak daha verimlidir. Ancak, onu diğer düzenleyicilerden özellikle ayıran, \fBsed\fR\&'in bir boru hattındaki metni süzme yeteneğidir.
 .sp
 .SS "sed nasıl çalışır"
 \fBsed\fR iki veri tamponu tutar: etkin kalıp alanı ve yardımcı tutma alanı. Her ikisi de başlangıçta boştur.
@@ -30,7 +30,7 @@ sed - metni süzmek ve dönüştürmek için akım düzenleyici
 .sp
 Betiğin sonuna ulaşıldığında, \fB-n\fR seçeneği kullanımda değilse, kalıp alanının içeriği çıktı akımına yazılır ve kaldırılmışsa satır sonu karakteri de satırın sonuna eklenir. Ardından, bir sonraki girdi satırı için bir sonraki döngü başlar.
 .sp
-’\fBD\fR’ gibi özel komutlar kullanılmadıkça, iki döngü arasında kalıp alanı silinir. Tutma alanındaki veriler ise döngüler arasında saklanır (verileri iki tampon arasında taşıyan ’h’, ’H’, ’x’, ’g’, ’G’ komutlarına da bakınız).
+\&'\fBD\fR\&' gibi özel komutlar kullanılmadıkça, iki döngü arasında kalıp alanı silinir. Tutma alanındaki veriler ise döngüler arasında saklanır (verileri iki tampon arasında taşıyan \&'h\&', \&'H\&', \&'x\&', \&'g\&', \&'G\&' komutlarına da bakınız).
 .sp
 .sp
 .SH "SEÇENEKLER"
@@ -53,17 +53,17 @@ Girilen \fBsed\fR uygulamasını kurallı biçimde çıktılayıp işlemin açı
 .RS 4
 .RS 4
 .nf
-$ \fBecho 1 | sed ’\\%1%s21232’\fR
+$ \fBecho 1 | sed \&'\\%1%s21232\&'\fR
 3
 \&
-$ \fBecho 1 | sed --debug ’\\%1%s21232’\fR
+$ \fBecho 1 | sed --debug \&'\\%1%s21232\&'\fR
 SED PROGRAM:
   /1/ s/1/3/
-INPUT:   ’STDIN’ line 1
+INPUT:   \&'STDIN\&' line 1
 PATTERN: 1
 COMMAND: /1/ s/1/3/
 MATCHED REGEX REGISTERS
-  regex[0] = 0-1 ’1’
+  regex[0] = 0-1 \&'1\&'
 PATTERN: 3
 END-OF-CYCLE:
 3
@@ -105,7 +105,7 @@ GNU \fBsed\fR herhangi bir çıktının gerçekten değişip değişmediğine ba
 .RS 4
 .RS 4
 .nf
-sed -Ei ’...’ DOSYA
+sed -Ei \&'...\&' DOSYA
 .fi
 .sp
 .RE
@@ -116,7 +116,7 @@ Yedekeme soneki olmaksızın \fB-E -i\fR ile aynıdır. DOSYA yedeği alınmadan
 .RS 4
 .RS 4
 .nf
-sed -iE ’...’ DOSYA
+sed -iE \&'...\&' DOSYA
 .fi
 .sp
 .RE
@@ -124,13 +124,13 @@ sed -iE ’...’ DOSYA
 .IP
 \fB--in-place=E\fR seçeneğine eşdeğer olup DOSYA yedeği olarak DOSYAE oluşturulur.
 .sp
-\fB-n\fR’yi \fB-i\fR ile kullanırken dikkatli olun: ilki satırların otomatik çıktılanmasını devre dışı bırakır ve ikincisi dosyayı yedeklemeden yerinde değiştirir. Dikkatsizce kullanıldığında (ve açık bir \fBp\fR komutu olmadan), çıktı dosyası boş olacaktır:
+\fB-n\fR\&'yi \fB-i\fR ile kullanırken dikkatli olun: ilki satırların otomatik çıktılanmasını devre dışı bırakır ve ikincisi dosyayı yedeklemeden yerinde değiştirir. Dikkatsizce kullanıldığında (ve açık bir \fBp\fR komutu olmadan), çıktı dosyası boş olacaktır:
 .sp
 .RS 4
 .RS 4
 .nf
-# YANLIŞ KULLANIM: ’DOSYA’ kırpılır.
-sed -ni ’s/foo/bar/’ DOSYA
+# YANLIŞ KULLANIM: \&'DOSYA\&' kırpılır.
+sed -ni \&'s/foo/bar/\&' DOSYA
 .fi
 .sp
 .RE
@@ -143,11 +143,11 @@ sed -ni ’s/foo/bar/’ DOSYA
 .sp
 .TP 4
 \fB--posix\fR
-GNU \fBsed\fR, POSIX \fBsed\fR’e göre birkaç eklenti içerir. Taşınabilir betikler yazmayı basitleştirmek için bu seçenek, ek komutlar da dahil olmak üzere bu kılavuzun belgelediği tüm eklentileri devre dışı bırakır. Çoğu sed uygulaması, POSIX tarafından zorunlu kılınan sözdiziminin dışındaki eklentilerin çoğunu kabul eder, ancak bazı eklentiler (Geribildirim bölümünde açıklanan \fBN\fR komutunun davranışı gibi) aslında standardı ihlal eder. Yalnızca standardı ihlal eden eklentiler devre dışı bırakılmak istenirse, \fBPOSIXLY_CORRECT\fR değişkeni boş olmayan bir değere ayarlanabilir.
+GNU \fBsed\fR, POSIX \fBsed\fR\&'e göre birkaç eklenti içerir. Taşınabilir betikler yazmayı basitleştirmek için bu seçenek, ek komutlar da dahil olmak üzere bu kılavuzun belgelediği tüm eklentileri devre dışı bırakır. Çoğu sed uygulaması, POSIX tarafından zorunlu kılınan sözdiziminin dışındaki eklentilerin çoğunu kabul eder, ancak bazı eklentiler (Geribildirim bölümünde açıklanan \fBN\fR komutunun davranışı gibi) aslında standardı ihlal eder. Yalnızca standardı ihlal eden eklentiler devre dışı bırakılmak istenirse, \fBPOSIXLY_CORRECT\fR değişkeni boş olmayan bir değere ayarlanabilir.
 .sp
 .TP 4
 \fB-b\fR, \fB--binary\fR
-Bu seçenek her platformda mevcuttur, ancak yalnızca işletim sisteminin metin dosyaları ile ikili dosyalar arasında bir ayrım yaptığı durumlarda etkilidir. Böyle bir ayrım yapıldığında (MS-DOS, Windows, Cygwin’de olduğu gibi) metin dosyaları bir satır sonu ve bir satır başı karakteri ile ayrılmış satırlardan oluşur ve \fBsed\fR sonlandıran satır başını görmez. Bu seçenek belirtildiğinde, \fBsed\fR girdi dosyalarını ikil kipte açar, böylece bu özel işlemi talep etmez ve satırların bir satır başı ile bitmesini dikkate alır.
+Bu seçenek her platformda mevcuttur, ancak yalnızca işletim sisteminin metin dosyaları ile ikili dosyalar arasında bir ayrım yaptığı durumlarda etkilidir. Böyle bir ayrım yapıldığında (MS-DOS, Windows, Cygwin\&'de olduğu gibi) metin dosyaları bir satır sonu ve bir satır başı karakteri ile ayrılmış satırlardan oluşur ve \fBsed\fR sonlandıran satır başını görmez. Bu seçenek belirtildiğinde, \fBsed\fR girdi dosyalarını ikil kipte açar, böylece bu özel işlemi talep etmez ve satırların bir satır başı ile bitmesini dikkate alır.
 .sp
 .TP 4
 \fB--follow-symlinks\fR
@@ -155,15 +155,15 @@ Bu seçenek yalnızca sembolik bağları destekleyen platformlarda kullanılabil
 .sp
 .TP 4
 \fB-E\fR, \fB-r\fR, \fB--regexp-extended\fR
-Temel düzenli ifadeler yerine genişletilmiş düzenli ifadeler kullanılır. Genişletilmiş düzenli ifadeler, \fBegrep\fR(1)’in kabul ettiği ifadelerdir; genellikle daha az ters eğik çizgiye sahip oldukları için bunlar daha okunaklıdır. Tarihsel olarak bu bir GNU eklentisi idi, ancak \fB-E\fR eklentisi artık POSIX standardına eklendiğinden (http://austingroupbugs.net/view.php?id=528) \fB-E\fR seçeneği yalnızca taşınabilirlik için kullanılır oldu. GNU \fBsed\fR yıllarca \fB-E\fR’yi belgelendirilmemiş bir seçenek olarak kabul etti ve *BSD \fBsed\fR’leri de yıllarca \fB-E\fR’yi kabul etti, ancak \fB-E\fR kullanan betikler diğer eski sistemlere taşınamayabilir. Bkz. \fBGenişletilmiş Düzenli İfadeler\fR
+Temel düzenli ifadeler yerine genişletilmiş düzenli ifadeler kullanılır. Genişletilmiş düzenli ifadeler, \fBegrep\fR(1)\&'in kabul ettiği ifadelerdir; genellikle daha az ters eğik çizgiye sahip oldukları için bunlar daha okunaklıdır. Tarihsel olarak bu bir GNU eklentisi idi, ancak \fB-E\fR eklentisi artık POSIX standardına eklendiğinden (http://austingroupbugs.net/view.php?id=528) \fB-E\fR seçeneği yalnızca taşınabilirlik için kullanılır oldu. GNU \fBsed\fR yıllarca \fB-E\fR\&'yi belgelendirilmemiş bir seçenek olarak kabul etti ve *BSD \fBsed\fR\&'leri de yıllarca \fB-E\fR\&'yi kabul etti, ancak \fB-E\fR kullanan betikler diğer eski sistemlere taşınamayabilir. Bkz. \fBGenişletilmiş Düzenli İfadeler\fR
 .sp
 .TP 4
 \fB-s\fR, \fB--separate\fR
-Öntanımlı olarak, \fBsed\fR komut satırında belirtilen dosyaları tek bir sürekli uzun akım olarak kabul eder. Bu GNU \fBsed\fR eklentisi, kullanıcının bunları ayrı dosyalar olarak görmesine izin verir: aralık adreslerinin (’\fB/abc/,/def/\fR’ gibi) birden fazla dosyaya yayılmasına izin verilmez, satır numaraları her dosyanın başlangıcına görelidir, \fB$\fR her dosyanın son satırını ifade eder ve \fBR\fR komutları ile çağrılan dosyalar dosya başlangıcına geri sarılır.
+Öntanımlı olarak, \fBsed\fR komut satırında belirtilen dosyaları tek bir sürekli uzun akım olarak kabul eder. Bu GNU \fBsed\fR eklentisi, kullanıcının bunları ayrı dosyalar olarak görmesine izin verir: aralık adreslerinin (\&'\fB/abc/,/def/\fR\&' gibi) birden fazla dosyaya yayılmasına izin verilmez, satır numaraları her dosyanın başlangıcına görelidir, \fB$\fR her dosyanın son satırını ifade eder ve \fBR\fR komutları ile çağrılan dosyalar dosya başlangıcına geri sarılır.
 .sp
 .TP 4
 \fB--sandbox\fR
-Korumalı alan tipinde, \fBe/w/r\fR komutları reddedilir - bunları içeren betikler çalıştırılmadan iptal edilir. Korumalı alan kipi, \fBsed\fR’in yalnızca komut satırında belirtilen girdi dosyalarında çalışmasını ve harici betikleri çalıştıramamasını sağlar.
+Korumalı alan tipinde, \fBe/w/r\fR komutları reddedilir - bunları içeren betikler çalıştırılmadan iptal edilir. Korumalı alan kipi, \fBsed\fR\&'in yalnızca komut satırında belirtilen girdi dosyalarında çalışmasını ve harici betikleri çalıştıramamasını sağlar.
 .sp
 .TP 4
 \fB-u\fR, \fB--unbuffered\fR
@@ -171,12 +171,12 @@ Hem girdiyi hem de çıktıyı mümkün olan en düşük düzeyde tamponlar. (Bu
 .sp
 .TP 4
 \fB-z\fR, \fB--null-data\fR, \fB--zero-terminated\fR
-Girdiyi, her satırı, satır sonu yerine boş karakter (ASCII ’NUL’ karakteri) ile sonlandırılmış bir satır kümesi olarak ele alır. Bu seçenek, rastgele dosya adlarını işlemek için "\fBsort -z\fR" ve "\fBfind -print0\fR" gibi komutlarla kullanılabilir.
+Girdiyi, her satırı, satır sonu yerine boş karakter (ASCII \&'NUL\&' karakteri) ile sonlandırılmış bir satır kümesi olarak ele alır. Bu seçenek, rastgele dosya adlarını işlemek için "\fBsort -z\fR" ve "\fBfind -print0\fR" gibi komutlarla kullanılabilir.
 .sp
 .PP
 Komut satırında \fB-e\fR, \fB-f\fR, \fB--expression\fR veya \fB--file\fR seçeneği verilmezse, komut satırındaki seçenek olmayan ilk girdi yürütülecek betik dosyası olarak alınır.
 .sp
-Yukarıdakilerin işlenmesinden sonra herhangi bir komut satırı girdisi kalırsa, bu girdiler işlenecek girdi dosyalarının adları olarak yorumlanır. ’-’ dosya adı, standart girdi akımını ifade eder. Hiçbir dosya adı belirtilmemişse standart girdi okunur.
+Yukarıdakilerin işlenmesinden sonra herhangi bir komut satırı girdisi kalırsa, bu girdiler işlenecek girdi dosyalarının adları olarak yorumlanır. \&'-\&' dosya adı, standart girdi akımını ifade eder. Hiçbir dosya adı belirtilmemişse standart girdi okunur.
 .sp
 .SH "KOMUTLAR"
 GNU \fBsed\fR aşağıdaki komutları destekler. Bazıları standart POSIX komutlarıdır, diğerleri ise GNU eklentisidir.
@@ -350,11 +350,11 @@ Dallanma komutları (\fBb\fR, \fBt\fR, \fBT\fR) için \fIYAFTA\fR konumunu belir
 .sp
 Adres aralıkları hakkında dikkat edilmesi gereken üç şey:
 .br
-1. Sözdizimi \fIADDR1,ADDR2\fR’dir (yani, adresler virgülle ayrılır);
+1. Sözdizimi \fIADDR1,ADDR2\fR\&'dir (yani, adresler virgülle ayrılır);
 .br
-2. \fIADDR1\fR’in eşleştiği satır, \fIADDR2\fR daha önceki bir satırı seçse bile her zaman kabul edilir;
+2. \fIADDR1\fR\&'in eşleştiği satır, \fIADDR2\fR daha önceki bir satırı seçse bile her zaman kabul edilir;
 .br
-3. Eğer \fIADDR2\fR bir düzenli ifade ise, \fIADDR1\fR’in eşleştiği satırla eşleştirmeye çalışılmaz.
+3. Eğer \fIADDR2\fR bir düzenli ifade ise, \fIADDR1\fR\&'in eşleştiği satırla eşleştirmeye çalışılmaz.
 .sp
 Adresten (veya adres aralığından) önce veya sonra \fB!\fR komutu yerleştirilebilir. Bu durumda komut, yalnızca adres (veya adres aralığı) eşleşmediğinde yürütülür.
 .sp
@@ -374,11 +374,11 @@ Son satırla eşleşir.
 .RS 4
 .RS 4
 .nf
-$ \fBseq 10 | sed -n ’0~4p’\fR
+$ \fBseq 10 | sed -n \&'0~4p\&'\fR
 4
 8
 \&
-$ \fBseq 10 | sed -n ’1~3p’\fR
+$ \fBseq 10 | sed -n \&'1~3p\&'\fR
 1
 4
 7
@@ -396,18 +396,18 @@ $ \fBseq 10 | sed -n ’1~3p’\fR
 \fB/\fR\fIDÜZİFD\fR\fB/\fR
 \fIDÜZİFD\fR düzenli ifadesiyle eşleşen satırı seçer. \fIDÜZİFD\fR içinde \fB/\fR karakterleri varsa, bunlar ters eğik çizgi (\fB\\\fR) ile öncelenmelidir.
 .sp
-Aşağıdaki komut, \fI/etc/passwd\fR dosyasında ’\fBbash\fR’ ile biten satırları ekrana basar:
+Aşağıdaki komut, \fI/etc/passwd\fR dosyasında \&'\fBbash\fR\&' ile biten satırları ekrana basar:
 .sp
 .RS 4
 .RS 4
 .nf
-sed -n ’/bash$/p’ /etc/passwd
+sed -n \&'/bash$/p\&' /etc/passwd
 .fi
 .sp
 .RE
 .RE
 .IP
-Boş düzenli ifade ’\fB//\fR’, son düzenli ifade eşleşmesini tekrarlar (aynı durum, boş düzenli ifade \fBs\fR komutuna aktarıldığında da geçerlidir). Düzenli ifade değiştiricilerinin düzenli ifade derlenirken değerlendirildiğini, dolayısıyla bunları boş düzenli ifadeyle birlikte belirtmenin geçersiz olacağı unutulmamalıdır.
+Boş düzenli ifade \&'\fB//\fR\&', son düzenli ifade eşleşmesini tekrarlar (aynı durum, boş düzenli ifade \fBs\fR komutuna aktarıldığında da geçerlidir). Düzenli ifade değiştiricilerinin düzenli ifade derlenirken değerlendirildiğini, dolayısıyla bunları boş düzenli ifadeyle birlikte belirtmenin geçersiz olacağı unutulmamalıdır.
 .sp
 .TP 4
 \fB\\c\fR\fIDÜZİFD\fR\fBc\fR
@@ -420,9 +420,9 @@ Aşağıdaki komutlar eşdeğerdir. \fI/home/alice/documents/\fR ile başlayan s
 .RS 4
 .RS 4
 .nf
-sed -n ’/^\\/home\\/alice\\/documents\\//p’
-sed -n ’\\%^/home/alice/documents/%p’
-sed -n ’\\;^/home/alice/documents/;p’
+sed -n \&'/^\\/home\\/alice\\/documents\\//p\&'
+sed -n \&'\\%^/home/alice/documents/%p\&'
+sed -n \&'\\;^/home/alice/documents/;p\&'
 .fi
 .sp
 .RE
@@ -433,7 +433,7 @@ sed -n ’\\;^/home/alice/documents/;p’
 \fB/\fR\fIDÜZİFD\fR\fB/I\fR\p \fB\\c\fR\fIDÜZİFD\fR\fBcI\fR
 Düzenli ifade eşleştirmesinin \fBI\fR değiştiricisi, düzenli ifadenin harf büyüklüğünü önemsemeden eşleşmesine sebep olan bir GNU eklentisidir.
 .sp
-Çoğu yazılım dilinde, harf büyüklüğünü önemsemeyen düzenli ifade eşleşmesi için küçük harf \fBi\fR kullanılır. Ancak, \fBsed\fR’de \fBi\fR, yerleştirme komutu için kullanılır (bkz. yerleştirme komutu).
+Çoğu yazılım dilinde, harf büyüklüğünü önemsemeyen düzenli ifade eşleşmesi için küçük harf \fBi\fR kullanılır. Ancak, \fBsed\fR\&'de \fBi\fR, yerleştirme komutu için kullanılır (bkz. yerleştirme komutu).
 .sp
 Aşağıdaki örnekler arasındaki farka dikkat edin.
 .sp
@@ -442,7 +442,7 @@ Bu örnekte, \fB/b/I\fR adrestir, \fBI\fR düzenli ifade değiştiricisidir, \fB
 .RS 4
 .RS 4
 .nf
-$ \fBprintf "%s\\n" a b c | sed ’/b/Id’\fR
+$ \fBprintf "%s\\n" a b c | sed \&'/b/Id\&'\fR
 a
 c
 .fi
@@ -455,7 +455,7 @@ Burada, \fB/b/\fR adrestir, \fBi\fR yerleştirme komutudur. \fBd\fR yerleştiril
 .RS 4
 .RS 4
 .nf
-$ \fBprintf "%s\\n" a b c | sed ’/b/id’\fR
+$ \fBprintf "%s\\n" a b c | sed \&'/b/id\&'\fR
 a
 d
 b
@@ -468,16 +468,16 @@ c
 .sp
 .TP 4
 \fB/\fR\fIDÜZİFD\fR\fB/M\fR\p \fB\\%\fR\fIDÜZİFD\fR\fB%M\fR
-\fBM\fR değiştiricisi, düzenli ifadeyi çok satırlı kipte eşleştirmeye yönlendiren bir GNU sed eklentisidir. Değiştirici, (normal davranışa ek olarak) \fB^\fR’ın satır sonu karakterinden sonraki boş dizgeyle (sonraki satırın başıyla) ve \fB$\fR’ın satır sonu karakterinden önceki boş dizgeyle eşleşmesine sebep olur. Daima tamponun başı veya sonuyla eşleşen özel karakter dizilimleri de (\fB\\’\fR ve \fB\\’\fR) vardır. Ek olarak nokta karakteri, çok satırlı kipte satır sonu karakteriyle eşleşmez.
+\fBM\fR değiştiricisi, düzenli ifadeyi çok satırlı kipte eşleştirmeye yönlendiren bir GNU sed eklentisidir. Değiştirici, (normal davranışa ek olarak) \fB^\fR\&'ın satır sonu karakterinden sonraki boş dizgeyle (sonraki satırın başıyla) ve \fB$\fR\&'ın satır sonu karakterinden önceki boş dizgeyle eşleşmesine sebep olur. Daima tamponun başı veya sonuyla eşleşen özel karakter dizilimleri de (\fB\\`\fR ve \fB\\\&'\fR) vardır. Ek olarak nokta karakteri, çok satırlı kipte satır sonu karakteriyle eşleşmez.
 .sp
 .PP
 Düzenli ifadeli adresler, mevcut kalıp uzayının içeriği üzerinde çalışır. Kalıp alanı değiştirilirse (örneğin \fBs///\fR komutuyla), düzenli ifade değiştirilen metin ile eşleştirilmeye çalışılır.
 .sp
-Aşağıdaki örnekte, \fB-n\fR ile otomatik yazdırma devre dışı bırakılmıştır. \fBs/2/X/\fR komutu, ’\fB2\fR’ içeren satırları ’\fBX\fR’ ile değiştirir. \fB/[0-9]/p\fR komutu, satırları rakamlarla eşleştirir ve yazdırır. İkinci satır \fB/[0-9]/\fR düzenli ifadesinden önce değiştirildiği için eşleşmeyecek ve yazdırılmayacaktır:
+Aşağıdaki örnekte, \fB-n\fR ile otomatik yazdırma devre dışı bırakılmıştır. \fBs/2/X/\fR komutu, \&'\fB2\fR\&' içeren satırları \&'\fBX\fR\&' ile değiştirir. \fB/[0-9]/p\fR komutu, satırları rakamlarla eşleştirir ve yazdırır. İkinci satır \fB/[0-9]/\fR düzenli ifadesinden önce değiştirildiği için eşleşmeyecek ve yazdırılmayacaktır:
 .sp
 .RS 4
 .nf
-$ \fBseq 3 | sed -n ’s/2/X/ ; /[0-9]/p’\fR
+$ \fBseq 3 | sed -n \&'s/2/X/ ; /[0-9]/p\&'\fR
 1
 3
 .fi
@@ -487,7 +487,7 @@ $ \fBseq 3 | sed -n ’s/2/X/ ; /[0-9]/p’\fR
 .SS "Desteklenen diğer adres biçemleri"
 .TP 4
 \fB0,/\fR\fIDÜZİFD\fR\fB/\fR
-\fB0,/\fR\fIDÜZİFD\fR\fB/\fR adres belirtiminde \fB0\fR satır numarası kullanılabilir, böylece \fBsed\fR ilk girdi satırında da \fIDÜZİFD\fR ile eşleşmeye çalışır. Başka bir deyişle, \fIDÜZİFD\fR’nin en baştaki girdi satırı ile eşleşmesi dışında \fB0,/\fR\fIDÜZİFD\fR\fB/\fR ile \fB1,/\fR\fIDÜZİFD\fR\fB/\fR benzerdir. \fB0,/\fR\fIDÜZİFD\fR\fB/\fR bunu aralığın sonu olarak değerlendirir. Halbuki, \fB1,/\fR\fIDÜZİFD\fR\fB/\fR aralığın başlangıcı ile eşleşir. Bu nedenle, aralık düzenli ifadenin ikinci benzerine kadar genişletilir.
+\fB0,/\fR\fIDÜZİFD\fR\fB/\fR adres belirtiminde \fB0\fR satır numarası kullanılabilir, böylece \fBsed\fR ilk girdi satırında da \fIDÜZİFD\fR ile eşleşmeye çalışır. Başka bir deyişle, \fIDÜZİFD\fR\&'nin en baştaki girdi satırı ile eşleşmesi dışında \fB0,/\fR\fIDÜZİFD\fR\fB/\fR ile \fB1,/\fR\fIDÜZİFD\fR\fB/\fR benzerdir. \fB0,/\fR\fIDÜZİFD\fR\fB/\fR bunu aralığın sonu olarak değerlendirir. Halbuki, \fB1,/\fR\fIDÜZİFD\fR\fB/\fR aralığın başlangıcı ile eşleşir. Bu nedenle, aralık düzenli ifadenin ikinci benzerine kadar genişletilir.
 .sp
 Bunun, 0 adresinin anlamlı olduğu tek yer oluşuna dikkat edilmelidir; 0. satır yoktur ve başka bir yolla 0 adresi belirtilen komutlar hata verir.
 .sp
@@ -496,11 +496,11 @@ Aşağıdaki örnekler, adres 1 ve 0 ile başlama arasındaki farkı göstermekt
 .RS 4
 .RS 4
 .nf
-$ \fBseq 10 | sed -n ’1,/[0-9]/p’\fR
+$ \fBseq 10 | sed -n \&'1,/[0-9]/p\&'\fR
 1
 2
 \&
-$ \fBseq 10 | sed -n ’0,/[0-9]/p’\fR
+$ \fBseq 10 | sed -n \&'0,/[0-9]/p\&'\fR
 1
 .fi
 .sp
@@ -510,11 +510,11 @@ $ \fBseq 10 | sed -n ’0,/[0-9]/p’\fR
 .sp
 .TP 4
 \fIADRES1\fR, \fI+N\fR
-\fIADRES1\fR ve \fIADRES1\fR’i izleyen \fIN\fR satırla eşleşir.
+\fIADRES1\fR ve \fIADRES1\fR\&'i izleyen \fIN\fR satırla eşleşir.
 .sp
 .TP 4
 \fIADRES1\fR, \fI~N\fR
-\fIADRES1\fR ve \fIADRES1\fRi izleyen satırlardan, satır numarası \fIN\fR’nin katları olan satırlara kadar olan satırlarla eşleşir.
+\fIADRES1\fR ve \fIADRES1\fRi izleyen satırlardan, satır numarası \fIN\fR\&'nin katları olan satırlara kadar olan satırlarla eşleşir.
 .sp
 .PP
 .sp
@@ -533,7 +533,7 @@ Temel kavram basittir: \fBs/\fR komutu, kalıp alanını belirtilen \fIDÜZİFD\
 .sp
 Düzenli ifade sözdizimi ile ilgili ayrıntılar için bkz: \fBDüzenli ifadeli adresler\fR
 .sp
-\fIYENİSİ\fR, eşleşmenin \fBn\fR’inci \fB\\...\\\fR kısmına atıfta bulunan, \fB\\n\fR atıfları içerebilir (\fBn\fR, 1’den 9’a kadar bir sayıdır). Ayrıca, \fIYENİSİ\fR kalıp alanının eşleşen kısmının tamamına atıfta bulunan öncelenmemiş \fB&\fR karakterleri de içerebilir.
+\fIYENİSİ\fR, eşleşmenin \fBn\fR\&'inci \fB\\...\\\fR kısmına atıfta bulunan, \fB\\n\fR atıfları içerebilir (\fBn\fR, 1\&'den 9\&'a kadar bir sayıdır). Ayrıca, \fIYENİSİ\fR kalıp alanının eşleşen kısmının tamamına atıfta bulunan öncelenmemiş \fB&\fR karakterleri de içerebilir.
 .sp
 Sınırlayıcı \fB/\fR karakterleri, verilen herhangi bir \fBs\fR komutunda herhangi bir başka tek karakterle eşli olarak değiştirilebilir. \fB/\fR karakteri (veya onun yerine kullanılan karakter), \fIDÜZİFD\fR ve \fIYENİSİ\fR içinde ancak bir \fB\\\fR karakteri ile öncelenerek görünebilir.
 .sp
@@ -568,9 +568,9 @@ s/\\(b\\?\\)-/x\\u\\1/g
 .fi
 .sp
 .RE
-‘\fBaxxB\fR’ çıktılar. İlk ‘\fB-\fR’ dönüştürülürken ‘\fB\\u\fR’ seçeneği ile ‘\fB\\1\fR’ numaralı düzenli ifade için \fIYENİSİ\fR boş olur. \fBb-\fR ise \fBxB\fR’ye dönüştürülürken kalıp alanına eklenen x karakteri dönüşümden etkilenmez.
+‘\fBaxxB\fR’ çıktılar. İlk ‘\fB-\fR’ dönüştürülürken ‘\fB\\u\fR’ seçeneği ile ‘\fB\\1\fR\&' numaralı düzenli ifade için \fIYENİSİ\fR boş olur. \fBb-\fR ise \fBxB\fR\&'ye dönüştürülürken kalıp alanına eklenen x karakteri dönüşümden etkilenmez.
 .sp
-Diğer yandan, \\l ve \\u boş bir ikameye öncülük ediyorsa \fIYENİSİ\fR’nin kalanını etkiler. Kalıp alanındaki ‘\fBa-b-\fR’ ile:
+Diğer yandan, \\l ve \\u boş bir ikameye öncülük ediyorsa \fIYENİSİ\fR\&'nin kalanını etkiler. Kalıp alanındaki ‘\fBa-b-\fR’ ile:
 .sp
 .RS 4
 .nf
@@ -578,7 +578,7 @@ s/\\(b\\?\\)-/\\u\\1x/g
 .fi
 .sp
 .RE
-komutu ’-’ ile ‘X’ (büyük harf) ve ‘b-’ ile ‘Bx’ dönüşümü yapar. Bu davranış istenmiyorsa, ’\\1’den sonra dönüşümü durduran bir ‘\\E’ eklenebilir.
+komutu \&'-’ ile ‘X’ (büyük harf) ve ‘b-’ ile ‘Bx’ dönüşümü yapar. Bu davranış istenmiyorsa, \&'\\1’den sonra dönüşümü durduran bir ‘\\E’ eklenebilir.
 .sp
 Son dönüşümde \\, & veya satır sonu karakteri yerleştirilmek istenirse, bu karakterlerin bir \\ ile öncelenmiş olmasına dikkat edilmelidir.
 .sp
@@ -586,7 +586,7 @@ Son dönüşümde \\, & veya satır sonu karakteri yerleştirilmek istenirse, bu
 .sp
 .TP 4
 \fBg\fR
-Eşleşen (yalnızca ilkini değil) tüm \fIDÜZİFD\fR’leri \fIYENİSİ\fR ile değiştirir.
+Eşleşen (yalnızca ilkini değil) tüm \fIDÜZİFD\fR\&'leri \fIYENİSİ\fR ile değiştirir.
 .sp
 .TP 4
 \fIN\fR
@@ -595,7 +595,7 @@ Yalnızca \fIN\fRinci \fIDÜZİFD\fR \fIYENİSİ\fR ile değiştirilir.
 .RS 4
 .TP 4
 \fBg ve N etkileşimi\fR
-POSIX standardı, \fBg\fR ve sayı değiştiricileri birlikte kullanıldığında ne olması gerektiğini belirtmez ve şu anda \fBsed\fR uygulamaları arasında geniş çapta üzerinde anlaşmaya varılmış bir çözüm yoktur. GNU \fBsed\fR için etkileşim şu şekilde tanımlanıştır: \fIN\fR’den önceki eşleşmeleri yoksay ve ardından \fIN\fR’den itibaren tüm eşleşmeleri eşleştir ve değiştir.
+POSIX standardı, \fBg\fR ve sayı değiştiricileri birlikte kullanıldığında ne olması gerektiğini belirtmez ve şu anda \fBsed\fR uygulamaları arasında geniş çapta üzerinde anlaşmaya varılmış bir çözüm yoktur. GNU \fBsed\fR için etkileşim şu şekilde tanımlanıştır: \fIN\fR\&'den önceki eşleşmeleri yoksay ve ardından \fIN\fR\&'den itibaren tüm eşleşmeleri eşleştir ve değiştir.
 .sp
 .RE
 .IP
@@ -607,14 +607,14 @@ Dönüşüm yapılmışsa yeni kalıp alanını çıktılar.
 .RS 4
 .TP 4
 \fBBilgi:\fR
-\fBp\fR ve \fBe\fR seçenekleri birlikte belirtildiğinde bu ikisinin bir birine göre konumu farklı sonuçlar üretebilir. Genelde, \fBep\fR (değerlendir ve çıktıla) istenir fakat diğer türlüsü de hata ayıklama için kullanışlıdır. Bu nedenle, GNU \fBsed\fR’in geçerli sürümü \fBs\fR komutunun genel seçenekleri etkilerini yalnızca bir kere gösterirken, özellikle \fBp\fR seçeneğinin hem \fBe\fR den önce hem de \fBe\fR den sonra kullanımında kalıp alanını önce ve sonra değerlendirir. Bu davranış, bu sürümde böyle belgelenmiş olsa da gelecekte değişebilir.
+\fBp\fR ve \fBe\fR seçenekleri birlikte belirtildiğinde bu ikisinin bir birine göre konumu farklı sonuçlar üretebilir. Genelde, \fBep\fR (değerlendir ve çıktıla) istenir fakat diğer türlüsü de hata ayıklama için kullanışlıdır. Bu nedenle, GNU \fBsed\fR\&'in geçerli sürümü \fBs\fR komutunun genel seçenekleri etkilerini yalnızca bir kere gösterirken, özellikle \fBp\fR seçeneğinin hem \fBe\fR den önce hem de \fBe\fR den sonra kullanımında kalıp alanını önce ve sonra değerlendirir. Bu davranış, bu sürümde böyle belgelenmiş olsa da gelecekte değişebilir.
 .sp
 .RE
 .IP
 .sp
 .TP 4
 \fBw\fR \fIDOSYA\fR
-Dönüşüm yapılmışsa sonucu belirtilen \fIDOSYA\fR’ya yazar. GNU \fBsed\fR eklentisi olarak, \fIDOSYA\fR için iki özel değer desteklenmektedir: sonuçları standart hataya yazan \fI/dev/stderr\fR ve standart çıktıya yazan \fI/dev/stdout\fR. Bu seçenek, \fB-i\fR seçeneği kullanılmadıkça \fBp\fR’ye eşdeğerdir.
+Dönüşüm yapılmışsa sonucu belirtilen \fIDOSYA\fR\&'ya yazar. GNU \fBsed\fR eklentisi olarak, \fIDOSYA\fR için iki özel değer desteklenmektedir: sonuçları standart hataya yazan \fI/dev/stderr\fR ve standart çıktıya yazan \fI/dev/stdout\fR. Bu seçenek, \fB-i\fR seçeneği kullanılmadıkça \fBp\fR\&'ye eşdeğerdir.
 .sp
 .TP 4
 \fBe\fR
@@ -626,15 +626,15 @@ Düzenli ifadenin harf büyüklüğüne duyarsız eşleştirilmesini sağlayan \
 .sp
 .TP 4
 \fBM\fR, \fBm\fR
-Düzenli ifadenin çok satırlı kipte eşleştirilmesini sağlayan \fBM\fR değiştiricisi bir GNU eklentisidir. Değiştirici, (normal davranışa ek olarak) \fB^\fR’ın satır sonu karakterinden sonraki boş dizgeyle (sonraki satırın başıyla) ve \fB$\fR’ın satır sonu karakterinden önceki boş dizgeyle eşleşmesine sebep olur. Daima tamponun başı veya sonuyla eşleşen özel karakter dizilimleri de (\fB\\’\fR ve \fB\\’\fR) vardır. Ek olarak nokta karakteri, çok satırlı kipte satır sonu karakteriyle eşleşmez.
+Düzenli ifadenin çok satırlı kipte eşleştirilmesini sağlayan \fBM\fR değiştiricisi bir GNU eklentisidir. Değiştirici, (normal davranışa ek olarak) \fB^\fR\&'ın satır sonu karakterinden sonraki boş dizgeyle (sonraki satırın başıyla) ve \fB$\fR\&'ın satır sonu karakterinden önceki boş dizgeyle eşleşmesine sebep olur. Daima tamponun başı veya sonuyla eşleşen özel karakter dizilimleri de (\fB\\`\fR ve \fB\\\&'\fR) vardır. Ek olarak nokta karakteri, çok satırlı kipte satır sonu karakteriyle eşleşmez.
 .sp
 .PP
 .sp
 .SS "Düzenli İfadeler"
-POSIX.2 Temel Düzenli İfadelerinin desteklenmesini gerektirse de başarım sorunları nedeniyle bunlar tamamlanmış değildir. \fB\\n\fR dizilimi bir düzenli ifadede satır sonu karakteri ile eşleşir, \fB\\a\fR, \fB\\t\fR ve benzerleri için benzer eşleşmeler söz konusudur. \fB-E\fR seçeneği temel düzenli ifadeler yerine gelişmiş düzenli ifadelerin kullanılmasını sağlar. Gelişmiş düzenli ifadeler yıllarca GNU \fBsed\fR tarafından desteklenmiş ve artık POSIX’e de dahil edilmiştir.
+POSIX.2 Temel Düzenli İfadelerinin desteklenmesini gerektirse de başarım sorunları nedeniyle bunlar tamamlanmış değildir. \fB\\n\fR dizilimi bir düzenli ifadede satır sonu karakteri ile eşleşir, \fB\\a\fR, \fB\\t\fR ve benzerleri için benzer eşleşmeler söz konusudur. \fB-E\fR seçeneği temel düzenli ifadeler yerine gelişmiş düzenli ifadelerin kullanılmasını sağlar. Gelişmiş düzenli ifadeler yıllarca GNU \fBsed\fR tarafından desteklenmiş ve artık POSIX\&'e de dahil edilmiştir.
 .sp
 .SS "Genişletilmiş Düzenli İfadeler"
-Temel ve genişletilmiş düzenli ifadeler arasındaki tek fark, birkaç karakterin davranışındadır: ’?’, ’+’, yaylı ayraçlar ’()’, kaşlı ayraçlar ’{}’ ve ’|’. Temel düzenli ifadelerde, bunların özel karakter olarak davranması için öncelenmesi gerekirken, genişletilmiş düzenli ifadelerde kendileri olarak davranması için öncelenmesi gerekir. ’|’ özeldir, çünkü ’\\|’ bir GNU eklentisi olup standart temel düzenli ifadelerde işlevsel değildir. Örnekler:
+Temel ve genişletilmiş düzenli ifadeler arasındaki tek fark, birkaç karakterin davranışındadır: \&'?\&', \&'+\&', yaylı ayraçlar \&'()\&', kaşlı ayraçlar \&'{}\&' ve \&'|\&'. Temel düzenli ifadelerde, bunların özel karakter olarak davranması için öncelenmesi gerekirken, genişletilmiş düzenli ifadelerde kendileri olarak davranması için öncelenmesi gerekir. \&'|\&' özeldir, çünkü \&'\\|\&' bir GNU eklentisi olup standart temel düzenli ifadelerde işlevsel değildir. Örnekler:
 .sp
 .TP 4
 \fBabc?\fR
@@ -683,11 +683,11 @@ Komut satırında belirtilmiş bir veya daha fazla girdi dosyası açılamadı (
 Çalışma anında bir G/Ç veya ciddi bir işlem hatası oluştu. GNU \fBsed\fR hemen çıktı.
 .sp
 .PP
-Ek olarak, \fBq\fR ve \fBQ\fR komutları \fBsed\fR’in özel bir çıkış kodu ile çıkmasını sağlamak için kullanılabilir:
+Ek olarak, \fBq\fR ve \fBQ\fR komutları \fBsed\fR\&'in özel bir çıkış kodu ile çıkmasını sağlamak için kullanılabilir:
 .sp
 .RS 4
 .nf
-$ \fBecho | sed ’Q42’ ; echo $?\fR
+$ \fBecho | sed \&'Q42\&' ; echo $?\fR
 42
 .fi
 .sp

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "AUTORECONF" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ autoreconf - Üretilmiş yapılandırma dosyalarını günceller
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBautoconf\fRu (ve \fBautoheader\fR, \fBaclocal\fR, \fBautomake\fR, \fBautopoint\fR (öncesinde \fBgettextize\fR) ve ilgiliyse \fBlibtoolize\fR) tekrar tekrar çalıştırılarak \fIDiZiN\fRlerdeki (’.’ öntanımlıdır) ve alt dizinlerdeki GNU Derleme Sistemi dosyaları tek seferde yeniden oluşturulur.
+\fBautoconf\fRu (ve \fBautoheader\fR, \fBaclocal\fR, \fBautomake\fR, \fBautopoint\fR (öncesinde \fBgettextize\fR) ve ilgiliyse \fBlibtoolize\fR) tekrar tekrar çalıştırılarak \fIDiZiN\fRlerdeki (`.\&' öntanımlıdır) ve alt dizinlerdeki GNU Derleme Sistemi dosyaları tek seferde yeniden oluşturulur.
 .sp
 Öntanımlı olarak, mevcut dosyalardan eski olanlar yeniden oluşturulur. Eğer GNU Derleme Sisteminin yeni sürümleri kuruluyorsa, \fBautoreconf\fR \fB--force\fR seçeneği ile çalıştırılarak bütün dosyalar yeniden oluşturulabilir.
 .sp
@@ -70,55 +70,55 @@ Uygulanabiliyorsa, \fB./configure && make\fR yapar.
 .sp
 .SS "Uyarı SINIFları şunlardır:"
 .TP 4
-’cross’
+\&'cross\&'
 çapraz derleme sorunları
 .sp
 .TP 4
-’gnu’
+\&'gnu\&'
 GNU kodlama standartları (gnu ve gnits kodlarında öntanımlı)
 .sp
 .TP 4
-’obsolete’
+\&'obsolete\&'
 atıl duruma gelmiş özellikler ve oluşumlar (öntanımlı)
 .sp
 .TP 4
-’override’
+\&'override\&'
 kullanıcı tarafından yeniden tanımlanmış Automake kuralları ve değişkenleri
 .sp
 .TP 4
-’portability’
+\&'portability\&'
 taşınabilirlik sorunları (gnu ve gnits kiplerinde öntanımlı)
 .sp
 .TP 4
-’portability-recursive’
+\&'portability-recursive\&'
 iç içe make değişkenleri (\fB-Wportability\fR ile öntanımlı)
 .sp
 .TP 4
-’extra-portability’
+\&'extra-portability\&'
 belirsiz araçlarla ilgili ek taşınabilirlik sorunları
 .sp
 .TP 4
-’syntax’
+\&'syntax\&'
 sözdizimsel olarak belirsiz yapılar
 .sp
 .TP 4
-’unsupported’
+\&'unsupported\&'
 desteklenmeyen ve tamamlanmamış özellikler (öntanımlı)
 .sp
 .TP 4
-’all’
+\&'all\&'
 Bütün uyarılar
 .sp
 .TP 4
-’no-\fISINIF\fR’
+\&'no-\fISINIF\fR\&'
 \fISINIF\fRa ilişkin tüm uyarılar kapatılır
 .sp
 .TP 4
-’none’
+\&'none\&'
 bütün uyarıları kapatılır
 .sp
 .TP 4
-’error’
+\&'error\&'
 uyarılar hata sayılır
 .sp
 .PP

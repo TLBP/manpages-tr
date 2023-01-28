@@ -8,7 +8,7 @@
  * Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
  * May be distributed under the GNU General Public License
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DMESG" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -120,7 +120,7 @@ komutu ile yalnızca hata ve uyarı iletileri gösterilir. Desteklenen tüm düz
 \fB-n\fR, \fB--console-level\fR \fIDÜZEY\fR
 Konsola çıktılanacak iletilerin \fIDÜZEY\fRini belirler. \fIDÜZEY\fR, düzey numarası veya düzey adının kısaltması olabilir. Desteklenen tüm düzeylerin listesi \fB--help\fR seçeneğinin çıktısında bulunabilir.
 .sp
-Örneğin \fB-n 1\fR veya \fB-n emerg\fR, acil durum (panik) iletileri dışındaki tüm iletilerin konsola çıktılanmasını engeller. Tüm düzeylerdeki iletiler \fI/proc/kmsg\fR’ye yazılmaya devam eder, dolayısıyla \fBsyslogd\fR(8) çekirdek iletilerinin tam olarak nerede görüneceğini denetlemek için kullanılabilir. \fB-n\fR seçeneği kullanıldığında, \fBdmesg\fR çekirdeğin halka tamponunu çıktılamaz veya temizlemez.
+Örneğin \fB-n 1\fR veya \fB-n emerg\fR, acil durum (panik) iletileri dışındaki tüm iletilerin konsola çıktılanmasını engeller. Tüm düzeylerdeki iletiler \fI/proc/kmsg\fR\&'ye yazılmaya devam eder, dolayısıyla \fBsyslogd\fR(8) çekirdek iletilerinin tam olarak nerede görüneceğini denetlemek için kullanılabilir. \fB-n\fR seçeneği kullanıldığında, \fBdmesg\fR çekirdeğin halka tamponunu çıktılamaz veya temizlemez.
 .sp
 .TP 4
 \fB--noescape\fR
@@ -138,15 +138,15 @@ Yazdırılamayan ve güvenli olmayabilecek karakterler (örneğin, bozuk çok ba
 \fB-r\fR, \fB--raw\fR
 Ham ileti tamponu gösterilir, yani günlükleme düzeyi önekleri ayıklanmaz, ancak yazdırılamayan tüm karakterler yine de öncelenir (ayrıca bkz: \fB--noescape\fR).
 .sp
-Gerçek ham biçemin, \fBdmesg\fR’in çekirdek iletilerini okuma yöntemine bağlı olduğu unutulmamalıdır. \fI/dev/kmsg\fR aygıtının kullandığı biçem, \fBsyslog\fR(2)’den farklıdır. Geriye dönük uyumluluk için \fBdmesg\fR, verileri her zaman \fBsyslog\fR(2) biçeminde döndürür. \fI/dev/kmsg\fR’den gerçek ham verileri, örneğin ’\fBdd if=/dev/kmsg iflag=nonblock\fR’ komutuyla okumak mümkündür.
+Gerçek ham biçemin, \fBdmesg\fR\&'in çekirdek iletilerini okuma yöntemine bağlı olduğu unutulmamalıdır. \fI/dev/kmsg\fR aygıtının kullandığı biçem, \fBsyslog\fR(2)\&'den farklıdır. Geriye dönük uyumluluk için \fBdmesg\fR, verileri her zaman \fBsyslog\fR(2) biçeminde döndürür. \fI/dev/kmsg\fR\&'den gerçek ham verileri, örneğin \&'\fBdd if=/dev/kmsg iflag=nonblock\fR\&' komutuyla okumak mümkündür.
 .sp
 .TP 4
 \fB-S\fR, \fB--syslog\fR
-Çekirdek iletilerini okumak için \fBdmesg\fR’i \fBsyslog\fR(2) çağrısını kullanmaya zorlar. Linux 3.5.0’dan beri, \fBsyslog\fR(2) yerine \fI/dev/kmsg\fR kullanımı öntanımlıdır.
+Çekirdek iletilerini okumak için \fBdmesg\fR\&'i \fBsyslog\fR(2) çağrısını kullanmaya zorlar. Linux 3.5.0\&'dan beri, \fBsyslog\fR(2) yerine \fI/dev/kmsg\fR kullanımı öntanımlıdır.
 .sp
 .TP 4
 \fB-s\fR, \fB--buffer-size\fR \fIBOYUT\fR
-Çekirdeğin halka tamponunu sorgulamak için \fIBOYUT\fR baytlık tampon kullanılır. 16392 öntanımlıdır. (Çekirdek syslog tamponunun öntanımlı boyutu ilk başta 4096, 1.3.54’ten beri 8192, 2.1.113’ten beri 16384 idi.) \fIBOYUT\fR olarak bundan daha büyük bir değer belirtilirse, bu seçenek tüm tamponu görüntülemek için bile kullanılabilir.
+Çekirdeğin halka tamponunu sorgulamak için \fIBOYUT\fR baytlık tampon kullanılır. 16392 öntanımlıdır. (Çekirdek syslog tamponunun öntanımlı boyutu ilk başta 4096, 1.3.54\&'ten beri 8192, 2.1.113\&'ten beri 16384 idi.) \fIBOYUT\fR olarak bundan daha büyük bir değer belirtilirse, bu seçenek tüm tamponu görüntülemek için bile kullanılabilir.
 .sp
 .TP 4
 \fB-T\fR, \fB--ctime\fR
@@ -156,11 +156,11 @@ Gerçek ham biçemin, \fBdmesg\fR’in çekirdek iletilerini okuma yöntemine ba
 .sp
 .TP 4
 \fB--since\fR \fIZAMAN\fR
-Belirtilen \fIZAMAN\fRdan beri kaydedilenler gösterilir. \fIZAMAN\fR, mutlak şekilde veya göreli olarak (örneğin, 1 saat önce ’1 hour ago’ olarak) belirtilebilir. \fBZaman damgasının yanlış olabileceği unutulmamalıdır!\fR Ayrıntılar için bkz: \fB--ctime\fR
+Belirtilen \fIZAMAN\fRdan beri kaydedilenler gösterilir. \fIZAMAN\fR, mutlak şekilde veya göreli olarak (örneğin, 1 saat önce \&'1 hour ago\&' olarak) belirtilebilir. \fBZaman damgasının yanlış olabileceği unutulmamalıdır!\fR Ayrıntılar için bkz: \fB--ctime\fR
 .sp
 .TP 4
 \fB--until\fR \fIZAMAN\fR
-Belirtilen \fIZAMAN\fRa kadar kaydedilenler gösterilir. \fIZAMAN\fR, mutlak şekilde veya göreli olarak (örneğin, 1 saat önce ’1 hour ago’ olarak) belirtilebilir. \fBZaman damgasının yanlış olabileceği unutulmamalıdır!\fR Ayrıntılar için bkz: \fB--ctime\fR
+Belirtilen \fIZAMAN\fRa kadar kaydedilenler gösterilir. \fIZAMAN\fR, mutlak şekilde veya göreli olarak (örneğin, 1 saat önce \&'1 hour ago\&' olarak) belirtilebilir. \fBZaman damgasının yanlış olabileceği unutulmamalıdır!\fR Ayrıntılar için bkz: \fB--ctime\fR
 .sp
 .TP 4
 \fB-t\fR, \fB--notime\fR
@@ -187,7 +187,7 @@ Kullanıcı alanı iletileri gösterilir.
 .sp
 .TP 4
 \fB-w\fR, \fB--follow\fR
-Yeni iletiler için bekler. Bu özellik yalnızca \fI/dev/kmsg\fR aygıtının okunabilir olduğu sistemlerde desteklenir (Linux 3.5.0’dan beri).
+Yeni iletiler için bekler. Bu özellik yalnızca \fI/dev/kmsg\fR aygıtının okunabilir olduğu sistemlerde desteklenir (Linux 3.5.0\&'dan beri).
 .sp
 .TP 4
 \fB-W\fR, \fB--follow-new\fR

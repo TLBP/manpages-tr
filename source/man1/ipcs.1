@@ -8,7 +8,7 @@
  * Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
  * May be distributed under the GNU General Public License
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "IPCS" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -92,7 +92,7 @@ Bu seçenekler yalnızca \fB-l\fR, (\fB--limits\fR) seçeneğini etkiler:
 \fB-b\fR, \fB--bytes\fR
 Boyutları insanlarca okunabilecek biçem yerine bayt olarak gösterir.
 .sp
-Öntanımlı olarak, boyutların ifade edildiği birim bayttır ve birim önekleri 2^10’un (1024) katlarıdır. Birimlerin kısaltmaları, daha iyi bir okunabilirlik sağlamak için, yalnızca ilk harflerinden sonrası kırpılarak gösterilir; örnekler: "1 KiB" ve "1 MiB" sırasıyla "1 K" ve "1 M" olarak gösterilir, ardından bu birimlerin bir parçası olan "iB" kasten atlanır.
+Öntanımlı olarak, boyutların ifade edildiği birim bayttır ve birim önekleri 2^10\&'un (1024) katlarıdır. Birimlerin kısaltmaları, daha iyi bir okunabilirlik sağlamak için, yalnızca ilk harflerinden sonrası kırpılarak gösterilir; örnekler: "1 KiB" ve "1 MiB" sırasıyla "1 K" ve "1 M" olarak gösterilir, ardından bu birimlerin bir parçası olan "iB" kasten atlanır.
 .sp
 .TP 4
 \fB--human\fR
@@ -105,7 +105,7 @@ Boyutları insanlarca okunabilecek biçemde gösterir.
 Linux \fBipcs\fR uygulaması, POSIX \fBipcs\fR uygulamasıyla tam uyumlu değildir. Linux sürümü, POSIX \fB-a\fR, \fB-b\fR ve \fB-o\fR seçeneklerini desteklemez, ancak POSIX tarafından tanımlanmayan \fB-l\fR ve \fB-u\fR seçeneklerini destekler. Taşınabilir bir uygulama \fB-a\fR, \fB-b\fR, \fB-o\fR, \fB-l\fR ve \fB-u\fR seçeneklerini kullanmamalıdır.
 .sp
 .SH "EK BİLGİ"
-Şu anki \fBipcs\fR uygulaması, \fI/proc/sysvipc\fR içindeki dosyaları ayrıştırarak mevcut süreçler arası iletişim kaynakları hakkında bilgi toplar. util-linux sürüm v2.23’ten önce, başka bir mekanizma kullanılıyordu: \fBmsgctl\fR(2), \fBsemctl\fR(2) ve \fBshmctl\fR(2)’nin IPC_STAT komutu. Bu mekanizma, \fI/proc\fR’un kullanılamadığı durumlarda sonraki util-linux sürümlerinde de kullanılmaktadır. IPC_STAT mekanizmasının bir sınırlaması, yalnızca kullanıcının okuma iznine sahip olduğu süreçler arası iletişim kaynakları hakkında bilgi almak için kullanılabilmesidir.
+Şu anki \fBipcs\fR uygulaması, \fI/proc/sysvipc\fR içindeki dosyaları ayrıştırarak mevcut süreçler arası iletişim kaynakları hakkında bilgi toplar. util-linux sürüm v2.23\&'ten önce, başka bir mekanizma kullanılıyordu: \fBmsgctl\fR(2), \fBsemctl\fR(2) ve \fBshmctl\fR(2)\&'nin IPC_STAT komutu. Bu mekanizma, \fI/proc\fR\&'un kullanılamadığı durumlarda sonraki util-linux sürümlerinde de kullanılmaktadır. IPC_STAT mekanizmasının bir sınırlaması, yalnızca kullanıcının okuma iznine sahip olduğu süreçler arası iletişim kaynakları hakkında bilgi almak için kullanılabilmesidir.
 .sp
 .SH "YAZAN"
 Krishna Balasubramanian tarafından yazılmıştır.

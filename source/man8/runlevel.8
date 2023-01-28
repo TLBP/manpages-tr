@@ -7,7 +7,7 @@
  * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
  * https://github.com/systemd/systemd
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "RUNLEVEL" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -24,7 +24,7 @@ runlevel - geçerli ve bir önceki sistem çalışma seviyelerini gösterir
 .PP
 .sp
 .SH "ÖN BİLGİ"
-"Çalışma seviyeleri", SysV init’te kullanılan hizmet gruplarını başlatmanın ve durdurmanın eski bir yoludur. Systemd, çalışma düzeylerini hedeflere ve \fBrunlevel\fR gibi ilişkili çalıştırılabilirlere eşleyen bir uyumluluk katmanı sağlar. Bununla birlikte, belirli bir zamanda yalnızca bir çalışma seviyesi "etkin" olabilirken, systemd aynı anda birden fazla hedefi etkinleştirebilir, bu nedenle çalışma seviyelerine eşleme kafa karıştırıcı ve yalnızca yaklaşıktır. Çalışma seviyeleri yeni kodda kullanılmamalıdır. Çoğunlukla, çekirdek önyüklemesinde girdilerle eşleşen sistemd hedeflerine başvurmanın kestirme bir yolu olarak kullanışlıdır.
+"Çalışma seviyeleri", SysV init\&'te kullanılan hizmet gruplarını başlatmanın ve durdurmanın eski bir yoludur. Systemd, çalışma düzeylerini hedeflere ve \fBrunlevel\fR gibi ilişkili çalıştırılabilirlere eşleyen bir uyumluluk katmanı sağlar. Bununla birlikte, belirli bir zamanda yalnızca bir çalışma seviyesi "etkin" olabilirken, systemd aynı anda birden fazla hedefi etkinleştirebilir, bu nedenle çalışma seviyelerine eşleme kafa karıştırıcı ve yalnızca yaklaşıktır. Çalışma seviyeleri yeni kodda kullanılmamalıdır. Çoğunlukla, çekirdek önyüklemesinde girdilerle eşleşen sistemd hedeflerine başvurmanın kestirme bir yolu olarak kullanışlıdır.
 .sp
 .B Çalışma seviyeleri ile systemd hedefleri arasındaki ilişki
 .TS
@@ -82,11 +82,11 @@ Başarı durumunda 0, başarısızlık durumunda sıfırdan farklı bir değer i
 .SH "ORTAM DEĞİŞKENLERİ"
 .TP 4
 \fBRUNLEVEL\fR
-Tanımlıysa, \fBrunlevel\fR geçerli çalışma seviyesi olarak değişkenin değerini gösterir ve utmp’yi yok sayar.
+Tanımlıysa, \fBrunlevel\fR geçerli çalışma seviyesi olarak değişkenin değerini gösterir ve utmp\&'yi yok sayar.
 .sp
 .TP 4
 \fBPREVLEVEL\fR
-Tanımlıysa, \fBrunlevel\fR önceki çalışma seviyesi olarak değişkenin değerini gösterir ve utmp’yi yok sayar.
+Tanımlıysa, \fBrunlevel\fR önceki çalışma seviyesi olarak değişkenin değerini gösterir ve utmp\&'yi yok sayar.
 .sp
 .PP
 .sp

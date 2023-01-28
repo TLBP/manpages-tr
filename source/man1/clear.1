@@ -36,7 +36,7 @@
  *
  * $Id: clear.1,v 1.27 2022/02/12 20:07:29 tom Exp $
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CLEAR" 1 "12 Şubat 2022" "ncurses-6.3 (patch 20220326)" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -60,7 +60,7 @@ clear - uçbirim ekranını temizler
 .SH "SEÇENEKLER"
 .TP 4
 \fB-T\fR \fItür\fR
-Uçbirirm \fItür\fR’ünü belirler. Normalde bu seçenek gereksizdir, çünkü öntanımlı değer \fBTERM\fR ortam değişkeninden alınır. \fB-T\fR belirtilmişse \fBLINES\fR ve \fBCOLUMNS\fR ortam değişkenleri de yok sayılır
+Uçbirirm \fItür\fR\&'ünü belirler. Normalde bu seçenek gereksizdir, çünkü öntanımlı değer \fBTERM\fR ortam değişkeninden alınır. \fB-T\fR belirtilmişse \fBLINES\fR ve \fBCOLUMNS\fR ortam değişkenleri de yok sayılır
 .sp
 .TP 4
 \fB-V\fR
@@ -73,7 +73,7 @@ Bu komutu içeren ncurses paketinin sürümünü gösterir ve çıkar.
 .PP
 .sp
 .SH "TARİHÇE"
-\fBclear\fR ilk olarak 24 Şubat 1979’da 2.79 BSD’de, ardından 1985 yılında Unix’in 8. baskısında göründü.
+\fBclear\fR ilk olarak 24 Şubat 1979\&'da 2.79 BSD\&'de, ardından 1985 yılında Unix\&'in 8. baskısında göründü.
 .sp
 AT&T \fBtput\fR diye bir komut içeren farklı bir BSD uygulaması (\fBtset\fR) uyarladı ve bunu \fBtput clear\fR çağrısı yapan bir kabuk betiği olan \fBclear\fR komutunda aşağıdaki gibi kullandı:
 .sp
@@ -84,7 +84,7 @@ exit
 .fi
 .sp
 .RE
-1989’da Keith Bostic, BSD \fBtput\fR komutunu AT&T \fBtput\fR’una benzer hale getirmek için değiştirdiğinde, \fBclear\fR komutu için şöyle bir kabuk betiği ekledi:
+1989\&'da Keith Bostic, BSD \fBtput\fR komutunu AT&T \fBtput\fR\&'una benzer hale getirmek için değiştirdiğinde, \fBclear\fR komutu için şöyle bir kabuk betiği ekledi:
 .sp
 .RS 4
 .nf
@@ -101,12 +101,12 @@ Daha sonra \fBE3\fR eklentisi geldi:
 .PD 1
 .RS 1
 .IP \(bu 3
-Haziran 1999’da \fBxterm\fR, ekranı temizlemek için standart denetim dizisine bir eklenti sağladı:
+Haziran 1999\&'da \fBxterm\fR, ekranı temizlemek için standart denetim dizisine bir eklenti sağladı:
 .sp
 .RS 4
 .RS 4
 .nf
-printf ’\\033[2J’
+printf \&'\\033[2J\&'
 .fi
 .sp
 .RE
@@ -117,29 +117,29 @@ kullanarak ekranın sadece görünen kısmını temizlemek yerine
 .RS 4
 .RS 4
 .nf
-printf ’\\033[3J’
+printf \&'\\033[3J\&'
 .fi
 .sp
 .RE
 .RE
 .IP
-kullanarak geri kaydırma da temizlenebilir oldu. Bu, \fBxterm\fR’den kaynaklanan bir özellik olarak \fIXTerm Denetim Dizilimleri\fR altında belgelenmiştir.
+kullanarak geri kaydırma da temizlenebilir oldu. Bu, \fBxterm\fR\&'den kaynaklanan bir özellik olarak \fIXTerm Denetim Dizilimleri\fR altında belgelenmiştir.
 .IP \(bu 3
-Birkaç uçbirim geliştiricisi daha, örneğin 2006’da PuTTY, bu özelliği benimsedi.
+Birkaç uçbirim geliştiricisi daha, örneğin 2006\&'da PuTTY, bu özelliği benimsedi.
 .IP \(bu 3
-Nisan 2011’de Red Hat’tan bir geliştirici, aynı şeyi yapmak için konsol sürücüsünü değiştirerek Linux çekirdeğine bir yama gönderdi. Linux 3.0 sürümünün bir parçası olan değişiklikte, değişikliğe yol açan Red Hat hata raporuna (#683733) atıfta bulunulmasına rağmen \fBxterm\fR’den bahsedilmedi.
+Nisan 2011\&'de Red Hat\&'tan bir geliştirici, aynı şeyi yapmak için konsol sürücüsünü değiştirerek Linux çekirdeğine bir yama gönderdi. Linux 3.0 sürümünün bir parçası olan değişiklikte, değişikliğe yol açan Red Hat hata raporuna (#683733) atıfta bulunulmasına rağmen \fBxterm\fR\&'den bahsedilmedi.
 .IP \(bu 3
-Yine, birkaç uçbirim geliştiricisi daha bu özelliği benimsedi. Ancak daha sonraki adım, bu eklentiyi dahil etmek için 2013’te \fBclear\fR uygulamasında yapılan bir değişiklikti.
+Yine, birkaç uçbirim geliştiricisi daha bu özelliği benimsedi. Ancak daha sonraki adım, bu eklentiyi dahil etmek için 2013\&'te \fBclear\fR uygulamasında yapılan bir değişiklikti.
 .IP \(bu 3
-2013 yılında \fBtput\fR’ta \fBE3\fR eklentisi “clear” ile gözden kaçmıştı. Bu, 2016’da, \fBtput\fR’un mantığı \fBclear\fR ve \fBtset\fR ile paylaşılacak şekilde yeniden düzenlenerek ele alındı.
+2013 yılında \fBtput\fR\&'ta \fBE3\fR eklentisi “clear” ile gözden kaçmıştı. Bu, 2016\&'da, \fBtput\fR\&'un mantığı \fBclear\fR ve \fBtset\fR ile paylaşılacak şekilde yeniden düzenlenerek ele alındı.
 .sp
 .RE
 .PD 0
 .sp
 .SH "TAŞINABİLİRLİK"
-Ne IEEE Std 1003.1/The Open Group Base Belirtimleri Sayı 7 (POSIX.1-2008) ne de X/Open Curses Sayı 7 belgelerinde tset veya reset’ten bahsedilir.
+Ne IEEE Std 1003.1/The Open Group Base Belirtimleri Sayı 7 (POSIX.1-2008) ne de X/Open Curses Sayı 7 belgelerinde tset veya reset\&'ten bahsedilir.
 .sp
-Sonuncusu tput’u şöyle belgelelendirmiştir: Bir kabuk betiği aracılığıyla ya da bir takma adla (sembolik bağ gibi) \fBtput\fR, \fBclear\fR olarak çalıştırılmak üzere kullanılabilir.
+Sonuncusu tput\&'u şöyle belgelelendirmiştir: Bir kabuk betiği aracılığıyla ya da bir takma adla (sembolik bağ gibi) \fBtput\fR, \fBclear\fR olarak çalıştırılmak üzere kullanılabilir.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBtput\fR(1), \fBterminfo\fR(5), \fBxterm\fR(1).

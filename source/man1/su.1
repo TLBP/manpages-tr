@@ -26,7 +26,7 @@
  *
  * Based on an implementation by David MacKenzie <djm@gnu.ai.mit.edu>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "SU" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -53,14 +53,14 @@ Bu \fBsu\fR sürümü, kimlik doğrulama, hesap ve oturum yönetimi için PAM ku
 .sp
 \fBsu\fR çoğunlukla ayrıcalıksız kullanıcılar için tasarlanmıştır, ayrıcalıklı kullanıcılar için önerilen çözüm (örneğin, root tarafından yürütülen betikler), kimlik doğrulama gerektirmeyen ve ayrı PAM yapılandırması sağlayan, kullanıcı kimliğine dokunmayan \fBrunuser\fR(1) komutunu kullanmaktır. PAM oturumu hiç gerekli değilse, önerilen çözüm \fBsetpriv\fR(1) komutunu kullanmaktır.
 .sp
-\fBsu\fR’nun her durumda son ortam değişikliğini yapmak için PAM (\fBpam_getenvlist\fR(3)) kullandığı unutulmamalıdır. \fB--login\fR ve \fB--preserve-environment\fR gibi komut satırı seçenekleri, PAM tarafından değiştirilmeden önce ortamı etkiler.
+\fBsu\fR\&'nun her durumda son ortam değişikliğini yapmak için PAM (\fBpam_getenvlist\fR(3)) kullandığı unutulmamalıdır. \fB--login\fR ve \fB--preserve-environment\fR gibi komut satırı seçenekleri, PAM tarafından değiştirilmeden önce ortamı etkiler.
 .sp
 2.38 sürümünden beri \fBsu\fR RLIMIT_NICE, RLIMIT_RTPRIO, RLIMIT_FSIZE, RLIMIT_AS ve RLIMIT_NOFILE süreç özkaynaklarının sınırlarını sıfırlamaktadır.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
 \fB-c\fR, \fB--command=\fR\fIkomut\fR
-\fIkomut\fR’u kabuğa \fB-c\fR seçeneği ile aktarır.
+\fIkomut\fR\&'u kabuğa \fB-c\fR seçeneği ile aktarır.
 .sp
 .TP 4
 \fB-f\fR, \fB--fast\fR
@@ -87,7 +87,7 @@ Kabuğu gerçeğiyle aynı ortamı kullanarak oturum açma kabuğu olarak başla
 .IP \(bu 3
 Hedef kullanıcının ev dizinine geçer
 .IP \(bu 3
-Kabuğu oturum açma kabuğu yaparken kabuğun argv[0]’ına ’\fB-\fR’ aktarır
+Kabuğu oturum açma kabuğu yaparken kabuğun argv[0]\&'ına \&'\fB-\fR\&' aktarır
 .sp
 .RE
 .IP
@@ -170,7 +170,7 @@ root için \fBPATH\fR ortam değişkenini tanımlar. \fBENV_SUPATH\fR öncelikli
 .SH "ÇIKIŞ DURUMU"
 \fBsu\fR normalde çalıştırdığı komutun çıkış durumunu döndürür. Komut bir sinyalle öldürülürse \fBsu\fR sinyal numararası artı 128 ile döner.
 .sp
-\fBsu\fR’nun kendisi tarafından üretilen çıkış durumları:
+\fBsu\fR\&'nun kendisi tarafından üretilen çıkış durumları:
 .sp
 .TP 4
 \fB1\fR
@@ -216,7 +216,7 @@ session required pam_lastlog.so nowtmp
 .RE
 .sp
 .SH "TARİHÇE"
-Bu \fBsu\fR komutu David MacKenzie’nin gerçeklenimine dayanan coreutils \fBsu\fR komutundan türetilmiştir. Util-linux \fBsu\fR komutu Karel Zak tarafından yeniden düzenlenmiştir.
+Bu \fBsu\fR komutu David MacKenzie\&'nin gerçeklenimine dayanan coreutils \fBsu\fR komutundan türetilmiştir. Util-linux \fBsu\fR komutu Karel Zak tarafından yeniden düzenlenmiştir.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBsetpriv\fR(1), \fBlogin.defs\fR(5), \fBshells\fR(5), \fBpam\fR(8), \fBrunuser\fR(1).

@@ -47,7 +47,7 @@
  * Modified 2004-06-24 by aeb
  * Modified, 2004-11-30, after idea from emmanuel.colbus@ensimag.imag.fr
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "KILL" 2 "10 Ekim 2019" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -80,7 +80,7 @@ int \fIsig\fR);
 .sp
 \fIpid\fR -1 ise, 1 numaralı süreç (init) haricindeki her sürece \fIsig\fR sinyali gönderilir (Aşağıda bahsedilen durum dışında).
 .sp
-\fIpid\fR -1’den küçükse, \fI-pid\fR süreç grubundaki her sürece \fIsig\fR sinyali gönderilir.
+\fIpid\fR -1\&'den küçükse, \fI-pid\fR süreç grubundaki her sürece \fIsig\fR sinyali gönderilir.
 .sp
 \fIsig\fR sıfırsa, hiçbir sinyal gönderilmez, ancak varlık ve izin denetimleri yapılır; çağrıcının sinyal göndermesine izin verilen bir süreç kimliğinin veya süreç grubu kimliğinin varlığını sınamak için kullanılabilir.
 .sp
@@ -112,10 +112,10 @@ POSIX.1-2001, POSIX.1-2008, SVr4, 4.3BSD.
 .sp
 POSIX.1, o anki sürecin sinyal gönderebildiği tüm süreçlere (bazı gerçeklenime özgü sistem süreçleri hariç) \fIsig\fR sinyalinin \fBkill(-1,sig)\fR ile gönderilmesini gerektirir. Linux bir sürecin kendi kendine sinyal gönderebilmesini mümkün kılar ancak, Linux üzerinde \fBkill(-1,sig)\fR çağrısı ile süreç kendisine sinyal gönderemez.
 .sp
-POSIX.1’e göre, bir süreç kendisine bir sinyal gönderirse ve gönderen evrede sinyal engellenmemişse ve engellemesi kaldırılmış veya sigwait(3) ile bekleyen başka evre yoksa, \fBkill\fR işlevi dönmeden önce gönderen evreye engellenmemiş en az bir sinyalin teslim edilmiş olması gerekir.
+POSIX.1\&'e göre, bir süreç kendisine bir sinyal gönderirse ve gönderen evrede sinyal engellenmemişse ve engellemesi kaldırılmış veya sigwait(3) ile bekleyen başka evre yoksa, \fBkill\fR işlevi dönmeden önce gönderen evreye engellenmemiş en az bir sinyalin teslim edilmiş olması gerekir.
 .sp
 .SS "LINUX TARİHÇESİ"
-Farklı çekirdek sürümleriyle, Linux, başka bir sürece sinyal gönderecek yetkisiz bir sürece gereken izinler için farklı kurallar getirmiştir. 1.0 dan 1.2.2’ye kadar sürümlü çekirdeklerde, göndericinin etkin kullanıcı kimliği alıcınınkiyle ya da göndericinin gerçek kullanıcı kimliği alıcınınkiyle eşleşmeliydi. 1.2.3 den 1.3.77’ye kadar sürümlü çekirdeklerde, göndericinin etkin kullanıcı kimliği alıcının gerçek ya da etkin kullanıcı kimliği ile eşleşmeliydi. 1.3.78 sürümünden itibaren çekirdek sürümlerinde POSIX.1 uyumlu kurallar geçerlidir.
+Farklı çekirdek sürümleriyle, Linux, başka bir sürece sinyal gönderecek yetkisiz bir sürece gereken izinler için farklı kurallar getirmiştir. 1.0 dan 1.2.2\&'ye kadar sürümlü çekirdeklerde, göndericinin etkin kullanıcı kimliği alıcınınkiyle ya da göndericinin gerçek kullanıcı kimliği alıcınınkiyle eşleşmeliydi. 1.2.3 den 1.3.77\&'ye kadar sürümlü çekirdeklerde, göndericinin etkin kullanıcı kimliği alıcının gerçek ya da etkin kullanıcı kimliği ile eşleşmeliydi. 1.3.78 sürümünden itibaren çekirdek sürümlerinde POSIX.1 uyumlu kurallar geçerlidir.
 .sp
 .sp
 .SH "İLGİLİ BELGELER"

@@ -14,7 +14,7 @@
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
  *
- * The GNU General Public License’s references to "object code"
+ * The GNU General Public License\&'s references to "object code"
  * and "executables" are to be interpreted as the output of any
  * document formatting or typesetting system, including
  * intermediate and printed output.
@@ -31,7 +31,7 @@
  *
  * Modified Sat Jul 24 17:00:12 1993 by Rik Faith (faith@cs.unc.edu)
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "NULL" 4 "Temmuz 2015" "Linux man-pages 5.10" ">Özel Dosyalar"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -58,11 +58,11 @@ chown root:root /dev/null /dev/zero
 .SH "AÇIKLAMA"
 \fI/dev/null\fR ve \fI/dev/zero\fR aygıtına yazılan veri yok edilir.
 .sp
-\fI/dev/null\fR aygıtından okuma işlemi daima dosya sonu ile dönerken (yani \fBread\fR(2) 0 döndürür) \fI/dev/zero\fR aygıtından okuma işlemi daima ’\\0’ karakteri döndürür.
+\fI/dev/null\fR aygıtından okuma işlemi daima dosya sonu ile dönerken (yani \fBread\fR(2) 0 döndürür) \fI/dev/zero\fR aygıtından okuma işlemi daima \&'\\0\&' karakteri döndürür.
 .sp
 Bu aygıtlar tüm kullanıcılar için okunabilir ve yazılabilir olmazsa çoğu uygulama tuhaf davranabilir.
 .sp
-Linux 2.6.31’den beri, \fI/dev/zero\fR aygıtından okuma işlemleri sinyallerle kesilmektedir. Bu değişiklik, \fI/dev/zero\fR aygıtından yapılan büyük okumalardan kaynaklanan istenmeyen gecikmeleri azaltmaya yardımcı olmak içindir.
+Linux 2.6.31\&'den beri, \fI/dev/zero\fR aygıtından okuma işlemleri sinyallerle kesilmektedir. Bu değişiklik, \fI/dev/zero\fR aygıtından yapılan büyük okumalardan kaynaklanan istenmeyen gecikmeleri azaltmaya yardımcı olmak içindir.
 .sp
 .SH "İLGİLİ DOSYALAR"
 \fI/dev/null\fR

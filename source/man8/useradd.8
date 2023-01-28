@@ -23,7 +23,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -35,7 +35,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "USERADD" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -79,7 +79,7 @@ Yeni kullanıcının \fI/etc/passwd\fR dosyasında adı-soyadı olarak kullanıl
 .sp
 .TP 4
 \fB-d\fR, \fB--home-dir\fR \fIEV_DİZİNİ\fR
-Oluşturulan yeni kullanıcının sisteme girişte kullanacağı ev dizinini belirler. Öntanımlı olarak, \fIKULLANICI\fR ismi \fIÜST_DİZİN\fR’e eklenerek belirlenir ve kullanıcının sisteme giriş dizini olarak kullanılır. \fIEV_DİZİNİ\fR sistemde mevcut değilse \fB-M\fR seçeneği belirtilmediği takdirde oluşturulacaktır.
+Oluşturulan yeni kullanıcının sisteme girişte kullanacağı ev dizinini belirler. Öntanımlı olarak, \fIKULLANICI\fR ismi \fIÜST_DİZİN\fR\&'e eklenerek belirlenir ve kullanıcının sisteme giriş dizini olarak kullanılır. \fIEV_DİZİNİ\fR sistemde mevcut değilse \fB-M\fR seçeneği belirtilmediği takdirde oluşturulacaktır.
 .sp
 .TP 4
 \fB-D\fR, \fB--defaults\fR
@@ -117,7 +117,7 @@ Bu seçenek yalnızca \fB-m\fR/\fB--create-home\fR seçeneği ile birlikte geçe
 .sp
 Bu seçenek belirtilmezse, \fI/etc/default/useradd\fR içindeki \fBSKEL\fR değişkeni tarafından belirtilen dizin veya öntanımlı olarak \fI/etc/skel\fR dizini kullanılır.
 .sp
-Mümkünse, ACL’ler ve genişletilmiş nitelikler de kopyalanır.
+Mümkünse, ACL\&'ler ve genişletilmiş nitelikler de kopyalanır.
 .sp
 .TP 4
 \fB-K\fR, \fB--key\fR \fIANAHTAR=DEĞER\fR
@@ -223,7 +223,7 @@ Kullanıcı için SELinux kullanıcısını belirler. Normalde bu alan boş bır
 .sp
 .TP 4
 \fB-b\fR, \fB--base-dir\fR \fIÜST_DİZİN\fR
-Yeni bir kullanıcının ev dizini için ilk dosyayolu önekini belirtir. Yeni bir hesap açarken \fB–d\fR seçeneği belirtilmemişse, yeni kullanıcının adı \fIÜST_DİZİN\fR’in sonuna eklenerek kulanıcının ev dizinini oluşturur.
+Yeni bir kullanıcının ev dizini için ilk dosyayolu önekini belirtir. Yeni bir hesap açarken \fB–d\fR seçeneği belirtilmemişse, yeni kullanıcının adı \fIÜST_DİZİN\fR\&'in sonuna eklenerek kulanıcının ev dizinini oluşturur.
 .sp
 Bu seçenek \fI/etc/default/useradd\fR içindeki \fBHOME\fR değişkenini tanımlar.
 .sp
@@ -279,7 +279,7 @@ Bu tanım sistem kullanıcıları için geçerli değildir ve komut satırında 
 \fBGID_MAX\fR (tamsayı), \fBGID_MIN\fR (tamsayı)
 \fBgroupadd\fR(8), \fBnewusers\fR(8) ve \fBuseradd\fR tarafından normal grupların oluşturulması için kullanılan grup kimlikleri aralığı.
 .sp
-\fBGID_MIN\fR için öntanımlı değer 1000, \fBGID_MAX\fR için 60000’dir.
+\fBGID_MIN\fR için öntanımlı değer 1000, \fBGID_MAX\fR için 60000\&'dir.
 .sp
 .TP 4
 \fBHOME_MODE\fR (tamsayı)
@@ -334,13 +334,13 @@ Parolanın süresi dolmadan önce uyarı verilen gün sayısı. Sıfır, yalnız
 \fBSUB_GID_MIN\fR (tamsayı), \fBSUB_GID_MAX\fR (tamsayı), \fBSUB_GID_COUNT\fR (tamsayı)
 \fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_GID_MIN\fR ila \fBSUB_GID_MAX\fR aralığından \fBSUB_GID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
 .sp
-\fBSUB_GID_MIN\fR, \fBSUB_GID_MAX\fR, \fBSUB_GID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+\fBSUB_GID_MIN\fR, \fBSUB_GID_MAX\fR, \fBSUB_GID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536\&'dır.
 .sp
 .TP 4
 \fBSUB_UID_MIN\fR (tamsayı), \fBSUB_UID_MAX\fR (tamsayı), \fBSUB_UID_COUNT\fR (tamsayı)
 \fI/etc/subuid\fR varsa, \fBuseradd\fR ve \fBnewusers\fR(8) komutları (kullanıcının zaten alt grup kimlikleri yoksa), her yeni kullanıcı için \fBSUB_UID_MIN\fR ila \fBSUB_UID_MAX\fR aralığından \fBSUB_UID_COUNT\fR kullanılmayan grup kimliği tahsis eder.
 .sp
-\fBSUB_UID_MIN\fR, \fBSUB_UID_MAX\fR, \fBSUB_UID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536’dır.
+\fBSUB_UID_MIN\fR, \fBSUB_UID_MAX\fR, \fBSUB_UID_COUNT\fR için öntanımlı değerler sırasıyla 100000, 600100000 ve 65536\&'dır.
 .sp
 .TP 4
 \fBSYS_GID_MAX\fR (tamsayı), \fBSYS_GID_MIN\fR (tamsayı)
@@ -358,7 +358,7 @@ Parolanın süresi dolmadan önce uyarı verilen gün sayısı. Sıfır, yalnız
 \fBUID_MAX\fR (tamsayı), \fBUID_MIN\fR (tamsayı)
 \fBuseradd\fR ve \fBnewusers\fR(8) komutları tarafından normal kullanıcılar oluşturulurken kullanılan kullanıcı kimlikleri aralığı
 .sp
-\fBUID_MIN\fR için öntanımlı değer 1000, \fBUID_MAX\fR için 60000’dir.
+\fBUID_MIN\fR için öntanımlı değer 1000, \fBUID_MAX\fR için 60000\&'dir.
 .sp
 .TP 4
 \fBUMASK\fR (tamsayı)
@@ -366,7 +366,7 @@ Dosya kipi oluşturma maskesi bu değerle ilklendirilir. Belirtilmezse maske 022
 .sp
 \fBuseradd\fR(8) ve \fBnewusers\fR(8) komutları \fBHOME_MODE\fR tanımlıysa ev dizininin kipini atamak için bu maskeyi kullanır.
 .sp
-Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask’ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
+Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask\&'ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
 .sp
 .TP 4
 \fBUSERGROUPS_ENAB\fR (mantıksal)

@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "MODINFO" 8 "Ocak 2021" "Kmod-29" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -47,7 +47,7 @@ modinfo - bir çekirdek modülü ile ilgili bilgileri görüntüler
 .sp
 \fBmodinfo\fR öntanımlı olarak modülün her özniteliğini kolayca okunabilmesi için \fIalan\fR : \fIdeğer\fR biçiminde listeler. Dosya adı da aynı şekilde listelenir (gerçekten bir öznitelik olmamasına rağmen).
 .sp
-\fBmodinfo\fR’nun bu sürümü, herhangi bir Linux Çekirdek mimarisinin modüllerini anlayabilir.
+\fBmodinfo\fR\&'nun bu sürümü, herhangi bir Linux Çekirdek mimarisinin modüllerini anlayabilir.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -56,7 +56,7 @@ Sürüm bilgilerini gösterir ve çıkar.
 .sp
 .TP 4
 \fB-F\fR, \fB--field\fR \fIalan\fR
-Her satıra bir tane olmak üzere yalnızca belirtilen \fIalan\fR değerini basar. Betik dosyaları için kullanışlıdır. \fIalan\fR adları büyük/küçük harfe duyarsızdır. Çok kullanılan alanlar (her modülde olmayabilir): \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR, \fBdepends\fR, \fBalias\fR. Genellikle birden fazla \fBparm\fR, \fBalias\fR ve \fBdepends\fR alanı vardır. Özel alan \fBfilename\fR’in değeri, modülün dosya adıdır.
+Her satıra bir tane olmak üzere yalnızca belirtilen \fIalan\fR değerini basar. Betik dosyaları için kullanışlıdır. \fIalan\fR adları büyük/küçük harfe duyarsızdır. Çok kullanılan alanlar (her modülde olmayabilir): \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR, \fBdepends\fR, \fBalias\fR. Genellikle birden fazla \fBparm\fR, \fBalias\fR ve \fBdepends\fR alanı vardır. Özel alan \fBfilename\fR\&'in değeri, modülün dosya adıdır.
 .sp
 .TP 4
 \fB-b\fR, \fB--basedir\fR \fIdizin\fR
@@ -72,7 +72,7 @@ Alan değerlerini ayırmak için satır sonu yerine ASCII \\0 karakteri kullanı
 .sp
 .TP 4
 \fB-a\fR, \fB--author\fR\p \fB-d\fR, \fB--description\fR\p \fB-l\fR, \fB--license\fR\p \fB-p\fR, \fB--parameters\fR\p \fB-n\fR, \fB--filename\fR
-\fB--field\fR \fIalan\fRları \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR ve \fBfilename\fR için kısayol seçenekler. Eski modutils modinfo’dan geçişi kolaylaştırır.
+\fB--field\fR \fIalan\fRları \fBauthor\fR, \fBdescription\fR, \fBlicense\fR, \fBparm\fR ve \fBfilename\fR için kısayol seçenekler. Eski modutils modinfo\&'dan geçişi kolaylaştırır.
 .sp
 .PP
 .sp

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "EXT4" 5 "Aralık 2021" "E2fsprogs 1.46.5" "Dosya Biçimleri ve Dosya Dönüşümleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -26,7 +26,7 @@ Ext2, ext3 veya ext4 için biçimlendirilmiş bir dosya sistemi, aşağıdaki do
 .sp
 .TP 4
 \fB64bit\fR
-Dosya sisteminin 2^32 bloktan daha büyük olmasını sağlar. Bu özellik gerektiğinde otomatik olarak ayarlanır, ancak dosya sisteminin ilk oluşturulduğunda bu eşikten daha küçük olsa bile, 2^32 bloktan daha büyük olarak yeniden boyutlandırılması gerekiyorsa bu özelliğin açıkça belirtilmesi yararlı olabilir. Bazı eski çekirdeklerin ve e2fsprogs’un eski sürümlerinin, bu ext4 özelliği etkinleştirilmiş dosya sistemlerini desteklemeyeceği unutulmamalıdır.
+Dosya sisteminin 2^32 bloktan daha büyük olmasını sağlar. Bu özellik gerektiğinde otomatik olarak ayarlanır, ancak dosya sisteminin ilk oluşturulduğunda bu eşikten daha küçük olsa bile, 2^32 bloktan daha büyük olarak yeniden boyutlandırılması gerekiyorsa bu özelliğin açıkça belirtilmesi yararlı olabilir. Bazı eski çekirdeklerin ve e2fsprogs\&'un eski sürümlerinin, bu ext4 özelliği etkinleştirilmiş dosya sistemlerini desteklemeyeceği unutulmamalıdır.
 .sp
 .TP 4
 \fBbigalloc\fR
@@ -53,7 +53,7 @@ Büyük dizinlerde ad aramalarını hızlandırmak için aşlı b-ağaçları (b
 .sp
 .TP 4
 \fBdir_nlink\fR
-Normalde, ext4, bir dosya düğümünün en fazla 65.000 sabit bağa sahip olmasına izin verir. Bu, dizinlerin yanı sıra normal dosyalar için de geçerlidir; bu, bir dizinde 64.998’den fazla alt dizin bulunamayacağı anlamına gelir (çünkü ’.’ ve ’..’ girişlerinin her biri ve dizinin üst dizindeki kendi dizin girdisi sabit bağ sayılır). Bu özellik, bir dizine giden sabit bağ sayısının azami sınır aşıldığında bilinmediğini belirtmek için ext4’ün bağ sayısı olarak 1’i kullanmasına neden olarak bu sınırı yükseltir.
+Normalde, ext4, bir dosya düğümünün en fazla 65.000 sabit bağa sahip olmasına izin verir. Bu, dizinlerin yanı sıra normal dosyalar için de geçerlidir; bu, bir dizinde 64.998\&'den fazla alt dizin bulunamayacağı anlamına gelir (çünkü \&'.\&' ve \&'..\&' girişlerinin her biri ve dizinin üst dizindeki kendi dizin girdisi sabit bağ sayılır). Bu özellik, bir dizine giden sabit bağ sayısının azami sınır aşıldığında bilinmediğini belirtmek için ext4\&'ün bağ sayısı olarak 1\&'i kullanmasına neden olarak bu sınırı yükseltir.
 .sp
 .TP 4
 \fBea_inode\fR
@@ -127,7 +127,7 @@ Bu ext4 özelliği, meta veri sağlama toplamını etkinleştirir. Bu özellik, 
 .sp
 .TP 4
 \fBmetadata_csum_seed\fR
-Bu özellik, dosya sisteminin meta veri sağlama toplamı tohumunu süper blokta saklamasına izin verir; bu, yöneticinin, dosya sistemi bağlıyken \fBmetadata_csum\fR özelliğini kullanarak bir dosya sisteminin UUID’sini değiştirmesine olanak tanır.
+Bu özellik, dosya sisteminin meta veri sağlama toplamı tohumunu süper blokta saklamasına izin verir; bu, yöneticinin, dosya sistemi bağlıyken \fBmetadata_csum\fR özelliğini kullanarak bir dosya sisteminin UUID\&'sini değiştirmesine olanak tanır.
 .sp
 .TP 4
 \fBmeta_bg\fR
@@ -159,15 +159,15 @@ Bu dosya sistemi özelliği, günümüzde ext2, ext3 ve ext4 dosya sistemlerinin
 .sp
 .TP 4
 \fBsparse_super2\fR
-Bu özellik, süperblok ve blok grubu tanıtıcılarının en fazla iki yedeği olacağını gösterir. Yedek süperblok(lar)ı ve blok grubu tanıtıcı(lar)ını depolamak için kullanılan blok grupları süperblokta saklanır, ancak genelde bir süperblok dosya sisteminin 1. blok grubunun başlangıcında saklanırken diğeri ise dosya sisteminin son blok grubunda yer alır. Bu özellik aslında \fBsparse_super\fR’in daha uç bir çeşidi olup veri dosyaları için kullanılan bitişik blokların diskin daha büyük bir yüzdesini kaplamasına izin verecek şekilde tasarlanmıştır.
+Bu özellik, süperblok ve blok grubu tanıtıcılarının en fazla iki yedeği olacağını gösterir. Yedek süperblok(lar)ı ve blok grubu tanıtıcı(lar)ını depolamak için kullanılan blok grupları süperblokta saklanır, ancak genelde bir süperblok dosya sisteminin 1. blok grubunun başlangıcında saklanırken diğeri ise dosya sisteminin son blok grubunda yer alır. Bu özellik aslında \fBsparse_super\fR\&'in daha uç bir çeşidi olup veri dosyaları için kullanılan bitişik blokların diskin daha büyük bir yüzdesini kaplamasına izin verecek şekilde tasarlanmıştır.
 .sp
 .TP 4
 \fBstable_inodes\fR
-Dosya sisteminin dosya düğümü numaralarını ve UUID’yi kararlı olarak imler. Bu özellikli bir dosya sisteminin daraltılmasına \fBresize2fs\fR(8) ve UUID’sinin değiştirilmesine de \fBtune2fs\fR(8) izin vermez. Bu özellik, dosya düğüm numaralarını ve UUID’yi kullanan özel şifreleme özelliklerinin kullanılmasına izin verir. Şifreleme özelliğinin yine de ayrıca etkinleştirilmesi gerektiği unutulmamalıdır. \fBstable_inodes\fR eski çekirdeklerde kullanılabilen geriye uyumlu bir özelliktir.
+Dosya sisteminin dosya düğümü numaralarını ve UUID\&'yi kararlı olarak imler. Bu özellikli bir dosya sisteminin daraltılmasına \fBresize2fs\fR(8) ve UUID\&'sinin değiştirilmesine de \fBtune2fs\fR(8) izin vermez. Bu özellik, dosya düğüm numaralarını ve UUID\&'yi kullanan özel şifreleme özelliklerinin kullanılmasına izin verir. Şifreleme özelliğinin yine de ayrıca etkinleştirilmesi gerektiği unutulmamalıdır. \fBstable_inodes\fR eski çekirdeklerde kullanılabilen geriye uyumlu bir özelliktir.
 .sp
 .TP 4
 \fBuninit_bg\fR
-Bu ext4 dosya sistemi özelliği, blok grubu tanıtıcılarının sağlama toplamları kullanılarak korunacağını ve böylece \fBmke2fs\fR(8)’nin tüm blok gruplarını ilklendirmeden bir dosya sisteminin oluşturmasını güvenli hale getireceğini belirtir. Çekirdek, kullanılmayan düğümleri için bu sağlama toplamlarını tutacak ve düğüm tablolarını ve bloklarını yavaş yavaş ilkendirecektir. Bu özellik, \fBe2fsck\fR(8) kullanılarak dosya sisteminin denetlenme süresini hızlandırır ve ayrıca dosya sistemini oluştururken \fBmke2fs\fR(8) için gereken süreyi de kısaltır.
+Bu ext4 dosya sistemi özelliği, blok grubu tanıtıcılarının sağlama toplamları kullanılarak korunacağını ve böylece \fBmke2fs\fR(8)\&'nin tüm blok gruplarını ilklendirmeden bir dosya sisteminin oluşturmasını güvenli hale getireceğini belirtir. Çekirdek, kullanılmayan düğümleri için bu sağlama toplamlarını tutacak ve düğüm tablolarını ve bloklarını yavaş yavaş ilkendirecektir. Bu özellik, \fBe2fsck\fR(8) kullanılarak dosya sisteminin denetlenme süresini hızlandırır ve ayrıca dosya sistemini oluştururken \fBmke2fs\fR(8) için gereken süreyi de kısaltır.
 .sp
 .TP 4
 \fBverity\fR
@@ -178,10 +178,10 @@ Bu özellik, oku-yaz dosya sistemlerinde önemli salt okunur dosyaların kimliğ
 .PP
 .sp
 .SH "BAĞLAMA SEÇENEKLERİ"
-Bu bölümde, ext2, ext3 ve ext4’e özgü bağlama seçenekleri açıklanmıştır. Diğer genel bağlama seçenekleri de kullanılabilir; ayrıntılar için bkz: \fBmount\fR(8)
+Bu bölümde, ext2, ext3 ve ext4\&'e özgü bağlama seçenekleri açıklanmıştır. Diğer genel bağlama seçenekleri de kullanılabilir; ayrıntılar için bkz: \fBmount\fR(8)
 .sp
 .SS "Ext2 için bağlama seçenekleri"
-’ext2’ dosya sistemi standart Linux dosya sistemidir. Linux çekirdeğinin 2.5.46 sürümünden beri, çoğu bağlama seçeneği için öntanımlılar dosya sisteminin süper bloğu tarafından belirlenir. Bunlar \fBtune2fs\fR(8) ile tanımlanabilir.
+`ext2\&' dosya sistemi standart Linux dosya sistemidir. Linux çekirdeğinin 2.5.46 sürümünden beri, çoğu bağlama seçeneği için öntanımlılar dosya sisteminin süper bloğu tarafından belirlenir. Bunlar \fBtune2fs\fR(8) ile tanımlanabilir.
 .sp
 .TP 4
 \fBacl\fR|\fBnoacl\fR
@@ -254,7 +254,7 @@ Ext2 dosya sistemi boş alanın belli bir miktarını yedek olarak ayırır (ön
 \fBsb\fR=\fIN\fR
 Normal süper blok yerine numarası \fIN\fR olan süper blok kullanılır. Bu seçenek normalde birincil süper blok bozulduğunda kullanılır. Yedek süper blokların yerleri dosya sisteminin blok boyuna, her gruptaki blok sayısına ve \fBsparse_super\fR gibi özelliklere bağlıdır.
 .sp
-\fBmke2fs\fR(8)’in dosya sistemini tutarlı değerlerle (örneğin, blok boyutu, gruptaki blok sayısı, \fBsparse_super\fR, vb.) yapılandırıldığı varsayımıyla, süper blokların yerleri \fBmke2fs\fR(8) komutunun \fB-n\fR seçeneği ile çıktılanarak ek yedek süper blokların yerleri saptanabilir.
+\fBmke2fs\fR(8)\&'in dosya sistemini tutarlı değerlerle (örneğin, blok boyutu, gruptaki blok sayısı, \fBsparse_super\fR, vb.) yapılandırıldığı varsayımıyla, süper blokların yerleri \fBmke2fs\fR(8) komutunun \fB-n\fR seçeneği ile çıktılanarak ek yedek süper blokların yerleri saptanabilir.
 .sp
 Buradaki bloklar 1 kilobaytlık birimlerden oluşur. Yani, 4 kilobaytlık bloklardan 32768 mantıksal blok ile oluşturulmuş bir dosya sisteminde "\fBsb=131072\fR" olur (yedek süper bloğun dosya sisteminin son bloğuna yerleştirilmesi nedeniyle).
 .sp
@@ -318,7 +318,7 @@ Gelişmiş kullanıcı öznitelikleri etkin olur. Bkz: \fBattr\fR(5)
 .sp
 .TP 4
 \fBjqfmt\fR={vfsold|vfsv0|vfsv1}
-Eski kota sisteminin (ext2’deki \fBjqfmt=vfsold\fR, yani kotanın 1. sürümünün) yanı sıra ext3 günlüklü kotaları da (kotanın 2. sürümü) desteklenir. \fBjqfmt=vfsv0\fR veya \fBjqfmt=vfsv1\fR seçeneği günlüklü kotaları etkinleştirir. Günlüklü kotaların getirisi, bir çökmeden sonra bile kota denetiminin gerekmemesidir. Kotalı dosya sistemi özelliği etkinleştirildiğinde, günlüklü kotalar otomatik olarak kullanılır ve bu bağlama seçeneği yok sayılır.
+Eski kota sisteminin (ext2\&'deki \fBjqfmt=vfsold\fR, yani kotanın 1. sürümünün) yanı sıra ext3 günlüklü kotaları da (kotanın 2. sürümü) desteklenir. \fBjqfmt=vfsv0\fR veya \fBjqfmt=vfsv1\fR seçeneği günlüklü kotaları etkinleştirir. Günlüklü kotaların getirisi, bir çökmeden sonra bile kota denetiminin gerekmemesidir. Kotalı dosya sistemi özelliği etkinleştirildiğinde, günlüklü kotalar otomatik olarak kullanılır ve bu bağlama seçeneği yok sayılır.
 .sp
 .TP 4
 \fBusrjquota=aquota.user\fR|\fBgrpjquota=aquota.group\fR
@@ -333,7 +333,7 @@ Ext4 dosya sistemi, büyük dosya sistemini desteklemek için ölçeklenebilirli
 .sp
 .TP 4
 \fBjournal_checksum\fR|\fBnojournal_checksum\fR
-\fBjournal_checksum\fR, günlükleme işlemlerinde sağlama toplamlarına olanak tanır. Bu, \fBe2fsck\fR(8)’da kurtarma koduna izin verir ve çekirdeğin, çekirdekteki bozulmayı algılamasını sağlar. Geriye uyumlu bir değişikliktir ve eski çekirdekler tarafından yok sayılır.
+\fBjournal_checksum\fR, günlükleme işlemlerinde sağlama toplamlarına olanak tanır. Bu, \fBe2fsck\fR(8)\&'da kurtarma koduna izin verir ve çekirdeğin, çekirdekteki bozulmayı algılamasını sağlar. Geriye uyumlu bir değişikliktir ve eski çekirdekler tarafından yok sayılır.
 .sp
 .TP 4
 \fBjournal_async_commit\fR
@@ -341,17 +341,17 @@ Teslimat bloğu, tanımlayıcı bloklar beklenmeden diske yazılabilir. Etkinle�
 .sp
 .TP 4
 \fBbarrier=0\fR|\fBbarrier=1\fR|\fBbarrier\fR|\fBnobarrier\fR
-Bu bağlama seçenekleri, ext3’teki seçenek ile aynı etkiye sahiptir. Diğer ext4 bağlama seçenekleriyle tutarlı olması için \fBbarrier\fR ve \fBnobarrier\fR seçenekleri eklenmiştir.
+Bu bağlama seçenekleri, ext3\&'teki seçenek ile aynı etkiye sahiptir. Diğer ext4 bağlama seçenekleriyle tutarlı olması için \fBbarrier\fR ve \fBnobarrier\fR seçenekleri eklenmiştir.
 .sp
 Ext4 dosya sisteminde engeller öntanımlı olarak etkindir.
 .sp
 .TP 4
 \fBinode_readahead_blks\fR=\fIN\fR
-Ext4’ün dosya düğümü tablosunu ileri doğru okuma algoritmasının tampon önbelleğine önceden okuyacağı azami dosya düğümü tablosu bloklarının sayısını belirler. Değer 2’nin üsteli olmalıdır. Öntanımlı değer 32 bloktur.
+Ext4\&'ün dosya düğümü tablosunu ileri doğru okuma algoritmasının tampon önbelleğine önceden okuyacağı azami dosya düğümü tablosu bloklarının sayısını belirler. Değer 2\&'nin üsteli olmalıdır. Öntanımlı değer 32 bloktur.
 .sp
 .TP 4
 \fBstripe\fR=\fIN\fR
-\fBmballoc\fR’un ayırma boyutu ve hizalama için kullanmaya çalışacağı dosya sistemi bloklarının sayısı. RAID 5/6 sistemleri için, (veri disklerinin sayısı) * (blok sayısı olarak RAID bölütünün boyu) olmalıdır.
+\fBmballoc\fR\&'un ayırma boyutu ve hizalama için kullanmaya çalışacağı dosya sistemi bloklarının sayısı. RAID 5/6 sistemleri için, (veri disklerinin sayısı) * (blok sayısı olarak RAID bölütünün boyu) olmalıdır.
 .sp
 .TP 4
 \fBdelalloc\fR
@@ -363,7 +363,7 @@ Gecikmeli tahsis devre dışı bırakılır. Veri kullanıcı önbelleğinden sa
 .sp
 .TP 4
 \fBmax_batch_time\fR=\fIµSANİYE\fR
-Ek dosya sistemi işlemlerinin eşzamanlı bir yazma işlemiyle birlikte toplu hale getirilmesi için ext4’ün beklemesi gereken mikrosaniye cinsinden azami süre. Eşzamanlı (sırasını bekleyen) bir yazma işlemi bir teslimatı ve ardından girdi/çıktının tamamlanmasını beklemeyi gerektirdiğinden, çok maliyetli olmayacağı ve büyük bir verim kazancı sağlayabileceği için, eşzamanlı yazma işlemini üstlenebilecek başka bir aktarım olup olmadığını görmek için kısa bir süre bekletilir. Kullanılan algoritma, bir aktarımın teslimatı için geçen süreyi (ortalama olarak) ölçerek diskin hızını otomatik olarak ayarlamak üzere tasarlanmıştır. Bu zaman, "teslimat zamanı" olarak adlandırılır. Aktarım süresi, teslimat süresinden azsa, ext4, işleme başka aktarımların katılıp katılmayacağını görmek için teslimat süresi tamamlanana dek uyumayı dener. \fBmax_batch_time\fR teslimat süresini öntanımlı olarak 15000 µs (15 ms) ile sınırlandırılır. Bu en iyileme, \fBmax_batch_time\fR seçeneğine 0 atanarak tamamen kapatılabilir.
+Ek dosya sistemi işlemlerinin eşzamanlı bir yazma işlemiyle birlikte toplu hale getirilmesi için ext4\&'ün beklemesi gereken mikrosaniye cinsinden azami süre. Eşzamanlı (sırasını bekleyen) bir yazma işlemi bir teslimatı ve ardından girdi/çıktının tamamlanmasını beklemeyi gerektirdiğinden, çok maliyetli olmayacağı ve büyük bir verim kazancı sağlayabileceği için, eşzamanlı yazma işlemini üstlenebilecek başka bir aktarım olup olmadığını görmek için kısa bir süre bekletilir. Kullanılan algoritma, bir aktarımın teslimatı için geçen süreyi (ortalama olarak) ölçerek diskin hızını otomatik olarak ayarlamak üzere tasarlanmıştır. Bu zaman, "teslimat zamanı" olarak adlandırılır. Aktarım süresi, teslimat süresinden azsa, ext4, işleme başka aktarımların katılıp katılmayacağını görmek için teslimat süresi tamamlanana dek uyumayı dener. \fBmax_batch_time\fR teslimat süresini öntanımlı olarak 15000 µs (15 ms) ile sınırlandırılır. Bu en iyileme, \fBmax_batch_time\fR seçeneğine 0 atanarak tamamen kapatılabilir.
 .sp
 .TP 4
 \fBmin_batch_time\fR=\fIµSANİYE\fR
@@ -405,7 +405,7 @@ gibi kalıplarla değiştirirken \fBfsync\fR(2) çağrısını kullanmaz. \fBaut
 .sp
 .TP 4
 \fBnoinit_itable\fR
-İlklendirilmemiş dosya düğümü tablosu blokları artalanda ilklendirilmez. Bu özellik, kurulum işleminin olabildiğince çabuk tamamlanabilmesi için kurulum CD’leri tarafından kullanılabilir; dosya düğümü tablosunun ilklendirilmesi, dosya sisteminin bir sonraki bağlanmasına kadar ertelenir.
+İlklendirilmemiş dosya düğümü tablosu blokları artalanda ilklendirilmez. Bu özellik, kurulum işleminin olabildiğince çabuk tamamlanabilmesi için kurulum CD\&'leri tarafından kullanılabilir; dosya düğümü tablosunun ilklendirilmesi, dosya sisteminin bir sonraki bağlanmasına kadar ertelenir.
 .sp
 .TP 4
 \fBinit_itable\fR=\fIN\fR
@@ -413,7 +413,7 @@ Tembel dosya düğümü tablosu ilklendirme kodu, önceki blok grubunun dosya d�
 .sp
 .TP 4
 \fBdiscard\fR|\fBnodiscard\fR
-Bloklar serbest bırakılırken ext4’ün ilgili blok aygıtına devre-dışı-bırak/kırparak-değiştir komutları verip vermeyeceğini belirler. Bu, SSD aygıtları ve seyrek/ince olarak sağlanan LUN’lar için kullanışlıdır, ancak yeterli sınama yapılıncaya kadar öntanımlı olarak etkin değildir.
+Bloklar serbest bırakılırken ext4\&'ün ilgili blok aygıtına devre-dışı-bırak/kırparak-değiştir komutları verip vermeyeceğini belirler. Bu, SSD aygıtları ve seyrek/ince olarak sağlanan LUN\&'lar için kullanışlıdır, ancak yeterli sınama yapılıncaya kadar öntanımlı olarak etkin değildir.
 .sp
 .TP 4
 \fBblock_validity\fR|\fBnoblock_validity\fR
@@ -421,11 +421,11 @@ Bu seçenek, dahili veri yapıları içinde yer alan dosya sistemi meta veri blo
 .sp
 .TP 4
 \fBdioread_lock\fR|\fBdioread_nolock\fR
-Ext4’ün doğrudan G/Ç okuma kilidini kullanıp kullanmayacağını belirler. \fBdioread_nolock\fR seçeneği belirtilirse, ext4, tampona yazmadan önce ilklendirilmemiş genişletilmiş ağaca yer tahsis eder ve G/Ç tamamlandıktan sonra genişletilmiş ağacı ilklendirilmiş ağaca dönüştürür. Bu yaklaşım, ext4 kodunun yüksek hızlı depolamalarda ölçeklenebilirliği artıran dosya düğümü mutekslerini kullanmaktan kaçınmasını sağlar. Ancak bu, veri günlükleme ile çalışmaz ve çekirdek uyarısıyla \fBdioread_nolock\fR seçeneği yok sayılır. \fBdioread_nolock\fR seçeneğinin yalnızca genişletilmiş ağaç tabanlı dosyalar için kullanıldığı unutulmamalıdır. Bu seçenekler içerdikleri kısıtlamalar nedeniyle öntanımlı olarak etkin değildir. (örneğin, \fBdioread_lock\fR).
+Ext4\&'ün doğrudan G/Ç okuma kilidini kullanıp kullanmayacağını belirler. \fBdioread_nolock\fR seçeneği belirtilirse, ext4, tampona yazmadan önce ilklendirilmemiş genişletilmiş ağaca yer tahsis eder ve G/Ç tamamlandıktan sonra genişletilmiş ağacı ilklendirilmiş ağaca dönüştürür. Bu yaklaşım, ext4 kodunun yüksek hızlı depolamalarda ölçeklenebilirliği artıran dosya düğümü mutekslerini kullanmaktan kaçınmasını sağlar. Ancak bu, veri günlükleme ile çalışmaz ve çekirdek uyarısıyla \fBdioread_nolock\fR seçeneği yok sayılır. \fBdioread_nolock\fR seçeneğinin yalnızca genişletilmiş ağaç tabanlı dosyalar için kullanıldığı unutulmamalıdır. Bu seçenekler içerdikleri kısıtlamalar nedeniyle öntanımlı olarak etkin değildir. (örneğin, \fBdioread_lock\fR).
 .sp
 .TP 4
 \fBmax_dir_size_kb\fR=\fIN\fR
-Dizin boyutunu sınırlar, böylece \fIN\fR kilobaytlık sınırın ötesine genişletme girişimi \fBENOSPC\fR hatasına neden olur. Bu, çok büyük bir dizinin ciddi başarım kaybına neden olabileceği ve hatta "yetersiz bellek katili"ni tetikleyebileceği, belleğin kısıtlı olduğu ortamlarda kullanışlıdır. (Örneğin, yalnızca 512 MB kullanılabilir bellek varsa, 176 MB’lık bir dizin, sistemde ciddi kramplara yol açabilir.)
+Dizin boyutunu sınırlar, böylece \fIN\fR kilobaytlık sınırın ötesine genişletme girişimi \fBENOSPC\fR hatasına neden olur. Bu, çok büyük bir dizinin ciddi başarım kaybına neden olabileceği ve hatta "yetersiz bellek katili"ni tetikleyebileceği, belleğin kısıtlı olduğu ortamlarda kullanışlıdır. (Örneğin, yalnızca 512 MB kullanılabilir bellek varsa, 176 MB\&'lık bir dizin, sistemde ciddi kramplara yol açabilir.)
 .sp
 .TP 4
 \fBi_version\fR
@@ -705,7 +705,7 @@ T}
 \fBmke2fs\fR(8), \fBmke2fs.conf\fR(5), \fBe2fsck\fR(8), \fBdumpe2fs\fR(8), \fBtune2fs\fR(8) \fBdebugfs\fR(8), \fBmount\fR(8), \fBchattr\fR(1).
 .sp
 .SH "TELİF HAKKI VE LİSANS"
-Telif hakkı ©1993, 1994, 1995 Theodore Ts’o
+Telif hakkı ©1993, 1994, 1995 Theodore Ts\&'o
 .br
 Lisans GPLv2+: GNU GPL sürüm 2 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: Yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
 .sp

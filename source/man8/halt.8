@@ -7,7 +7,7 @@
  * Lisans: LGPL-2.1+, Diğer bilgiler için systemd deposuna bakılabilir:
  * https://github.com/systemd/systemd
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "HALT" 8 "Ekim 2022" "systemd-251" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -81,7 +81,7 @@ Başarı durumunda 0, başarısızlık durumunda sıfırdan farklı bir değer i
 .SH "EK BİLGİLER"
 Bu komutlar, özgün SysV komutlarıyla temel uyumluluğu koruyacak şekilde uygulanır. \fBsystemctl\fR(1) fiilleri \fBhalt\fR, \fBpoweroff\fR ve \fBreboot\fR bazı ek özelliklerle aynı işlevselliği sağlar.
 .sp
-Birçok SysV sisteminde \fBhalt\fR’ın eskiden \fBpoweroff\fR ile eşanlamlı olduğu, yani her iki komutun da aynı şekilde makinenin kapanmasıyla sonuçlandığı unutulmamalıdır. \fBsystemd\fR(1) daha doğru işlem yapar ve \fBhalt\fR, yalnızca sistemin durdurulması ile sonuçlanır (makine kapatılmaz), gerçekten kapatmak için \fBpoweroff\fR gerekir.
+Birçok SysV sisteminde \fBhalt\fR\&'ın eskiden \fBpoweroff\fR ile eşanlamlı olduğu, yani her iki komutun da aynı şekilde makinenin kapanmasıyla sonuçlandığı unutulmamalıdır. \fBsystemd\fR(1) daha doğru işlem yapar ve \fBhalt\fR, yalnızca sistemin durdurulması ile sonuçlanır (makine kapatılmaz), gerçekten kapatmak için \fBpoweroff\fR gerekir.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBsystemd\fR(1), \fBsystemctl\fR(1), \fBshutdown\fR(8), \fBwall\fR(1).

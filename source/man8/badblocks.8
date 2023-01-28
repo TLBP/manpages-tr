@@ -11,7 +11,7 @@
  *                                 Laboratoire MASI, Institut Blaise Pascal
  *                                 Universite Pierre et Marie Curie (Paris VI)
  *
- * Copyright 1995, 1996, 1997, 1998, 1999 by Theodore Ts’o
+ * Copyright 1995, 1996, 1997, 1998, 1999 by Theodore Ts\&'o
  * Copyright 1999 by David Beattie
  *
  * This file is based on the minix file system programs fsck and mkfs
@@ -20,7 +20,7 @@
  * This file may be redistributed under the terms of the GNU Public License.
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "BADBLOCKS" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -41,7 +41,7 @@ badblocks - aygıtı bozuk blokları bulmak için tarar
 .sp
 .TP 4
 \fBÖnemli bilgi\fR
-Eğer \fBbadblocks\fR komutunun çıktısı \fBe2fsck\fR(8) ya da \fBmke2fs\fR(8)’e yönlendirilecekse blok boyunun gerektiği biçimde belirtilmesi önemlidir, çünkü üretilen blok sayısı dosya sisteminde kullanılan blok boyuna çok bağlıdır. Bu sebepten kullanıcının \fBbadblocks\fR komutu yerine \fBe2fsck\fR(8) ve \fBmke2fs\fR(8)’i \fB-c\fR seçeneğiyle kullanması şiddetle önerilir.
+Eğer \fBbadblocks\fR komutunun çıktısı \fBe2fsck\fR(8) ya da \fBmke2fs\fR(8)\&'e yönlendirilecekse blok boyunun gerektiği biçimde belirtilmesi önemlidir, çünkü üretilen blok sayısı dosya sisteminde kullanılan blok boyuna çok bağlıdır. Bu sebepten kullanıcının \fBbadblocks\fR komutu yerine \fBe2fsck\fR(8) ve \fBmke2fs\fR(8)\&'i \fB-c\fR seçeneğiyle kullanması şiddetle önerilir.
 .sp
 .PP
 .sp
@@ -64,7 +64,7 @@ Sınamadan çıkılmadan önceki hatalı azami blok sayısını belirler. 0 değ
 .sp
 .TP 4
 \fB-f\fR
-Normalde, \fBbadblocks\fR bağlanmış bir aygıt üzerinde oku/yaz sınaması ya da zararsız yazma sınaması yapmayı reddeder. Çünkü her ikisi de sistemin çökmesine hatta salt-okunur biçimde bağlanmış dahi olsa dosya sisteminin zarar görmesine neden olabilir. Eğer \fBbadblocks\fR’tan daha akıllı olduğunuzu düşünüyorsanız ki neredeyse böyle bir şey imkansızdır, bu güçlük \fB–f\fR seçeneği kullanılarak aşılabilir, ancak bu seçeneği kullanmaktan mümkün olduğunca kaçınmak gerekir. Bu seçeneğin kullanılabileceği güvenli tek durum, \fI/etc/mtab\fR dosyasının yanlış olduğu ve aygıtın gerçekte bağlı olmadığı durumdur.
+Normalde, \fBbadblocks\fR bağlanmış bir aygıt üzerinde oku/yaz sınaması ya da zararsız yazma sınaması yapmayı reddeder. Çünkü her ikisi de sistemin çökmesine hatta salt-okunur biçimde bağlanmış dahi olsa dosya sisteminin zarar görmesine neden olabilir. Eğer \fBbadblocks\fR\&'tan daha akıllı olduğunuzu düşünüyorsanız ki neredeyse böyle bir şey imkansızdır, bu güçlük \fB–f\fR seçeneği kullanılarak aşılabilir, ancak bu seçeneği kullanmaktan mümkün olduğunca kaçınmak gerekir. Bu seçeneğin kullanılabileceği güvenli tek durum, \fI/etc/mtab\fR dosyasının yanlış olduğu ve aygıtın gerçekte bağlı olmadığı durumdur.
 .sp
 .TP 4
 \fB-i\fR \fIgirdidosyası\fR

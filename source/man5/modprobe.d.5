@@ -22,7 +22,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "MODPROBE.D" 5 "Ocak 2021" "Kmod-29" "Dosya Biçimleri ve Dosya Dönüşümleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -51,7 +51,7 @@ modprobe.d - modprobe için yapılandırma dizini
 .sp
 Modül ve takma adlarının (diğer modül adları gibi) içinde \fB_\fR ve \fB-\fR olabilir: alt çizgi dönüştürme otomatik olarak gerçekleştiğinden, tüm modül komutlarında her ikisi de kullanılabilir.
 .sp
-\fImodprobe.d\fR altındaki dosyaların biçemi basittir: her satıra bir komut; boş satırlar ve ’#’ ile başlayan satırlar yok sayılır (yorum eklemek için kullanışlıdır). Bir satırın sonundaki bir ’\\’ satırın sonraki satırda devam etmesine neden olur, bu da dosyayı biraz daha düzenli hale getirir.
+\fImodprobe.d\fR altındaki dosyaların biçemi basittir: her satıra bir komut; boş satırlar ve \&'#\&' ile başlayan satırlar yok sayılır (yorum eklemek için kullanışlıdır). Bir satırın sonundaki bir \&'\\\&' satırın sonraki satırda devam etmesine neden olur, bu da dosyayı biraz daha düzenli hale getirir.
 .sp
 .SH "KOMUTLAR"
 .TP 4
@@ -66,7 +66,7 @@ Modüller kendi takma adlarını içerebilir: Genellikle bunlar "pci:123..." gib
 .sp
 .TP 4
 \fBinstall\fR \fImodül komut\fR...
-Bu komut, \fBmodprobe\fR’a belirtilen \fImodül\fRü normal şekilde çekirdeğe eklemek yerine belirtilen \fIkomut\fRu çalıştırmasını söyler. \fIkomut\fR herhangi bir kabuk komutu olabilir: bu, her türlü karmaşık işlemin yapılmasını sağlar. Örneğin, "fred" modülü zaten kurulu "barney" modülüyle daha iyi çalışıyorsa (ancak bağımlı modül olmadığından \fBmodprobe\fR otomatik olarak yüklemiyorsa), bunu sağlamak için "\fBinstall fred /sbin/modprobe barney; /sbin/modprobe --ignore-install fred\fR" komutu verilebilir. İkinci \fBmodprobe\fR’un aynı yükleme komutunu yeniden çalıştırmasını engelleyen \fB--ignore-install\fR’a da dikkat edilmelidir. Ayrıca aşağıya da bkz.
+Bu komut, \fBmodprobe\fR\&'a belirtilen \fImodül\fRü normal şekilde çekirdeğe eklemek yerine belirtilen \fIkomut\fRu çalıştırmasını söyler. \fIkomut\fR herhangi bir kabuk komutu olabilir: bu, her türlü karmaşık işlemin yapılmasını sağlar. Örneğin, "fred" modülü zaten kurulu "barney" modülüyle daha iyi çalışıyorsa (ancak bağımlı modül olmadığından \fBmodprobe\fR otomatik olarak yüklemiyorsa), bunu sağlamak için "\fBinstall fred /sbin/modprobe barney; /sbin/modprobe --ignore-install fred\fR" komutu verilebilir. İkinci \fBmodprobe\fR\&'un aynı yükleme komutunu yeniden çalıştırmasını engelleyen \fB--ignore-install\fR\&'a da dikkat edilmelidir. Ayrıca aşağıya da bkz.
 .sp
 Ek modül bağımlılıkları sağlama sorununa bir çözüm olarak bu komutun uzun vadeli geleceği garanti edilmez ve bu komutun, gelecekteki bir sürümde kalıcı olarak kaldırılması ya da kullanımdan kaldırılma hakkında bir uyarı ile değiştirilmesi düşünülmektedir. Kullanımı, \fBmkinitrd\fR gibi dağıtıma yardımcı uygulamalar tarafından modül bağımlılıklarının otomatik olarak belirlenmesi işlemini karmaşıklaştırmaktadır. Çünkü bunların artık bir şekilde yükleme komutlarının ne yapıyor olabileceğini yorumlaması gerekmektedir. Mükemmel bir dünyada, modüllerin bu komutu kullanmadan tüm bağımlılık bilgilerini sağlaması gerekir. Linux çekirdeği içinde akıllı bağımlılık desteğini sağlamak için çalışmalar devam etmektedir.
 .sp
@@ -86,7 +86,7 @@ Bu, \fBmodprobe -r\fR ile çağrılması dışında, yukarıdaki \fBinstall\fR k
 \fBsoftdep\fR \fIanamodül\fR \fBpre:\fR \fImodül\fR... \fBpost:\fR \fImodül\fR...
 \fBsoftdep\fR komutu, esnek veya isteğe bağlı modül bağımlılıklarının belirtilmesine olanak tanır. \fIanamodül\fR, bu isteğe bağlı modüller kurulmadan kullanılabilir, ancak genellikle bazı özellikler eksik kalır. Örneğin, bir depolama aygıtı sürücüsü, yönetim özelliklerini kullanmak için başka bir modülün yüklenmesini gerektirebilir.
 .sp
-\fBpre:\fR ve \fBpost:\fR \fImodül\fRleri, \fIanamodül\fRden önce (pre) ve sonra (post) \fBmodprobe\fR’un kurmaya (veya kaldırmaya) çalışacağı diğer modüllerin adlarının ve/veya takma adlarının listeleridir.
+\fBpre:\fR ve \fBpost:\fR \fImodül\fRleri, \fIanamodül\fRden önce (pre) ve sonra (post) \fBmodprobe\fR\&'un kurmaya (veya kaldırmaya) çalışacağı diğer modüllerin adlarının ve/veya takma adlarının listeleridir.
 .sp
 Örnek: Yapılandırmada "\fBsoftdep c pre: a b post: d e\fR" sağlandığı varsayılsın. \fBsoftdep\fR olmadan "\fBmodprobe c\fR"yi çalıştırmak artık "\fBmodprobe a b c d e\fR" çalıştırmaya eşdeğerdir. \fB--use-blacklist\fR gibi seçenekler belirtilen tüm modüllere uygulanırken modül girdileri yalnızca \fIc\fR modülüne uygulanır.
 .sp
@@ -101,7 +101,7 @@ Bu, \fBmodprobe -r\fR ile çağrılması dışında, yukarıdaki \fBinstall\fR k
 .PP
 .sp
 .SH "UYUMLULUK"
-Kmod’un gelecekteki bir sürümü, yukarıda açıklandığı gibi \fBinstall\fR kullanılmasını önlemek için güçlü bir uyarı ile gelecektir. Bu, çekirdekteki esnek bağımlılıklar için destek tamamlandığında gerçekleşebilir. Bu destek, bu tür bağımlılıkları doğrudan modüller içinde sağlayarak bu yardımcı uygulama içindeki mevcut \fBsoftdep\fR desteğini tamamlayacaktır.
+Kmod\&'un gelecekteki bir sürümü, yukarıda açıklandığı gibi \fBinstall\fR kullanılmasını önlemek için güçlü bir uyarı ile gelecektir. Bu, çekirdekteki esnek bağımlılıklar için destek tamamlandığında gerçekleşebilir. Bu destek, bu tür bağımlılıkları doğrudan modüller içinde sağlayarak bu yardımcı uygulama içindeki mevcut \fBsoftdep\fR desteğini tamamlayacaktır.
 .sp
 .SH "TELİF HAKKI"
 Belgenin telif hakkı © 2003 Rusty Russell, IBM Corporation.

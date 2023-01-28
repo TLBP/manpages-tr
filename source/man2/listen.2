@@ -48,7 +48,7 @@
  * Modified 1998 by Andi Kleen
  * Modified 11 May 2001 by Sam Varshavchik <mrsam@courier-mta.com>
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "LISTEN" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -60,7 +60,7 @@ listen - soket üzerinde bağlantıları dinler
 .sp
 .SH BİLDİRİM
 .nf
-\fB#include <sys/types.h>\fR          /* NOTLAR’a bakın */
+\fB#include <sys/types.h>\fR          /* NOTLAR\&'a bakın */
 \fB#include <sys/socket.h>\fR
 .fi
 .sp
@@ -93,11 +93,11 @@ Belirtilen \fIsockfd\fR uygun bir dosya tanıtıcısı değil.
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+Belirtilen \fIsockfd\fR\&'nin bir soketle ilgisi yok.
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Soket, \fBlisten\fR()’ı destekleyen türde değil.
+Soket, \fBlisten\fR()\&'ı destekleyen türde değil.
 .sp
 .PP
 .sp
@@ -120,11 +120,11 @@ Gelen bağlantılar \fBaccept\fR(2) ile kabul edilir.
 .sp
 .RE
 .PD 0
-POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyası gerekir ve taşınabilir uygulamalar için dahil edilmesi akıllıca olacaktır.
+POSIX.1\&'de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux\&'da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyası gerekir ve taşınabilir uygulamalar için dahil edilmesi akıllıca olacaktır.
 .sp
 \fIbacklog\fR değişkeninin TCP soketleri üzerindeki etkisi Linux 2.2 ile beraber değişti. Artık, tamamlanmamış bağlantı isteklerinin kuyruk uzunluğunu belirlemek yerine, kabul edilmeyi bekleyen kurulmuş soketlerin kuyruk uzunluğunu belirlemektedir. Tamamlanmamış soketler için azami kuyruk uzunluğu \fI/proc/sys/net/ipv4/tcp_max_syn_backlog\fR kullanılarak tanımlanabilir. Eşzamanlı çerezler (syncookies) etkinleştirildiğinde, mantıksal olarak azami uzunluk yoktur ve bu ayar yok sayılır. Daha fazla bilgi için \fBtcp\fR(7) sayfasına bakınız.
 .sp
-\fIbacklog\fR değeri, eğer \fI/proc/sys/net/core/somaxonn\fR’dan daha büyükse, bu değere düşürülür. Linux 5.4’ten bu yana bu dosyanın öntanımlı değeri 4096’dır; eski çekirdeklerde öntanımlı değer 128 idi. 2.4.15’ten önceki çekirdeklerde \fBSOMAXCONN\fR’a 128 değeriyle sabitlenmişti.
+\fIbacklog\fR değeri, eğer \fI/proc/sys/net/core/somaxonn\fR\&'dan daha büyükse, bu değere düşürülür. Linux 5.4\&'ten bu yana bu dosyanın öntanımlı değeri 4096\&'dır; eski çekirdeklerde öntanımlı değer 128 idi. 2.4.15\&'ten önceki çekirdeklerde \fBSOMAXCONN\fR\&'a 128 değeriyle sabitlenmişti.
 .sp
 .SH "ÖRNEKLER"
 \fBbind\fR(2) sayfasına bakınız.

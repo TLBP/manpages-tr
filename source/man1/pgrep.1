@@ -13,7 +13,7 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "PGREP" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -83,7 +83,7 @@ Normal çıktıyı engeller; onun yerine eşleşen süreç sayısı çıktılan�
 .sp
 .TP 4
 \fB-g\fR, \fB--pgroup\fR \fIsüreç-grup-kiml\fR,...
-Yalnızca belirtilen süreç grup kimlikleriyle eşleşen süreçler listelenir. Süreç grubu 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR’in kendi süreç grubuna dönüştürülür.
+Yalnızca belirtilen süreç grup kimlikleriyle eşleşen süreçler listelenir. Süreç grubu 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR\&'in kendi süreç grubuna dönüştürülür.
 .sp
 .TP 4
 \fB-G\fR, \fB--group\fR \fIgrup-kiml\fR,...
@@ -119,7 +119,7 @@ Yalnızca belirtilen ebeveyn süreç kimlikleriyle eşleşen süreçler listelen
 .sp
 .TP 4
 \fB-s\fR, \fB--session\fR \fIsüreç-oturum-kiml\fR,...
-Yalnızca belirtilen süreç oturum kimlikleriyle eşleşen süreçler listelenir. Oturum kimliği 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR’in kendi oturum kimliğine dönüştürülür.
+Yalnızca belirtilen süreç oturum kimlikleriyle eşleşen süreçler listelenir. Oturum kimliği 0, \fBpkill\fR, \fBpgrep\fR veya \fBpidwait\fR\&'in kendi oturum kimliğine dönüştürülür.
 .sp
 .TP 4
 \fB-t\fR, \fB--terminal\fR \fIuçbirim\fR,...
@@ -135,11 +135,11 @@ Yalnızca belirtilen kullanıcı kimlikleriyle eşleşen süreçler listelenir. 
 .sp
 .TP 4
 \fB-v\fR, \fB--inverse\fR
-Eşleşmeyi olumsuzlar. Bu seçenek mormalde \fBpgrep\fR veya \fBpidwait\fR’in bağlamında kullanılır. \fBpkill\fR’in bağlamında, seçeneğin kazayla kullanımından kaçınmak için kısa seçenek devre dışı bırakılır.
+Eşleşmeyi olumsuzlar. Bu seçenek mormalde \fBpgrep\fR veya \fBpidwait\fR\&'in bağlamında kullanılır. \fBpkill\fR\&'in bağlamında, seçeneğin kazayla kullanımından kaçınmak için kısa seçenek devre dışı bırakılır.
 .sp
 .TP 4
 \fB-w\fR, \fB--lightweight\fR
-\fBpgrep\fR veya \fBpidwait\fR’in bağlamında süreç kimlikleri yerine tüm evre kimlikleri listelenir. \fBpkill\fR’in bağlamında, bu seçenek devre dışı bırakılır.
+\fBpgrep\fR veya \fBpidwait\fR\&'in bağlamında süreç kimlikleri yerine tüm evre kimlikleri listelenir. \fBpkill\fR\&'in bağlamında, bu seçenek devre dışı bırakılır.
 .sp
 .TP 4
 \fB-x\fR, \fB--exact\fR
@@ -147,7 +147,7 @@ Yalnızca, \fIşablon\fR ile KESİNLİKLE (exactly) eşleşen süreç isimleriyl
 .sp
 .TP 4
 \fB-F\fR, \fB--pidfile\fR \fIdosya\fR
-Süreç kimliklerini \fIdosya\fRdan okur. Bu seçenek \fBpgrep\fR’ten ziyade özellikle \fBpkill\fR veya \fBpidwait\fR için yararlıdır.
+Süreç kimliklerini \fIdosya\fRdan okur. Bu seçenek \fBpgrep\fR\&'ten ziyade özellikle \fBpkill\fR veya \fBpidwait\fR için yararlıdır.
 .sp
 .TP 4
 \fB-L\fR, \fB--logpidfile\fR

@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "HTDBM" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -116,7 +116,7 @@ DBM dosyasının ismi. Genellikle, \fI.db\fR, \fI.pag\fR veya \fI.dir\fR eklenti
 .sp
 .TP 4
 \fIkullanıcı\fR
-\fIparola-dosyası\fR’nda oluşturulacak veya güncellenecek kullanıcı ismi. \fIkullanıcı\fR bu dosyada mevcut değilse yeni bir girdi eklenir. Girdi mevcutsa parolası değiştirilir.
+\fIparola-dosyası\fR\&'nda oluşturulacak veya güncellenecek kullanıcı ismi. \fIkullanıcı\fR bu dosyada mevcut değilse yeni bir girdi eklenir. Girdi mevcutsa parolası değiştirilir.
 .sp
 .TP 4
 \fIparola\fR
@@ -129,7 +129,7 @@ DBM dosyasının türü; SDBM, GDBM, DB veya "default" olabilir.
 .PP
 .sp
 .SH "YETERSİZLİKLER"
-Birden fazla DBM dosya biçemi vardır ve büyük bir olasılıkla da sisteminizde bu birden fazla biçemle ilgili kütüphaneler vardır. SDBM, NDBM, GNU’nun GDBM projesi ve Berkeley/Sleepycat DB 2/3/4 bunların başlıcalarıdır. Ne yazık ki, bu kütüphanelerin her birinin dosya biçimleri farklıdır. Bu bakımdan, \fIdosyaismi\fR dosyasında kullanılan dosya biçeminin \fBhtdbm\fR tarafından kullanılanla aynı biçemde olduğundan emin olmalısınız. \fBhtdbm\fR hangi tür DBM dosyasına baktığını saptayacak yeterliliğe sahip değildir. Yanlış biçemli bir dosya belirtirseniz hiçbir şey dönmeyebileceği gibi, başka isimde bir DBM dosyasının oluşturulması veya daha da kötüsü üzerine yazmaya çalışıyorsanız DBM dosyasının bozulması bile olasıdır.
+Birden fazla DBM dosya biçemi vardır ve büyük bir olasılıkla da sisteminizde bu birden fazla biçemle ilgili kütüphaneler vardır. SDBM, NDBM, GNU\&'nun GDBM projesi ve Berkeley/Sleepycat DB 2/3/4 bunların başlıcalarıdır. Ne yazık ki, bu kütüphanelerin her birinin dosya biçimleri farklıdır. Bu bakımdan, \fIdosyaismi\fR dosyasında kullanılan dosya biçeminin \fBhtdbm\fR tarafından kullanılanla aynı biçemde olduğundan emin olmalısınız. \fBhtdbm\fR hangi tür DBM dosyasına baktığını saptayacak yeterliliğe sahip değildir. Yanlış biçemli bir dosya belirtirseniz hiçbir şey dönmeyebileceği gibi, başka isimde bir DBM dosyasının oluşturulması veya daha da kötüsü üzerine yazmaya çalışıyorsanız DBM dosyasının bozulması bile olasıdır.
 .sp
 Unix sistemlerinde, kullanılan DBM dosyasının biçemini öğrenmek için \fBfile\fR(1) komutu kullanılabilir.
 .sp

@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DBLATEX" 1 "Mart 2015" "dblatex3-0.3.12" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -12,7 +12,7 @@
 .ad l
 .PD 0
 .SH İSİM
-dblatex - DocBook’tan LaTeX, DVI, PostScript ve PDF’e dönüşüm aracı
+dblatex - DocBook\&'tan LaTeX, DVI, PostScript ve PDF\&'e dönüşüm aracı
 .sp
 .SH KULLANIM
 .IP \fBdblatex\fR 8
@@ -21,7 +21,7 @@ dblatex - DocBook’tan LaTeX, DVI, PostScript ve PDF’e dönüşüm aracı
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBdblatex\fR, SGML/XML DocBook belgeleri ilk işlem olarak saf LaTeX’e çevirerek DVI, PostScript veya PDF’ye dönüştüren bir uygulamadır. MathML 2.0 imlenimi de desteklenmektedir.
+\fBdblatex\fR, SGML/XML DocBook belgeleri ilk işlem olarak saf LaTeX\&'e çevirerek DVI, PostScript veya PDF\&'ye dönüştüren bir uygulamadır. MathML 2.0 imlenimi de desteklenmektedir.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -42,7 +42,7 @@ Yapılandırma \fIDOSYA\fRsı; kullanılacak tüm seçenekleri ve uygulanacak ö
 .sp
 .TP 4
 \fB-d\fR, \fB--debug\fR
-Hata ayıklama kipi. \fBdblatex\fR’in çalıştığı geçici dizin silinmez.
+Hata ayıklama kipi. \fBdblatex\fR\&'in çalıştığı geçici dizin silinmez.
 .sp
 .TP 4
 \fB-D\fR, \fB--dump\fR
@@ -50,7 +50,7 @@ Bir hata oluştuğunda hata ayıklama amacıyla hata yığıtını dökümler.
 .sp
 .TP 4
 \fB-e\fR, \fB--indexstyle\fR=\fIDOSYA\fR
-Öntanımlı belge dizini biçemi yerine \fBmakeindex\fR(1)’e iletilecek biçem \fIDOSYA\fRsı.
+Öntanımlı belge dizini biçemi yerine \fBmakeindex\fR(1)\&'e iletilecek biçem \fIDOSYA\fRsı.
 .sp
 .TP 4
 \fB-f\fR, \fB--fig-format\fR=\fIBİÇEM\fR
@@ -62,7 +62,7 @@ Girdi olarak dosya biçemi: \fIsgml\fR, \fIxml\fR (öntanımlıdır).
 .sp
 .TP 4
 \fB-i\fR, \fB--texinputs\fR=\fIYOL\fR
-\fBTEXINPUTS\fR’a eklenecek \fIYOL\fRlar.
+\fBTEXINPUTS\fR\&'a eklenecek \fIYOL\fRlar.
 .sp
 .TP 4
 \fB-I\fR, \fB--fig-path\fR=\fIYOL\fR
@@ -86,7 +86,7 @@ Kullanılacak XSLT aracı: \fBxsltproc\fR(1) (öntanımlıdır), \fB4xslt\fR, \f
 .sp
 .TP 4
 \fB-O\fR, \fB--output\fR=\fIDİZİN\fR
-\fBset\fR içindeki \fBbook\fR’ların çıktılanacağı \fIDİZİN\fR. Belirtilmezse çalışma dizini kullanılır. Tek bir belge çıktılanacaksa bu seçenek yok sayılır ve yerine \fB-o\fR seçeneği uygulanır.
+\fBset\fR içindeki \fBbook\fR\&'ların çıktılanacağı \fIDİZİN\fR. Belirtilmezse çalışma dizini kullanılır. Tek bir belge çıktılanacaksa bu seçenek yok sayılır ve yerine \fB-o\fR seçeneği uygulanır.
 .sp
 .TP 4
 \fB-p\fR, \fB--xsl-user\fR=\fIDOSYA\fR
@@ -142,7 +142,7 @@ XSLT aracına aktarılacak seçenekler.
 .sp
 .TP 4
 \fB-X\fR, \fB--no-external\fR
-Harici metin dosyası desteğini devre dışı bırakır. Bu destek, \fBtextdata\fR veya \fBimagedata\fR tarafından başvurulan harici dosyalardaki \fBcallout\fR’lar için gereklidir, ancak belge bu tür \fBcallout\fR’lar içermiyorsa devre dışı bırakılabilir. Bu desteği devre dışı bırakmak, büyük belgelerin işlenmesini hızlandırabilir.
+Harici metin dosyası desteğini devre dışı bırakır. Bu destek, \fBtextdata\fR veya \fBimagedata\fR tarafından başvurulan harici dosyalardaki \fBcallout\fR\&'lar için gereklidir, ancak belge bu tür \fBcallout\fR\&'lar içermiyorsa devre dışı bırakılabilir. Bu desteği devre dışı bırakmak, büyük belgelerin işlenmesini hızlandırabilir.
 .sp
 .PP
 .sp
@@ -219,8 +219,8 @@ dblatex -x "--path /path/to/load/entity" myfile.xml
 .sp
 .RS 4
 .nf
-xsltproc --param profile.attribute "’output’" \\
-         --param profile.value "’pdf’" \\
+xsltproc --param profile.attribute "\&'output\&'" \\
+         --param profile.value "\&'pdf\&'" \\
          /path/to/profiling/profile.xsl \\
          myfile.xml | dblatex -o myfile.pdf -
 .fi

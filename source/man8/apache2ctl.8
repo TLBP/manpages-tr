@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "APACHE2CTL" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -53,7 +53,7 @@ SysV başlatma betiği kipinde ise, aşağıda tanımlanan basit, tek sözcükl�
 .SH "AÇIKLAMA"
 \fBapachectl\fR Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusu için bir denetim aracıdır. Sistem yöneticisinin Apache \fBhttpd\fR artalan sürecini denetimi altında tutabilmesine yardımcı olmak amacıyla tasarlanmıştır.
 .sp
-\fBapachectl\fR iki kipte işleyebilir. İlkinde, \fBhttpd\fR komutu için basit bir önyüz gibi davranarak, gerekli ortam değişkenlerini atar ve belirtilen komut satırı seçenekleriyle \fBhttpd\fR sürecini başlatır. İkinci kipte ise, \fBapachectl\fR bir SysV başlatma betiği olarak \fBstart\fR, \fBrestart\fR, \fBstop\fR gibi tek sözcüklük basit komutlar alır ve bunları uygun sinyallere dönüştürerek \fBhttpd\fR’ye gönderir.
+\fBapachectl\fR iki kipte işleyebilir. İlkinde, \fBhttpd\fR komutu için basit bir önyüz gibi davranarak, gerekli ortam değişkenlerini atar ve belirtilen komut satırı seçenekleriyle \fBhttpd\fR sürecini başlatır. İkinci kipte ise, \fBapachectl\fR bir SysV başlatma betiği olarak \fBstart\fR, \fBrestart\fR, \fBstop\fR gibi tek sözcüklük basit komutlar alır ve bunları uygun sinyallere dönüştürerek \fBhttpd\fR\&'ye gönderir.
 .sp
 Eğer Apache kurulumunuzda standart dışı dosya yolları kullanmışsanız, \fBhttpd\fR için uygun yolları atamak için \fBapachectl\fR betiğini elden geçirmelisiniz. Bu arada gerek gördüğünüz \fBhttpd\fR komut satırı girdilerini de belirtebilirsiniz. Ayrıntılar için betik içindeki açıklamalara bakınız.
 .sp

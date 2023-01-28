@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "KILLALL" 1 "Kasım 2021" "psmisc-23.4" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -38,7 +38,7 @@ Bir \fBkillall\fR süreci kendi kendini sonlandıramaz ama diğer \fBkillall\fR 
 .SH "SEÇENEKLER"
 .TP 4
 \fB-e\fR, \fB--exact\fR
-Çok uzun isimler için kesin bir eşleşme aranır. Şayet bir komut ismi 15 karakterden uzun ise, tam isim erişilmez olabilir (mesela değiştirilmiş olabilir). Bu durumda \fBkillall\fR, isimlerindeki ilk 15 karakteri eşleşen bütün süreçleri öldürür. \fB-e\fR seçeneği ile, bu tür girdiler atlanır. Şayet \fB-e\fR’ye ek olarak \fB-v\fR seçeneği de tanımlanmışsa, \fBkillall\fR, atladığı her girdi için bir ileti görüntüler.
+Çok uzun isimler için kesin bir eşleşme aranır. Şayet bir komut ismi 15 karakterden uzun ise, tam isim erişilmez olabilir (mesela değiştirilmiş olabilir). Bu durumda \fBkillall\fR, isimlerindeki ilk 15 karakteri eşleşen bütün süreçleri öldürür. \fB-e\fR seçeneği ile, bu tür girdiler atlanır. Şayet \fB-e\fR\&'ye ek olarak \fB-v\fR seçeneği de tanımlanmışsa, \fBkillall\fR, atladığı her girdi için bir ileti görüntüler.
 .sp
 .TP 4
 \fB-I\fR, \fB--ignore-case\fR
@@ -113,7 +113,7 @@ Süreç görünmüyorsa ve iki tarama arasında geçen sürede başka bir süre�
 .sp
 Süreçler isim değiştirmişse \fBkillall\fR bunlarla doğru olarak eşleşemeyebilir.
 .sp
-Komut satırında belirtilebilecek isimlerin sayısı ile ilgili bir sınırlama vardır. Bu sayı, işaretsiz uzun tamsayı bayt sayısının 8 ile çarpımıdır. Çoğunlukla sınır, 32 bitlik sistemler 32, benzer şekilde 64 bitlik sistemler için ise 64’tür.
+Komut satırında belirtilebilecek isimlerin sayısı ile ilgili bir sınırlama vardır. Bu sayı, işaretsiz uzun tamsayı bayt sayısının 8 ile çarpımıdır. Çoğunlukla sınır, 32 bitlik sistemler 32, benzer şekilde 64 bitlik sistemler için ise 64\&'tür.
 .sp
 .SH "TELİF HAKKI"
 Werner Almesberger @ 1993-2002, Craig Small @ 2002-2021

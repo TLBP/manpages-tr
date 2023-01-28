@@ -5,11 +5,11 @@
  *
  * Özgün Belgenin Lisans ve Telif Hakkı bilgileri:
  *
- * Copyright 1993, 1994, 1995 by Theodore Ts’o. *
+ * Copyright 1993, 1994, 1995 by Theodore Ts\&'o. *
  * This file may be redistributed under the terms of the GNU Public License.
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "E2FSCK" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -38,10 +38,10 @@ fsck.ext4 - Linux ext4 dosya sistemini denetler
 .sp
 .TP 4
 \fBUyarı:\fR
-Genelde \fBe2fsck\fR’yı bağlı dosya sistemlerinde çalıştırmak güvenli değildir. Tek istisna \fB-n\fR seçeneğinin belirtilmesi ve \fB-c\fR, \fB-l\fR veya \fB-L\fR seçeneklerinin belirtilmemesidir. Ancak, bunu yapmak güvenli olsa bile, dosya sistemi bağlanmışsa \fBe2fsck\fR tarafından gösterilen sonuçlar geçerli değildir. \fBe2fsck\fR, bağlı bir dosya sisteminin denetlenmesi gerekip gerekmediğini sorarsa, tek doğru cevap “no/hayır”dır. Ne yaptıklarını gerçekten bilen uzmanlar bile bu soruya başka bir yanıt vermeden önce düşünmelidir.
+Genelde \fBe2fsck\fR\&'yı bağlı dosya sistemlerinde çalıştırmak güvenli değildir. Tek istisna \fB-n\fR seçeneğinin belirtilmesi ve \fB-c\fR, \fB-l\fR veya \fB-L\fR seçeneklerinin belirtilmemesidir. Ancak, bunu yapmak güvenli olsa bile, dosya sistemi bağlanmışsa \fBe2fsck\fR tarafından gösterilen sonuçlar geçerli değildir. \fBe2fsck\fR, bağlı bir dosya sisteminin denetlenmesi gerekip gerekmediğini sorarsa, tek doğru cevap “no/hayır”dır. Ne yaptıklarını gerçekten bilen uzmanlar bile bu soruya başka bir yanıt vermeden önce düşünmelidir.
 .sp
 .PP
-\fBe2fsck\fR etkileşimli kipte çalıştırılırsa (yani \fB-y\fR, \fB-n\fR veya \fB-p\fR seçeneklerinden hiçbiri belirtilmemişse), uygulama kullanıcıdan dosya sisteminde bulunan her sorunu düzeltmesini ister. ’y’ yanıtı hatayı düzeltecektir; ’n’ hatayı düzeltmeden bırakır; ve ’a’ sorunu ve sonraki tüm sorunları çözecektir; Enter tuşuna basmak, soru işaretinden önce yazdırılan öntanımlı yanıtla devam edecektir. Ctrl-C’ye basmak \fBe2fsck\fR’yı hemen sonlandırır.
+\fBe2fsck\fR etkileşimli kipte çalıştırılırsa (yani \fB-y\fR, \fB-n\fR veya \fB-p\fR seçeneklerinden hiçbiri belirtilmemişse), uygulama kullanıcıdan dosya sisteminde bulunan her sorunu düzeltmesini ister. \&'y\&' yanıtı hatayı düzeltecektir; \&'n\&' hatayı düzeltmeden bırakır; ve \&'a\&' sorunu ve sonraki tüm sorunları çözecektir; Enter tuşuna basmak, soru işaretinden önce yazdırılan öntanımlı yanıtla devam edecektir. Ctrl-C\&'ye basmak \fBe2fsck\fR\&'yı hemen sonlandırır.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -52,7 +52,7 @@ Genelde \fBe2fsck\fR’yı bağlı dosya sistemlerinde çalıştırmak güvenli 
 \fB-b\fR \fIsüperblok\fR
 Birincil süperbloğu kullanmak yerine, \fIsüperblok\fR ile belirtilen başka bir süperbloğu kullanır. Bu seçenek, birincil süperblok bozulduğu durumlarda kullanılır. Yedek süperbloğun yeri, dosya sisteminin blok boyutu, her gruptaki blok sayısı ve \fBsparse_super\fR gibi özellikler ile alakalıdır.
 .sp
-\fBmke2fs\fR(8) komutunu \fB–n\fR seçeneği ile birlikte kullanılarak, mke2fs’nin dosya sisteminin düzeniyle tutarlı seçeneklerle (dosya sisteminin blok boyutu, her gruptaki blok sayısı, \fBsparse_super\fR gibi) dosya sistemini oluşturduğu varsayımıyla, yedek süperblokların nerelerde bulunduğu öğrenilebilir.
+\fBmke2fs\fR(8) komutunu \fB–n\fR seçeneği ile birlikte kullanılarak, mke2fs\&'nin dosya sisteminin düzeniyle tutarlı seçeneklerle (dosya sisteminin blok boyutu, her gruptaki blok sayısı, \fBsparse_super\fR gibi) dosya sistemini oluşturduğu varsayımıyla, yedek süperblokların nerelerde bulunduğu öğrenilebilir.
 .sp
 Şayet bir süperblok tanımlanmış ve dosya sistemi salt okunur açılmamışsa, \fBe2fsck\fR, birincil süperbloğu dosya sisteminin bütünlüğü adına uygun şekilde güncelleyecektir.
 .sp
@@ -78,7 +78,7 @@ Dosya sistemindeki dizinlerde eniyileme yapar. Bu seçenek, \fBe2fsck\fR’nın 
 .sp
 \fB-D\fR seçeneği olmasa bile, \fBe2fsck\fR bazen örneğin, dizin indisleme etkinse ve bir dizin indislenmemişse ve indislenmesi yarar sağlayacaksa veya indis yapıları bozulmuşsa ve yeniden oluşturulması gerekiyorsa, birkaç dizini en iyileyebilir. \fB-D\fR seçeneği, dosya sistemindeki tüm dizinleri en iyilenmeye zorlar. Bu bazen onları biraz daha küçük ve arama için biraz daha hızlı hale getirebilir, ancak normalde bu seçenek pek kulanılmaz.
 .sp
-\fB-D\fR seçeneği, \fBe2fsck\fR’nın başarımı düşürmemek adına normalde zorlanmadığı, tek bir dizindeki yinelenen adlara sahip dizin girdilerini de algılar.
+\fB-D\fR seçeneği, \fBe2fsck\fR\&'nın başarımı düşürmemek adına normalde zorlanmadığı, tek bir dizindeki yinelenen adlara sahip dizin girdilerini de algılar.
 .sp
 .TP 4
 \fB-E\fR \fIek_seçenekler\fR
@@ -87,7 +87,7 @@ Dosya sistemindeki dizinlerde eniyileme yapar. Bu seçenek, \fBe2fsck\fR’nın 
 .RS
 .TP 4
 \fBea_ver\fR=\fIek_özellik_sürümü\fR
-Bu seçenekle, \fBe2fsck\fR’nın dosya sistemin denetlerken kullandığı ek özellik bloklarının sürüm numarasını belirler. Sürüm numarası 1 veya 2 olabilir. Öntanımlı değer 2’dir.
+Bu seçenekle, \fBe2fsck\fR’nın dosya sistemin denetlerken kullandığı ek özellik bloklarının sürüm numarasını belirler. Sürüm numarası 1 veya 2 olabilir. Öntanımlı değer 2\&'dir.
 .sp
 .TP 4
 \fBjournal_only\fR
@@ -99,7 +99,7 @@ Gerekliyse günlük yeniden yürütülür, herhangi bir denetim ve onarım yapı
 .sp
 .TP 4
 \fBdiscard\fR
-Tam dosya sistemi denetiminden sonra boş bloklar ve kullanılmayan dosya düğümü bloklarından kurtulmaya çalışır (katı hal aygıtlarında ve seyrek/ince olarak sağlanan depolamada gereksiz bloklardan kurtulmak yararlıdır). Bunun 5. geçişte dosya sistemi tamamen denetlendikten SONRA ve yalnızca tanınabilir hatalar içermeyen bloklar için yapıldığı unutulmamalıdır. Ancak \fBe2fsck\fR’nın bir sorunu tam olarak saptayamadığı durumlar olabilir ve bu durumda bu seçenek daha fazla elle veri kurtarma işleminden de kurtarabilir.
+Tam dosya sistemi denetiminden sonra boş bloklar ve kullanılmayan dosya düğümü bloklarından kurtulmaya çalışır (katı hal aygıtlarında ve seyrek/ince olarak sağlanan depolamada gereksiz bloklardan kurtulmak yararlıdır). Bunun 5. geçişte dosya sistemi tamamen denetlendikten SONRA ve yalnızca tanınabilir hatalar içermeyen bloklar için yapıldığı unutulmamalıdır. Ancak \fBe2fsck\fR\&'nın bir sorunu tam olarak saptayamadığı durumlar olabilir ve bu durumda bu seçenek daha fazla elle veri kurtarma işleminden de kurtarabilir.
 .sp
 .TP 4
 \fBnodiscard\fR
@@ -115,7 +115,7 @@ Gereksiz genişlik veya derinliği ortadan kaldırarak genişletilmiş ağacı e
 .sp
 .TP 4
 \fBinode_count_fullmap\fR
-Çok sayıda sabit bağlı dosya içeren bir dosya sistemini denetlerken hız için belleği kullanarak takaslama yapar. Gereken bellek miktarı, dosya sistemindeki düğüm sayısıyla orantılıdır. Büyük dosya sistemleri için bu, gigabaytlarca bellek anlamına gelebilir. (Örneğin, 2,8 milyar düğüme sahip 40 TB’lık bir dosya sistemi, bu en iyileme etkinleştirilirse ek olarak 5,7 GB bellek tüketecektir.) Bu en iyileme, \fI/etc/e2fsck.conf\fR dosyasının seçenekler bölümünde de etkinleştirilebilir.
+Çok sayıda sabit bağlı dosya içeren bir dosya sistemini denetlerken hız için belleği kullanarak takaslama yapar. Gereken bellek miktarı, dosya sistemindeki düğüm sayısıyla orantılıdır. Büyük dosya sistemleri için bu, gigabaytlarca bellek anlamına gelebilir. (Örneğin, 2,8 milyar düğüme sahip 40 TB\&'lık bir dosya sistemi, bu en iyileme etkinleştirilirse ek olarak 5,7 GB bellek tüketecektir.) Bu en iyileme, \fI/etc/e2fsck.conf\fR dosyasının seçenekler bölümünde de etkinleştirilebilir.
 .sp
 .TP 4
 \fBno_inode_count_fullmap\fR
@@ -123,7 +123,7 @@ Gereksiz genişlik veya derinliği ortadan kaldırarak genişletilmiş ağacı e
 .sp
 .TP 4
 \fBreadahead_kb\fR
-\fBe2fsck\fR çalışma zamanını azaltma umuduyla meta verileri önden alacak kadar KiB bellek kullanır. Öntanımlı olarak, bu, iki blok grubunun dosya düğümü tablolarının boyutuna ayarlanır (normal bir ext4 dosya sisteminde genelde 4MiB); bu miktar toplam fiziksel belleğin 1/50’sinden fazlaysa, okuma işlemi devre dışı bırakılır. Okumayı tamamen devre dışı bırakmak için buna sıfır belirtilmelidir.
+\fBe2fsck\fR çalışma zamanını azaltma umuduyla meta verileri önden alacak kadar KiB bellek kullanır. Öntanımlı olarak, bu, iki blok grubunun dosya düğümü tablolarının boyutuna ayarlanır (normal bir ext4 dosya sisteminde genelde 4MiB); bu miktar toplam fiziksel belleğin 1/50\&'sinden fazlaysa, okuma işlemi devre dışı bırakılır. Okumayı tamamen devre dışı bırakmak için buna sıfır belirtilmelidir.
 .sp
 .TP 4
 \fBbmap2extent\fR
@@ -177,7 +177,7 @@ Dosya sistemi salt okunur açılır ve bütün sorulara “no/hayır” cevabın
 .sp
 .TP 4
 \fB-p\fR
-Onay beklemeden dosya sistemini düzeltir. Bu seçenek, \fBe2fsck\fR’in insan müdahalesi olmadan güvenli bir şekilde çözülebilecek herhangi bir dosya sistemi sorununu otomatik olarak düzeltmesini sağlar. \fBe2fsck\fR, sistem yöneticisinin ek düzeltici önlem almasını gerektirebilecek bir sorun tespit ederse, \fBe2fsck\fR sorunun bir açıklamasını basar ve ardından çıkış koduna mantıksal olarak veyalanan 4 değeriyle çıkar. (bkz: \fBÇIKIŞ KODLARI\fR bölümü) Bu seçenek normalde sistemin önyükleme betikleri tarafından kullanılır. \fB-n\fR veya \fB-y\fR seçenekleriyle birlikte belirtilemez.
+Onay beklemeden dosya sistemini düzeltir. Bu seçenek, \fBe2fsck\fR\&'in insan müdahalesi olmadan güvenli bir şekilde çözülebilecek herhangi bir dosya sistemi sorununu otomatik olarak düzeltmesini sağlar. \fBe2fsck\fR, sistem yöneticisinin ek düzeltici önlem almasını gerektirebilecek bir sorun tespit ederse, \fBe2fsck\fR sorunun bir açıklamasını basar ve ardından çıkış koduna mantıksal olarak veyalanan 4 değeriyle çıkar. (bkz: \fBÇIKIŞ KODLARI\fR bölümü) Bu seçenek normalde sistemin önyükleme betikleri tarafından kullanılır. \fB-n\fR veya \fB-y\fR seçenekleriyle birlikte belirtilemez.
 .sp
 .TP 4
 \fB-r\fR
@@ -232,7 +232,7 @@ Sürüm bilgilerini basar ve çıkar.
 .RE
 .sp
 .SH "SİNYALLER"
-\fBe2fsck\fR’ya gönderildiğinde hangi sinyallerin ne etkilere sebep olduğu aşağıda açıklanmıştır:
+\fBe2fsck\fR\&'ya gönderildiğinde hangi sinyallerin ne etkilere sebep olduğu aşağıda açıklanmıştır:
 .sp
 .TP 4
 \fBSIGUSR1\fR
@@ -247,9 +247,9 @@ Süreç ilerleme çubuğunun görüntülenmesine veya ilerleme bilgisi çıktıl
 .SH "HATALARIN BİLDİRİLMESİ"
 Her yazılımda hatalar olabilir. Şayet \fBe2fsck\fR’nin çökmesine sebep olan bir dosya sistemi veya \fBe2fsck\fR’nin tamir edemediği bir dosya sistemi bulursanız, lütfen yazara bunu bildirin.
 .sp
-Hata bildirirken mümkün olduğunca fazla bilgi ekleyin. En iyisi, \fBe2fsck\fR’nin hata iletisinin tamamını e-postanıza iliştirin. (e2fsck tarafından basılan iletilerin İngilizce olduğundan emin olun; Sisteminiz \fBe2fsck\fR’nın iletilerini başka bir dile çevrilecek şekilde yapılandırılmışsa, lütfen \fBLC_ALL\fR ortam değişkenine "C" değerini atayın, böylece \fBe2fsck\fR çıktısının dökümü benim için faydalı olacaktır.) Şayet kopyaların saklanabildiği yazılabilir bir dosya sisteminiz varsa, \fBscript\fR(1) komutu \fBe2fsck\fR’nin çıktılarının bir dosyaya yazılabilmesi için en kullanışlı yoldur.
+Hata bildirirken mümkün olduğunca fazla bilgi ekleyin. En iyisi, \fBe2fsck\fR’nin hata iletisinin tamamını e-postanıza iliştirin. (e2fsck tarafından basılan iletilerin İngilizce olduğundan emin olun; Sisteminiz \fBe2fsck\fR\&'nın iletilerini başka bir dile çevrilecek şekilde yapılandırılmışsa, lütfen \fBLC_ALL\fR ortam değişkenine "C" değerini atayın, böylece \fBe2fsck\fR çıktısının dökümü benim için faydalı olacaktır.) Şayet kopyaların saklanabildiği yazılabilir bir dosya sisteminiz varsa, \fBscript\fR(1) komutu \fBe2fsck\fR’nin çıktılarının bir dosyaya yazılabilmesi için en kullanışlı yoldur.
 .sp
-Ayrıca \fBdumpe2fs\fR(8)’nin çıktılarını göndermek de faydalı olabilir. Şayet özel bir düğüm veya düğümler \fBe2fsck\fR’ya sorun çıkarıyorsa, \fBdebugfs\fR(8)’i kullanmak ve ilgili düğümler hakkındaki raporu da göndermek iyi bir fikir olacaktır. Şayet bu düğüm bir dizin ise, \fBdebugfs dump\fR komutu bu dizin düğümünün içeriğini almanıza yardımcı olur. Daha sonra \fBuuencode\fR(1) komutunu bu çıktı üzerinde çalıştırdıktan sonra bana gönderin. Hatayı yeniden oluşturmaya yardımcı olmak için gönderebileceğiniz en kullanışlı veri, dosya sisteminin \fBe2image\fR(8) kullanılarak oluşturulan sıkıştırılmış ham imge dökümüdür. Daha fazla bilgi için \fBe2image\fR(8) kılavuz sayfasında bulunabilir.
+Ayrıca \fBdumpe2fs\fR(8)’nin çıktılarını göndermek de faydalı olabilir. Şayet özel bir düğüm veya düğümler \fBe2fsck\fR’ya sorun çıkarıyorsa, \fBdebugfs\fR(8)\&'i kullanmak ve ilgili düğümler hakkındaki raporu da göndermek iyi bir fikir olacaktır. Şayet bu düğüm bir dizin ise, \fBdebugfs dump\fR komutu bu dizin düğümünün içeriğini almanıza yardımcı olur. Daha sonra \fBuuencode\fR(1) komutunu bu çıktı üzerinde çalıştırdıktan sonra bana gönderin. Hatayı yeniden oluşturmaya yardımcı olmak için gönderebileceğiniz en kullanışlı veri, dosya sisteminin \fBe2image\fR(8) kullanılarak oluşturulan sıkıştırılmış ham imge dökümüdür. Daha fazla bilgi için \fBe2image\fR(8) kılavuz sayfasında bulunabilir.
 .sp
 \fBe2fsck -V\fR çıktısını da eklemeyi unutmayın, böylece hangi sürümü çalıştırdığınızı bilirim.
 .sp

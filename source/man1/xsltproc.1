@@ -26,7 +26,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "XSLTPROC" 1 "17 Ağustos 2022" "libxslt 1.1.36" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -80,11 +80,11 @@ Girdi olarak verilen belge bir HTML dosyasıdır.
 .sp
 .TP 4
 \fB--maxdepth\fR \fIDEĞER\fR
-\fBlibxslt\fR(3)’nin bir sonsuz döngüye girmesini engellemek üzere şablon yığıtının derinliğini sınırlamakta kullanılır. Öntanımlı değeri 3000’dir.
+\fBlibxslt\fR(3)\&'nin bir sonsuz döngüye girmesini engellemek üzere şablon yığıtının derinliğini sınırlamakta kullanılır. Öntanımlı değeri 3000\&'dir.
 .sp
 .TP 4
 \fB--maxvars\fR \fIDEĞER\fR
-Azami değişken sayısı. Öntanımlı değeri 15000’dir.
+Azami değişken sayısı. Öntanımlı değeri 15000\&'dir.
 .sp
 .TP 4
 \fB--maxparserdepth\fR \fIDEĞER\fR
@@ -100,7 +100,7 @@ Sözde rastgele sayı üretecini \fITOHUM\fR ile ilklendirir.
 .sp
 .TP 4
 \fB--nodtdattr\fR
-Belge DTD’sindeki öntanımlı öznitelikler uygulanmaz.
+Belge DTD\&'sindeki öntanımlı öznitelikler uygulanmaz.
 .sp
 .TP 4
 \fB--nomkdir\fR
@@ -108,7 +108,7 @@ Dizinlerin oluşturulması reddedilir.
 .sp
 .TP 4
 \fB--nonet\fR
-DTD’ler, öğeler ve belgeleri almak için İnternet kullanılmaz.
+DTD\&'ler, öğeler ve belgeleri almak için İnternet kullanılmaz.
 .sp
 .TP 4
 \fB--noout\fR
@@ -116,7 +116,7 @@ Sonuçlar çıktılanmaz.
 .sp
 .TP 4
 \fB--novalid\fR
-Belge DTD’sinin yüklenmesi adımını atlar.
+Belge DTD\&'sinin yüklenmesi adımını atlar.
 .sp
 .TP 4
 \fB--nowrite\fR
@@ -136,9 +136,9 @@ Dizin sistemde mevcut olan bir dizin olmalıdır.
 .RS 4
 .TP 4
 \fBBilgi:\fR
-\fIDİZİN\fR RFC 2396’nın “URI reference computation” bölümündeki açıklamaya uygun olmalıdır. Yani, örneğin \fB-o dizin\fR belki çalışır ama \fB-o dizin/\fR kesin çalışacaktır.
+\fIDİZİN\fR RFC 2396\&'nın “URI reference computation” bölümündeki açıklamaya uygun olmalıdır. Yani, örneğin \fB-o dizin\fR belki çalışır ama \fB-o dizin/\fR kesin çalışacaktır.
 .sp
-Ç.N. - Dizin belirtilir ve "I/O error : Is a directory" hatası alınırsa, dizinin sonuna örn. ’beni.sil’ eklenerek hatadan kurtulmak mümkündür. ’beni.sil’ dosyalarınızla birlikte belirttiğiniz dizine yazılacaktır. İçinde muhtemelen çıktılanması unutulan veya çıktılanmaması gereken şeyler olacaktır.
+Ç.N. - Dizin belirtilir ve "I/O error : Is a directory" hatası alınırsa, dizinin sonuna örn. \&'beni.sil\&' eklenerek hatadan kurtulmak mümkündür. \&'beni.sil\&' dosyalarınızla birlikte belirttiğiniz dizine yazılacaktır. İçinde muhtemelen çıktılanması unutulan veya çıktılanmaması gereken şeyler olacaktır.
 .sp
 .RE
 .IP
@@ -149,7 +149,7 @@ XSLT şablonuna \fIİSİM DEĞER\fR çifti aktarmakta kullanılır. Böyle en fa
 .sp
 .TP 4
 \fB--path\fR \fI"YOL(LAR)"\fR
-DTD’leri, öğeleri ve belgeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
+DTD\&'leri, öğeleri ve belgeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
 .sp
 .TP 4
 \fB--profile\fR, \fB--norman\fR

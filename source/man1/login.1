@@ -22,7 +22,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "LOGIN" 1 "1 Şubat 2022" "Shadow-utils 4.11.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -65,13 +65,13 @@ Başarılı bir girişten sonra, herhangi bir sistem iletisi ve postanın varlı
 .sp
 Kullanıcı ve grup kimliğiniz, \fB$HOME, $SHELL, $PATH, $LOGNAME\fR ve \fB$MAIL\fR değerleri \fI/etc/passwd\fR dosyasındaki değerlere göre ayarlanır. \fBulimit\fR, \fBumask\fR ve \fBnice\fR değerleri de GECOS alanındaki girdilere göre ayarlanır.
 .sp
-Bazı kurulumlarda, \fB$TERM\fR ortam değişkenine, \fI/etc/ttytype\fR’da belirtildiği gibi, \fBtty\fR satırınızdaki uçbirim türü atanır.
+Bazı kurulumlarda, \fB$TERM\fR ortam değişkenine, \fI/etc/ttytype\fR\&'da belirtildiği gibi, \fBtty\fR satırınızdaki uçbirim türü atanır.
 .sp
 Komut yorumlayıcınız bir ilklendirme betiği çalıştırabilir.
 .sp
 Bir alt sistem oturumunda, oturum açma kabuğunun ilk karakteri "*" olur. Belirtilen ev dizini, kullanıcının oturum açacağı yeni dosya sisteminin kök dizini olarak kullanılır.
 .sp
-\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)’in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
+\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)\&'in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -97,7 +97,7 @@ Bu \fBlogin\fR sürümünün belli durumlarda kullanılabilen farklı derleme se
 .sp
 Dosya konumları sistem yapılandırmasına bağlı olarak farklı olabilir.
 .sp
-\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)’in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
+\fBlogin\fR, kullanıcıları \fIutmp\fR dosyasından kaldırmaktan sorumlu DEĞİLDİR. Bir uçbirim oturumunun görünen sahipliğini temizlemek \fBgetty\fR(8) ve \fBinit\fR(8)\&'in sorumluluğundadır. \fBlogin\fR uygulamasını kabuk isteminden \fBexec\fR kullanmadan çalıştırırsanız, oturum açan kullanıcı, bu "alt oturum"u kapattıktan sonra bile oturum açmış gibi görünmeye devam edecektir.
 .sp
 Her uygulamada olduğu gibi, \fBlogin\fR görünümü de sahte olabilir. Güvenilmez kullanıcıların bir makineye fiziksel erişimi varsa, saldırgan bunu makinenin başına oturacak bir sonraki kişinin parolasını almak için kullanabilir. Linux altında, SAK mekanizması, kullanıcılar tarafından güvenilir bir yol başlatmak ve bu tür saldırıları önlemek için kullanılabilir.
 .sp
@@ -249,13 +249,13 @@ Kullanıcının parola GECOS alanındaki nice, ulimit ve umask ile \fI/etc/limit
 .sp
 .TP 4
 \fBTTYGROUP\fR (dizge), \fBTTYPERM\fR (dizge)
-Uçbirim ayrıcalıkları: Oturum açma uçbiriminin grubu \fBTTYGROUP\fR olur ve izinler \fBTTYPERM\fR’e atanır.
+Uçbirim ayrıcalıkları: Oturum açma uçbiriminin grubu \fBTTYGROUP\fR olur ve izinler \fBTTYPERM\fR\&'e atanır.
 .sp
 Öntanımlı olarak, uçbirimin sahibi kullanıcının birincil grubu ve izinleri 0600 olur.
 .sp
 \fBTTYGROUP\fR ya grup ismi ya da sayısal grup kimliği olmaldır.
 .sp
-Uçbirimlerin sahibi olan özel bir grubun sahibi olduğu \fBwrite\fR uygulamanız varsa, \fBTTYGROUP\fR’u grup numarası ve \fBTTYPERM\fR’i 0620 yapın. Aksi takdirde, \fBTTYGROUP\fR satırını yorum satırı ve \fBTTYPERM\fR’i 622 veya 600 yapın.
+Uçbirimlerin sahibi olan özel bir grubun sahibi olduğu \fBwrite\fR uygulamanız varsa, \fBTTYGROUP\fR\&'u grup numarası ve \fBTTYPERM\fR\&'i 0620 yapın. Aksi takdirde, \fBTTYGROUP\fR satırını yorum satırı ve \fBTTYPERM\fR\&'i 622 veya 600 yapın.
 .sp
 .TP 4
 \fBTTYTYPE_FILE\fR (dizge)
@@ -271,7 +271,7 @@ Dosya kipi oluşturma maskesi bu değerle ilklendirilir. Belirtilmezse maske 022
 .sp
 \fBuseradd\fR(8) ve \fBnewusers\fR(8) komutları \fBHOME_MODE\fR tanımlıysa ev dizininin kipini atamak için bu maskeyi kullanır.
 .sp
-Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask’ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
+Ayrıca, \fBlogin\fR tarafından kullanıcının ilk umask\&'ını tanımlamakta kullanılır. Dikkat: Bu maske (\fBQUOTAS_ENAB\fR tanımlıysa) kullanıcının GECOS satırı tarafından veya \fBlimits\fR(5) dosyasında \fBK\fR tanımlayıcıdaki sınır belirtimine göre yeniden tanımlanabilir.
 .sp
 .TP 4
 \fBUSERGROUPS_ENAB\fR (mantıksal)

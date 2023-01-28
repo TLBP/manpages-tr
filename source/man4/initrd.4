@@ -37,7 +37,7 @@
  *     phone: (302)654-5478
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "INITRD" 4 "Mart 2019" "Linux man-pages 5.10" ">Özel Dosyalar"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -48,7 +48,7 @@
 initrd - önyükleyici ilklendirmeli RAM disk
 .sp
 .SH "YAPILANDIRMA"
-\fI/dev/initrd\fR aygıtı salt-okunur olup büyük aygıt numarası 1, küçük aygıt numarası 250’dir. \fI/dev/initrd\fR genellikle 0400 izinleriyle (sadece root için okuma izni) root:disk sahipliğinde bir dosyadır. Linux sisteminde \fI/dev/initrd\fR aygıtı yoksa şu komutlarla oluşturulabilir:
+\fI/dev/initrd\fR aygıtı salt-okunur olup büyük aygıt numarası 1, küçük aygıt numarası 250\&'dir. \fI/dev/initrd\fR genellikle 0400 izinleriyle (sadece root için okuma izni) root:disk sahipliğinde bir dosyadır. Linux sisteminde \fI/dev/initrd\fR aygıtı yoksa şu komutlarla oluşturulabilir:
 .sp
 .RS 4
 .nf
@@ -70,11 +70,11 @@ Açılış işleminin ilk döneminde çekirdek çalışır ve \fI/dev/initrd\fR 
 .PD 1
 .RS 1
 .IP 1. 3
-Önyükleyici çekirdeği ve \fI/dev/initrd\fR’nin içeriğini belleğe yükler.
+Önyükleyici çekirdeği ve \fI/dev/initrd\fR\&'nin içeriğini belleğe yükler.
 .IP 2. 3
 Çekirdek çalışmaya başlayınca, çekirdek \fI/dev/initrd\fR aygıtının sıkıştırmasını çözüp içeriğini \fI/dev/ram0\fR aygıtına kopyaladıktan sonra \fI/dev/initrd\fR tarafından kullanılan belleği serbest bırakır.
 .IP 3. 3
-Çekirdek, başlangıç kök dosya sistemi olarak \fI/dev/ram0\fR’ı oku-yaz erişimiyle bağlar.
+Çekirdek, başlangıç kök dosya sistemi olarak \fI/dev/ram0\fR\&'ı oku-yaz erişimiyle bağlar.
 .IP 4. 3
 İstenen normal kök dosya sistemi zaten başlangıç kök dosya sistemi ise (yani \fI/dev/ram0\fR) çekirdek son açılış adımına atlar.
 .IP 5. 3
@@ -94,11 +94,11 @@ Aşağıdaki önyükleyici seçenekleri \fBinitrd\fR ile kullanıldığı zaman 
 .sp
 .TP 4
 \fBinitrd\fR=\fIdosya-ismi\fR
-\fI/dev/initrd\fR’nin içeriği olarak yüklenecek dosyayı belirtmek içindir. \fBLOADLIN\fR için bu bir komut satırı seçeneğidir. \fBLILO\fR için bunu \fI/etc/lilo.conf\fR dosyasında kullanabilirsiniz. Bu seçenekle belirtilen dosya ismi genellikle gzipli dosya sistemi imgesidir.
+\fI/dev/initrd\fR\&'nin içeriği olarak yüklenecek dosyayı belirtmek içindir. \fBLOADLIN\fR için bu bir komut satırı seçeneğidir. \fBLILO\fR için bunu \fI/etc/lilo.conf\fR dosyasında kullanabilirsiniz. Bu seçenekle belirtilen dosya ismi genellikle gzipli dosya sistemi imgesidir.
 .sp
 .TP 4
 \fBnoinitrd\fR
-Bu önyükleme seçeneği iki dönemli açılış işlemini iptal eder. Çekirdek, \fI/dev/initrd\fR ilklendirilmemiş gibi olağan açılışı gerçekleştirir. Bu seçenekle, önyükleyici tarafından belleğe yüklenen \fI/dev/initrd\fR’nin içeriği korunur. Bu seçenek \fI/dev/initrd\fR’nin içeriğinin herhangi bir veri olmasına izin verir, dosya sistemi imgesi olması gerekmez. Bu durumda \fI/dev/initrd\fR aygıtı salt okunurdur ve sistem açıldıktan sonra da salt okunur olarak kalabilir.
+Bu önyükleme seçeneği iki dönemli açılış işlemini iptal eder. Çekirdek, \fI/dev/initrd\fR ilklendirilmemiş gibi olağan açılışı gerçekleştirir. Bu seçenekle, önyükleyici tarafından belleğe yüklenen \fI/dev/initrd\fR\&'nin içeriği korunur. Bu seçenek \fI/dev/initrd\fR\&'nin içeriğinin herhangi bir veri olmasına izin verir, dosya sistemi imgesi olması gerekmez. Bu durumda \fI/dev/initrd\fR aygıtı salt okunurdur ve sistem açıldıktan sonra da salt okunur olarak kalabilir.
 .sp
 .TP 4
 \fBroot\fR=\fIaygıt-ismi\fR
@@ -117,7 +117,7 @@ echo 0x365 >/proc/sys/kernel/real-root-dev
 .fi
 .sp
 .RE
-Bir NFS örneği olarak, IP numarası 193.8.232.7 ve ismi ’idefix’ olan bir sistem için 193.8.232.7 IP numarasıyla bir yerel ağlı NFS sunucusu üzerindeki \fI/var/nfsroot\fR NFS dizinini normal kök dosya sistemi olarak değiştirecek kabuk komutu:
+Bir NFS örneği olarak, IP numarası 193.8.232.7 ve ismi `idefix’ olan bir sistem için 193.8.232.7 IP numarasıyla bir yerel ağlı NFS sunucusu üzerindeki \fI/var/nfsroot\fR NFS dizinini normal kök dosya sistemi olarak değiştirecek kabuk komutu:
 .sp
 .RS 4
 .nf
@@ -130,14 +130,14 @@ echo 255 >/proc/sys/kernel/real-root-dev
 .RE
 .sp
 .SS "Kullanım"
-\fIinitrd\fR’nin esas oluşturulma sebebi sistem kurulumunda modüler çekirdek yapılandırmasını mümkün kılmaktı.
+\fIinitrd\fR\&'nin esas oluşturulma sebebi sistem kurulumunda modüler çekirdek yapılandırmasını mümkün kılmaktı.
 .sp
 Olası bir sistem kurulum senaryosu şöyle olabilir:
 .sp
 .PD 1
 .RS 1
 .IP 1. 3
-Önyükleyici uygulaması disketten ya da başka bir ortamdan mümkün en küçük çekirdekle (yani sadece \fI/dev/ram\fR, \fI/dev/initrd\fR ve ext2 dosya sistemi desteğiyle) başlar ve başlangıç dosya sisteminin gzipli sürümü ile \fI/dev/initrd\fR’yi yükler. Bu kullanıcıya sorularak, sondalanarak veya ikisini de kullanarak yapılabilir.
+Önyükleyici uygulaması disketten ya da başka bir ortamdan mümkün en küçük çekirdekle (yani sadece \fI/dev/ram\fR, \fI/dev/initrd\fR ve ext2 dosya sistemi desteğiyle) başlar ve başlangıç dosya sisteminin gzipli sürümü ile \fI/dev/initrd\fR\&'yi yükler. Bu kullanıcıya sorularak, sondalanarak veya ikisini de kullanarak yapılabilir.
 .IP 2. 3
 \fB/linuxrc\fR çalıştırılabiliri normal kök dosya sistemini (1) ve dağıtım ortamını (2) (CD-ROM, ağ, teyp, vs.) bağlamak için gerekenleri (aygıt türü, aygıt sürücüsü, dosya sistemi gibi) saptar.
 .IP 3. 3
@@ -151,19 +151,19 @@ Bundan sonra çekirdek normal kök dosya sistemini bağlar.
 .IP 7. 3
 Artık normal kök dosya sistemi kullanıma hazırdır, yani önyükleyici kurulabilir.
 .IP 8. 3
-Sistemi açmak için kullanılacak modüllerle birlikte bir dosya sistemini \fI/dev/initrd\fR’ye yükleyecek önyükleyici yapılandırılır (Yani, \fI/dev/ram0\fR aygıtında değişiklik yapılabilir, sonra sistemden ayrılıp son olarak \fI/dev/ram0\fR içindeki imge bir dosyaya yazılabilir).
+Sistemi açmak için kullanılacak modüllerle birlikte bir dosya sistemini \fI/dev/initrd\fR\&'ye yükleyecek önyükleyici yapılandırılır (Yani, \fI/dev/ram0\fR aygıtında değişiklik yapılabilir, sonra sistemden ayrılıp son olarak \fI/dev/ram0\fR içindeki imge bir dosyaya yazılabilir).
 .IP 9. 3
 Sistem artık açılabilir hale gelmiştir ve ek kurulum işlemlerine devam edilebilir.
 .sp
 .RE
 .PD 0
-Yukarıdaki senaryoda \fI/dev/initrd\fR’ye düşen anahtar rol, çekirdeği yeniden derlemeden, büyük bir çekirdek kullanmak zorunda kalmadan hatta bir başlangıç çekirdeği seçilmesi bile gerekmeden normal sistem işlemleri sırasında kullanılan yapılandırma verilerinin yeniden kullanılabilirliğini sağlamaktır.
+Yukarıdaki senaryoda \fI/dev/initrd\fR\&'ye düşen anahtar rol, çekirdeği yeniden derlemeden, büyük bir çekirdek kullanmak zorunda kalmadan hatta bir başlangıç çekirdeği seçilmesi bile gerekmeden normal sistem işlemleri sırasında kullanılan yapılandırma verilerinin yeniden kullanılabilirliğini sağlamaktır.
 .sp
 Bir ikinci senaryo da tek bir yönetim ağında farklı donanım yapılandırmalı sistemler üzerinde çalışan Linux kurulumları içindir. Böyle durumlarda, küçük bir çekirdek ailesi (ideal olarak bir çekirdek) kullanılması ve yapılandırmaya ilişkin sisteme özel yapılandırmaların mümkün olduğu kadar küçük tutulması istenebilir. Bu durumda, ihtiyaç duyulan tüm modülleri içeren bir dosya oluşturulur. Bundan sonra sadece \fB/linuxrc\fR dosyası veya \fB/linuxrc\fR tarafından çalıştırılan bir dosya farklı olabilirdi.
 .sp
-Bir üçüncü senaryo kurtarma diskleri için daha elverişlidir. Kök dosya sisteminin disk bölümünün yeri gibi bilgiler önyükleme sırasında gerekli olmadığından bunun için, \fI/dev/initrd\fR’de yüklü sistem olası sağlamlık sınamasından sonra otomatik algılama ya da kullanıcıya sorma kullanabilir.
+Bir üçüncü senaryo kurtarma diskleri için daha elverişlidir. Kök dosya sisteminin disk bölümünün yeri gibi bilgiler önyükleme sırasında gerekli olmadığından bunun için, \fI/dev/initrd\fR\&'de yüklü sistem olası sağlamlık sınamasından sonra otomatik algılama ya da kullanıcıya sorma kullanabilir.
 .sp
-Son ama en çok kullanılan senaryo CD-ROM’dan kolay kurulum için \fBinitrd\fR kullanan CD-ROM’lu Linux dağıtımlarının kullandığı senaryodur. Dağıtım, herhangi bir disket kullanmadan \fI/dev/initrd\fR’yi doğrudan yüklemek için LOADLIN’i kullanabilir. Dağıtım ayrıca, bir açılış disketinden LILO kullanıp, \fI/dev/initrd\fR üzerinden CD-ROM’daki daha büyük bir ram disk’i yükleyebilir.
+Son ama en çok kullanılan senaryo CD-ROM\&'dan kolay kurulum için \fBinitrd\fR kullanan CD-ROM\&'lu Linux dağıtımlarının kullandığı senaryodur. Dağıtım, herhangi bir disket kullanmadan \fI/dev/initrd\fR\&'yi doğrudan yüklemek için LOADLIN\&'i kullanabilir. Dağıtım ayrıca, bir açılış disketinden LILO kullanıp, \fI/dev/initrd\fR üzerinden CD-ROM\&'daki daha büyük bir ram disk\&'i yükleyebilir.
 .sp
 .sp
 .SH "İLGİLİ DOSYALAR"

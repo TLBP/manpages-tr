@@ -14,7 +14,7 @@
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
  *
- * The GNU General Public License’s references to "object code"
+ * The GNU General Public License\&'s references to "object code"
  * and "executables" are to be interpreted as the output of any
  * document formatting or typesetting system, including
  * intermediate and printed output.
@@ -34,7 +34,7 @@
  *
  * Modified 2003-04-04, aeb
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "ENCRYPT" 3 "1 Kasım 2020" "Linux man-pages 5.10" "Kütüphane İşlevleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -90,10 +90,10 @@ Bunların herbiri \fB-lcrypt\fR ile ilintileme gerektirir.
 .SH "AÇIKLAMA"
 .TP 4
 \fBUyarı:\fR
-Artık güvenli kabul edilmeyen DES blok şifresini kullandıkları için \fBcrypt\fR(), \fBcrypt_r\fR(), \fBsetkey\fR() ve \fBsetkey_r\fR() glibc-2.28’de kaldırıldı. Uygulamaların \fBlibcrypt\fR gibi daha güncel bir şifreleme kütüphanesine geçmesi gerekir.
+Artık güvenli kabul edilmeyen DES blok şifresini kullandıkları için \fBcrypt\fR(), \fBcrypt_r\fR(), \fBsetkey\fR() ve \fBsetkey_r\fR() glibc-2.28\&'de kaldırıldı. Uygulamaların \fBlibcrypt\fR gibi daha güncel bir şifreleme kütüphanesine geçmesi gerekir.
 .sp
 .PP
-Bu işlevler 64 bitlik iletileri şifreler ve şifresini çözer. \fBsetkey\fR() işlevi \fBencrypt\fR() işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan \fIkey\fR değişkeni 64 baytlık bir dizidir ve her baytın değeri 1 ya da 0’dır. \fIkey\fR[n] dizisinin \fBn=8*i-1\fR indisli elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
+Bu işlevler 64 bitlik iletileri şifreler ve şifresini çözer. \fBsetkey\fR() işlevi \fBencrypt\fR() işlevi tarafından kullanılan anahtarı belirler. Burada kullanılan \fIkey\fR değişkeni 64 baytlık bir dizidir ve her baytın değeri 1 ya da 0\&'dır. \fIkey\fR[n] dizisinin \fBn=8*i-1\fR indisli elemanları yoksayılır, bu durumda asıl anahtar uzunluğu 56 bit olur.
 .sp
 \fBencrypt\fR() işlevi aktarılan tamponda değişiklik yapar, \fIedflag\fR değişkenine 0 aktarılırsa \fIblock\fR içeriğini şifreler, 1 aktarılırsa şifresini çözer. \fIkey\fR gibi \fIblock\fR değişkeni de şifrelenmiş değerin bit gösterimini içerir. Sonuç aynı tampon içinde döner.
 .sp
@@ -126,7 +126,7 @@ Yukarıdaki işlevler çağrılmadan önce \fIerrno\fR değişkeni sıfırlanır
 .sp
 .TP 4
 \fBENOSYS\fR
-İşlev kütüphanede bulunmamaktadır (Örneğin, ABD’nin ihracat sınırlamalarından dolayı).
+İşlev kütüphanede bulunmamaktadır (Örneğin, ABD\&'nin ihracat sınırlamalarından dolayı).
 .sp
 .PP
 .sp
@@ -161,9 +161,9 @@ T}
 \fBencrypt_r\fR() ve \fBsetkey_r\fR() işlevi GNU eklentisidir.
 .sp
 .SH "EK BİLGİ"
-Glibc’deki yararlanım: Bkz. \fBcrypt\fR(3)
+Glibc\&'deki yararlanım: Bkz. \fBcrypt\fR(3)
 .sp
-Glibc’deki özellikler: Gibc-2.2’de bu işlevler DES algoritmasını kullanmaktadır.
+Glibc\&'deki özellikler: Gibc-2.2\&'de bu işlevler DES algoritmasını kullanmaktadır.
 .sp
 .SH "ÖRNEKLER"
 .RS 4
@@ -196,19 +196,19 @@ main(void)
 \&
     encrypt(buf, 0);
     for (int i = 0; i < 8; i++) {
-        for (int j = 0, txt[i] = ’\\0’; j < 8; j++) {
+        for (int j = 0, txt[i] = \&'\\0\&'; j < 8; j++) {
             txt[i] |= buf[i * 8 + j] << j;
         }
-        txt[8] = ’\\0’;
+        txt[8] = \&'\\0\&';
     }
     printf("Şifrelemeden sonra:  %s\\n", txt);
 \&
     encrypt(buf, 1);
     for (int i = 0; i < 8; i++) {
-        for (int j = 0, txt[i] = ’\\0’; j < 8; j++) {
+        for (int j = 0, txt[i] = \&'\\0\&'; j < 8; j++) {
             txt[i] |= buf[i * 8 + j] << j;
         }
-        txt[8] = ’\\0’;
+        txt[8] = \&'\\0\&';
     }
     printf("Şifre çözüldükten sonra:  %s\\n", txt);
     exit(EXIT_SUCCESS);

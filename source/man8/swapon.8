@@ -24,7 +24,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
@@ -46,7 +46,7 @@
  * Tue Apr 30 03:32:07 1996: Added some text from A. Koppenhoefer
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "SWAPON" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -71,7 +71,7 @@ swapoff - aygıt ve dosyalar için sayfalama ve takaslama işlemlerini kapatır
 .SH "AÇIKLAMA" 
 \fBswapon\fR, sayfalama ve takaslama işlemlerinin gerçekleşeceği aygıtları belirtmek için kullanılır.
 .sp
-\fIözeldosya\fR’da kullanılan aygıt veya dosya belirtilir. Bir aygıtı etiket veya UUID ile belirtmek için \fB-L\fR \fIetiket\fR veya \fB-U\fR \fIuuid\fR seçenekleri kullanılmalıdır
+\fIözeldosya\fR\&'da kullanılan aygıt veya dosya belirtilir. Bir aygıtı etiket veya UUID ile belirtmek için \fB-L\fR \fIetiket\fR veya \fB-U\fR \fIuuid\fR seçenekleri kullanılmalıdır
 .sp
 \fBswapon\fR çağrıları normalde sistem önyükleme betiklerinden yapılır ve tüm takas aygıtlarını kullanılabilir hale getirir, böylece sayfalama ve takas etkinliği birkaç aygıt ve dosya arasında serpiştirilir.
 .sp
@@ -89,7 +89,7 @@ Takas destek cihazı iptal veya kırpma işlemini destekliyorsa takas iptallerin
 .RS
 .TP 4
 \fBonce\fR
-\fBswapon\fR’da tüm takas alanı için tek seferlik bir iptal işlemi gerçekleştirir.
+\fBswapon\fR\&'da tüm takas alanı için tek seferlik bir iptal işlemi gerçekleştirir.
 .sp
 .TP 4
 \fBpages\fR
@@ -110,7 +110,7 @@ Sayfa boyutu çalışan çekirdeğinkiyle eşleşmiyorsa, takas alanını yenide
 .sp
 .TP 4
 \fB-L\fR \fIetiket\fR
-\fIetiket\fR’i belirtilen disk bölümü kullanılır. (Disk bölümü için \fI/proc/partitions\fR dosyasına bakılır.)
+\fIetiket\fR\&'i belirtilen disk bölümü kullanılır. (Disk bölümü için \fI/proc/partitions\fR dosyasına bakılır.)
 .sp
 .TP 4
 \fB-o\fR, \fB--options\fR \fIseçenekler\fR
@@ -218,12 +218,12 @@ Libmount hata ayıklama çıktısı etkin olur.
 .sp
 \fBcp\fR(1) veya \fBtruncate\fR(1) gibi komutlar, delikli dosyalar oluşturur. Bu dosyalar swapon tarafından reddedilir.
 .sp
-\fBfallocate\fR(1) tarafından oluşturulan önceden tahsisli dosyalar da, dosya sistemine bağlı olarak delikli dosyalar olarak yorumlanabilir. Önceden tahsisli takas dosyaları, Linux 4.18’den beri XFS’de desteklenmektedir.
+\fBfallocate\fR(1) tarafından oluşturulan önceden tahsisli dosyalar da, dosya sistemine bağlı olarak delikli dosyalar olarak yorumlanabilir. Önceden tahsisli takas dosyaları, Linux 4.18\&'den beri XFS\&'de desteklenmektedir.
 .sp
 Takas dosyası oluşturmanın en taşınabilir çözümü \fBdd\fR(1) ve \fI/dev/zero\fR kullanmaktır.
 .sp
 .SS "Btrfs"
-Btrfs’deki takas dosyaları, \fBnocow\fR özniteliğine sahip dosyalarda Linux 5.0’dan beri desteklenmektedir. Daha fazla ayrıntı için bkz: \fBbtrfs\fR(5)
+Btrfs\&'deki takas dosyaları, \fBnocow\fR özniteliğine sahip dosyalarda Linux 5.0\&'dan beri desteklenmektedir. Daha fazla ayrıntı için bkz: \fBbtrfs\fR(5)
 .sp
 .SS "NFS"
 NFS üzerinden takas çalışmayabilir.

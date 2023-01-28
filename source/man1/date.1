@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DATE" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,7 +23,7 @@ date - sistem tarih ve saatini görüntüler veya ayarlar
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBdate\fR geçerli zamanı belirtilen \fIBİÇEM\fR’de görüntüler veya sistem zamanını ayarlar.
+\fBdate\fR geçerli zamanı belirtilen \fIBİÇEM\fR\&'de görüntüler veya sistem zamanını ayarlar.
 .sp
 Uzun seçeneklerdeki zorunlu girdiler kısa seçenekler için de zorunludur.
 .sp
@@ -41,7 +41,7 @@ Uzun seçeneklerdeki zorunlu girdiler kısa seçenekler için de zorunludur.
 .sp
 .TP 4
 \fB-I\fR, \fB--iso-8601\fR=[\fIBİÇEM\fR]
-Tarih/zaman dizgesi ISO 8601 uyumlu çıktılanır. \fIBİÇEM\fR izgesinde tarih ve saat hassasiyeti belirtmek için ’date’ (öntanımlıdır), ’hours’, ’minutes’, ’seconds’ veya ’ns’ belirtilebilir.
+Tarih/zaman dizgesi ISO 8601 uyumlu çıktılanır. \fIBİÇEM\fR izgesinde tarih ve saat hassasiyeti belirtmek için \&'date\&' (öntanımlıdır), \&'hours\&', \&'minutes\&', \&'seconds\&' veya \&'ns\&' belirtilebilir.
 .br
 Örnekler:
 .sp
@@ -68,7 +68,7 @@ Tarih ve zaman RFC 5322 uyumlu çıktılanır. Örnek: Mon, 04 Apr 2022 16:17:39
 .sp
 .TP 4
 \fB--rfc-3339\fR=\fIBİÇEM\fR
-Tarih ve zaman RFC 3339 uyumlu çıktılanır. \fIBİÇEM\fR dizgesinde tarih ve saat hassasiyeti belirtmek için ’hours’, ’minutes’, ’seconds’ veya ’ns’ belirtilebilir.
+Tarih ve zaman RFC 3339 uyumlu çıktılanır. \fIBİÇEM\fR dizgesinde tarih ve saat hassasiyeti belirtmek için \&'hours\&', \&'minutes\&', \&'seconds\&' veya \&'ns\&' belirtilebilir.
 .br
 Örnek:
 .sp
@@ -89,7 +89,7 @@ $ date --rfc-3339=seconds
 .sp
 .TP 4
 \fB-s\fR, \fB--set\fR=\fIDİZGE\fR
-Saati belirtilen \fIDİZGE\fR’ye göre ayarlar.
+Saati belirtilen \fIDİZGE\fR\&'ye göre ayarlar.
 .sp
 .TP 4
 \fB-u\fR, \fB--utc\fR, \fB--universal\fR
@@ -220,7 +220,7 @@ Yılın çeyreği (1..4)
 .sp
 .TP 4
 \fB%s\fR
-’00:00:00 1970-01-01 UTC’den beri geçen saniye sayısı
+`00:00:00 1970-01-01 UTC\&'den beri geçen saniye sayısı
 .sp
 .TP 4
 \fB%S\fR
@@ -236,7 +236,7 @@ Yatay sekme.
 .sp
 .TP 4
 \fB%u\fR
-Haftanın günü (1..7); 1, Pazartesi’ye karşılıktır.
+Haftanın günü (1..7); 1, Pazartesi\&'ye karşılıktır.
 .sp
 .TP 4
 \fB%U\fR
@@ -307,7 +307,7 @@ alanlar sıfırlarla yastıklanır
 .sp
 .TP 3
 \fB÷\fR
-alanlar sıfırlarla yastıklanır ve 4’ten fazla basamaklı yılların önüne ’÷’ konur
+alanlar sıfırlarla yastıklanır ve 4\&'ten fazla basamaklı yılların önüne \&'÷\&' konur
 .sp
 .TP 3
 \fB^\fR
@@ -321,27 +321,27 @@ mümkünse büyük harf için küçük harf veya tersi kullanılır.
 Bu niteleyicilerden sonra isteğe bağlı olarak alan genişliği bir ondalık sayı olarak belirtilir, bunu isteğe bağlı bir değiştirici izleyebilir: E ile mümkünse yerelin diğer gösterimi, O ile eğer elverişli ise yerelin diğer sayısal simgeleri ifade edilir.
 .sp
 .SH "ÖRNEKLER"
-1970-01-01 UTC’den beri geçen saniyeleri tarihe çevir:
+1970-01-01 UTC\&'den beri geçen saniyeleri tarihe çevir:
 .sp
 .RS 7
 .nf
-$ date --date=’@2147483647’
+$ date --date=\&'@2147483647\&'
 .fi
 .sp
 .RE
-ABD’nin batı kıyısındaki zamanı göster (TZ’yi bulmak için \fBtzselect\fR(1) kullan):
+ABD\&'nin batı kıyısındaki zamanı göster (TZ\&'yi bulmak için \fBtzselect\fR(1) kullan):
 .sp
 .RS 7
 .nf
-$ TZ=’America/Los_Angeles’ date
+$ TZ=\&'America/Los_Angeles\&' date
 .fi
 .sp
 .RE
-ABD’nin batı kıyısında gelecek Cuma sabah 9 için yerel zamanı göster:
+ABD\&'nin batı kıyısında gelecek Cuma sabah 9 için yerel zamanı göster:
 .sp
 .RS 7
 .nf
-$ date --date=’TZ="America/Los_Angeles" 09:00 next Fri’
+$ date --date=\&'TZ="America/Los_Angeles" 09:00 next Fri\&'
 .fi
 .sp
 .RE
@@ -361,7 +361,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/date>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) date invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) date invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006 Yalçın Kolukısa

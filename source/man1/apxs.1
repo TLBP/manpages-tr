@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "APXS" 1 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -45,7 +45,7 @@ apxs - Apache Eklenti Aracı
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBapxs\fR, Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusu için ek modül derleme ve kurulum aracıdır. Bu araç sayesinde, bir veya daha fazla kaynak veya nesne \fIdosya\fR’sından bir dinamik paylaşımlı nesne (DSO - "Dynamic Shared Object" kısaltması) derlemek ve bu nesneyi (modülü) Apache sunucusuna çalışma anında \fBmod_so\fR modülünün \fBLoadModule\fR yönergesi üzerinden yüklemek mümkün olmaktadır.
+\fBapxs\fR, Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusu için ek modül derleme ve kurulum aracıdır. Bu araç sayesinde, bir veya daha fazla kaynak veya nesne \fIdosya\fR\&'sından bir dinamik paylaşımlı nesne (DSO - "Dynamic Shared Object" kısaltması) derlemek ve bu nesneyi (modülü) Apache sunucusuna çalışma anında \fBmod_so\fR modülünün \fBLoadModule\fR yönergesi üzerinden yüklemek mümkün olmaktadır.
 .sp
 Bu eklenti mekanizmasını platformunuzda kullanmak için DSO desteğinin olması ve \fBhttpd\fR(8) çalıştırılabilirinin \fBmod_so\fR modülünü içerecek şekilde derlenmiş olması gerekir. Eğer bunlar mevcut değilse \fBapxs\fR aracı durumu size bildirecektir. Bunu aşağıdaki komutla kendiniz de sınayabilirsiniz:
 .sp
@@ -64,7 +64,7 @@ gcc -fpic -DSHARED_MODULE -I/dosya/yolu/apache/include -c mod_foo.c
 ld -Bshareable -o mod_foo.so mod_foo.o
 cp mod_foo.so /dosya/yolu/apache/modules/mod_foo.so
 chmod 755 /dosya/yolu/apache/modules/mod_foo.so
-[’foo’ modülü /dosya/yolu/apache/etc/httpd.conf’ta etkinleştiriliyor]
+[`foo\&' modülü /dosya/yolu/apache/etc/httpd.conf\&'ta etkinleştiriliyor]
 $ apachectl restart
 /dosya/yolu/apache/sbin/apachectl restart: httpd not running, trying to start
 [Tue Mar 31 11:27:55 1998] [debug] mod_so.c(303): loaded module foo_module
@@ -73,9 +73,9 @@ $ _
 .fi
 .sp
 .RE
-\fIdosya\fR olarak bir C kaynak dosyası (\fI.c\fR), bir nesne dosyası (\fI.o\fR) ve hatta bir kütüphane arşivi archive (\fI.a\fR) belirtebilirsiniz. \fBapxs\fR aracı bu dosya uzantılarını tanıdığından C dosyalarını derleme işleminden, arşiv ve nesne dosyalarını ise doğrudan ilintileme işleminden geçirir. Fakat böyle önceden derlenmiş nesne dosyalarını kullanırken, dinamik paylaşımlı nesne olarak kullanılmalarını sağlamak üzere konumdan bağımsız kod (PIC) üretecek şekilde derlenmiş olduklarından emin olmalısınız. Örneğin GCC’yi bunun için daima \fB-fpic\fR seçeneği ile kullanmalısınız. Diğer C derleyiciler için, \fBapxs\fR’in nesne dosyalarını derlerken kullanacağı seçenekleri öğrenmek için o derleyicilerin kılavuz sayfalarına bakınız.
+\fIdosya\fR olarak bir C kaynak dosyası (\fI.c\fR), bir nesne dosyası (\fI.o\fR) ve hatta bir kütüphane arşivi archive (\fI.a\fR) belirtebilirsiniz. \fBapxs\fR aracı bu dosya uzantılarını tanıdığından C dosyalarını derleme işleminden, arşiv ve nesne dosyalarını ise doğrudan ilintileme işleminden geçirir. Fakat böyle önceden derlenmiş nesne dosyalarını kullanırken, dinamik paylaşımlı nesne olarak kullanılmalarını sağlamak üzere konumdan bağımsız kod (PIC) üretecek şekilde derlenmiş olduklarından emin olmalısınız. Örneğin GCC\&'yi bunun için daima \fB-fpic\fR seçeneği ile kullanmalısınız. Diğer C derleyiciler için, \fBapxs\fR\&'in nesne dosyalarını derlerken kullanacağı seçenekleri öğrenmek için o derleyicilerin kılavuz sayfalarına bakınız.
 .sp
-Apache’deki DSO desteği ile ilgili daha ayrıntılı bilgi edinmek için <https://httpd.apache.org/docs/2.4/mod/mod_so.html>: \fBmod_so\fR belgesini okumakla yetinmeyip \fIsrc/modules/standard/mod_so.c\fR kaynak dosyasını da okuyunuz.
+Apache\&'deki DSO desteği ile ilgili daha ayrıntılı bilgi edinmek için <https://httpd.apache.org/docs/2.4/mod/mod_so.html>: \fBmod_so\fR belgesini okumakla yetinmeyip \fIsrc/modules/standard/mod_so.c\fR kaynak dosyasını da okuyunuz.
 .sp
 .SH "SEÇENEKLER"
 .SS "Ortak Seçenekler"
@@ -88,14 +88,14 @@ Apache’deki DSO desteği ile ilgili daha ayrıntılı bilgi edinmek için <htt
 .SS "Sorgu Seçenekleri"
 .TP 4
 \fB-q\fR
-\fBhttpd\fR(8)’yi derlemekte kullanılacak değişkenler ve ortam ayarları için bir sorgu gerçekleştirir. \fIsorgu\fR belirtilmeksizin çağrıldığında, bilinen değişkenleri değerleriyle birlikte basar. İsteğe bağlı \fB-v\fR seçeneği liste çıktısını biçemler.
+\fBhttpd\fR(8)\&'yi derlemekte kullanılacak değişkenler ve ortam ayarları için bir sorgu gerçekleştirir. \fIsorgu\fR belirtilmeksizin çağrıldığında, bilinen değişkenleri değerleriyle birlikte basar. İsteğe bağlı \fB-v\fR seçeneği liste çıktısını biçemler.
 .sp
-Modülünüzü yükleyecek \fBhttpd\fR(8)’yi derlemek için kullanılacak ayarları elle belirtmek için kullanılır. Örneğin, Apache’nin C başlık dosyalarının yerini kendi Makefile dosyalarınızın içinde şöyle belirtebilirsiniz:
+Modülünüzü yükleyecek \fBhttpd\fR(8)\&'yi derlemek için kullanılacak ayarları elle belirtmek için kullanılır. Örneğin, Apache\&'nin C başlık dosyalarının yerini kendi Makefile dosyalarınızın içinde şöyle belirtebilirsiniz:
 .sp
 .RS 4
 .RS 4
 .nf
-INC=-I’apxs -q INCLUDEDIR’
+INC=-I`apxs -q INCLUDEDIR`
 .fi
 .sp
 .RE
@@ -153,7 +153,7 @@ Bu seçenek \fBlibtool --mode=link\fR komutuna doğrudan seçenek aktarmak için
 .sp
 .TP 4
 \fB-p\fR
-Bu seçenek \fBapxs\fR’in \fIapr/apr-util\fR kütüphaneleriyle ilintilenmesini sağlar. \fIapr/apr-util\fR kütüphanelerini kullanan yardımcı uygulamaları derlerken yararlıdır.
+Bu seçenek \fBapxs\fR\&'in \fIapr/apr-util\fR kütüphaneleriyle ilintilenmesini sağlar. \fIapr/apr-util\fR kütüphanelerini kullanan yardımcı uygulamaları derlerken yararlıdır.
 .sp
 .PP
 .sp
@@ -164,7 +164,7 @@ Kurulum işlemini belirtir ve dinamik olarak paylaşımlı nesneleri sunucunun \
 .sp
 .TP 4
 \fB-a\fR
-İlgili \fBLoadModule\fR satırını Apache’nin \fIhttpd.conf\fR yapılandırma dosyasına otomatik olarak ekleyerek veya böyle bir satır varsa bunu etkin kılarak modülü etkinleştirir.
+İlgili \fBLoadModule\fR satırını Apache\&'nin \fIhttpd.conf\fR yapılandırma dosyasına otomatik olarak ekleyerek veya böyle bir satır varsa bunu etkin kılarak modülü etkinleştirir.
 .sp
 .TP 4
 \fB-A\fR
@@ -172,13 +172,13 @@ Kurulum işlemini belirtir ve dinamik olarak paylaşımlı nesneleri sunucunun \
 .sp
 .TP 4
 \fB-e\fR
-Modülü kurmaya çalışmaksızın Apache’nin \fIhttpd.conf\fR yapılandırma dosyasını \fB-i\fR işlemine benzer şekilde \fB-a\fR ve \fB-A\fR seçenekleri ile düzenleme işlemini belirtir.
+Modülü kurmaya çalışmaksızın Apache\&'nin \fIhttpd.conf\fR yapılandırma dosyasını \fB-i\fR işlemine benzer şekilde \fB-a\fR ve \fB-A\fR seçenekleri ile düzenleme işlemini belirtir.
 .sp
 .PP
 .sp
 .sp
 .SH "ÖRNEKLER"
-Apache’nin sunucu işlevselliğini genişletmek amacıyla kullanacağınız \fImod_foo.c\fR adında bir Apache modülünüz olduğunu varsayalım. Öncelikle, C kaynak dosyasını, Apache sunucusuna çalışma anında yüklenmeye uygun bir paylaşımlı nesne olarak derlemeniz gerekir. Bunu sağlamak için şu komutları vermelisiniz:
+Apache\&'nin sunucu işlevselliğini genişletmek amacıyla kullanacağınız \fImod_foo.c\fR adında bir Apache modülünüz olduğunu varsayalım. Öncelikle, C kaynak dosyasını, Apache sunucusuna çalışma anında yüklenmeye uygun bir paylaşımlı nesne olarak derlemeniz gerekir. Bunu sağlamak için şu komutları vermelisiniz:
 .sp
 .RS 4
 .nf
@@ -198,7 +198,7 @@ $ apxs -i -a mod_foo.la
 /dosya/yolu/libtool --mode=install cp mod_foo.la /dosya/yolu/apache/modules
 \&...
 chmod 755 /dosya/yolu/apache/modules/mod_foo.so
-[’foo’ modülü /dosya/yolu/apache/conf/httpd.conf’da etkinleştiriliyor]
+[`foo\&' modülü /dosya/yolu/apache/conf/httpd.conf\&'da etkinleştiriliyor]
 $ _
 .fi
 .sp
@@ -247,11 +247,11 @@ apxs -i -a -n "foo" mod_foo.la
 /dosya/yolu/libtool --mode=install cp mod_foo.la /dosya/yolu/apache/modules
 \&...
 chmod 755 /dosya/yolu/apache/modules/mod_foo.so
-[’foo’ modülü /dosya/yolu/apache/conf/httpd.conf’ta etkinleştiriliyor]
+[`foo\&' modülü /dosya/yolu/apache/conf/httpd.conf\&'ta etkinleştiriliyor]
 apachectl restart
 /dosya/yolu/apache/sbin/apachectl restart: httpd not running, trying to start
 chmod 755 /dosya/yolu/apache/modules/mod_foo.so
-[’foo’ modülü /dosya/yolu/apache/etc/httpd.conf’ta etkinleştiriliyor]
+[`foo\&' modülü /dosya/yolu/apache/etc/httpd.conf\&'ta etkinleştiriliyor]
 apachectl restart
 /dosya/yolu/apache/sbin/apachectl restart: httpd not running, trying to start
 [Tue Mar 31 11:27:55 1998] [debug] mod_so.c(303): loaded module foo_module

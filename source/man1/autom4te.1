@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "AUTOM4TE" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,11 +21,11 @@ autom4te - M4 sayesinde dosya ve komut dosyaları oluşturur
 .PP
 .sp
 .SH "AÇIKLAMA"
-GNU M4’ü gereksiz çalıştırmalardan kaçınarak \fIDOSYALAR\fR üzerinde çalıştırır. İzleme yapılıyorsa izleri, dondurma işlemi yapılıyorsa donmuş dosyayı, aksi takdirde \fIDOSYALAR\fR’ın açılımını çıktılar.
+GNU M4\&'ü gereksiz çalıştırmalardan kaçınarak \fIDOSYALAR\fR üzerinde çalıştırır. İzleme yapılıyorsa izleri, dondurma işlemi yapılıyorsa donmuş dosyayı, aksi takdirde \fIDOSYALAR\fR\&'ın açılımını çıktılar.
 .sp
-\fIDOSYALAR\fR’ın bazılarının adı ’\fIDOSYA\fR\fI.m4f\fR’ ise, bunlar önceki tüm dosyaların M4 donmuş dosyaları olarak kabul edilir (bu nedenle yüklenmezler). ’\fIDOSYA\fR\fI.m4f\fR’ bulunamazsa, önceki tüm dosyalarla birlikte ’\fIDOSYA\fR\fI.m4\fR’ kullanılır.
+\fIDOSYALAR\fR\&'ın bazılarının adı \&'\fIDOSYA\fR\fI.m4f\fR\&' ise, bunlar önceki tüm dosyaların M4 donmuş dosyaları olarak kabul edilir (bu nedenle yüklenmezler). \&'\fIDOSYA\fR\fI.m4f\fR\&' bulunamazsa, önceki tüm dosyalarla birlikte \&'\fIDOSYA\fR\fI.m4\fR\&' kullanılır.
 .sp
-Bazı dosyalar isteğe bağlı olabilir, yani yalnızca içerilecek dosyalar yolunda (include path) bulunursa işlenir, ancak bunların uzantısı ’\fI.m4?\fR’ olmalıdır (dosya uzantısında o soru imi yoktur).
+Bazı dosyalar isteğe bağlı olabilir, yani yalnızca içerilecek dosyalar yolunda (include path) bulunursa işlenir, ancak bunların uzantısı \&'\fI.m4?\fR\&' olmalıdır (dosya uzantısında o soru imi yoktur).
 .sp
 .SS "İşlem kipleri:"
 .TP 4
@@ -46,7 +46,7 @@ Geçici dosyalar kaldırılmaz.
 .sp
 .TP 4
 \fB-o\fR, \fB--output=\fR\fIDOSYA\fR
-Çıktıyı \fIDOSYA\fR’ya kaydeder (’-’ öntanımlı olup standart çıktıya yazılır).
+Çıktıyı \fIDOSYA\fR\&'ya kaydeder (\&'-\&' öntanımlı olup standart çıktıya yazılır).
 .sp
 .TP 4
 \fB-f\fR, \fB--force\fR
@@ -99,55 +99,55 @@ M4sugar çıktısı oluşturur
 .sp
 .SS "Uyarı SINIFları:"
 .TP 4
-’cross’
+\&'cross\&'
 çapraz derleme sorunları
 .sp
 .TP 4
-’obsolete’
+\&'obsolete\&'
 atıl duruma gelmiş özellikler ve yapılar (öntanımlı)
 .sp
 .TP 4
-’override’
+\&'override\&'
 kullanıcının yaptığı Automake kural ve değişken tanımları
 .sp
 .TP 4
-’portability’
+\&'portability\&'
 taşınabilirlik sorunları (gnu ve gnits kiplerinde öntanımlı)
 .sp
 .TP 4
-’portability-recursive’
+\&'portability-recursive\&'
 iç içe make değişkenleri (\fB-Wportability\fR ile öntanımlı)
 .sp
 .TP 4
-’extra-portability’
+\&'extra-portability\&'
 belirsiz araçlarla ilgili ek taşınabilirlik sorunları
 .sp
 .TP 4
-’syntax’
+\&'syntax\&'
 sözdizimsel olarak belirsiz yapılar (öntanımlı)
 .sp
 .TP 4
-’unsupported’
+\&'unsupported\&'
 desteklenmeyen ve tamamlanmamış özellikler (öntanımlı)
 .sp
 .TP 4
-’all’
+\&'all\&'
 Bütün uyarılar
 .sp
 .TP 4
-’no-\fISINIF\fR’
+\&'no-\fISINIF\fR\&'
 \fISINIF\fRa ilişkin tüm uyarıları kapatır
 .sp
 .TP 4
-’none’
+\&'none\&'
 bütün uyarıları kapatır
 .sp
 .TP 4
-’error’
+\&'error\&'
 uyarılar hata sayılır
 .sp
 .PP
-Ortam değişkenleri ’\fBM4\fR’ ve ’\fBWARNINGS\fR’ önemsenir.
+Ortam değişkenleri \&'\fBM4\fR\&' ve \&'\fBWARNINGS\fR\&' önemsenir.
 .sp
 .SS "Kütüphane dizinleri:"
 .TP 4
@@ -167,7 +167,7 @@ Ortam değişkenleri ’\fBM4\fR’ ve ’\fBWARNINGS\fR’ önemsenir.
 .sp
 .TP 4
 \fB-p\fR, \fB--preselect\fR=\fIMAKRO\fR
-Gelecekteki bir çalıştırma için \fIMAKRO\fR’yu izlemeye hazırlar.
+Gelecekteki bir çalıştırma için \fIMAKRO\fR\&'yu izlemeye hazırlar.
 .sp
 .PP
 .sp
@@ -178,7 +178,7 @@ Gelecekteki bir çalıştırma için \fIMAKRO\fR’yu izlemeye hazırlar.
 .sp
 .PP
 .sp
-.SS "BiÇEM için ’$f:$l:$n:$%’ öntanımlıdır ve aşağıdaki öncelemler kullanılabilir:"
+.SS "BiÇEM için `$f:$l:$n:$%\&' öntanımlıdır ve aşağıdaki öncelemler kullanılabilir:"
 .TP 4
 $$
 özel $ karakteri

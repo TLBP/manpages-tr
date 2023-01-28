@@ -26,7 +26,7 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "XMLLINT" 1 "17 Ağustos 2022" "libxml2 2.10.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -80,13 +80,13 @@ Gerçeklemenin dahili kopyasını sınar.
 .sp
 .TP 4
 \fB--dtdvalid\fR \fIURL\fR
-Geçerlilik doğrulamasında kullanılacak DTD \fIURL\fR’den (İnternette kaynağın bulunduğu konumu belirten eşsiz adresten) okunur.
+Geçerlilik doğrulamasında kullanılacak DTD \fIURL\fR\&'den (İnternette kaynağın bulunduğu konumu belirten eşsiz adresten) okunur.
 .sp
 .TP 4
 \fB--dtdvalidfpi\fR \fIBGT\fR
-Geçerlilik doğrulaması için Biçimsel Genel Tanımlayıcı \fIBGT\fR ile belirtilen DTD’yi kullanır, bunun çalışması için Biçimsel Genel Tanımlayıcıyı dışa aktaran bir katalog gerekeceği unutulmamalıdır.
+Geçerlilik doğrulaması için Biçimsel Genel Tanımlayıcı \fIBGT\fR ile belirtilen DTD\&'yi kullanır, bunun çalışması için Biçimsel Genel Tanımlayıcıyı dışa aktaran bir katalog gerekeceği unutulmamalıdır.
 .sp
-Biçimsel Genel Tanımlayıcı, DOCTYPE bildirimi içinde PUBLIC sözcüğünden sonra, URL/URI’den önce gelir ve 4 alandan oluşur. Bir DOCTYPE örneği (BGT vurgulanmıştır):
+Biçimsel Genel Tanımlayıcı, DOCTYPE bildirimi içinde PUBLIC sözcüğünden sonra, URL/URI\&'den önce gelir ve 4 alandan oluşur. Bir DOCTYPE örneği (BGT vurgulanmıştır):
 .sp
 .RS 4
 .RS 4
@@ -98,15 +98,15 @@ Biçimsel Genel Tanımlayıcı, DOCTYPE bildirimi içinde PUBLIC sözcüğünden
 .RE
 .RE
 .IP
-\fB//\fR bir ayraçtır ve BGT’nin alanlarını ayırmakta kullanılır.
+\fB//\fR bir ayraçtır ve BGT\&'nin alanlarını ayırmakta kullanılır.
 .sp
-İlk alan \fB-\fR, DTD’nin biçimsel bir standarda bağlı olup olmadığını gösterir. DTD onaylanmamışsa (örneğin siz yazmışsınızdır) \fB-\fR, standart dışı bir kuruluş tarafından onaylamışsa \fB+\fR kullanılır. Resmi bir standart tarafından onaylanmışsa bu alan resmi standarda bir başvuru içermelidir.
+İlk alan \fB-\fR, DTD\&'nin biçimsel bir standarda bağlı olup olmadığını gösterir. DTD onaylanmamışsa (örneğin siz yazmışsınızdır) \fB-\fR, standart dışı bir kuruluş tarafından onaylamışsa \fB+\fR kullanılır. Resmi bir standart tarafından onaylanmışsa bu alan resmi standarda bir başvuru içermelidir.
 .sp
-İkinci alan, DTD’den sorumlu kişi veya kuruluşu betimler (örnekte: "W3C").
+İkinci alan, DTD\&'den sorumlu kişi veya kuruluşu betimler (örnekte: "W3C").
 .sp
-Üçüncü alan, DTD’de açıklanan belge türünü betimler (örnekte: "DTD XHTML 1.0 Transitional"). Genelde sürüm numarası gibi ayırıcı özellikler içerir.
+Üçüncü alan, DTD\&'de açıklanan belge türünü betimler (örnekte: "DTD XHTML 1.0 Transitional"). Genelde sürüm numarası gibi ayırıcı özellikler içerir.
 .sp
-Dördüncü alan, DTD’de kullanılan dili iki harfle betimler (örnekte: "EN" - ingilizce).
+Dördüncü alan, DTD\&'de kullanılan dili iki harfle betimler (örnekte: "EN" - ingilizce).
 .sp
 .TP 4
 \fB--debug\fR
@@ -182,7 +182,7 @@ CDATA bölümleri yerine eşdeğeri metin düğümleri kullanılır.
 .sp
 .TP 4
 \fB--nonet\fR
-DTD’ler ve öğe başvuruları için interneti kullanmaz.
+DTD\&'ler ve öğe başvuruları için interneti kullanmaz.
 .sp
 .TP 4
 \fB--noout\fR
@@ -206,11 +206,11 @@ Gereksiz isim uzayı bildirimleri kaldırılır.
 .sp
 .TP 4
 \fB--output\fR \fIDOSYA\fR
-\fBxmllint\fR’in çözümleme sonucunu kaydedeceği dosyanın yolu belirtilir. Genellikle uygulama bir ağaç oluşturur ve bunu standart çıktıya gönderir, bu seçenekle sonuçlanan XML ağacı \fIDOSYA\fRya kaydedilir.
+\fBxmllint\fR\&'in çözümleme sonucunu kaydedeceği dosyanın yolu belirtilir. Genellikle uygulama bir ağaç oluşturur ve bunu standart çıktıya gönderir, bu seçenekle sonuçlanan XML ağacı \fIDOSYA\fRya kaydedilir.
 .sp
 .TP 4
 \fB--path\fR \fI"YOL(LAR)"\fR
-DTD’leri veya öğeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
+DTD\&'leri veya öğeleri yüklemek için \fI"YOL(LAR)"\fR tarafından belirtilen dosya sistemi yollarının (boşluk veya iki nokta üst üste ile ayrılmış) listesi kullanılır. Boşluk ayraçlı yollar tırnak içine alınmalıdır.
 .sp
 .TP 4
 \fB--pattern\fR \fIŞABLON\fR
@@ -258,7 +258,7 @@ Kullanıcı G/Ç desteğini sınar.
 .sp
 .TP 4
 \fB--valid\fR
-Belgenin kullanılan DTD’ye uygun olarak hazırlanıp hazırlanmadığına bakar (DTD: Document Type Definition - Belge Türü Tanımlaması). DTD geçerlilik sınaması komut satırından \fB-–dtdvalid\fR seçeneği ile bir DTD belirtilerek de yapılabilir. Öntanımlı olarak, \fBxmllint\fR ayrıca, belgenin iyi biçimli olup olmadığıyla ilgili sınamaları da yapar.
+Belgenin kullanılan DTD\&'ye uygun olarak hazırlanıp hazırlanmadığına bakar (DTD: Document Type Definition - Belge Türü Tanımlaması). DTD geçerlilik sınaması komut satırından \fB-–dtdvalid\fR seçeneği ile bir DTD belirtilerek de yapılabilir. Öntanımlı olarak, \fBxmllint\fR ayrıca, belgenin iyi biçimli olup olmadığıyla ilgili sınamaları da yapar.
 .sp
 .TP 4
 \fB--version\fR
@@ -323,7 +323,7 @@ Bu yardım iletilerini görüntüler.
 .sp
 .TP 4
 \fBls\fR \fIYOL\fR
-\fIYOL\fR’un (şayet belirtilmişse) veya geçerli dizinin içeriğini listeler.
+\fIYOL\fR\&'un (şayet belirtilmişse) veya geçerli dizinin içeriğini listeler.
 .sp
 .TP 4
 \fBpwd\fR
@@ -379,7 +379,7 @@ Sınıflandırılmadı.
 .sp
 .TP 4
 2
-DTD’de hata var.
+DTD\&'de hata var.
 .sp
 .TP 4
 3

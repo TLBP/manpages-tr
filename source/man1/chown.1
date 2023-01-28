@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "CHOWN" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -23,10 +23,10 @@ chown - dosyanın sahibini ve grubunu değiştirir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Bu kılavuz, \fBchown\fR komutunun GNU sürümünü anlatmaktadır. \fBchown\fR, belirtilen her dosya için kullanıcı ve/veya grup sahipliğini, seçenek olmayan ilk girdiye göre değiştirir. Sadece bir kullanıcı adı veya sayısal kullanıcı kimliği belirtilmişse, kullanıcı belirtilen dosyaların sahibi olur ve dosya grubu değişmez. Şayet kullanıcı isminden sonra boşluksuz iki nokta üst üste imi ile ayrılmış grup ismi (veya sayısal grup kimliği) varsa, grubun sahipliği de değişir. Buradaki önemli nokta, kullanıcı ismi ve grup ismi arasında boşluk olmaması gerektiğidir. Kullanıcı isminden sonra iki nokta üst üste imi var fakat grup ismi yok ise; kullancı dosyanın sahibi olur ve dosya grubu, kullanıcının birincil grubu olarak değiştirilir. İki nokta üst üste ve grup adı belirtilmiş ama kullanıcı adı belirtilmemişse, sadece dosya grubu değiştirilir. Bu durumda; \fBchown\fR, \fBchgrp\fR’un yaptığını yapar. Sadece iki nokta üst üste imi varsa veya \fISAHİP\fR:\fIGRUP\fR terimi hiç verilmemişse dosya sahipliğinde bir değişiklik yapılmaz.
+Bu kılavuz, \fBchown\fR komutunun GNU sürümünü anlatmaktadır. \fBchown\fR, belirtilen her dosya için kullanıcı ve/veya grup sahipliğini, seçenek olmayan ilk girdiye göre değiştirir. Sadece bir kullanıcı adı veya sayısal kullanıcı kimliği belirtilmişse, kullanıcı belirtilen dosyaların sahibi olur ve dosya grubu değişmez. Şayet kullanıcı isminden sonra boşluksuz iki nokta üst üste imi ile ayrılmış grup ismi (veya sayısal grup kimliği) varsa, grubun sahipliği de değişir. Buradaki önemli nokta, kullanıcı ismi ve grup ismi arasında boşluk olmaması gerektiğidir. Kullanıcı isminden sonra iki nokta üst üste imi var fakat grup ismi yok ise; kullancı dosyanın sahibi olur ve dosya grubu, kullanıcının birincil grubu olarak değiştirilir. İki nokta üst üste ve grup adı belirtilmiş ama kullanıcı adı belirtilmemişse, sadece dosya grubu değiştirilir. Bu durumda; \fBchown\fR, \fBchgrp\fR\&'un yaptığını yapar. Sadece iki nokta üst üste imi varsa veya \fISAHİP\fR:\fIGRUP\fR terimi hiç verilmemişse dosya sahipliğinde bir değişiklik yapılmaz.
 .sp
 .SH "SEÇENEKLER"
-Her \fIDOSYA\fR’nın sahip ve/veya grubunu \fISAHİP\fR ve/veya \fIGRUP\fR olarak değiştirir. \fB--reference\fR seçeneği ile \fIDOSYA\fR’nın sahip ve grubu \fIÖRNEK-DOSYA\fR’nınkilerle aynı yapılır.
+Her \fIDOSYA\fR\&'nın sahip ve/veya grubunu \fISAHİP\fR ve/veya \fIGRUP\fR olarak değiştirir. \fB--reference\fR seçeneği ile \fIDOSYA\fR\&'nın sahip ve grubu \fIÖRNEK-DOSYA\fR\&'nınkilerle aynı yapılır.
 .sp
 .TP 4
 \fB-c\fR, \fB--changes\fR
@@ -54,15 +54,15 @@ Sadece şimdiki kullanıcı ve/veya grup isimlerinin burada tanımlananlar ile e
 .sp
 .TP 4
 \fB--no-preserve-root\fR
-Kök dizin (’/’) özellikle işleme alınmaz (öntanımlı).
+Kök dizin (\&'/\&') özellikle işleme alınmaz (öntanımlı).
 .sp
 .TP 4
 \fB--preserve-root\fR
-Kök dizin (’/’) üzerinde ardışık işlem başarısız olur.
+Kök dizin (\&'/\&') üzerinde ardışık işlem başarısız olur.
 .sp
 .TP 4
 \fB--reference\fR=\fIÖRNEK-DOSYA\fR
-Bir \fISAHİP\fR:\fIGRUP\fR belirtmek yerine \fIÖRNEK-DOSYA\fR’nın değerleri kullanılır.
+Bir \fISAHİP\fR:\fIGRUP\fR belirtmek yerine \fIÖRNEK-DOSYA\fR\&'nın değerleri kullanılır.
 .sp
 .TP 4
 \fB-R\fR, \fB--recursive\fR
@@ -92,7 +92,7 @@ Bir dizine sembolik bağ olan bağlar saptandığında işlem bağa değil hedef
 Sembolik bağlar izlenmez (öntanımlı).
 .sp
 .PP
-Sahip belirtilmemişse, sahiplik değiştirilmez. Grup belirtilmemişse dosya grubu değiştirilmez ama grup isminden sonra bir ’:’ varsa, dosyanın grubu kullanıcının birincil grubu olarak değiştirilir. \fISAHİP\fR ve \fIGRUP\fR birer isim olabileceği gibi birer sayısal değer de olabilir.
+Sahip belirtilmemişse, sahiplik değiştirilmez. Grup belirtilmemişse dosya grubu değiştirilmez ama grup isminden sonra bir \&':\&' varsa, dosyanın grubu kullanıcının birincil grubu olarak değiştirilir. \fISAHİP\fR ve \fIGRUP\fR birer isim olabileceği gibi birer sayısal değer de olabilir.
 .sp
 .SH "ÖRNEKLER"
 .TP 4
@@ -123,7 +123,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .br
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/chown>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) chown invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) chown invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006 Yalçın Kolukısa

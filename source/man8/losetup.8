@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "LOSETUP" 8 "Ocak 2021" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -52,7 +52,7 @@ Dönüş aygıtını yeniden boyutlandırmak için:
 .sp
 .sp
 .SH "AÇIKLAMA"
-\fBlosetup\fR, dönüş aygıtlarını normal dosyalar veya blok aygıtlarıyla ilişkilendirmek, dönüş aygıtlarını sistemden ayırmak ve bir dönüş aygıtının durumunu sorgulamak için kullanılır. Yalnızca \fI/dev/loop\fR\fIN\fR verilirse, \fIN\fR’inci dönüş aygıtının durumu gösterilir. Herhangi bir seçenek verilmezse, tüm dönüş aygıtlarının durumu gösterilir.
+\fBlosetup\fR, dönüş aygıtlarını normal dosyalar veya blok aygıtlarıyla ilişkilendirmek, dönüş aygıtlarını sistemden ayırmak ve bir dönüş aygıtının durumunu sorgulamak için kullanılır. Yalnızca \fI/dev/loop\fR\fIN\fR verilirse, \fIN\fR\&'inci dönüş aygıtının durumu gösterilir. Herhangi bir seçenek verilmezse, tüm dönüş aygıtlarının durumu gösterilir.
 .sp
 .TP 4
 \fBBilgi:\fR
@@ -104,7 +104,7 @@ Veri sonu, veri başlangıcından itibaren \fIBOYUT\fR bayta ayarlanır. \fIBOYU
 .sp
 .TP 4
 \fB-b\fR, \fB--sector-size\fR \fIBOYUT\fR
-Dönüş aygıtının mantıksal sektör boyutunu \fIBOYUT\fR bayta ayarlar (Linux 4.14’ten beri). Seçenek, yeni bir dönüş aygıtı oluşturulurken veya halihazırda var olan dönüş aygıtının sektör boyutunu değiştirmek için bağımsız komut oluştururken kullanılabilir.
+Dönüş aygıtının mantıksal sektör boyutunu \fIBOYUT\fR bayta ayarlar (Linux 4.14\&'ten beri). Seçenek, yeni bir dönüş aygıtı oluşturulurken veya halihazırda var olan dönüş aygıtının sektör boyutunu değiştirmek için bağımsız komut oluştururken kullanılabilir.
 .sp
 .TP 4
 \fB-c\fR, \fB--set-capacity\fR \fI/dev/loop\fR[\fIN\fR]

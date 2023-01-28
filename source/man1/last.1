@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "LAST" 1 "17 Şubat 2022" "util-linux 2.38" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -25,11 +25,11 @@ lastb - hatalı oturum açmış/kapatmış kullanıcıları listeler
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBlast\fR \fI/var/log/wtmp\fR dosyasında (veya \fB-f\fR seçeneğiyle belirtilen dosyada) geriye doğru arama yapar ve bu dosya oluşturulduğundan beri oturum açan (ve oturumu kapatan) tüm kullanıcıların bir listesini görüntüler. Bir veya daha fazla \fIkullanıcı\fR adı ve/veya \fItty\fR verilebilir, bu durumda \fBlast\fR sadece bunlarla eşleşen girdileri gösterecektir. \fItty\fR’lerin isimleri kısaltılabilir, bu nedenle \fBlast 0\fR ile \fBlast tty0\fR aynıdır.
+\fBlast\fR \fI/var/log/wtmp\fR dosyasında (veya \fB-f\fR seçeneğiyle belirtilen dosyada) geriye doğru arama yapar ve bu dosya oluşturulduğundan beri oturum açan (ve oturumu kapatan) tüm kullanıcıların bir listesini görüntüler. Bir veya daha fazla \fIkullanıcı\fR adı ve/veya \fItty\fR verilebilir, bu durumda \fBlast\fR sadece bunlarla eşleşen girdileri gösterecektir. \fItty\fR\&'lerin isimleri kısaltılabilir, bu nedenle \fBlast 0\fR ile \fBlast tty0\fR aynıdır.
 .sp
 \fBSIGINT\fR sinyali (genellikle kesme tuşu Ctrl-C tarafından oluşturulur) veya \fBSIGQUIT\fR sinyali yakalandığında, \fBlast\fR dosyada ne kadar arama yapıldığını gösterir; \fBSIGINT\fR sinyali ile \fBlast\fR sonlanır.
 .sp
-Sözde kullanıcı \fBreboot\fR’un, sistemi yeniden her başlatışı günlüğe kaydedilir. Bu nedenle, \fBlast reboot\fR, günlük dosyası oluşturulduğundan beri tüm yeniden başlatmaların kaydını gösterecektir.
+Sözde kullanıcı \fBreboot\fR\&'un, sistemi yeniden her başlatışı günlüğe kaydedilir. Bu nedenle, \fBlast reboot\fR, günlük dosyası oluşturulduğundan beri tüm yeniden başlatmaların kaydını gösterecektir.
 .sp
 \fBlastb\fR ile \fBlast\fR aynıdır, ancak öntanımlı olarak tüm hatalı oturum açma girişimlerini içeren \fI/var/log/btmp\fR dosyasındaki kayıtları gösterir.
 .sp

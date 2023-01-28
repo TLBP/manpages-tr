@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "AUTOCONF" 1 "Ocak 2021" "GNU autoconf 2.71" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,7 +21,7 @@ autoconf - configure betiğini üretir
 .PP
 .sp
 .SH "AÇIKLAMA"
-Verilmişse \fIŞABLON-DOSYA\fR’dan, verilmemişse, varsa \fIconfigure.ac\fR’den, yoksa \fIconfigure.in\fR’den \fBconfigure\fR betiğini oluşturur. Çıktı, \fIŞABLON-DOSYA\fR verilmişse standart çıktıya, verilmemişse \fBconfigure\fR dosyasına yollanır.
+Verilmişse \fIŞABLON-DOSYA\fR\&'dan, verilmemişse, varsa \fIconfigure.ac\fR\&'den, yoksa \fIconfigure.in\fR\&'den \fBconfigure\fR betiğini oluşturur. Çıktı, \fIŞABLON-DOSYA\fR verilmişse standart çıktıya, verilmemişse \fBconfigure\fR dosyasına yollanır.
 .sp
 .SS "İşlem kipleri:"
 .TP 4
@@ -46,7 +46,7 @@ Tüm dosyalar eski sürüm kabul edilir.
 .sp
 .TP 4
 \fB-o\fR, \fB--output=\fR\fIDOSYA\fR
-Çıktıyı \fIDOSYA\fR’ya kaydeder (Öntanımlı olarak standart çıktıya yazılır).
+Çıktıyı \fIDOSYA\fR\&'ya kaydeder (Öntanımlı olarak standart çıktıya yazılır).
 .sp
 .TP 4
 \fB-W\fR, \fB--warnings\fR=\fISINIF\fR
@@ -56,55 +56,55 @@ Tüm dosyalar eski sürüm kabul edilir.
 .sp
 .SS "Uyarı SINIFları şunlardır:"
 .TP 4
-’cross’
+\&'cross\&'
 çapraz derleme sorunları
 .sp
 .TP 4
-’gnu’
+\&'gnu\&'
 GNU kodlama standartları (gnu ve gnits kodlarında öntanımlı)
 .sp
 .TP 4
-’obsolete’
+\&'obsolete\&'
 atıl duruma gelmiş özellikler ve oluşumlar (öntanımlı)
 .sp
 .TP 4
-’override’
+\&'override\&'
 kullanıcı tarafından yeniden tanımlanmış Automake kuralları ve değişkenleri
 .sp
 .TP 4
-’portability’
+\&'portability\&'
 taşınabilirlik sorunları (gnu ve gnits kiplerinde öntanımlı)
 .sp
 .TP 4
-’portability-recursive’
+\&'portability-recursive\&'
 iç içe Make değişkenleri (\fB-Wportability\fR ile öntanımlı)
 .sp
 .TP 4
-’extra-portability’
+\&'extra-portability\&'
 belirsiz araçlarla ilgili ek taşınabilirlik sorunları
 .sp
 .TP 4
-’syntax’
+\&'syntax\&'
 sözdizimsel olarak belirsiz yapılar (öntanımlı)
 .sp
 .TP 4
-’unsupported’
+\&'unsupported\&'
 desteklenmeyen ve tamamlanmamış özellikler (öntanımlı)
 .sp
 .TP 4
-’all’
+\&'all\&'
 Bütün uyarılar
 .sp
 .TP 4
-’no-\fISINIF\fR’
+\&'no-\fISINIF\fR\&'
 \fISINIF\fRa ilişkin tüm uyarılar kapatılır
 .sp
 .TP 4
-’none’
+\&'none\&'
 bütün uyarıları kapatılır
 .sp
 .PP
-Ortam değişkenleri ’\fBM4\fR’ ve ’\fBWARNINGS\fR’ önemsenir.
+Ortam değişkenleri \&'\fBM4\fR\&' ve \&'\fBWARNINGS\fR\&' önemsenir.
 .sp
 .SS "Kütüphane dizinleri:"
 .TP 4
@@ -124,10 +124,10 @@ Ortam değişkenleri ’\fBM4\fR’ ve ’\fBWARNINGS\fR’ önemsenir.
 .sp
 .TP 4
 \fB-i\fR, \fB--initialization\fR
-Autoconf’un ilklendirme süreci de izlenir.
+Autoconf\&'un ilklendirme süreci de izlenir.
 .sp
 .PP
-İzleme kipinde hiçbir yapılandırma betiği oluşturulmaz. \fIBiÇEM\fR için ’$f:$l:$n:$%’ öntanımlıdır; \fIBiÇEM\fR hakkında daha fazla bilgi için \fBautom4te --help\fR’ yazınız.
+İzleme kipinde hiçbir yapılandırma betiği oluşturulmaz. \fIBiÇEM\fR için `$f:$l:$n:$%\&' öntanımlıdır; \fIBiÇEM\fR hakkında daha fazla bilgi için \fBautom4te --help\fR\&' yazınız.
 .sp
 .sp
 .SH "YAZAN"

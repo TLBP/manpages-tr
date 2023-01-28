@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-22T00:25:23+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "XGETTEXT" 1 "4 Temmuz 2020" "GNU gettext-tools 20200704" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -32,11 +32,11 @@ Girdi dosyaları
 .sp
 .TP 4
 \fB-f\fR, \fB--files-from=\fR\fIDOSYA\fR
-Girdi dosyalarının listesini \fIDOSYA\fR’dan okur.
+Girdi dosyalarının listesini \fIDOSYA\fR\&'dan okur.
 .sp
 .TP 4
 \fB-D\fR, \fB--directory=\fR\fIDİZİN\fR
-Girdi dosyalarının arama yoluna \fIDİZİN\fR’i ekler.
+Girdi dosyalarının arama yoluna \fIDİZİN\fR\&'i ekler.
 .sp
 .PP
 Girdi dosyası ‘-‘ ise, standart girdi okunur.
@@ -127,7 +127,7 @@ ASCII yerine Unicode üç nokta karakteri tercih edilir.
 .sp
 .TP 4
 \fBquote-unicode\fR
-ASCII \fB"’’\fR yerine Unicode tırnak karakterleri tercih edilir.
+ASCII \fB"\&'`\fR yerine Unicode tırnak karakterleri tercih edilir.
 .sp
 .TP 4
 \fBbullet-unicode\fR
@@ -148,7 +148,7 @@ gettext ("Üç noktadan önce boşluk bırakmak istiyoruz ...");
 .RE
 .RE
 .IP
-\fBxgettext:\fR yorumun ardından virgülle ayrılmış bayraklar gelebilir. Olası bayraklar ’[no-]\fISINAMA\fR-check’ biçimindedir; burada \fISINAMA\fR, geçerli bir sözdizimi sınamasının adıdır. Bir bayrağın önüne no- eklenirse, anlamını olumsuzlar.
+\fBxgettext:\fR yorumun ardından virgülle ayrılmış bayraklar gelebilir. Olası bayraklar \&'[no-]\fISINAMA\fR-check\&' biçimindedir; burada \fISINAMA\fR, geçerli bir sözdizimi sınamasının adıdır. Bir bayrağın önüne no- eklenirse, anlamını olumsuzlar.
 .sp
 Bazı sınamalar, denetimleri tüm dizge yerine \fBmsgstr\fR içindeki her tümceye uygular. \fBxgettext\fR, genellikle bir nokta ve ardından belirli sayıda boşluk arayan bir kalıp eşleşmesi gerçekleştirerek tümcenin sonunu algılar. Aranacak boşluk sayısı \fB--sentence-end\fR seçeneği ile belirtilir.
 .sp
@@ -195,9 +195,9 @@ Tanımlanmış anahtar sözcük \fIBELİRTİM\fRlerini devre dışı bırakmak i
 .IP \(bu 3
 GNOME için özel kullanım desteği olarak, \fIBELİRTİM id:argnumg\fR biçemindeyse \fBxgettext\fR GNOME glib ‘"\fBmsgctxt|msgid\fR"’ sözdizimini kullanarak \fIargnum\fRuncu girdiyi bağlamlı bir dizge olarak ele alır.
 .IP \(bu 3
-\fIBELİRTİM ’id:…,totalnumargst’\fR biçemindeyse \fBxgettext\fR yalnızca, asıl girdi sayısı \fItotalnumargs\fR’a eşitse bu girdi belirtimini tanır. Bu, C++’da aşırı yüklenmiş işlev çağrılarının belirsizliğini gidermek için kullanışlıdır.
+\fIBELİRTİM \&'id:…,totalnumargst\&'\fR biçemindeyse \fBxgettext\fR yalnızca, asıl girdi sayısı \fItotalnumargs\fR\&'a eşitse bu girdi belirtimini tanır. Bu, C++\&'da aşırı yüklenmiş işlev çağrılarının belirsizliğini gidermek için kullanışlıdır.
 .IP \(bu 3
-\fIBELİRTİM ’id:argnum...,"xcomment"’\fR biçemindeyse \fBxgettext\fR iletiyi belirtilen girdi dizgesinden çıkarırken, çıkarılan \fIxcomment\fR yorumunu iletiye ekler. Normal bir kabuk komut satırı aracılığıyla kullanıldığında, \fIxcomment\fR etrafındaki çift tırnakların öncelenmesi gerektiği unutulmamalıdır.
+\fIBELİRTİM \&'id:argnum...,"xcomment"\&'\fR biçemindeyse \fBxgettext\fR iletiyi belirtilen girdi dizgesinden çıkarırken, çıkarılan \fIxcomment\fR yorumunu iletiye ekler. Normal bir kabuk komut satırı aracılığıyla kullanıldığında, \fIxcomment\fR etrafındaki çift tırnakların öncelenmesi gerektiği unutulmamalıdır.
 .sp
 .RE
 .IP
@@ -253,11 +253,11 @@ Desktop için: \fBName\fR, \fBGenericName\fR, \fBComment\fR, \fBKeywords\fR
 .sp
 .TP 4
 \fB--flag=\fR\fISÖZCÜK:NUM:BAYRAK\fR
-\fISÖZCÜK\fR işlevinin \fINUM\fRuncu girdinin bir parçası olarak ortaya çıkan dizgeler için ek \fIBAYRAK\fRları belirtir. Olası bayraklar, muhtemelen ’\fBpass-\fR’ ön ekli ve ’\fBno-c-format\fR’ gibi olumsuzlamaları olan ’\fBc-format\fR’ gibi, olası biçem dizgesi göstergeleridir.
+\fISÖZCÜK\fR işlevinin \fINUM\fRuncu girdinin bir parçası olarak ortaya çıkan dizgeler için ek \fIBAYRAK\fRları belirtir. Olası bayraklar, muhtemelen \&'\fBpass-\fR\&' ön ekli ve \&'\fBno-c-format\fR\&' gibi olumsuzlamaları olan \&'\fBc-format\fR\&' gibi, olası biçem dizgesi göstergeleridir.
 .sp
-\fB--flag=function:arg:lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, belirtilen \fBfunction\fR işlevinin \fBarg\fRıncı değişkeni olarak bir biçem dizgisi beklemesidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format__ (__printf__, arg, ...)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, GNU libc’deki \fBerror\fR(3) işlevini kullanırsanız, davranışını \fB--flag=error:3:c-format\fR aracılığıyla belirtebilirsiniz. Bu belirtimin etkisi, \fBxgettext\fR’in işlevin \fBarg\fRıncı değişkeni olarak ortaya çıkan tüm \fBgettext\fR(3) çağrılarını biçem dizgeleri olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: \fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+\fB--flag=function:arg:lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, belirtilen \fBfunction\fR işlevinin \fBarg\fRıncı değişkeni olarak bir biçem dizgisi beklemesidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli \&'\fB__attribute__ ((__format__ (__printf__, arg, ...)))\fR\&' bildirimine kabaca eşdeğerdir.) Örneğin, GNU libc\&'deki \fBerror\fR(3) işlevini kullanırsanız, davranışını \fB--flag=error:3:c-format\fR aracılığıyla belirtebilirsiniz. Bu belirtimin etkisi, \fBxgettext\fR\&'in işlevin \fBarg\fRıncı değişkeni olarak ortaya çıkan tüm \fBgettext\fR(3) çağrılarını biçem dizgeleri olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: \fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
 .sp
-\fB--flag=function:arg:pass-lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, \fBfunction\fR çağrısı, bir \fBformat\fR dizgesi vermesi gereken konumda iken gerçekleşirse, \fBarg\fRıncı değişkenin de ilave olarak aynı türde bir \fBformat\fR dizgesi vermesi gerektiğidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:pass-c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli ’\fB__attribute__ ((__format_arg__ (arg)))\fR’ bildirimine kabaca eşdeğerdir.) Örneğin, \fBgettext\fR(3) işlevi için ’\fB_\fR’ kısayolu kullanılırsa, seçenek olarak \fB--flag=_:1:pass-c-format\fR kullanmak gerekir. Bu belirtimin etkisi, \fBxgettext\fR’in \fB_("string")\fR çağrısı için biçem dizgesi gereksinimini ilk girdi olan \fBstring\fR’e yöneltmesi ve böylece onu bir biçem dizgesi olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: "\fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
+\fB--flag=function:arg:pass-lang-format\fR seçeneğinin anlamı, \fBlang\fR dilinde, \fBfunction\fR çağrısı, bir \fBformat\fR dizgesi vermesi gereken konumda iken gerçekleşirse, \fBarg\fRıncı değişkenin de ilave olarak aynı türde bir \fBformat\fR dizgesi vermesi gerektiğidir. (GCC işlev özniteliklerine aşina olanlar için, \fB--flag=function:arg:pass-c-format\fR seçeneği, bir C kaynak dosyasındaki \fBfunction\fR işlevine ekli \&'\fB__attribute__ ((__format_arg__ (arg)))\fR\&' bildirimine kabaca eşdeğerdir.) Örneğin, \fBgettext\fR(3) işlevi için \&'\fB_\fR\&' kısayolu kullanılırsa, seçenek olarak \fB--flag=_:1:pass-c-format\fR kullanmak gerekir. Bu belirtimin etkisi, \fBxgettext\fR\&'in \fB_("string")\fR çağrısı için biçem dizgesi gereksinimini ilk girdi olan \fBstring\fR\&'e yöneltmesi ve böylece onu bir biçem dizgesi olarak işaretlemesidir. Bu, bu tür dizgeler hiçbir biçem dizgesi yönergesi içermediğinde yararlıdır: "\fBmsgfmt -c\fR tarafından yapılan denetimlerle birlikte, çevirmenlerin çalışma zamanında bir çökmeye neden olacak biçem dizgesi yönergelerini yanlışlıkla kullanmamalarını sağlar.
 .sp
 Bu seçeneğin etkili olduğu diller: C, C++, ObjectiveC, Shell, Python, Lisp, EmacsLisp, librep, Scheme, Java, C#, awk, YCP, Tcl, Perl, PHP, GCC-source, Lua, JavaScript, Vala.
 .sp
@@ -279,7 +279,7 @@ Boost biçem dizgelerini tanır. Bu seçenek yalnızca C++ diliyle etkilidir.
 .sp
 .TP 4
 \fB--debug\fR
-Bir iletiyi biçem dizesi olarak imlemekten kimin sorumlu olduğunu göstermek için \fBc-format\fR ve \fBpossible-c-format\fR bayraklarını kullanır. İkincisi, istek \fBxgettext\fR’ten geliyorsa kullanılır, ilki ise istek yazılımcıdan geliyorsa kullanılır.
+Bir iletiyi biçem dizesi olarak imlemekten kimin sorumlu olduğunu göstermek için \fBc-format\fR ve \fBpossible-c-format\fR bayraklarını kullanır. İkincisi, istek \fBxgettext\fR\&'ten geliyorsa kullanılır, ilki ise istek yazılımcıdan geliyorsa kullanılır.
 .sp
 Öntanımlı olarak \fBc-format\fR bayrağı kullanılır. Çevirmen bu ayrıntılarla ilgilenmek zorunda kalmamalıdır.
 .sp
@@ -313,11 +313,11 @@ PO dosyasını girintili tarzda yazar.
 .sp
 .TP 4
 \fB--no-location\fR
-’#: dosyaismi:satır’ başlıkları yazılmaz. Bu seçeneğin kullanımı teknik olarak yetenekli çevirmenler için ileti bağlamını bulmayı zorlaştırır (Bazı çok satırlı hata iletileri kodun farklı yerlerinden toplanarak oluşur, bunları bulup doğru konumlamak için kodu okumak gerekir).
+\&'#: dosyaismi:satır\&' başlıkları yazılmaz. Bu seçeneğin kullanımı teknik olarak yetenekli çevirmenler için ileti bağlamını bulmayı zorlaştırır (Bazı çok satırlı hata iletileri kodun farklı yerlerinden toplanarak oluşur, bunları bulup doğru konumlamak için kodu okumak gerekir).
 .sp
 .TP 4
 \fB-n\fR, \fB--add-location\fR[=\fITÜR\fR]
-’#: dosyaismi:satır’ başlıkları yazılır (öntanımlıdır).
+\&'#: dosyaismi:satır\&' başlıkları yazılır (öntanımlıdır).
 .sp
 Seçimlik \fITÜR\fR ‘full’, ‘file’ veya ‘never’ olabilir. \fITÜR\fR belirtilmezse veya ‘full’ değeri belirtilirse dosyaismi ve satır her ikisi de yazılır. ‘file’ belirtilirse satır kısmı yazılmaz. ‘never’ belirtmek \fB--no-location\fR seçeneğine eşdeğerdir.
 .sp
@@ -339,7 +339,7 @@ itstool yorumlarını yazar.
 .sp
 .TP 4
 \fB-w\fR, \fB--width=\fR\fISAYI\fR
-Çıktı sayfa genişliği \fISAYI\fR’ya ayarlanır. Çıktı dosyalarındaki uzun dizgeler, her satırın genişliğinin (=ekran sütunlarının sayısı) verilen \fISAYI\fR’ya eşit veya küçük olmasını sağlamak için birden çok satıra bölünecektir.
+Çıktı sayfa genişliği \fISAYI\fR\&'ya ayarlanır. Çıktı dosyalarındaki uzun dizgeler, her satırın genişliğinin (=ekran sütunlarının sayısı) verilen \fISAYI\fR\&'ya eşit veya küçük olmasını sağlamak için birden çok satıra bölünecektir.
 .sp
 .TP 4
 \fB--no-wrap\fR
@@ -355,17 +355,17 @@ Sıralı çıktı üretir. Bu seçeneğin kullanımı, çevirmenin ileti bağlam
 .sp
 .TP 4
 \fB--omit-header\fR
-Başlığa ’msgid ""’ girdisini yazmaz. Ortaya çıkan dosya tamamen ASCII olmayacaksa, bu seçeneği kullanmanın hataya yol açacağı unutulmamalıdır.
+Başlığa `msgid ""\&' girdisini yazmaz. Ortaya çıkan dosya tamamen ASCII olmayacaksa, bu seçeneği kullanmanın hataya yol açacağı unutulmamalıdır.
 .sp
 .TP 4
 \fB--copyright-holder=\fR\fIDİZGE\fR
 Çıktıya telif hakkı \fIDİZGE\fRsi yazılır. \fIDİZGE\fR çıktıyı içeren paketin telif hakkı sahibi olmalıdır. (Paketin kaynak dosyalarından alınan msgstr dizgelerinin paketin telif hakkı sahibine ait olduğu unutulmamalıdır.) Çevirmenlerin çevirilerinin telif hakkını devretmeleri veya reddetmeleri beklenir, böylece paket sahipleri bunları yasal risk almadan dağıtabilir. Dizge boşsa, çıktı dosyaları kamu malı olarak işaretlenir; bu durumda, çevirmenlerin telif haklarını reddetmeleri beklenir, böylece paket sahipleri yasal risk almadan bunları dağıtabilir.
 .sp
-\fIDİZGE\fR için öntanımlı değer Free Software Foundation, Inc.’dir, çünkü \fBxgettext\fR ilk olarak GNU projesinde kullanılmıştır.
+\fIDİZGE\fR için öntanımlı değer Free Software Foundation, Inc.\&'dir, çünkü \fBxgettext\fR ilk olarak GNU projesinde kullanılmıştır.
 .sp
 .TP 4
 \fB--foreign-user\fR
-Yabancı kullanıcılar için FSF telif hakkı çıktıda bulunmaz. Bu seçenek \fB--copyright-holder=’’\fR seçeneğine eşdeğerdir. Çevirilerinin kamu malı olmasını isteyen GNU projesi dışındaki paketler için faydalı olabilir.
+Yabancı kullanıcılar için FSF telif hakkı çıktıda bulunmaz. Bu seçenek \fB--copyright-holder=\&'\&'\fR seçeneğine eşdeğerdir. Çevirilerinin kamu malı olmasını isteyen GNU projesi dışındaki paketler için faydalı olabilir.
 .sp
 .TP 4
 \fB--package-name=\fR\fIPAKET\fR

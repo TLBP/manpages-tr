@@ -8,12 +8,12 @@
  * e2image.c --- Program which writes an image file backing up
  *               critical metadata for the filesystem.
  *
- * Copyright 2000, 2001 by Theodore Ts’o.
+ * Copyright 2000, 2001 by Theodore Ts\&'o.
  *
  * This file may be redistributed under the terms of the GNU Public License.
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "E2IMAGE" 8 "Aralık 2021" "E2fsprogs 1.46.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -36,9 +36,9 @@ e2image - ext2/ext3/ext4 dosya sisteminin hassas meta verilerini dosyaya kaydede
 .sp
 Bir sistemdeki tüm dosya sistemleri için imge dosyaları oluşturmak ve bölüm düzenini (\fBfdisk -l\fR komutu ile) düzenli aralıklarla (önyükleme sırasında ve/veya haftada bir vb.) kaydetmek çok iyi bir fikirdir. Dosya sisteminin ciddi şekilde zarar görmesi durumunda bu verilere erişilebilir olmasını sağlamak için, \fIimge-dosyası\fR verilerini içerdiği dosya sisteminde değil, başka dosya sistemlerinde (örn. bir USB diskte) saklanmalıdır.
 .sp
-Disk alanından tasarruf etmek için \fBe2image\fR, \fIimge-dosyası\fRnı seyrek bir dosya olarak veya QCOW2 biçiminde oluşturur. Bu nedenle, seyrek \fIimge-dosyası\fRnın başka bir konuma kopyalanması gerekiyorsa, önce sıkıştırılmalı ya da \fB--sparse=always\fR seçeneği kullanılarak \fBcp\fR(1)’in GNU sürümü ile kopyalanmalıdır. Bu, seyrek olmayan QCOW2 imgesi için geçerli değildir.
+Disk alanından tasarruf etmek için \fBe2image\fR, \fIimge-dosyası\fRnı seyrek bir dosya olarak veya QCOW2 biçiminde oluşturur. Bu nedenle, seyrek \fIimge-dosyası\fRnın başka bir konuma kopyalanması gerekiyorsa, önce sıkıştırılmalı ya da \fB--sparse=always\fR seçeneği kullanılarak \fBcp\fR(1)\&'in GNU sürümü ile kopyalanmalıdır. Bu, seyrek olmayan QCOW2 imgesi için geçerli değildir.
 .sp
-Bir ext2 \fIimge-dosyası\fRnın boyutu, öncelikle dosya sisteminin boyutuna ve kullanımda olan düğüm sayısına bağlıdır. 1,2 milyon düğümden 200.000 düğümün kullanıldığı 10 Gigabaytlık bir dosya sistemi için, \fIimge-dosyası\fR yaklaşık 35 Megabayt olacaktır; 550.000 düğümden 15.000 düğümün kullanıldığı 4 Gigabaytlık bir dosya sistemi, 3 Megabaytlık bir \fIimge-dosyası\fRyla sonuçlanacaktır. \fIimge-dosyası\fRları oldukça sıkıştırılabilir olma eğilimindedir; diskte 32 Megabayt yer kaplayan bir \fIimge-dosyası\fR genellikle 3 veya 4 Megabayt’a kadar sıkıştırılır.
+Bir ext2 \fIimge-dosyası\fRnın boyutu, öncelikle dosya sisteminin boyutuna ve kullanımda olan düğüm sayısına bağlıdır. 1,2 milyon düğümden 200.000 düğümün kullanıldığı 10 Gigabaytlık bir dosya sistemi için, \fIimge-dosyası\fR yaklaşık 35 Megabayt olacaktır; 550.000 düğümden 15.000 düğümün kullanıldığı 4 Gigabaytlık bir dosya sistemi, 3 Megabaytlık bir \fIimge-dosyası\fRyla sonuçlanacaktır. \fIimge-dosyası\fRları oldukça sıkıştırılabilir olma eğilimindedir; diskte 32 Megabayt yer kaplayan bir \fIimge-dosyası\fR genellikle 3 veya 4 Megabayt\&'a kadar sıkıştırılır.
 .sp
 \fIimge-dosyası\fR \fB-\fR ise, \fBe2image\fR çıktısı standart çıktıya gönderilir, böylece çıktı \fBgzip\fR(1) gibi bir komuta aktarılabilir. (Normal bir \fIimge-dosyası\fR veya QCOW2 imgesi oluşturma işlemi dosyaya rasgele erişim gerektirdiğinden ve boru kullanılarak yapılamadığından, bunun şu anda yalnızca \fB-r\fR seçeneği kullanılarak ham \fIimge-dosyası\fR oluşturulurken desteklendiği unutulmamalıdır.)
 .sp
@@ -53,7 +53,7 @@ Bir ext2 \fIimge-dosyası\fRnın boyutu, öncelikle dosya sisteminin boyutuna ve
 .sp
 .TP 4
 \fB-B\fR \fIblokboyu\fR
-Bayt olarak dosya sistemindeki blok boyu. Normalde \fBe2image\fR, uygun blok boyunu bulmak için çeşitli farklı boylarda süper bloğu arar. Bu arama bazı durumlarda yanıltıcı olabilir. Bu seçenek, \fBe2fsck\fR(8)’yı yalnızca belirli blok boylarında olabilen süper bloğu bulmaya zorlar. Süper blok bulunamazsa, \fBe2image\fR ölümcül hatayla sonlanır.
+Bayt olarak dosya sistemindeki blok boyu. Normalde \fBe2image\fR, uygun blok boyunu bulmak için çeşitli farklı boylarda süper bloğu arar. Bu arama bazı durumlarda yanıltıcı olabilir. Bu seçenek, \fBe2fsck\fR(8)\&'yı yalnızca belirli blok boylarında olabilen süper bloğu bulmaya zorlar. Süper blok bulunamazsa, \fBe2image\fR ölümcül hatayla sonlanır.
 .sp
 .TP 4
 \fB-c\fR
@@ -108,7 +108,7 @@ Dosya sisteminin içeriği hakkındaki bilgilerin açığa çıkmasını önleme
 .SH "HAM İMGE DOSYALARI"
 \fB-r\fR seçeneği, normal bir imge dosyasından iki şekilde farklı olan ham bir imge dosyası oluşturur. İlk olarak, imge dosyası içinde dosya sistemi meta verileri, aygıttaki konumuna göreli bir konuma yerleştirilir, böylece \fBdebugfs\fR(8), \fBdumpe2fs\fR(8), \fBe2fsck\fR(8), \fBlosetup\fR(8), vb. doğrudan ham \fIimge-dosyası\fR üzerinde çalıştırılabilir. Ham imge dosyası, tüketilen disk alanı miktarını en aza indirmek için seyrek dosya olarak oluşturulur. (Bu dosyanın, seyrek dosyaların nasıl oluşturulacağını anlamayan yardımcı uygulamalarla kopyalama, sıkıştırma/açma işlemlerinde dikkatli olun; dosya, dosya sisteminin kendisi kadar büyük olacaktır!) İkinci olarak, ham imge dosyası ayrıca, standart imge dosyasında bulunmayan dolaylı bloklar ve dizin blokları da içerecektir.
 .sp
-İmge dosyaları bazen, e2fsprogs’a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
+İmge dosyaları bazen, e2fsprogs\&'a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
 .sp
 .RS 4
 .nf
@@ -123,7 +123,7 @@ Bu, herhangi bir veri bloğu içermeden yalnızca meta verileri gönderir. Ancak
 .SH "QCOW2 İMGE DOSYALARI"
 \fB-Q\fR seçeneği, normal veya ham imge dosyası yerine bir QCOW2 imge dosyası oluşturacaktır. Bir QCOW2 imgesi, ham imgenin içerdiği tüm bilgileri içerir, ancak ham imgenin aksine seyrek değildir. QCOW2 imgesi, verileri birbirine yakın bir şekilde paketleyen özel bir yapıda depolayarak imge tarafından kullanılan alan miktarını en aza indirir, böylece boyut en aza indirilirken boş alanlar oluşmaz.
 .sp
-İmge dosyaları bazen, e2fsprogs’a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
+İmge dosyaları bazen, e2fsprogs\&'a gönderilen hata raporlarının bir parçası olarak dosya sistemleri gönderilirken kullanılır. Böyle bir kullanım için önerilen komut aşağıdakine benzer (hda1 yerine kendi aygıtınızı yazın):
 .sp
 .RS 4
 .nf
@@ -149,7 +149,7 @@ Bu komut, tüm verileri içeren bir QCOW2 imgesini, bir disk bölümü veya loop
 .SH "KONUMLAR"
 Normalde bir dosya sistemi disk bölümünün başlangıcında başlar ve \fBe2image\fR bu disk bölümünde çalıştırılır. İmge dosyalarıyla çalışırken, disk bölümü aygıtını kullanma seçeneğiniz yoktur, bu nedenle doğrudan \fB-o\fR seçeneğiyle dosya sisteminin başladığı konumu belirtebilirsiniz. Benzer şekilde \fB-O\fR seçeneği, dosya sistemini yazmadan önce hedefte ilerlenecek konumu belirler.
 .sp
-Örneğin, 1 MiB’tan başlayan disk bölümünde bulunan ext2 dosya sistemini içeren sabit sürücünün tamamının \fBdd\fR(1) imgesi bir blok aygıtına şöyle klonlanabilir:
+Örneğin, 1 MiB\&'tan başlayan disk bölümünde bulunan ext2 dosya sistemini içeren sabit sürücünün tamamının \fBdd\fR(1) imgesi bir blok aygıtına şöyle klonlanabilir:
 .sp
 .RS 4
 .nf
@@ -157,7 +157,7 @@ Normalde bir dosya sistemi disk bölümünün başlangıcında başlar ve \fBe2i
 .fi
 .sp
 .RE
-Veya bir dosya sistemi, bir blok aygıtından bir imge dosyasına, disk bölümleme tablosu için 1 MiB’lık yer bırakarak şöyle kopyalanabilir:
+Veya bir dosya sistemi, bir blok aygıtından bir imge dosyasına, disk bölümleme tablosu için 1 MiB\&'lık yer bırakarak şöyle kopyalanabilir:
 .sp
 .RS 4
 .nf
@@ -168,7 +168,7 @@ Veya bir dosya sistemi, bir blok aygıtından bir imge dosyasına, disk bölüml
 En az bir konum ve yalnızca bir dosya belirtilirse, yerinde taşıma gerçekleştirilir ve dosya sistemi bir konumdan diğerine güvenle taşınabilir.
 .sp
 .SH "YAZANLAR"
-Theodore Ts’o tarafından yazılmıştır.
+Theodore Ts\&'o tarafından yazılmıştır.
 .sp
 .SH "YARARLANIM"
 \fBe2image\fR, e2fsprogs paketinin bir parçasıdır ve http://e2fsprogs.sourceforge.net adresinden elde edilebilir.

@@ -23,7 +23,7 @@
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ’’AS IS’’ AND
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
@@ -35,7 +35,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "USERDEL" 8 "Şubat 2022" "Shadow-utils 4.11.1" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -57,7 +57,7 @@ userdel - Bir kullanıcı hesabını ve onunla ilgili dosyaları siler
 .SH "SEÇENEKLER"
 .TP 4
 \fB-f\fR, \fB--force\fR
-Bu seçenek, \fBuserdel\fR komutunun silmeye çalıştığı kullanıcı sistemde oturum açmışsa bile, hesabının silinmesini sağlar. Ayrıca, başka bir kullanıcı aynı ev dizinini kullansa veya posta havuzu belirtilen kullanıcıya ait olmasa bile, \fBuserdel\fR’i kullanıcının ev dizinini ve posta havuzunu kaldırmaya zorlar. \fI/etc/login.defs\fR dosyasında \fBUSERGROUPS_ENAB=yes\fR tanımı ve silinen kullanıcıyla aynı ada sahip bir grup varsa, bu grup, hala başka bir kullanıcının birincil grubu olsa bile silinir.
+Bu seçenek, \fBuserdel\fR komutunun silmeye çalıştığı kullanıcı sistemde oturum açmışsa bile, hesabının silinmesini sağlar. Ayrıca, başka bir kullanıcı aynı ev dizinini kullansa veya posta havuzu belirtilen kullanıcıya ait olmasa bile, \fBuserdel\fR\&'i kullanıcının ev dizinini ve posta havuzunu kaldırmaya zorlar. \fI/etc/login.defs\fR dosyasında \fBUSERGROUPS_ENAB=yes\fR tanımı ve silinen kullanıcıyla aynı ada sahip bir grup varsa, bu grup, hala başka bir kullanıcının birincil grubu olsa bile silinir.
 .sp
 .RS 4
 .TP 4
@@ -123,7 +123,7 @@ Tanımlanmışsa, bir kullanıcı kaldırılırken bu komut çalıştırılır. 
 .sp
 Betiğin dönüş kodu dikkate alınmaz.
 .sp
-Aşağıdaki örnekte, kullanıcının cron’u kaldırılmakta ve yazdırma işleri bitirilmektedir:
+Aşağıdaki örnekte, kullanıcının cron\&'u kaldırılmakta ve yazdırma işleri bitirilmektedir:
 .sp
 .RS 4
 .RS 4

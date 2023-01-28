@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "APACHE2" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -43,32 +43,32 @@ httpd - Apache Hiper Metin Aktarım Protokolü Sunucusu
 .SH "AÇIKLAMA"
 \fBapache2\fR, Apache Hiper Metin Aktarım Protokolü (HTTP) sunucusudur. Tek başına çalışan bir artalan süreci olarak tasarlanmıştır. Bu tarz kullanıldığında istekleri işleme sokmak için çocuk süreçlerden ve evrelerden oluşan bir havuz oluşturur.
 .sp
-Genelde, \fBapache2\fR’nin doğrudan çalıştırılmaması gerekir. Ya \fBapache2ctl\fR ya da \fB/etc/init.d/apache2\fR aracılığıyla çalıştırılmalıdır. \fBapache2\fR’ye keyfi girdi aktarılmak istenirse \fBapache2ctl\fR kullanılabilir. Ortam değişkenleri Debian yapılandırmasında \fI/etc/apache2/envvars\fR dosyasında tanımlanmaktadır.
+Genelde, \fBapache2\fR\&'nin doğrudan çalıştırılmaması gerekir. Ya \fBapache2ctl\fR ya da \fB/etc/init.d/apache2\fR aracılığıyla çalıştırılmalıdır. \fBapache2\fR\&'ye keyfi girdi aktarılmak istenirse \fBapache2ctl\fR kullanılabilir. Ortam değişkenleri Debian yapılandırmasında \fI/etc/apache2/envvars\fR dosyasında tanımlanmaktadır.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
 \fB-d\fR \fIsunucu-kök-dizini\fR
-\fIsunucu-kök-dizini\fR’ni \fBServerRoot\fR yönergesine ilk değer olarak atar. Yapılandırma dosyasındaki bir \fBServerRoot\fR yönergesiyle bu atama geçersiz kılınabilir. Bu seçenek belirtilmediği takdirde \fI/usr/local/apache2\fR dizini öntanımlıdır.
+\fIsunucu-kök-dizini\fR\&'ni \fBServerRoot\fR yönergesine ilk değer olarak atar. Yapılandırma dosyasındaki bir \fBServerRoot\fR yönergesiyle bu atama geçersiz kılınabilir. Bu seçenek belirtilmediği takdirde \fI/usr/local/apache2\fR dizini öntanımlıdır.
 .sp
 .TP 4
 \fB-f\fR \fIyapılandırma-dosyası\fR
-Başlatma sırasında \fIyapılandırma-dosyası\fR’ndaki yönergeler kullanılır. Eğer \fIyapılandırma-dosyası\fR bir \fI/\fR ile başlamıyorsa dosyanın \fBServerRoot\fR yönergesinin değerine göreli olduğu varsayılır. Seçenek belirtilmediği takdirde \fI/etc/apache2/apache2.conf\fR öntanımlıdır.
+Başlatma sırasında \fIyapılandırma-dosyası\fR\&'ndaki yönergeler kullanılır. Eğer \fIyapılandırma-dosyası\fR bir \fI/\fR ile başlamıyorsa dosyanın \fBServerRoot\fR yönergesinin değerine göreli olduğu varsayılır. Seçenek belirtilmediği takdirde \fI/etc/apache2/apache2.conf\fR öntanımlıdır.
 .sp
 .TP 4
 \fB-k start | restart | graceful | stop | graceful-stop\fR
-\fBapache2\fR’yi başlatmak, durdurmak ve yeniden başlatmak için sinyal gönderir. Daha ayrıntılı bilgi edinmek için <https://httpd.apache.org/docs/2.4/stopping.html>: Apache HTTP Sunucusunun Durdurulması ve Yeniden Başlatılması belgesine bakınız.
+\fBapache2\fR\&'yi başlatmak, durdurmak ve yeniden başlatmak için sinyal gönderir. Daha ayrıntılı bilgi edinmek için <https://httpd.apache.org/docs/2.4/stopping.html>: Apache HTTP Sunucusunun Durdurulması ve Yeniden Başlatılması belgesine bakınız.
 .sp
 .TP 4
 \fB-C\fR \fIyönerge\fR
-Yapılandırma \fIyönerge\fR’sini yapılandırma dosyalarını okumadan önce işleme sokar.
+Yapılandırma \fIyönerge\fR\&'sini yapılandırma dosyalarını okumadan önce işleme sokar.
 .sp
 .TP 4
 \fB-c\fR \fIyönerge\fR
-Yapılandırma \fIyönerge\fR’sini yapılandırma dosyalarını okuduktan sonra işleme sokar.
+Yapılandırma \fIyönerge\fR\&'sini yapılandırma dosyalarını okuduktan sonra işleme sokar.
 .sp
 .TP 4
 \fB-D\fR \fIdeğişken\fR
-Sunucu başlatılırken veya yeniden başlatılırken komutları şarta bağlı olarak işleme sokmak veya atlamak için yapılandırma dosyalarında kullanılan \fBIfDefine\fR bölümlerinde kullanılmak üzere bir yapılandırma \fIdeğişken\fR’i tanımlar. Ayrıca, \fB-DNO_DETACH\fR (ana sürecin çatallanmasını engellemek için), \fB-DFOREGROUND\fR (ana sürecin \fBsetsid\fR(3) ve benzerlerinden çağrılmasını engellemek için) gibi daha az bilinen bazı başlatma girdilerini atamakta da kullanılabilir.
+Sunucu başlatılırken veya yeniden başlatılırken komutları şarta bağlı olarak işleme sokmak veya atlamak için yapılandırma dosyalarında kullanılan \fBIfDefine\fR bölümlerinde kullanılmak üzere bir yapılandırma \fIdeğişken\fR\&'i tanımlar. Ayrıca, \fB-DNO_DETACH\fR (ana sürecin çatallanmasını engellemek için), \fB-DFOREGROUND\fR (ana sürecin \fBsetsid\fR(3) ve benzerlerinden çağrılmasını engellemek için) gibi daha az bilinen bazı başlatma girdilerini atamakta da kullanılabilir.
 .sp
 .TP 4
 \fB-e\fR \fIseviye\fR
@@ -76,7 +76,7 @@ Hata günlüğü seviyesi olarak \fBLogLevel\fR yönergesine sunucu başlatılı
 .sp
 .TP 4
 \fB-E\fR \fIdosya\fR
-Sunucunun başlatılması sırasında hata iletilerinin belirtilen \fIdosya\fR’ya gönderilmesini sağlar.
+Sunucunun başlatılması sırasında hata iletilerinin belirtilen \fIdosya\fR\&'ya gönderilmesini sağlar.
 .sp
 .TP 4
 \fB-h\fR

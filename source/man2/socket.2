@@ -46,7 +46,7 @@
  * Modified 2002-07-17 by Michael Kerrisk <mtk.manpages@gmail.com>
  * Modified 2004-06-17 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "SOCKET" 2 "6 Eylül 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -214,7 +214,7 @@ T}
 T{
 \fBAF_ALG\fR
 T}:T{
-Çekirdek şifreleme API’sine arayüz
+Çekirdek şifreleme API\&'sine arayüz
 T}:T{
 T}
 T{
@@ -270,7 +270,7 @@ Eskidir ve yeni programlarda kullanılmamalıdır; \fBpacket\fR(7) sayfasına ba
 .PP
 Bazı soket türleri tüm protokol aileleri tarafından uygulanmayabilir.
 .sp
-Linux 2.6.27’den itibaren, \fItype\fR değişkeni ikinci bir işleve sahiptir: soket türünü belirtmeye ek olarak \fBsocket\fR()’in davranışını değiştirmek için aşağıdaki değerler bit düzeyinde VEYA’lanabilir:
+Linux 2.6.27\&'den itibaren, \fItype\fR değişkeni ikinci bir işleve sahiptir: soket türünü belirtmeye ek olarak \fBsocket\fR()\&'in davranışını değiştirmek için aşağıdaki değerler bit düzeyinde VEYA\&'lanabilir:
 .sp
 .TP 4
 \fBSOCK_NONBLOCK\fR
@@ -291,7 +291,7 @@ Yürütmeyi kapat (Close On Exec) (\fBFD_CLOEXEC\fR) bayrağını yeni dosya tan
 .sp
 \fBSOCK_PACKET\fR kullanımı önerilmeyen bir soket türüdür ve doğrudan aygıt sürücüsünden ham paket alınması için kullanılır. Bunun yerine \fBpacket\fR(7) kullanılmalıdır.
 .sp
-\fBfcntl\fR(2) çağrısının \fBF_SETOWN\fR işlemi, bant dışı (Out Of Band) veri geldiğinde \fBSIGURG\fR veya \fBSOCK_STREAM\fR bağlantısı beklenmedik şekilde koparsa \fBSIGPIPE\fR sinyalini alacak süreci veya süreç grubunu belirtmek için kullanılabilir. Bu işlem ayrıca, sıra beklemesiz G/Ç bildirimlerini ve G/Ç’ı \fBSIGIO\fR aracılığıyla alacak süreç ve süreç gruplarını belirtmek için de kullanılabilir. \fBF_SETOWN\fR kullanımı, \fBioctl\fR(2) çağrısının \fBFIOSETWON\fR veya \fBSIOCSPGRP\fR değerleriyle kullanımına eşdeğerdir.
+\fBfcntl\fR(2) çağrısının \fBF_SETOWN\fR işlemi, bant dışı (Out Of Band) veri geldiğinde \fBSIGURG\fR veya \fBSOCK_STREAM\fR bağlantısı beklenmedik şekilde koparsa \fBSIGPIPE\fR sinyalini alacak süreci veya süreç grubunu belirtmek için kullanılabilir. Bu işlem ayrıca, sıra beklemesiz G/Ç bildirimlerini ve G/Ç\&'ı \fBSIGIO\fR aracılığıyla alacak süreç ve süreç gruplarını belirtmek için de kullanılabilir. \fBF_SETOWN\fR kullanımı, \fBioctl\fR(2) çağrısının \fBFIOSETWON\fR veya \fBSIOCSPGRP\fR değerleriyle kullanımına eşdeğerdir.
 .sp
 Ağ, protokol modülüne bir hata durumu (örneğin IP için ICMP iletisi kullanarak) sinyallediğinde bekleyen hata bayrağı sokete atanır. Bekleyen hatanın kodunu, soket üzerindeki sonraki işlem döndürür. Bazı protokollerde hata üzerine daha ayrıntılı bilgi edinmek için sokete özgü hata kuyruğu kullanmak mümkündür; \fBip\fR(7) sayfasındaki \fBIP_RECVERR\fR sabitine bakın.
 .sp
@@ -339,22 +339,22 @@ Kullanılan protokol modülleri tarafından başka hatalar oluşturulabilir.
 .SH "UYUMLULUK"
 POSIX.1-2001, POSIX.1-2008 4.4BSD
 .sp
-\fBSOCK_NONBLOCK\fR ve \fBSOCK_CLOEXEC\fR bayrakları Linux’a özgüdür.
+\fBSOCK_NONBLOCK\fR ve \fBSOCK_CLOEXEC\fR bayrakları Linux\&'a özgüdür.
 .sp
 \fBsocket\fR() 4.2BSD ile ortaya çıktı. Genellikle BSD soket katmanının klonlarını destekleyen (Sistem V türleri dahil) BSD olmayan sistemlere/sistemlerden taşınabilirdir.
 .sp
 .SH "EK BİLGİLER"
-POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+POSIX.1\&'de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux\&'da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
 .sp
 4.x BSD altında protokol aileleri için \fBPF_UNIX\fR ve \fBPF_INET\fR vb. sabitleri kullanılırken, \fBAF_UNIX\fR ve \fBAF_INET\fR vb. sabitleri adres aileleri için kullanılmaktadır. Ancak, zaten BSD kılavuz sayfasında şunlar geçiyor: "Protokol ailesi genellikle adres ailesiyle aynıdır" ve sonraki standartlar artık her yerde AF_* sabitlerini kullanıyor.
 .sp
 .SH "ÖRNEKLER"
-\fBsocket\fR()’in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
+\fBsocket\fR()\&'in örnek kullanımı \fBgetaddrinfo\fR(3) sayfasında verilmiştir.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBaccept\fR(2), \fBbind\fR(2), \fBclose\fR(2), \fBconnect\fR(2), \fBfcntl\fR(2), \fBgetpeername\fR(2), \fBgetsockname\fR(2), \fBgetsockopt\fR(2), \fBioctl\fR(2), \fBlisten\fR(2), \fBread\fR(2), \fBrecv\fR(2), \fBselect\fR(2), \fBsend\fR(2), \fBshutdown\fR(2), \fBsocketpair\fR(2), \fBwrite\fR(2), \fBgetprotoent\fR(3), \fBaddress_families\fR(7), \fBip\fR(7), \fBsocket\fR(7), \fBtcp\fR(7), \fBudp\fR(7), \fBunix\fR(7)
 .sp
-"An Introductory 4.3BSD Interprocess Communication Tutorial" ve "BSD Interprocess Communication Tutorial", \fIUNIX Programcısının Ek Belgeleri Cilt 1\fR’de yeniden basılmıştır.
+"An Introductory 4.3BSD Interprocess Communication Tutorial" ve "BSD Interprocess Communication Tutorial", \fIUNIX Programcısının Ek Belgeleri Cilt 1\fR\&'de yeniden basılmıştır.
 .sp
 .SH "ÇEVİREN"
 © 2022 Fatih Koçer

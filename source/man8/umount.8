@@ -19,7 +19,7 @@
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
  *
- * The GNU General Public License’s references to "object code"
+ * The GNU General Public License\&'s references to "object code"
  * and "executables" are to be interpreted as the output of any
  * document formatting or typesetting system, including
  * intermediate and printed output.
@@ -33,7 +33,7 @@
  * License along with this manual; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "UMOUNT" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -56,7 +56,7 @@ umount - dosya sistemlerini ayırır
 .SH "AÇIKLAMA"
 \fBumount\fR, dosya sistem(ler)ini, bağlı olduğu dosya hiyeraşisinden ayırır. Bir dosya sistemi, bağlandığı dizin adı verilerek belirtilir. Dosya sisteminin üzerinde olduğu özel aygıt isimlerinin belirtilmesi de işe yarayabilir ama bu yöntem oldukça eskidir. Ayrıca, aygıtın birden fazla dizine bağlandığı durumlarda hata oluşacaktır.
 .sp
-"Meşgul" bir dosya sisteminin ayrılamayacağı unutulmamalıdır. Örneğin; açık dosyalar var ise veya bir süreç oradaki bir dizin içinde çalışıyorsa ya da o dizindeki bir takas dosyası kullanımda ise, vb. Örneğin bir süreç libc’yi başlatır ve libc oradaki yerel dosyaları açar böyle bir durumda, süreç \fBumount\fR’u çalıştırabilse bile işlem başarılı olmaz. Bir delice ayırma işlemi bu sorunların üstesinden gelir, ancak başka sorunları da beraberinde getirebilir. Bkz: \fB--lazy\fR seçeneği.
+"Meşgul" bir dosya sisteminin ayrılamayacağı unutulmamalıdır. Örneğin; açık dosyalar var ise veya bir süreç oradaki bir dizin içinde çalışıyorsa ya da o dizindeki bir takas dosyası kullanımda ise, vb. Örneğin bir süreç libc\&'yi başlatır ve libc oradaki yerel dosyaları açar böyle bir durumda, süreç \fBumount\fR\&'u çalıştırabilse bile işlem başarılı olmaz. Bir delice ayırma işlemi bu sorunların üstesinden gelir, ancak başka sorunları da beraberinde getirebilir. Bkz: \fB--lazy\fR seçeneği.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -97,7 +97,7 @@ Dışsal \fB/sbin/umount.\fR\fIds-türü\fR aracı mevcut olsa bile çalıştır
 \fB-l\fR, \fB--lazy\fR
 Tembel ayırma. Dosya sistemi dosya hiyerarşisinden hemen ayrılır ve meşguliyeti biter bitmez bu dosya sistemine yapılan tüm atıflar temizlenir.
 .sp
-Bu seçeneğin ağ dosya sisteminde veya alt bağlantılara sahip yerel dosya sisteminde kullanılması durumunda, her an sistemin yeniden başlatılması beklenebilir. \fBumount -l\fR için önerilen kullanım durumu, normal bir \fBumount\fR’un kapatılmış bir sunucu veya ağ disk bölümü nedeniyle askıda kalacağı erişilemeyen bir ağ paylaşımı nedeniyle kapanma sırasında beklemede kalmasını önlemektir. Paylaşımın yeniden bağlanması mümkün olmayacaktır.
+Bu seçeneğin ağ dosya sisteminde veya alt bağlantılara sahip yerel dosya sisteminde kullanılması durumunda, her an sistemin yeniden başlatılması beklenebilir. \fBumount -l\fR için önerilen kullanım durumu, normal bir \fBumount\fR\&'un kapatılmış bir sunucu veya ağ disk bölümü nedeniyle askıda kalacağı erişilemeyen bir ağ paylaşımı nedeniyle kapanma sırasında beklemede kalmasını önlemektir. Paylaşımın yeniden bağlanması mümkün olmayacaktır.
 .sp
 .TP 4
 \fB-n\fR, \fB--namespace\fR \fIisimalanı\fR
@@ -129,7 +129,7 @@ Ayırma başarısız olursa dosya sistemini salt-okunur olarak yeniden bağlamay
 .sp
 .TP 4
 \fB-t\fR, \fB--types\fR \fIds-türü\fR[,...]
-Eylemlerin yalnızca belirtilen türdeki dosya sistemlerinde gerçekleştirilmesi gerektiğini belirtir. Virgülle ayrılmış bir liste halinde birden fazla tür belirtilebilir. Dosya sistemi türleri listesinin önüne, belirtilen türlerin tümü için herhangi bir işlem yapılmaması gerektiğini belirtmek için "no" eklenebilir. \fBumount\fR’un bağlı dosya sistemleri hakkındaki bilgileri çekirdekten (\fI/proc/mounts\fR) okuduğu ve dosya sistemi adlarının \fI/etc/fstab\fR’da kullanılan dosya sistemi adlarından farklı olabileceği unutulmamalıdır. (örneğin, "nfs4" ve "nfs").
+Eylemlerin yalnızca belirtilen türdeki dosya sistemlerinde gerçekleştirilmesi gerektiğini belirtir. Virgülle ayrılmış bir liste halinde birden fazla tür belirtilebilir. Dosya sistemi türleri listesinin önüne, belirtilen türlerin tümü için herhangi bir işlem yapılmaması gerektiğini belirtmek için "no" eklenebilir. \fBumount\fR\&'un bağlı dosya sistemleri hakkındaki bilgileri çekirdekten (\fI/proc/mounts\fR) okuduğu ve dosya sistemi adlarının \fI/etc/fstab\fR\&'da kullanılan dosya sistemi adlarından farklı olabileceği unutulmamalıdır. (örneğin, "nfs4" ve "nfs").
 .sp
 .TP 4
 \fB-v\fR, \fB--verbose\fR
@@ -155,7 +155,7 @@ Normalde, yalnızca root kullanıcısı dosya sistemlerini bağlayabilir. Ancak,
 .SH "DÖNÜŞ AYGITI"
 \fBumount\fR komutu, \fI/etc/mtab\fR dosyasından bağımsız olarak \fBmount\fR(8) komutuyla ilklendirilmiş dönüş aygıtını otomatik olarak ayırır.
 .sp
-Bu durumda, aygıt \fBautoclear\fR özelliği ile ilklendirilir (daha fazla ayrıntı için bkz: \fBlosetup\fR(8)), aksi takdirde \fB--detach-loop\fR seçeneğini veya \fBlosetup -d /dev/loop\fR[\fIN\fR] komutunu kulanmak gerekir. \fBautoclear\fR özelliği Linux 2.6.25’ten beri desteklenmektedir.
+Bu durumda, aygıt \fBautoclear\fR özelliği ile ilklendirilir (daha fazla ayrıntı için bkz: \fBlosetup\fR(8)), aksi takdirde \fB--detach-loop\fR seçeneğini veya \fBlosetup -d /dev/loop\fR[\fIN\fR] komutunu kulanmak gerekir. \fBautoclear\fR özelliği Linux 2.6.25\&'ten beri desteklenmektedir.
 .sp
 .SH "DIŞSAL ARAÇLAR"
 Dışsal ayırma araçları için sözdizimi:

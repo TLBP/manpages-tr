@@ -8,9 +8,9 @@
  * Copyright 1988,1990,1993,1994 by Paul Vixie
  * All rights reserved
  *
- * Distribute freely, except: don’t remove my name from the source or
- * documentation (don’t take credit for my work), mark your changes (don’t
- * get me blamed for your possible bugs), don’t alter or remove this
+ * Distribute freely, except: don\&'t remove my name from the source or
+ * documentation (don\&'t take credit for my work), mark your changes (don\&'t
+ * get me blamed for your possible bugs), don\&'t alter or remove this
  * notice.  May be sold if buildable source is provided to buyer.  No
  * warrantee of any kind, express or implied, is included with this
  * software; use at your own risk, responsibility for damages (if any) to
@@ -18,10 +18,10 @@
  * user.
  *
  * Send bug reports, bug fixes, enhancements, requests, flames, etc., and
- * I’ll try to keep a version up to date.  I can be reached as follows:
+ * I\&'ll try to keep a version up to date.  I can be reached as follows:
  * Paul Vixie         <paul@vix.com>          uunet!decwrl!vixie!paul
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "CRONTAB" 5 "24 Ocak 1994" "cron 3.0" "Dosya Biçimleri ve Dosya Dönüşümleri"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -29,12 +29,12 @@
 .ad l
 .PD 0
 .SH İSİM
-crontab - cron’u yöneten tablolar
+crontab - cron\&'u yöneten tablolar
 .sp
 .SH "AÇIKLAMA"
 Bir \fIcrontab\fR dosyasında, \fBcron\fR(8) sürecinin hangi zamanda hangi komutu çalıştıracağını belirten açıklamalar bulunur. Her kullanıcı kendi \fIcrontab\fR dosyasına sahip olabilir. Bu kullanıcılara ait \fIcrontab\fR dosyalarındaki zamanlanmış komutlar, \fIcrontab\fR dosyasının sahibi hangi kullanıcı ise onun adı altında çalıştırılır. Uucp ve News genellikle kendi \fIcrontab\fR dosyalarına sahiptirler, bu sayede bir \fBcron\fR komutunun parçası olarak \fBsu\fR(1) komutunu çalıştırma ihtiyacı ortadan kalkmış olur.
 .sp
-Boş satırlar, sekmeler ve ara boşluklar yok sayılırlar. ’#’ karakteri ile başlayan satırlar yorum satırlarıdır. Dosyanın işletilmesi sırasında sistem tarafından önemsenmezler. Unutmayın ki, \fBcron\fR komutları ve yorumlar aynı satırda olamazlar. Bir yorum satırının devamında, bir \fBcron\fR komutu yer alıyorsa, sistem burasını da yorum olarak kabul eder ve işleme sokmaz. Aynı şekilde; yorumlar da, ortam değişkeni ayarları biçiminde, aynı satırda yer alamazlar.
+Boş satırlar, sekmeler ve ara boşluklar yok sayılırlar. `#\&' karakteri ile başlayan satırlar yorum satırlarıdır. Dosyanın işletilmesi sırasında sistem tarafından önemsenmezler. Unutmayın ki, \fBcron\fR komutları ve yorumlar aynı satırda olamazlar. Bir yorum satırının devamında, bir \fBcron\fR komutu yer alıyorsa, sistem burasını da yorum olarak kabul eder ve işleme sokmaz. Aynı şekilde; yorumlar da, ortam değişkeni ayarları biçiminde, aynı satırda yer alamazlar.
 .sp
 Geçerli bir \fIcrontab\fR satırı, ya ortam değişkenidir, ya da bir \fBcron\fR komutudur. Bir ortam değişkeni şu şekilde olur:
 .sp
@@ -46,16 +46,16 @@ Geçerli bir \fIcrontab\fR satırı, ya ortam değişkenidir, ya da bir \fBcron\
 .RE
 Eşit işaretinin yanındaki boşluklar seçime bağlıdır. Değer içindeki sonraki boşluklar, isme atanan değerin bir parçası olarak kabul edileceklerdir. Değer dizgesi, önde veya arkada yer alan boşlukları korumak için, çift ya da tek tırnak içinde olabilir. Buradaki temel nokta çift tırnak ile başlarsanız çift tırnak ile bitirmeniz gerektiğidir. Aynı şekilde tek tırnak ile başlarsanız tek tırnak ile bitirmelisiniz.
 .sp
-Pek çok ortam değişkeni, \fBcron\fR(8) süreci tarafından düzenlenir. \fBSHELL\fR değişkeni, \fI/bin/sh\fR’ı işaret eder. \fBLOGNAME\fR ve \fBHOME\fR, \fIcrontab\fR dosyasının sahibinin \fI/etc/passwd\fR dosyasındaki değerlerine göre ayarlanır. \fBHOME\fR ve \fBSHELL\fR ortam değişkenleri, \fIcrontab\fR içindeki ayrıca belirtilerek önemsenmeyebilir ama \fBLOGNAME\fR önemsenir.
+Pek çok ortam değişkeni, \fBcron\fR(8) süreci tarafından düzenlenir. \fBSHELL\fR değişkeni, \fI/bin/sh\fR\&'ı işaret eder. \fBLOGNAME\fR ve \fBHOME\fR, \fIcrontab\fR dosyasının sahibinin \fI/etc/passwd\fR dosyasındaki değerlerine göre ayarlanır. \fBHOME\fR ve \fBSHELL\fR ortam değişkenleri, \fIcrontab\fR içindeki ayrıca belirtilerek önemsenmeyebilir ama \fBLOGNAME\fR önemsenir.
 .sp
 .TP 4
 \fBUyarı:\fR
 BSD sistemlerde, \fBLOGNAME\fR değişkeni bazen \fBUSER\fR olarak adlandırılabilir. Bu tür sistemlerde, \fBUSER\fR değişkeni de ayarlanmalıdır.
 .sp
 .PP
-\fBLOGNAME\fR, \fBHOME\fR ve \fBSHELL\fR’e ek olarak; \fBcron\fR(8), bu \fIcrontab\fR dosyasındaki komutların çalışması sonucu e-posta göndermeyi gerektirecek bir durum ortaya çıkmışsa, \fBMAILTO\fR değişkenini de arar. Şayet \fBMAILTO\fR tanımlı ve içeriği boş değil ise, posta burada belirtilen kullanıcıya gönderilir. Şayet \fBMAILTO\fR belirtilmiş ama içeriği boş ise, (\fBMAILTO=""\fR gibi) e-posta gönderilmez. Diğer durumlarda, e-posta, \fIcrontab\fR dosyasının sahibi olan kullanıcıya gönderilir. Bu seçenek, \fBcron\fR(8)’u yüklerken postacı olarak \fI/usr/lib/sendmail\fR yerine \fI/bin/mail\fR kullanmaya karar verdiğiniz durumlarda oldukça faydalı olur -- \fI/bin/mail\fR sahte isme izin vermez ve UUCP genellikle onun e-postalarını okumaz.
+\fBLOGNAME\fR, \fBHOME\fR ve \fBSHELL\fR\&'e ek olarak; \fBcron\fR(8), bu \fIcrontab\fR dosyasındaki komutların çalışması sonucu e-posta göndermeyi gerektirecek bir durum ortaya çıkmışsa, \fBMAILTO\fR değişkenini de arar. Şayet \fBMAILTO\fR tanımlı ve içeriği boş değil ise, posta burada belirtilen kullanıcıya gönderilir. Şayet \fBMAILTO\fR belirtilmiş ama içeriği boş ise, (\fBMAILTO=""\fR gibi) e-posta gönderilmez. Diğer durumlarda, e-posta, \fIcrontab\fR dosyasının sahibi olan kullanıcıya gönderilir. Bu seçenek, \fBcron\fR(8)\&'u yüklerken postacı olarak \fI/usr/lib/sendmail\fR yerine \fI/bin/mail\fR kullanmaya karar verdiğiniz durumlarda oldukça faydalı olur -- \fI/bin/mail\fR sahte isme izin vermez ve UUCP genellikle onun e-postalarını okumaz.
 .sp
-Bir \fBcron\fR(8) komutunun yapısı V7 standartı ile oldukça uyumludur. Her satır, sonunda bir komut olan, beş adet zaman ve tarih alanına sahiptir. Şayet bu bir sistem \fIcrontab\fR dosyası ise kullanıcı adı da belirtilir. Komutlar \fBcron\fR(8) tarafından işletilir. Burada belirtilen bir komutun işletilmesi için: dakika, saat ve ay bölümünün gerçek zaman ile aynı olması ve haftanın günü ya da ayın günü bölümününden en az birisinin gerçek zaman ile aynı olması gerekir (açıklama için aşağıdaki Bilgi’ye bakınız). Burada unutulmaması gereken bir nokta vardır: kayıp saatler diye adlandırabileceğimiz zaman (yaz saati, kış saati uygulamalarında geçişlerde yaşanan saat kaybı gibi) için ayarlanmış görevler asla çalışmayacaktır. Benzer şekilde, bir seferden daha fazla yaşanan saatler için ayarlanmış görevlerde iki kez çalıştırılacaktır (yaz saati kış saati değişimlerinde saatin geriye alınıp, iki kere aynı saat diliminin yaşanması). \fBcron\fR(8), her dakika başı \fBcron\fR girişlerini gözden geçirir. Zaman ve tarih alanları:
+Bir \fBcron\fR(8) komutunun yapısı V7 standartı ile oldukça uyumludur. Her satır, sonunda bir komut olan, beş adet zaman ve tarih alanına sahiptir. Şayet bu bir sistem \fIcrontab\fR dosyası ise kullanıcı adı da belirtilir. Komutlar \fBcron\fR(8) tarafından işletilir. Burada belirtilen bir komutun işletilmesi için: dakika, saat ve ay bölümünün gerçek zaman ile aynı olması ve haftanın günü ya da ayın günü bölümününden en az birisinin gerçek zaman ile aynı olması gerekir (açıklama için aşağıdaki Bilgi\&'ye bakınız). Burada unutulmaması gereken bir nokta vardır: kayıp saatler diye adlandırabileceğimiz zaman (yaz saati, kış saati uygulamalarında geçişlerde yaşanan saat kaybı gibi) için ayarlanmış görevler asla çalışmayacaktır. Benzer şekilde, bir seferden daha fazla yaşanan saatler için ayarlanmış görevlerde iki kez çalıştırılacaktır (yaz saati kış saati değişimlerinde saatin geriye alınıp, iki kere aynı saat diliminin yaşanması). \fBcron\fR(8), her dakika başı \fBcron\fR girişlerini gözden geçirir. Zaman ve tarih alanları:
 .sp
 .RS 4
 .nf
@@ -79,7 +79,7 @@ Adım değerleri aralıklarla birlikte kullanılabilir. Bir aralıktan sonra ‘
 .sp
 “month” ve “day of week” alan adları için isimler de kullanılabilir. Büyük/küçük harf ayrımı olmaksızın ingilizce ismin ilk üç harfini kullanabilirsiniz. İsim aralıkları ve isim listelerini kullanamazsınız.
 .sp
-6. alan (satırın geri kalanı kısmı) çalıştırılacak komutu belirtir. Satırsonu karakterine veya “%” işaretine kadar olan kısım, \fI/bin/sh\fR ya da \fBcrontab\fR’ın \fBSHELL\fR ortam değişkenince tanımlanmış olan kabuk tarafından çalıştırılır. Yüzde işareti ‘%’, ‘\\’ işareti ile öncelenmedikçe, satırsonu karakteri haline dönüşür ve ilk ‘%’ den sonraki tüm bilgi, standart girdiye komut olarak gönderilir.
+6. alan (satırın geri kalanı kısmı) çalıştırılacak komutu belirtir. Satırsonu karakterine veya “%” işaretine kadar olan kısım, \fI/bin/sh\fR ya da \fBcrontab\fR\&'ın \fBSHELL\fR ortam değişkenince tanımlanmış olan kabuk tarafından çalıştırılır. Yüzde işareti ‘%’, ‘\\’ işareti ile öncelenmedikçe, satırsonu karakteri haline dönüşür ve ilk ‘%’ den sonraki tüm bilgi, standart girdiye komut olarak gönderilir.
 .sp
 .TP 4
 \fBBilgi:\fR
@@ -91,7 +91,7 @@ Komutun çalıştırılacağı gün iki alandan ayarlanabilir: ayın günü ve h
 .RS 0
 .nf
 # komutları çalıştırmak için /bin/sh kullanılsın,
-# /etc/passwd’de belirtilen önemsizdir
+# /etc/passwd\&'de belirtilen önemsizdir
 SHELL=/bin/sh
 # kimin crontab’ı olduğunu boşver, bütün çıktıları ‘paul’e postala
 MAILTO=paul
@@ -130,7 +130,7 @@ Ay ve haftanın günleri isim olarak belirtilebilir.
 .sp
 Ortam değişkenleri \fIcrontab\fR içinden ayarlanabilir. BSD veya ATT’de alt süreçlere aktarılan ortam, \fI/etc/rc\fR içindekilerden birisidir.
 .sp
-Komut çıktısı; \fIcrontab\fR’ın sahibine postalanabilir (BSD bunu beceremez), \fIcrontab\fR’ın sahibinden başkasına postalanabilir (SysV bunu beceremez) veya bu özellik kapatılabilir ve kimseye posta gönderilmez (SysV bunu da yapamaz).
+Komut çıktısı; \fIcrontab\fR\&'ın sahibine postalanabilir (BSD bunu beceremez), \fIcrontab\fR\&'ın sahibinden başkasına postalanabilir (SysV bunu beceremez) veya bu özellik kapatılabilir ve kimseye posta gönderilmez (SysV bunu da yapamaz).
 .sp
 .SH "YAZAN"
 Paul Vixie tarafından yazılmıştır.

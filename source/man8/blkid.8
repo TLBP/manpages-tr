@@ -13,7 +13,7 @@
  * The complete text of the license is available in the
  * http://www.gnu.org/licenses/licenses.html
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "BLKID" 8 "17 Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -47,7 +47,7 @@ Blok aygıtları hakkında bilgi almak için \fBlsblk\fR(8) komutunun veya dosya
 .PP
 \fIAYGIT\fR belirtildiğinde, yalnızca bu aygıttan gelen belirteçler görüntülenir. Komut satırında birden çok \fIAYGIT\fR belirtmek mümkündür. Hiçbiri aygıt belirtilmezse, \fI/proc/partitions\fR içinde görünen tüm bölümler veya bölümlenmemiş aygıtlar gösterilir.
 .sp
-\fBblkid\fR’nin iki ana işlem şekli vardır: ya belirli bir \fIİSİM=DEĞER\fR çiftine sahip bir aygıtı arar ya da belirtilen bir veya daha fazla \fIAYGIT\fR için \fIİSİM=DEĞER\fR çiftlerini görüntüler.
+\fBblkid\fR\&'nin iki ana işlem şekli vardır: ya belirli bir \fIİSİM=DEĞER\fR çiftine sahip bir aygıtı arar ya da belirtilen bir veya daha fazla \fIAYGIT\fR için \fIİSİM=DEĞER\fR çiftlerini görüntüler.
 .sp
 Güvenlik nedenleriyle \fBblkid\fR, sondalama sonucu çelişkili olan (çakışan birden çok dosya sistemi algılanırsa) tüm aygıtları sessizce yok sayar . Düşük seviyeli sondalama kipi (\fB-p\fR), bu durumda daha fazla bilgi ve ek çıkış durumu sağlar. Ayrıntılı bir liste elde etmek ve eski şeyleri (sihirli dizgeleri) aygıttan silmek için \fBwipefs\fR(8) kullanılması önerilir.
 .sp
@@ -72,7 +72,7 @@ Artık var olmayan aygıtları kaldırmak için \fBblkid\fR önbelleğinde çöp
 .sp
 .TP 4
 \fB-H\fR, \fB--hint\fR \fITANIM\fR
-Sondalama ipucunu belirler. İpuçları, sondalama işlevlerini örneğin başka bir konumu yoklamaya zorlamanın isteğe bağlı bir yoludur. Çok oturumlu UDF’de oturum konumunu belirlemek için şimdilik sadece "\fBsession_offset=\fR\fISAYI\fR" desteklenmektedir.
+Sondalama ipucunu belirler. İpuçları, sondalama işlevlerini örneğin başka bir konumu yoklamaya zorlamanın isteğe bağlı bir yoludur. Çok oturumlu UDF\&'de oturum konumunu belirlemek için şimdilik sadece "\fBsession_offset=\fR\fISAYI\fR" desteklenmektedir.
 .sp
 .TP 4
 \fB-i\fR, \fB--info\fR
@@ -80,19 +80,19 @@ G/Ç sınırlamaları (diğer adıyla G/Ç topolojisi) hakkındaki bilgileri gö
 .sp
 .TP 4
 \fB-k\fR, \fB--list-filesystems\fR
-Bilinen tüm dosya sistemlerini ve RAID’leri listeler ve çıkar.
+Bilinen tüm dosya sistemlerini ve RAID\&'leri listeler ve çıkar.
 .sp
 .TP 4
 \fB-l\fR, \fB--list-one\fR
 \fB--match-token\fR seçeneğiyle belirtilen arama girdileriyle eşleşen yalnızca bir aygıt aranır. Belirtilen arama girdileriyle eşleşen birden fazla aygıt varsa, en yüksek önceliğe sahip aygıt ve/veya belirtilen önceliğe sahip ilk aygıt döndürülür (bkz: \fBudev\fR açıklaması). Azalan öncelik sırasına göre aygıt türleri şunlardır: Aygıt Eşleyici, EVMS, LVM, MD ve son olarak normal blok aygıtları. Bu seçenek belirtilmezse, \fBblkid\fR arama girdileriyle eşleşen tüm aygıtları listeler.
 .sp
-Bu seçenek, \fB--match-token\fR LABEL veya UUID belirteçleri ile kullanıldığında \fBblkid\fR’yi \fBudev\fR kullanmaya zorlar. Amaç, aynı etiketin birden fazla aygıt için kullanıldığı sistemlerde diğer araçlarla (\fBmount\fR(8) gibi) tutarlı çıktılar sağlamaktır.
+Bu seçenek, \fB--match-token\fR LABEL veya UUID belirteçleri ile kullanıldığında \fBblkid\fR\&'yi \fBudev\fR kullanmaya zorlar. Amaç, aynı etiketin birden fazla aygıt için kullanıldığı sistemlerde diğer araçlarla (\fBmount\fR(8) gibi) tutarlı çıktılar sağlamaktır.
 .sp
 .TP 4
 \fB-L\fR, \fB--label\fR \fIYAFTA\fR
-\fIYAFTA\fR dosya sistemi etiketini kullanan aygıtı arar; bu \fB--list-one\fR \fB--output\fR \fIAYGIT\fR \fB--match-token\fR LABEL=\fIYAFTA\fR’ya eşdeğerdir. Bu arama yöntemi, \fI/dev/disk/by-label\fR \fBudev\fR sembolik bağlarını güvenilir bir şekilde kullanabilir (sembolik bağları doğrulama olmadan kullanmanın güvenilir olmaması). \fB--label\fR seçeneği, \fBudev\fR olsun olmasın her sistemde çalışır.
+\fIYAFTA\fR dosya sistemi etiketini kullanan aygıtı arar; bu \fB--list-one\fR \fB--output\fR \fIAYGIT\fR \fB--match-token\fR LABEL=\fIYAFTA\fR\&'ya eşdeğerdir. Bu arama yöntemi, \fI/dev/disk/by-label\fR \fBudev\fR sembolik bağlarını güvenilir bir şekilde kullanabilir (sembolik bağları doğrulama olmadan kullanmanın güvenilir olmaması). \fB--label\fR seçeneği, \fBudev\fR olsun olmasın her sistemde çalışır.
 .sp
-Ne yazık ki, e2fsprogs’taki özgün \fBblkid\fR, \fB-o\fR \fILİSTE\fR ile eşanlamlı olarak \fB-L\fR seçeneğini kullanır. Daha iyi taşınabilirlik için betiklerde \fB-L\fR seçeneği yerine \fB-l\fR \fB-o\fR \fIAYGIT\fR \fB-t\fR LABEL=\fIYAFTA\fR ve \fB-o\fR \fILİSTE\fR kullanılmalıdır.
+Ne yazık ki, e2fsprogs\&'taki özgün \fBblkid\fR, \fB-o\fR \fILİSTE\fR ile eşanlamlı olarak \fB-L\fR seçeneğini kullanır. Daha iyi taşınabilirlik için betiklerde \fB-L\fR seçeneği yerine \fB-l\fR \fB-o\fR \fIAYGIT\fR \fB-t\fR LABEL=\fIYAFTA\fR ve \fB-o\fR \fILİSTE\fR kullanılmalıdır.
 .sp
 .TP 4
 \fB-n\fR, \fB--match-types\fR \fILİSTE\fR
@@ -145,7 +145,7 @@ Yalnızca aygıt isimlerini basar; bu çıktı biçemi \fB--label\fR ve \fB--uui
 .sp
 .TP 4
 \fBudev\fR
-\fBudev\fR ortamına kolay aktarım için \fIanahtar="değer"\fR çiftleri basar; anahtarların önüne ID_FS_ veya ID_PART_ önekleri getirilir. Değer, \fBudev\fR ortamı için güvenli olacak şekilde değiştirilebilir; düz ASCII, onaltılık öncelemler ve geçerli UTF-8’e izin verilir, kullanımına izin verilmeyen her şey (boşluklar dahil) ’_’ ile değiştirilir. _ENC soneki içeren anahtarlar, güvenli olmayan karakterler için onaltılık öncelemleri kullanır.
+\fBudev\fR ortamına kolay aktarım için \fIanahtar="değer"\fR çiftleri basar; anahtarların önüne ID_FS_ veya ID_PART_ önekleri getirilir. Değer, \fBudev\fR ortamı için güvenli olacak şekilde değiştirilebilir; düz ASCII, onaltılık öncelemler ve geçerli UTF-8\&'e izin verilir, kullanımına izin verilmeyen her şey (boşluklar dahil) \&'_\&' ile değiştirilir. _ENC soneki içeren anahtarlar, güvenli olmayan karakterler için onaltılık öncelemleri kullanır.
 .sp
 Daha fazla süperblok algılanırsa \fBudev\fR çıktısı ID_FS_AMBIVALENT etiketini döndürür ve boş bölümler de dahil olmak üzere tüm bölümler için daima ID_PART_ENTRY_* etiketlerini döndürür.
 .sp
@@ -169,7 +169,7 @@ Belirtilen tüm \fIKONUM\fRlarda sondalama yapılır (yalnızca \fB--probe\fR il
 \fB-p\fR, \fB--probe\fR
 Düşük seviyeli sondalama kipine geçer (arabelleği yok sayarak).
 .sp
-Düşük seviyeli sondalamanın ayrıca bölüm tablosu türü (PTTYPE etiketi) ve bölümler (PART_ENTRY_* etiketleri) hakkında bilgi verdiği unutulmamalıdır. Düşük seviyeli sondalama tarafından üretilen etiket adları, dahili olarak \fBlibblkid\fR(3) tarafından kullanılan adlara dayanır ve \fB--probe\fR olmadan elde edildiklerinden bunlar farklı olabilir (örneğin PART_ENTRY_UUID=’ye karşın PARTUUID=). Bkz: \fB--no-part-details\fR.
+Düşük seviyeli sondalamanın ayrıca bölüm tablosu türü (PTTYPE etiketi) ve bölümler (PART_ENTRY_* etiketleri) hakkında bilgi verdiği unutulmamalıdır. Düşük seviyeli sondalama tarafından üretilen etiket adları, dahili olarak \fBlibblkid\fR(3) tarafından kullanılan adlara dayanır ve \fB--probe\fR olmadan elde edildiklerinden bunlar farklı olabilir (örneğin PART_ENTRY_UUID=\&'ye karşın PARTUUID=). Bkz: \fB--no-part-details\fR.
 .sp
 .TP 4
 \fB-s\fR, \fB--match-tag\fR \fIYAFTA\fR
@@ -211,7 +211,7 @@ komutu RAID hariç desteklenen tüm biçemleri sondalar. Bu seçenek yalnızca \
 .sp
 .TP 4
 \fB-U\fR, \fB--uuid\fR \fIUUID\fR
-Belirtilen \fIUUID\fR’li dosya sistemini araştırır. Ayrıntılar için bkz: \fB--label\fR seçeneği.
+Belirtilen \fIUUID\fR\&'li dosya sistemini araştırır. Ayrıntılar için bkz: \fB--label\fR seçeneği.
 .sp
 .TP 4
 \fB-h\fR, \fB--help\fR

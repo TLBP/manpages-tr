@@ -72,7 +72,7 @@
  * $Id: bind.2,v 1.3 1999/04/23 19:56:07 freitag Exp $
  * Modified 2004-06-23 by Michael Kerrisk <mtk.manpages@gmail.com>
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "BIND" 2 "1 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -84,7 +84,7 @@ bind - adresi soketle ilişkilendirir
 .sp
 .SH BİLDİRİM
 .nf
-\fB#include <sys/types.h>\fR          /* NOTLAR’a bakın */
+\fB#include <sys/types.h>\fR          /* NOTLAR\&'a bakın */
 \fB#include <sys/socket.h>\fR
 .fi
 .sp
@@ -143,7 +143,7 @@ Soket zaten bir adres ile ilişkilendirilmiş.
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+Belirtilen \fIsockfd\fR\&'nin bir soketle ilgisi yok.
 .sp
 .PP
 Aşağıdaki hatalar sadece UNIX (\fBAF_UNIX\fR) alan soketleri için geçerlidir.
@@ -190,9 +190,9 @@ Soket düğümü salt-okunur bir dosya sisteminde yer alıyor.
 POSIX.1-2001, POSIX.1-2008, SVr4, 4.4BSD (\fBbind()\fR ilk defa 4.2BSD ile ortaya çıktı).
 .sp
 .SH "NOTLAR"
-POSIX.1’de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux’da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
+POSIX.1\&'de, \fI<sys/types.h>\fR dahil edilmeyi gerektirmez ve yine bu başlık dosyası Linux\&'da da gerekmez. Fakat bazı tarihsel (BSD) uygulamalardan ötürü bu başlık dosyasının olması gerekir ve uygulamaların taşınabilirliği için dahil edilmesi akıllıca olacaktır.
 .sp
-\fIsocklen_t\fR’nin arka planı için \fBaccept\fR(2) sayfasına bakın.
+\fIsocklen_t\fR\&'nin arka planı için \fBaccept\fR(2) sayfasına bakın.
 .sp
 .SH "HATALAR"
 Şeffaf vekil için seçenekler açıklanmamıştır.

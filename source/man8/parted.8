@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "PARTED" 8 "Eylül 2021" "parted-3.5" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -25,7 +25,7 @@ parted - disk bölümleme uygulaması
 .sp
 Bu kılavuz \fBparted\fR komutunu özet niteliğinde belgelendirmektedir. Tam belge uygulama paketi içinde GNU info biçiminde bulunmaktadır.
 .sp
-\fBparted\fR 3.0 sürümünden beri dosya sistemi işlemlerini desteklememektedir. Bu bakımdan, mkpartfs, mkfs, cp, move, check, resize komutları artık desteklenmiyor. Dosya sistemleri üzerinde işlem yapmak için bu işlemlere özgü bir araçlar kullanılmalıdır. Örneğin, ext2, ext3, ext4 dosya sistemleri üzerinde işlem yapmak için e2fsprogs uygulamaları kullanılabilir. Parted, bunlardan bazılarını yapmanıza izin verse de, parted’deki dosya sistemiyle ilgili kod, dosya sistemine özgü paketlerdeki kod kadar sağlıklı değildir.
+\fBparted\fR 3.0 sürümünden beri dosya sistemi işlemlerini desteklememektedir. Bu bakımdan, mkpartfs, mkfs, cp, move, check, resize komutları artık desteklenmiyor. Dosya sistemleri üzerinde işlem yapmak için bu işlemlere özgü bir araçlar kullanılmalıdır. Örneğin, ext2, ext3, ext4 dosya sistemleri üzerinde işlem yapmak için e2fsprogs uygulamaları kullanılabilir. Parted, bunlardan bazılarını yapmanıza izin verse de, parted\&'deki dosya sistemiyle ilgili kod, dosya sistemine özgü paketlerdeki kod kadar sağlıklı değildir.
 .sp
 .SH "SEÇENEKLER"
 .TP 4
@@ -153,7 +153,7 @@ Konumlar ve boyutlar görüntülenirken kullanıcı tarafından açıkça bir bi
 .sp
 .TP 4
 \fBdisk_set\fR \fIim durum\fR
-Belirtilen \fIim\fRim durumunu \fIdurum\fR olarak değiştirir. \fIdurum\fR "on" veya "off" olabilir. Kullanılan bölümleme tablosu türüne bağlı olarak \fIim\fRlerin hiçbiri veya bazısı olmayabilir. Desteklenen im, GPT üzerinde \fB"pmbr_boot"\fR olup GPT’nin koruyucu MBR bölümünün önyükleme imini etkinleştirir.
+Belirtilen \fIim\fRim durumunu \fIdurum\fR olarak değiştirir. \fIdurum\fR "on" veya "off" olabilir. Kullanılan bölümleme tablosu türüne bağlı olarak \fIim\fRlerin hiçbiri veya bazısı olmayabilir. Desteklenen im, GPT üzerinde \fB"pmbr_boot"\fR olup GPT\&'nin koruyucu MBR bölümünün önyükleme imini etkinleştirir.
 .sp
 .TP 4
 \fBdisk_toggle\fR \fIim\fR

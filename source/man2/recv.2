@@ -45,7 +45,7 @@
  * Modified 1998,1999 by Andi Kleen
  * 2001-06-19 corrected SO_EE_OFFENDER, bug report by James Hawtin
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "RECV" 2 "11 Kasım 2020" "Linux man-pages 5.10" "Sistem Çağrıları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -222,7 +222,7 @@ struct msghdr {
 .fi
 .sp
 .RE
-Soket bağlantısızsa, \fImsg_name\fR alanı çağrıcı tarafından tahsis edilen kaynak adresi döndürmek için kullanılan tampona göstericidir. Çağrıcı çağrıyı yapmadan önce tamponun boyutunu \fImsg_namelen\fR’e belirtmelidir; başarılı bir çağrıdan sonra \fImsg_namelen\fR dönen adresin uzunluğunu içerir. Eğer uygulama kaynak adresi bilmeye ihtiyaç duymuyorsa \fImsg_name\fR NULL olarak belirtilebilir.
+Soket bağlantısızsa, \fImsg_name\fR alanı çağrıcı tarafından tahsis edilen kaynak adresi döndürmek için kullanılan tampona göstericidir. Çağrıcı çağrıyı yapmadan önce tamponun boyutunu \fImsg_namelen\fR\&'e belirtmelidir; başarılı bir çağrıdan sonra \fImsg_namelen\fR dönen adresin uzunluğunu içerir. Eğer uygulama kaynak adresi bilmeye ihtiyaç duymuyorsa \fImsg_name\fR NULL olarak belirtilebilir.
 .sp
 \fBreadv\fR(2) sayfasında açıklandığı üzere, \fImsg_iov\fR ve \fImsg_iovlen\fR alanları dağıtma-toplama konumlarını belirler.
 .sp
@@ -234,7 +234,7 @@ Soket bağlantısızsa, \fImsg_name\fR alanı çağrıcı tarafından tahsis edi
 .nf
 struct cmsghdr {
     size_t cmsg_len;    /* Başlıkla beraber verinin bayt sayısı
-                           (POSIX’de veri türü socklen_t’dir) */
+                           (POSIX\&'de veri türü socklen_t\&'dir) */
     int    cmsg_level;  /* Kaynak protokol */
     int    cmsg_type;   /* Protokole özgü tür */
 /* devamında,
@@ -318,7 +318,7 @@ Soket, bağlantılı bir protokolle ilişkilendirilmiş ancak bağlanmamış (\f
 .sp
 .TP 4
 \fBENOTSOCK\fR
-Belirtilen \fIsockfd\fR’nin bir soketle ilgisi yok.
+Belirtilen \fIsockfd\fR\&'nin bir soketle ilgisi yok.
 .sp
 .PP
 .sp
@@ -332,9 +332,9 @@ Eğer sıfır uzunluğunda bir verikatarı beklemedeyse, sıfır \fIflags\fR de�
 .sp
 \fIsocklen_t\fR POSIX ile icat edilmiştir. Ayrıca \fBaccept\fR(2) sayfasına bakın.
 .sp
-POSIX.1’e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünde, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
+POSIX.1\&'e göre, \fImsghdr\fR yapısının \fImsg_controllen\fR alanı \fIsocklen_t\fR türünde, \fImsg_iovlen\fR alanı ise \fIint\fR türünde olmalıdır, fakat glibc ikisine de \fIsize_t\fR türünü atar.
 .sp
-Tek çağrıda çok sayıda verikatarı alabilmek için kullanılan Linux’a özgü sistem çağrısı hakkında bilgi edinmek için \fBrecvmmsg\fR(2) sayfasına bakın.
+Tek çağrıda çok sayıda verikatarı alabilmek için kullanılan Linux\&'a özgü sistem çağrısı hakkında bilgi edinmek için \fBrecvmmsg\fR(2) sayfasına bakın.
 .sp
 .SH "ÖRNEKLER"
 \fBrecvfrom\fR() kullanım örneği \fBgetaddrinfo\fR(3) sayfasında verilmiştir.

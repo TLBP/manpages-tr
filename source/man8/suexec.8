@@ -20,7 +20,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:34+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:58+03:00
 .TH "SUEXEC" 8 "28 Şubat 2022" "Apache HTTP Sunucusu 2.4.53" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -37,7 +37,7 @@ suexec - harici uygulamaları çalıştırmadan önce kullanıcıyı değiştiri
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBsuexec\fR, CGI uygulamalarını çalıştırmadan önce Apache HTTP Sunucusu tarafından kullanıcı değiştirmek için kullanılır. Bunu yapabilmek için sunucunun \fBroot\fR tarafından çalıştırılmış olması gerekir. HTTP artalan süreci normalde \fBroot\fR aidiyetinde çalışmadığından \fBsuexec\fR’in çalıştırılabilir dosyasının sahibi \fBroot\fR olmalı, setuid biti etkin (\fBu+s\fR) olmalı ve dosyaya \fBroot\fR dışında hiç kimse yazamamalıdır.
+\fBsuexec\fR, CGI uygulamalarını çalıştırmadan önce Apache HTTP Sunucusu tarafından kullanıcı değiştirmek için kullanılır. Bunu yapabilmek için sunucunun \fBroot\fR tarafından çalıştırılmış olması gerekir. HTTP artalan süreci normalde \fBroot\fR aidiyetinde çalışmadığından \fBsuexec\fR\&'in çalıştırılabilir dosyasının sahibi \fBroot\fR olmalı, setuid biti etkin (\fBu+s\fR) olmalı ve dosyaya \fBroot\fR dışında hiç kimse yazamamalıdır.
 .sp
 \fBsuexec\fR güvenlik modeli ve kavramlar hakkında bilgi edinmek için suexec belgesine (https://httpd.apache.org/docs/2.4/suexec.html) bakınız.
 .sp

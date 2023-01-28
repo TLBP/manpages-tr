@@ -21,7 +21,7 @@
  * along with this library; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:32+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:56+03:00
 .TH "WATCH" 1 "Haziran 2020" "procps-ng 3.3.16" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -47,7 +47,7 @@ Ardışık güncellemeler arasındaki farkları vurgular. İsteğe bağlı \fBpe
 .sp
 .TP 4
 \fB-n\fR, \fB--interval\fR \fIARALIK\fR
-Güncelleme aralığını belirler. Komut, daha küçük değerlerin dönüştürüldüğü 0,1 saniyeden daha kısa aralıklara izin vermez. Ondalık ayracı olarak ’.’ veya ’,’ her yerelde çalışır. \fBWATCH_INTERVAL\fR ortam değişkeni, belli bir aralığı (aynı kurallar ve biçimlendirme ile) kalıcı hale getirmek için kullanılabilir.
+Güncelleme aralığını belirler. Komut, daha küçük değerlerin dönüştürüldüğü 0,1 saniyeden daha kısa aralıklara izin vermez. Ondalık ayracı olarak \&'.\&' veya \&',\&' her yerelde çalışır. \fBWATCH_INTERVAL\fR ortam değişkeni, belli bir aralığı (aynı kurallar ve biçimlendirme ile) kalıcı hale getirmek için kullanılabilir.
 .sp
 .TP 4
 \fB-p\fR, \fB--precise\fR
@@ -153,7 +153,7 @@ Birleştirme (aksan) karakterleri \fB--differences\fR vurgulamalarında asla far
 .sp
 Son sütunda biten bir satırın hemen ardından gelen boş satırlar görüntülenmez.
 .sp
-\fB--precise\fR kipi, yürütülmesi \fIARALIK\fR saniyeden uzun süren bir \fIkomut\fRun bozduğu zamanlamayı düzeltecek gelişmiş zamansal bozunma teknolojisine henüz sahip değildir. \fBwatch\fR ayrıca, \fIARALIK\fR saniyeden uzun süren önceki bir yürütmeyi (\fBnetstat\fR’ın DNS aramalarının bazan çok uzun sürmesi gibi) yakalayabilecek kadar hızlı bir şekilde komut yürütmesini başlatma durumuna da geçebilir.
+\fB--precise\fR kipi, yürütülmesi \fIARALIK\fR saniyeden uzun süren bir \fIkomut\fRun bozduğu zamanlamayı düzeltecek gelişmiş zamansal bozunma teknolojisine henüz sahip değildir. \fBwatch\fR ayrıca, \fIARALIK\fR saniyeden uzun süren önceki bir yürütmeyi (\fBnetstat\fR\&'ın DNS aramalarının bazan çok uzun sürmesi gibi) yakalayabilecek kadar hızlı bir şekilde komut yürütmesini başlatma durumuna da geçebilir.
 .sp
 .SH "ÖRNEKLER"
 Posta şöyle de izlenebilir:
@@ -176,7 +176,7 @@ Yalnızca joe kullanıcısına ait dosyaları izlemek için:
 .sp
 .RS 4
 .nf
- watch -d ’ls -l | fgrep joe’
+ watch -d \&'ls -l | fgrep joe\&'
 .fi
 .sp
 .RE
@@ -185,8 +185,8 @@ Tırnak kullanımının etkilerini gözlemlemek için:
 .RS 4
 .nf
 watch echo $$
-watch echo ’$$’
-watch echo "’"’$$’"’"
+watch echo \&'$$\&'
+watch echo "\&'"\&'$$\&'"\&'"
 .fi
 .sp
 .RE
@@ -218,15 +218,15 @@ Hata bildirimi için lütfen <procps (at) freelists.org> adresini kullanın.
 Lütfen, çeviri ile ilgili bildirimler için <belgeler-genel (at) lists.sourceforge.net> adresini kullanın.
 .sp
 .SH "TARİHÇE"
-Gerçekleme, Tony Rems’in 1991 tarihli özgün \fBwatch\fR uygulamasına dayanmaktadır (ilk değişiklikler ve düzeltmeler Francois Pinard tarafından yapılmıştır).
+Gerçekleme, Tony Rems\&'in 1991 tarihli özgün \fBwatch\fR uygulamasına dayanmaktadır (ilk değişiklikler ve düzeltmeler Francois Pinard tarafından yapılmıştır).
 .sp
-Mike Coleman tarafından büyük ölçüde elden geçirilerek yeni özellikler (farklar seçeneği, SIGWINCH işleme, sınırsız komut uzunluğu, uzun satır işleme) Nisan 1999’da eklendi.
+Mike Coleman tarafından büyük ölçüde elden geçirilerek yeni özellikler (farklar seçeneği, SIGWINCH işleme, sınırsız komut uzunluğu, uzun satır işleme) Nisan 1999\&'da eklendi.
 .br
-2002-2003’te Albert Cahalan tarafından değişiklikler yapıldı.
+2002-2003\&'te Albert Cahalan tarafından değişiklikler yapıldı.
 .br
-2008’de Morty Abzug tarafından standart hata işlemleri, exec ve beep seçenekleri eklendi.
+2008\&'de Morty Abzug tarafından standart hata işlemleri, exec ve beep seçenekleri eklendi.
 .br
-2009’da Jarrod Lowe tarafından Unicode desteği eklendi.
+2009\&'da Jarrod Lowe tarafından Unicode desteği eklendi.
 .sp
 .SH "ÇEVİREN"
 © 2022 Nilgün Belma Bugüner

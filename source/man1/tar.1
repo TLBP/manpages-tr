@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "TAR" 1 "Temmuz 2020" "tar-1.34" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -70,7 +70,7 @@ GNU \fBtar\fR, birden fazla dosyayı tek bir dosyada (bir arşiv) depolamak ve b
 .SS "Seçenek biçimleri"
 GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel tarz\fRda, komuttan sonra seçenek harfleri kümesi, ardından, bu seçeneklerin gerektirdiği girdiler gelir. Girdiler, seçenek harfleriyle aynı sırada okunur. Tüm seçenekler işlendikten sonra kalan komut satırı sözcükleri, isteğe bağlı olmayan girdiler olarak değerlendirilir: dosya veya arşiv üye adları.
 .sp
-Örneğin, \fBc\fR seçeneği arşivin oluşturulmasını gerektirir, \fBv\fR seçeneği işlemin ayrıntılılarını ister ve \fBf\fR seçeneği üzerinde çalışılacak arşivin adını belirleyen bir girdi alır. Geleneksel tarzda yazılan aşağıdaki komut, \fBtar\fR’a \fI/etc\fR dizinindeki tüm dosyaları \fIetc.tar\fR arşiv dosyasına kaydetmesini söyler, arşivlenen dosyaları ayrıntılı olarak listeler:
+Örneğin, \fBc\fR seçeneği arşivin oluşturulmasını gerektirir, \fBv\fR seçeneği işlemin ayrıntılılarını ister ve \fBf\fR seçeneği üzerinde çalışılacak arşivin adını belirleyen bir girdi alır. Geleneksel tarzda yazılan aşağıdaki komut, \fBtar\fR\&'a \fI/etc\fR dizinindeki tüm dosyaları \fIetc.tar\fR arşiv dosyasına kaydetmesini söyler, arşivlenen dosyaları ayrıntılı olarak listeler:
 .sp
 .RS 4
 .nf
@@ -78,7 +78,7 @@ GNU \fBtar\fR için seçenekler üç farklı biçimde verilebilir. \fBGeleneksel
 .fi
 .sp
 .RE
-\fBUNIX\fR veya \fBkısa seçenek\fR tarzında, diğer komut satırı yardımcı uygulamalarında olduğu gibi, her seçenek harfinin önüne tek bir tire eklenir. Bir seçenek girdi alırsa, girdi onu ya ayrı bir komut satırı sözcüğü olarak ya da hemen ardından gelen bir seçenek olarak izler. Ancak, seçenek "isteğe bağlı" bir girdi alıyorsa, girdi, örneğin \fB-g/tmp/snar.db\fR’de olduğu gibi, herhangi bir boşluk bırakmadan seçenek harfinin hemen ardına yazılmalıdır.
+\fBUNIX\fR veya \fBkısa seçenek\fR tarzında, diğer komut satırı yardımcı uygulamalarında olduğu gibi, her seçenek harfinin önüne tek bir tire eklenir. Bir seçenek girdi alırsa, girdi onu ya ayrı bir komut satırı sözcüğü olarak ya da hemen ardından gelen bir seçenek olarak izler. Ancak, seçenek "isteğe bağlı" bir girdi alıyorsa, girdi, örneğin \fB-g/tmp/snar.db\fR\&'de olduğu gibi, herhangi bir boşluk bırakmadan seçenek harfinin hemen ardına yazılmalıdır.
 .sp
 Girdi almayan seçenekler, tek bir tire işaretinden sonra birlikte kümelenebilir, örn. \fB-vkp\fR. Girdi alan seçeneklerin girdileri (zorunlu veya isteğe bağlı), böyle bir kümenin sonuna eklenebilir, örn. \fB-vkpf a.tar\fR.
 .sp
@@ -107,7 +107,7 @@ veya (bazı seçenekleri kısaltarak):
 Her üç tarzdaki seçenekler karıştırılabilir, ancak bunu eski seçeneklerle yapmak önerilmez.
 .sp
 .SS "İşlem kipi"
-Aşağıdaki listelenen seçenekler, GNU \fBtar\fR’ın hangi işlemi gerçekleştireceğini belirler. Tam olarak bunlardan biri verilmelidir. İsteğe bağlı olmayan girdilerin anlamı, istenen çalışma kipine bağlıdır.
+Aşağıdaki listelenen seçenekler, GNU \fBtar\fR\&'ın hangi işlemi gerçekleştireceğini belirler. Tam olarak bunlardan biri verilmelidir. İsteğe bağlı olmayan girdilerin anlamı, istenen çalışma kipine bağlıdır.
 .sp
 .TP 4
 \fB-A\fR, \fB--catenate\fR, \fB--concatenate\fR
@@ -180,11 +180,11 @@ Artımlı arşiv oluştururken aygıt numaralarına bakar (öntanımlıdır)
 \fB-g\fR, \fB--listed-incremental\fR=\fIDOSYA\fR
 Yeni GNU biçimli artımlı yedeklemeleri yönetir. \fIDOSYA\fR, anlık yedeğin adıdır; burada \fBtar\fR, önceki artımlı dökümden bu yana hangi dosyaların değiştiğine karar vermek için kullanılan ek bilgileri depolar ve sonuç olarak yeniden dökümü gerekir. Bir arşiv oluştururken \fIDOSYA\fR mevcut değilse, oluşturulacak ve tüm dosyalar ortaya çıkan arşive eklenecektir (0. düzey döküm). Sıfır olmayan \fIN\fR. düzey artımlı arşiv oluşturmak için, \fIN-1\fR. düzeyde oluşturulan anlık yedeğin kopyası \fIDOSYA\fR olarak kullanılır.
 .sp
-Listeleme veya çıkarma sırasında, \fIDOSYA\fR’nın gerçek içeriği denetlenmez, bu yalnızca sözdizimsel gereksinimler nedeniyle gerekir. Bu bakımdan, yerine \fI/dev/null\fR kullanmak yaygın bir uygulamadır.
+Listeleme veya çıkarma sırasında, \fIDOSYA\fR\&'nın gerçek içeriği denetlenmez, bu yalnızca sözdizimsel gereksinimler nedeniyle gerekir. Bu bakımdan, yerine \fI/dev/null\fR kullanmak yaygın bir uygulamadır.
 .sp
 .TP 4
 \fB--hole-detection\fR=\fIYÖNTEM\fR
-Seyrek dosyalardaki boşlukları algılamak için \fIYÖNTEM\fR kullanılır. Bu seçenek örtük olarak \fB--sparse\fR seçeneğini uygular. \fIYÖNTEM\fR için geçerli değerler \fBseek\fR ve \fBraw\fR’dır. \fBseek\fR öntanımlı olup, uygulanabilir değilse \fBraw\fR son çaredir.
+Seyrek dosyalardaki boşlukları algılamak için \fIYÖNTEM\fR kullanılır. Bu seçenek örtük olarak \fB--sparse\fR seçeneğini uygular. \fIYÖNTEM\fR için geçerli değerler \fBseek\fR ve \fBraw\fR\&'dır. \fBseek\fR öntanımlı olup, uygulanabilir değilse \fBraw\fR son çaredir.
 .sp
 .TP 4
 \fB-G\fR, \fB--incremental\fR
@@ -196,7 +196,7 @@ Okunamayan dosyalarda sıfırdan farklı bir değerle çıkmaz
 .sp
 .TP 4
 \fB--level\fR=\fISAYI\fR
-Listeli artımsal arşiv oluşturmak için döküm düzeyini belirler. Şimdilik yalnızca \fB--level=0\fR anlamlıdır: \fBtar\fR’a dökümden önce anlık yedek dosyasını kırpması talimatını verir, böylece 0. düzey döküm zorlanmış olur.
+Listeli artımsal arşiv oluşturmak için döküm düzeyini belirler. Şimdilik yalnızca \fB--level=0\fR anlamlıdır: \fBtar\fR\&'a dökümden önce anlık yedek dosyasını kırpması talimatını verir, böylece 0. düzey döküm zorlanmış olur.
 .sp
 .TP 4
 \fB-n\fR, \fB--seek\fR
@@ -212,7 +212,7 @@ Arşivin aranabilir olmadığı varsayılır.
 .sp
 .TP 4
 \fB--occurrence\fR\fB[=\fR\fIN\fR\fB]\fR
-Arşivdeki her dosyanın yalnızca \fIN\fR. kopyası üzerinde çalışır. Bu seçenek yalnızca \fB--delete\fR, \fB--diff\fR, \fB--extract\fR veya \fB--list\fR seçeneği ile birlikte ve komut satırından veya \fB-T\fR seçeneği üzerinden bir dosya listesi verildiğinde geçerlidir. \fIN\fR öntanımlı olarak 1’dir.
+Arşivdeki her dosyanın yalnızca \fIN\fR. kopyası üzerinde çalışır. Bu seçenek yalnızca \fB--delete\fR, \fB--diff\fR, \fB--extract\fR veya \fB--list\fR seçeneği ile birlikte ve komut satırından veya \fB-T\fR seçeneği üzerinden bir dosya listesi verildiğinde geçerlidir. \fIN\fR öntanımlı olarak 1\&'dir.
 .sp
 .TP 4
 \fB--restrict\fR
@@ -220,7 +220,7 @@ Zararlı olabilecek bazı seçeneklerin kullanımını devre dışı bırakır.
 .sp
 .TP 4
 \fB--sparse-version\fR=\fIBÜYÜK\fR[\fI.KÜÇÜK\fR]
-Kullanılacak seyrek biçemin sürümünü belirler (örtük olarak \fB--sparse\fR uygular). Geçerli girdi değerleri \fB0.0\fR, \fB0.1\fR ve \fB1.0\fR’dır. Seyrek biçemlerin ayrıntılı açıklaması için komut satırından şu komut girilebilir: \fBinfo tar ’Sparse Formats’\fR.
+Kullanılacak seyrek biçemin sürümünü belirler (örtük olarak \fB--sparse\fR uygular). Geçerli girdi değerleri \fB0.0\fR, \fB0.1\fR ve \fB1.0\fR\&'dır. Seyrek biçemlerin ayrıntılı açıklaması için komut satırından şu komut girilebilir: \fBinfo tar \&'Sparse Formats\&'\fR.
 .sp
 .TP 4
 \fB--S\fR, \fB--sparse\fR
@@ -229,7 +229,7 @@ Seyrek dosyaları verimli şekilde işler. Dosya sistemindeki bazı dosyalar asl
 .PP
 .sp
 .SS "Geçersizleştirme denetimi"
-Bu seçenekler, diskteki mevcut bir arşivden bir dosya çıkarılırken \fBtar\fR’ın eylemlerini denetler.
+Bu seçenekler, diskteki mevcut bir arşivden bir dosya çıkarılırken \fBtar\fR\&'ın eylemlerini denetler.
 .sp
 .TP 4
 \fB-k\fR, \fB--keep-old-files\fR
@@ -519,7 +519,7 @@ Gelişmiş öznitelikler desteği devre dışı bırakılır.
 .sp
 .TP 4
 \fB--xattrs-exclude\fR=\fIKALIP\fR
-\fBxattr\fR anahtarları için dışlama kalıbını belirler. \fIKALIP\fR POSIX düzenli ifadesi olmalıdır. Örneğin, \fB--xattrs-exclude=’^user.’\fR kullanıcı isim uzayından öznitelikleri dışlar.
+\fBxattr\fR anahtarları için dışlama kalıbını belirler. \fIKALIP\fR POSIX düzenli ifadesi olmalıdır. Örneğin, \fB--xattrs-exclude=\&'^user.\&'\fR kullanıcı isim uzayından öznitelikleri dışlar.
 .sp
 .TP 4
 \fB--xattrs-include\fR=\fIKALIP\fR
@@ -530,7 +530,7 @@ Gelişmiş öznitelikler desteği devre dışı bırakılır.
 .SS "Aygıt seçimi ve geçiş"
 .TP 4
 \fB-f\fR, \fB--file\fR=\fIARŞİV\fR
-\fIARŞİV\fR adlı aygıt veya dosya kullanılır. Bu seçenek belirtilmezse \fBtar\fR önce \fBTAPE\fR ortam değişkenini inceler. Değişkene atama yapılmışsa değer arşiv adı olarak kullanılır. Yoksa, \fBtar\fR’ın öntanımlıya derlendiği varsayılır. Öntanımlı değer ya \fB--show-defaults\fR seçeneğinden elde edilir ya da \fBtar --help\fR çıktısının sonundadır.
+\fIARŞİV\fR adlı aygıt veya dosya kullanılır. Bu seçenek belirtilmezse \fBtar\fR önce \fBTAPE\fR ortam değişkenini inceler. Değişkene atama yapılmışsa değer arşiv adı olarak kullanılır. Yoksa, \fBtar\fR\&'ın öntanımlıya derlendiği varsayılır. Öntanımlı değer ya \fB--show-defaults\fR seçeneğinden elde edilir ya da \fBtar --help\fR çıktısının sonundadır.
 .sp
 İçinde iki nokta üst üste bulunan bir arşiv adı, uzak makinedeki bir dosyayı veya aygıtı belirtir. İki nokta üst üste iminden önceki kısım makine adı veya IP adresi olarak, sonraki kısım ise dosya veya aygıt olarak ele alınır. Örnek:
 .sp
@@ -542,7 +542,7 @@ Gelişmiş öznitelikler desteği devre dışı bırakılır.
 .sp
 \fB--rsh-command=/usr/bin/ssh\fR
 .sp
-Uzak makinede \fBrmt\fR(8) komutunun kurulu olması gerekir. Dosya yolu \fBtar\fR’ın öntanımlısı ile eşleşmezse \fBtar\fR’a doğru yol \fB--rmt-command\fR seçeneği kullanılarak belirtilebilir.
+Uzak makinede \fBrmt\fR(8) komutunun kurulu olması gerekir. Dosya yolu \fBtar\fR\&'ın öntanımlısı ile eşleşmezse \fBtar\fR\&'a doğru yol \fB--rmt-command\fR seçeneği kullanılarak belirtilebilir.
 .sp
 .TP 4
 \fB--force-local\fR
@@ -550,7 +550,7 @@ Uzak makinede \fBrmt\fR(8) komutunun kurulu olması gerekir. Dosya yolu \fBtar\f
 .sp
 .TP 4
 \fB-F\fR, \fB--info-script\fR=\fIKOMUT\fR, \fB--new-volume-script\fR=\fIKOMUT\fR
-Teybin sonuna ulaşılışılan her seferde \fIKOMUT\fR çalıştırılır (örtük olarak \fB-M\fR uygulanır). Komut girdi içerebilir. Başlatıldığında \fBtar\fR’ın ortamına ek olarak aşağıdaki değişkenler miras alınır:
+Teybin sonuna ulaşılışılan her seferde \fIKOMUT\fR çalıştırılır (örtük olarak \fB-M\fR uygulanır). Komut girdi içerebilir. Başlatıldığında \fBtar\fR\&'ın ortamına ek olarak aşağıdaki değişkenler miras alınır:
 .sp
 .RS
 .TP 4
@@ -607,7 +607,7 @@ Uzak arşive erişilirken \fBrsh\fR yerine \fIKOMUT\fR kullanılır. Bkz: \fB-f\
 .sp
 .TP 4
 \fB--volno-file\fR=\fIDOSYA\fR
-Bu seçenek \fB--multi-volume\fR ile birlikte kullanıldığında \fBtar\fR, çok bölümlü arşivin hangi bölümünde çalıştığını \fIDOSYA\fR’dan takip edecektir.
+Bu seçenek \fB--multi-volume\fR ile birlikte kullanıldığında \fBtar\fR, çok bölümlü arşivin hangi bölümünde çalıştığını \fIDOSYA\fR\&'dan takip edecektir.
 .sp
 .PP
 .sp
@@ -622,11 +622,11 @@ Listeleme veya çıkartma sırasında dosya sonu karakterinden sonraki tamamlanm
 .sp
 .TP 4
 \fB-i\fR, \fB--ignore-zeros\fR
-Arşivdeki sıfırlı blokları yok sayar. Normalde sıfırlarla dolu iki ardışık 512’lik blok, EOF anlamına gelir ve \fBtar\fR bunlarla karşılaştıktan sonra okumayı durdurur. Bu seçenek ona daha fazla okuma talimatı verir. \fB-A\fR seçeneğiyle oluşturulan arşivleri okurken kullanışlıdır.
+Arşivdeki sıfırlı blokları yok sayar. Normalde sıfırlarla dolu iki ardışık 512\&'lik blok, EOF anlamına gelir ve \fBtar\fR bunlarla karşılaştıktan sonra okumayı durdurur. Bu seçenek ona daha fazla okuma talimatı verir. \fB-A\fR seçeneğiyle oluşturulan arşivleri okurken kullanışlıdır.
 .sp
 .TP 4
 \fB--record-size\fR=\fISAYI\fR
-Kayıt boyutunu belirler. \fISAYI\fR her kayıttaki bayt sayısıdır. 512’nin katları olmalıdır. Örneğin 10 kilobayt için \fB--record-size=10K\fR gibi bir boyut soneki belirtilebilir. Geçerli soneklerin listesi için bkz: \fBBoyut sonekleri\fR
+Kayıt boyutunu belirler. \fISAYI\fR her kayıttaki bayt sayısıdır. 512\&'nin katları olmalıdır. Örneğin 10 kilobayt için \fB--record-size=10K\fR gibi bir boyut soneki belirtilebilir. Geçerli soneklerin listesi için bkz: \fBBoyut sonekleri\fR
 .sp
 .PP
 .sp
@@ -642,7 +642,7 @@ GNU \fBtar\fR 1.13.x biçemi
 .sp
 .TP 4
 \fBoldgnu\fR
-\fBtar\fR <= 1.12’ye göre GNU biçemi.
+\fBtar\fR <= 1.12\&'ye göre GNU biçemi.
 .sp
 .TP 4
 \fBpax\fR, \fBposix\fR
@@ -806,7 +806,7 @@ Sürüm denetim sistemi dizinleri dışlanır.
 .sp
 .TP 4
 \fB--exclude-vcs-ignores\fR
-VCS’ye özgü ignore dosyalarından okunan kalıplarla eşleşen dosyalar dışlanır. Desteklenen dosyalar: \fBcvsignore, .gitignore, .bzrignore, .hgignore\fR.
+VCS\&'ye özgü ignore dosyalarından okunan kalıplarla eşleşen dosyalar dışlanır. Desteklenen dosyalar: \fBcvsignore, .gitignore, .bzrignore, .hgignore\fR.
 .sp
 .TP 4
 \fB-h\fR, \fB--dereference\fR
@@ -854,7 +854,7 @@ Ayrıca, bkz: \fB--verbatim-files-from\fR
 .sp
 .TP 4
 \fB-N\fR, \fB--newer\fR=\fITARİH\fR, \fB--after-date\fR=\fITARİH\fR
-Yalnızca \fITARİH\fR’ten daha yeni dosyalar saklanır. \fITARİH\fR \fB/\fR veya \fB.\fR ile başlıyorsa bir dosya adı olarak alınır ve o dosyanın değişiklik zamanı tarih olarak kullanlılır.
+Yalnızca \fITARİH\fR\&'ten daha yeni dosyalar saklanır. \fITARİH\fR \fB/\fR veya \fB.\fR ile başlıyorsa bir dosya adı olarak alınır ve o dosyanın değişiklik zamanı tarih olarak kullanlılır.
 .sp
 .TP 4
 \fB--one-file-system\fR
@@ -880,7 +880,7 @@ Aksi belirtilmedikçe, \fIDOSYA\fR satır sonu karakteri ile ayrılmış bir ad 
 .sp
 Bu davranışın istenmediği noktada, \fB--verbatim-files-from\fR seçeneği kullanılarak devre dışı bırakılabilir.
 .sp
-\fB--null\fR seçeneği \fBtar\fR’a \fIDOSYA\fR içindeki adların satır sonu karakteri yerine boş karakterle sonlanacağını belirtir. söyler. Listenin \fBfind\fR(1) komutunun \fB-print0\fR belirteci ile oluşturulması yararlıdır.
+\fB--null\fR seçeneği \fBtar\fR\&'a \fIDOSYA\fR içindeki adların satır sonu karakteri yerine boş karakterle sonlanacağını belirtir. söyler. Listenin \fBfind\fR(1) komutunun \fB-print0\fR belirteci ile oluşturulması yararlıdır.
 .sp
 .TP 4
 \fB--unquote\fR
@@ -926,7 +926,7 @@ Harf büyüklüğü önemsenmez.
 .sp
 .TP 4
 \fB--no-anchored\fR
-Kalıplar, herhangi bir /’den sonrası ile eşleşir (dışlama için öntanımlıdır).
+Kalıplar, herhangi bir /\&'den sonrası ile eşleşir (dışlama için öntanımlıdır).
 .sp
 .TP 4
 \fB--no-ignore-case\fR
@@ -969,7 +969,7 @@ Dosya zamanını tam çözünürlükle gösterir.
 .sp
 .TP 4
 \fB--index-file\fR=\fIDOSYA\fR
-Ayrıntılı çıktı \fIDOSYA\fR’ya gönderilir.
+Ayrıntılı çıktı \fIDOSYA\fR\&'ya gönderilir.
 .sp
 .TP 4
 \fB-l\fR \fB--check-links\fR
@@ -1005,11 +1005,11 @@ Arşivi işledikten sonra toplam bayt sayısını gösterir. \fISİNYAL\fR belir
 .sp
 .TP 4
 \fB--utc\fR
-Dosya değişiklik zamanlarını UTC’ye göre gösterir.
+Dosya değişiklik zamanlarını UTC\&'ye göre gösterir.
 .sp
 .TP 4
 \fB-v\fR, \fB--verbose\fR
-İşlenen dosyalar ayrıntılı olarak listelenir. Bu seçeneğin komut satırındaki her örneği, ayrıntı düzeyini bir artırır. Azami ayrıntı düzeyi 3’tür. Çeşitli ayrıntı düzeylerinin \fBtar\fR çıktısını nasıl etkilediğine ilişkin ayrıntılı bir açıklama için GNU Tar Kılavuzu, 2.5.1 "--verbose Seçeneği" alt bölümüne bakılabilir
+İşlenen dosyalar ayrıntılı olarak listelenir. Bu seçeneğin komut satırındaki her örneği, ayrıntı düzeyini bir artırır. Azami ayrıntı düzeyi 3\&'tür. Çeşitli ayrıntı düzeylerinin \fBtar\fR çıktısını nasıl etkilediğine ilişkin ayrıntılı bir açıklama için GNU Tar Kılavuzu, 2.5.1 "--verbose Seçeneği" alt bölümüne bakılabilir
 .sp
 .TP 4
 \fB--warning\fR=\fISÖZCÜK\fR
@@ -1108,7 +1108,7 @@ Okunamayan dosyalar veya dizinler hakkındaki uyarılar engellenir. Bu anahtar s
 .sp
 .TP 4
 \fBunknown-cast\fR
-"%s: Bilinmeyen dosya türü ’%c’, normal dosya olarak çıkarıldı"
+"%s: Bilinmeyen dosya türü \&'%c\&', normal dosya olarak çıkarıldı"
 .sp
 .TP 4
 \fBignore-newer\fR
@@ -1116,7 +1116,7 @@ Okunamayan dosyalar veya dizinler hakkındaki uyarılar engellenir. Bu anahtar s
 .sp
 .TP 4
 \fBunknown-keyword\fR
-"Bilinmeyen genişletilmiş başlık anahtar sözcüğü ’%s’ yok sayılıyor"
+"Bilinmeyen genişletilmiş başlık anahtar sözcüğü \&'%s\&' yok sayılıyor"
 .sp
 .TP 4
 \fBdecompress-program\fR
@@ -1135,7 +1135,7 @@ tar (child): gzip deneniyor
 .RE
 .RE
 .IP
-Yani, \fBtar\fR önce arşivi \fBcompress\fR kullanarak açmayı deniyor ve bu başarısız olduğunda \fBgzip\fR’e geçiyor.
+Yani, \fBtar\fR önce arşivi \fBcompress\fR kullanarak açmayı deniyor ve bu başarısız olduğunda \fBgzip\fR\&'e geçiyor.
 .sp
 .TP 4
 \fBrecord-size\fR
@@ -1163,7 +1163,7 @@ Artımlı çıkarmayı denetleyen anahtar \fISÖZCÜK\fRler:
 .sp
 .TP 4
 \fBbad-dumpdir\fR
-"Bozuk dumpdir: ’X’ hiç kullanılmadı"
+"Bozuk dumpdir: \&'X\&' hiç kullanılmadı"
 .sp
 .PP
 .RE
@@ -1210,14 +1210,14 @@ Başarılı sonlanma.
 .sp
 .TP 4
 \fB1\fR
-Bazı dosyalar farklıdır. \fBtar\fR \fB--compare\fR (\fB--diff\fR, \fB-d\fR) komut satırı seçeneğiyle çağrıldıysa, bu kod, arşivdeki bazı dosyaların diskteki benzerlerinden farklı olduğu anlamına gelir. \fBtar\fR’a \fB--create\fR, \fB--append\fR veya \fB--update\fR seçeneklerinden biri verilmişse, bu çıkış kodu, bazı dosyaların arşivlenirken değiştirildiği ve dolayısıyla elde edilen arşivin tam kopyayı içermediği anlamına gelir.
+Bazı dosyalar farklıdır. \fBtar\fR \fB--compare\fR (\fB--diff\fR, \fB-d\fR) komut satırı seçeneğiyle çağrıldıysa, bu kod, arşivdeki bazı dosyaların diskteki benzerlerinden farklı olduğu anlamına gelir. \fBtar\fR\&'a \fB--create\fR, \fB--append\fR veya \fB--update\fR seçeneklerinden biri verilmişse, bu çıkış kodu, bazı dosyaların arşivlenirken değiştirildiği ve dolayısıyla elde edilen arşivin tam kopyayı içermediği anlamına gelir.
 .sp
 .TP 4
 \fB2\fR
 Ölümcül hata. Yani kurtarılamayan bir hata oluşmuştur.
 .sp
 .PP
-\fBtar\fR tarafından çağrılan bir alt süreç sıfırdan farklı bir çıkış koduyla çıktıysa, \fBtar\fR’ın kendisi de bu kodla çıkar. Bu, örneğin bir sıkıştırma seçeneği (örneğin \fB-z\fR) kullanılmış ve harici sıkıştırma uygulaması başarısız olmuşsa ortaya çıkabilir. Başka bir örnek, uzak bir aygıta yedekleme yaparken \fBrmt\fR hatası oluşmasıdır.
+\fBtar\fR tarafından çağrılan bir alt süreç sıfırdan farklı bir çıkış koduyla çıktıysa, \fBtar\fR\&'ın kendisi de bu kodla çıkar. Bu, örneğin bir sıkıştırma seçeneği (örneğin \fB-z\fR) kullanılmış ve harici sıkıştırma uygulaması başarısız olmuşsa ortaya çıkabilir. Başka bir örnek, uzak bir aygıta yedekleme yaparken \fBrmt\fR hatası oluşmasıdır.
 .sp
 .SH "İLGİLİ BELGELER"
 \fBbzip2\fR(1), \fBcompress\fR(1), \fBgzip\fR(1), \fBlzma\fR(1), \fBlzop\fR(1), \fBrmt\fR(8), \fBsymlink\fR(7), \fBxz\fR(1), \fBzstd\fR(1).

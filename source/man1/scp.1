@@ -21,7 +21,7 @@
  *   notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ’’AS IS’’ AND ANY EXPRESS OR
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
  * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
@@ -32,7 +32,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:31+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:55+03:00
 .TH "SCP" 1 "23 Şubat 2022" "openssh 9.0p1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -55,7 +55,7 @@ Veri aktarımı için \fBssh\fR(1) kullanılır, \fBssh\fR(1) ile aynı kimlik k
 .sp
 Kimlik kanıtlaması için gerekli ise, \fBscp\fR kullanıcı parolalarını veya anahtar parolalarını soracaktır.
 .sp
-\fIkaynak\fR ve \fIhedef\fR yerel dosya yolu ve uzak konak için yol bileşeni isteğe bağlı olarak [\fIkullanıcı\fR@]\fIkonak\fR:[\fIyol\fR] veya \fIscp://\fR[\fIkullanıcı\fR@]\fIkonak\fR[:\fIport\fR][\fIyol\fR] biçiminde belirtilebilir. ’\fB:\fR’ içeren dosya adlarınının konak belirteçleri olarak ele alınmasını önlemek için yerel dosya adları mutlak veya göreli yollar kullanılarak açık hale getirilebilir.
+\fIkaynak\fR ve \fIhedef\fR yerel dosya yolu ve uzak konak için yol bileşeni isteğe bağlı olarak [\fIkullanıcı\fR@]\fIkonak\fR:[\fIyol\fR] veya \fIscp://\fR[\fIkullanıcı\fR@]\fIkonak\fR[:\fIport\fR][\fIyol\fR] biçiminde belirtilebilir. \&'\fB:\fR\&' içeren dosya adlarınının konak belirteçleri olarak ele alınmasını önlemek için yerel dosya adları mutlak veya göreli yollar kullanılarak açık hale getirilebilir.
 .sp
 İki uzak konak arasında kopyalama yapılırken \fIscp://\fR biçemi kullanılıyorsa \fB-R\fR şeçeneğinin kullanımı durumunda \fIhedef\fR için \fIport\fR belirtilemez.
 .sp
@@ -75,7 +75,7 @@ Yalnızca IPv6 adreslerinin kullanımına zorlar.
 .sp
 .TP 4
 \fB-A\fR
-\fBssh-agent\fR(1)’in uzak sisteme yönlendirilmesini sağlar. Öntanımlı olarak, bir kimlik doğrulama aracısı yönlendirilmez.
+\fBssh-agent\fR(1)\&'in uzak sisteme yönlendirilmesini sağlar. Öntanımlı olarak, bir kimlik doğrulama aracısı yönlendirilmez.
 .sp
 .TP 4
 \fB-B\fR
@@ -83,11 +83,11 @@ Toplu işlem kipine geçilir (kullanıcı ve anahtar parolalarının sorulmasın
 .sp
 .TP 4
 \fB-c\fR \fIşifre\fR
-Veri aktarımını şifrelemek üzere \fIşifre\fR belirtilir. Bu seçenek doğrudan \fBssh\fR(1)’e gönderilir.
+Veri aktarımını şifrelemek üzere \fIşifre\fR belirtilir. Bu seçenek doğrudan \fBssh\fR(1)\&'e gönderilir.
 .sp
 .TP 4
 \fB-C\fR
-Sıkıştırma etkinleştirilir. Sıkıştırmayı etkinleştirmek için \fB-C\fR seçeneği \fBssh\fR(1)’e gönderilir.
+Sıkıştırma etkinleştirilir. Sıkıştırmayı etkinleştirmek için \fB-C\fR seçeneği \fBssh\fR(1)\&'e gönderilir.
 .sp
 .TP 4
 \fB-D\fR \fIsftp_sunucu_yolu\fR
@@ -95,15 +95,15 @@ Sıkıştırma etkinleştirilir. Sıkıştırmayı etkinleştirmek için \fB-C\f
 .sp
 .TP 4
 \fB-F\fR \fIssh_config\fR
-\fBssh\fR(1)’e kullanıcıya özel yapılandırma dosyasını belirtmek için kullanılır. Bu seçenek doğrudan \fBssh\fR(1)’e gönderilir.
+\fBssh\fR(1)\&'e kullanıcıya özel yapılandırma dosyasını belirtmek için kullanılır. Bu seçenek doğrudan \fBssh\fR(1)\&'e gönderilir.
 .sp
 .TP 4
 \fB-i\fR \fIid_dosyası\fR
-Genel anahtar kimlik doğrulaması için kimliğin (özel anahtar) okunacağı dosyayı seçer. Bu seçenek doğrudan \fBssh\fR(1)’e gönderilir.
+Genel anahtar kimlik doğrulaması için kimliğin (özel anahtar) okunacağı dosyayı seçer. Bu seçenek doğrudan \fBssh\fR(1)\&'e gönderilir.
 .sp
 .TP 4
 \fB-J\fR \fIhop\fR
-Önce \fIhop\fR ile belirtilen konağa scp bağlantısı kurulur ve oradan bir TCP yönlendirmesi ile asıl hedefe bağlanılır. Virgül ayraçlı birden fazla \fIhop\fR belirtilebilir. \fBProxyJump\fR yapılandırma yönergesini belirtmenin kısayoludur. Bu seçenek doğrudan \fBssh\fR(1)’e gönderilir.
+Önce \fIhop\fR ile belirtilen konağa scp bağlantısı kurulur ve oradan bir TCP yönlendirmesi ile asıl hedefe bağlanılır. Virgül ayraçlı birden fazla \fIhop\fR belirtilebilir. \fBProxyJump\fR yapılandırma yönergesini belirtmenin kısayoludur. Bu seçenek doğrudan \fBssh\fR(1)\&'e gönderilir.
 .sp
 .TP 4
 \fB-l\fR \fIsınır\fR
@@ -111,11 +111,11 @@ Band genişliğini Kbit/s cinsinden bir değerle sınırlamak için kullanılır
 .sp
 .TP 4
 \fB-O\fR
-SFTP protokolü yerine eski SCP protokolü kullanılır. SFTP gerçeklemeyen sunucular için SCP protokolünün kullanımını zorlamak gerekli olabilir. Eski SFTP sunucuları için bir ’~’ öneki ile yolları genişletmek için veya bazı dosya ismi kalıpları için geri uyumluluk adına bu gerekebilir.
+SFTP protokolü yerine eski SCP protokolü kullanılır. SFTP gerçeklemeyen sunucular için SCP protokolünün kullanımını zorlamak gerekli olabilir. Eski SFTP sunucuları için bir \&'~\&' öneki ile yolları genişletmek için veya bazı dosya ismi kalıpları için geri uyumluluk adına bu gerekebilir.
 .sp
 .TP 4
 \fB-o\fR \fIssh_seçeneği\fR
-\fBssh\fR(1)’e seçenekleri \fBssh_config\fR(5)’deki biçimde aktarmak için kullanılabilir. Bu seçenek ayrı bir \fBscp\fR komut satırı seçeneği yokken seçenekleri belirtmek için faydalıdır. Aşağıda listelenen seçeneklere belirtilebilen değerler \fBssh_config\fR(5) kılavuz sayfasında bulunabilir.
+\fBssh\fR(1)\&'e seçenekleri \fBssh_config\fR(5)\&'deki biçimde aktarmak için kullanılabilir. Bu seçenek ayrı bir \fBscp\fR komut satırı seçeneği yokken seçenekleri belirtmek için faydalıdır. Aşağıda listelenen seçeneklere belirtilebilen değerler \fBssh_config\fR(5) kılavuz sayfasında bulunabilir.
 .sp
 .RS 4
 .RS 4
@@ -196,15 +196,15 @@ Kaynak dosyadaki değişiklik ve erişim zamanları ile kipler korunur.
 .sp
 .TP 4
 \fB-q\fR
-Sessiz kip: İlerleme sayacı ve \fBssh\fR(1)’den gelen uyarı ve tanı iletileri gösterilmez.
+Sessiz kip: İlerleme sayacı ve \fBssh\fR(1)\&'den gelen uyarı ve tanı iletileri gösterilmez.
 .sp
 .TP 4
 \fB-R\fR
-İki uzak konak arasındaki kopyalama, kaynak konağa bağlanarak ve orada \fBscp\fR çalıştırılarak gerçekleştirilir. Bu, kaynak konakta çalışan \fBscp\fR’nin parola gerektirmeden hedef konakta kimlik doğrulaması yapabilmesini gerektirir.
+İki uzak konak arasındaki kopyalama, kaynak konağa bağlanarak ve orada \fBscp\fR çalıştırılarak gerçekleştirilir. Bu, kaynak konakta çalışan \fBscp\fR\&'nin parola gerektirmeden hedef konakta kimlik doğrulaması yapabilmesini gerektirir.
 .sp
 .TP 4
 \fB-r\fR
-Dizinlerin tamamı ardarda kopyalanır. \fBscp\fR’nin (alt) dizinlerde rastladığı sembolik bağları izleyeceği unutulmamalıdır.
+Dizinlerin tamamı ardarda kopyalanır. \fBscp\fR\&'nin (alt) dizinlerde rastladığı sembolik bağları izleyeceği unutulmamalıdır.
 .sp
 .TP 4
 \fB-S \fR \fIuygulama\fR
@@ -216,7 +216,7 @@ Katı dosya adı denetimini devre dışı bırakır. Öntanımlı olarak, dosyal
 .sp
 .TP 4
 \fB-v\fR
-Ayrıntılı bilgi verilir. \fBscp\fR’nin ve \fBssh\fR(1)’in kendi işlemleri hakkında hata ayıklama iletileri basmasını sağlar. Bu seçenek bağlantı, kimlik kanıtlama ve yapılandırma sorunlarının çözümlenmesinde yararlıdır.
+Ayrıntılı bilgi verilir. \fBscp\fR\&'nin ve \fBssh\fR(1)\&'in kendi işlemleri hakkında hata ayıklama iletileri basmasını sağlar. Bu seçenek bağlantı, kimlik kanıtlama ve yapılandırma sorunlarının çözümlenmesinde yararlıdır.
 .sp
 .PP
 .sp
@@ -227,7 +227,7 @@ Ayrıntılı bilgi verilir. \fBscp\fR’nin ve \fBssh\fR(1)’in kendi işlemler
 Timo Rinne ve Tatu Ylonen tarafından yazılmıştır.
 .sp
 .SH "TARİHÇE"
-\fBscp\fR, Regents of the University of California’nın BSD kaynak kodlarındaki \fBrcp\fR(1) uygulamasına dayanarak geliştirilmiştir.
+\fBscp\fR, Regents of the University of California\&'nın BSD kaynak kodlarındaki \fBrcp\fR(1) uygulamasına dayanarak geliştirilmiştir.
 .sp
 OpenSSH 8.8 sürümünden beri, \fBscp\fR aktarım için öntanımlı olarak SFTP protokolünü kullanmaktadır.
 .sp

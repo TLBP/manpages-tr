@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:29+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:53+03:00
 .TH "BC" 1 "11 Haziran 2006" "GNU bc 1.07.1" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -21,9 +21,9 @@ bc - Keyfî duyarlılıkta hesaplama dili
 .PP
 .sp
 .SH "AÇIKLAMA"
-\fBbc\fR, girilen deyimleri işleterek keyfi uzunlukta ve duyarlılıktaki sayılar üzerinde matematiksel işlemler yapmaya imkan sağlayan etkileşimli bir ortam ve bir yazılım geliştirme dilidir. Sözdizimi açısından C yazılım geliştirme dilini andıran bazı benzerlikler vardır. Komut satırından belirtmek suretiyle kullanabileceğimiz standart bir math kütüphanesine sahiptir. Eğer gerekli ise; math kütüphanesi, belirtilen dosyalardan daha önce ele alınır. \fBbc\fR işleme tabi tutarken dosyaları komut satırında belirtilen sıraya göre ele alır. Belirtilen dosyaların tümü ele alınıp işlendikten sonra, standart girdiden girişler okunmaya başlar. Kodlar nasıl okunuyorlarsa bu halleriyle işletilirler. (Eğer belirtilen dosyalardan herhangi birinde \fBbc\fR’yi sonlandıracak bir komut yer alırsa, \fBbc\fR sonlanır, bir daha standart girdiden okuyamaz.)
+\fBbc\fR, girilen deyimleri işleterek keyfi uzunlukta ve duyarlılıktaki sayılar üzerinde matematiksel işlemler yapmaya imkan sağlayan etkileşimli bir ortam ve bir yazılım geliştirme dilidir. Sözdizimi açısından C yazılım geliştirme dilini andıran bazı benzerlikler vardır. Komut satırından belirtmek suretiyle kullanabileceğimiz standart bir math kütüphanesine sahiptir. Eğer gerekli ise; math kütüphanesi, belirtilen dosyalardan daha önce ele alınır. \fBbc\fR işleme tabi tutarken dosyaları komut satırında belirtilen sıraya göre ele alır. Belirtilen dosyaların tümü ele alınıp işlendikten sonra, standart girdiden girişler okunmaya başlar. Kodlar nasıl okunuyorlarsa bu halleriyle işletilirler. (Eğer belirtilen dosyalardan herhangi birinde \fBbc\fR\&'yi sonlandıracak bir komut yer alırsa, \fBbc\fR sonlanır, bir daha standart girdiden okuyamaz.)
 .sp
-\fBbc\fR’nin bu sürümü, geleneksel \fBbc\fR uygulamalarına ve POSIX taslak standardına göre bazı genişletmeler içermektedir. Komut satırı seçenekleri, bu genişletmelerin bir uyarı çıktılamasına veya reddedilmesine neden olabilir. Bu belge, bu işlemci tarafından kabul edilen dili açıklar. Genişletmeler yeri gelince açıklanacaktır.
+\fBbc\fR\&'nin bu sürümü, geleneksel \fBbc\fR uygulamalarına ve POSIX taslak standardına göre bazı genişletmeler içermektedir. Komut satırı seçenekleri, bu genişletmelerin bir uyarı çıktılamasına veya reddedilmesine neden olabilir. Bu belge, bu işlemci tarafından kabul edilen dili açıklar. Genişletmeler yeri gelince açıklanacaktır.
 .sp
 .SS "SEÇENEKLER"
 .TP 4
@@ -40,7 +40,7 @@ Standart math kütüphanesini kullanıma sokar.
 .sp
 .TP 4
 \fB-w\fR, \fB--warn\fR
-POSIX \fBbc\fR’ye ek genişletmeler için uyarılar verir.
+POSIX \fBbc\fR\&'ye ek genişletmeler için uyarılar verir.
 .sp
 .TP 4
 \fB-s\fR, \fB--standard\fR
@@ -57,32 +57,32 @@ Sürüm ve telif hakkı bilgilerini gösterir ve çıkar.
 .PP
 .sp
 .SS "SAYILAR"
-\fBbc\fR’deki en temel eleman sayılardır. Sayılar keyfi duyarlılıkta ifade edilirler. Yani \fBbc\fR’de bir sayı, tamsayı kısım ve ondalık kısım olarak ifade edilir. Tüm sayılar normalde iç hesaplamalarda onluk tabanda ele alınırlar ve tüm işlemler onluk tabanda gerçekleştirilir. (Bu sürüm, bölme ve çarpma işlemlerinde sayıların ondalık kısımlarını belli uzunluktan sonra kesmektedir.) \fBbc\fR’de sayıların iki özelliği vardır: uzunluk ve bölüntü. Uzunluk, sayıdaki tüm anlamlı rakamların, bölüntü ise ondalık noktadan sonraki rakamların adedidir. Örneğin:
+\fBbc\fR\&'deki en temel eleman sayılardır. Sayılar keyfi duyarlılıkta ifade edilirler. Yani \fBbc\fR\&'de bir sayı, tamsayı kısım ve ondalık kısım olarak ifade edilir. Tüm sayılar normalde iç hesaplamalarda onluk tabanda ele alınırlar ve tüm işlemler onluk tabanda gerçekleştirilir. (Bu sürüm, bölme ve çarpma işlemlerinde sayıların ondalık kısımlarını belli uzunluktan sonra kesmektedir.) \fBbc\fR\&'de sayıların iki özelliği vardır: uzunluk ve bölüntü. Uzunluk, sayıdaki tüm anlamlı rakamların, bölüntü ise ondalık noktadan sonraki rakamların adedidir. Örneğin:
 .sp
 .RS 4
 .nf
-\&.000001 sayısının uzunluğu 6 ve bölüntüsü 6’dır.
-1935.000 sayısının uzunluğu 7 ve bölüntüsü 3’tür.
+\&.000001 sayısının uzunluğu 6 ve bölüntüsü 6\&'dır.
+1935.000 sayısının uzunluğu 7 ve bölüntüsü 3\&'tür.
 .fi
 .sp
 .RE
 .sp
 .SS "DEĞİŞKENLER"
-Sayılar iki farklı türde değişken olarak saklanabilirler: basit değişkenler ve diziler. Her iki değişken türü için de değişkenlere birer ad verilir. Değişken isimleri bir harfle başlarlar ve sonrasında harfler, rakamlar ve altçizgi karakteri içerebilirler. Tüm harfler küçük harf olmak zorundadır. (Abece-sayısal uzun isimler bir genişletmedir. Çünkü, POSIX \fBbc\fR’de değişken isimleri tek bir küçük harften ibaretttir.) Dizi değişkenleri ise isimden sonra [] (köşeli ayraç) alırlar.
+Sayılar iki farklı türde değişken olarak saklanabilirler: basit değişkenler ve diziler. Her iki değişken türü için de değişkenlere birer ad verilir. Değişken isimleri bir harfle başlarlar ve sonrasında harfler, rakamlar ve altçizgi karakteri içerebilirler. Tüm harfler küçük harf olmak zorundadır. (Abece-sayısal uzun isimler bir genişletmedir. Çünkü, POSIX \fBbc\fR\&'de değişken isimleri tek bir küçük harften ibaretttir.) Dizi değişkenleri ise isimden sonra [] (köşeli ayraç) alırlar.
 .sp
-\fBbc\fR’de dört tane özel değişken vardır. Bunlar; \fBscale\fR, \fBibase\fR, \fBobase\fR ve \fBlast\fR’dır. \fBscale\fR, işlemlerde ondalık noktadan sonra kaç tane rakamın kullanılacağını belirtir. Öntanımlı \fBscale\fR değeri \fB0\fR’dır. \fBibase\fR (input base) ve \fBobase\fR (output base) değişkenleri, girdi ve çıktı için sayı tabanlarını belirtir. Örneğin, \fBibase=10\fR ve \fBobase=2\fR olursa sayılar onluk tabanda girilir ve sonuçlar ekrana ikilik tabanda yazdırılır. \fBibase\fR ve \fBobase\fR için öntanımlı değer \fB10\fR’dur. \fBlast\fR değişkeni (bu bir genişletmedir) ise, en son ekrana yazdırılan sayıyı içeren bir değişkendir. Bu değişkenlere yeni değerler atanabilir. Bunlar ileride daha ayrıntılı olarak ele alınacaktır.
+\fBbc\fR\&'de dört tane özel değişken vardır. Bunlar; \fBscale\fR, \fBibase\fR, \fBobase\fR ve \fBlast\fR\&'dır. \fBscale\fR, işlemlerde ondalık noktadan sonra kaç tane rakamın kullanılacağını belirtir. Öntanımlı \fBscale\fR değeri \fB0\fR\&'dır. \fBibase\fR (input base) ve \fBobase\fR (output base) değişkenleri, girdi ve çıktı için sayı tabanlarını belirtir. Örneğin, \fBibase=10\fR ve \fBobase=2\fR olursa sayılar onluk tabanda girilir ve sonuçlar ekrana ikilik tabanda yazdırılır. \fBibase\fR ve \fBobase\fR için öntanımlı değer \fB10\fR\&'dur. \fBlast\fR değişkeni (bu bir genişletmedir) ise, en son ekrana yazdırılan sayıyı içeren bir değişkendir. Bu değişkenlere yeni değerler atanabilir. Bunlar ileride daha ayrıntılı olarak ele alınacaktır.
 .sp
 .SS "AÇIKLAMA SATIRLARI"
-\fBbc\fR’de açıklama satırları \fB/*\fR karakterleri ile başlar ve \fB*/\fR karakterleri ile biter. Açıklamalar herhangi bir yerde başlayabilir ve girdide tek bir boşluk olarak ele alınır. (Yani, bu da açıklamaların girdi elemanları arasında bir ayraç olarak yorumlandığını gösterir. Dolayısıyla, bir değişken ismi içerisinde açıklama yer alamaz.) Açıklamalar sınırlarını belirleyen karakterler arasında satırsonu karakteri içerebilir.
+\fBbc\fR\&'de açıklama satırları \fB/*\fR karakterleri ile başlar ve \fB*/\fR karakterleri ile biter. Açıklamalar herhangi bir yerde başlayabilir ve girdide tek bir boşluk olarak ele alınır. (Yani, bu da açıklamaların girdi elemanları arasında bir ayraç olarak yorumlandığını gösterir. Dolayısıyla, bir değişken ismi içerisinde açıklama yer alamaz.) Açıklamalar sınırlarını belirleyen karakterler arasında satırsonu karakteri içerebilir.
 .sp
-Ayrıca \fBbc\fR’de betiklerin kullanılmasını sağlamak için tek satırlık açıklamalar desteklenmektedir ve bu bir genişletmedir. Tek satırlık açıklama \fB#\fR karakterinden sonra başlar ve satır sonuna kadar devam eder. Satırsonu karakteri açıklamaya dahil değildir ve normal karakter olarak ele alınır.
+Ayrıca \fBbc\fR\&'de betiklerin kullanılmasını sağlamak için tek satırlık açıklamalar desteklenmektedir ve bu bir genişletmedir. Tek satırlık açıklama \fB#\fR karakterinden sonra başlar ve satır sonuna kadar devam eder. Satırsonu karakteri açıklamaya dahil değildir ve normal karakter olarak ele alınır.
 .sp
 .SS "İFADELER"
-Sayılar, ifadelerle ve deyimlerle birlikte kullanılırlar. Bu dil, etkileşimli bir çalışma ortamı olarak tasarlandığı için deyimler ve ifadeler de etkileşimli olarak işletilebilir. \fBbc\fR’de ’\fBmain\fR’ yordam kavramı yoktur. Bunun yerine kod, rastlandıkları sırayla hemen yorumlanarak işletilir. (İşlevler, önce tanımlanırlar ve sonradan kullanılabilir - ileride ele alınacaktır).
+Sayılar, ifadelerle ve deyimlerle birlikte kullanılırlar. Bu dil, etkileşimli bir çalışma ortamı olarak tasarlandığı için deyimler ve ifadeler de etkileşimli olarak işletilebilir. \fBbc\fR\&'de \&'\fBmain\fR\&' yordam kavramı yoktur. Bunun yerine kod, rastlandıkları sırayla hemen yorumlanarak işletilir. (İşlevler, önce tanımlanırlar ve sonradan kullanılabilir - ileride ele alınacaktır).
 .sp
-En basit ifade bir ’sabit’tir. \fBbc\fR, \fBibase\fR değişkeniyle belirtilen o anki girdi tabanını kullanarak sayıyı dahili onluk tabana çevirir. (Ancak, işlevler için bir istisna vardır.) \fBibase\fR değişkeninin geçerli değerleri \fB2\fR’den \fB36\fR’ya kadardır (\fB16\fR’dan sonrası genişletmedir). Sayılar girilirken, \fB0-9\fR arası rakamlar ve (ascii) \fBA-Z\fR arası harfler ile kullanılabilir. (Dikkat: \fBA-Z\fR büyük harf olmalıdır. Çünkü, küçük harfler değişkenler için kullanılıyor.) Tek rakamlı sayılar, \fBibase\fR ne olursa olsun, her zaman rakamın ifade ettiği değere sahip olurlar (örn, \fBA = 9\fR)). \fBbc\fR çok rakamlı sayılarda, \fBibase\fR değerine eşit veya daha büyük rakamları \fBibase-1\fR değeriyle ele alarak sayının değerini hesaplar. Bu \fBZZZ\fR sayısını daima, girdi tabanındaki 3 haneli en büyük sayı yapar.
+En basit ifade bir \&'sabit\&'tir. \fBbc\fR, \fBibase\fR değişkeniyle belirtilen o anki girdi tabanını kullanarak sayıyı dahili onluk tabana çevirir. (Ancak, işlevler için bir istisna vardır.) \fBibase\fR değişkeninin geçerli değerleri \fB2\fR\&'den \fB36\fR\&'ya kadardır (\fB16\fR\&'dan sonrası genişletmedir). Sayılar girilirken, \fB0-9\fR arası rakamlar ve (ascii) \fBA-Z\fR arası harfler ile kullanılabilir. (Dikkat: \fBA-Z\fR büyük harf olmalıdır. Çünkü, küçük harfler değişkenler için kullanılıyor.) Tek rakamlı sayılar, \fBibase\fR ne olursa olsun, her zaman rakamın ifade ettiği değere sahip olurlar (örn, \fBA = 9\fR)). \fBbc\fR çok rakamlı sayılarda, \fBibase\fR değerine eşit veya daha büyük rakamları \fBibase-1\fR değeriyle ele alarak sayının değerini hesaplar. Bu \fBZZZ\fR sayısını daima, girdi tabanındaki 3 haneli en büyük sayı yapar.
 .sp
-İfadeler, diğer yüksek-düzeyli dillerdekilere oldukça benzer. \fBbc\fR’de sayılar için farklı türler olmadığı için karışık türler için kurallar yoktur. Bunun yerine, sadece ifadelerin bölüntüleri için kurallar vardır. Her ifadenin bir bölüntüsü vardır. Bu, özgün sayıların bölüntülerinden, gerçekleştirilen işlemden ve çoğu durumda da \fBscale\fR değişkeninin değerinden elde edilir. \fBscale\fR değişkeninin alabileceği değerler, 0 ile C’deki tamsayı türü ile ifade edilebilen en büyük tamsayı aralığındadır.
+İfadeler, diğer yüksek-düzeyli dillerdekilere oldukça benzer. \fBbc\fR\&'de sayılar için farklı türler olmadığı için karışık türler için kurallar yoktur. Bunun yerine, sadece ifadelerin bölüntüleri için kurallar vardır. Her ifadenin bir bölüntüsü vardır. Bu, özgün sayıların bölüntülerinden, gerçekleştirilen işlemden ve çoğu durumda da \fBscale\fR değişkeninin değerinden elde edilir. \fBscale\fR değişkeninin alabileceği değerler, 0 ile C\&'deki tamsayı türü ile ifade edilebilen en büyük tamsayı aralığındadır.
 .sp
 Aşağıdaki geçerli ifadelerin açıklamalarında "\fIifade\fR" eksiksiz bir ifadeyi ve "\fIdeğişken\fR" ise sıradan bir değişkeni veya bir dizi değişkenini göstermektedir. Bir basit değişken
 .sp
@@ -104,47 +104,47 @@ Aşağıdaki geçerli ifadelerin açıklamalarında "\fIifade\fR" eksiksiz bir i
 .sp
 .TP 4
 \fB-\fR \fIifade\fR
-Sonuç, \fIifade\fR’nin negatifi olur.
+Sonuç, \fIifade\fR\&'nin negatifi olur.
 .sp
 .TP 4
 \fB++\fR \fIdeğişken\fR
-\fIdeğişken\fR ’bir’ arttırılır ve yeni değer ifadenin sonucu olur.
+\fIdeğişken\fR \&'bir\&' arttırılır ve yeni değer ifadenin sonucu olur.
 .sp
 .TP 4
 \fB--\fR \fIdeğişken\fR
-\fIdeğişken\fR ’bir’ eksiltilir ve yeni değer ifadenin sonucu olur.
+\fIdeğişken\fR \&'bir\&' eksiltilir ve yeni değer ifadenin sonucu olur.
 .sp
 .TP 4
 \fIdeğişken\fR \fB++\fR
-İfadenin sonucu değişkenin değerine atanır, sonra \fIdeğişken\fR’in değeri ’bir’ artırılır.
+İfadenin sonucu değişkenin değerine atanır, sonra \fIdeğişken\fR\&'in değeri \&'bir\&' artırılır.
 .sp
 .TP 4
 \fIdeğişken\fR \fB--\fR
-İfadenin sonucu değişkenin değerine atanır, sonra \fIdeğişken\fR’in değeri ’bir’ eksiltilir.
+İfadenin sonucu değişkenin değerine atanır, sonra \fIdeğişken\fR\&'in değeri \&'bir\&' eksiltilir.
 .sp
 .TP 4
 \fIifade\fR \fB+\fR \fIifade\fR
-Sonuç, iki \fIifade\fR’nin toplamıdır.
+Sonuç, iki \fIifade\fR\&'nin toplamıdır.
 .sp
 .TP 4
 \fIifade\fR \fB-\fR \fIifade\fR
-Sonuç, iki \fIifade\fR’nin farkıdır.
+Sonuç, iki \fIifade\fR\&'nin farkıdır.
 .sp
 .TP 4
 \fIifade\fR \fB*\fR \fIifade\fR
-Sonuç, iki \fIifade\fR’nin çarpımıdır.
+Sonuç, iki \fIifade\fR\&'nin çarpımıdır.
 .sp
 .TP 4
 \fIifade\fR \fB/\fR \fIifade\fR
-Sonuç, iki \fIifade\fR’nin bölümüdür. Sonucun bölüntüsü \fBscale\fR değişkeninin değeridir.
+Sonuç, iki \fIifade\fR\&'nin bölümüdür. Sonucun bölüntüsü \fBscale\fR değişkeninin değeridir.
 .sp
 .TP 4
 \fIifade\fR \fB%\fR \fIifade\fR
-Sonuç, "kalan"ı verir ve şu şekilde hesaplanır. \fBa%b\fR’yi hesaplarken, ilk önce a/b \fBscale\fR haneli olarak hesaplanır. \fBscale\fR\fB+scale(b)\fR ve \fBscale(a)\fR’dan hangisi daha büyükse bu bölüntüye göre \fBa-(a/b)*b\fR ifadesi sonucu hesaplamak için kullanılır. Eğer \fBscale\fR 0’a eşitlenirse ve her iki ifade de tamsayı ise, bu ifade tamsayı kalan işlevidir.
+Sonuç, "kalan"ı verir ve şu şekilde hesaplanır. \fBa%b\fR\&'yi hesaplarken, ilk önce a/b \fBscale\fR haneli olarak hesaplanır. \fBscale\fR\fB+scale(b)\fR ve \fBscale(a)\fR\&'dan hangisi daha büyükse bu bölüntüye göre \fBa-(a/b)*b\fR ifadesi sonucu hesaplamak için kullanılır. Eğer \fBscale\fR 0\&'a eşitlenirse ve her iki ifade de tamsayı ise, bu ifade tamsayı kalan işlevidir.
 .sp
 .TP 4
 \fIifade\fR \fB^\fR \fIifade\fR
-İfadenin sonucu, birinci üssü ikincidir. İkinci ifade bir tamsayı olmalıdır. (Eğer ikinci ifade tamsayı değilse, önce ekrana bir uyarı gelir ve ifade tamsayı olacak şekilde kesilir, yani ikinci ifadenin tam kısmı alınır). Sonucun bölüntüsü ise, eğer üs negatif ise \fBscale\fR’dir. Üs pozitif ise sonuç, \fBscale\fR ile ilk ifadenin bölüntüsünden büyük olanı ile ilk ifadenin bölüntüsü çarpı üs değerinden küçük olanıdır, yani \fBscale(a^b) = min(max(\fR\fBscale\fR\fB, scale(a)), scale(a)*b)\fR’dir. Unutulmamalıdır ki \fIifade\fR\fB^0\fR ifadesinin sonucu her zaman "1" olur.
+İfadenin sonucu, birinci üssü ikincidir. İkinci ifade bir tamsayı olmalıdır. (Eğer ikinci ifade tamsayı değilse, önce ekrana bir uyarı gelir ve ifade tamsayı olacak şekilde kesilir, yani ikinci ifadenin tam kısmı alınır). Sonucun bölüntüsü ise, eğer üs negatif ise \fBscale\fR\&'dir. Üs pozitif ise sonuç, \fBscale\fR ile ilk ifadenin bölüntüsünden büyük olanı ile ilk ifadenin bölüntüsü çarpı üs değerinden küçük olanıdır, yani \fBscale(a^b) = min(max(\fR\fBscale\fR\fB, scale(a)), scale(a)*b)\fR\&'dir. Unutulmamalıdır ki \fIifade\fR\fB^0\fR ifadesinin sonucu her zaman "1" olur.
 .sp
 .TP 4
 \fB(\fR \fIifade\fR \fB)\fR
@@ -156,49 +156,49 @@ Yaylı ayraçlar, ifadenin değeri bulunurken standart önceliği değiştirir; 
 .sp
 .TP 4
 \fIdeğişken\fR \fI<şlç>\fR\fB=\fR \fIifade\fR
-Bu, "\fIdeğişken\fR \fB=\fR \fIdeğişken\fR \fI<işlec>\fR \fIifade\fR" ile eşdeğerdir ancak bir farkla; \fIdeğişken\fR’in değeri sadece bir kere elde edilir. Eğer \fIdeğişken\fR bir dizi ise, işlemin bir kere yapılacağı gözden uzak tutulmamalıdır.
+Bu, "\fIdeğişken\fR \fB=\fR \fIdeğişken\fR \fI<işlec>\fR \fIifade\fR" ile eşdeğerdir ancak bir farkla; \fIdeğişken\fR\&'in değeri sadece bir kere elde edilir. Eğer \fIdeğişken\fR bir dizi ise, işlemin bir kere yapılacağı gözden uzak tutulmamalıdır.
 .sp
 .PP
-İlişkisel ifadeler (karşılaştırma ifadeleri), sonuçları her zaman \fB0\fR veya \fB1\fR olan özel ifadelerdir. \fB0\fR yanlış (false) ve \fB1\fR doğru (true) olarak yorumlanır. Bunlar herhangi bir ifade içerisinde yer alabilir. (POSIX \fBbc\fR’de ise ilişkisel ifadeler sadece \fBif\fR, \fBwhile\fR ve \fBfor\fR deyimlerinde kullanılabilir ve sadece bir tane ilişkisel sınama olabilir.) İlişkisel işleçler şunlardır:
+İlişkisel ifadeler (karşılaştırma ifadeleri), sonuçları her zaman \fB0\fR veya \fB1\fR olan özel ifadelerdir. \fB0\fR yanlış (false) ve \fB1\fR doğru (true) olarak yorumlanır. Bunlar herhangi bir ifade içerisinde yer alabilir. (POSIX \fBbc\fR\&'de ise ilişkisel ifadeler sadece \fBif\fR, \fBwhile\fR ve \fBfor\fR deyimlerinde kullanılabilir ve sadece bir tane ilişkisel sınama olabilir.) İlişkisel işleçler şunlardır:
 .sp
 .TP 4
 \fIifade1\fR \fB<\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’den küçükse \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'den küçükse \fB1\fR değilse \fB0\fR olur.
 .sp
 .TP 4
 \fIifade1\fR \fB<=\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’den küçük ya da eşitse \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'den küçük ya da eşitse \fB1\fR değilse \fB0\fR olur.
 .sp
 .TP 4
 \fIifade1\fR \fB>\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’den büyükse \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'den büyükse \fB1\fR değilse \fB0\fR olur.
 .sp
 .TP 4
 \fIifade1\fR \fB>=\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’den büyük ya da eşitse \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'den büyük ya da eşitse \fB1\fR değilse \fB0\fR olur.
 .sp
 .TP 4
 \fIifade1\fR \fB==\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’ye eşitse \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'ye eşitse \fB1\fR değilse \fB0\fR olur.
 .sp
 .TP 4
 \fIifade1\fR \fB!=\fR \fIifade2\fR
-Sonuç, eğer \fIifade1\fR, \fIifade2\fR’den farklıysa \fB1\fR değilse \fB0\fR olur.
+Sonuç, eğer \fIifade1\fR, \fIifade2\fR\&'den farklıysa \fB1\fR değilse \fB0\fR olur.
 .sp
 .PP
-\fBbc\fR’de mantıksal (boolean) işlemler de geçerlidir. (POSIX \fBbc\fR’de mantıksal işlemler yoktur.) Mantıksal işlemlerin sonucu, ilişkisel işlemlerde olduğu gibi, 0 (false) yada 1 (true) olmaktadır. Mantıksal işleçler şunlardır:
+\fBbc\fR\&'de mantıksal (boolean) işlemler de geçerlidir. (POSIX \fBbc\fR\&'de mantıksal işlemler yoktur.) Mantıksal işlemlerin sonucu, ilişkisel işlemlerde olduğu gibi, 0 (false) yada 1 (true) olmaktadır. Mantıksal işleçler şunlardır:
 .sp
 .TP 4
 \fB!\fR\fIifade\fR
-\fIifade\fR 0 ise sonuç 1’dir. Aksi halde 0 olur.
+\fIifade\fR 0 ise sonuç 1\&'dir. Aksi halde 0 olur.
 .sp
 .TP 4
 \fIifade\fR \fB&&\fR \fIifade\fR
-\fIifade\fR’lerin ikiside sıfırdan farklıysa sonuç 1’dir. Aksi halde 0 olur.
+\fIifade\fR\&'lerin ikiside sıfırdan farklıysa sonuç 1\&'dir. Aksi halde 0 olur.
 .sp
 .TP 4
 \fIifade\fR \fB||\fR \fIifade\fR
-\fIifade\fR’lerden biri sıfırdan farklıysa sonuç 1’dir. Aksi halde 0 olur.
+\fIifade\fR\&'lerden biri sıfırdan farklıysa sonuç 1\&'dir. Aksi halde 0 olur.
 .sp
 .PP
 İşleçlerin işlem öncelik sırası şöyledir (küçükten büyüğe):
@@ -226,13 +226,13 @@ a = 3 < 5
 .fi
 .sp
 .RE
-C programcıları bu ifadeyi ele alırken, önce \fB3<5\fR (sonuç 1’dir) ifadesini gerçekleştirir, ardından sonucu "\fIa\fR" değişkenine atarlar. \fBbc\fR’de ise önce "\fIa\fR"ya 3 atanır ve ardından 5 ile karşılaştırma yapılır. Buna dikkat etmek gerekir. En iyisi, ilişkisel ve mantıksal işleçler ile atama işleci aynı ifadede kullanıldığında karmaşayı önlemek için yaylı ayraçları kullanmaktır.
+C programcıları bu ifadeyi ele alırken, önce \fB3<5\fR (sonuç 1\&'dir) ifadesini gerçekleştirir, ardından sonucu "\fIa\fR" değişkenine atarlar. \fBbc\fR\&'de ise önce "\fIa\fR"ya 3 atanır ve ardından 5 ile karşılaştırma yapılır. Buna dikkat etmek gerekir. En iyisi, ilişkisel ve mantıksal işleçler ile atama işleci aynı ifadede kullanıldığında karmaşayı önlemek için yaylı ayraçları kullanmaktır.
 .sp
-\fBbc\fR’de desteklenen biraz daha özel ifadeler vardır. Bunlar, standart işlevler ve kullanıcı tanımlı işlevlerde, "\fIisim\fR\fB(\fR\fIdeğişkenler\fR\fB)\fR" şeklinde görülmektedirler. Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümündeki kullanıcı tanımlı işlevlere bakınız. Yerleşik işlevler şunlardır:
+\fBbc\fR\&'de desteklenen biraz daha özel ifadeler vardır. Bunlar, standart işlevler ve kullanıcı tanımlı işlevlerde, "\fIisim\fR\fB(\fR\fIdeğişkenler\fR\fB)\fR" şeklinde görülmektedirler. Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümündeki kullanıcı tanımlı işlevlere bakınız. Yerleşik işlevler şunlardır:
 .sp
 .TP 4
 \fBlength\fR \fB(\fR \fIifade\fR \fB)\fR
-\fBlength\fR işlevinin değeri, \fIifade\fR’deki anlamlı hanelerin adedidir.
+\fBlength\fR işlevinin değeri, \fIifade\fR\&'deki anlamlı hanelerin adedidir.
 .sp
 .TP 4
 \fBread\fR \fB( )\fR
@@ -240,34 +240,34 @@ C programcıları bu ifadeyi ele alırken, önce \fB3<5\fR (sonuç 1’dir) ifad
 .sp
 .TP 4
 \fBscale\fR \fB(\fR \fIifade\fR \fB)\fR
-\fBscale\fR işlevinin değeri, \fIifade\fR’denin sonucu olan sayıdaki ondalık hanelerin sayısıdır.
+\fBscale\fR işlevinin değeri, \fIifade\fR\&'denin sonucu olan sayıdaki ondalık hanelerin sayısıdır.
 .sp
 .TP 4
 \fBsqrt\fR \fB(\fR \fIifade\fR \fB)\fR
-\fBsqrt\fR işlevinin değeri, \fIifade\fR’nin kareköküdür. \fIifade\fR’nin sonucu negatif bir sayı ise bir çalışma anı hatası üretilir.
+\fBsqrt\fR işlevinin değeri, \fIifade\fR\&'nin kareköküdür. \fIifade\fR\&'nin sonucu negatif bir sayı ise bir çalışma anı hatası üretilir.
 .sp
 .PP
 .sp
 .SS "DEYİMLER"
-Deyimler, çoğu cebirsel dilde olduğu gibi, ifadelerin sırayla değerlendirilmelerini sağlarlar. \fBbc\fR’de deyimler "mümkün olduğunca" yürütülür. Yürütme, bir ya da daha fazla tam deyimden sonra bir satır sonu karakteri girildiğinde gerçekleşir. Yürütmenin anında gerçekleşmesi bakımdan \fBbc\fR’de satır sonu karakterleri çok önemlidir. Aslında, deyimleri ayırmak için bir noktalı virgül ve bir satır sonu karakteri gerekir. Yanlış yerde kullanılmış bir satır sonu karakteri bir sözdizimi hatasına sebep olur. Satır sonu karakteri deyimler için bir ayraç olduğundan, bir satırsonu karakterini gizlemek için ters eğik çizgi kullanılabilir. Ters eğik çizgiden sonra gelen bir satır sonu karakterinden oluşan karakter çiftini \fBbc\fR boşluk karakteri olarak değerlendirir. Bir deyim listesi, noktalı virgül ve satır sonu karakteri ile sonlandırımış deyimlerden oluşur. Aşağıdaki listede \fBbc\fR’deki deyimler ve bunların ne yaptıkları anlatılmaktadır (Köşeli ayraçlar (\fB[ ]\fR) arasına alınanlar, deyimin isteğe bağlı kısımlarıdır.):
+Deyimler, çoğu cebirsel dilde olduğu gibi, ifadelerin sırayla değerlendirilmelerini sağlarlar. \fBbc\fR\&'de deyimler "mümkün olduğunca" yürütülür. Yürütme, bir ya da daha fazla tam deyimden sonra bir satır sonu karakteri girildiğinde gerçekleşir. Yürütmenin anında gerçekleşmesi bakımdan \fBbc\fR\&'de satır sonu karakterleri çok önemlidir. Aslında, deyimleri ayırmak için bir noktalı virgül ve bir satır sonu karakteri gerekir. Yanlış yerde kullanılmış bir satır sonu karakteri bir sözdizimi hatasına sebep olur. Satır sonu karakteri deyimler için bir ayraç olduğundan, bir satırsonu karakterini gizlemek için ters eğik çizgi kullanılabilir. Ters eğik çizgiden sonra gelen bir satır sonu karakterinden oluşan karakter çiftini \fBbc\fR boşluk karakteri olarak değerlendirir. Bir deyim listesi, noktalı virgül ve satır sonu karakteri ile sonlandırımış deyimlerden oluşur. Aşağıdaki listede \fBbc\fR\&'deki deyimler ve bunların ne yaptıkları anlatılmaktadır (Köşeli ayraçlar (\fB[ ]\fR) arasına alınanlar, deyimin isteğe bağlı kısımlarıdır.):
 .sp
 .TP 4
 \fIifade\fR
-Bir ifade iki şeyden birini yapar. Eğer ifade "\fB<değişken> <atama> ...\fR" şeklinde başlıyorsa, bir atama deyimi olduğu kabul edilir. Eğer ifade bir atama deyimi değil ise, \fIifade\fR’nin değeri bulunur ve çıktıya yazdırılır. Sayının ardından satır sonu karakteri yazdırılır. Örneğin, \fBa=1\fR ifadesi bariz bir atama deyimidir; ve \fB(a=1)\fR ise içinde bir atama deyimi olan bir ifadedir. Çıktılanan tüm sayılar \fBobase\fR değişkeni ile belirtilen tabanda yazdırılırlar. \fBobase\fR değişkeninin alabileceği değerler 2 ile \fBBC_BASE_MAX\fR arasındadır. (Ayrıntılı bilgi için \fBSINIRLAR\fR bölümüne bakınız.)
+Bir ifade iki şeyden birini yapar. Eğer ifade "\fB<değişken> <atama> ...\fR" şeklinde başlıyorsa, bir atama deyimi olduğu kabul edilir. Eğer ifade bir atama deyimi değil ise, \fIifade\fR\&'nin değeri bulunur ve çıktıya yazdırılır. Sayının ardından satır sonu karakteri yazdırılır. Örneğin, \fBa=1\fR ifadesi bariz bir atama deyimidir; ve \fB(a=1)\fR ise içinde bir atama deyimi olan bir ifadedir. Çıktılanan tüm sayılar \fBobase\fR değişkeni ile belirtilen tabanda yazdırılırlar. \fBobase\fR değişkeninin alabileceği değerler 2 ile \fBBC_BASE_MAX\fR arasındadır. (Ayrıntılı bilgi için \fBSINIRLAR\fR bölümüne bakınız.)
 .sp
-2 ile 16 arasındaki tabanlar için çıktı bildiğimiz yöntemle yazdırılır. 16’dan daha büyük tabanlar için ise, \fBbc\fR her bir haneyi yazdırmak için 10’luk tabanda birden çok karakter kullanır ve haneler arasında boşluk bırakır. Her hane, \fBobase-1\fR değerini 10’luk düzende yazmak için gereken sayıda rakamdan oluşur. Örneğin, \fBobase=20\fR için 65 sayısı ekrana "\fB03 05\fR" şeklinde yazdırılır.
+2 ile 16 arasındaki tabanlar için çıktı bildiğimiz yöntemle yazdırılır. 16\&'dan daha büyük tabanlar için ise, \fBbc\fR her bir haneyi yazdırmak için 10\&'luk tabanda birden çok karakter kullanır ve haneler arasında boşluk bırakır. Her hane, \fBobase-1\fR değerini 10\&'luk düzende yazmak için gereken sayıda rakamdan oluşur. Örneğin, \fBobase=20\fR için 65 sayısı ekrana "\fB03 05\fR" şeklinde yazdırılır.
 .sp
 Sayılar keyfi duyarlılıkta ele alındıkları için, bazı sayılar ekrana yazdırılırken tek bir satıra sığmayabilirler. Bu durumda satırların sonuna "\\" (ters eğik çizgi) karakteri gelir. Her satırda en fazla 70 karakter yazdırılabilir.
 .sp
-\fBbc\fR’nin etkileşimli doğasından dolayı yazılan en son değer, özel \fBlast\fR değişkeninde saklanır, böylece aynı sayıyı bir daha elde etmek için bir önceki \fIifade\fR’yi tekrar yazmaya gerek kalmaz. \fBlast\fR değişkenine atama yapılabilir ve atanan değer son yazılan değerin üzerine yazılır. Yeni atanan değer, yeni bir değer ekrana yazılana kadar ya da \fBlast\fR değişkenine yeni bir atama yapılana kadar geçerli kalır. (Bazı kurulumlar \fBlast\fR için bir kısaltma olarak bir sayının parçası olmayan tek bir nokta (.) kullanımını mümkün kılabilir.)
+\fBbc\fR\&'nin etkileşimli doğasından dolayı yazılan en son değer, özel \fBlast\fR değişkeninde saklanır, böylece aynı sayıyı bir daha elde etmek için bir önceki \fIifade\fR\&'yi tekrar yazmaya gerek kalmaz. \fBlast\fR değişkenine atama yapılabilir ve atanan değer son yazılan değerin üzerine yazılır. Yeni atanan değer, yeni bir değer ekrana yazılana kadar ya da \fBlast\fR değişkenine yeni bir atama yapılana kadar geçerli kalır. (Bazı kurulumlar \fBlast\fR için bir kısaltma olarak bir sayının parçası olmayan tek bir nokta (.) kullanımını mümkün kılabilir.)
 .sp
 .TP 4
 \fIdizge\fR
-\fIdizge\fR çıktıya yazdırılır. Çift tırnak \fB"..."\fR arasına alınan her şey (satırsonu karakteri de dahil) dizge olarak kabul edilir ve ekrana aynen yazdırılır. \fIdizge\fR yazdırıldıktan sonra satırsonu karakteri yazdırılmaz (yani aşağı satıra geçilmez, bu nedenle satırsonu karakteri \fIdizge\fR’nin içine yerleştirilmelidir).
+\fIdizge\fR çıktıya yazdırılır. Çift tırnak \fB"..."\fR arasına alınan her şey (satırsonu karakteri de dahil) dizge olarak kabul edilir ve ekrana aynen yazdırılır. \fIdizge\fR yazdırıldıktan sonra satırsonu karakteri yazdırılmaz (yani aşağı satıra geçilmez, bu nedenle satırsonu karakteri \fIdizge\fR\&'nin içine yerleştirilmelidir).
 .sp
 .TP 4
 \fBprint \fR \fIliste\fR
-\fBprint\fR deyimi (bu bir genişletmedir) çıktıya birşeyler yazdırmak için kullanılan başka bir yöntemdir. \fIliste\fR zorunludur, aralarına virgül (,) konulmuş dizgelerden ve ifadelerden oluşur. \fIliste\fR’deki her dizge veya ifade, yazıldıkları sıraya göre ekrana yazdırılır. Eğer belirtilmediyse satırın sonunda satır sonu karakteri yazdırılmaz. İfadelerin değerleri bulunduktan sonra sonuçları ekrana yazdırılır. Bu esnada ekrana en son yazdırılan sayının değeri \fBlast\fR değişkenine atanır. \fBprint\fR deyimi içindeki dizgeler çıktıya yazdırılır ve özel anlamı olan karakterleri de içerebilir. Özel karakterler ters eğik çizgi karakteri ile başlar. \fBbc\fR tarafından tanınan özel karakterler; "\fBa\fR" (uyarı; bip sesi), "\fBb\fR" (geri silme), "\fBf\fR" (sayfa ileri), "\fBn\fR" (satır sonu), "\fBq\fR" (çift tırnak), "\fBt\fR" (sekme) ve "\fB\\\fR" (ters eğik çizgi) karakterleridir. Bunların dışındaki karakterler yok sayılır.
+\fBprint\fR deyimi (bu bir genişletmedir) çıktıya birşeyler yazdırmak için kullanılan başka bir yöntemdir. \fIliste\fR zorunludur, aralarına virgül (,) konulmuş dizgelerden ve ifadelerden oluşur. \fIliste\fR\&'deki her dizge veya ifade, yazıldıkları sıraya göre ekrana yazdırılır. Eğer belirtilmediyse satırın sonunda satır sonu karakteri yazdırılmaz. İfadelerin değerleri bulunduktan sonra sonuçları ekrana yazdırılır. Bu esnada ekrana en son yazdırılan sayının değeri \fBlast\fR değişkenine atanır. \fBprint\fR deyimi içindeki dizgeler çıktıya yazdırılır ve özel anlamı olan karakterleri de içerebilir. Özel karakterler ters eğik çizgi karakteri ile başlar. \fBbc\fR tarafından tanınan özel karakterler; "\fBa\fR" (uyarı; bip sesi), "\fBb\fR" (geri silme), "\fBf\fR" (sayfa ileri), "\fBn\fR" (satır sonu), "\fBq\fR" (çift tırnak), "\fBt\fR" (sekme) ve "\fB\\\fR" (ters eğik çizgi) karakterleridir. Bunların dışındaki karakterler yok sayılır.
 .sp
 .TP 4
 \fB{\fR \fIdeyim_listesi\fR \fB}\fR
@@ -275,15 +275,15 @@ Bu, bir birleşik deyimdir. Bu yapı, birden çok deyimi gruplandırarak birlikt
 .sp
 .TP 4
 \fBif (\fR \fIifade\fR \fB)\fR \fIdeyim1\fR \fB[\fR \fBelse\fR \fIdeyim2\fR \fB]\fR
-\fBif \fRdeyimi \fIifade\fR’nin değerini bulur ve \fIifade\fR’nin sonucuna göre \fIdeyim1\fR’i veya \fIdeyim2\fR’yi çalıştırır. \fIifade\fR’nin sonucu sıfırdan farklı ise \fIdeyim1\fR işletilir. Eğer \fIdeyim2\fR belirtilmişse ve \fIifade\fR’nin sonucu da sıfır ise, \fIdeyim2\fR işletilir (\fBelse\fR sözcüğü bir genişletmedir).
+\fBif \fRdeyimi \fIifade\fR\&'nin değerini bulur ve \fIifade\fR\&'nin sonucuna göre \fIdeyim1\fR\&'i veya \fIdeyim2\fR\&'yi çalıştırır. \fIifade\fR\&'nin sonucu sıfırdan farklı ise \fIdeyim1\fR işletilir. Eğer \fIdeyim2\fR belirtilmişse ve \fIifade\fR\&'nin sonucu da sıfır ise, \fIdeyim2\fR işletilir (\fBelse\fR sözcüğü bir genişletmedir).
 .sp
 .TP 4
 \fBwhile (\fR \fIifade\fR \fB)\fR \fIdeyim\fR
-\fBwhile\fRdeyimi, \fIifade\fR’nin değeri sıfırdan farklı olduğu müddetçe \fIdeyim\fR’i tekrar tekrar işletir. Döngüde her yinelemede önce \fIifade\fR’nin değeri bulunur, sonuç sıfırdan farklı ise \fIdeyim\fR işletilir. \fIifade\fR’nin sıfır olması durumunda veya çıkmak için \fBbreak\fR deyimi kullanıldığında döngü sonlanır.
+\fBwhile\fRdeyimi, \fIifade\fR\&'nin değeri sıfırdan farklı olduğu müddetçe \fIdeyim\fR\&'i tekrar tekrar işletir. Döngüde her yinelemede önce \fIifade\fR\&'nin değeri bulunur, sonuç sıfırdan farklı ise \fIdeyim\fR işletilir. \fIifade\fR\&'nin sıfır olması durumunda veya çıkmak için \fBbreak\fR deyimi kullanıldığında döngü sonlanır.
 .sp
 .TP 4
 \fBfor (\fR \fB[\fR \fIifade1\fR \fB]\fR \fB;\fR \fB[\fR \fIifade2\fR \fB]\fR \fB;\fR \fB[\fR \fIifade3\fR \fB]\fR \fB)\fR \fIdeyim\fR
-\fBfor\fR deyimi, \fIdeyim\fR’in tekrar tekrar çalıştırılmasını sağlar. İlk başta (yani döngü başlamadan önce) \fIifade1\fR işletilir. Döngüde her yinelemede \fIdeyim\fR işletilmeden önce \fIifade2\fR’nin değeri bulunur. Eğer sonuç sıfırdan farklı ise \fIdeyim\fR yerine getirilir, eğer sonuç sıfır ise döngü sonlandırılır. Döngüde \fIdeyim\fR yerine getirildikten sonra \fIifade3\fR işletilir ve ardından \fIifade2\fR’nin değeri tekrar bulunur. Ta ki \fIifade2\fR’nin değeri sıfır oluncaya kadar... Döngüyü daha erken sonlandırmak için \fBbreak \fRdeyimi kullanılabilir. Eğer \fIifade1\fR veya \fIifade3\fR kullanılmamışsa, bu noktada değerlendirilecek hiçbir şey olmadığından bir şey yapılmaz. Eğer \fIifade2\fR kullanılmamışsa, \fIifade2\fR’nin değeri 1 olarak kabul edilir. (POSIX \fBbc\fR’de her üç ifadeyi de belirtmek mecburidir. Bunların seçimlik kullanılması, bir genişletmedir.) \fBfor\fR deyiminine eşdeğer kod şöyledir:
+\fBfor\fR deyimi, \fIdeyim\fR\&'in tekrar tekrar çalıştırılmasını sağlar. İlk başta (yani döngü başlamadan önce) \fIifade1\fR işletilir. Döngüde her yinelemede \fIdeyim\fR işletilmeden önce \fIifade2\fR\&'nin değeri bulunur. Eğer sonuç sıfırdan farklı ise \fIdeyim\fR yerine getirilir, eğer sonuç sıfır ise döngü sonlandırılır. Döngüde \fIdeyim\fR yerine getirildikten sonra \fIifade3\fR işletilir ve ardından \fIifade2\fR\&'nin değeri tekrar bulunur. Ta ki \fIifade2\fR\&'nin değeri sıfır oluncaya kadar... Döngüyü daha erken sonlandırmak için \fBbreak \fRdeyimi kullanılabilir. Eğer \fIifade1\fR veya \fIifade3\fR kullanılmamışsa, bu noktada değerlendirilecek hiçbir şey olmadığından bir şey yapılmaz. Eğer \fIifade2\fR kullanılmamışsa, \fIifade2\fR\&'nin değeri 1 olarak kabul edilir. (POSIX \fBbc\fR\&'de her üç ifadeyi de belirtmek mecburidir. Bunların seçimlik kullanılması, bir genişletmedir.) \fBfor\fR deyiminine eşdeğer kod şöyledir:
 .sp
 .RS 4
 .RS 4
@@ -309,7 +309,7 @@ Bu, bir birleşik deyimdir. Bu yapı, birden çok deyimi gruplandırarak birlikt
 .sp
 .TP 4
 \fBhalt\fR
-\fBhalt\fR deyimi, (bir genişletmedir) \fBbc\fR’yi sonladırır. \fBquit\fR’ten farkı, \fBhalt\fR deyimi kesinkes değil, koşul sağlandığında çalışır. Örneğin, "\fBif (0 == 1) halt\fR" deyimi \fBbc\fR’yi hemen sonladırmaz; çünkü koşul sağlanmadığı için \fBhalt\fR deyimi işletilmez.
+\fBhalt\fR deyimi, (bir genişletmedir) \fBbc\fR\&'yi sonladırır. \fBquit\fR\&'ten farkı, \fBhalt\fR deyimi kesinkes değil, koşul sağlandığında çalışır. Örneğin, "\fBif (0 == 1) halt\fR" deyimi \fBbc\fR\&'yi hemen sonladırmaz; çünkü koşul sağlanmadığı için \fBhalt\fR deyimi işletilmez.
 .sp
 .TP 4
 \fBreturn\fR
@@ -317,7 +317,7 @@ Bir işlevden \fB0\fR döndürerek çıkar. (Ayrıntılı bilgi için \fBİŞLEV
 .sp
 .TP 4
 \fBreturn\fR \fI( ifade )\fR
-Bir işlevden \fIifade\fR’nin değerini döndürerek çıkar. (Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümüne bakınız.) Bir genişletme olarak yaylı ayraçlar gerekli değildir.
+Bir işlevden \fIifade\fR\&'nin değerini döndürerek çıkar. (Ayrıntılı bilgi için \fBİŞLEVLER\fR bölümüne bakınız.) Bir genişletme olarak yaylı ayraçlar gerekli değildir.
 .sp
 .PP
 .sp
@@ -326,11 +326,11 @@ Yardımcı deyimler, bildiğimiz klasik anlamda işletilebilir deyimler değildi
 .sp
 .TP 4
 \fBlimits\fR
-\fBbc\fR’nin yerel sürümü tarafından zorlanan yerel sınırları basar. Bu bir genişletmedir.
+\fBbc\fR\&'nin yerel sürümü tarafından zorlanan yerel sınırları basar. Bu bir genişletmedir.
 .sp
 .TP 4
 \fBquit\fR
-Her nerede ve her ne şekilde kullanılırsa kullanılsın, \fBbc\fR’yi kesinkes sonlandırır. Örneğin, "\fBif (0 == 1) quit\fR" deyimi, şart sağlanmasa da \fBbc\fR’yi sonlandıracaktır.
+Her nerede ve her ne şekilde kullanılırsa kullanılsın, \fBbc\fR\&'yi kesinkes sonlandırır. Örneğin, "\fBif (0 == 1) quit\fR" deyimi, şart sağlanmasa da \fBbc\fR\&'yi sonlandıracaktır.
 .sp
 .TP 4
 \fBwarranty\fR
@@ -339,7 +339,7 @@ Uzun bir garanti iletisi basar. Bu bir genişletmedir.
 .PP
 .sp
 .SS "İŞLEVLER"
-İşlevler, daha sonra çalıştırılmak üzere hesaplamaların tanımlandığı bir yöntem sunar. \fBbc\fR’deki işlevler daima bir değer hesaplayıp bunu çağrıcıya döndürürler. İşlev tanımları girdide saptanana kadar bir işlev tanımsızdır. Bu tanımlama, aynı isimde yeni bir işlev tanımlanıncaya kadar geçerlidir. Yeni işlev tanımı eskisinin yerine geçer. Bir işlev aşağıdaki gibi tanımlanır.
+İşlevler, daha sonra çalıştırılmak üzere hesaplamaların tanımlandığı bir yöntem sunar. \fBbc\fR\&'deki işlevler daima bir değer hesaplayıp bunu çağrıcıya döndürürler. İşlev tanımları girdide saptanana kadar bir işlev tanımsızdır. Bu tanımlama, aynı isimde yeni bir işlev tanımlanıncaya kadar geçerlidir. Yeni işlev tanımı eskisinin yerine geçer. Bir işlev aşağıdaki gibi tanımlanır.
 .sp
 .RS 4
 .nf
@@ -352,13 +352,13 @@ Bir işlev çağrısı ise "\fIisim\fR\fB(\fR\fIgirdiler\fR\fB)\fR" biçiminde b
 .sp
 \fIgirdiler\fR sayı ya da dizi olabilir (dizi girdiler bir genişletmedir). İşlev tanımında sıfır ya da daha fazla sayıda girdi olabilir ve bunlar aralarına virgül konularak ayrılmış isimlerden oluşan bir liste olarak tanımlanır. Sayılar sadece değerleriyle aktarılan girdilerdir. Diziler ise sadece değişkenleriyle aktarılır. Dizi değişkenleri "\fIisim\fR\fB[]\fR" şeklinde belirtilir. İşlev çağrısında asıl girdiler, sayı türünde ifadelerdir. Aynı yazım şekli, dizi değişkenleri üzerinden dizilerin aktarılmasında da kullanılır. Bir isimli dizi bir işleve değişkeni ile aktarılır. İşlev tanımları dinamik olduklarından, girdi sayısı ve türleri işlev çağrıldığında değerlendirilir. Girdilerin sayısı ve türlerindeki herhangi bir uyumsuzluk bir çalışma anı hatasına sebep olur. Ayrıca, tanımsız bir işlevin çağrılması da bir çalışma anı hatasına sebep olacaktır.
 .sp
-\fIauto_listesi\fR, "yerel" kullanım için isteğe bağlı bir değişken listesidir. \fIauto_listesi\fR’nin (eğer varsa) sözdizimi "\fBauto\fR \fIisim, ... ;\fR" şeklindedir (Sondaki noktalı virgül isteğe bağlıdır). Her \fIisim\fR \fBauto\fR değişkenin ismidir. Diziler, değişkenlerde kullanılan sözdizimi ile belirtilebilir. Bu değişkenler sıfır ile ilklendirilerek, değerleri, işlevin başlangıcında yığıta basılır ve işlevin icrası boyunca kullanılır. İşlevden çıkışta bu değerler yığıttan çekilir, böylece değişkenler işlevin başlangıcındaki ilk değerlerine dönmüş olur. Bunlar gerçekte, işlev çağrısı sırasında ilklendirilen \fBauto\fR değişkenlerdir. \fBauto\fR değişkenler, geleneksel yerel değişkenlerden farklıdır. A işlevi, B işlevini çağırdığında, A işlevinin \fBauto\fR değişkenlerine, B işlevinde \fBauto\fR değişkenler olarak bildirilmedikçe, B işlevi aynı isimlerle erişebilir. \fBauto\fR değişkenler ve işlev değişkenleri yığıta basıldıklarından dolayı \fBbc\fR kendini çağıran işlevleri destekler.
+\fIauto_listesi\fR, "yerel" kullanım için isteğe bağlı bir değişken listesidir. \fIauto_listesi\fR\&'nin (eğer varsa) sözdizimi "\fBauto\fR \fIisim, ... ;\fR" şeklindedir (Sondaki noktalı virgül isteğe bağlıdır). Her \fIisim\fR \fBauto\fR değişkenin ismidir. Diziler, değişkenlerde kullanılan sözdizimi ile belirtilebilir. Bu değişkenler sıfır ile ilklendirilerek, değerleri, işlevin başlangıcında yığıta basılır ve işlevin icrası boyunca kullanılır. İşlevden çıkışta bu değerler yığıttan çekilir, böylece değişkenler işlevin başlangıcındaki ilk değerlerine dönmüş olur. Bunlar gerçekte, işlev çağrısı sırasında ilklendirilen \fBauto\fR değişkenlerdir. \fBauto\fR değişkenler, geleneksel yerel değişkenlerden farklıdır. A işlevi, B işlevini çağırdığında, A işlevinin \fBauto\fR değişkenlerine, B işlevinde \fBauto\fR değişkenler olarak bildirilmedikçe, B işlevi aynı isimlerle erişebilir. \fBauto\fR değişkenler ve işlev değişkenleri yığıta basıldıklarından dolayı \fBbc\fR kendini çağıran işlevleri destekler.
 .sp
-İşlevin gövdesi bir \fBbc\fR deyimleri listesidir. Tekrar belitelim, deyimler noktalı virgül ve satır sonu karakterleri ile birbirlerinden ayrılır. \fBreturn\fR deyimi işlevin sonlandırılmasına sebep olur ve bir değer döndürür. \fBreturn\fR deyiminin iki sürümü vardır. ilk şeklinde "\fBreturn\fR" ifadesi işlevi çağıran ifadeye sıfır değerini döndürür. İkinci şeklinde, "\fBreturn\fR \fI( ifade )\fR", \fIifade\fR’nin değeri hesaplanıp çağıran ifadeye sonucu döndürülür. Her işlevin sonunda kendiliğinden bir \fBreturn(0)\fR vardır. Böylece bir işlevin sonunda açıkça bir \fBreturn\fR deyimi kullanmaya gerek kalmaksızın işlev sıfır değeri döndürerek sonlanır.
+İşlevin gövdesi bir \fBbc\fR deyimleri listesidir. Tekrar belitelim, deyimler noktalı virgül ve satır sonu karakterleri ile birbirlerinden ayrılır. \fBreturn\fR deyimi işlevin sonlandırılmasına sebep olur ve bir değer döndürür. \fBreturn\fR deyiminin iki sürümü vardır. ilk şeklinde "\fBreturn\fR" ifadesi işlevi çağıran ifadeye sıfır değerini döndürür. İkinci şeklinde, "\fBreturn\fR \fI( ifade )\fR", \fIifade\fR\&'nin değeri hesaplanıp çağıran ifadeye sonucu döndürülür. Her işlevin sonunda kendiliğinden bir \fBreturn(0)\fR vardır. Böylece bir işlevin sonunda açıkça bir \fBreturn\fR deyimi kullanmaya gerek kalmaksızın işlev sıfır değeri döndürerek sonlanır.
 .sp
-İşlevler ayrıca, \fBibase\fR değişkeninin kullanımını da değiştirir. İşlev gövdesindeki tüm sabitler, işlev çağrısı sırasında \fBibase\fR değişkeninin değeri kullanılarak dönüştürülür. Sayıların dönüşümü için daima \fBibase\fR’in o anki değerini kullanan yerleşik \fBread\fR işlevi dışında, işlev icrası sırasında \fBibase\fR değişiklikleri gözardı edilir.
+İşlevler ayrıca, \fBibase\fR değişkeninin kullanımını da değiştirir. İşlev gövdesindeki tüm sabitler, işlev çağrısı sırasında \fBibase\fR değişkeninin değeri kullanılarak dönüştürülür. Sayıların dönüşümü için daima \fBibase\fR\&'in o anki değerini kullanan yerleşik \fBread\fR işlevi dışında, işlev icrası sırasında \fBibase\fR değişiklikleri gözardı edilir.
 .sp
-Bir geliştirme olarak, tanım biçimi pek az esnektir. Standart, işlev gövdesini oluşturan ilk kuyruklu ayracın \fBdefine\fR ile aynı satırda olmasını ve kalan her şeyin alt satırlarda olmasını gerektirir. \fBbc\fR’nin bu sürümü, ilk kaşlı ayraçın öncesinde ya da sonrasında satır sonu karakteri kullanabilmeyi mümkün kılar. Örneğin aşağıdakiler geçerli tanımlardır:
+Bir geliştirme olarak, tanım biçimi pek az esnektir. Standart, işlev gövdesini oluşturan ilk kuyruklu ayracın \fBdefine\fR ile aynı satırda olmasını ve kalan her şeyin alt satırlarda olmasını gerektirir. \fBbc\fR\&'nin bu sürümü, ilk kaşlı ayraçın öncesinde ya da sonrasında satır sonu karakteri kullanabilmeyi mümkün kılar. Örneğin aşağıdakiler geçerli tanımlardır:
 .sp
 .RS 4
 .nf
@@ -382,7 +382,7 @@ px(1)
 .fi
 .sp
 .RE
-\fBpy\fR void işlev olmadığından \fBpy(1)\fR çağrısı isteneni bastıktan sonra işlevin dönüş değerini basar. İşlev bir \fBreturn\fR deyimi içermediğinden öntanımlı olan \fBreturn(0)\fR’dan dolayı \fB0\fR değeri basılır. \fBpx(1)\fR) için void işlev olduğundan \fB0\fR basılmaz.
+\fBpy\fR void işlev olmadığından \fBpy(1)\fR çağrısı isteneni bastıktan sonra işlevin dönüş değerini basar. İşlev bir \fBreturn\fR deyimi içermediğinden öntanımlı olan \fBreturn(0)\fR\&'dan dolayı \fB0\fR değeri basılır. \fBpx(1)\fR) için void işlev olduğundan \fB0\fR basılmaz.
 .sp
 Ayrıca, değişken dizisi içeren çağrı da eklendi. Değişken dizisi içeren çağrıyı bildirmek için işlev tanımındaki dizi değişkeni "\fB*\fR\fIisim\fR\fB[]\fR" sözdizimi ile kullanılır. Dizideki değişkenlerin değerleriyle çağrılması nedeniyle işlev çağrısı aynı kalır.
 .sp
@@ -391,19 +391,19 @@ Ayrıca, değişken dizisi içeren çağrı da eklendi. Değişken dizisi içere
 .sp
 .TP 4
 \fBs\fR \fB(\fR\fIx\fR\fB)\fR
-Radyan cinsinden \fIx\fR’in sinüsü.
+Radyan cinsinden \fIx\fR\&'in sinüsü.
 .sp
 .TP 4
 \fBc\fR \fB(\fR\fIx\fR\fB)\fR
-Radyan cinsinden \fIx\fR’in kosinüsü.
+Radyan cinsinden \fIx\fR\&'in kosinüsü.
 .sp
 .TP 4
 \fBa\fR \fB(\fR\fIx\fR\fB)\fR
-\fIx\fR’in arktanjantı; radyan cinsinden döner.
+\fIx\fR\&'in arktanjantı; radyan cinsinden döner.
 .sp
 .TP 4
 \fBl\fR \fB(\fR\fIx\fR\fB)\fR
-\fIx\fR’in doğal logaritması.
+\fIx\fR\&'in doğal logaritması.
 .sp
 .TP 4
 \fBe\fR \fB(\fR\fIx\fR\fB)\fR
@@ -411,12 +411,12 @@ Radyan cinsinden \fIx\fR’in kosinüsü.
 .sp
 .TP 4
 \fBj\fR \fB(\fR\fIn\fR\fB,\fR \fIx\fR\fB)\fR
-\fIx\fR tamsayısına göre \fIn\fR’inci dereceden Bessel işlevi.
+\fIx\fR tamsayısına göre \fIn\fR\&'inci dereceden Bessel işlevi.
 .sp
 .PP
 .sp
 .SS "ÖRNEKLER"
-\fI/bin/sh\fR’da aşağıdaki atama, kabuk değişkeni \fBpi\fR’ye pi değerini atar.
+\fI/bin/sh\fR\&'da aşağıdaki atama, kabuk değişkeni \fBpi\fR\&'ye pi değerini atar.
 .sp
 .RS 4
 .nf
@@ -424,7 +424,7 @@ pi=$(echo "scale=10; 4*a(1)" | bc -l)
 .fi
 .sp
 .RE
-Aşağıdaki örnekte, math kütüphanesinde kullanılan üstel işlevin tanımı vardır. Bu işlev POSIX \fBbc\fR’de yazılmıştır.
+Aşağıdaki örnekte, math kütüphanesinde kullanılan üstel işlevin tanımı vardır. Bu işlev POSIX \fBbc\fR\&'de yazılmıştır.
 .sp
 .RS 4
 .nf
@@ -507,14 +507,14 @@ define f (x) {
 .RE
 .sp
 .SS "READLINE ve LIBEDIT SEÇENEKLERİ"
-GNU \fBbc\fR (bir yapılandırma seçeneği ile), GNU \fBreadline\fR girdi düzenleme kütüphanesini ya da BSD \fBlibedit\fR kütüphanesini kullanacak şekilde derlenebilir. Bu ise kullanıcıya, \fBbc\fR’ye göndermeden önce birden çok satır üzerinde düzenleme yapma imkanı sunar. Ayrıca, daha önceden girilen satırlar için bir geçmiş de tutar. Bu seçenek seçilirse, \fBbc\fR bir özel değişkene daha sahip olur. Bu özel \fBhistory\fR değişkeni, bellekte tutulacak satır sayısını tutar. -1 değeri sınırsız (bellek yettiği müddetçe) sayıda eski komut tutulacağını belirtir ve öntanımlı değeri 100’dür. Eğer pozitif bir tamsayı belirtilirse, liste bu belirtilen sayı ile sınırlandırılmış olur. 0 değeri ise liste tutulmayacağını belirtir.
+GNU \fBbc\fR (bir yapılandırma seçeneği ile), GNU \fBreadline\fR girdi düzenleme kütüphanesini ya da BSD \fBlibedit\fR kütüphanesini kullanacak şekilde derlenebilir. Bu ise kullanıcıya, \fBbc\fR\&'ye göndermeden önce birden çok satır üzerinde düzenleme yapma imkanı sunar. Ayrıca, daha önceden girilen satırlar için bir geçmiş de tutar. Bu seçenek seçilirse, \fBbc\fR bir özel değişkene daha sahip olur. Bu özel \fBhistory\fR değişkeni, bellekte tutulacak satır sayısını tutar. -1 değeri sınırsız (bellek yettiği müddetçe) sayıda eski komut tutulacağını belirtir ve öntanımlı değeri 100\&'dür. Eğer pozitif bir tamsayı belirtilirse, liste bu belirtilen sayı ile sınırlandırılmış olur. 0 değeri ise liste tutulmayacağını belirtir.
 .sp
 Daha ayrıntılı bilgi için, GNU \fBreadline\fR, \fBhistory\fR ve BSD \fBlibedit\fR kütüphanesi hakkındaki belgeleri okuyunuz. \fBbc\fR, \fBreadline\fR ve \fBlibedit\fR kütüphaneleri aynı anda etkin olacak şekilde derlenemez.
 .sp
 .SS "FARKLILIKLAR"
-\fBbc\fR’nin bu sürümü, POSIX P1003.2/D11 taslağından uyarlanmıştır ve taslağa göre ve geleneksel \fBbc\fR uygulamalarına göre bir takım farklılıklar sözkonusudur. \fBdc\fR(1) kullanılan geleneksel yolla gerçekleştirilmemiştir. Bu sürüm, yazılımın kodlarını ayrıştırarak bayt koda çevirdikten sonra tek bir süreç olarak çalıştırır. Komut satırından verilen ve belgelendirilmemiş \fB-c\fR seçeneği ile yazılım çalıştırılmaz, onun yerine bayt kodları ekrana listelenir. Bu, aslında etkileşimli olarak ayrıştırıcının hatalarını görmek/gidermek ve math kütüphanesini hazırlamak için kullanılır.
+\fBbc\fR\&'nin bu sürümü, POSIX P1003.2/D11 taslağından uyarlanmıştır ve taslağa göre ve geleneksel \fBbc\fR uygulamalarına göre bir takım farklılıklar sözkonusudur. \fBdc\fR(1) kullanılan geleneksel yolla gerçekleştirilmemiştir. Bu sürüm, yazılımın kodlarını ayrıştırarak bayt koda çevirdikten sonra tek bir süreç olarak çalıştırır. Komut satırından verilen ve belgelendirilmemiş \fB-c\fR seçeneği ile yazılım çalıştırılmaz, onun yerine bayt kodları ekrana listelenir. Bu, aslında etkileşimli olarak ayrıştırıcının hatalarını görmek/gidermek ve math kütüphanesini hazırlamak için kullanılır.
 .sp
-POSIX \fBbc\fR’den asıl farklılıklar, bir özelliğin daha fazla işlevsellik eklemek için genişletildiği genişletmeler ve yeni özelliklerin eklendiği eklemelerdir. Aşağıda,eklemelerin ve genişletmelerin bir listesi yer almaktadır:
+POSIX \fBbc\fR\&'den asıl farklılıklar, bir özelliğin daha fazla işlevsellik eklemek için genişletildiği genişletmeler ve yeni özelliklerin eklendiği eklemelerdir. Aşağıda,eklemelerin ve genişletmelerin bir listesi yer almaktadır:
 .sp
 .TP 4
 \fBLANG\fR
@@ -522,43 +522,43 @@ Bu sürüm \fBLANG\fR ve \fBLC_\fR ile başlayan ortam değişkenlerinin işlenm
 .sp
 .TP 4
 isimler
-Geleneksel ve POSIX \fBbc\fR değişkenler, diziler ve işlevler için sadece tek harften oluşan isimleri mümkün kılar. GNU \fBbc\fR’de bu isimler için çok karakterli isimler kullanılabilir ve her isim bir harf ile başlar, harfler, rakamlar ile altçizgi karakterini içerebilir.
+Geleneksel ve POSIX \fBbc\fR değişkenler, diziler ve işlevler için sadece tek harften oluşan isimleri mümkün kılar. GNU \fBbc\fR\&'de bu isimler için çok karakterli isimler kullanılabilir ve her isim bir harf ile başlar, harfler, rakamlar ile altçizgi karakterini içerebilir.
 .sp
 .TP 4
 dizgeler
-Dizgelerde NUL karakter kullanılmasına izin verilmez, POSIX’e göre dizgelerde tüm karakterler kullanılabilmelidir.
+Dizgelerde NUL karakter kullanılmasına izin verilmez, POSIX\&'e göre dizgelerde tüm karakterler kullanılabilmelidir.
 .sp
 .TP 4
 \fBlast\fR
-POSIX \fBbc\fR’de bir \fBlast\fR değişkeni yoktur. \fBbc\fR’nin bazı gerçeklemelerinde bunun yerine nokta (.) kullanılır.
+POSIX \fBbc\fR\&'de bir \fBlast\fR değişkeni yoktur. \fBbc\fR\&'nin bazı gerçeklemelerinde bunun yerine nokta (.) kullanılır.
 .sp
 .TP 4
 karşılaştırmalar
-POSIX \fBbc\fR’de karşılaştırmalar sadece \fBif\fR, \fBwhile\fR deyimlerinde ve \fBfor\fR deyiminin ikinci ifadesinde kullanılabilir. Ayrıca bu deyimlerde sadece bir ilişkisel işleme izin verilir.
+POSIX \fBbc\fR\&'de karşılaştırmalar sadece \fBif\fR, \fBwhile\fR deyimlerinde ve \fBfor\fR deyiminin ikinci ifadesinde kullanılabilir. Ayrıca bu deyimlerde sadece bir ilişkisel işleme izin verilir.
 .sp
 .TP 4
 \fBif\fR deyimi ve \fBelse\fR sözcüğü
-POSIX \fBbc\fR’de \fBelse\fR sözcüğü yoktur.
+POSIX \fBbc\fR\&'de \fBelse\fR sözcüğü yoktur.
 .sp
 .TP 4
 \fBfor\fR deyimi
-POSIX \fBbc\fR’de tüm ifadelerin deyim içinde kullanılması gerekir.
+POSIX \fBbc\fR\&'de tüm ifadelerin deyim içinde kullanılması gerekir.
 .sp
 .TP 4
 \fB&&, ||, !\fR
-POSIX \fBbc\fR’de mantıksal işleçler yoktur.
+POSIX \fBbc\fR\&'de mantıksal işleçler yoktur.
 .sp
 .TP 4
 \fBread\fR işlevi
-POSIX \fBbc\fR’de \fBread\fR işlevi yoktur.
+POSIX \fBbc\fR\&'de \fBread\fR işlevi yoktur.
 .sp
 .TP 4
 \fBprint\fR deyimi
-POSIX \fBbc\fR’de \fBprint\fR deyimi yoktur.
+POSIX \fBbc\fR\&'de \fBprint\fR deyimi yoktur.
 .sp
 .TP 4
 \fBcontinue\fR deyimi
-POSIX \fBbc\fR’de \fBcontinue\fR deyimi yoktur.
+POSIX \fBbc\fR\&'de \fBcontinue\fR deyimi yoktur.
 .sp
 .TP 4
 \fBreturn\fR deyimi
@@ -578,11 +578,11 @@ POSIX \fBbc\fR bu "eski tarz" atama işleçlerinin tanımlanmasını gerektirmez
 .sp
 .TP 4
 sayılardaki boşluklar
-\fBbc\fR’nin diğer gerçeklemeleri sayıların içinde boşluklara izin verir. "\fBx=1 3\fR" ataması, "\fBx=13\fR" olarak değerlendirilecektir. Aynı ifade bu sürümde bir sözdizimi hatasına sebep olacaktır.
+\fBbc\fR\&'nin diğer gerçeklemeleri sayıların içinde boşluklara izin verir. "\fBx=1 3\fR" ataması, "\fBx=13\fR" olarak değerlendirilecektir. Aynı ifade bu sürümde bir sözdizimi hatasına sebep olacaktır.
 .sp
 .TP 4
 çalıştırma ve hatalar
-Bu \fBbc\fR, yazılım içerinde sözdizimi ve diğer hataların bulunması durumunda kodun işletilmesi konusunda diğer gerçeklemelere göre oldukça farklılıklar içermektedir. Eğer bir işlev tanımlanırken bir sözdizimi hatası yapılmışsa, hata düzeltme mekanizması deyimin başlangıcını bulmaya çalışır, ilk hatalı satırı bulur ve satır numarasını ekrana yazar; sonra yine de işlevin geri kalan kısımlarını ayrıştırmaya devam eder. İşlev içinde bir kez bile hata yapılmışsa, o işlev ’çağrılamaz’ addedilir ve tanımsız olur.
+Bu \fBbc\fR, yazılım içerinde sözdizimi ve diğer hataların bulunması durumunda kodun işletilmesi konusunda diğer gerçeklemelere göre oldukça farklılıklar içermektedir. Eğer bir işlev tanımlanırken bir sözdizimi hatası yapılmışsa, hata düzeltme mekanizması deyimin başlangıcını bulmaya çalışır, ilk hatalı satırı bulur ve satır numarasını ekrana yazar; sonra yine de işlevin geri kalan kısımlarını ayrıştırmaya devam eder. İşlev içinde bir kez bile hata yapılmışsa, o işlev \&'çağrılamaz\&' addedilir ve tanımsız olur.
 .sp
 Etkileşimli ortamda çalışırken bir sözdizimi hatası yapılırsa, bir uyarı gelir ve çalıştırılacak olan o anki küme geçersiz sayılır. İşletim kümesi, yazılışı tamamlanmış basit veya birleşik bir deyimden sonra satırsonu karakteri bulunan yapıdır. Örneğin,
 .sp
@@ -612,16 +612,16 @@ tek işletim kümesidir. Oluşan herhangi bir çalışma anı hatası (error), o
 .sp
 .TP 4
 kesmeler
-Bir etkileşimli oturumda, \fBSIGINT\fR sinyali (genelde klavyeden Ctrl-C’ye basıldığında üretilir) o anda işletilmekte olan kümenin yarıda kesilmesine neden olur. Hangi işlevin yarıda kesildiğini belirten bir çalışma anı hatası ekrana yazdırılır. Ardından, tüm çalışma anı yapılarının "temizlenme"sinden sonra, \fBbc\fR’nin yeni girdiler almak için hazır olduğunu yazan bir ileti belirir. Önceden tanımlanmış olan tüm işlevler ve \fBauto\fR-olmayan değişkenler bu noktadan önceki değerleriyle aynen kalırlar. Tüm \fBauto\fR değişkenler ve işlev değişkenleri bu "temizleme" işlemi esnasında silinirler. Etkileşimli olmayan bir oturumda ise \fBSIGINT\fR sinyali, \fBbc\fR’nin çalışmasını sonlandırır.
+Bir etkileşimli oturumda, \fBSIGINT\fR sinyali (genelde klavyeden Ctrl-C\&'ye basıldığında üretilir) o anda işletilmekte olan kümenin yarıda kesilmesine neden olur. Hangi işlevin yarıda kesildiğini belirten bir çalışma anı hatası ekrana yazdırılır. Ardından, tüm çalışma anı yapılarının "temizlenme"sinden sonra, \fBbc\fR\&'nin yeni girdiler almak için hazır olduğunu yazan bir ileti belirir. Önceden tanımlanmış olan tüm işlevler ve \fBauto\fR-olmayan değişkenler bu noktadan önceki değerleriyle aynen kalırlar. Tüm \fBauto\fR değişkenler ve işlev değişkenleri bu "temizleme" işlemi esnasında silinirler. Etkileşimli olmayan bir oturumda ise \fBSIGINT\fR sinyali, \fBbc\fR\&'nin çalışmasını sonlandırır.
 .sp
 .PP
 .sp
 .SS "SINIRLAR"
-Aşağıda bu \fBbc\fR’nin işlem yapabileceği sınırlar verilmiştir. Bunlardan bazıları aslında her bir kurulum için farklı farklı olabilir. Bunların geçerli değerlerini öğrenmek için \fBlimits\fR deyimini kullanın.
+Aşağıda bu \fBbc\fR\&'nin işlem yapabileceği sınırlar verilmiştir. Bunlardan bazıları aslında her bir kurulum için farklı farklı olabilir. Bunların geçerli değerlerini öğrenmek için \fBlimits\fR deyimini kullanın.
 .sp
 .TP 4
 \fBBC_BASE_MAX\fR
-Azami çıktı tabanı, 999’dur. Azami girdi tabanı ise 16’dır.
+Azami çıktı tabanı, 999\&'dur. Azami girdi tabanı ise 16\&'dır.
 .sp
 .TP 4
 \fBBC_DIM_MAX\fR
@@ -637,7 +637,7 @@ Dizgelerin içerebileceği karakter sayısı \fBINT_MAX\fR ile sınırlanmışt�
 .sp
 .TP 4
 üs
-Üstel değerlerde üssün (^) sınırı \fBLONG_MAX\fR’tır.
+Üstel değerlerde üssün (^) sınırı \fBLONG_MAX\fR\&'tır.
 .sp
 .TP 4
 değişken isimleri
@@ -655,11 +655,11 @@ Basit değişken, dizi ve işlev isimlerinin her biri için eşsiz isim sayısı
 .sp
 .TP 4
 \fBBC_ENV_ARGS\fR
-Bu, \fBbc\fR’nin girdi almak için kullandığı diğer bir mekanizmadır. Biçimi komut satırı girdileri ile aynıdır. Bu ortam değişkenlerinde listelenmiş dosyalar, komut satırında belirtilen dosyalardan önce işlem görür. Bu, kullanıcıya "standart" seçenekleri ve dosyaları ayarlama imkanını sunar. Ortam değişkenlerinde belirtilen dosyalar genellikle içlerinde kullanıcının tanımladığı işlevler olan ve dosyalardır. Bu ayarlama ile artık, \fBbc\fR her çalıştırıldığında belirtilen dosyalar işleme sokulur.
+Bu, \fBbc\fR\&'nin girdi almak için kullandığı diğer bir mekanizmadır. Biçimi komut satırı girdileri ile aynıdır. Bu ortam değişkenlerinde listelenmiş dosyalar, komut satırında belirtilen dosyalardan önce işlem görür. Bu, kullanıcıya "standart" seçenekleri ve dosyaları ayarlama imkanını sunar. Ortam değişkenlerinde belirtilen dosyalar genellikle içlerinde kullanıcının tanımladığı işlevler olan ve dosyalardır. Bu ayarlama ile artık, \fBbc\fR her çalıştırıldığında belirtilen dosyalar işleme sokulur.
 .sp
 .TP 4
 \fBBC_LINE_LENGTH\fR
-Bu, sayılar ekrana yazdırılırken bir satırda kaç karakter olacağını belirten bir tamsayıdır. Uzun (yani, tek satıra sığmayan) sayılar için \\ (ters eğik çizgi) ve satırsonu karakterleri bu miktara dahildir. Bu değişkene atanan 3’ten küçük değerler için satır uzunluğu 70 yapılır.
+Bu, sayılar ekrana yazdırılırken bir satırda kaç karakter olacağını belirten bir tamsayıdır. Uzun (yani, tek satıra sığmayan) sayılar için \\ (ters eğik çizgi) ve satırsonu karakterleri bu miktara dahildir. Bu değişkene atanan 3\&'ten küçük değerler için satır uzunluğu 70 yapılır.
 .sp
 .PP
 .sp
@@ -678,7 +678,7 @@ Philip A. Nelson tarafından yazılmıştır.
 Telif hakkı © 2017 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sürüm 3 veya üstü <http://gnu.org/licenses/gpl.html> Bu bir özgür yazılımdır: yazılımı değiştirmek ve dağıtmakta özgürsünüz. Yasaların izin verdiği ölçüde HİÇBİR GARANTİ YOKTUR.
 .sp
 .SH "TEŞEKKÜRLER"
-Yazar kodun sınanmasındaki geniş yardımlarından dolayı Steve Sommars’a teşekkürlerinin kabulünü rica ediyor. Bir çok öneride bulundu ve onun katılımıyla bu çok daha iyi bir ürün oldu.
+Yazar kodun sınanmasındaki geniş yardımlarından dolayı Steve Sommars\&'a teşekkürlerinin kabulünü rica ediyor. Bir çok öneride bulundu ve onun katılımıyla bu çok daha iyi bir ürün oldu.
 .sp
 .SH "ÇEVİREN"
 © 1999 Adem Güneş

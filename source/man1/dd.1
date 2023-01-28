@@ -4,7 +4,7 @@
  * https://github.com/TLBP/manpages-tr
  *
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:30+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:54+03:00
 .TH "DD" 1 "Eylül 2021" "GNU coreutils 9.0" "Kullanıcı Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -28,7 +28,7 @@ Bir dosyayı belirtilen terimlere uygun olarak dönüştürüp biçimleyerek kop
 .SS "TERİMLER"
 .TP 4
 \fBbs=\fR\fISAYI\fR
-Bir kerede \fISAYI\fR bayt okur veya yazar (512 öntanımlıdır). \fBibs=\fR\fIsayı\fR ve \fBobs=\fR\fIsayı\fR’ya zorlar.
+Bir kerede \fISAYI\fR bayt okur veya yazar (512 öntanımlıdır). \fBibs=\fR\fIsayı\fR ve \fBobs=\fR\fIsayı\fR\&'ya zorlar.
 .sp
 .TP 4
 \fBcbs=\fR\fIsayı\fR
@@ -60,7 +60,7 @@ Bir kerede \fISAYI\fR bayt yazılır (512 öntanımlıdır).
 .sp
 .TP 4
 \fBof=\fR\fIDOSYA\fR
-Standart çıktı yerine \fIDOSYA\fR’ya yazar.
+Standart çıktı yerine \fIDOSYA\fR\&'ya yazar.
 .sp
 .TP 4
 \fBoflags=\fR\fISİMGELER\fR
@@ -76,23 +76,23 @@ Girdi başlangıcında \fBibs\fR baytlık \fISAYI\fR paket atlanır.
 .sp
 .TP 4
 \fBstatus=\fR\fISEVİYE\fR
-Standart hatada gösterilecek bilgi \fISEVİYE\fRsi: ’\fBnone\fR’ ile hata iletileri hariç herşey engellenir; ’\fBnoxfer\fR’ ile son aktarımın istatistikleri engellenir; ’\fBprogress\fR’ ile aktarım istatistikleri aralıklı olarak gösterilir.
+Standart hatada gösterilecek bilgi \fISEVİYE\fRsi: \&'\fBnone\fR\&' ile hata iletileri hariç herşey engellenir; \&'\fBnoxfer\fR\&' ile son aktarımın istatistikleri engellenir; \&'\fBprogress\fR\&' ile aktarım istatistikleri aralıklı olarak gösterilir.
 .sp
 .PP
-\fISAYI\fR’ların ardından sonek olarak şu dizgeler gelebilir (sayılar dizgelerin kaçar baytı ifade ettiğini göstermektedir): c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000, M=1024*1024, xM=M, GB=1000*1000*1000, G=1024*1024*1024 ve T, P, E, Z, Y için de aynısı geçerlidir. Bibaytlık birimler de kullanılabilir: KiB=K, MiB=M, ...
+\fISAYI\fR\&'ların ardından sonek olarak şu dizgeler gelebilir (sayılar dizgelerin kaçar baytı ifade ettiğini göstermektedir): c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000, M=1024*1024, xM=M, GB=1000*1000*1000, G=1024*1024*1024 ve T, P, E, Z, Y için de aynısı geçerlidir. Bibaytlık birimler de kullanılabilir: KiB=K, MiB=M, ...
 .sp
 .SS "DÖNÜŞÜM sözcükleri şunlar olabilir:"
 .TP 4
 \fBascii\fR
-EBCDIC’den ASCII’ye dönüşüm.
+EBCDIC\&'den ASCII\&'ye dönüşüm.
 .sp
 .TP 4
 \fBebcdic\fR
-ASCII’den EBCDIC’e dönüşüm.
+ASCII\&'den EBCDIC\&'e dönüşüm.
 .sp
 .TP 4
 \fBibm\fR
-ASCII’den öteki EBCDIC’e dönüşüm.
+ASCII\&'den öteki EBCDIC\&'e dönüşüm.
 .sp
 .TP 4
 \fBblock\fR
@@ -182,7 +182,7 @@ Dosya erişim zamanı güncellenmez.
 .sp
 .TP 4
 \fBnocache\fR
-Önbellekleme yapılmaması isteği. \fBoflag=sync\fR’e de bakın.
+Önbellekleme yapılmaması isteği. \fBoflag=sync\fR\&'e de bakın.
 .sp
 .TP 4
 \fBnoctty\fR
@@ -230,7 +230,7 @@ Telif hakkı © 2021 Free Software Foundation, Inc. Lisans GPLv3+: GNU GPL sür�
 .SH "İLGİLİ BELGELER"
 GNU coreutils sayfasında: <http://www.gnu.org/software/coreutils/dd>
 .br
-Veya sisteminizde: \fBinfo ’(coreutils) dd invocation’\fR
+Veya sisteminizde: \fBinfo \&'(coreutils) dd invocation\&'\fR
 .sp
 .SH "ÇEVİREN"
 © 2006 Yalçın Kolukısa

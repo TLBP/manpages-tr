@@ -8,12 +8,12 @@
  * Copyright 1993 Rickard E. Faith (faith (at) cs.unc.edu)
  * May be distributed under the GNU General Public License
  *
- * Copyright (C) 1993 Theodore Ts’o <tytso@athena.mit.edu>
+ * Copyright (C) 1993 Theodore Ts\&'o <tytso@athena.mit.edu>
  * Copyright (C) 2011 Karel Zak <kzak@redhat.com>
  *
  * This program comes with ABSOLUTELY NO WARRANTY.
 ..
-.\" Derlenme zamanı: 2023-01-21T21:03:33+03:00
+.\" Derlenme zamanı: 2023-01-28T03:33:57+03:00
 .TH "DMESG" 8 "Şubat 2022" "util-linux 2.38" "Sistem Yönetim Komutları"
 .\" Sözcükleri ilgisiz yerlerden bölme (disable hyphenation)
 .nh
@@ -146,14 +146,14 @@ Ham ileti tamponunu basar, yani günlük düzeyi öneklerini ayıklanmaz, ancak 
 .RS 4
 .TP 4
 \fBBilgi:\fR
-Gerçek ham biçim, \fBdmesg\fR’in çekirdek iletilerini nasıl okuduğuna bağlıdır. \fI/dev/kmsg\fR aygıtı, \fBsyslog\fR(2)’den farklı bir biçim kullanır. Geriye dönük uyumluluk için \fBdmesg\fR, verileri her zaman \fBsyslog\fR(2) biçiminde döndürür. \fI/dev/kmsg\fR’den gerçek ham verileri okumak mümkündür. Örnek: ’\fBdd if=/dev/kmsg iflag=nonblock\fR’
+Gerçek ham biçim, \fBdmesg\fR\&'in çekirdek iletilerini nasıl okuduğuna bağlıdır. \fI/dev/kmsg\fR aygıtı, \fBsyslog\fR(2)\&'den farklı bir biçim kullanır. Geriye dönük uyumluluk için \fBdmesg\fR, verileri her zaman \fBsyslog\fR(2) biçiminde döndürür. \fI/dev/kmsg\fR\&'den gerçek ham verileri okumak mümkündür. Örnek: \&'\fBdd if=/dev/kmsg iflag=nonblock\fR\&'
 .sp
 .RE
 .IP
 .sp
 .TP 4
 \fB-S\fR, \fB--syslog\fR
-Çekirdek iletilerini okumak için \fBdmesg\fR’yi \fBsyslog\fR(2) kullanmaya zorlar. Linux 3.5.0 sürümünden beri öntanımlı olarak \fBsyslog\fR(2) yerine \fI/dev/kmsg\fR kullanılmaktadır.
+Çekirdek iletilerini okumak için \fBdmesg\fR\&'yi \fBsyslog\fR(2) kullanmaya zorlar. Linux 3.5.0 sürümünden beri öntanımlı olarak \fBsyslog\fR(2) yerine \fI/dev/kmsg\fR kullanılmaktadır.
 .sp
 .TP 4
 \fB-s\fR, \fB--buffer-size\fR \fISAYI\fR
@@ -167,11 +167,11 @@ Zaman damgasını biçemli gösterir.
 .sp
 .TP 4
 \fB--since\fR \fIZAMAN\fR
-Belirtilen \fIZAMAN\fRdan sonraki kayıtları gösterir. Zamanı mutlak veya göreli (’1 hour ago’ gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
+Belirtilen \fIZAMAN\fRdan sonraki kayıtları gösterir. Zamanı mutlak veya göreli (\&'1 hour ago\&' gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
 .sp
 .TP 4
 \fB--until\fR \fIZAMAN\fR
-Belirtilen \fIZAMAN\fRa kadar olan kayıtları gösterir. Zamanı mutlak veya göreli (’1 hour ago’ gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
+Belirtilen \fIZAMAN\fRa kadar olan kayıtları gösterir. Zamanı mutlak veya göreli (\&'1 hour ago\&' gibi) belirtmek mümkündür. Zaman damgasının çok dakik olmayacağına dikkat edilmelidir, ayrıntılar için bkz: \fB--ctime\fR
 .sp
 .TP 4
 \fB-t\fR, \fB--notime\fR
