@@ -1,0 +1,82 @@
+2023-01-28 nbb
+
+       * manpages-tr-2.0.6-2
+         325 dosya. Kaynak paketi temelde 2.0.4 sürümü.
+         2.0.x serisinin ilk resmi deb paketi
+
+2023-01-27 nbb
+
+       * manpages-tr-2.0.6-1
+         325 dosya. Kaynak paketi temelde 2.0.4 sürümü.
+         2.0.x serisinin resmi deb paketi kabul sürecinine giren, başarılı
+         olamayan ikinci sürümü.
+
+2023-01-24 nbb
+
+       * manpages-tr-2.0.5-1
+         325 dosya. Kaynak paketi temelde 2.0.4 sürümü.
+         2.0.x serisinin resmi deb paketi kabul sürecinine giren, başarılı
+         olamayan ilk sürümü.
+
+2023-01-22 nbb
+
+       * manpages-tr-2.0.4
+         325 dosya. Gayrı resmi ilk deb paketi.
+
+2022-12-09 nbb
+
+       * manpages-tr-2.0.3
+         300 dosya.
+
+2022-10-29 nbb
+
+       * manpages-tr-2.0.2
+         292 dosya.
+
+2022-10-17 nbb
+
+       * manpages-tr-2.0.1
+         267 dosya. İlk TLBP manpages-tr paketi.
+
+2008-04-21 nbb
+
+       * manpages-tr-1.0.5
+         276 çeviri, ikinci deb paketi.
+         1.0.x serisinin son paketi.
+
+2006-10-31 nbb
+
+       * manpages-tr-1.0.4
+         217 çeviri.
+
+2004-04-10 nbb
+
+       * manpages-tr-1.0.3
+         159 çeviri.
+
+2004-04-01 nbb
+
+       * manpages-tr-1.0.2+cvs20040401-1
+         94 çeviri içeren ilk resmi deb paketi.
+
+2004-02-22 nbb
+
+       * manpages-tr-1.0.2
+         82 çeviri.
+
+2004-01-06 nbb
+
+       * manpages-tr-1.0.1
+         72 çeviri.
+
+2003-12-20 nbb
+
+       * manpages-tr-1.0.0
+         46 çeviri içeren SF üzerinden dağıtılan ilk paket.
+
+2003-10-23 nbb
+
+       * manpages-tr-0.1.0
+         43 çeviri içeren ilk deneme paketi.
+         Bunu başka deneme paketleri izledi ve sonuçta
+         dağıtılacak ilk sürümün 1.x.x olabilirliğinde mutabakat sağlandı.
